@@ -1,0 +1,256 @@
+# CircleCI integration with Drupal 8.
+
+## Defines images and working directory.
+defaults: &defaults
+  docker:
+    # - image: juampynr/drupal8ci:latest
+    # updated CI image
+    - image: kxwang/drupal-ci:circleci
+    - image: selenium/standalone-chrome-debug:3.7.1-beryllium
+  working_directory: /var/www/html
+
+## Defines the cache restoring mechanism.
+restore_cache: &restore_cache
+  # We use the composer.lock as a way to determine if we can cache our build.
+  keys:
+  - v1-dependencies-{{ checksum "composer.lock" }}
+  # fallback to using the latest cache if no exact match is found
+  - v1-dependencies-
+
+## Defines the cache saving mechanism.
+save_cache: &save_cache
+  paths:
+    - ./vendor
+    - ./web/core
+    - ./web/modules/contrib
+    - ./web/profiles/contrib
+    - ./web/themes/contrib
+    - ./web/libraries
+  key: v1-dependencies-{{ checksum "composer.lock" }}
+
+#Jobs
+
+## Job to run the update path and Behat tests.
+build_and_deploy: &build_and_deploy
+  <<: *defaults
+  steps:
+    - restore_cache:
+        name: Retore Git cache before checkout
+        keys:
+          - source
+    - checkout
+    - save_cache:
+        name: Save Git cache after checkout
+        key: source
+        paths:
+          - ".git"
+    - restore_cache:
+        name: Restore Terminus cache
+        keys:
+          - terminus_-{{ checksum "composer.lock" }}
+    - run:
+        name: Install Terminus
+        command: |
+          # if [ ! -f "/tmp/vendor/pantheon-systems/terminus/bin/terminus" ]; then
+          cd /tmp && composer require pantheon-systems/terminus:^2.0.0
+          # fi
+    - save_cache:
+        name: Save Terminus cache
+        key: terminus_-{{ checksum "composer.lock" }}
+        paths:
+          - "/tmp/vendor"
+    # - restore_cache:
+    #     name: Restore theme build asset cache
+    #     keys:
+    #       - cloudy_-{{ checksum "web/themes/custom/cloudy/package.json" }}
+    # - run:
+    #     name: Install theme build tools
+    #     command: |
+    #       cd web/themes/custom/cloudy && npm install
+    # - save_cache:
+    #     name: Save theme build asset cache
+    #     key: cloudy_-{{ checksum "web/themes/custom/cloudy/package.json" }}
+    #     paths:
+    #       - "web/themes/custom/cloudy/node_modules"
+    - restore_cache: *restore_cache
+    - run:
+        name: Composer install
+        command: |
+          # Pantheon don't allow these folders but Composer needs them
+          rm -rf ./web/modules/contrib/facets
+          # Run composer install with hirak/prestissimo for better performance
+          composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
+          composer global require hirak/prestissimo && composer install --no-suggest --no-interaction
+          # TODO: should only deploy non-dev packages
+          # --no-dev
+    - run:
+        name: Deploy to Pantheon
+        when: on_success
+        command: |
+          export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
+          # Don't check the repo host key
+          export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          # Don't check for host key for Pantheon sites
+          echo -e "host *.drush.in\n    StrictHostKeyChecking no" >> ~/.ssh/config
+          # Terminus log in with the user email that will be displayed as the commit user in Pantheon Git repo
+          terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email"
+          # Git operations
+          git remote add pantheon ssh://codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435@codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435.drush.in:2222/~/repository.git
+          git config --global user.email "$eGov_Email"
+          # Compile SCSS in our custom theme
+          cd web/themes/custom/cloudy && npm run build && cd /var/www/html
+          # Exclude dependencies
+          rm -rf web/themes/custom/cloudy/node_modules
+          # Force add all files to include those excluded by .gitignore
+          rm -rf ./web/modules/contrib/search_api_solr/.git
+          git add -f /var/www/html
+          # Without these lines, push will fail with "please remote git submodules" error
+          git rm -r ./vendor/drupal/coder/.git && git rm -r ./web/modules/contrib/facets/.git
+          # Pantheon site will use the wrong DB if the local is kept
+          git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
+          git rm -r --cache web/sites/default/files --ignore-unmatch
+          
+          # Set the git commit user name so it's clear in Pantheon log who made the change
+          git config --global user.name $CIRCLE_USERNAME
+          git config --global user.email $eGov_Email
+
+          git commit -m "CircleCI deployment" --quiet
+          # When commit on master, we deploy to DEV
+          if [[ $CIRCLE_BRANCH = "master" ]]; then
+            echo "Deploy to Pantheon DEV site"
+            # Set the connection type to GIT
+            terminus connection:set $CIRCLE_PROJECT_REPONAME.dev git
+            git push -f pantheon master
+            # TODO: Sanitize DB here
+            # terminus env:clone-content $CIRCLE_PROJECT_REPONAME.test dev
+            # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
+            # Read the last Git log in the master branch. Get the branch name at the end of the log.
+            # Example: Merge pull request #35 from eGovPDX/powr-152
+            cd /var/www/html
+            # Must read the last commit message from Github. The last one in local repo is "CircleCI Deployment"
+            if [[ $(git log origin/master --pretty=format:%s -1) =~ (^Merge pull request #[0-9]* from eGovPDX\/)([^,]*) ]]; then
+              echo "Found a Pull Request Merge for branch: '${BASH_REMATCH[2]}'";
+              # Check if a multidev environment with the branch name exists or not
+              terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
+              if grep -Fxq "${BASH_REMATCH[2]}" ./env_list.txt; then
+                # Delete both the multidev site and branch
+                terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.${BASH_REMATCH[2]} -y
+              fi
+            fi
+          else
+            # Check if the multidev branch site exists. If not, create it
+            terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
+            if grep -Fxq "$CIRCLE_BRANCH" ./env_list.txt; then
+              echo "Found multidev site"
+            else
+              # Create a new Multi-Dev with files and database from Test.
+              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.test $CIRCLE_BRANCH
+            fi
+            rm -rf ./env_list.txt
+            # Set the connection type to GIT
+            terminus connection:set $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH git
+            # Only do force push when the multidev site doesn't exist
+            git push -f pantheon $CIRCLE_BRANCH
+            # Wake up the multidev site and wait 60s.
+            terminus env:wake $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH
+            # Drush CIM, CR are handled by QuickSilver event handlers
+            # echo 'node_access_rebuild();' | $(terminus drush $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH -- php-script)
+          fi
+
+run_tests: &run_tests
+  <<: *defaults
+  steps:
+    - restore_cache:
+        name: Retore Git cache before checkout
+        keys:
+          - source
+    - checkout
+    - save_cache:
+        name: Save Git cache after checkout
+        key: source
+        paths:
+          - ".git"
+    - restore_cache:
+        name: Restore Terminus cache
+        keys:
+          - terminus_-{{ checksum "composer.lock" }}
+    - run:
+        name: Install Terminus
+        command: |
+          # if [ ! -f "/tmp/vendor/pantheon-systems/terminus/bin/terminus" ]; then
+          cd /tmp && composer require pantheon-systems/terminus:^2.0.0
+          # fi
+    - save_cache:
+        name: Save Terminus cache
+        key: terminus_-{{ checksum "composer.lock" }}
+        paths:
+          - "/tmp/vendor"
+    - restore_cache: *restore_cache
+    - run:
+        name: Composer install
+        command: |
+          # Run composer install with hirak/prestissimo for better performance
+          composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
+          composer global require hirak/prestissimo && composer install --no-suggest --no-interaction
+          # TODO: should only deploy non-dev packages
+          # --no-dev
+    - run:
+        name: Run drush commands on Pantheon
+        command: |
+          export PATH=/var/www/html/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
+          terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
+
+          sleep 20 # wait 20 seconds for file sync to finish
+
+          # Must clear cache to ensure config import from the right environment
+          if [[ $CIRCLE_BRANCH = "master" ]]; then
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- cr
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- -y updb
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- cim -y
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- core:cron -y
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- cr
+          else            
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH -- cr
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH -- -y updb
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH -- cim -y
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- core:cron -y
+            terminus remote:drush $CIRCLE_PROJECT_REPONAME.dev -- cr
+          fi
+    - run:
+        name: Run tests against Pantheon
+        when: on_success
+        command: |
+          export PATH=/var/www/html/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
+          terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
+
+          # TODO: revisit this when we only deploy non-dev packages.
+          # Install Behat and its dependencies.
+          # composer install
+          # if [[ $CIRCLE_BRANCH = "master" ]]; then
+          #   echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://${HTTP_AUTH}@dev-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.dev\"}}}}"' >> $BASH_ENV && source $BASH_ENV
+          #   behat -c tests/behat.yml --tags '@dev'
+          # else
+          #   echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://${CIRCLE_BRANCH}-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.${CIRCLE_BRANCH}\"}}}}"' >> $BASH_ENV && source $BASH_ENV
+          #   behat -c tests/behat.yml --tags '@multidev'
+          # fi
+    - save_cache: *save_cache
+    - store_test_results:
+        path: /var/www/html/artifacts/behat
+    - store_artifacts:
+        path: /var/www/html/artifacts
+
+# Declare all of the jobs we should run.
+version: 2
+jobs:
+  deploy:
+     <<: *build_and_deploy
+  test:
+     <<: *run_tests
+
+# Declare a workflow that runs all of our jobs in parallel.
+workflows:
+  version: 2
+  deploy_workflow:
+    jobs:
+      # Test will be started by QuickSilver after the sync_code event
+      - deploy
