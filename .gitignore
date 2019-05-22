@@ -1,0 +1,125 @@
+# Ignore paths that contain user-generated content.
+web/sites/*/files
+web/sites/*/private
+files/*
+artifacts
+vendor/
+web/core/
+web/libraries/
+web/modules/contrib/
+web/profiles/contrib/
+web/themes/contrib/
+web/vendor/
+
+# Avoid accidental modification of pantheon.upstream.yml in sites
+# created from this upstream
+pantheon.upstream.yml
+
+# Pantheon commits a settings.php for environment-specific settings.
+# Place local settings in settings.local.php.
+# We included this in our repo as it has no secrets.
+# web/sites/*/settings.local.php
+
+# Note that services.local.yml is not loaded by default. If you would like
+# to use this file add the following to your settings.local.php file:
+#   $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
+web/sites/*/services.local.yml
+
+# ** Only works in OSs that support newer versions of fnmatch (Bash 4+)
+web/sites/default/**/files
+web/sites/default/**/private
+
+# Ignore SimpleTest multi-site environment.
+sites/simpletest
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+
+# Logs and databases #
+######################
+*.log
+*.sql
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon
+Thumbs.db
+._*
+
+# Vim generated files #
+######################
+*.un~
+
+# SASS #
+##########
+.sass-cache
+web/themes/custom/**/*.map
+web/themes/custom/cloudy/css/*.css
+web/themes/custom/cloudy/js/main.bundle.js
+
+# Things in the core directory that Drupal 8 commits in the repository.
+!web/core/**/*.gz
+
+# Visual Studio Code #
+##########
+.vscode/*
+
+# Particle theme gitignore #
+##########
+
+# Dependencies
+web/themes/custom/particle/node_modules
+web/themes/custom/particle/vendor
+web/themes/custom/cloudy/node_modules
+web/themes/custom/cloudy/vendor
+
+# Generated files
+*.sass-cache/
+.eslintcache
+*unison.*
+
+#IDE plugins
+.idea
+atlassian-ide-plugin.xml
+
+web/themes/custom/particle/source/styleguide/css
+
+# Errors
+npm-debug.log
+php_errors.log
+
+# Local Lando override file #
+##########
+.lando.local.yml
+
+# Local Lando node stuff #
+##########
+node_modules/
+package-lock.json
+!web/themes/custom/cloudy/package-lock.json
+app
+app/
+
+# Exclude Sass temp files. #
+########
+.sass-cache/*
+
+# Exclude Mike's docker sutff. #
+########
+docker-compose.yml
+site.conf
+log.conf
+php.Dockerfile
+php.ini
