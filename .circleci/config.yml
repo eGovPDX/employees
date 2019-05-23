@@ -98,9 +98,9 @@ build_and_deploy: &build_and_deploy
           git remote add pantheon ssh://codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435@codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435.drush.in:2222/~/repository.git
           git config --global user.email "$eGov_Email"
           # Compile SCSS in our custom theme
-          cd web/themes/custom/cloudy && npm run build && cd /var/www/html
+          # cd web/themes/custom/cloudy && npm run build && cd /var/www/html
           # Exclude dependencies
-          rm -rf web/themes/custom/cloudy/node_modules
+          # rm -rf web/themes/custom/cloudy/node_modules
           # Force add all files to include those excluded by .gitignore
           rm -rf ./web/modules/contrib/search_api_solr/.git
           git add -f /var/www/html
