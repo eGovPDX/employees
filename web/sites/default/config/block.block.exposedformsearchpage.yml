@@ -1,0 +1,29 @@
+uuid: 47bfec0f-ad8d-4e9a-aa65-a45556b0ec5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: exposedformsearchpage
+theme: cloudy2
+region: content
+weight: -5
+provider: null
+plugin: 'views_exposed_filter_block:search-page'
+settings:
+  id: 'views_exposed_filter_block:search-page'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/search\r\n/search/*"
+    negate: false
+    context_mapping: {  }
