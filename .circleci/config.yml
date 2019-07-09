@@ -121,8 +121,6 @@ build_and_deploy: &build_and_deploy
             # Set the connection type to GIT
             terminus connection:set $CIRCLE_PROJECT_REPONAME.dev git
             git push -f pantheon master
-            # TODO: Sanitize DB here
-            # terminus env:clone-content $CIRCLE_PROJECT_REPONAME.test dev
             # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
             # Read the last Git log in the master branch. Get the branch name at the end of the log.
             # Example: Merge pull request #35 from eGovPDX/powr-152
@@ -143,8 +141,8 @@ build_and_deploy: &build_and_deploy
             if grep -Fxq "$CIRCLE_BRANCH" ./env_list.txt; then
               echo "Found multidev site"
             else
-              # Create a new Multi-Dev with files and database from Test.
-              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.test $CIRCLE_BRANCH
+              # Create a new Multi-Dev with files and database from Dev.
+              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.dev $CIRCLE_BRANCH
             fi
             rm -rf ./env_list.txt
             # Set the connection type to GIT
