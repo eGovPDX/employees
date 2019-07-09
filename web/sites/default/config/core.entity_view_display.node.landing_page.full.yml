@@ -46,31 +46,32 @@ third_party_settings:
   layout_library:
     enable: true
   layout_builder_restrictions:
-    allowed_blocks:
-      'Chaos tools': {  }
-      Content: {  }
-      'Content fields':
-        - 'field_block:node:landing_page:uid'
-        - 'field_block:node:landing_page:created'
-        - 'field_block:node:landing_page:body'
-      core:
-        - page_title_block
-      'Entity Browser':
-        - 'entity_browser_block:media_browser'
-      Help: {  }
-      'Lists (Views)': {  }
-      Menus: {  }
-      'Moderation Dashboard': {  }
-      System:
-        - system_breadcrumb_block
-      User: {  }
-      'User fields': {  }
-      Views: {  }
-    allowed_layouts:
-      - layout_onecol
-      - layout_twocol_section
-      - layout_threecol_section
-      - layout_fourcol_section
+    entity_view_mode_restriction:
+      allowed_blocks:
+        'Chaos tools': {  }
+        Content: {  }
+        'Content fields':
+          - 'field_block:node:landing_page:uid'
+          - 'field_block:node:landing_page:created'
+          - 'field_block:node:landing_page:body'
+        core:
+          - page_title_block
+        'Entity Browser':
+          - 'entity_browser_block:media_browser'
+        Help: {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        'Moderation Dashboard': {  }
+        System:
+          - system_breadcrumb_block
+        User: {  }
+        'User fields': {  }
+        Views: {  }
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+        - layout_fourcol_section
 _core:
   default_config_hash: xe8JwKNFUBheuwYjfYju8_RA8c3rMj5JbTk35d_3TeU
 id: node.landing_page.full

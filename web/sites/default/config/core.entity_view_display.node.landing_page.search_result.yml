@@ -64,12 +64,13 @@ third_party_settings:
   layout_library:
     enable: false
   layout_builder_restrictions:
-    allowed_blocks: {  }
-    allowed_layouts:
-      - layout_onecol
-      - layout_twocol_section
-      - layout_threecol_section
-      - layout_fourcol_section
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts:
+        - layout_onecol
+        - layout_twocol_section
+        - layout_threecol_section
+        - layout_fourcol_section
 _core:
   default_config_hash: 5UN5kAHRgHTV9rnAtMyoW8FuNbs9zX705ijw5csX8YI
 id: node.landing_page.search_result
