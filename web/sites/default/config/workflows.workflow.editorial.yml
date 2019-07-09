@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.event
     - node.type.landing_page
+    - node.type.news
     - node.type.page
   module:
     - content_moderation
@@ -73,5 +75,8 @@ type_settings:
         - review
   entity_types:
     node:
+      - event
       - landing_page
+      - news
       - page
+  default_moderation_state: draft
