@@ -66,7 +66,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-$settings['cache']['bins']['render'] = 'cache.backend.null';
+# $settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -88,7 +88,7 @@ $settings['cache']['bins']['render'] = 'cache.backend.null';
  *
  * Only use this setting once the site has been installed.
  */
-$settings['cache']['bins']['page'] = 'cache.backend.null';
+# $settings['cache']['bins']['page'] = 'cache.backend.null';
 
 /**
  * Disable Dynamic Page Cache.
@@ -159,8 +159,7 @@ $settings['hash_salt'] = 'thisismysaltittasteslikesalt';
 // $config['clamav.settings']['enabled'] = 0;
 
 $settings['trusted_host_patterns'] = array(
-  '^'. preg_quote('employees.lndo.site') .'$',
-  '^'. preg_quote('localhost') .'$'
+  '.*'   // Allow any hostname
 );
 
 $config['system.file']['path']['temporary'] = '/tmp';

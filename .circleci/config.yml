@@ -59,24 +59,24 @@ build_and_deploy: &build_and_deploy
         key: terminus_-{{ checksum "composer.lock" }}
         paths:
           - "/tmp/vendor"
-    # - restore_cache:
-    #     name: Restore theme build asset cache
-    #     keys:
-    #       - cloudy_-{{ checksum "web/themes/custom/cloudy/package.json" }}
-    # - run:
-    #     name: Install theme build tools
-    #     command: |
-    #       cd web/themes/custom/cloudy && npm install
-    # - save_cache:
-    #     name: Save theme build asset cache
-    #     key: cloudy_-{{ checksum "web/themes/custom/cloudy/package.json" }}
-    #     paths:
-    #       - "web/themes/custom/cloudy/node_modules"
+    - restore_cache:
+        name: Restore theme build asset cache
+        keys:
+          - cloudy_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+    - run:
+        name: Install theme build tools
+        command: |
+          cd web/themes/custom/cloudy2 && npm install
+    - save_cache:
+        name: Save theme build asset cache
+        key: cloudy_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+        paths:
+          - "web/themes/custom/cloudy2/node_modules"
     - restore_cache: *restore_cache
     - run:
         name: Composer install
         command: |
-          # Pantheon don't allow these folders but Composer needs them
+          # Pantheon does not allow these folders but Composer needs them
           rm -rf ./web/modules/contrib/facets
           # Run composer install with hirak/prestissimo for better performance
           composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
@@ -121,8 +121,6 @@ build_and_deploy: &build_and_deploy
             # Set the connection type to GIT
             terminus connection:set $CIRCLE_PROJECT_REPONAME.dev git
             git push -f pantheon master
-            # TODO: Sanitize DB here
-            # terminus env:clone-content $CIRCLE_PROJECT_REPONAME.test dev
             # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
             # Read the last Git log in the master branch. Get the branch name at the end of the log.
             # Example: Merge pull request #35 from eGovPDX/powr-152
@@ -143,8 +141,8 @@ build_and_deploy: &build_and_deploy
             if grep -Fxq "$CIRCLE_BRANCH" ./env_list.txt; then
               echo "Found multidev site"
             else
-              # Create a new Multi-Dev with files and database from Test.
-              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.test $CIRCLE_BRANCH
+              # Create a new Multi-Dev with files and database from Dev.
+              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.dev $CIRCLE_BRANCH
             fi
             rm -rf ./env_list.txt
             # Set the connection type to GIT

@@ -1,0 +1,22 @@
+uuid: e08aae51-a691-41e9-b9f5-aca406494b61
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - cloudy2
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: cloudy2_messages
+theme: cloudy2
+region: header
+weight: -2
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

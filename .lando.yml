@@ -17,11 +17,30 @@ services:
     xdebug: true
     config:
       conf: xdebug.ini
+  node:
+    type: node
+    overrides:
+      environment:
+        LANDO_WEBROOT_USER: www-data
+        LANDO_WEBROOT_GROUP: www-data
+    run_as_root:
+      - /bin/sh -c "adduser www-data node"
+      - /bin/sh -c "chmod -R 775 /var/www"
+    build:
+      - echo "Installing Node.js dependencies..."
+      - npm -C /app/web/themes/custom/cloudy2 install
 tooling:
   drush:
     description: Run drush commands
     service: appserver
     cmd: drush --root=/app/web
+  npm:
+    description: Run npm commands
+    service: node
+    cmd: cd /app/web/themes/custom/cloudy2 && npm -C /app/web/themes/custom/cloudy2
+  node:
+    description: Run node commands
+    service: node
   latest:
     description: Download and import the latest database from Dev
     cmd:
