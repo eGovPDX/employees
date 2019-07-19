@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4a81ccffc4973d042207b195fbaa53a",
+    "content-hash": "b533179a1166c6c530c2571bda6d706c",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -2662,6 +2662,57 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/blazy",
                 "issues": "https://drupal.org/project/issues/blazy"
+            }
+        },
+        {
+            "name": "drupal/bootstrap_datepicker",
+            "version": "1.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bootstrap_datepicker.git",
+                "reference": "8.x-1.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bootstrap_datepicker-8.x-1.0-beta2.zip",
+                "reference": "8.x-1.0-beta2",
+                "shasum": "d662afb84e9fe9e21788baffb173cc132536128e"
+            },
+            "require": {
+                "drupal/core": "^8.6.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta2",
+                    "datestamp": "1555488185",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Martijn de Wit",
+                    "homepage": "https://www.drupal.org/user/83953"
+                },
+                {
+                    "name": "beljaako",
+                    "homepage": "https://www.drupal.org/user/1031430"
+                }
+            ],
+            "description": "Bootstrap datepicker",
+            "homepage": "http://drupal.org/project/bootstrap_datepicker",
+            "support": {
+                "source": "https://git.drupalcode.org/project/bootstrap_datepicker"
             }
         },
         {
@@ -6814,6 +6865,53 @@
             "support": {
                 "source": "https://cgit.drupalcode.org/slick_entityreference",
                 "issues": "https://drupal.org/project/issues/slick_entityreference"
+            }
+        },
+        {
+            "name": "drupal/time_field",
+            "version": "1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/time_field.git",
+                "reference": "8.x-1.12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/time_field-8.x-1.12.zip",
+                "reference": "8.x-1.12",
+                "shasum": "3ab6f115429995cf72dfbd25ae69cc07dcf54ce4"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.12",
+                    "datestamp": "1553752981",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "lostkoder",
+                    "homepage": "https://www.drupal.org/user/3545132"
+                }
+            ],
+            "description": "Provides \"Time Field\" and \"Time Range Field\".",
+            "homepage": "https://www.drupal.org/project/time_field",
+            "support": {
+                "source": "https://git.drupalcode.org/project/time_field"
             }
         },
         {
@@ -11542,6 +11640,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/bootstrap_datepicker": 10,
         "drupal-composer/drupal-security-advisories": 20,
         "roave/security-advisories": 20
     },
