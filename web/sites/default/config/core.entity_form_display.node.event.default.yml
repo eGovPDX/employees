@@ -46,44 +46,58 @@ content:
   field_end_date:
     weight: 9
     settings:
-      assume_nearby_year: false
-      autoclose: false
-      container: body
-      calendar_weeks: false
-      clear_btn: false
-      toggle_active: false
-      days_of_week_disabled: {  }
-      days_of_week_highlighted: {  }
-      dates_disabled: ''
-      disable_touch_keyboard: false
-      enable_on_readonly: true
-      end_date_selection: date
-      end_date: 31-12-2999
-      end_date_timedelta: ''
-      force_parse: true
-      format: ''
-      immediate_updates: false
-      keep_empty_values: false
-      keyboard_navigation: true
+      title: ''
+      format: mm/dd/yyyy
       language: en
-      min_view_mode: '0'
+      show_week_days: '1'
+      today_btn: 'FALSE'
+      clear_btn: '1'
+      autoclose: '1'
+      week_start: '0'
+      assume_nearby_year: '1'
+      container: body
+      dates_disabled: ''
+      days_of_week_highlighted:
+        2: '2'
+        3: '3'
+        4: '4'
+        5: '5'
+        6: '6'
+        1: 0
+        7: 0
+      disable_touch_keyboard: '1'
+      end_date_selection: date
+      end_date: ''
+      end_date_timedelta: ''
+      force_parse: '1'
+      keyboard_navigation: '1'
       max_view_mode: '4'
-      multidate: false
-      multidate_separator: ','
+      min_view_mode: '0'
       orientation: auto
-      rtl: false
-      show_on_focus: true
-      show_week_days: true
+      show_on_focus: '1'
       start_date_selection: date
-      start_date: 01-01-1000
+      start_date: ''
       start_date_timedelta: ''
       start_view: '0'
-      title: ''
-      today_btn: 'FALSE'
-      today_highlight: false
-      update_view_date: true
-      week_start: '0'
-      z_index_offset: 10
+      update_view_date: '1'
+      z_index_offset: '10'
+      calendar_weeks: 0
+      toggle_active: false
+      days_of_week_disabled:
+        1: 0
+        2: 0
+        3: 0
+        4: 0
+        5: 0
+        6: 0
+        7: 0
+      enable_on_readonly: 0
+      immediate_updates: 0
+      keep_empty_values: 0
+      multidate: false
+      multidate_separator: ','
+      rtl: 0
+      today_highlight: 0
     third_party_settings: {  }
     type: bootstrap_date_widget
     region: content
@@ -156,8 +170,8 @@ content:
   field_start_time:
     weight: 8
     settings:
-      enabled: false
-      step: 5
+      step: '5'
+      enabled: 0
     third_party_settings: {  }
     type: time_widget
     region: content
