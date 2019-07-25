@@ -15,13 +15,13 @@ entity_type: media
 bundle: document
 label: Document
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   file_directory: '[date:custom:Y]-[date:custom:m]'
-  file_extensions: 'txt pdf doc docx'
+  file_extensions: 'txt pdf doc docx xls xlsx ppt pptx'
   max_filesize: ''
   description_field: false
   handler: 'default:file'

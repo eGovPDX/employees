@@ -3,11 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video.field_caption
+    - field.field.media.video.field_creator
     - field.field.media.video.field_media_in_library
     - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_source
+    - field.field.media.video.field_title
+    - field.field.media.video.field_transcript
     - media.type.video
   module:
-    - user
+    - text
     - video_embed_field
 _core:
   default_config_hash: ULSDSeb1LGUAS40ia_8qngabv0GTcJAaHGl67xDUNsA
@@ -19,16 +24,31 @@ content:
   created:
     label: hidden
     type: timestamp
-    weight: 1
+    weight: 7
     settings:
       date_format: medium
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
     region: content
+  field_caption:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_creator:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_media_video_embed_field:
     type: video_embed_field_video
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       responsive: true
@@ -36,6 +56,29 @@ content:
       height: 480
       autoplay: true
     third_party_settings: {  }
+    region: content
+  field_source:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_title:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_transcript:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
     region: content
   name:
     label: hidden
@@ -45,13 +88,8 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     region: content
-  uid:
-    label: hidden
-    type: author
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    region: content
 hidden:
   field_media_in_library: true
+  search_api_excerpt: true
   thumbnail: true
+  uid: true

@@ -3,13 +3,21 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_creator
+    - field.field.media.image.field_file_size
+    - field.field.media.image.field_image_height
+    - field.field.media.image.field_image_width
     - field.field.media.image.field_media_in_library
+    - field.field.media.image.field_mime_type
+    - field.field.media.image.field_source
+    - field.field.media.image.field_title
     - field.field.media.image.image
     - image.style.thumbnail
     - media.type.image
   module:
     - image_widget_crop
-    - path
+    - text
 _core:
   default_config_hash: kyoAHlZTGIuGTaQuBblGBk8EhfnVKOl19_0j5WbpQqM
 id: media.image.default
@@ -17,16 +25,41 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
-  field_media_in_library:
-    type: boolean_checkbox
+  field_caption:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+    region: content
+  field_creator:
     weight: 4
     settings:
-      display_label: true
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_source:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   image:
     type: image_widget_crop
-    weight: 0
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -41,25 +74,25 @@ content:
     region: content
   name:
     type: string_textfield
-    weight: 3
+    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     region: content
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 100
+    weight: 6
     region: content
     third_party_settings: {  }
 hidden:
   created: true
+  field_file_size: true
+  field_image_height: true
+  field_image_width: true
+  field_media_in_library: true
+  field_mime_type: true
+  path: true
   uid: true

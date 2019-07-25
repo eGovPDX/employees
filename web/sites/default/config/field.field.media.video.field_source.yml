@@ -1,0 +1,19 @@
+uuid: fc5be194-7034-4c6a-8548-26589c334a26
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_source
+    - media.type.video
+id: media.video.field_source
+field_name: field_source
+entity_type: media
+bundle: video
+label: Source
+description: 'The source of the original publication of this media. Can be either a fully qualified URL to the source (starts with http or https), or the name of a source that is not available by URL. This source is different than the video URL.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

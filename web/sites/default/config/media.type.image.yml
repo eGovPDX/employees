@@ -1,15 +1,24 @@
 uuid: 1c901b78-e3d2-43bc-8a37-9e85ff9b9663
 langcode: und
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: _none
 _core:
   default_config_hash: UbLy1_yBV5jSxil0-k8gV9GiVUg3Oik3hlAJzqeT8YQ
 id: image
 label: Image
-description: 'Locally hosted images.'
+description: 'Images added to the site have a focal point set to allow the system to crop the image for use in banners and features.'
 source: image
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
   source_field: image
-field_map: {  }
+field_map:
+  mimetype: field_mime_type
+  filesize: field_file_size
+  width: field_image_width
+  height: field_image_height
