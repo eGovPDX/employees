@@ -1,17 +1,22 @@
 uuid: 9102c3ca-78e3-4a61-80eb-f0a6497c53b2
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: _none
 _core:
   default_config_hash: d0O8xgPZqpnaY92j4yFbMdK9hvHLIoOk-OTknz5IGZ4
 id: document
 label: Document
-description: 'A locally hosted document, such as a PDF.'
+description: 'A document with a title and summary that can be embedded in other content showing file type and size. Allowed formats are .pdf (preferred), .doc, .docx, .xls, .xlsx, .ppt, .pptx, and .txt.'
 source: file
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
   source_field: field_document
 field_map:
-  mime: field_mime_type
-  size: field_document_size
+  mimetype: field_mime_type
+  filesize: field_file_size

@@ -1,0 +1,19 @@
+uuid: beef6a1c-c3b0-4ec8-a10f-a7604a79da23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_creator
+    - media.type.image
+id: media.image.field_creator
+field_name: field_creator
+entity_type: media
+bundle: image
+label: Creator
+description: 'The name of the media creator and/or the organization they represent (i.e. "Jane Doe, NW News Corp"). If the source is the City of Portland, do not include the organization name.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: d84e7640-a456-45d7-93df-551ded55c048
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_image_width
+    - media.type.image
+id: media.image.field_image_width
+field_name: field_image_width
+entity_type: media
+bundle: image
+label: 'Image width'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
