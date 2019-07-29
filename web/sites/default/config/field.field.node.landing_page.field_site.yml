@@ -1,0 +1,29 @@
+uuid: 7a86be0d-691e-4899-ac74-7c00da58996e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_site
+    - node.type.landing_page
+    - taxonomy.vocabulary.site
+id: node.landing_page.field_site
+field_name: field_site
+entity_type: node
+bundle: landing_page
+label: Site
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      site: site
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
