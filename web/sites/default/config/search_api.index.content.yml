@@ -6,7 +6,7 @@ dependencies:
     - node
     - search_api
   config:
-    - search_api.server.database
+    - search_api.server.searchstax
     - core.entity_view_mode.node.full
 _core:
   default_config_hash: qEX0c8Yf878jYMC-3TrFlGSSNQeGbl3u0Hs6GJfxA38
@@ -171,4 +171,4 @@ tracker_settings:
 options:
   index_directly: true
   cron_limit: 50
-server: database
+server: searchstax
