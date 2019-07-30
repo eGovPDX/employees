@@ -1,0 +1,14 @@
+uuid: d7dd0035-3444-4a76-bc9e-9cfb47918a90
+langcode: en
+status: true
+dependencies:
+  config:
+    - key.key.solr_username
+    - search_api.server.searchstax
+id: solr_username
+label: 'Solr username'
+config_type: search_api_server
+config_prefix: search_api.server
+config_name: searchstax
+config_item: backend_config.connector_config.username
+key_id: solr_username
