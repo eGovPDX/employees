@@ -44,6 +44,13 @@ content:
         file_links: false
         remove_button: false
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   name:
     type: string_textfield
     weight: 3
@@ -67,4 +74,12 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_caption: true
+  field_creator: true
+  field_file_size: true
+  field_image_height: true
+  field_image_width: true
+  field_mime_type: true
+  field_source: true
+  field_title: true
   uid: true
