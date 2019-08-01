@@ -8,12 +8,75 @@ dependencies:
     - node.type.news
   module:
     - layout_builder
+    - layout_discovery
+    - layout_library
     - text
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings: {  }
+        components:
+          986b2381-5a5a-4ef1-a816-989ea203431d:
+            uuid: 986b2381-5a5a-4ef1-a816-989ea203431d
+            region: content
+            configuration:
+              id: 'field_block:node:news:type'
+              label: 'Content type'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          27575e94-e99a-44af-8434-8e7ab2155282:
+            uuid: 27575e94-e99a-44af-8434-8e7ab2155282
+            region: content
+            configuration:
+              id: 'field_block:node:news:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+          11b7e65c-35b3-4d9b-8a94-488e289ef3dd:
+            uuid: 11b7e65c-35b3-4d9b-8a94-488e289ef3dd
+            region: content
+            configuration:
+              id: 'field_block:node:news:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.news.search_result
 targetEntityType: node
 bundle: news
