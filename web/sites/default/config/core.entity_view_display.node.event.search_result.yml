@@ -14,13 +14,88 @@ dependencies:
   module:
     - datetime
     - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
     - text
     - time_field
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings: {  }
+        components:
+          a27995a6-99a2-4d72-b295-4df3603e1bd8:
+            uuid: a27995a6-99a2-4d72-b295-4df3603e1bd8
+            region: content
+            configuration:
+              id: 'field_block:node:event:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          column_widths: 67-33
+        components:
+          3309e892-a069-4772-a763-ea5460ee8e05:
+            uuid: 3309e892-a069-4772-a763-ea5460ee8e05
+            region: first
+            configuration:
+              id: 'field_block:node:event:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          2595b674-7982-4661-aa21-378d6b144cc6:
+            uuid: 2595b674-7982-4661-aa21-378d6b144cc6
+            region: second
+            configuration:
+              id: 'field_block:node:event:field_start_date'
+              label: 'Start date'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: datetime_default
+                settings:
+                  timezone_override: ''
+                  format_type: long_12h
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
 id: node.event.search_result
 targetEntityType: node
 bundle: event
@@ -29,12 +104,12 @@ content:
   body:
     label: visually_hidden
     type: text_default
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     region: content
   field_all_day:
-    weight: 4
+    weight: 5
     label: visually_hidden
     settings:
       format: default
@@ -44,7 +119,7 @@ content:
     type: boolean
     region: content
   field_end_date:
-    weight: 2
+    weight: 3
     label: visually_hidden
     settings:
       timezone_override: ''
@@ -53,7 +128,7 @@ content:
     type: datetime_default
     region: content
   field_end_time:
-    weight: 3
+    weight: 4
     label: visually_hidden
     settings:
       time_format: 'h:i A'
@@ -61,7 +136,7 @@ content:
     type: time_formatter
     region: content
   field_start_date:
-    weight: 0
+    weight: 1
     label: visually_hidden
     settings:
       timezone_override: ''
@@ -70,14 +145,18 @@ content:
     type: datetime_default
     region: content
   field_start_time:
-    weight: 1
+    weight: 2
     label: visually_hidden
     settings:
       time_format: 'h:i A'
     third_party_settings: {  }
     type: time_formatter
     region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   content_moderation_control: true
-  links: true
   search_api_excerpt: true
