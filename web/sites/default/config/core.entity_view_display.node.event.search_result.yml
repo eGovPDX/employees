@@ -46,6 +46,24 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             additional: {  }
+            weight: 1
+          b0b112f6-40d5-4ab1-b908-413bd5b60f2f:
+            uuid: b0b112f6-40d5-4ab1-b908-413bd5b60f2f
+            region: content
+            configuration:
+              id: 'field_block:node:event:type'
+              label: 'Content type'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
             weight: 0
         third_party_settings: {  }
       -
