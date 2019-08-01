@@ -162,13 +162,15 @@ field_settings:
     type: text
     configuration:
       roles:
-        anonymous: anonymous
+        authenticated: authenticated
       view_mode:
         'entity:node':
           event: default
           landing_page: full
           news: default
           page: default
+        'entity:taxonomy_term':
+          site: ''
 datasource_settings:
   'entity:node':
     bundles:
