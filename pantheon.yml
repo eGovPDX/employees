@@ -36,6 +36,9 @@ workflows:
         description: Import configuration from .yml files
         script: private/scripts/drush_post_deploy_config_import.php
       - type: webphp
+        description: Rebuild cache after config import
+        script: private/scripts/drush_post_deploy_cache_rebuild.php
+      - type: webphp
         description: Run cron jobs
         script: private/scripts/drush_post_deploy_cron.php
       - type: webphp
@@ -56,6 +59,9 @@ workflows:
       - type: webphp
         description: Import configuration from .yml files
         script: private/scripts/drush_post_deploy_config_import.php
+      - type: webphp
+        description: Rebuild cache after config import
+        script: private/scripts/drush_post_deploy_cache_rebuild.php
       - type: webphp
         description: Run cron jobs
         script: private/scripts/drush_post_deploy_cron.php
