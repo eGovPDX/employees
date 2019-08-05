@@ -43,7 +43,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
     $primary_domain = $_SERVER['HTTP_HOST'];
   }
 
-  if ($_ENV['PANTHEON_ENVIRONMENT'] !== 'lando' && 
+  if ($_ENV['PANTHEON_ENVIRONMENT'] !== 'lando' &&
       ($_SERVER['HTTP_HOST'] != $primary_domain
         || !isset($_SERVER['HTTP_USER_AGENT_HTTPS'])
         || $_SERVER['HTTP_USER_AGENT_HTTPS'] != 'ON' ) ) {
@@ -73,6 +73,29 @@ else {
   $env = 'dev';
 }
 
+// Enable/disable config_split configurations based on the current environment
+$config['config_split.config_split.config_multidev']['status'] = FALSE;
+$config['config_split.config_split.config_dev']['status'] = FALSE;
+$config['config_split.config_split.config_test']['status'] = FALSE;
+$config['config_split.config_split.config_prod']['status'] = FALSE;
+$config['config_split.config_split.config_local']['status'] = FALSE;
+switch ($env) {
+  case 'live':
+    $config['config_split.config_split.config_prod']['status'] = TRUE;
+    break;
+  case 'test':
+    $config['config_split.config_split.config_test']['status'] = TRUE;
+    break;
+  case 'dev':
+    $config['config_split.config_split.config_dev']['status'] = TRUE;
+    break;
+  case 'lando':
+    $config['config_split.config_split.config_local']['status'] = TRUE;
+    break;
+  default:  // Everything else (i.e. various multidev environments)
+    $config['config_split.config_split.config_multidev']['status'] = TRUE;
+    break;
+}
 
 
 // $databases['default']['default'] = array (

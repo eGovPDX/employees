@@ -1,4 +1,4 @@
-uuid: 34d5c231-a722-4ab8-9f00-b261d939b0d8
+uuid: 6eb3aea6-375e-4f39-8090-fcef3e13a058
 langcode: en
 status: true
 dependencies:
@@ -6,10 +6,8 @@ dependencies:
     - search_api.index.content
   module:
     - search_api
-_core:
-  default_config_hash: 8eXHpZgzJ58fVmB7evA4TNESdXWjMOW9AFPYSxEimE4
-id: search
-label: Search
+id: index_search
+label: 'Index search'
 module: views
 description: ''
 tag: ''
@@ -27,26 +25,24 @@ display:
         type: none
         options: {  }
       cache:
-        type: search_api_time
-        options:
-          results_lifespan: 3600
-          results_lifespan_custom: 0
-          output_lifespan: 3600
-          output_lifespan_custom: 0
+        type: tag
+        options: {  }
       query:
         type: views_query
-      exposed_form:
-        type: input_required
         options:
-          submit_button: Search
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Enter keywords to search the site.'
-          text_input_required_format: rich_text
       pager:
         type: mini
         options:
@@ -67,25 +63,22 @@ display:
             next: ››
       style:
         type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          uses_fields: false
       row:
         type: search_api
         options:
           view_modes:
             'entity:node':
-              event: default
-              landing_page: teaser
-              news: default
-              page: teaser
+              event: search_result
+              landing_page: search_result
+              news: search_result
+              page: search_result
+            'entity:taxonomy_term':
+              site: search_result
       fields:
-        rendered:
+        label:
           table: search_api_index_content
-          field: rendered
-          id: rendered
+          field: label
+          id: label
           entity_type: null
           entity_field: null
           plugin_id: search_api
@@ -134,6 +127,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           link_to_item: false
+          use_highlighting: false
           multi_type: separator
           multi_separator: ', '
       filters:
@@ -144,33 +138,26 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: or
+          operator: and
           value: ''
           group: 1
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Keywords
+            label: Search
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
-            identifier: keywords
+            identifier: search
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              editor: '0'
               administrator: '0'
-              layout_manager: '0'
-              media_creator: '0'
-              media_manager: '0'
-              page_creator: '0'
-              page_reviewer: '0'
-              landing_page_creator: '0'
-              landing_page_reviewer: '0'
-              workspace_creator: '0'
-              workspace_reviewer: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -184,42 +171,59 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           parse_mode: terms
-          min_length: 2
-          fields: {  }
+          min_length: null
+          fields:
+            - rendered
           plugin_id: search_api_fulltext
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
+        content_type:
+          id: content_type
           table: search_api_index_content
-          field: search_api_relevance
+          field: content_type
           relationship: none
           group_type: group
           admin_label: ''
-          order: DESC
+          operator: or
+          value:
+            event: event
+            news: news
+            page: page
+          group: 1
           exposed: false
           expose:
+            operator_id: ''
             label: ''
-          plugin_id: search_api
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+      sorts: {  }
+      title: Search
       header: {  }
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: 'Your search did not return any results.'
-            format: rich_text
-          plugin_id: text
+      empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      title: Search
     cache_metadata:
       max-age: -1
       contexts:
@@ -227,15 +231,14 @@ display:
         - url
         - url.query_args
       tags: {  }
-  page:
+  page_1:
     display_plugin: page
-    id: page
+    id: page_1
     display_title: Page
     position: 1
     display_options:
       display_extenders: {  }
       path: search
-      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:

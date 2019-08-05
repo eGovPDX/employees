@@ -3,11 +3,52 @@ langcode: en
 status: true
 dependencies:
   module:
+    - search_api_solr
     - node
+    - taxonomy
     - search_api
   config:
-    - search_api.server.database
+    - field.storage.node.field_end_date
+    - field.storage.node.field_end_time
+    - search_api.server.searchstax
     - core.entity_view_mode.node.full
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    advanced:
+      index_prefix: ''
+      collection: ''
 _core:
   default_config_hash: qEX0c8Yf878jYMC-3TrFlGSSNQeGbl3u0Hs6GJfxA38
 id: content
@@ -15,6 +56,74 @@ name: Content
 description: 'An index of all content in your site.'
 read_only: false
 field_settings:
+  content_changed:
+    label: Changed
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  content_field_end_date:
+    label: 'End date'
+    datasource_id: 'entity:node'
+    property_path: field_end_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_end_date
+  content_field_end_time:
+    label: 'End time'
+    datasource_id: 'entity:node'
+    property_path: field_end_time
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_end_time
+  content_status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  content_title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: 'solr_text_custom:edge'
+    dependencies:
+      module:
+        - node
+  content_type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  content_uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  description:
+    label: Description
+    datasource_id: 'entity:taxonomy_term'
+    property_path: description
+    type: text
+    dependencies:
+      module:
+        - taxonomy
   label:
     label: Label
     property_path: aggregated_field
@@ -23,6 +132,23 @@ field_settings:
       type: first
       fields:
         - 'entity:node/title'
+  name:
+    label: Name
+    datasource_id: 'entity:taxonomy_term'
+    property_path: name
+    type: 'solr_text_custom:edge'
+    boost: !!float 21
+    dependencies:
+      module:
+        - taxonomy
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -36,35 +162,24 @@ field_settings:
     type: text
     configuration:
       roles:
-        anonymous: anonymous
+        authenticated: authenticated
       view_mode:
         'entity:node':
           event: default
           landing_page: full
           news: default
           page: default
-  status:
-    label: null
-    datasource_id: 'entity:node'
-    property_path: status
-    type: boolean
-    indexed_locked: true
-    type_locked: true
-    dependencies:
-      module:
-        - node
-  uid:
-    label: null
-    datasource_id: 'entity:node'
-    property_path: uid
-    type: integer
-    indexed_locked: true
-    type_locked: true
-    dependencies:
-      module:
-        - node
+        'entity:taxonomy_term':
+          site: ''
 datasource_settings:
   'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:taxonomy_term':
     bundles:
       default: true
       selected: {  }
@@ -102,6 +217,7 @@ processor_settings:
       preprocess_query: -8
     all_fields: false
   rendered_item: {  }
+  solr_date_range: {  }
   stopwords:
     fields:
       - label
@@ -171,4 +287,4 @@ tracker_settings:
 options:
   index_directly: true
   cron_limit: 50
-server: database
+server: searchstax

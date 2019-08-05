@@ -1,0 +1,95 @@
+uuid: 96ca3f53-6797-4591-9d20-3d07cbcc73ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.search_result
+    - taxonomy.vocabulary.site
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings: {  }
+        components:
+          25f6e97f-6292-4a64-a6a6-29cdb74b6c69:
+            uuid: 25f6e97f-6292-4a64-a6a6-29cdb74b6c69
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:site:description'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
+          be688528-3493-4693-b66e-a13dd0528739:
+            uuid: be688528-3493-4693-b66e-a13dd0528739
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:site:vid'
+              label: Vocabulary
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          e8b490bf-febf-48b9-bffc-5c955ec0c825:
+            uuid: e8b490bf-febf-48b9-bffc-5c955ec0c825
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:site:name'
+              label: Name
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
+id: taxonomy_term.site.search_result
+targetEntityType: taxonomy_term
+bundle: site
+mode: search_result
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
