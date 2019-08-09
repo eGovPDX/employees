@@ -14,6 +14,7 @@
         "drupal/console": "^1.0.2",
         "drupal/facets": "^1.4",
         "drupal/key": "^1.8",
+        "drupal/og": "^1.0@alpha",
         "drupal/openid_connect": "^1.0@beta",
         "drupal/permissions_by_term": "^2.10",
         "drupal/radix": "^4.3",
@@ -61,7 +62,11 @@
             "bower-asset",
             "npm-asset"
         ],
-        "patches": {}
+        "patches": {
+            "drupal/og": {
+                "WIP: Adds basic UI for adding, editing and removing group memberships #231": "https://patch-diff.githubusercontent.com/raw/Gizra/og/pull/231.patch"
+            }
+        }
     },
     "repositories": {
         "drupal": {
