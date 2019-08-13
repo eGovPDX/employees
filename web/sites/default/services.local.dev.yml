@@ -1,0 +1,15 @@
+# Local services, development version
+#
+# This is the development version of the services.local.yml file, which enables various development
+# settings. It is not managed in source control. To run the site in development mode, make a copy 
+# of this file and rename it services.local.yml. To run the site locally in production mode (caching 
+# on, debug off, etc.), make a copy of services.local.default.yml and rename it services.local.yml.
+parameters:
+  http.response.debug_cacheability_headers: true
+  twig.config:
+    debug: true
+    auto_reload: true
+    cache: false
+services:
+  cache.backend.null:
+    class: Drupal\Core\Cache\NullBackendFactory
