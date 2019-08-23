@@ -10,6 +10,8 @@ dependencies:
   config:
     - field.storage.node.field_end_date
     - field.storage.node.field_end_time
+    - field.storage.node.field_start_date
+    - field.storage.node.field_start_time
     - search_api.server.searchstax
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -80,6 +82,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_end_time
+  content_field_start_date:
+    label: 'Start date'
+    datasource_id: 'entity:node'
+    property_path: field_start_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_start_date
+  content_field_start_time:
+    label: 'Start time'
+    datasource_id: 'entity:node'
+    property_path: field_start_time
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_start_time
   content_status:
     label: status
     datasource_id: 'entity:node'
