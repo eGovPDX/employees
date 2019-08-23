@@ -65,7 +65,11 @@ display:
             offset_label: Offset
           quantity: 9
       style:
-        type: html_list
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
       row:
         type: search_api
         options:
@@ -192,6 +196,42 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: search_api_options
+        content_status:
+          id: content_status
+          table: search_api_index_content
+          field: content_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_content
@@ -263,13 +303,17 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: 'Displaying @start - @end of @total upcoming events'
+          content: 'Displaying @current_record_count  of @total upcoming events'
           plugin_id: result
       footer: {  }
       empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
@@ -289,6 +333,9 @@ display:
       defaults:
         title: false
         pager: false
+        header: false
+        filters: false
+        filter_groups: false
       pager:
         type: some
         options:
@@ -297,21 +344,7 @@ display:
       allow:
         items_per_page: false
       display_description: ''
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-      tags: {  }
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: events
+      header: {  }
       filters:
         content_type:
           id: content_type
@@ -352,33 +385,29 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: search_api_options
-        search_api_fulltext:
-          id: search_api_fulltext
+        content_status:
+          id: content_status
           table: search_api_index_content
-          field: search_api_fulltext
+          field: content_status
           relationship: none
           group_type: group
           admin_label: ''
-          operator: and
-          value: ''
+          operator: '='
+          value: '1'
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: search_api_fulltext_op
-            label: 'Search events'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: search_api_fulltext_op
-            identifier: search
+            operator: ''
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              administrator: '0'
-            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -391,18 +420,29 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          parse_mode: terms
-          min_length: null
-          fields:
-            - rendered
-          plugin_id: search_api_fulltext
-      defaults:
-        filters: false
-        filter_groups: false
+          plugin_id: search_api_boolean
       filter_groups:
         operator: AND
         groups:
           1: AND
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+      tags: {  }
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: 'Sitewide page'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: events
+      defaults:
+        filters: true
+        filter_groups: true
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
