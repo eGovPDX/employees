@@ -38,7 +38,7 @@ assert_options(ASSERT_ACTIVE, TRUE);
 /**
  * Enable local development services.
  */
-$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/default/services.local.yml';
+$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/default/local.services.yml';
 
 /**
  * Show all error messages, with backtrace information.
@@ -66,7 +66,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -74,7 +74,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * Uncomment the code below to only store migrations in memory and not in the
  * database. This makes it easier to develop custom migrations.
  */
-# $settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
+#$settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
 
 /**
  * Disable Internal Page Cache.
@@ -88,7 +88,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['page'] = 'cache.backend.null';
+$settings['cache']['bins']['page'] = 'cache.backend.null';
 
 /**
  * Disable Dynamic Page Cache.

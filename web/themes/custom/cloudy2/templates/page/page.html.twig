@@ -32,25 +32,46 @@
       {% endif %}
     {% endblock %}
   {% endembed %}
+  <div class="row">
+    <main class="col-lg-9 col-md-9 col-sm-12 order-2">
+      {% if page.header %}
+        <header class="page__header mb-3">
+          <div class="container">
+            {{ page.header }}
+          </div>
+        </header>
+      {% endif %}
 
-  <main>
-    {% if page.header %}
-      <header class="page__header mb-3">
-        <div class="container">
-          {{ page.header }}
+      {% if page.content %}
+        <div class="page__content">
+          <div class="container">
+            {{ page.content }}
+          </div>
         </div>
-      </header>
-    {% endif %}
-
-    {% if page.content %}
-      <div class="page__content">
-        <div class="container">
-          {{ page.content }}
-        </div>
+      {% endif %}
+    </main>
+    <nav class="navbar navbar-expand-lg navbar-expand-md navbar-light col-lg-3 col-md-3 col-sm-3 order-1">
+      <button class="navbar-toggler w-100 ml-4" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle page menu">
+        <span class="navbar-toggler-text">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav flex-column w-100 ml-4">
+          <li class="nav-item border-bottom">
+            <a class="nav-link active" href="#">Active</a>
+          </li>
+          <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item border-bottom">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
       </div>
-    {% endif %}
-  </main>
-
+    </nav>
+  </div>
   {% if page.footer %}
     <footer class="page__footer mt-5">
       <div class="container">

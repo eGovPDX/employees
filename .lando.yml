@@ -17,6 +17,12 @@ services:
     xdebug: true
     config:
       conf: xdebug.ini
+    overrides:
+      environment:
+        BEHAT_PARAMS: '{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "https://portlandor.lndo.site"}, "Drupal\\DrupalExtension" : {"drush" :   {  "root":  "/app/web" }}}}'
+        MINK_DRIVER_ARGS: '["chrome", null, "http://chromedriver:4444/wd/hub"]'
+        MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", null, "http://chromedriver:4444/wd/hub"]'
+        MINK_DRIVER_CLASS: 'Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver'
   node:
     type: node
     overrides:
@@ -29,6 +35,22 @@ services:
     build:
       - echo "Installing Node.js dependencies..."
       - npm -C /app/web/themes/custom/cloudy2 install
+  chromedriver:
+    type: compose
+    services:
+      image: robcherry/docker-chromedriver:latest
+      expose:
+        - "4444"
+      environment:
+        CHROMEDRIVER_WHITELISTED_IPS: ""
+        CHROMEDRIVER_URL_BASE: "/wd/hub"
+      security_opt:
+        - seccomp:unconfined
+      command: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+events:
+  post-start:
+    - node: echo "Building theme asset files..."
+    - node: npm -C /app/web/themes/custom/cloudy2 run build:dev
 tooling:
   drush:
     description: Run drush commands
@@ -67,6 +89,8 @@ tooling:
       - appserver: drush core:cron -y
       - appserver: echo "Clearing cache..."
       - appserver: drush cr -y
+      - appserver: echo "Building theme asset files..."
+      - node: npm -C /app/web/themes/custom/cloudy2 run build:dev
   cupex:
     description: Composer update, database update, and config export to get a clean module or theme update
     cmd:
@@ -76,8 +100,6 @@ tooling:
       - appserver: drush updb -y
       - appserver: echo "Exporting Drupal config..."
       - appserver: drush cex -y
-      # - appserver: echo "Building theme asset files..."
-      # - node: npm -C /app/web/themes/custom/cloudy run build:dev
   xdebug-on:
     service: appserver
     description: Enable xdebug for nginx.
@@ -88,4 +110,12 @@ tooling:
     description: Disable xdebug for nginx.
     cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm && echo "Disabling xdebug"
     user: root
+  behat:
+    service: appserver
+    description: "Run behat tests"
+    cmd:
+      - /app/vendor/bin/behat -c /app/tests/behat.yml
+  chromedriver:
+    service: chromedriver
+    description: "Run chromedriver commands."
     
