@@ -7,8 +7,90 @@ dependencies:
     - field.field.node.news.body
     - node.type.news
   module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings: {  }
+        components:
+          66cbfeb7-774d-40e1-bf77-3edbd74604e5:
+            uuid: 66cbfeb7-774d-40e1-bf77-3edbd74604e5
+            region: content
+            configuration:
+              id: 'field_block:node:news:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          column_widths: 50-50
+        components:
+          1e4e3c3a-895a-44e1-acda-a7ffa1ba32f6:
+            uuid: 1e4e3c3a-895a-44e1-acda-a7ffa1ba32f6
+            region: first
+            configuration:
+              id: 'field_block:node:news:uid'
+              label: 'Authored by'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: compact
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          da1ef0eb-0cff-4437-9527-a8f95c081f1d:
+            uuid: da1ef0eb-0cff-4437-9527-a8f95c081f1d
+            region: second
+            configuration:
+              id: 'field_block:node:news:created'
+              label: 'Authored on'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: timestamp
+                settings:
+                  date_format: long_12h
+                  custom_date_format: ''
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
 id: node.news.teaser
 targetEntityType: node
 bundle: news
