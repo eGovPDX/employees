@@ -5,10 +5,128 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.event.body
+    - field.field.node.event.field_all_day
+    - field.field.node.event.field_end_date
+    - field.field.node.event.field_end_time
+    - field.field.node.event.field_start_date
+    - field.field.node.event.field_start_time
     - node.type.event
   module:
+    - layout_builder
+    - layout_discovery
+    - layout_library
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings: {  }
+        components:
+          7bd375cc-2a11-4c26-91ba-9313e331faf0:
+            uuid: 7bd375cc-2a11-4c26-91ba-9313e331faf0
+            region: content
+            configuration:
+              id: 'field_block:node:event:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: string
+                settings:
+                  link_to_entity: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          column_widths: 50-50
+        components:
+          47592d0d-f17d-41a5-8e17-4a04240d0637:
+            uuid: 47592d0d-f17d-41a5-8e17-4a04240d0637
+            region: first
+            configuration:
+              id: 'field_block:node:event:field_start_date'
+              label: 'Start date'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: datetime_default
+                settings:
+                  timezone_override: ''
+                  format_type: month_day_year
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          526059ed-eb43-4bd1-9257-d92a489e1f8e:
+            uuid: 526059ed-eb43-4bd1-9257-d92a489e1f8e
+            region: second
+            configuration:
+              id: 'field_block:node:event:field_end_date'
+              label: 'End date'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: datetime_default
+                settings:
+                  timezone_override: ''
+                  format_type: month_day_year
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          7b720640-efa0-465d-8dc7-22dc0e3f01c4:
+            uuid: 7b720640-efa0-465d-8dc7-22dc0e3f01c4
+            region: first
+            configuration:
+              id: 'field_block:node:event:field_start_time'
+              label: 'Start time'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: time_formatter
+                settings:
+                  time_format: 'h:i a'
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+          caa20b78-2ea6-45f1-8187-4b6738ec1a90:
+            uuid: caa20b78-2ea6-45f1-8187-4b6738ec1a90
+            region: second
+            configuration:
+              id: 'field_block:node:event:field_end_time'
+              label: 'End time'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: visually_hidden
+                type: time_formatter
+                settings:
+                  time_format: 'h:i a'
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.event.teaser
 targetEntityType: node
 bundle: event
