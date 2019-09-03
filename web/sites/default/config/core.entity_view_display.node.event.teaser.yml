@@ -44,6 +44,32 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 0
+          15f0d4f7-d777-4ff8-979c-285d6ff7ddb3:
+            uuid: 15f0d4f7-d777-4ff8-979c-285d6ff7ddb3
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:event:links'
+            additional: {  }
+            weight: 1
+          63ac00d0-19d3-457b-b5fd-0fe20cb5c716:
+            uuid: 63ac00d0-19d3-457b-b5fd-0fe20cb5c716
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:body'
+              formatter:
+                label: hidden
+                type: text_summary_or_trimmed
+                settings:
+                  trim_length: 600
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
       -
         layout_id: layout_twocol_section
