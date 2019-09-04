@@ -13,6 +13,7 @@ dependencies:
     - node.type.event
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - layout_library
     - text
@@ -44,32 +45,6 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 0
-          15f0d4f7-d777-4ff8-979c-285d6ff7ddb3:
-            uuid: 15f0d4f7-d777-4ff8-979c-285d6ff7ddb3
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'extra_field_block:node:event:links'
-            additional: {  }
-            weight: 1
-          63ac00d0-19d3-457b-b5fd-0fe20cb5c716:
-            uuid: 63ac00d0-19d3-457b-b5fd-0fe20cb5c716
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:event:body'
-              formatter:
-                label: hidden
-                type: text_summary_or_trimmed
-                settings:
-                  trim_length: 600
-                third_party_settings: {  }
-            additional: {  }
-            weight: 2
         third_party_settings: {  }
       -
         layout_id: layout_twocol_section
@@ -153,25 +128,19 @@ third_party_settings:
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
 id: node.event.teaser
 targetEntityType: node
 bundle: event
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
+
 hidden:
+  body: true
+  links: true
   content_moderation_control: true
   field_all_day: true
   field_end_date: true
