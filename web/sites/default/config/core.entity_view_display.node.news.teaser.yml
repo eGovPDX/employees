@@ -95,21 +95,10 @@ id: node.news.teaser
 targetEntityType: node
 bundle: news
 mode: teaser
-content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
+content: {  }
 hidden:
+  body: true
   content_moderation_control: true
   langcode: true
+  links: true
   search_api_excerpt: true

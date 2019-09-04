@@ -13,6 +13,7 @@ dependencies:
     - node.type.event
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - layout_library
     - text
@@ -127,25 +128,17 @@ third_party_settings:
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
 id: node.event.teaser
 targetEntityType: node
 bundle: event
 mode: teaser
-content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
+content: {  }
 hidden:
+  body: true
   content_moderation_control: true
   field_all_day: true
   field_end_date: true
@@ -153,4 +146,5 @@ hidden:
   field_start_date: true
   field_start_time: true
   langcode: true
+  links: true
   search_api_excerpt: true
