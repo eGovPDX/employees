@@ -9,6 +9,7 @@ dependencies:
     - node.type.page
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - layout_library
     - metatag
@@ -63,8 +64,13 @@ third_party_settings:
             additional: {  }
             weight: 2
         third_party_settings: {  }
+    allow_custom: true
   layout_library:
     enable: true
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
 _core:
   default_config_hash: Kfxnq5Imio9VFBoNa_PIkzXoTmjz_T-EY3mOrwDTddU
 id: node.page.default
@@ -94,4 +100,6 @@ content:
 hidden:
   content_moderation_control: true
   langcode: true
+  layout_builder__layout: true
+  layout_builder__translation: true
   layout_selection: true
