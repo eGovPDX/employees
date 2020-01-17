@@ -4,8 +4,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_creator
+    - field.field.media.image.field_file_size
+    - field.field.media.image.field_image_height
+    - field.field.media.image.field_image_width
     - field.field.media.image.field_media_in_library
+    - field.field.media.image.field_mime_type
+    - field.field.media.image.field_source
+    - field.field.media.image.field_title
     - field.field.media.image.image
+    - image.style.crop_freeform
     - media.type.image
   module:
     - image
@@ -21,7 +30,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: crop_freeform
       image_link: ''
     third_party_settings: {  }
     region: content
