@@ -13,6 +13,7 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_title
     - field.field.media.image.image
+    - image.style.large
     - media.type.image
   module:
     - image
@@ -105,7 +106,7 @@ content:
     weight: 2
     label: hidden
     settings:
-      image_style: ''
+      image_style: large
       image_link: ''
     third_party_settings: {  }
     region: content

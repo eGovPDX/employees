@@ -4,9 +4,17 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.thumbnail
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_creator
+    - field.field.media.image.field_file_size
+    - field.field.media.image.field_image_height
+    - field.field.media.image.field_image_width
     - field.field.media.image.field_media_in_library
+    - field.field.media.image.field_mime_type
+    - field.field.media.image.field_source
+    - field.field.media.image.field_title
     - field.field.media.image.image
-    - image.style.medium
+    - image.style.media_library
     - media.type.image
   module:
     - image
@@ -22,7 +30,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: medium
+      image_style: media_library
       image_link: ''
     third_party_settings: {  }
     region: content
