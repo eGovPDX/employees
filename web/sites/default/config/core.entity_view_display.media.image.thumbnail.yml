@@ -14,26 +14,14 @@ dependencies:
     - field.field.media.image.field_source
     - field.field.media.image.field_title
     - field.field.media.image.image
-    - image.style.media_library
     - media.type.image
-  module:
-    - image
 _core:
   default_config_hash: Gb3qN_HZzqfFf4728OIYBwnMVryxUzlsWkmOY56idC8
 id: media.image.thumbnail
 targetEntityType: media
 bundle: image
 mode: thumbnail
-content:
-  image:
-    type: image
-    weight: 0
-    label: hidden
-    settings:
-      image_style: media_library
-      image_link: ''
-    third_party_settings: {  }
-    region: content
+content: {  }
 hidden:
   created: true
   field_caption: true
@@ -45,6 +33,7 @@ hidden:
   field_mime_type: true
   field_source: true
   field_title: true
+  image: true
   langcode: true
   name: true
   thumbnail: true

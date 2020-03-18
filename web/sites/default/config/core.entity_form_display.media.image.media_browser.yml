@@ -4,13 +4,20 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_browser
+    - field.field.media.image.field_caption
+    - field.field.media.image.field_creator
+    - field.field.media.image.field_file_size
+    - field.field.media.image.field_image_height
+    - field.field.media.image.field_image_width
     - field.field.media.image.field_media_in_library
+    - field.field.media.image.field_mime_type
+    - field.field.media.image.field_source
+    - field.field.media.image.field_title
     - field.field.media.image.image
     - image.style.medium
     - media.type.image
   module:
     - image_widget_crop
-    - lightning_media
     - path
 _core:
   default_config_hash: iVmRBD7y3Gmddt29sSx9DwwH6Q4UaROqMu7FLyy_bvQ
@@ -39,10 +46,7 @@ content:
       crop_types_required: {  }
       show_default_crop: true
       warn_multiple_usages: false
-    third_party_settings:
-      lightning_media:
-        file_links: false
-        remove_button: false
+    third_party_settings: {  }
     region: content
   langcode:
     type: language_select
