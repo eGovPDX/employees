@@ -20,6 +20,7 @@ if (defined('PANTHEON_ENVIRONMENT') && (PANTHEON_ENVIRONMENT !== 'live')) {
 	drop temporary table to_update;";
 	$webform_query = "truncate table webform_submission; truncate table webform_submission_data; truncate table webform_submission_log;";
 	$cache_query = "truncate table cache_bootstrap; truncate table cache_config; truncate table cache_container; truncate table cache_data; truncate table cache_default; truncate table cache_discovery; truncate table cache_entity; truncate table cache_page; truncate table cache_render;";
+	$watchdog_query = "truncate table watchdog;";
 
 	// Run custom query to sanitize user data.
 	echo "Sanitizing the user data...\n";
@@ -35,5 +36,10 @@ if (defined('PANTHEON_ENVIRONMENT') && (PANTHEON_ENVIRONMENT !== 'live')) {
 	echo "Deleting webform submissions...\n";
 	passthru('drush sql-query "' . $cache_query . '"');
 	echo "Webform submission deletion complete.\n";
+
+	// Delete log data
+	echo "Deleting log entries...\n";
+	passthru('drush sql-query "' . $watchdog_query . '"');
+	echo "Log entry deletion complete.\n";
 
 }
