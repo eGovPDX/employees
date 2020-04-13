@@ -15,6 +15,9 @@ workflows:
         script: private/scripts/slack_deploy_notification.php
   clone_database:
     after:
+#      - type: webphp
+#        description: Sanitize the db using a custom drush command
+#        script: private/scripts/db_sanitization_portland.php
       - type: webphp
         description: Post deployment notification to Slack
         script: private/scripts/slack_deploy_notification.php
