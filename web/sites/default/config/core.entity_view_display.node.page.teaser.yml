@@ -1,4 +1,4 @@
-uuid: a2818326-deb1-4dcd-bf19-7bd6eafc6c4b
+uuid: f57cef5a-f12b-4250-b2f5-260ee4091541
 langcode: en
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
     - text
     - user
 _core:
-  default_config_hash: 5LgpWwg6HIBQ1CW3MZaz81YFkqmyQEc2RakDWut74EY
+  default_config_hash: cSv5lDnbIgDug475Hdz3woED2XMqYv3awI-J9u1JLbY
 id: node.page.teaser
 targetEntityType: node
 bundle: page
@@ -20,15 +20,11 @@ content:
     label: hidden
     type: text_summary_or_trimmed
     weight: 100
+    region: content
     settings:
       trim_length: 600
     third_party_settings: {  }
-    region: content
   links:
     weight: 101
     region: content
-hidden:
-  content_moderation_control: true
-  field_meta_tags: true
-  langcode: true
-  layout_selection: true
+hidden: {  }
