@@ -1,0 +1,22 @@
+uuid: 11c2c5b6-26e7-46cb-b545-4509b75e3fc1
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - cloudy2
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: cloudy2_help
+theme: cloudy2
+region: content
+weight: -6
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }
