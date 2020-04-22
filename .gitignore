@@ -23,7 +23,7 @@ pantheon.upstream.yml
 # Note that services.local.yml is not loaded by default. If you would like
 # to use this file add the following to your settings.local.php file:
 #   $settings['container_yamls'][] = __DIR__ . '/services.local.yml';
-# web/sites/*/services.local.yml
+# web/sites/*/local.services.yml
 
 # ** Only works in OSs that support newer versions of fnmatch (Bash 4+)
 web/sites/default/**/files
@@ -54,7 +54,8 @@ sites/simpletest
 ######################
 .DS_Store*
 ehthumbs.db
-Icon
+# Icon must end with two \r ~ https://stackoverflow.com/a/30755378
+Icon\r\r
 Thumbs.db
 ._*
 
@@ -76,8 +77,17 @@ web/themes/custom/cloudy/js/main.bundle.js
 ##########
 .vscode/*
 
-# Particle theme gitignore #
+# Theme gitignore #
 ##########
+web/themes/custom/cloudy/dist*
+web/themes/custom/cloudy/src/design-tokens/dist
+# Pattern Lab
+web/themes/custom/cloudy/dependencyGraph.json
+web/themes/custom/cloudy/pattern-lab/_patterns/00-elements/icon/15-all-icons.json
+web/themes/custom/cloudy/pattern-lab/_patterns/00-elements/icon/60-all-font-awesome-icons.json
+web/themes/custom/cloudy/pattern-lab/_data/design-tokens.json
+# Dist directory for easy web viewing
+web/pattern-lab
 
 # Dependencies
 web/themes/custom/particle/node_modules
@@ -86,6 +96,7 @@ web/themes/custom/cloudy/node_modules
 web/themes/custom/cloudy/vendor
 
 # Generated files
+dist
 *.sass-cache/
 .eslintcache
 *unison.*
@@ -108,7 +119,7 @@ php_errors.log
 ##########
 node_modules/
 package-lock.json
-!web/themes/custom/cloudy/package-lock.json
+!web/themes/custom/cloudy/yarn.lock
 app
 app/
 
@@ -123,3 +134,16 @@ site.conf
 log.conf
 php.Dockerfile
 php.ini
+/.csslintrc
+/.eslintignore
+/.eslintrc.json
+/.ht.router.php
+/.htaccess
+/INSTALL.txt
+/README.txt
+/autoload.php
+/example.gitignore
+/index.php
+/robots.txt
+/update.php
+/web.config
