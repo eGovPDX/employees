@@ -4,6 +4,7 @@
     "description": "Project template for Drupal 8 sites built with the Lightning distribution.",
     "license": "GPL-2.0-or-later",
     "require": {
+        "bower-asset/cropper": "^2.3",
         "cweagans/composer-patches": "^1.6.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "drupal/admin_toolbar": "^2.0",
@@ -65,27 +66,17 @@
     "extra": {
         "composer-exit-on-patch-failure": true,
         "enable-patching": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "installer-paths": {
-            "web/core": [
-                "type:drupal-core"
-            ],
-            "web/libraries/{$name}": [
-                "type:drupal-library",
-                "type:bower-asset",
-                "type:npm-asset"
-            ],
-            "web/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "web/drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ]
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library","type:bower-asset","type:npm-asset"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/drush/contrib/{$name}": ["type:drupal-drush"]
         },
         "installer-types": [
             "bower-asset",
@@ -94,14 +85,30 @@
         "patches": {}
     },
     "repositories": {
-        "drupal": {
+        "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "assets": {
+        "1": {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        }
+        },
+        "dev": {
+            "type": "vcs",
+            "url": "https://github.com/acquia/lightning-dev"
+        },
+        "2": {
+             "type": "package",
+             "package": {
+                 "name": "toc/toc",
+                 "version": "v0.3.2",
+                 "type": "drupal-library",
+                 "dist": {
+                     "url": "https://raw.githubusercontent.com/jgallen23/toc/greenkeeper/update-all/dist/toc.min.js",
+                     "type": "file"
+                 }
+             }
+         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
