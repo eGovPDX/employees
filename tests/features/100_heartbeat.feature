@@ -9,7 +9,4 @@ Feature: Basic site operation and navigation
 
   Scenario: Visit the homepage as authenticated user
     When I visit "/"
-    Then I should see "Employees"
-    # And I should see "Bureaus and offices" in the "main_menu" region
-    # And I should see "Alerts" in the "main_menu" region
-    # And I should see "Portland, Oregon, USA" in the "footer_second" region
+    Then I should see "Portland Employees"
