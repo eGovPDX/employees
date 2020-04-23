@@ -106,13 +106,11 @@
         },
         "installer-types": [
             "bower-asset",
-            "npm-asset",
-            "drupal-library",
-            "library"
+            "npm-asset"
         ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library","type:bower-asset","type:npm-asset","type:library"],
+            "web/libraries/{$name}": ["type:drupal-library","type:bower-asset","type:npm-asset"],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
