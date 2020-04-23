@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fa50cde095be824d9fc422911b3d54f",
+    "content-hash": "f8702e55999656fbb60473173fb8cc79",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7014,6 +7014,48 @@
             "time": "2020-04-10T16:34:50+00:00"
         },
         {
+            "name": "oomphinc/composer-installers-extender",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oomphinc/composer-installers-extender.git",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "reference": "ca1c4b16b0905c81d1e77e608f36a2eff1a56f56",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "composer/installers": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "OomphInc\\ComposerInstallersExtender\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "OomphInc\\ComposerInstallersExtender\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Beemsterboer",
+                    "email": "stephen@oomphinc.com",
+                    "homepage": "https://github.com/balbuf"
+                }
+            ],
+            "description": "Extend the composer/installers plugin to accept any arbitrary package type.",
+            "homepage": "http://www.oomphinc.com/",
+            "time": "2017-03-31T16:57:39+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -8077,6 +8119,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-03-16T08:31:04+00:00"
         },
         {
@@ -8527,6 +8583,20 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-03-16T08:31:04+00:00"
         },
         {
@@ -9703,6 +9773,20 @@
                 "debug",
                 "dump"
             ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-03-27T16:54:36+00:00"
         },
         {
@@ -10731,6 +10815,16 @@
                 "autoload",
                 "dependency",
                 "package"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-04-10T09:44:22+00:00"
         },
