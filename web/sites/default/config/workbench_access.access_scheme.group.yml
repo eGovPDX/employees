@@ -1,0 +1,19 @@
+uuid: 61cfeec6-75f7-401f-8a17-ed3178648dac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.field_parent_group
+    - taxonomy.vocabulary.groups
+id: group
+label: Group
+plural_label: Groups
+scheme: taxonomy
+scheme_settings:
+  vocabularies:
+    - groups
+  fields:
+    -
+      entity_type: node
+      bundle: page
+      field: field_parent_group

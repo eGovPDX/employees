@@ -1,0 +1,20 @@
+uuid: 4997cc23-d916-4c39-90ec-94477f2a9110
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.event
+    - node.type.page
+    - system.menu.main
+id: site
+label: Site
+plural_label: Sites
+scheme: menu
+scheme_settings:
+  menus:
+    - main
+  bundles:
+    - article
+    - event
+    - page

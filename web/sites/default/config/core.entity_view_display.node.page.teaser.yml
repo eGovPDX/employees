@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_parent_group
     - node.type.page
   module:
     - text
@@ -27,4 +28,10 @@ content:
   links:
     weight: 101
     region: content
-hidden: {  }
+  workbench_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_parent_group: true
