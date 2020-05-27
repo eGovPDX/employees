@@ -1,0 +1,25 @@
+uuid: 58b0d513-2a6f-432d-9451-ddd3ab36cc80
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.basic_group
+id: basic_group-member
+label: Member
+weight: -100
+internal: true
+audience: member
+group_type: basic_group
+permissions_ui: true
+permissions:
+  - 'access group_node overview'
+  - 'leave group'
+  - 'update own group_membership content'
+  - 'view group'
+  - 'view group_membership content'
+  - 'view group_node:article entity'
+  - 'view group_node:event entity'
+  - 'view group_node:page entity'
+  - 'view unpublished group_node:article entity'
+  - 'view unpublished group_node:event entity'
+  - 'view unpublished group_node:page entity'

@@ -1,25 +1,29 @@
-uuid: 6c9f07d3-b1a3-4b00-840d-c0dd545bda4b
+uuid: 732d1f20-fc4e-448e-a759-cce6d3f5f235
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.user.full
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
+    - layout_builder
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
-id: user.user.default
+id: user.user.full
 targetEntityType: user
 bundle: user
-mode: default
+mode: full
 content:
   member_for:
     weight: 5
     region: content
-    settings: {  }
-    third_party_settings: {  }
   user_picture:
     type: image
     weight: 0
