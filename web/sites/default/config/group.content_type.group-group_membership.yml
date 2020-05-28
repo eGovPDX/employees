@@ -1,15 +1,15 @@
-uuid: d20f2245-7135-4cc6-930a-1048e9de6cbd
+uuid: bcdd7c49-b60e-43d0-bc3b-eb54ac92ff26
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.basic_group
+    - group.type.group
   module:
     - user
-id: basic_group-group_membership
-label: 'Basic group: Group membership'
+id: group-group_membership
+label: 'Group: Group membership'
 description: 'Adds users to groups as members.'
-group_type: basic_group
+group_type: group
 content_plugin: group_membership
 plugin_config:
   group_cardinality: 0

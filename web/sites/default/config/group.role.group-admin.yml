@@ -1,0 +1,25 @@
+uuid: 38fa46ff-f5bd-488d-bcbe-9aa6c0dff8c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.group
+id: group-admin
+label: Admin
+weight: -9
+internal: false
+audience: member
+group_type: group
+permissions_ui: true
+permissions:
+  - 'access content overview'
+  - 'access group_media overview'
+  - 'access group_node overview'
+  - 'administer group'
+  - 'administer members'
+  - 'delete group'
+  - 'edit group'
+  - 'leave group'
+  - 'update own group_membership content'
+  - 'view group'
+  - 'view group_membership content'

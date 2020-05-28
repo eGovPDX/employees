@@ -1,14 +1,14 @@
-uuid: 53838263-f99b-438a-bfc6-f81f451e6677
+uuid: 24a7e3e0-490a-45de-875a-e6b8f232e439
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.group_content.group_roles
-    - group.content_type.private_group-group_membership
-id: group_content.private_group-group_membership.group_roles
+    - group.content_type.group-group_membership
+id: group_content.group-group_membership.group_roles
 field_name: group_roles
 entity_type: group_content
-bundle: private_group-group_membership
+bundle: group-group_membership
 label: Roles
 description: ''
 required: false
@@ -18,5 +18,5 @@ default_value_callback: ''
 settings:
   handler: 'group_type:group_role'
   handler_settings:
-    group_type_id: private_group
+    group_type_id: group
 field_type: entity_reference

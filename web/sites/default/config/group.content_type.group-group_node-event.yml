@@ -1,17 +1,17 @@
-uuid: 2d0198f4-3e53-4b7f-a9fc-426d6e449e66
+uuid: d65bf560-581c-4d5f-b4b5-890c5a92caf7
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.private_group
+    - group.type.group
     - node.type.event
   module:
     - gnode
     - node
-id: private_group-group_node-event
-label: 'Private group: Group node (Event)'
+id: group-group_node-event
+label: 'Group: Group node (Event)'
 description: 'Adds <em class="placeholder">Event</em> content to groups both publicly and privately.'
-group_type: private_group
+group_type: group
 content_plugin: 'group_node:event'
 plugin_config:
   group_cardinality: 1

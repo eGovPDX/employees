@@ -1,17 +1,17 @@
-uuid: 154fd2fd-f4a9-488e-8f1e-442136183ecd
+uuid: 94f6621c-45d6-4765-9723-5422356434c5
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.private_group
+    - group.type.group
     - node.type.page
   module:
     - gnode
     - node
-id: private_group-group_node-page
-label: 'Private group: Group node (Basic page)'
+id: group-group_node-page
+label: 'Group: Group node (Basic page)'
 description: 'Adds <em class="placeholder">Basic page</em> content to groups both publicly and privately.'
-group_type: private_group
+group_type: group
 content_plugin: 'group_node:page'
 plugin_config:
   group_cardinality: 1

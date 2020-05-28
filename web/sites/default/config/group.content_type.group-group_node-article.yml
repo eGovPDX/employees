@@ -1,19 +1,19 @@
-uuid: e28239bc-8465-4bcf-b289-f2fd291d29d8
+uuid: 2361079c-ae09-48cc-a555-8668f3453053
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.basic_group
+    - group.type.group
     - node.type.article
   module:
     - gnode
     - node
-id: basic_group-group_node-article
-label: 'Basic group: Group node (Article)'
+id: group-group_node-article
+label: 'Group: Group node (Article)'
 description: 'Adds <em class="placeholder">Article</em> content to groups both publicly and privately.'
-group_type: basic_group
+group_type: group
 content_plugin: 'group_node:article'
 plugin_config:
-  group_cardinality: 0
+  group_cardinality: 1
   entity_cardinality: 1
   use_creation_wizard: false
