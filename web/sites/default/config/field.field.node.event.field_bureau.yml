@@ -1,0 +1,29 @@
+uuid: e7757060-239d-42fb-b60f-4578b62b10c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bureau
+    - node.type.event
+    - taxonomy.vocabulary.bureaus
+id: node.event.field_bureau
+field_name: field_bureau
+entity_type: node
+bundle: event
+label: Bureau(s)
+description: 'Where should this event appear?'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      bureaus: bureaus
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

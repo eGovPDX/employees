@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.landing_page.body
+    - field.field.node.landing_page.field_bureau
     - node.type.landing_page
   module:
     - text
@@ -19,6 +20,19 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_bureau:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100
