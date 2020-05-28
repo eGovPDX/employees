@@ -19,12 +19,11 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 100
+    weight: 0
     region: content
     settings:
       trim_length: 600
     third_party_settings: {  }
-  links:
-    weight: 101
-    region: content
-hidden: {  }
+hidden:
+  content_moderation_control: true
+  links: true
