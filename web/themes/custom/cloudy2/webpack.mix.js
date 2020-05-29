@@ -7,7 +7,7 @@
  | for your application. See https://github.com/JeffreyWay/laravel-mix.
  |
  */
-const proxy = 'http://drupal.local';
+const proxy = 'https://employees.lndo.site';
 const mix = require('laravel-mix');
 
 /*
@@ -46,3 +46,12 @@ mix.sass('src/sass/cloudy2.style.scss', 'css');
  |--------------------------------------------------------------------------
  */
 mix.js('src/js/cloudy2.script.js', 'js');
+
+/*
+ |--------------------------------------------------------------------------
+ | Vendor libraries
+ |--------------------------------------------------------------------------
+ */
+mix
+  .scripts('node_modules/bootstrap/dist/js/bootstrap.min.js', 'assets/js/vendor/bootstrap.min.js')
+  .scripts('node_modules/popper.js/dist/umd/popper.min.js', 'assets/js/vendor/popper.min.js')
