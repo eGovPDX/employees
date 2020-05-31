@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.event.body
     - field.field.node.event.field_bureau
+    - field.field.node.event.field_tags
     - node.type.event
     - workflows.workflow.editorial
   module:
@@ -34,6 +35,16 @@ content:
     third_party_settings: {  }
   field_bureau:
     weight: 122
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags:
+    weight: 123
     settings:
       match_operator: CONTAINS
       match_limit: 10

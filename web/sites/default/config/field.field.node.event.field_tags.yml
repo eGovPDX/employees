@@ -1,17 +1,15 @@
-uuid: 49e7de62-d267-44a7-95bd-b4a7bcce35ff
+uuid: f1c0ef31-89ec-40eb-99f7-e77624a8ebed
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_tags
-    - node.type.article
+    - node.type.event
     - taxonomy.vocabulary.tags
-_core:
-  default_config_hash: QdUgf_beeoaPiyKorFv0q1fcJpWH_uZTqe_xoVJacrw
-id: node.article.field_tags
+id: node.event.field_tags
 field_name: field_tags
 entity_type: node
-bundle: article
+bundle: event
 label: Tags
 description: '(Optional) Tag your content for search facets. Enter a comma-separated list. For example: Amsterdam, Mexico City, "Cleveland, Ohio"'
 required: false
@@ -24,7 +22,8 @@ settings:
     target_bundles:
       tags: tags
     sort:
-      field: _none
-    auto_create: true
+      field: name
+      direction: asc
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
