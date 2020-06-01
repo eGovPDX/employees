@@ -1,0 +1,22 @@
+uuid: d131c9b9-01d7-4b2b-80ea-caae74e843ef
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: events
+label: Events
+type: 'canonical_entities:node'
+pattern: 'events/[node:field_when:value-format:numeric_year]/[node:field_when:value-format:numeric_month]/[node:field_when:value-format:numeric_day]/[node:title]'
+selection_criteria:
+  1ddd7db1-664f-4f3b-ba39-71a4fe6666b7:
+    id: node_type
+    bundles:
+      event: event
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 1ddd7db1-664f-4f3b-ba39-71a4fe6666b7
+selection_logic: and
+weight: -5
+relationships: {  }
