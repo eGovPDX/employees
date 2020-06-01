@@ -1,4 +1,4 @@
-uuid: c0bb2f75-9c82-45e7-8ddb-899350ccd480
+uuid: 1738ae26-0502-4779-ac85-983c63433d30
 langcode: en
 status: true
 dependencies:
@@ -7,10 +7,14 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_bureau
     - field.field.node.event.field_tags
+    - field.field.node.event.field_when
     - node.type.event
   module:
+    - smart_date
     - text
     - user
+_core:
+  default_config_hash: GE8vxA9J85JTlqiqDwrBsmkZq8HXuJ5QEESclO3u8N8
 id: node.event.teaser
 targetEntityType: node
 bundle: event
@@ -19,13 +23,26 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    weight: 2
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  field_when:
+    type: smartdate_default
+    weight: 1
+    region: content
+    label: inline
+    settings:
+      format: default
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  content_moderation_control: true
   field_bureau: true
   field_tags: true
-  links: true

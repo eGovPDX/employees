@@ -1,4 +1,4 @@
-uuid: 8bbfed73-f3d9-4350-b147-2a9e35f69aea
+uuid: b8b832d5-b88b-4db3-8661-91916c52c59a
 langcode: en
 status: true
 dependencies:
@@ -6,10 +6,14 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_bureau
     - field.field.node.event.field_tags
+    - field.field.node.event.field_when
     - node.type.event
   module:
+    - smart_date
     - text
     - user
+_core:
+  default_config_hash: XfXOESXjfDxqVoacpjrjq_1BNXO5tYsp7ocnbGrNuak
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -18,24 +22,11 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  content_moderation_control:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_bureau:
     weight: 2
-    label: above
-    settings:
-      link: true
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_label
     region: content
-  field_tags:
+  field_bureau:
     weight: 3
     label: above
     settings:
@@ -43,5 +34,27 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-hidden:
-  links: true
+  field_tags:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_when:
+    weight: 1
+    label: above
+    settings:
+      format: default
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: smartdate_default
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
