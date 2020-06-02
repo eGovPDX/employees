@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc3974efbafb0e765b666df7db596b88",
+    "content-hash": "7b525f47daf8275f93e4367d8a8096e1",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1841,50 +1841,6 @@
             "time": "2019-06-08T11:03:04+00:00"
         },
         {
-            "name": "drupal/add_content_by_bundle",
-            "version": "1.0.0-beta1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/add_content_by_bundle.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/add_content_by_bundle-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "26c167cf13ddbf6b07c2e20b3775037e7e9d2951"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1590406810",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "mandclu",
-                    "homepage": "https://www.drupal.org/user/52136"
-                }
-            ],
-            "description": "Provides a views header/footer link to add a node for a specific bundle",
-            "homepage": "https://www.drupal.org/project/add_content_by_bundle",
-            "support": {
-                "source": "https://git.drupalcode.org/project/add_content_by_bundle"
-            }
-        },
-        {
             "name": "drupal/admin_toolbar",
             "version": "2.2.0",
             "source": {
@@ -3462,55 +3418,6 @@
             }
         },
         {
-            "name": "drupal/fullcalendar_view",
-            "version": "4.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/fullcalendar_view.git",
-                "reference": "8.x-4.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/fullcalendar_view-8.x-4.5.zip",
-                "reference": "8.x-4.5",
-                "shasum": "311d8b3b4469d7c719185eff255ecb5276170195"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-4.5",
-                    "datestamp": "1590881332",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Mingsong",
-                    "homepage": "https://www.drupal.org/user/2986445"
-                }
-            ],
-            "description": "This is a lightweight View plugin module that provides a calendar view format powered by FullCalendar JavaScript.",
-            "homepage": "http://drupal.org/project/fullcalendar_view",
-            "keywords": [
-                "Drupal",
-                "fullcalendar_view"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/fullcalendar_view",
-                "issues": "http://drupal.org/project/issues/fullcalendar_view"
-            }
-        },
-        {
             "name": "drupal/group",
             "version": "1.0.0-rc5",
             "source": {
@@ -4351,29 +4258,26 @@
         },
         {
             "name": "drupal/masquerade",
-            "version": "2.0.0-beta3",
+            "version": "2.0.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/masquerade.git",
-                "reference": "8.x-2.0-beta3"
+                "reference": "8.x-2.0-beta4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/masquerade-8.x-2.0-beta3.zip",
-                "reference": "8.x-2.0-beta3",
-                "shasum": "125c53931a0658b4ef9f66abb696db7c98d43985"
+                "url": "https://ftp.drupal.org/files/projects/masquerade-8.x-2.0-beta4.zip",
+                "reference": "8.x-2.0-beta4",
+                "shasum": "8ab6cf13239e92a787f373d83bd245b9d50f7e6b"
             },
             "require": {
                 "drupal/core": "^8.7.7 || ^9"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-2.0-beta3",
-                    "datestamp": "1579041783",
+                    "version": "8.x-2.0-beta4",
+                    "datestamp": "1591126506",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -5607,106 +5511,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/smart_date",
                 "issues": "https://www.drupal.org/project/issues/smart_date"
-            }
-        },
-        {
-            "name": "drupal/smart_date_calendar_kit",
-            "version": "1.0.0-beta3",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/smart_date_calendar_kit.git",
-                "reference": "1.0.0-beta3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/smart_date_calendar_kit-1.0.0-beta3.zip",
-                "reference": "1.0.0-beta3",
-                "shasum": "dcf771481259ccf831974dd593cd217958d9c3ef"
-            },
-            "require": {
-                "drupal/add_content_by_bundle": "*",
-                "drupal/core": "^8 || ^9",
-                "drupal/fullcalendar_view": "*",
-                "drupal/smart_date": "*",
-                "drupal/smart_date_starter_kit": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.0.0-beta3",
-                    "datestamp": "1589534700",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "mandclu",
-                    "homepage": "https://www.drupal.org/user/52136"
-                }
-            ],
-            "description": "Initial configuration to show your Smart Date values in a Fullcalendar View",
-            "homepage": "https://www.drupal.org/project/smart_date_calendar_kit",
-            "support": {
-                "source": "https://git.drupalcode.org/project/smart_date_calendar_kit",
-                "error": "name : invalid value (smart_date_calendar_kit), must match [A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*"
-            }
-        },
-        {
-            "name": "drupal/smart_date_starter_kit",
-            "version": "1.0.0-beta3",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/smart_date_starter_kit.git",
-                "reference": "8.x-1.0-beta3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/smart_date_starter_kit-8.x-1.0-beta3.zip",
-                "reference": "8.x-1.0-beta3",
-                "shasum": "dd0460aa348190c55c9a45f6b73bf53ce558cd40"
-            },
-            "require": {
-                "drupal/add_content_by_bundle": "^1.0@alpha",
-                "drupal/core": "^8.6",
-                "drupal/smart_date": "^2.0",
-                "php": "^7.1"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-beta3",
-                    "datestamp": "1589535622",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "mandclu",
-                    "homepage": "https://www.drupal.org/user/52136"
-                }
-            ],
-            "description": "A content type and view to help you get started with Smart Date.",
-            "homepage": "https://www.drupal.org/project/smart_date_starter_kit",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/smart_date_starter_kit",
-                "issues": "https://www.drupal.org/project/issues/smart_date_starter_kit"
             }
         },
         {
@@ -10962,6 +10766,199 @@
             "time": "2020-05-27T17:09:57+00:00"
         },
         {
+            "name": "drupal/add_content_by_bundle",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/add_content_by_bundle.git",
+                "reference": "1.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/add_content_by_bundle-1.0.0-beta1.zip",
+                "reference": "1.0.0-beta1",
+                "shasum": "26c167cf13ddbf6b07c2e20b3775037e7e9d2951"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta1",
+                    "datestamp": "1590406810",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mandclu",
+                    "homepage": "https://www.drupal.org/user/52136"
+                }
+            ],
+            "description": "Provides a views header/footer link to add a node for a specific bundle",
+            "homepage": "https://www.drupal.org/project/add_content_by_bundle",
+            "support": {
+                "source": "https://git.drupalcode.org/project/add_content_by_bundle"
+            }
+        },
+        {
+            "name": "drupal/fullcalendar_view",
+            "version": "4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/fullcalendar_view.git",
+                "reference": "8.x-4.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/fullcalendar_view-8.x-4.5.zip",
+                "reference": "8.x-4.5",
+                "shasum": "311d8b3b4469d7c719185eff255ecb5276170195"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.5",
+                    "datestamp": "1590881332",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Mingsong",
+                    "homepage": "https://www.drupal.org/user/2986445"
+                }
+            ],
+            "description": "This is a lightweight View plugin module that provides a calendar view format powered by FullCalendar JavaScript.",
+            "homepage": "http://drupal.org/project/fullcalendar_view",
+            "keywords": [
+                "Drupal",
+                "fullcalendar_view"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/fullcalendar_view",
+                "issues": "http://drupal.org/project/issues/fullcalendar_view"
+            }
+        },
+        {
+            "name": "drupal/smart_date_calendar_kit",
+            "version": "1.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/smart_date_calendar_kit.git",
+                "reference": "1.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/smart_date_calendar_kit-1.0.0-beta3.zip",
+                "reference": "1.0.0-beta3",
+                "shasum": "dcf771481259ccf831974dd593cd217958d9c3ef"
+            },
+            "require": {
+                "drupal/add_content_by_bundle": "*",
+                "drupal/core": "^8 || ^9",
+                "drupal/fullcalendar_view": "*",
+                "drupal/smart_date": "*",
+                "drupal/smart_date_starter_kit": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta3",
+                    "datestamp": "1589534700",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mandclu",
+                    "homepage": "https://www.drupal.org/user/52136"
+                }
+            ],
+            "description": "Initial configuration to show your Smart Date values in a Fullcalendar View",
+            "homepage": "https://www.drupal.org/project/smart_date_calendar_kit",
+            "support": {
+                "source": "https://git.drupalcode.org/project/smart_date_calendar_kit",
+                "error": "name : invalid value (smart_date_calendar_kit), must match [A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*"
+            }
+        },
+        {
+            "name": "drupal/smart_date_starter_kit",
+            "version": "1.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/smart_date_starter_kit.git",
+                "reference": "8.x-1.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/smart_date_starter_kit-8.x-1.0-beta3.zip",
+                "reference": "8.x-1.0-beta3",
+                "shasum": "dd0460aa348190c55c9a45f6b73bf53ce558cd40"
+            },
+            "require": {
+                "drupal/add_content_by_bundle": "^1.0@alpha",
+                "drupal/core": "^8.6",
+                "drupal/smart_date": "^2.0",
+                "php": "^7.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta3",
+                    "datestamp": "1589535622",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "mandclu",
+                    "homepage": "https://www.drupal.org/user/52136"
+                }
+            ],
+            "description": "A content type and view to help you get started with Smart Date.",
+            "homepage": "https://www.drupal.org/project/smart_date_starter_kit",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/smart_date_starter_kit",
+                "issues": "https://www.drupal.org/project/issues/smart_date_starter_kit"
+            }
+        },
+        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
@@ -11255,8 +11252,6 @@
         "drupal/moderation_dashboard": 10,
         "drupal/openid_connect": 10,
         "drupal/search_api_location": 15,
-        "drupal/smart_date_calendar_kit": 10,
-        "drupal/smart_date_starter_kit": 10,
         "drupal/workbench_access": 10,
         "drupal-composer/drupal-security-advisories": 20,
         "roave/security-advisories": 20

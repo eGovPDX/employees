@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - editor
-    - entity_embed
     - media
 _core:
   default_config_hash: WNeK5FbcY8pXgEpbD_KgRzlF1-5PL3BJXwqaBctPTqw
@@ -35,12 +34,6 @@ filters:
     provider: editor
     status: true
     weight: 11
-    settings: {  }
-  entity_embed:
-    id: entity_embed
-    provider: entity_embed
-    status: true
-    weight: 100
     settings: {  }
   filter_html:
     id: filter_html
