@@ -15,8 +15,13 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  masquerade:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   member_for:
-    weight: 5
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
