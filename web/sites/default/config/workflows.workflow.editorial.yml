@@ -2,6 +2,10 @@ uuid: de4ab674-8132-464b-91a0-afc8323b5bd9
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.article
+    - node.type.landing_page
+    - node.type.page
   module:
     - content_moderation
 _core:
@@ -59,5 +63,9 @@ type_settings:
       from:
         - draft
         - published
-  entity_types: {  }
+  entity_types:
+    node:
+      - article
+      - landing_page
+      - page
   default_moderation_state: draft

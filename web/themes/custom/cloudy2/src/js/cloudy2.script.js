@@ -1,7 +1,4 @@
-import 'popper.js';
-import 'bootstrap';
-
-(function () {
+(function ($, Drupal) {
 
   'use strict';
 

@@ -1,10 +1,18 @@
+bootstrap:
+  version: VERSION
+  js:
+    # Copied from node_modules
+    assets/js/vendor/popper.min.js: { minified: true }
+    assets/js/vendor/bootstrap.min.js: { minified: true }
+  dependencies:
+    - core/jquery
 style:
   version: VERSION
   css:
     theme:
-      assets/css/cloudy2.style.css: {}
+      assets/css/cloudy2.style.css: { minified: true }
   js:
-    assets/js/cloudy2.script.js: {}
+    assets/js/cloudy2.script.js: { minified: true }
   dependencies:
     - core/jquery
     - core/drupal

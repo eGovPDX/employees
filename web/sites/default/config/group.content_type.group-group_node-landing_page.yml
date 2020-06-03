@@ -1,0 +1,19 @@
+uuid: 3d2c8903-e185-4ab1-bdf2-3650f9fcc8e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.group
+    - node.type.landing_page
+  module:
+    - gnode
+    - node
+id: group-group_node-landing_page
+label: 'Group: Group node (Landing page)'
+description: 'Adds <em class="placeholder">Landing page</em> content to groups both publicly and privately.'
+group_type: group
+content_plugin: 'group_node:landing_page'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

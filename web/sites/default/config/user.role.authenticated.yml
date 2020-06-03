@@ -6,15 +6,18 @@ _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated
 label: 'Authenticated user'
-weight: 1
+weight: -9
 is_admin: false
 permissions:
-  - 'access comments'
   - 'access content'
   - 'access shortcuts'
-  - 'access site-wide contact form'
-  - 'post comments'
+  - 'access toolbar'
+  - 'access tour'
+  - 'access user profiles'
+  - 'notify of path changes'
   - 'search content'
-  - 'skip comment approval'
-  - 'use text format basic_html'
+  - 'use admin toolbar search'
+  - 'use advanced search'
+  - 'use text format restricted_html'
   - 'view media'
+  - 'view the administration theme'

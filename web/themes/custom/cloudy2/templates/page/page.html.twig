@@ -33,22 +33,25 @@
     {% endblock %}
   {% endembed %}
 
-  <main>
+  <main class="container">
     {% if page.header %}
       <header class="page__header mb-3">
-        <div class="container">
           {{ page.header }}
-        </div>
       </header>
     {% endif %}
 
+    <div class="row">
     {% if page.content %}
-      <div class="page__content">
-        <div class="container">
+      <div class="page__content col-lg-8 col-sm-12">
           {{ page.content }}
-        </div>
       </div>
     {% endif %}
+    {% if page.side %}
+      <div class="page__side col-lg-4 col-sm-12">
+          {{ page.side }}
+      </div>
+    {% endif %}
+    </div>
   </main>
 
   {% if page.footer %}
