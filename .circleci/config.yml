@@ -1,55 +1,26 @@
 # CircleCI integration with Drupal 8.
 
-## Defines images and working directory.
-pre_deploy: &pre_deploy
-  docker:
-    # - image: juampynr/drupal8ci:latest
-    # updated CI image
-    - image: kxwang/drupal-ci:circleci
-  working_directory: /var/www/html
-
-pre_test: &pre_test
-  docker:
-    # - image: juampynr/drupal8ci:latest
-    # updated CI image
-    - image: kxwang/drupal-ci:circleci
-    - image: selenium/standalone-chrome-debug:3.7.1-beryllium
-  parallelism: 5
-  working_directory: /var/www/html
-
-## Defines the cache restoring mechanism.
-restore_cache: &restore_cache
-  # We use the composer.lock as a way to determine if we can cache our build.
-  keys:
-  - v1-dependencies-{{ checksum "composer.lock" }}
-  # fallback to using the latest cache if no exact match is found
-  - v1-dependencies-
-
-## Defines the cache saving mechanism.
-save_cache: &save_cache
-  paths:
-    - ./vendor
-    - ./web/core
-    - ./web/modules/contrib
-    - ./web/profiles/contrib
-    - ./web/themes/contrib
-    - ./web/libraries
-  key: v1-dependencies-{{ checksum "composer.lock" }}
-
 #Jobs
 
 ## Job to run the update path and Behat tests.
 build_and_deploy: &build_and_deploy
-  <<: *pre_deploy
+  docker:
+    # - image: juampynr/drupal8ci:latest
+    # updated CI image
+    - image: kxwang/drupal-ci:circleci
+  working_directory: /var/www/html
   steps:
     - restore_cache:
         name: Retore Git cache before checkout
         keys:
-          - source
+          - source-v1-{{ .Branch }}-{{ .Revision }}
+          - source-v1-{{ .Branch }}-
+          - source-v1-
     - checkout
+    - run: git gc
     - save_cache:
         name: Save Git cache after checkout
-        key: source
+        key: source-v1-{{ .Branch }}-{{ .Revision }}
         paths:
           - ".git"
     - restore_cache:
@@ -68,22 +39,29 @@ build_and_deploy: &build_and_deploy
         paths:
           - "/tmp/vendor"
     - restore_cache:
-        name: Restore theme build asset cache
+        name: Restore theme dependencies cache
         keys:
           - cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
     - run:
-        name: Install theme build tools
+        name: Install theme dependencies
         command: |
           cd web/themes/custom/cloudy2 && npm install
     - save_cache:
-        name: Save theme build asset cache
+        name: Save theme dependencies cache
         key: cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
         paths:
           - "web/themes/custom/cloudy2/node_modules"
-    - restore_cache: *restore_cache
+    - restore_cache:
+        name: Restore Composer Cache
+        keys:
+          - v1-dependencies-{{ checksum "composer.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
     - run:
         name: Composer install
         command: |
+          # hotfix - getting error on module but can't update due to lightning dependency, try removing and getting fresh
+          rm -rf ./web/modules/contrib/search_api_solr
           # Pantheon does not allow these folders but Composer needs them
           rm -rf ./web/modules/contrib/facets
           # Run composer install with hirak/prestissimo for better performance
@@ -91,9 +69,20 @@ build_and_deploy: &build_and_deploy
           composer install --no-suggest --no-interaction
           # TODO: should only deploy non-dev packages
           # --no-dev
+    - save_cache:
+        name: Save Composer Cache
+        key: v1-dependencies-{{ checksum "composer.lock" }}
+        paths:
+          - ./vendor
+          - ./web/core
+          - ./web/modules/contrib
+          - ./web/profiles/contrib
+          - ./web/themes/contrib
+          - ./web/libraries
     - run:
         name: Deploy to Pantheon
         when: on_success
+        no_output_timeout: 15m # allow 15 minutes instead of 10 minute default for script to complete
         command: |
           export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
           # Don't check the repo host key
@@ -105,30 +94,34 @@ build_and_deploy: &build_and_deploy
           # Git operations
           git remote add pantheon ssh://codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435@codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435.drush.in:2222/~/repository.git
           git config --global user.email "$eGov_Email"
-          # Compile SCSS in our custom theme
-          # cd web/themes/custom/cloudy && npm run build && cd /var/www/html
-          # Exclude dependencies
-          # rm -rf web/themes/custom/cloudy/node_modules
           # Force add all files to include those excluded by .gitignore
-          rm -rf ./web/modules/contrib/search_api_solr/.git
+          cd /var/www/html && find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
           git add -f /var/www/html
-          # Without these lines, push will fail with "please remote git submodules" error
-          git rm -r ./vendor/drupal/coder/.git && git rm -r ./web/modules/contrib/facets/.git
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
           
-          # Set the git commit user name so it's clear in Pantheon log who made the change
-          git config --global user.name $CIRCLE_USERNAME
+          # Set the git commit user name and email address so it's clear in Pantheon log who made the change
+          if [[ $CIRCLE_USERNAME = "" ]]; then
+            git config --global user.name Dependabot
+          else
+            git config --global user.name $CIRCLE_USERNAME
+          fi
           git config --global user.email $eGov_Email
+          
+          export COMMIT_MSG="$(git log -1 --pretty=%B)"
+          git commit -m "CircleCI deployment for: " -m "$COMMIT_MSG" --quiet
 
-          git commit -m "CircleCI deployment" --quiet
           # When commit on master, we deploy to DEV
           if [[ $CIRCLE_BRANCH = "master" ]]; then
             echo "Deploy to Pantheon DEV site"
+            # Set Pantheon environment name
+            echo "export PANTHEON_ENV=dev" >> $BASH_ENV && source $BASH_ENV
             # Set the connection type to GIT
             terminus connection:set $CIRCLE_PROJECT_REPONAME.dev git
             git push -f pantheon master
+            # TODO: Sanitize DB here
+            # terminus env:clone-content $CIRCLE_PROJECT_REPONAME.test dev
             # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
             # Read the last Git log in the master branch. Get the branch name at the end of the log.
             # Example: Merge pull request #35 from eGovPDX/powr-152
@@ -143,33 +136,98 @@ build_and_deploy: &build_and_deploy
                 terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.${BASH_REMATCH[2]} -y
               fi
             fi
-          else
+            echo "Waiting for sync code workflow to finish..."
+            until [ $(terminus workflow:list --fields status,env --format string -- $CIRCLE_PROJECT_REPONAME | egrep -i $PANTHEON_ENV -m 1 | egrep -i -o "^\w+") == succeeded ]; do
+              sleep 30
+            done
+            echo "Rebuilding cache..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+            echo "Running database updates..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- updb -y
+            echo "Importing config..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y
+            echo "Running cron..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- core:cron -y
+            echo "Rebuilding cache..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+          else  # All other commits deploy to a multidev
+            # Set Pantheon environment name
+            if [[ $CIRCLE_BRANCH =~ ^dependabot\/ ]] && [[ $CIRCLE_PULL_REQUEST =~ \/pull\/([0-9]+)$ ]]; then
+              echo "export PANTHEON_ENV=bot-${BASH_REMATCH[1]}" >> $BASH_ENV && source $BASH_ENV
+            else
+              echo "export PANTHEON_ENV=$CIRCLE_BRANCH" >> $BASH_ENV && source $BASH_ENV
+            fi
+            echo "Pantheon environment name is $PANTHEON_ENV"
+
             # Check if the multidev branch site exists. If not, create it
             terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
-            if grep -Fxq "$CIRCLE_BRANCH" ./env_list.txt; then
+            if grep -Fxq "$PANTHEON_ENV" ./env_list.txt; then
               echo "Found multidev site"
             else
               # Create a new Multi-Dev with files and database from Dev.
-              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.dev $CIRCLE_BRANCH
+              echo "Creating new multidev site. Please wait." && terminus multidev:create $CIRCLE_PROJECT_REPONAME.dev $PANTHEON_ENV
             fi
             rm -rf ./env_list.txt
             # Set the connection type to GIT
-            terminus connection:set $CIRCLE_PROJECT_REPONAME.$CIRCLE_BRANCH git
-            # Only do force push when the multidev site doesn't exist
-            git push -f pantheon $CIRCLE_BRANCH
+            terminus connection:set $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV git
+            # Force push $CIRCLE_BRANCH to Pantheon as branch named $PANTHEON_ENV
+            git push -f pantheon $CIRCLE_BRANCH:$PANTHEON_ENV
+
+            echo "Waiting for sync code workflow to finish..."
+            until [ $(terminus workflow:list --fields status,env --format string -- $CIRCLE_PROJECT_REPONAME | egrep -i $PANTHEON_ENV -m 1 | egrep -i -o "^\w+") == succeeded ]; do
+              sleep 30
+            done
+            echo "Rebuilding cache..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+            echo "Running database updates..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- updb -y
+            echo "Importing config..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y
+            echo "Running cron..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- core:cron -y
+            echo "Rebuilding cache..."
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+
+            if [[ $CIRCLE_BRANCH =~ ^dependabot\/ ]]; then
+              echo "Dependabot branch detected..."
+
+              # Set the connection type to SFTP
+              terminus connection:set $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV sftp
+
+              # Clone database from DEV
+              # This is necessary if the build gets re-run because the drush cim above can
+              # interfere with the drush cex below (by importing what was previously exported)
+              terminus env:clone-content $CIRCLE_PROJECT_REPONAME.dev $PANTHEON_ENV --db-only --cc -y
+              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y
+
+              # Abort if there's any database updates that cause a configuration change
+              echo "Run database update... and abort if there's a configuration change"
+              echo "IMPORTANT: If there's a configuation change, download this branch and manually update the dependency"
+              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- updb -y
+              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cex --no   # this will return failure code if there's config to export
+            fi
           fi
 
 run_tests: &run_tests
-  <<: *pre_test
+  docker:
+    # - image: juampynr/drupal8ci:latest
+    # updated CI image
+    - image: kxwang/drupal-ci:circleci
+    - image: selenium/standalone-chrome-debug:3.7.1-beryllium
+  parallelism: 5
+  working_directory: /var/www/html
   steps:
     - restore_cache:
         name: Retore Git cache before checkout
         keys:
-          - source
+          - source-v1-{{ .Branch }}-{{ .Revision }}
+          - source-v1-{{ .Branch }}-
+          - source-v1-
     - checkout
+    - run: git gc
     - save_cache:
         name: Save Git cache after checkout
-        key: source
+        key: source-v1-{{ .Branch }}-{{ .Revision }}
         paths:
           - ".git"
     - restore_cache:
@@ -187,37 +245,6 @@ run_tests: &run_tests
         key: terminus_-{{ checksum "composer.lock" }}
         paths:
           - "/tmp/vendor"
-    - run:
-        name: Show Drush commands result
-        command: |
-          export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
-          terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
-          # Get all workflows
-          terminus workflow:list --format=csv --fields=id,env,workflow,user,status $CIRCLE_PROJECT_REPONAME > workflows.csv
-          # Fine the latest "Sync Code" workflow for the current branch
-          WORKFLOW_ID="empty id"
-          while IFS=',' read id env message user status
-          do
-            if [ "$CIRCLE_BRANCH" = "master" ]; then
-              if [ "$env" == "dev" ] && [[ $message =~ ^\"Sync.*\"$ ]]; then
-                  WORKFLOW_ID=$id
-                  break
-              fi
-            else
-              if [ "$env" == "$CIRCLE_BRANCH" ] && [[ $message =~ ^\"Sync.*\"$ ]]; then
-                  WORKFLOW_ID=$id
-                  break
-              fi
-            fi
-          done < workflows.csv
-
-          echo $WORKFLOW_ID
-          if [[ $WORKFLOW_ID = "empty id" ]]; then
-            echo "Cannot find any Sync Code workflow for branch $CIRCLE_BRANCH. Try terminus workflow:list $CIRCLE_PROJECT_REPONAME."
-            exit 1
-          fi
-          # Show the logs of the latest "Sync Code" workflow for the current branch
-          terminus workflow:info:logs $CIRCLE_PROJECT_REPONAME --id=${WORKFLOW_ID}
     - restore_cache:
         name: Restore Behat cache
         key: v1-behat-dependencies-{{ checksum "tests/composer.lock" }}
@@ -234,33 +261,43 @@ run_tests: &run_tests
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
           # Log in via terminus first. Required for tests that require user login.
           terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
+          mkdir -p tests/test-results/behat/features
           cd tests
-          # Split feature files by timing data so all split test jobs will finish around the same time
-          TESTFILES=$(circleci tests glob "features/*.feature"  | circleci tests split --split-by=timings)
-          if [[ $CIRCLE_BRANCH = "master" ]]; then
-            echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://dev-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.dev\"}}}}"' >> $BASH_ENV && source $BASH_ENV
-            for TESTFILE in $TESTFILES
-            do
-                behat -c behat.yml ${TESTFILE}
-            done
+
+          # Set Pantheon environment name
+          if [[ $CIRCLE_BRANCH =~ ^dependabot\/ ]] && [[ $CIRCLE_PULL_REQUEST =~ \/pull\/([0-9]+)$ ]]; then
+            echo "export PANTHEON_ENV=bot-${BASH_REMATCH[1]}" >> $BASH_ENV && source $BASH_ENV
           else
-            echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://${CIRCLE_BRANCH}-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.${CIRCLE_BRANCH}\"}}}}"' >> $BASH_ENV && source $BASH_ENV
-            for TESTFILE in $TESTFILES
-            do
-                behat -c behat.yml ${TESTFILE}
-            done
+            echo "export PANTHEON_ENV=$CIRCLE_BRANCH" >> $BASH_ENV && source $BASH_ENV
           fi
+          echo "Pantheon environment name is $PANTHEON_ENV"
+
+          # Split feature files so all split test jobs will finish around the same time
+          TESTFILES=$(circleci tests glob "features/*.feature" | circleci tests split)
+          if [[ $PANTHEON_ENV = "master" ]]; then
+            echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://dev-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.dev\"}}}}"' >> $BASH_ENV && source $BASH_ENV
+          else
+            echo 'export BEHAT_PARAMS="{\"extensions\" : {\"Behat\\\MinkExtension\" : {\"base_url\" : \"https://${PANTHEON_ENV}-${CIRCLE_PROJECT_REPONAME}.pantheonsite.io\"}, \"Drupal\\\DrupalExtension\" : {\"drush\" : { \"alias\": \"$CIRCLE_PROJECT_REPONAME.${CIRCLE_BRANCH}\"}}}}"' >> $BASH_ENV && source $BASH_ENV
+          fi
+          for TESTFILE in $TESTFILES
+          do
+            public_ip_address=$(wget -qO- http://checkip.amazonaws.com)
+            echo "This container's public ip address is $public_ip_address"
+            behat -c behat.yml -f pretty -o std -f junit -o test-results/behat ${TESTFILE} || behat -c behat.yml -f pretty -o std -f junit -o test-results/behat ${TESTFILE}
+            mv test-results/behat/default.xml test-results/behat/${TESTFILE}.xml
+          done
     - save_cache:
         paths:
           - ./tests/vendor
         key: v1-behat-dependencies-{{ checksum "tests/composer.lock" }}
     - store_test_results:
-        path: /var/www/html/artifacts/behat
+        path: /var/www/html/tests/test-results
     - store_artifacts:
         path: /var/www/html/artifacts
+        destination: /
 
 # Declare all of the jobs we should run.
-version: 2
+version: 2.1
 jobs:
   deploy:
      <<: *build_and_deploy
@@ -270,7 +307,9 @@ jobs:
 # Declare a workflow that runs all of our jobs in parallel.
 workflows:
   version: 2
-  deploy_workflow:
+  deploy_and_test:
     jobs:
-      # Test will be started by QuickSilver after the sync_code event
       - deploy
+      - test:
+          requires:
+            - deploy
