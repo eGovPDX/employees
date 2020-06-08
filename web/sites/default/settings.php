@@ -34,7 +34,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'test') {
     /** Replace www.example.com with your registered domain name */
     // $primary_domain = 'test-employees.portland.gov';
-    $primary_domain = $_SERVER['HTTP_HOST'];    // Temporarily use default pantheon domain until official domain is registered
+    $primary_domain = $_SERVER['HTTP_HOST'];    // Use default pantheon domain
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
     /** Replace www.example.com with your registered domain name */
