@@ -1,8 +1,7 @@
 name: Cloudy2
 description: A theme based on Radix.
 screenshot: screenshot.png
-# core: 8.x
-# version: VERSION
+core_version_requirement: ^8.7.7 || ^9.0
 engine: twig
 type: theme
 base theme: radix
@@ -32,9 +31,3 @@ component-libraries:
   cloudy2:
     paths:
       - ./src/components
-
-# Information added by Drupal.org packaging script on 2019-05-04
-version: '8.x-4.3'
-core: '8.x'
-project: 'radix'
-datestamp: 1556995394
