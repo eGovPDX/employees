@@ -4,11 +4,15 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.full
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_last_name
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
     - layout_builder
+    - masquerade_field
     - user
 third_party_settings:
   layout_builder:
@@ -48,4 +52,7 @@ content:
       image_link: content
     third_party_settings: {  }
     label: hidden
-hidden: {  }
+hidden:
+  field_active_directory_id: true
+  field_first_name: true
+  field_last_name: true

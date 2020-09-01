@@ -1,0 +1,21 @@
+uuid: e7cf5404-f38b-437d-8db6-7965978344b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_active_directory_id
+field_name: field_active_directory_id
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
