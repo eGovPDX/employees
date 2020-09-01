@@ -96,11 +96,12 @@ build_and_deploy: &build_and_deploy
           git config --global user.email "$eGov_Email"
           # Force add all files to include those excluded by .gitignore
           cd /var/www/html && find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
+          cd /var/www/html && find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
           git add -f /var/www/html
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
-          
+
           # Set the git commit user name and email address so it's clear in Pantheon log who made the change
           if [[ $CIRCLE_USERNAME = "" ]]; then
             git config --global user.name Dependabot
@@ -108,7 +109,7 @@ build_and_deploy: &build_and_deploy
             git config --global user.name $CIRCLE_USERNAME
           fi
           git config --global user.email $eGov_Email
-          
+
           export COMMIT_MSG="$(git log -1 --pretty=%B)"
           git commit -m "CircleCI deployment for: " -m "$COMMIT_MSG" --quiet
 

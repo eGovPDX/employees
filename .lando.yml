@@ -8,6 +8,8 @@ config:
   edge: false
   cache: false
 services:
+  database:
+    type: mariadb:10.3
   appserver:
     build_as_root:
       - /bin/sh -c "cp /app/cop_ca_*.crt /usr/local/share/ca-certificates/"
