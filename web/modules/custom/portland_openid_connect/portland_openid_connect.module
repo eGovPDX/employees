@@ -103,7 +103,7 @@ function _get_all_users($access_token) {
 
     // Loop until there is no nextLink
     $next_request_url = $response_data['@odata.nextLink'];
-    $request_limit = 10;
+    $request_limit = 5;
     $request_count = 0;
     while($next_request_url != null && $request_count < $request_limit) {
       $response = $client->get($next_request_url, $options);
