@@ -50,7 +50,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 50
+          items_per_page: 200
           offset: 0
           id: 0
           total_pages: 0
@@ -966,6 +966,92 @@ display:
             group_items: {  }
           plugin_id: numeric
           entity_type: user
+        field_last_name_value:
+          id: field_last_name_value
+          table: user__field_last_name
+          field: field_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_last_name_value_op
+            label: 'Last name'
+            description: ''
+            use_operator: false
+            operator: field_last_name_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_last_name_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: string
+        field_first_name_value:
+          id: field_first_name_value
+          table: user__field_first_name
+          field: field_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: word
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_first_name_value_op
+            label: 'First name'
+            description: ''
+            use_operator: false
+            operator: field_first_name_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_first_name_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              editor: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: string
       sorts:
         created:
           id: created

@@ -4,15 +4,13 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 
-
 /**
  * Implement hook_cron()
  * Retrieve a view and send it to powr@portlandoregon.gov
  */
 function portland_openid_connect_cron()
 {
-
-  // DELETE FROM semaphore WHERE name = 'cron';
+  // lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
   // Call Microsoft Graph API to retrieve user info
   $tokens = _get_access_token();
@@ -25,6 +23,9 @@ function portland_openid_connect_cron()
 function _add_users($response_data) {
   $user_data_array = $response_data['value']; // array of users
   if(empty($user_data_array)) return;
+
+  $count_user_created = 0;
+  $count_user_updated = 0;
 
   foreach($user_data_array as $user_data) {
     // Skip accounts without first or last names
@@ -47,21 +48,31 @@ function _add_users($response_data) {
         'field_first_name' => $user_data['givenName'],
         'field_last_name' => $user_data['surname'],
       ]);
+      $count_user_created++;
     }
     else {
       $user = array_values($users)[0];
-      $user->set('name', $user_data['id']);
+      // $user->set('name', $user_data['id']);
       $user->set('mail', $user_data['mail']);
-      $user->set('field_active_directory_id', $user_data['id']);
+      // $user->set('field_active_directory_id', $user_data['id']);
       $user->set('field_first_name', $user_data['givenName']);
       $user->set('field_last_name', $user_data['surname']);
+      $count_user_updated++;
     }
     $user -> save();
   }
+
+  $log_message = 'Retrieved ' . count($user_data_array) . ' users. ';
+  if($count_user_created != 0) {
+    $log_message .= " Created $count_user_created.";
+  }
+  if($count_user_updated != 0) {
+    $log_message .= " Updated $count_user_updated.";
+  }
+  \Drupal::logger('portland OpenID')->notice($log_message);
 }
 
 function _get_all_users($access_token) {
-
   $system_state = \Drupal::state();
 
   /* @var \GuzzleHttp\ClientInterface $client */
@@ -76,47 +87,62 @@ function _get_all_users($access_token) {
   ];
 
   try { 
-    $deltaLink = $system_state->get('deltaLink');
+    // $system_state->delete('resumeLink');
 
-    // For debug
-    $deltaLink = '';
+    if( $resumeLink = $system_state->get('resumeLink') ) {
+      \Drupal::logger('portland OpenID')->notice('Resume retrieving user information ...');
+    }
+    else {
+      \Drupal::logger('portland OpenID')->notice('Start retrieving user information ...');
+    }
 
-    $request_url = (empty($deltaLink)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $deltaLink;
+    $request_url = (empty($resumeLink)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resumeLink;
     $response = $client->get($request_url, $options);
     $response_data = json_decode((string) $response->getBody(), TRUE);
     _add_users($response_data);
 
     // Loop until there is no nextLink
     $next_request_url = $response_data['@odata.nextLink'];
-    while($next_request_url != null) {
+    $request_limit = 10;
+    $request_count = 0;
+    while($next_request_url != null && $request_count < $request_limit) {
       $response = $client->get($next_request_url, $options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
       $next_request_url = $response_data['@odata.nextLink'];
       _add_users($response_data);
+      $request_count++;
     }
 
-    $system_state->set('deltaLink', $response_data['@odata.deltaLink']);
+    if($next_request_url == null) {
+      $system_state->set('resumeLink', $response_data['@odata.deltaLink']);
+      \Drupal::logger('portland OpenID')->notice('Finished retrieving all user information.');
+    }
+    else {
+      $system_state->set('resumeLink', $response_data['@odata.nextLink']);
+      \Drupal::logger('portland OpenID')->notice('More user information to be retrieved by the next cron job.');
+    }
 
     return true;
   }
   catch (RequestException $e) {
     $variables = [
-      '@message' => 'Could not retrieve tokens',
+      '@message' => 'Could not retrieve user information',
       '@error_message' => $e->getMessage(),
     ];
-    // $this->loggerFactory->get('openid_connect_windows_aad')
-      // ->error('@message. Details: @error_message', $variables);
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
     return FALSE;
   }
 }
 
 function _get_access_token() {
   $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
+  $client_id = $windows_aad_config->get('settings.client_id');
+  $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
 
   $request_options = [
     'form_params' => [
       // 'code' => $authorization_code,
-      'client_id' => $windows_aad_config->get('settings.client_id'),
+      'client_id' => $client_id,
       'client_secret' => $windows_aad_config->get('settings.client_secret'),
       'grant_type' => 'client_credentials',
       'scope' => 'https://graph.microsoft.com/.default',
@@ -127,7 +153,7 @@ function _get_access_token() {
   $client = new \GuzzleHttp\Client();
 
   try {
-    $response = $client->post('https://login.microsoftonline.com/636d7808-73c9-41a7-97aa-8c4733642141/oauth2/v2.0/token', $request_options);
+    $response = $client->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", $request_options);
     $response_data = json_decode((string) $response->getBody(), TRUE);
 
     // Expected result.
@@ -145,8 +171,7 @@ function _get_access_token() {
       '@message' => 'Could not retrieve tokens',
       '@error_message' => $e->getMessage(),
     ];
-    // $this->loggerFactory->get('openid_connect_windows_aad')
-      // ->error('@message. Details: @error_message', $variables);
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
     return FALSE;
   }
 }
