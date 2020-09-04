@@ -4,12 +4,30 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function portland_openid_connect_form_openid_connect_login_form_alter(&$form, &$form_state)
+{
+  // Override the default label of the submit button
+  $form["openid_connect_client_windows_aad_login"]["#value"] = t('Log in with City of Portland network account');
+}
+
+
 /**
  * Implement hook_cron()
  * Retrieve a view and send it to powr@portlandoregon.gov
  */
 function portland_openid_connect_cron()
 {
+  // Only run cron job on the test multidev
+  $should_run_user_sync = isset($_ENV['PANTHEON_ENVIRONMENT']) &&
+    in_array($_ENV['PANTHEON_ENVIRONMENT'], ['powr-1208']);
+  if( ! $should_run_user_sync ){
+    return;
+  }
+
   // lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
   // Call Microsoft Graph API to retrieve user info
