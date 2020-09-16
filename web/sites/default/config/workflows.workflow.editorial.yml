@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.article
-    - node.type.landing_page
+    - node.type.event
+    - node.type.news
     - node.type.page
   module:
     - content_moderation
@@ -15,57 +15,64 @@ label: Editorial
 type: content_moderation
 type_settings:
   states:
-    archived:
-      label: Archived
-      weight: 5
-      published: false
-      default_revision: true
     draft:
       label: Draft
       published: false
       default_revision: false
-      weight: -5
+      weight: -2
     published:
       label: Published
       published: true
       default_revision: true
       weight: 0
+    review:
+      published: false
+      default_revision: false
+      label: Review
+      weight: -1
+    unpublished:
+      published: false
+      default_revision: true
+      label: Unpublished
+      weight: 1
   transitions:
-    archive:
-      label: Archive
-      from:
-        - published
-      to: archived
-      weight: 2
-    archived_draft:
-      label: 'Restore to Draft'
-      from:
-        - archived
-      to: draft
-      weight: 3
-    archived_published:
-      label: Restore
-      from:
-        - archived
-      to: published
-      weight: 4
     create_new_draft:
       label: 'Create New Draft'
       to: draft
+      weight: -2
+      from:
+        - draft
+        - published
+        - review
+        - unpublished
+    mark_for_review:
+      label: 'Mark for Review'
+      from:
+        - draft
+        - published
+        - review
+        - unpublished
+      to: review
+      weight: -1
+    publish:
+      label: Publish
+      to: published
       weight: 0
       from:
         - draft
         - published
-    publish:
-      label: Publish
-      to: published
-      weight: 1
+    unpublish:
+      label: Unpublish
       from:
         - draft
         - published
+        - review
+        - unpublished
+      to: unpublished
+      weight: 1
   entity_types:
     node:
-      - article
-      - landing_page
+      - event
+      - news
       - page
   default_moderation_state: draft

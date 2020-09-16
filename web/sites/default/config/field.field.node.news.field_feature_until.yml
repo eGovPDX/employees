@@ -1,0 +1,21 @@
+uuid: 4dd55ea4-75f6-40cb-9881-8d616bd9d085
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_until
+    - node.type.news
+  module:
+    - datetime
+id: node.news.field_feature_until
+field_name: field_feature_until
+entity_type: node
+bundle: news
+label: 'Feature Until'
+description: 'If you feature news, you must select a date that news should stop being featured.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

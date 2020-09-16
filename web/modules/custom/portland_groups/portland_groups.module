@@ -1,0 +1,156 @@
+<?php
+
+use Drupal\group\Entity\GroupContent;
+use \Drupal\group\Entity\Group;
+
+/**
+ * Implements hook_form_alter().
+ */
+function portland_groups_form_alter(&$form, &$form_state, $form_id) {
+  if (array_key_exists('field_display_groups', $form) === TRUE && !is_null($form['field_display_groups'])) {
+    _portland_groups_populate_field_display_groups($form, $form_state);
+  }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function portland_groups_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if ($entity_form['#entity_type'] == 'media' && array_key_exists('field_display_groups', $entity_form)) {
+    _portland_groups_inline_entity_populate_field_display_groups($entity_form, $form_state);
+  }
+}
+
+/**
+ * Populates the field_display_groups autocomplete widget in a node form.
+ */
+function _portland_groups_populate_field_display_groups(&$form, &$form_state) {
+  // get the group id and store it in session in case it's needed in an inline entity
+  // form in a CKEditor iframe. if new page, prepopulate field_display_groups with parent group.
+  if(array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != NULL) {
+    $group = $form_state->getStorage()['group'];
+    $group_id = $group->id();
+    \Drupal::request()->getSession()->set('parent_group_id', $group_id);
+
+    $node = $form_state->getFormObject()->getEntity();
+    if($node->isNew()) {
+      $form['field_display_groups']['widget'][0]['target_id']['#default_value'] = $group;
+    }
+  }
+}
+
+/**
+ * Populates the field_display_groups select/chosen widget in a media form.
+ */
+function _portland_groups_inline_entity_populate_field_display_groups(&$form, &$form_state) {
+  // if new erntity, prepopulate with parent group, which is stored in a session var.
+  if($form['#entity']->isNew()) {
+    $session = \Drupal::request()->getSession();
+    $group_id = $session->get('parent_group_id');
+    if (!is_null($group_id)) {
+      $form['field_display_groups']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_entity_update
+ * 
+ * Runs whenever an entity is updated. 
+ * If the entity has field_display_groups, call a function to synchronize group ownership based on the
+ * first group in the field.
+ */
+function portland_groups_entity_update($entity) {
+  if ($entity && method_exists($entity, 'hasField') && $entity->hasField('field_display_groups')) {
+    _portland_groups_synchronize_entity_group_ownership($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_insert
+ * 
+ * We only want this to run on insert when we're not in a group context.
+ * When we are in group context, the group module will take care of creating
+ * the group content entity.
+ */
+function portland_groups_entity_insert($entity) {
+  if ($entity && method_exists($entity, 'hasField') && $entity->hasField('field_display_groups') && \Drupal::routeMatch()->getParameter('group') == null) {
+    _portland_groups_synchronize_entity_group_ownership($entity);
+  }
+}
+
+function _portland_groups_synchronize_entity_group_ownership($entity) {
+
+  // start building entity type id; we only support node and media entity types
+  // if other, return immediately and avoid unnecessary processing.
+  $plugin_id = ":";
+  $entity_type = $entity->getEntityTypeId();
+  if ($entity_type == "node") {
+    $plugin_id = "group_node" . $plugin_id . $entity->bundle();
+  } else if ($entity_type == "media") {
+    $plugin_id = "group_media" . $plugin_id . $entity->bundle();
+  } else {
+    return;
+  }
+
+  $orig_entity = $entity->original;
+  $eid = $entity->id();
+
+  if (!$orig_entity) {
+    // this is a newly created entity; assign it to a group
+    $field_value = $entity->get('field_display_groups')->getValue();
+    if (count($field_value) > 0) {
+      $group_id = $field_value[0]['target_id'];
+      _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id);
+    }
+    return;
+
+  } else {
+    // this is an existing entity; if the group has changed, remove it from the old group
+    // and assign to the new group.
+    $field_value = $entity->get('field_display_groups')->getValue();
+    if (count($field_value) > 0) {
+      $new_owner_group = $field_value[0]['target_id'];
+    } else {
+      // all groups have been removed from field_display_groups.
+      // don't do anything; this is most likely a mistake. if not, administrators
+      // can fix it.
+      return;
+    }
+    
+    // there may not be an original owner group to remove, if the entity was originally created outside of group context.
+    $field_value = $orig_entity->get('field_display_groups')->getValue();
+    $orig_owner_group = null;
+    if (count($field_value) > 0) {
+      $orig_owner_group = $field_value[0]['target_id'];
+    }
+
+    if ($orig_owner_group != $new_owner_group) {
+      if ($orig_owner_group) {
+        // remove from old group
+        $old_group = \Drupal\group\Entity\Group::load($orig_owner_group);
+        if ($old_group) {
+          $current_node = $old_group->getContent($plugin_id, ['entity_id' => $eid]);
+          $content = array_values($current_node)[0];
+          $content->delete();
+        }
+      }
+      // assign to new group
+      _portland_groups_add_entity_to_group($entity, $new_owner_group, $plugin_id);
+    }
+  }
+}
+
+function _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id) {
+  // make sure entity isn't already in group; the entity may already be assigned to
+  // the group by virtue of having been created in that context.
+  $group = \Drupal\group\Entity\Group::load($group_id);
+  $group->addContent($entity, $plugin_id);
+
+  // use this code if we ever need to check if a node is in a group before adding it.
+  // $current_node = $group->getContent($plugin_id, ['entity_id' => $entity->id()]);
+  // if (!$current_node || count($current_node) < 1) {
+  //  $group->addContent($entity, $plugin_id);
+  // }
+}
