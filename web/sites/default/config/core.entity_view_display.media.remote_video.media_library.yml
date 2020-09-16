@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
+    - field.field.media.remote_video.field_display_in_group
     - field.field.media.remote_video.field_media_oembed_video
     - image.style.medium
     - media.type.remote_video
@@ -27,6 +28,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_display_in_group: true
   field_media_oembed_video: true
   name: true
   uid: true

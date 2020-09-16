@@ -1,0 +1,19 @@
+uuid: f9fa876f-9ae0-4c2d-96a7-54f7b99883d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - media.type.remote_video
+  module:
+    - groupmedia
+    - media
+id: private-group_media-remote_video
+label: 'Private Group: Group media (Remote video)'
+description: 'Adds <em class="placeholder">Remote video</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_media:remote_video'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

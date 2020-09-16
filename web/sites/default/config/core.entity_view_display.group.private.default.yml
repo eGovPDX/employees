@@ -1,0 +1,51 @@
+uuid: 92584bc7-2158-470a-bf60-d7d156fa1150
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.private.field_group_description
+    - field.field.group.private.field_group_path
+    - field.field.group.private.field_parent_group
+    - group.type.private
+  module:
+    - text
+id: group.private.default
+targetEntityType: group
+bundle: private
+mode: default
+content:
+  field_group_description:
+    weight: -3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_group_path:
+    weight: -4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_group:
+    weight: -2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  label:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  uid: true

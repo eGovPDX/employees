@@ -1,0 +1,19 @@
+uuid: dbcbc9b0-403d-44d4-9c3d-40716a79d4f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - node.type.news
+  module:
+    - gnode
+    - node
+id: private-group_node-news
+label: 'Private Group: Group node (News)'
+description: 'Adds <em class="placeholder">News</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_node:news'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

@@ -1,0 +1,19 @@
+uuid: 588c7a6c-4040-4f02-bd94-458c46f2facc
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.public
+    - media.type.document
+  module:
+    - groupmedia
+    - media
+id: public-group_media-document
+label: 'Public Group: Group media (Document)'
+description: 'Adds <em class="placeholder">Document</em> content to groups both publicly and privately.'
+group_type: public
+content_plugin: 'group_media:document'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

@@ -1,0 +1,33 @@
+uuid: eb8a08b8-23d9-4c6d-a581-b62b948bec05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_display_in_group
+    - group.type.bureau
+    - group.type.private
+    - group.type.public
+    - media.type.document
+id: media.document.field_display_in_group
+field_name: field_display_in_group
+entity_type: media
+bundle: document
+label: 'Belongs to'
+description: 'Select the <em>bureau</em> or <em>group</em> this document belongs to for editing.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      bureau: bureau
+      private: private
+      public: public
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: bureau
+field_type: entity_reference

@@ -1,0 +1,64 @@
+uuid: 6648be3e-d8e0-4b28-b0bb-1b04b8ca7599
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.bureau.field_group_description
+    - field.field.group.bureau.field_group_path
+    - field.field.group.bureau.field_parent_group
+    - group.type.bureau
+  module:
+    - text
+id: group.bureau.default
+targetEntityType: group
+bundle: bureau
+mode: default
+content:
+  field_group_description:
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_group_path:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_parent_group:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  label:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  path: true

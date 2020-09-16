@@ -1,0 +1,23 @@
+uuid: f89cfa90-1e26-429e-8805-f0f5d9829a17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_link
+    - node.type.resource
+  module:
+    - link
+id: node.resource.field_resource_link
+field_name: field_resource_link
+entity_type: node
+bundle: resource
+label: 'Resource Link'
+description: 'Provide the full URL of the resource.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

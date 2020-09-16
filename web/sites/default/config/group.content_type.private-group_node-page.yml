@@ -1,0 +1,19 @@
+uuid: e13b7307-83fa-4ad5-a0fc-8f0a96daf593
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - node.type.page
+  module:
+    - gnode
+    - node
+id: private-group_node-page
+label: 'Private Group: Group node (Page)'
+description: 'Adds <em class="placeholder">Page</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_node:page'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false
