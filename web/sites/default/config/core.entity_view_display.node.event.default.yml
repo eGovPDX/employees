@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
-    - field.field.node.event.field_bureau
+    - field.field.node.event.field_display_in_group
     - field.field.node.event.field_tags
     - field.field.node.event.field_when
     - node.type.event
@@ -22,29 +22,26 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_bureau:
-    weight: 2
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
+  content_moderation_control:
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_tags:
     weight: 3
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_when:
-    weight: 0
-    label: inline
+    weight: 1
+    label: hidden
     settings:
       format: default
       format_type: medium
@@ -54,4 +51,5 @@ content:
     type: smartdate_default
     region: content
 hidden:
+  field_display_in_group: true
   links: true

@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.news.body
+    - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - node.type.news
@@ -19,16 +20,14 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 0
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
 hidden:
+  content_moderation_control: true
+  field_display_in_group: true
   field_feature: true
   field_feature_until: true
+  links: true

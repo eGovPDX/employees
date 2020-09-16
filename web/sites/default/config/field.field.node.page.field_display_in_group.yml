@@ -1,0 +1,33 @@
+uuid: 1752c3ce-3d79-4994-a355-c5ddad629120
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_in_group
+    - group.type.bureau
+    - group.type.private
+    - group.type.public
+    - node.type.page
+id: node.page.field_display_in_group
+field_name: field_display_in_group
+entity_type: node
+bundle: page
+label: 'Display in Group'
+description: 'Select the <em>bureau</em>, <em>public group</em>, or <em>private group</em> to which this page belongs.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      bureau: bureau
+      private: private
+      public: public
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: bureau
+field_type: entity_reference

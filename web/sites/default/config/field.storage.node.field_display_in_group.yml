@@ -1,16 +1,16 @@
-uuid: 557c634a-5803-405e-a39c-306320e56c96
+uuid: 4814bfab-70c1-4081-b54a-6055c7710c1b
 langcode: en
 status: true
 dependencies:
   module:
+    - group
     - node
-    - taxonomy
-id: node.field_bureau
-field_name: field_bureau
+id: node.field_display_in_group
+field_name: field_display_in_group
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: group
 module: core
 locked: false
 cardinality: -1
