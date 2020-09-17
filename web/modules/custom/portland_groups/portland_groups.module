@@ -2,6 +2,14 @@
 
 use Drupal\group\Entity\GroupContent;
 use \Drupal\group\Entity\Group;
+use Drupal\group\GroupMembershipLoaderInterface;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\group\Entity\GroupTypeInterface;
+use Drupal\group\Entity\GroupContentTypeInterface;
+use Drupal\pathauto\Form\PathautoBulkUpdateForm;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Implements hook_form_alter().
@@ -221,5 +229,135 @@ function portland_form_alter(&$form, &$form_state, $form_id)
         }
     } elseif (substr_compare($form_id, $group_form_prefix, 0, strlen($group_form_prefix)) === 0) {
         $form['#validate'][] = '_validate_group_group_path';
+    }
+}
+
+/**
+ * Get the parent group IDs of an entity.
+ * See https://drupal.stackexchange.com/questions/238755/how-to-get-group-ids-by-ids-of-elements-of-group-content
+ */
+function getGroupIdsByEntity($entity)
+{
+    if ($entity == null) {
+        return [];
+    }
+    $group_ids = [];
+
+    $group_contents = GroupContent::loadByEntity($entity);
+    foreach ($group_contents as $group_content) {
+        $group_ids[] = $group_content->getGroup()->id();
+    }
+
+    return $group_ids;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ * POWR-475 Changing short name of a group can cause the group URL to be
+ * different from the URLs in the group menu. Root cause is that the group
+ * URL is set by PathAuto to be clean and unique. But the URL in sidebar
+ * menu is formed by Twig code using the short name as is. The solution is
+ * to update short name to ensure it's clean and unique when the group is
+ * updated.
+ */
+function portland_group_presave(GroupInterface $group)
+{
+    $newgroup_path = $group->get('field_group_path')->value;
+    if ($group->original === null) {
+        $originalgroup_path = ''; // new group
+    } else {
+        $originalgroup_path = $group->original->get('field_group_path')->value;
+    }
+    // Check if this is a new group or an existing group whose group_path has been modified
+    if ($originalgroup_path !== $newgroup_path) {
+        $cleangroup_path = $newgroup_path;
+        if ($cleangroup_path === '') {
+            $cleangroup_path = 'invalid-short-name';
+        }
+        $alias = "/$cleangroup_path";
+        $gid = $group->id();
+        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        // Update the group path when we have alias conflict
+        \Drupal::service("pathauto.alias_uniquifier")->uniquify($alias, "/group/$gid", $lang);
+        $group->set('field_group_path', substr($alias, 1)); // Remove the first character "/"
+    }
+}
+
+/**
+ * A helper function to clean up group path.
+ * Support "/" as part of group_path. Called by group form validation.
+ * @param string $group_group_path Will be modified as a clean string by Path
+ * @return boolean Flase if the input is invalid.
+ */
+function _clean_group_group_path(&$group_group_path)
+{
+    if (empty($group_group_path)) {
+        return false;
+    }
+
+    // If the group_path contains "/", we have to clean each part and put it back again.
+    if (strpos($group_group_path, '/') !== false) {
+        // Split the string and clean each part
+        $original_parts = explode("/", $group_group_path);
+        $parts = [];
+        foreach ($original_parts as $original_part) {
+            // Skip empty string
+            if ($original_part == "") {
+                continue;
+            }
+            $parts[] = \Drupal::service("pathauto.alias_cleaner")->cleanString($original_part);
+        }
+        // The string only contains "/"
+        if (count($parts) == 0) {
+            return false;
+        }
+        // Put everything back again
+        $group_group_path = implode("/", $parts);
+    } else {
+        $group_group_path = \Drupal::service("pathauto.alias_cleaner")->cleanString($group_group_path);
+        if (empty($group_group_path)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ * Add and update group aliases like "/powr/news" when a group is updated.
+ */
+function portland_group_update(GroupInterface $group)
+{
+    // get group path
+    $group_path = $group->get('field_group_path')->value;
+    $orig_group_path = $group->original->get('field_group_path')->value;
+
+    // only update URL aliases if group_path changes
+    if ($group_path != $orig_group_path) {
+        // 4.2. Bulk regenerate URL aliases for content by running pathauto batch processing
+        $batch = array(
+            'title' => t('Bulk updating URL aliases'),
+            'operations' => array(
+            array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchStart', array()),
+            ),
+            'finished' => 'Drupal\pathauto\Form\PathautoBulkUpdateForm::batchFinished',
+        );
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:node", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group_content", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:media", "update"]);
+        batch_set($batch);
+
+        $gid = $group->id();
+        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+        // TODO: manually regenerate URL alias for main group page; pathauto bulk update isn't getting it sometimes
+        $existing_alias = \Drupal::service('path.alias_storage')->lookupPathAlias("/group/$gid", $lang);
+        $alias = "/$group_path";
+        // if it exists and doesn't match current alias, delete and re-save
+        if ($existing_alias && $existing_alias != $alias) {
+            \Drupal::service('path.alias_storage')->delete(['alias' => $existing_alias, 'langcode' => $lang]);
+            $path = \Drupal::service('path.alias_storage')->save("/group/$gid", $alias, $lang);
+        }
     }
 }
