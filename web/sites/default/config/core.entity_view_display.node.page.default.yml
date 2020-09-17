@@ -8,9 +8,104 @@ dependencies:
     - field.field.node.page.field_parent
     - field.field.node.page.field_tags
     - node.type.page
+    - views.view.group_menu
   module:
+    - layout_builder
+    - layout_discovery
+    - layout_library
     - text
     - user
+    - views
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 75-25
+        components:
+          218bb64a-e8d6-47f8-8485-f0939bd02266:
+            uuid: 218bb64a-e8d6-47f8-8485-f0939bd02266
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 1
+          b5e9d332-ab44-4fcd-ab0a-f6d5c674f3de:
+            uuid: b5e9d332-ab44-4fcd-ab0a-f6d5c674f3de
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:page:content_moderation_control'
+            additional: {  }
+            weight: 0
+          62e813b2-531f-40cc-be2e-d38abde40031:
+            uuid: 62e813b2-531f-40cc-be2e-d38abde40031
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_group_page_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+          d6ce131e-e45c-47e9-a4d2-b6dbcf84ffa4:
+            uuid: d6ce131e-e45c-47e9-a4d2-b6dbcf84ffa4
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_group_child_page'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          9064c4b2-db06-4540-b829-0f4947658548:
+            uuid: 9064c4b2-db06-4540-b829-0f4947658548
+            region: content
+            configuration:
+              id: 'field_block:node:page:field_tags'
+              label: Tags
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
 id: node.page.default

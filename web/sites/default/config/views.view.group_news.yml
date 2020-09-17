@@ -281,7 +281,10 @@ display:
         pager: false
         fields: false
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
       pager:
         type: some
         options:

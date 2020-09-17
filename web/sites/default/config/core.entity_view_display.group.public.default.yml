@@ -7,83 +7,108 @@ dependencies:
     - field.field.group.public.field_group_path
     - field.field.group.public.field_parent_group
     - group.type.public
+    - views.view.group_events
+    - views.view.group_menu
+    - views.view.group_news
   module:
     - layout_builder
+    - layout_discovery
     - layout_library
     - text
+    - views
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: true
     sections:
       -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 75-25
+        components:
+          4cd6c47e-efb7-4b6a-bd99-686859b14fe7:
+            uuid: 4cd6c47e-efb7-4b6a-bd99-686859b14fe7
+            region: first
+            configuration:
+              id: 'field_block:group:public:field_group_description'
+              label: 'Group Description'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          3dbf98ce-d3fd-4ba4-b3ae-c1628fdb8edd:
+            uuid: 3dbf98ce-d3fd-4ba4-b3ae-c1628fdb8edd
+            region: first
+            configuration:
+              id: 'views_block:group_news-block_group_news'
+              label: News
+              provider: views
+              label_display: visible
+              views_label: News
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+          7aa228e3-d3bc-4f37-9aa3-6f71b97e56cb:
+            uuid: 7aa228e3-d3bc-4f37-9aa3-6f71b97e56cb
+            region: first
+            configuration:
+              id: 'views_block:group_events-block_group_news'
+              label: 'Upcoming Events'
+              provider: views
+              label_display: visible
+              views_label: 'Upcoming Events'
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+          eddb731e-5349-4052-b99d-cca1810e142b:
+            uuid: eddb731e-5349-4052-b99d-cca1810e142b
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: Menu
+              provider: views
+              label_display: visible
+              views_label: Menu
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
         layout_id: layout_onecol
         layout_settings:
           label: ''
         components:
-          96a8ae2f-0af3-4906-a5f3-68fb7283af93:
-            uuid: 96a8ae2f-0af3-4906-a5f3-68fb7283af93
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:group:public:label'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            additional: {  }
-            weight: 0
-          6e5786a8-0bea-4318-81d7-f65675286d52:
-            uuid: 6e5786a8-0bea-4318-81d7-f65675286d52
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:group:public:field_group_path'
-              formatter:
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-                type: string
-            additional: {  }
-            weight: 1
           96932d9c-fc48-4d55-b07e-15809cb92a2f:
             uuid: 96932d9c-fc48-4d55-b07e-15809cb92a2f
             region: content
             configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
               id: 'field_block:group:public:field_parent_group'
+              label: Parent
+              provider: layout_builder
+              label_display: '0'
               formatter:
-                label: above
+                label: inline
+                type: entity_reference_label
                 settings:
                   link: true
                 third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 2
-          4cd6c47e-efb7-4b6a-bd99-686859b14fe7:
-            uuid: 4cd6c47e-efb7-4b6a-bd99-686859b14fe7
-            region: content
-            configuration:
-              label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:group:public:field_group_description'
-              formatter:
-                label: above
-                settings: {  }
-                third_party_settings: {  }
-                type: text_default
+                view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
