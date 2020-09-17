@@ -1,18 +1,18 @@
-uuid: f6893423-a2ab-4b44-96fe-c376cd4e1db6
+uuid: 6b00a999-abfe-4472-8e3e-6188ef39f70c
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_feature
-    - node.type.news
-id: node.news.field_feature
+    - node.type.resource
+id: node.resource.field_feature
 field_name: field_feature
 entity_type: node
-bundle: news
+bundle: resource
 label: 'Feature Sitewide'
-description: '<em>Featured  news</em> will appear on the sitewide homepage until the feature until date.'
+description: 'If you feature a resource, it will appear on the sitewide homepage.'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 0

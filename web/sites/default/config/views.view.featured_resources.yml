@@ -1,15 +1,15 @@
-uuid: d532dc3b-1f41-4f85-bc90-cd3871e289cc
+uuid: 2458ea1b-57d0-4625-82fc-b11cc9619b7c
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
-    - node.type.news
+    - node.type.resource
   module:
+    - datetime
     - node
     - user
-id: promoted_news
-label: 'Promoted News'
+id: featured_resources
+label: 'Featured Resources'
 module: views
 description: ''
 tag: ''
@@ -69,11 +69,21 @@ display:
             offset_label: Offset
           quantity: 9
       style:
-        type: default
-      row:
-        type: 'entity:node'
+        type: html_list
         options:
-          view_mode: teaser
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         title:
           id: title
@@ -140,18 +150,48 @@ display:
           id: type
           table: node_field_data
           field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
           value:
-            news: news
+            resource: resource
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
           entity_type: node
           entity_field: type
           plugin_id: bundle
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        field_promote_sitewide_value:
-          id: field_promote_sitewide_value
-          table: node__field_promote_sitewide
-          field: field_promote_sitewide_value
+        field_feature_value:
+          id: field_feature_value
+          table: node__field_feature
+          field: field_feature_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -186,11 +226,56 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: boolean
+        field_feature_until_value:
+          id: field_feature_until_value
+          table: node__field_feature_until
+          field: field_feature_until_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: now
+            type: date
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
       sorts:
-        changed:
-          id: changed
+        title:
+          id: title
           table: node_field_data
-          field: changed
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
@@ -198,32 +283,18 @@ display:
           exposed: false
           expose:
             label: ''
-          granularity: second
           entity_type: node
-          entity_field: changed
-          plugin_id: date
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-      title: 'Employee News'
+          entity_field: title
+          plugin_id: standard
+      title: 'Employee Resources'
       header: {  }
       footer: {  }
       empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      link_url: ''
+      link_display: page_river
     cache_metadata:
       max-age: -1
       contexts:
@@ -233,14 +304,44 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  page_river:
+  block_featured_resources:
+    display_plugin: block
+    id: block_featured_resources
+    display_title: Block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 20
+          offset: 0
+      defaults:
+        pager: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+      use_more: true
+      use_more_always: false
+      use_more_text: 'More Resources'
+      block_description: 'Featured Resources'
+      block_hide_empty: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_resources:
     display_plugin: page
-    id: page_river
+    id: page_resources
     display_title: Page
     position: 1
     display_options:
       display_extenders: {  }
-      path: node
+      path: resources
     cache_metadata:
       max-age: -1
       contexts:

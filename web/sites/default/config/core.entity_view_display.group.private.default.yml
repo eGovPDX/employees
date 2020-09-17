@@ -8,7 +8,85 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
   module:
+    - layout_builder
+    - layout_library
     - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          068bb11d-746f-4a53-87b2-00964e495ad6:
+            uuid: 068bb11d-746f-4a53-87b2-00964e495ad6
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:group:private:label'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 0
+          33ecc421-d1c0-4018-9af8-6055654db746:
+            uuid: 33ecc421-d1c0-4018-9af8-6055654db746
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:group:private:field_group_path'
+              formatter:
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+                type: string
+            additional: {  }
+            weight: 1
+          45c51865-55c7-4425-8419-62d05b28fbc1:
+            uuid: 45c51865-55c7-4425-8419-62d05b28fbc1
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:group:private:field_group_description'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 2
+          dea10b47-d0b6-45a9-ba8b-dd0ae226771f:
+            uuid: dea10b47-d0b6-45a9-ba8b-dd0ae226771f
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:group:private:field_parent_group'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 3
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: group.private.default
 targetEntityType: group
 bundle: private
