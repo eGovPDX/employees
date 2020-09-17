@@ -1,0 +1,30 @@
+uuid: ec340b00-c6d3-474c-806a-0e6e6d0dd739
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.featured_resources
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: views_block__featured_resources_block_featured_resources
+theme: cloudy2
+region: side
+weight: -5
+provider: null
+plugin: 'views_block:featured_resources-block_featured_resources'
+settings:
+  id: 'views_block:featured_resources-block_featured_resources'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/news\r\n/events"
+    negate: false
+    context_mapping: {  }

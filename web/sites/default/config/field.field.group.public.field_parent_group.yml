@@ -1,0 +1,30 @@
+uuid: 6d3a0616-f160-4f48-8ba6-174a98bebfa4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_parent_group
+    - group.type.bureau
+    - group.type.public
+id: group.public.field_parent_group
+field_name: field_parent_group
+entity_type: group
+bundle: public
+label: Parent
+description: '(Optional) Set a <em>parent</em> bureau or group for this group to appear in its list of children. Private groups cannot be a parent.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      bureau: bureau
+      public: public
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: bureau
+field_type: entity_reference

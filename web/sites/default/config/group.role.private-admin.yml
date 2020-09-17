@@ -1,0 +1,70 @@
+uuid: 45358b21-2483-414b-a464-dfa22761e84c
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+id: private-admin
+label: Admin
+weight: -4
+internal: false
+audience: member
+group_type: private
+permissions_ui: true
+permissions:
+  - 'access group_media overview'
+  - 'access group_node overview'
+  - 'administer members'
+  - 'create group_media:document entity'
+  - 'create group_media:image entity'
+  - 'create group_media:remote_video entity'
+  - 'create group_node:event entity'
+  - 'create group_node:news entity'
+  - 'create group_node:page entity'
+  - 'create group_node:resource entity'
+  - 'delete any group_media:document entity'
+  - 'delete any group_media:image entity'
+  - 'delete any group_media:remote_video entity'
+  - 'delete any group_node:event entity'
+  - 'delete any group_node:news entity'
+  - 'delete any group_node:page entity'
+  - 'delete any group_node:resource entity'
+  - 'delete own group_media:document entity'
+  - 'delete own group_media:image entity'
+  - 'delete own group_media:remote_video entity'
+  - 'delete own group_node:event entity'
+  - 'delete own group_node:news entity'
+  - 'delete own group_node:page entity'
+  - 'delete own group_node:resource entity'
+  - 'edit group'
+  - 'leave group'
+  - 'update any group_media:document entity'
+  - 'update any group_media:image entity'
+  - 'update any group_media:remote_video entity'
+  - 'update any group_node:event entity'
+  - 'update any group_node:news entity'
+  - 'update any group_node:page entity'
+  - 'update any group_node:resource entity'
+  - 'update own group_media:document entity'
+  - 'update own group_media:image entity'
+  - 'update own group_media:remote_video entity'
+  - 'update own group_node:event entity'
+  - 'update own group_node:news entity'
+  - 'update own group_node:page entity'
+  - 'update own group_node:resource entity'
+  - 'view group'
+  - 'view group_media:document entity'
+  - 'view group_media:image entity'
+  - 'view group_media:remote_video entity'
+  - 'view group_membership content'
+  - 'view group_node:event entity'
+  - 'view group_node:news entity'
+  - 'view group_node:page entity'
+  - 'view group_node:resource entity'
+  - 'view unpublished group_media:document entity'
+  - 'view unpublished group_media:image entity'
+  - 'view unpublished group_media:remote_video entity'
+  - 'view unpublished group_node:event entity'
+  - 'view unpublished group_node:news entity'
+  - 'view unpublished group_node:page entity'
+  - 'view unpublished group_node:resource entity'

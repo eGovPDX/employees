@@ -1,0 +1,154 @@
+uuid: 92584bc7-2158-470a-bf60-d7d156fa1150
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.private.field_group_description
+    - field.field.group.private.field_group_path
+    - field.field.group.private.field_parent_group
+    - group.type.private
+    - views.view.group_events
+    - views.view.group_menu
+    - views.view.group_news
+  module:
+    - layout_builder
+    - layout_discovery
+    - layout_library
+    - text
+    - views
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 75-25
+        components:
+          45c51865-55c7-4425-8419-62d05b28fbc1:
+            uuid: 45c51865-55c7-4425-8419-62d05b28fbc1
+            region: first
+            configuration:
+              id: 'field_block:group:private:field_group_description'
+              label: 'Group Description'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          2a44a2e8-f121-4e7b-bdcd-c31a89a998e8:
+            uuid: 2a44a2e8-f121-4e7b-bdcd-c31a89a998e8
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          5d20a8e9-d549-4968-8582-d044d66d52b0:
+            uuid: 5d20a8e9-d549-4968-8582-d044d66d52b0
+            region: first
+            configuration:
+              id: 'views_block:group_news-block_group_news'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+          296ba911-2cc9-4a17-b7e4-4398a9d1e2d9:
+            uuid: 296ba911-2cc9-4a17-b7e4-4398a9d1e2d9
+            region: first
+            configuration:
+              id: 'views_block:group_events-block_group_news'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          dea10b47-d0b6-45a9-ba8b-dd0ae226771f:
+            uuid: dea10b47-d0b6-45a9-ba8b-dd0ae226771f
+            region: content
+            configuration:
+              id: 'field_block:group:private:field_parent_group'
+              label: Parent
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+id: group.private.default
+targetEntityType: group
+bundle: private
+mode: default
+content:
+  field_group_description:
+    weight: -3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_group_path:
+    weight: -4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_group:
+    weight: -2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  label:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  uid: true

@@ -1,0 +1,24 @@
+uuid: 7026ca4b-edf3-47a8-8b28-9ac867f18a22
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+id: private-member
+label: Member
+weight: -100
+internal: true
+audience: member
+group_type: private
+permissions_ui: true
+permissions:
+  - 'leave group'
+  - 'view group'
+  - 'view group_media:document entity'
+  - 'view group_media:image entity'
+  - 'view group_media:remote_video entity'
+  - 'view group_membership content'
+  - 'view group_node:event entity'
+  - 'view group_node:news entity'
+  - 'view group_node:page entity'
+  - 'view group_node:resource entity'

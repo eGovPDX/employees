@@ -1,0 +1,26 @@
+uuid: 450c7958-7a19-46ac-9160-25ae1058bfe4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group_content.bureau-group_membership.group_roles
+    - group.content_type.bureau-group_membership
+id: group_content.bureau-group_membership.default
+targetEntityType: group_content
+bundle: bureau-group_membership
+mode: default
+content:
+  entity_id:
+    type: entity_reference_autocomplete
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden:
+  group_roles: true
+  path: true
+  uid: true

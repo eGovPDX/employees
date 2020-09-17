@@ -1,0 +1,23 @@
+uuid: a5cc610f-1979-4eb8-aa25-accb0a4e7d16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_description
+    - group.type.private
+  module:
+    - text
+id: group.private.field_group_description
+field_name: field_group_description
+entity_type: group
+bundle: private
+label: 'Group Description'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

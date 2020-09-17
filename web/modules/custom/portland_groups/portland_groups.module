@@ -1,0 +1,363 @@
+<?php
+
+use Drupal\group\Entity\GroupContent;
+use \Drupal\group\Entity\Group;
+use Drupal\group\GroupMembershipLoaderInterface;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\group\Entity\GroupTypeInterface;
+use Drupal\group\Entity\GroupContentTypeInterface;
+use Drupal\pathauto\Form\PathautoBulkUpdateForm;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Cache\Cache;
+
+/**
+ * Implements hook_form_alter().
+ */
+function portland_groups_form_alter(&$form, &$form_state, $form_id) {
+  if (array_key_exists('field_display_in_group', $form) === TRUE && !is_null($form['field_display_in_group'])) {
+    _portland_groups_populate_field_display_groups($form, $form_state);
+  }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function portland_groups_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if ($entity_form['#entity_type'] == 'media' && array_key_exists('field_display_in_group', $entity_form)) {
+    _portland_groups_inline_entity_populate_field_display_groups($entity_form, $form_state);
+  }
+}
+
+/**
+ * Populates the field_display_in_group autocomplete widget in a node form.
+ */
+function _portland_groups_populate_field_display_groups(&$form, &$form_state) {
+  // get the group id and store it in session in case it's needed in an inline entity
+  // form in a CKEditor iframe. if new page, prepopulate field_display_in_group with parent group.
+  if(array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != NULL) {
+    $group = $form_state->getStorage()['group'];
+    $group_id = $group->id();
+    \Drupal::request()->getSession()->set('parent_group_id', $group_id);
+
+    $node = $form_state->getFormObject()->getEntity();
+    if($node->isNew()) {
+      $form['field_display_in_group']['widget'][0]['target_id']['#default_value'] = $group;
+    }
+  }
+}
+
+/**
+ * Populates the field_display_in_group select/chosen widget in a media form.
+ */
+function _portland_groups_inline_entity_populate_field_display_groups(&$form, &$form_state) {
+  // if new erntity, prepopulate with parent group, which is stored in a session var.
+  if($form['#entity']->isNew()) {
+    $session = \Drupal::request()->getSession();
+    $group_id = $session->get('parent_group_id');
+    if (!is_null($group_id)) {
+      $form['field_display_in_group']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_entity_update
+ *
+ * Runs whenever an entity is updated.
+ * If the entity has field_display_in_group, call a function to synchronize group ownership based on the
+ * first group in the field.
+ */
+function portland_groups_entity_update($entity) {
+  if ($entity && method_exists($entity, 'hasField') && $entity->hasField('field_display_in_group')) {
+    _portland_groups_synchronize_entity_group_ownership($entity);
+  }
+}
+
+/**
+ * Implements hook_entity_insert
+ *
+ * We only want this to run on insert when we're not in a group context.
+ * When we are in group context, the group module will take care of creating
+ * the group content entity.
+ */
+function portland_groups_entity_insert($entity) {
+  if ($entity && method_exists($entity, 'hasField') && $entity->hasField('field_display_in_group') && \Drupal::routeMatch()->getParameter('group') == null) {
+    _portland_groups_synchronize_entity_group_ownership($entity);
+  }
+}
+
+function _portland_groups_synchronize_entity_group_ownership($entity) {
+
+  // start building entity type id; we only support node and media entity types
+  // if other, return immediately and avoid unnecessary processing.
+  $plugin_id = ":";
+  $entity_type = $entity->getEntityTypeId();
+  if ($entity_type == "node") {
+    $plugin_id = "group_node" . $plugin_id . $entity->bundle();
+  } else if ($entity_type == "media") {
+    $plugin_id = "group_media" . $plugin_id . $entity->bundle();
+  } else {
+    return;
+  }
+
+  $orig_entity = $entity->original;
+  $eid = $entity->id();
+
+  if (!$orig_entity) {
+    // this is a newly created entity; assign it to a group
+    $field_value = $entity->get('field_display_in_group')->getValue();
+    if (count($field_value) > 0) {
+      $group_id = $field_value[0]['target_id'];
+      _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id);
+    }
+    return;
+
+  } else {
+    // this is an existing entity; if the group has changed, remove it from the old group
+    // and assign to the new group.
+    $field_value = $entity->get('field_display_in_group')->getValue();
+    if (count($field_value) > 0) {
+      $new_owner_group = $field_value[0]['target_id'];
+    } else {
+      // all groups have been removed from field_display_in_group.
+      // don't do anything; this is most likely a mistake. if not, administrators
+      // can fix it.
+      return;
+    }
+
+    // there may not be an original owner group to remove, if the entity was originally created outside of group context.
+    $field_value = $orig_entity->get('field_display_in_group')->getValue();
+    $orig_owner_group = null;
+    if (count($field_value) > 0) {
+      $orig_owner_group = $field_value[0]['target_id'];
+    }
+
+    if ($orig_owner_group != $new_owner_group) {
+      if ($orig_owner_group) {
+        // remove from old group
+        $old_group = \Drupal\group\Entity\Group::load($orig_owner_group);
+        if ($old_group) {
+          $current_node = $old_group->getContent($plugin_id, ['entity_id' => $eid]);
+          $content = array_values($current_node)[0];
+          $content->delete();
+        }
+      }
+      // assign to new group
+      _portland_groups_add_entity_to_group($entity, $new_owner_group, $plugin_id);
+    }
+  }
+}
+
+function _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id) {
+  // make sure entity isn't already in group; the entity may already be assigned to
+  // the group by virtue of having been created in that context.
+  $group = \Drupal\group\Entity\Group::load($group_id);
+  $group->addContent($entity, $plugin_id);
+
+  // use this code if we ever need to check if a node is in a group before adding it.
+  // $current_node = $group->getContent($plugin_id, ['entity_id' => $entity->id()]);
+  // if (!$current_node || count($current_node) < 1) {
+  //  $group->addContent($entity, $plugin_id);
+  // }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function portland_inline_entity_form_entity_form_alter(&$entity_form, &$form_state)
+{
+    if (
+        $entity_form['#entity_type'] == 'media' &&
+        array_key_exists('field_display_in_group', $entity_form) &&
+        array_key_exists('widget', $entity_form["field_display_in_group"])&&
+        array_key_exists('add_more', $entity_form["field_display_in_group"]['widget'])
+    ) {
+        // Set the Group field to the correct default value. Have to use session because the entity browser is in an iFrame.
+        $group_id = \Drupal::request()->getSession()->get('parent_group_id');
+        if ($group_id != null) {
+          $entity_form["field_display_in_group"]['widget'][0]['target_id']['#default_value'] = $group_id;
+        }
+    }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function portland_form_alter(&$form, &$form_state, $form_id)
+{
+    // Only set the default field for new Media items
+    $form_array_with_group_field = [
+        'node_news_form',
+        'node_news_edit_form',
+        'node_page_form',
+        'node_page_edit_form',
+        'node_event_form',
+        'node_event_edit_form',
+        'media_image_add_form',
+        'media_audio_add_form',
+        'media_remote_video_add_form',
+        'media_document_add_form',
+    ];
+
+    $group_form_prefix = 'group_';
+
+    if (in_array($form_id, $form_array_with_group_field)) {
+        // Set the default value as the node's current group
+        $node = $form_state->getFormObject()->getEntity();
+        $group_id = null;
+        // The value is used in portland_inline_entity_form_entity_form_alter()
+        // When creating a node, get the group from form state.
+        if ($node->isNew()) {
+            if (array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != null) {
+                $group_id = $form_state->getStorage()['group']->id();
+                if (array_key_exists('group_content', $form) && $group_id != null) {
+                    \Drupal::request()->getSession()->set('parent_group_id', $group_id);
+                }
+            }
+        }
+        // Set the default group in "field_display_in_group" in entity browser form
+        // When editing a node, get the node's parent group
+        else {
+          $group_ids = getGroupIdsByEntity($node);
+          if(count($group_ids) > 0) {
+            // Assume each node only belongs to one group.
+            // When there are multiple parent groups, use the first one.
+            \Drupal::request()->getSession()->set('parent_group_id', $group_ids[0]);
+          }
+        }
+    } elseif (substr_compare($form_id, $group_form_prefix, 0, strlen($group_form_prefix)) === 0) {
+        $form['#validate'][] = '_validate_group_group_path';
+    }
+}
+
+/**
+ * Get the parent group IDs of an entity.
+ * See https://drupal.stackexchange.com/questions/238755/how-to-get-group-ids-by-ids-of-elements-of-group-content
+ */
+function getGroupIdsByEntity($entity)
+{
+    if ($entity == null) {
+        return [];
+    }
+    $group_ids = [];
+
+    $group_contents = GroupContent::loadByEntity($entity);
+    foreach ($group_contents as $group_content) {
+        $group_ids[] = $group_content->getGroup()->id();
+    }
+
+    return $group_ids;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ * POWR-475 Changing short name of a group can cause the group URL to be
+ * different from the URLs in the group menu. Root cause is that the group
+ * URL is set by PathAuto to be clean and unique. But the URL in sidebar
+ * menu is formed by Twig code using the short name as is. The solution is
+ * to update short name to ensure it's clean and unique when the group is
+ * updated.
+ */
+function portland_group_presave(GroupInterface $group)
+{
+    $newgroup_path = $group->get('field_group_path')->value;
+    if ($group->original === null) {
+        $originalgroup_path = ''; // new group
+    } else {
+        $originalgroup_path = $group->original->get('field_group_path')->value;
+    }
+    // Check if this is a new group or an existing group whose group_path has been modified
+    if ($originalgroup_path !== $newgroup_path) {
+        $cleangroup_path = $newgroup_path;
+        if ($cleangroup_path === '') {
+            $cleangroup_path = 'invalid-short-name';
+        }
+        $alias = "/$cleangroup_path";
+        $gid = $group->id();
+        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        // Update the group path when we have alias conflict
+        \Drupal::service("pathauto.alias_uniquifier")->uniquify($alias, "/group/$gid", $lang);
+        $group->set('field_group_path', substr($alias, 1)); // Remove the first character "/"
+    }
+}
+
+/**
+ * A helper function to clean up group path.
+ * Support "/" as part of group_path. Called by group form validation.
+ * @param string $group_group_path Will be modified as a clean string by Path
+ * @return boolean Flase if the input is invalid.
+ */
+function _clean_group_group_path(&$group_group_path)
+{
+    if (empty($group_group_path)) {
+        return false;
+    }
+
+    // If the group_path contains "/", we have to clean each part and put it back again.
+    if (strpos($group_group_path, '/') !== false) {
+        // Split the string and clean each part
+        $original_parts = explode("/", $group_group_path);
+        $parts = [];
+        foreach ($original_parts as $original_part) {
+            // Skip empty string
+            if ($original_part == "") {
+                continue;
+            }
+            $parts[] = \Drupal::service("pathauto.alias_cleaner")->cleanString($original_part);
+        }
+        // The string only contains "/"
+        if (count($parts) == 0) {
+            return false;
+        }
+        // Put everything back again
+        $group_group_path = implode("/", $parts);
+    } else {
+        $group_group_path = \Drupal::service("pathauto.alias_cleaner")->cleanString($group_group_path);
+        if (empty($group_group_path)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ * Add and update group aliases like "/powr/news" when a group is updated.
+ */
+function portland_group_update(GroupInterface $group)
+{
+    // get group path
+    $group_path = $group->get('field_group_path')->value;
+    $orig_group_path = $group->original->get('field_group_path')->value;
+
+    // only update URL aliases if group_path changes
+    if ($group_path != $orig_group_path) {
+        // 4.2. Bulk regenerate URL aliases for content by running pathauto batch processing
+        $batch = array(
+            'title' => t('Bulk updating URL aliases'),
+            'operations' => array(
+            array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchStart', array()),
+            ),
+            'finished' => 'Drupal\pathauto\Form\PathautoBulkUpdateForm::batchFinished',
+        );
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:node", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group_content", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:media", "update"]);
+        batch_set($batch);
+
+        $gid = $group->id();
+        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+        // TODO: manually regenerate URL alias for main group page; pathauto bulk update isn't getting it sometimes
+        $existing_alias = \Drupal::service('path.alias_storage')->lookupPathAlias("/group/$gid", $lang);
+        $alias = "/$group_path";
+        // if it exists and doesn't match current alias, delete and re-save
+        if ($existing_alias && $existing_alias != $alias) {
+            \Drupal::service('path.alias_storage')->delete(['alias' => $existing_alias, 'langcode' => $lang]);
+            $path = \Drupal::service('path.alias_storage')->save("/group/$gid", $alias, $lang);
+        }
+    }
+}

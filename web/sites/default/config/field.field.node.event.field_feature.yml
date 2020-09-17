@@ -1,0 +1,23 @@
+uuid: fddae8e6-3e52-4815-bd28-53be61cbaa17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature
+    - node.type.event
+id: node.event.field_feature
+field_name: field_feature
+entity_type: node
+bundle: event
+label: 'Feature Sitewide'
+description: 'If you feature an event, it will appear on the sitewide homepage until the event has passed.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

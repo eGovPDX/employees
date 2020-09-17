@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_parent
     - field.field.node.page.field_tags
     - node.type.page
   module:
@@ -27,5 +29,7 @@ content:
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
+  field_display_in_group: true
+  field_parent: true
   field_tags: true
   links: true

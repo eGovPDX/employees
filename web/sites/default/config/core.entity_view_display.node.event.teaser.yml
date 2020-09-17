@@ -5,7 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.event.body
-    - field.field.node.event.field_bureau
+    - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_feature
     - field.field.node.event.field_tags
     - field.field.node.event.field_when
     - node.type.event
@@ -40,6 +41,8 @@ content:
       format_type: medium
     third_party_settings: {  }
 hidden:
-  field_bureau: true
+  content_moderation_control: true
+  field_display_in_group: true
+  field_feature: true
   field_tags: true
   links: true

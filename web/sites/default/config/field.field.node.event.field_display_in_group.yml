@@ -1,0 +1,33 @@
+uuid: d193a6c0-9a0b-41a0-91a7-5842ec9c641b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_in_group
+    - group.type.bureau
+    - group.type.private
+    - group.type.public
+    - node.type.event
+id: node.event.field_display_in_group
+field_name: field_display_in_group
+entity_type: node
+bundle: event
+label: 'Display in Group'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      bureau: bureau
+      private: private
+      public: public
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: bureau
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: 3fb84652-bf84-46cc-bb15-c47de08911f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_description
+    - group.type.public
+  module:
+    - text
+id: group.public.field_group_description
+field_name: field_group_description
+entity_type: group
+bundle: public
+label: 'Group Description'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

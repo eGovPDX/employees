@@ -1,0 +1,14 @@
+uuid: 79920dcb-3cf6-4585-84cc-bd6d0d2f39f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media
+label: Media
+type: 'canonical_entities:media'
+pattern: '[media:field_display_in_group:entity:field_group_path]/[media:bundle]/[media:name]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

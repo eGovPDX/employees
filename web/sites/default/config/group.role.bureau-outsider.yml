@@ -1,0 +1,23 @@
+uuid: efe39c08-0d89-487e-9226-4fedc18b9204
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.bureau
+id: bureau-outsider
+label: Outsider
+weight: -101
+internal: true
+audience: outsider
+group_type: bureau
+permissions_ui: true
+permissions:
+  - 'join group'
+  - 'view group'
+  - 'view group_media:document entity'
+  - 'view group_media:image entity'
+  - 'view group_media:remote_video entity'
+  - 'view group_node:event entity'
+  - 'view group_node:news entity'
+  - 'view group_node:page entity'
+  - 'view group_node:resource entity'

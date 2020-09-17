@@ -1,0 +1,17 @@
+uuid: b34fc616-cf36-4c59-8ab0-2e05b15d8f4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+  module:
+    - user
+id: private-group_membership
+label: 'Private Group: Group membership'
+description: 'Adds users to groups as members.'
+group_type: private
+content_plugin: group_membership
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

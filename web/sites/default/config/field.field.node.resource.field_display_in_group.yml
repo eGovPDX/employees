@@ -1,0 +1,33 @@
+uuid: a2211a46-43a5-454d-bd19-66b5b542504e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_in_group
+    - group.type.bureau
+    - group.type.private
+    - group.type.public
+    - node.type.resource
+id: node.resource.field_display_in_group
+field_name: field_display_in_group
+entity_type: node
+bundle: resource
+label: 'Display in Group'
+description: 'Provide a link to the <em>group</em> or <em>bureau</em> in which this <em>resource</em> should appear.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      bureau: bureau
+      private: private
+      public: public
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: bureau
+field_type: entity_reference

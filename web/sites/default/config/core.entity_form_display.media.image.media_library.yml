@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
+    - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
     - image.style.thumbnail
     - media.type.image
@@ -26,6 +27,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_display_in_group: true
   name: true
   path: true
   status: true

@@ -1,0 +1,23 @@
+uuid: 6b00a999-abfe-4472-8e3e-6188ef39f70c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature
+    - node.type.resource
+id: node.resource.field_feature
+field_name: field_feature
+entity_type: node
+bundle: resource
+label: 'Feature Sitewide'
+description: 'If you feature a resource, it will appear on the sitewide homepage.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
