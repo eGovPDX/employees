@@ -17,7 +17,7 @@ mode: default
 content:
   field_display_in_group:
     weight: 2
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -25,7 +25,8 @@ content:
     region: content
   field_media_document:
     label: visually_hidden
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
     type: file_default
     weight: 1

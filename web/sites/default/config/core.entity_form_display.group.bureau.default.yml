@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.bureau.field_parent_group
     - group.type.bureau
   module:
+    - path
     - text
 id: group.bureau.default
 targetEntityType: group
@@ -15,7 +16,7 @@ bundle: bureau
 mode: default
 content:
   field_group_description:
-    weight: 2
+    weight: 3
     settings:
       rows: 9
       summary_rows: 3
@@ -33,7 +34,7 @@ content:
     type: string_textfield
     region: content
   field_parent_group:
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -50,9 +51,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -60,5 +67,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  path: true
+hidden: {  }
