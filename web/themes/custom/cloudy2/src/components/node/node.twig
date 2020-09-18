@@ -19,18 +19,24 @@
 
   {% if label and not page %}
     {{ title_prefix }}
-    <h2{{ title_attributes }}>
+    <h3{{ title_attributes }}>
       <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
+    </h3>
     {{ title_suffix }}
   {% endif %}
 
   {% if display_submitted %}
     <div class="node__meta">
-      {{ author_picture }}
       <div{{ author_attributes.addClass('node__submitted') }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
+        <p>
+        {% trans %}
+        Submitted by {{ author_name }}<br>
+        Created on {{ date }}
+        {% endtrans %}
+        {% if updated %}
+          {% trans %}<br>Updated on {{ updated }}<br>{% endtrans %}
+        {% endif %}
+        </p>
       </div>
     </div>
   {% endif %}

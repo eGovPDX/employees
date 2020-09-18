@@ -233,38 +233,34 @@ display:
             group_items: {  }
           plugin_id: datetime
       sorts:
-        changed:
-          id: changed
-          table: node_field_data
-          field: changed
+        field_published_on_value:
+          id: field_published_on_value
+          table: node__field_published_on
+          field: field_published_on_value
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: node
-          entity_field: changed
-          plugin_id: date
-        created:
-          id: created
-          table: node_field_data
-          field: created
           order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          relationship: none
-          group_type: group
-          admin_label: ''
           exposed: false
           expose:
             label: ''
           granularity: second
-      title: 'Employee News'
-      header: {  }
+          plugin_id: datetime
+      title: 'Welcome to Portland Employees'
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: "<p class=\"lead\">Services and information for City of Portland employees.</p>\r\n<h2>Featured News</h2>"
+            format: basic_html
+          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }

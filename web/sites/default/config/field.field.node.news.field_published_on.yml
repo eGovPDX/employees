@@ -1,0 +1,24 @@
+uuid: 57257d68-4241-48d1-8857-76757d3cd7d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_published_on
+    - node.type.news
+  module:
+    - datetime
+id: node.news.field_published_on
+field_name: field_published_on
+entity_type: node
+bundle: news
+label: 'Published on'
+description: 'Defaults to the current date time. Update the date and time if publishing at a future date.'
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

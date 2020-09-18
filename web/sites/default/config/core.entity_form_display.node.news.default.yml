@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
+    - field.field.node.news.field_published_on
     - node.type.news
     - workflows.workflow.editorial
   module:
@@ -54,6 +55,12 @@ content:
     region: content
   field_feature_until:
     weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_published_on:
+    weight: 26
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
