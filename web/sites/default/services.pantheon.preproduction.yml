@@ -10,8 +10,12 @@
 # See 'default.services.yml' for information on useful settings to
 # put here.
 #
- parameters:
-   twig.config:
-     debug: true
-     auto_reload: true
-     cache: false
+parameters:
+  http.response.debug_cacheability_headers: true
+  twig.config:
+    debug: true
+    auto_reload: true
+    cache: false
+services:
+  cache.backend.null:
+    class: Drupal\Core\Cache\NullBackendFactory
