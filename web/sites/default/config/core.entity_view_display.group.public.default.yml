@@ -12,7 +12,6 @@ dependencies:
     - views.view.group_news
   module:
     - layout_builder
-    - layout_discovery
     - layout_library
     - text
     - views
@@ -84,15 +83,9 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 0
-        third_party_settings: {  }
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
           96932d9c-fc48-4d55-b07e-15809cb92a2f:
             uuid: 96932d9c-fc48-4d55-b07e-15809cb92a2f
-            region: content
+            region: second
             configuration:
               id: 'field_block:group:public:field_parent_group'
               label: Parent
@@ -108,7 +101,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 2
+            weight: 1
         third_party_settings: {  }
   layout_library:
     enable: false

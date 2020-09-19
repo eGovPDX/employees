@@ -15,10 +15,34 @@
 ]
 %}
 <article{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {{ title_suffix }}
 
-  {% block content %}
+
+  {% if label and not page %}
+    {{ title_prefix }}
+    <h3{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h3>
+    {{ title_suffix }}
+  {% endif %}
+
+  {% if display_submitted %}
+    <div class="node__meta">
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        <p>
+        {% trans %}
+        Submitted by {{ author_name }}<br>
+        Created on {{ date }}
+        {% endtrans %}
+        {% if updated %}
+          {% trans %}<br>Updated on {{ updated }}<br>{% endtrans %}
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('node__content') }}>
     {{ content }}
-  {% endblock %}
+  </div>
+
 </article>

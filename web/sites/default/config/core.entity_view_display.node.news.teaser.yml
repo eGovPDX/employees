@@ -8,8 +8,10 @@ dependencies:
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
+    - field.field.node.news.field_published_on
     - node.type.news
   module:
+    - datetime
     - text
     - user
 id: node.news.teaser
@@ -20,18 +22,23 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    weight: 1
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  links:
-    weight: 1
+  field_published_on:
+    type: datetime_default
+    weight: 0
     region: content
-    settings: {  }
+    label: inline
+    settings:
+      format_type: medium
+      timezone_override: ''
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
   field_feature_until: true
+  links: true
