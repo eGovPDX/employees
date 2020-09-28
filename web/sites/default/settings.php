@@ -99,14 +99,10 @@ switch ($env) {
 }
 
 
-// $databases['default']['default'] = array (
-//   'database' => 'pantheon',
-//   'username' => 'pantheon',
-//   'password' => 'pantheon',
-//   'prefix' => '',
-//   'host' => 'database',
-//   'port' => '3306',
-//   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-//   'driver' => 'mysql',
-// );
-// $config_directories['sync'] = 'sites/default/files/config_EIU_3aqFK8Mce5DfzNoGx8NhYGOiRv5Msjots_khrG8RcyFwWcIrmMWWh7qsmt3MRh9uCo0J0A/sync';
+// Overwrite Google Tag Manager environment setting in 'live' production site.
+if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
+  if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
+    $config['google_tag.container.portland.gov']['environment_id'] = 'env-1';
+    $config['google_tag.container.portland.gov']['environment_token'] = 'ooMp5LjvXgMdbFJ9wE617g';
+  }
+}
