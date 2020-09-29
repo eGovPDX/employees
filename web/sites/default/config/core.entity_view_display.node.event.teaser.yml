@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.event.field_when
     - node.type.event
   module:
-    - smart_date
     - text
     - user
 _core:
@@ -29,20 +28,10 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  field_when:
-    type: smartdate_default
-    weight: 0
-    region: content
-    label: inline
-    settings:
-      timezone_override: ''
-      format: compact
-      force_chronological: false
-      format_type: medium
-    third_party_settings: {  }
 hidden:
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
   field_tags: true
+  field_when: true
   links: true

@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.event.field_when
     - node.type.event
   module:
-    - smart_date
+    - datetime_range
     - text
     - user
 _core:
@@ -51,15 +51,14 @@ content:
     type: entity_reference_label
     region: content
   field_when:
-    weight: 1
-    label: hidden
+    weight: 5
+    label: above
     settings:
-      format: default
+      separator: '-'
       format_type: medium
       timezone_override: ''
-      force_chronological: false
     third_party_settings: {  }
-    type: smartdate_default
+    type: daterange_default
     region: content
 hidden:
   field_display_in_group: true
