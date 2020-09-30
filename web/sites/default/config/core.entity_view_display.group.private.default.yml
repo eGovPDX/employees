@@ -62,27 +62,14 @@ third_party_settings:
             region: first
             configuration:
               id: 'views_block:group_news-block_group_news'
-              label: ''
+              label: News
               provider: views
               label_display: visible
-              views_label: ''
+              views_label: News
               items_per_page: none
               context_mapping: {  }
             additional: {  }
             weight: 1
-          296ba911-2cc9-4a17-b7e4-4398a9d1e2d9:
-            uuid: 296ba911-2cc9-4a17-b7e4-4398a9d1e2d9
-            region: first
-            configuration:
-              id: 'views_block:group_events-block_group_news'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
           dea10b47-d0b6-45a9-ba8b-dd0ae226771f:
             uuid: dea10b47-d0b6-45a9-ba8b-dd0ae226771f
             region: second
@@ -102,6 +89,19 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
+          ccbcbfa4-4601-4cc1-89f5-bb62b39ae6b1:
+            uuid: ccbcbfa4-4601-4cc1-89f5-bb62b39ae6b1
+            region: first
+            configuration:
+              id: 'views_block:group_events-block_group_events'
+              label: Events
+              provider: views
+              label_display: visible
+              views_label: Events
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false

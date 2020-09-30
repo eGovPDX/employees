@@ -54,19 +54,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
-          270fad22-363d-4c3b-9d64-58c6cbaf05bb:
-            uuid: 270fad22-363d-4c3b-9d64-58c6cbaf05bb
-            region: first
-            configuration:
-              id: 'views_block:group_events-block_group_news'
-              label: 'Upcoming Events'
-              provider: views
-              label_display: visible
-              views_label: 'Upcoming Events'
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
           c30f0744-1040-49d4-b94e-2e72e91d9b8c:
             uuid: c30f0744-1040-49d4-b94e-2e72e91d9b8c
             region: second
@@ -99,6 +86,19 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 3
+          287db75a-6648-44a8-ad07-83cc2809f66f:
+            uuid: 287db75a-6648-44a8-ad07-83cc2809f66f
+            region: first
+            configuration:
+              id: 'views_block:group_events-block_group_events'
+              label: Events
+              provider: views
+              label_display: visible
+              views_label: Events
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
