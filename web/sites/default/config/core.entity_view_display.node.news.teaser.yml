@@ -11,7 +11,7 @@ dependencies:
     - field.field.node.news.field_published_on
     - node.type.news
   module:
-    - datetime
+    - smart_date
     - text
     - user
 id: node.news.teaser
@@ -28,13 +28,15 @@ content:
     third_party_settings: {  }
     region: content
   field_published_on:
-    type: datetime_default
+    type: smartdate_default
     weight: 0
     region: content
     label: inline
     settings:
-      format_type: medium
       timezone_override: ''
+      format: date_only
+      force_chronological: false
+      format_type: medium
     third_party_settings: {  }
 hidden:
   content_moderation_control: true

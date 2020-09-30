@@ -1,4 +1,4 @@
-uuid: 157396be-7306-44e6-870a-a0cf5d2075b0
+uuid: 90a0da85-1f2e-4d46-9c52-ee880425b399
 langcode: en
 status: true
 dependencies:
@@ -6,23 +6,16 @@ dependencies:
     - field.storage.node.field_when
     - node.type.event
   module:
-    - smart_date
-_core:
-  default_config_hash: '-YVyZixV2I1tWIn_wfTHXM8AlzQDnuH0mF0epUpxXiY'
+    - datetime_range
 id: node.event.field_when
 field_name: field_when
 entity_type: node
 bundle: event
 label: When
 description: ''
-required: false
+required: true
 translatable: false
-default_value:
-  -
-    default_date_type: next_hour
-    default_date: ''
-    default_duration_increments: "0\r\n30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
-    default_duration: 60
+default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: smartdate
+field_type: daterange

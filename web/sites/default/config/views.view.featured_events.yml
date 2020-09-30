@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - node.type.event
   module:
+    - datetime
     - node
     - user
 id: featured_events
@@ -359,9 +360,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_1:
+  block_upcoming_sitewide_events:
     display_plugin: block
-    id: block_1
+    id: block_upcoming_sitewide_events
     display_title: Block
     position: 2
     display_options:
@@ -395,9 +396,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  page_river:
+  page_upcoming_sitewide_events:
     display_plugin: page
-    id: page_river
+    id: page_upcoming_sitewide_events
     display_title: Page
     position: 1
     display_options:

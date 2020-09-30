@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.news.field_published_on
     - node.type.news
   module:
-    - datetime
+    - smart_date
     - text
     - user
 id: node.news.default
@@ -34,10 +34,12 @@ content:
     weight: 1
     label: inline
     settings:
-      format_type: medium
       timezone_override: ''
+      format: date_only
+      force_chronological: false
+      format_type: medium
     third_party_settings: {  }
-    type: datetime_default
+    type: smartdate_default
     region: content
 hidden:
   field_display_in_group: true

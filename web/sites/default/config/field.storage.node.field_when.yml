@@ -1,18 +1,17 @@
-uuid: 0a360595-4f59-4581-a805-9978b320f3a3
+uuid: 3a71220c-51a5-493a-abcc-2ee2c4739207
 langcode: en
 status: true
 dependencies:
   module:
+    - datetime_range
     - node
-    - smart_date
-_core:
-  default_config_hash: NywCPIm4tJfbc_ol1P8KtR4GXKLX9mszrM0KGwfte3g
 id: node.field_when
 field_name: field_when
 entity_type: node
-type: smartdate
-settings: {  }
-module: smart_date
+type: daterange
+settings:
+  datetime_type: datetime
+module: datetime_range
 locked: false
 cardinality: 1
 translatable: true

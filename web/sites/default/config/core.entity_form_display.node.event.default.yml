@@ -68,7 +68,10 @@ content:
   field_when:
     weight: 1
     settings:
+      default_duration_increments: "30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
+      default_duration: 60
       modal: false
+      show_extra: true
     third_party_settings: {  }
     type: smartdate_default
     region: content

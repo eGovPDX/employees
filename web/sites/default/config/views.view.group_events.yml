@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - node.type.event
   module:
+    - datetime
     - node
     - user
 id: group_events
@@ -357,9 +358,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_group_news:
+  block_group_events:
     display_plugin: block
-    id: block_group_news
+    id: block_group_events
     display_title: Block
     position: 2
     display_options:
@@ -375,7 +376,10 @@ display:
         use_more_always: false
         use_more_text: false
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
       pager:
         type: some
         options:
@@ -460,9 +464,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  page_group_news:
+  page_group_events:
     display_plugin: page
-    id: page_group_news
+    id: page_group_events
     display_title: Page
     position: 1
     display_options:

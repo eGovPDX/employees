@@ -32,16 +32,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_feature:
-    weight: 4
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_tags:
     weight: 3
     label: inline
@@ -52,15 +42,16 @@ content:
     region: content
   field_when:
     weight: 1
-    label: hidden
+    label: inline
     settings:
-      format: default
-      format_type: medium
       timezone_override: ''
+      format: compact
       force_chronological: false
+      format_type: medium
     third_party_settings: {  }
     type: smartdate_default
     region: content
 hidden:
   field_display_in_group: true
+  field_feature: true
   links: true
