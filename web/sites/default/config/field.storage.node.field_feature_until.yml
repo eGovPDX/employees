@@ -4,7 +4,11 @@ status: true
 dependencies:
   module:
     - datetime
+    - field_permissions
     - node
+third_party_settings:
+  field_permissions:
+    permission_type: custom
 id: node.field_feature_until
 field_name: field_feature_until
 entity_type: node
