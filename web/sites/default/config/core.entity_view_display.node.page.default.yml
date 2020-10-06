@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_tags
     - node.type.page
     - views.view.group_menu
@@ -52,8 +54,68 @@ third_party_settings:
               id: 'extra_field_block:node:page:content_moderation_control'
             additional: {  }
             weight: 0
-          62e813b2-531f-40cc-be2e-d38abde40031:
-            uuid: 62e813b2-531f-40cc-be2e-d38abde40031
+          1e656d54-190d-4722-8ee5-267131853010:
+            uuid: 1e656d54-190d-4722-8ee5-267131853010
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_show_in_menu'
+              formatter:
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+                type: boolean
+            additional: {  }
+            weight: 2
+          ba045366-e948-4474-bab1-aa789574e9b5:
+            uuid: ba045366-e948-4474-bab1-aa789574e9b5
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_menu_url_text'
+              formatter:
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+                type: string
+            additional: {  }
+            weight: 3
+          71038bee-f817-4691-bcfd-1e0036d9c1db:
+            uuid: 71038bee-f817-4691-bcfd-1e0036d9c1db
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_page_children_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          c3e2463d-0e95-406a-bd13-be6b83868559:
+            uuid: c3e2463d-0e95-406a-bd13-be6b83868559
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_sibling_page_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
+          e7d70d3a-677a-4cda-8d19-f2ec7a713f8f:
+            uuid: e7d70d3a-677a-4cda-8d19-f2ec7a713f8f
             region: second
             configuration:
               id: 'views_block:group_menu-block_group_page_menu'
@@ -64,20 +126,7 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 1
-          d6ce131e-e45c-47e9-a4d2-b6dbcf84ffa4:
-            uuid: d6ce131e-e45c-47e9-a4d2-b6dbcf84ffa4
-            region: second
-            configuration:
-              id: 'views_block:group_menu-block_group_child_page'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
+            weight: 2
         third_party_settings: {  }
       -
         layout_id: layout_onecol
@@ -125,6 +174,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_menu_url_text:
+    weight: 4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: first
+  field_show_in_menu:
+    weight: 3
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: first
   field_tags:
     weight: 2
     label: inline

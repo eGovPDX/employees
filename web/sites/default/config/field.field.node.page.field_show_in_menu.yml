@@ -1,0 +1,23 @@
+uuid: 25ea0519-973f-4e5d-806a-71d91d57ed09
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_in_menu
+    - node.type.page
+id: node.page.field_show_in_menu
+field_name: field_show_in_menu
+entity_type: node
+bundle: page
+label: 'Show in Menu'
+description: 'Show this page in a menu. Add a parent to have it only appear under that platform.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
