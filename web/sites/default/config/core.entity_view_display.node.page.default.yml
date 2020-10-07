@@ -54,40 +54,6 @@ third_party_settings:
               id: 'extra_field_block:node:page:content_moderation_control'
             additional: {  }
             weight: 0
-          1e656d54-190d-4722-8ee5-267131853010:
-            uuid: 1e656d54-190d-4722-8ee5-267131853010
-            region: first
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:page:field_show_in_menu'
-              formatter:
-                label: above
-                settings:
-                  format: default
-                  format_custom_false: ''
-                  format_custom_true: ''
-                third_party_settings: {  }
-                type: boolean
-            additional: {  }
-            weight: 2
-          ba045366-e948-4474-bab1-aa789574e9b5:
-            uuid: ba045366-e948-4474-bab1-aa789574e9b5
-            region: first
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:page:field_menu_url_text'
-              formatter:
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-                type: string
-            additional: {  }
-            weight: 3
           71038bee-f817-4691-bcfd-1e0036d9c1db:
             uuid: 71038bee-f817-4691-bcfd-1e0036d9c1db
             region: second
@@ -114,19 +80,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
-          e7d70d3a-677a-4cda-8d19-f2ec7a713f8f:
-            uuid: e7d70d3a-677a-4cda-8d19-f2ec7a713f8f
-            region: second
-            configuration:
-              id: 'views_block:group_menu-block_group_page_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
         third_party_settings: {  }
       -
         layout_id: layout_onecol
