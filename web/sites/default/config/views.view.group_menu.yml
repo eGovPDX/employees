@@ -1754,7 +1754,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2225,7 +2225,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_node }}" class="nav-link{% if nid == raw_arguments.nid %} active{% endif %}">{{ field_menu_url_text }}{% if status_1 == "No" %}<span class="badge badge-danger ml-2">Unpublished</span>{% endif %}</a>'
+            text: '<a href="{{ view_node }}" class="nav-link{% if nid == raw_arguments.nid %} active disabled{% endif %}">{{ field_menu_url_text }}{% if status_1 == "No" %}<span class="badge badge-danger ml-2">Unpublished</span>{% endif %}</a>'
             make_link: false
             path: ''
             absolute: false
