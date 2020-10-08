@@ -10,19 +10,16 @@ field_name: field_parent
 entity_type: node
 bundle: page
 label: Parent
-description: '(Optional) If a parent <em>page</em> is added, this page will appear beneath that page in the group menu.'
+description: "<p>(Optional) If a <strong>parent page</strong> is added, this page will appear beneath that page in the <strong>group menu and in breadcrumbs</strong>.</p>\r\n<p>Additional instructions:</p>\r\n<ul>\r\n<li>Search for a page by keywords in the <strong>title</strong>. The search is looking for an <strong>exact match</strong>. <strong>Spelling matters</strong>.</li>\r\n<li><strong>Do not select a page to be its own parent.</strong></li>\r\n<li>Make sure the page you select as a parent is in the <strong>same group as the page you are creating</strong>.</li>\r\n</ul>"
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:node'
+  handler: views
   handler_settings:
-    target_bundles:
-      page: page
-    sort:
-      field: title
-      direction: ASC
-    auto_create: false
-    auto_create_bundle: ''
+    view:
+      view_name: parent_page_entity_ref_view
+      display_name: parent_entity_ref
+      arguments: {  }
 field_type: entity_reference

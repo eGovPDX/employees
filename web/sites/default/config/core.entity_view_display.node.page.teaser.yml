@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
     - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_tags
     - node.type.page
   module:
@@ -30,6 +32,8 @@ content:
 hidden:
   content_moderation_control: true
   field_display_in_group: true
+  field_menu_url_text: true
   field_parent: true
+  field_show_in_menu: true
   field_tags: true
   links: true

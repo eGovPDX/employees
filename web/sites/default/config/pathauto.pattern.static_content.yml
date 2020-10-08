@@ -7,17 +7,16 @@ dependencies:
 id: static_content
 label: 'Static Content'
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent]/[node:title]'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent:entity:field_menu_url_text]/[node:field_menu_url_text]'
 selection_criteria:
-  d31611fe-8d6f-43e4-9413-127b6f25c32c:
+  3048af62-fa8d-451e-a249-8fc5ed7d3ed8:
     id: node_type
     bundles:
       page: page
-      resource: resource
     negate: false
     context_mapping:
       node: node
-    uuid: d31611fe-8d6f-43e4-9413-127b6f25c32c
+    uuid: 3048af62-fa8d-451e-a249-8fc5ed7d3ed8
 selection_logic: and
 weight: -5
 relationships: {  }
