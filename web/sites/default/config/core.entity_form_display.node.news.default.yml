@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
+    - field.field.node.news.field_tags
     - node.type.news
     - workflows.workflow.editorial
   module:
@@ -37,7 +38,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_display_in_group:
-    weight: 5
+    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -60,10 +61,20 @@ content:
     type: datetime_default
     region: content
   field_published_on:
-    weight: 26
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_tags:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
     region: content
   moderation_state:
     type: moderation_state_default

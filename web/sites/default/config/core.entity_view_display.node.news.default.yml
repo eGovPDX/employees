@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
+    - field.field.node.news.field_tags
     - node.type.news
   module:
     - smart_date
@@ -38,8 +39,17 @@ content:
       format: date_only
       force_chronological: false
       format_type: medium
+      add_classes: 0
     third_party_settings: {  }
     type: smartdate_default
+    region: content
+  field_tags:
+    weight: 3
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
 hidden:
   field_display_in_group: true

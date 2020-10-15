@@ -80,6 +80,25 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
+          3dd673f0-24f3-419e-bc7a-a931c6662473:
+            uuid: 3dd673f0-24f3-419e-bc7a-a931c6662473
+            region: first
+            configuration:
+              id: 'field_block:node:page:field_tags'
+              label: Tags
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
       -
         layout_id: layout_onecol
