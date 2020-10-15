@@ -11,7 +11,7 @@ field_name: field_tags
 entity_type: node
 bundle: page
 label: Tags
-description: '(Optional) Tag your content for search facets. Enter a comma-separated list. For example: Amsterdam, Mexico City, "Cleveland, Ohio"'
+description: '(Optional) Tag your content for search facets. Enter a comma-separated list using <strong>Title Case</strong>. For example: Form, "Printable Flyer", Training. A tag will be created if one exactly matching the spelling of your tag does not exist.'
 required: false
 translatable: true
 default_value: {  }
@@ -24,6 +24,6 @@ settings:
     sort:
       field: name
       direction: asc
-    auto_create: false
+    auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference

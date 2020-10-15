@@ -3,12 +3,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.document.field_description
     - field.field.media.document.field_display_in_group
     - field.field.media.document.field_media_document
+    - field.field.media.document.field_tags
     - media.type.document
   module:
     - file
     - path
+    - text
 _core:
   default_config_hash: gtZlAQdQqZgVWvvZ6v-hfmACkfEimqn_GPDbQZqNAbw
 id: media.document.default
@@ -18,12 +21,20 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_display_in_group:
+  field_description:
     weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_display_in_group:
+    weight: 3
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -39,6 +50,16 @@ content:
     type: file_generic
     weight: 1
     region: content
+  field_tags:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
   name:
     type: string_textfield
     weight: 0
@@ -49,20 +70,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 8
+    region: content
     settings:
       display_label: true
-    weight: 6
-    region: content
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 5
     settings:
       match_operator: CONTAINS
       match_limit: 10

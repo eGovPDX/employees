@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
+    - field.field.node.resource.field_tags
     - node.type.resource
   module:
     - user
@@ -16,18 +17,17 @@ targetEntityType: node
 bundle: resource
 mode: teaser
 content:
-  content_moderation_control:
-    weight: -20
+  field_resource_description:
+    type: basic_string
+    weight: 0
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
 hidden:
+  content_moderation_control: true
   field_display_in_group: true
   field_feature: true
-  field_resource_description: true
   field_resource_link: true
+  field_tags: true
+  links: true

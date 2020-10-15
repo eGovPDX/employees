@@ -1,15 +1,15 @@
-uuid: d27d894f-ade6-4712-ae75-00f608599fe6
+uuid: e0903760-5eae-4491-9617-78a43c9e4f8e
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_tags
-    - node.type.event
+    - node.type.news
     - taxonomy.vocabulary.tags
-id: node.event.field_tags
+id: node.news.field_tags
 field_name: field_tags
 entity_type: node
-bundle: event
+bundle: news
 label: Tags
 description: '(Optional) Tag your content for search facets. Enter a comma-separated list using <strong>Title Case</strong>. For example: Form, "Printable Flyer", Training. A tag will be created if one exactly matching the spelling of your tag does not exist.'
 required: false

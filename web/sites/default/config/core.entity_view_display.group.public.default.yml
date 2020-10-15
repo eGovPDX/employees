@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.group.public.field_group_description
     - field.field.group.public.field_group_path
+    - field.field.group.public.field_org_type
     - field.field.group.public.field_parent_group
     - group.type.public
     - views.view.group_events
@@ -88,7 +89,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 2
           7ef4e781-43c6-4439-a392-c918e1440cd6:
             uuid: 7ef4e781-43c6-4439-a392-c918e1440cd6
             region: first
@@ -102,6 +103,41 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
+          b697f4f6-53df-413f-b980-0f3639567df8:
+            uuid: b697f4f6-53df-413f-b980-0f3639567df8
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:group:public:field_org_type'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 3
+          5ed9d439-e1ee-46b4-8769-3d6d5fd7fcb2:
+            uuid: 5ed9d439-e1ee-46b4-8769-3d6d5fd7fcb2
+            region: second
+            configuration:
+              id: 'field_block:group:public:field_org_type'
+              label: Type
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -125,6 +161,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_org_type:
+    weight: -1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: first
   field_parent_group:
     weight: -3
     label: above
