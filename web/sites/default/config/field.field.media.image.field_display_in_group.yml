@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_display_in_group
-    - group.type.bureau
     - group.type.private
     - group.type.public
     - media.type.image
@@ -22,12 +21,11 @@ settings:
   handler: 'default:group'
   handler_settings:
     target_bundles:
-      bureau: bureau
       private: private
       public: public
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: bureau
+    auto_create_bundle: null
 field_type: entity_reference
