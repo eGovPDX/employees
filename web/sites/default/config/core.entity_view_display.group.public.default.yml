@@ -103,22 +103,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
-          b697f4f6-53df-413f-b980-0f3639567df8:
-            uuid: b697f4f6-53df-413f-b980-0f3639567df8
-            region: first
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:group:public:field_org_type'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 3
           5ed9d439-e1ee-46b4-8769-3d6d5fd7fcb2:
             uuid: 5ed9d439-e1ee-46b4-8769-3d6d5fd7fcb2
             region: second
@@ -131,7 +115,7 @@ third_party_settings:
                 label: inline
                 type: entity_reference_label
                 settings:
-                  link: true
+                  link: false
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity

@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.group.field_parent_group
-    - group.type.bureau
     - group.type.public
 id: group.public.field_parent_group
 field_name: field_parent_group
@@ -20,11 +19,10 @@ settings:
   handler: 'default:group'
   handler_settings:
     target_bundles:
-      bureau: bureau
       public: public
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: bureau
+    auto_create_bundle: null
 field_type: entity_reference
