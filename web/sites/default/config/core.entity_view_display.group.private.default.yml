@@ -7,6 +7,7 @@ dependencies:
     - field.field.group.private.field_group_path
     - field.field.group.private.field_parent_group
     - group.type.private
+    - views.view.group_documents
     - views.view.group_events
     - views.view.group_menu
     - views.view.group_news
@@ -98,6 +99,19 @@ third_party_settings:
               provider: views
               label_display: visible
               views_label: Events
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 2
+          152c2948-a0d9-4154-b8f9-0119ebf62eea:
+            uuid: 152c2948-a0d9-4154-b8f9-0119ebf62eea
+            region: second
+            configuration:
+              id: 'views_block:group_documents-block_1'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
               items_per_page: none
               context_mapping: {  }
             additional: {  }
