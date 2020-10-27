@@ -8,11 +8,13 @@ dependencies:
     - field.field.group.public.field_org_type
     - field.field.group.public.field_parent_group
     - group.type.public
+    - views.view.group_documents
     - views.view.group_events
     - views.view.group_menu
     - views.view.group_news
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_library
     - text
     - views
@@ -122,9 +124,30 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
+          78dfcb2c-5c9b-446f-ab88-526d261d8a88:
+            uuid: 78dfcb2c-5c9b-446f-ab88-526d261d8a88
+            region: second
+            configuration:
+              id: 'views_block:group_documents-block_1'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
 id: group.public.default
 targetEntityType: group
 bundle: public
