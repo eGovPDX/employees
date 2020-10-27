@@ -195,7 +195,12 @@ display:
           entity_field: title
           plugin_id: standard
       title: 'Group Menu'
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -787,6 +792,7 @@ display:
         style: false
         row: false
         sorts: false
+        header: false
       relationships:
         field_display_in_group:
           id: field_display_in_group
@@ -1095,11 +1101,7 @@ display:
       style:
         type: html_list
         options:
-          grouping:
-            -
-              field: label
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -1123,6 +1125,20 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: standard
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2>More in {{ label }}</h2>'
+            format: basic_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -1770,11 +1786,7 @@ display:
       style:
         type: html_list
         options:
-          grouping:
-            -
-              field: field_menu_url_text_1
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -1894,6 +1906,7 @@ display:
         row: false
         query: false
         sorts: false
+        header: false
       filter_groups:
         operator: AND
         groups:
@@ -2397,11 +2410,7 @@ display:
       style:
         type: html_list
         options:
-          grouping:
-            -
-              field: field_menu_url_text_1
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -2433,6 +2442,20 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: standard
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2>{{ ''More in''|t }} {{ field_menu_url_text_1 }}</h2>'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
