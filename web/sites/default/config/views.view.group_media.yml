@@ -84,8 +84,6 @@ display:
             edit_group_content: edit_group_content
             delete_group_content: delete_group_content
             edit_media: edit_media
-            delete_media: delete_media
-            dropbutton: dropbutton
           info:
             name:
               sortable: true
@@ -109,7 +107,7 @@ display:
               empty_column: false
               responsive: ''
             uid:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -137,20 +135,6 @@ display:
               empty_column: false
               responsive: ''
             edit_media:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            delete_media:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            dropbutton:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -348,7 +332,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Publisher
+          label: 'Created by'
           exclude: false
           alter:
             alter_text: false
@@ -568,109 +552,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Edit media'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: Edit
-          entity_type: media
-          plugin_id: entity_link_edit
-        delete_media:
-          id: delete_media
-          table: media
-          field: delete_media
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Delete Media'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: Delete
-          entity_type: media
-          plugin_id: entity_link_delete
-        dropbutton:
-          id: dropbutton
-          table: views
-          field: dropbutton
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Dropbutton
+          label: Edit
           exclude: false
           alter:
             alter_text: false
@@ -711,17 +593,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          fields:
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
-            edit_media: edit_media
-            delete_media: delete_media
-            name: '0'
-            bundle: '0'
-            status: '0'
-          destination: true
-          plugin_id: dropbutton
+          text: Edit
+          output_url_as_text: false
+          absolute: false
+          entity_type: media
+          plugin_id: entity_link_edit
       filters:
         status:
           id: status
