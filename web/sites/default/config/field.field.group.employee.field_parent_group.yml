@@ -1,4 +1,4 @@
-uuid: 6d3a0616-f160-4f48-8ba6-174a98bebfa4
+uuid: 2aff1f0d-edcb-4953-89e3-dcb843f0af49
 langcode: en
 status: true
 dependencies:
@@ -6,12 +6,12 @@ dependencies:
     - field.storage.group.field_parent_group
     - group.type.employee
     - group.type.public
-id: group.public.field_parent_group
+id: group.employee.field_parent_group
 field_name: field_parent_group
 entity_type: group
-bundle: public
+bundle: employee
 label: Parent
-description: '(Optional) Set a <em>parent</em> bureau or group for this group to appear in its list of children. Private groups cannot be a parent.'
+description: ''
 required: false
 translatable: true
 default_value: {  }

@@ -1,19 +1,20 @@
-uuid: 1668c3a1-2048-474c-9f60-9be7216c5457
+uuid: 7a2dc796-265a-45fe-a1e7-363f23fcae81
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.public
-id: public-editor
-label: Editor
-weight: -10
+    - group.type.employee
+id: employee-admin
+label: Admin
+weight: -9
 internal: false
 audience: member
-group_type: public
+group_type: employee
 permissions_ui: true
 permissions:
   - 'access group_media overview'
   - 'access group_node overview'
+  - 'administer members'
   - 'create group_media:document entity'
   - 'create group_media:image entity'
   - 'create group_media:remote_video entity'
@@ -21,10 +22,21 @@ permissions:
   - 'create group_node:news entity'
   - 'create group_node:page entity'
   - 'create group_node:resource entity'
+  - 'delete any group_media:document entity'
+  - 'delete any group_media:image entity'
+  - 'delete any group_media:remote_video entity'
+  - 'delete any group_node:event entity'
+  - 'delete any group_node:news entity'
+  - 'delete any group_node:page entity'
+  - 'delete any group_node:resource entity'
+  - 'delete own group_media:document entity'
+  - 'delete own group_media:image entity'
+  - 'delete own group_media:remote_video entity'
   - 'delete own group_node:event entity'
   - 'delete own group_node:news entity'
   - 'delete own group_node:page entity'
   - 'delete own group_node:resource entity'
+  - 'edit group'
   - 'leave group'
   - 'update any group_media:document entity'
   - 'update any group_media:image entity'
@@ -36,6 +48,7 @@ permissions:
   - 'update own group_media:document entity'
   - 'update own group_media:image entity'
   - 'update own group_media:remote_video entity'
+  - 'update own group_membership content'
   - 'update own group_node:event entity'
   - 'update own group_node:news entity'
   - 'update own group_node:page entity'

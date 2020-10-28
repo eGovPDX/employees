@@ -1,0 +1,19 @@
+uuid: e731da30-6d95-44eb-bb8b-9e1a1703346b
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+    - node.type.news
+  module:
+    - gnode
+    - node
+id: employee-group_node-news
+label: 'Employee Group: Group node (News)'
+description: 'Adds <em class="placeholder">News</em> content to groups both publicly and privately.'
+group_type: employee
+content_plugin: 'group_node:news'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false
