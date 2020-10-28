@@ -1,0 +1,19 @@
+uuid: 7d066c8b-c9a3-42e7-a540-5f84f889fc57
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+    - node.type.page
+  module:
+    - gnode
+    - node
+id: employee-group_node-page
+label: 'Employee Group: Group node (Page)'
+description: 'Adds <em class="placeholder">Page</em> content to groups both publicly and privately.'
+group_type: employee
+content_plugin: 'group_node:page'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

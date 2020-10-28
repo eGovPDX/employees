@@ -1,0 +1,29 @@
+uuid: 396d2b4c-2be8-43bc-91a0-22e6d10805eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_org_type
+    - group.type.private
+    - taxonomy.vocabulary.org_type
+id: group.private.field_org_type
+field_name: field_org_type
+entity_type: group
+bundle: private
+label: Type
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      org_type: org_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,18 +1,18 @@
-uuid: 00ff2dac-93b2-48a6-a5a9-fc2e6d31a6c3
+uuid: c443ba24-d1ea-4fd6-8249-8e683b65c2cd
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.group.public.field_group_description
-    - field.field.group.public.field_group_path
-    - field.field.group.public.field_org_type
-    - field.field.group.public.field_parent_group
-    - group.type.public
+    - field.field.group.employee.field_group_description
+    - field.field.group.employee.field_group_path
+    - field.field.group.employee.field_org_type
+    - field.field.group.employee.field_parent_group
+    - group.type.employee
   module:
     - text
-id: group.public.default
+id: group.employee.default
 targetEntityType: group
-bundle: public
+bundle: employee
 mode: default
 content:
   field_group_description:
@@ -35,9 +35,13 @@ content:
     region: content
   field_org_type:
     weight: 3
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: entity_reference_autocomplete
     region: content
   field_parent_group:
     weight: 2
