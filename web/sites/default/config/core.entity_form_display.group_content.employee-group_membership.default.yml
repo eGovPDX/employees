@@ -5,8 +5,6 @@ dependencies:
   config:
     - field.field.group_content.employee-group_membership.group_roles
     - group.content_type.employee-group_membership
-  module:
-    - path
 id: group_content.employee-group_membership.default
 targetEntityType: group_content
 bundle: employee-group_membership
@@ -14,7 +12,7 @@ mode: default
 content:
   entity_id:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 0
     settings:
       match_operator: CONTAINS
       size: 60
@@ -22,17 +20,7 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-  group_roles:
-    type: options_buttons
-    weight: 31
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  group_roles: true
+  path: true
   uid: true

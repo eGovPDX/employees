@@ -74,14 +74,15 @@ final class JoinLeaveLink extends FieldPluginBase {
     $group = $values->_entity;
     $build = NULL;
     $user = \Drupal::currentUser();
+    $current_path = \Drupal::service('path.current')->getPath();
     if (empty($group->getMember($user))) {
       if ($group->hasPermission('join group', $user)) {
-        $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(),'destination' => '/groups'])->toString();
+        $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(),'destination' => $current_path])->toString();
       }
     }
     else {
       if ($group->getMember($user) and $group->hasPermission('leave group', $user)) {
-        $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(),'destination' => '/groups'])->toString();
+        $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(),'destination' => $current_path])->toString();
       }
     }
 
