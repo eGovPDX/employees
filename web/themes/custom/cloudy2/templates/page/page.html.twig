@@ -29,6 +29,14 @@
     {% block right %}
       {% if page.navbar_right %}
         {{ page.navbar_right }}
+        <form accept-charset="UTF-8" action="/search" class="form-inline" id="search-block-form" method="get">
+          <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label form-group">
+            <input class="form-search form-control" data-drupal-selector="edit-keys" id="edit-keys" maxlength="128" name="search" placeholder="Search" size="20" title="Enter the terms you wish to search for." type="search" value="" />
+          </div>
+          <div class="form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions">
+            <input class="button js-form-submit form-submit btn btn-primary" data-drupal-selector="edit-submit" id="edit-submit" type="submit" value="Search" />
+          </div>
+        </form>
       {% endif %}
     {% endblock %}
   {% endembed %}

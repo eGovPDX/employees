@@ -9,6 +9,7 @@ dependencies:
   module:
     - image
     - layout_builder
+    - masquerade_field
     - user
 third_party_settings:
   layout_builder:
@@ -48,4 +49,6 @@ content:
       image_link: content
     third_party_settings: {  }
     label: hidden
-hidden: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
