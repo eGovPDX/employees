@@ -1,21 +1,19 @@
-uuid: 5f1cd4dd-07d1-4cff-b4fc-4b877891d07b
+uuid: 23ea747e-7735-4a92-9fd0-0d0990f22895
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.media.field_description
     - media.type.document
-  module:
-    - text
 id: media.document.field_description
 field_name: field_description
 entity_type: media
 bundle: document
 label: Description
-description: '(Recommended) Add a <strong>description</strong> to explain how the document is used and to improve search.'
+description: '(Recommended) Add a <strong>description</strong> to explain how this document is used and to help with search. When embedded, the description will appear immediately below the document link.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text_long
+field_type: string_long

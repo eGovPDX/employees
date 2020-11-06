@@ -13,7 +13,6 @@ dependencies:
   module:
     - file
     - path
-    - text
 _core:
   default_config_hash: gtZlAQdQqZgVWvvZ6v-hfmACkfEimqn_GPDbQZqNAbw
 id: media.document.default
@@ -33,7 +32,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
+    type: string_textarea
     region: content
   field_display_in_group:
     weight: 3
@@ -46,7 +45,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_file_size:
-    weight: 26
+    weight: 9
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -60,7 +59,7 @@ content:
     weight: 1
     region: content
   field_mime_type:
-    weight: 27
+    weight: 10
     settings:
       size: 60
       placeholder: ''

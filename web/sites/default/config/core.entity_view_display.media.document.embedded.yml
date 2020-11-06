@@ -1,8 +1,9 @@
-uuid: b4554547-2540-4949-973c-913ac87d03d2
+uuid: 46bcf8ea-31ad-4757-a6d9-7d2e18fc8657
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.embedded
     - field.field.media.document.field_description
     - field.field.media.document.field_display_in_group
     - field.field.media.document.field_file_size
@@ -12,48 +13,53 @@ dependencies:
     - media.type.document
   module:
     - file
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 _core:
   default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
-id: media.document.default
+id: media.document.embedded
 targetEntityType: media
 bundle: document
-mode: default
+mode: embedded
 content:
   field_description:
-    weight: 1
-    label: visually_hidden
+    type: basic_string
+    weight: 3
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
-    region: content
-  field_display_in_group:
+  field_file_size:
     weight: 2
-    label: inline
+    label: hidden
     settings:
-      link: true
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
-    type: entity_reference_label
+    type: number_integer
     region: content
   field_media_document:
     label: visually_hidden
-    settings:
-      use_description_as_link_text: true
+    settings: {  }
     third_party_settings: {  }
-    type: file_default
+    type: file_url_plain
     weight: 0
     region: content
-  field_tags:
-    weight: 3
-    label: inline
+  field_mime_type:
+    weight: 1
+    label: hidden
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: string
     region: content
 hidden:
   created: true
-  field_file_size: true
-  field_mime_type: true
+  field_display_in_group: true
+  field_tags: true
   name: true
   thumbnail: true
   uid: true
