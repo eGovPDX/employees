@@ -2,6 +2,9 @@ uuid: 5598e532-ff6b-4edf-b3d5-56c131a69277
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.embedded
+    - core.entity_view_mode.media.media_library
   module:
     - editor
     - media
@@ -54,4 +57,6 @@ filters:
       allowed_media_types:
         document: document
         image: image
-      allowed_view_modes: {  }
+      allowed_view_modes:
+        embedded: embedded
+        media_library: media_library
