@@ -20,14 +20,13 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
+  group_roles:
+    type: options_buttons
+    weight: 1
     region: content
-    settings:
-      include_locked: true
+    settings: {  }
     third_party_settings: {  }
 hidden:
-  group_roles: true
+  langcode: true
   path: true
   uid: true
