@@ -1,0 +1,14 @@
+theme: cloudy2
+defaults:
+  sender: test_mail_collector
+  formatter: mime_mail
+_core:
+  default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
+modules:
+  sendgrid_integration:
+    none:
+      formatter: sendgrid_integration
+      sender: sendgrid_integration
+  employees:
+    none:
+      formatter: mime_mail

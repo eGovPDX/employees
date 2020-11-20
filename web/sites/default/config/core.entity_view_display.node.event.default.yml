@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_feature
+    - field.field.node.event.field_reviewer
     - field.field.node.event.field_tags
     - field.field.node.event.field_when
     - node.type.event
@@ -48,12 +49,14 @@ content:
       format: compact
       force_chronological: false
       format_type: medium
+      add_classes: 0
     third_party_settings: {  }
     type: smartdate_default
     region: content
 hidden:
   field_display_in_group: true
   field_feature: true
+  field_reviewer: true
   langcode: true
   links: true
   search_api_excerpt: true
