@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_display_in_group
     - field.storage.node.field_menu_url_text
     - node.type.page
     - node.type.resource
@@ -561,6 +562,69 @@ display:
           empty_zero: false
           hide_alter_empty: false
           plugin_id: custom
+        field_display_in_group:
+          id: field_display_in_group
+          table: node__field_display_in_group
+          field: field_display_in_group
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 1
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       defaults:
         fields: false
         filters: false
@@ -718,7 +782,11 @@ display:
       style:
         type: html_list
         options:
-          grouping: {  }
+          grouping:
+            -
+              field: field_display_in_group
+              rendered: true
+              rendered_strip: false
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -737,6 +805,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_display_in_group'
         - 'config:field.storage.node.field_menu_url_text'
   block_group_page_menu:
     display_plugin: block
@@ -1786,7 +1855,11 @@ display:
       style:
         type: html_list
         options:
-          grouping: {  }
+          grouping:
+            -
+              field: field_menu_url_text_1
+              rendered: true
+              rendered_strip: false
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -2354,7 +2427,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_menu_url_text_1 }}{% if status == "No" %}<span class="badge badge-danger ml-2">Unpublished</span>{% endif %}'
+            text: '<span class="sr-only">Menu for </span> {% if field_menu_url_text_1 %}{{ field_menu_url_text_1 }}{% else %}{{ title_1 }}{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2410,7 +2483,11 @@ display:
       style:
         type: html_list
         options:
-          grouping: {  }
+          grouping:
+            -
+              field: field_menu_url_text_1
+              rendered: true
+              rendered_strip: false
           row_class: nav-item
           default_row_class: true
           type: ul
@@ -2442,20 +2519,7 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: standard
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: true
-          content:
-            value: '<h2>{{ ''More in''|t }} {{ field_menu_url_text_1 }}</h2>'
-            format: full_html
-          plugin_id: text
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
