@@ -1439,7 +1439,7 @@ display:
           id: type
           table: node_field_data
           field: type
-          relationship: none
+          relationship: reverse__node__field_parent
           group_type: group
           admin_label: ''
           operator: in
@@ -1482,7 +1482,7 @@ display:
           id: field_parent_target_id
           table: node__field_parent
           field: field_parent_target_id
-          relationship: none
+          relationship: reverse__node__field_parent
           group_type: group
           admin_label: ''
           operator: 'not empty'
@@ -1564,7 +1564,7 @@ display:
           id: status
           table: node_field_revision
           field: status
-          relationship: none
+          relationship: reverse__node__field_parent
           group_type: group
           admin_label: ''
           operator: '='
@@ -2319,7 +2319,7 @@ display:
         style: false
         row: false
         query: false
-        sorts: true
+        sorts: false
         header: false
       filter_groups:
         operator: AND
@@ -2378,7 +2378,7 @@ display:
           field: reverse__node__field_parent
           relationship: field_parent
           group_type: group
-          admin_label: field_parent
+          admin_label: 'Pages under the parent'
           required: false
           entity_type: node
           plugin_id: entity_reverse
@@ -2913,6 +2913,31 @@ display:
           query_comment: ''
           query_tags: {  }
       header: {  }
+      sorts:
+        field_sort_weight_value:
+          id: field_sort_weight_value
+          table: node__field_sort_weight
+          field: field_sort_weight_value
+          relationship: reverse__node__field_parent
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
+        field_menu_url_text_value:
+          id: field_menu_url_text_value
+          table: node__field_menu_url_text
+          field: field_menu_url_text_value
+          relationship: reverse__node__field_parent
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
