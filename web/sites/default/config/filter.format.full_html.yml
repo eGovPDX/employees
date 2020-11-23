@@ -2,6 +2,9 @@ uuid: 2067437b-5925-4654-a9a2-4d5d81fca6bb
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.embedded
+    - core.entity_view_mode.media.embedded_50
   module:
     - editor
     - media
@@ -50,8 +53,11 @@ filters:
     status: true
     weight: 100
     settings:
-      default_view_mode: default
+      default_view_mode: embedded
       allowed_media_types:
         document: document
         image: image
-      allowed_view_modes: {  }
+        remote_video: remote_video
+      allowed_view_modes:
+        embedded_50: embedded_50
+        embedded: embedded

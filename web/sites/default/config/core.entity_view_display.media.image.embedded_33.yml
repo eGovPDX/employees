@@ -1,25 +1,31 @@
-uuid: 4f0083b8-87a9-40cd-82e4-57b9ce1751a6
+uuid: eb7ff162-f061-4e20-b7a2-1ff9d16ab26d
 langcode: en
-status: true
+status: false
 dependencies:
   config:
+    - core.entity_view_mode.media.embedded_33
     - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
-    - image.style.max_2600x2600
+    - image.style.max_650x650
     - media.type.image
   module:
     - image
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
-id: media.image.default
+id: media.image.embedded_33
 targetEntityType: media
 bundle: image
-mode: default
+mode: embedded_33
 content:
   field_media_image:
     label: visually_hidden
     settings:
-      image_style: max_2600x2600
+      image_style: max_650x650
       image_link: ''
     third_party_settings: {  }
     type: image
