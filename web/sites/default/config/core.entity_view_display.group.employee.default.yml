@@ -14,6 +14,7 @@ dependencies:
     - views.view.group_news
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_library
     - text
     - views
@@ -72,19 +73,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
-          1b8f2fa1-af59-4981-8690-38e0ff92632a:
-            uuid: 1b8f2fa1-af59-4981-8690-38e0ff92632a
-            region: second
-            configuration:
-              id: 'views_block:group_menu-block_group_page_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
           a451fcce-2cec-4bd8-85e2-e41927c54ba8:
             uuid: a451fcce-2cec-4bd8-85e2-e41927c54ba8
             region: second
@@ -103,7 +91,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 2
           be73b75b-2f83-4931-918c-813ca43e2315:
             uuid: be73b75b-2f83-4931-918c-813ca43e2315
             region: second
@@ -122,7 +110,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 2
+            weight: 3
           4aebada8-4d22-411b-a65b-c2339b8937cf:
             uuid: 4aebada8-4d22-411b-a65b-c2339b8937cf
             region: second
@@ -135,10 +123,31 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 3
+            weight: 4
+          6fee4277-b445-4539-899c-fc9504d17855:
+            uuid: 6fee4277-b445-4539-899c-fc9504d17855
+            region: second
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
 id: group.employee.default
 targetEntityType: group
 bundle: employee
