@@ -3,23 +3,12 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - group
 id: groups
 label: Groups
 type: 'canonical_entities:group'
 pattern: '[group:field_group_path]'
-selection_criteria:
-  c7bf8caf-0bbf-4c63-8dc1-fe6c9e605bd4:
-    id: 'entity_bundle:group'
-    bundles:
-      bureau: bureau
-      private: private
-      public: public
-    negate: false
-    context_mapping:
-      group: group
-    uuid: c7bf8caf-0bbf-4c63-8dc1-fe6c9e605bd4
+selection_criteria: {  }
 selection_logic: and
 weight: -5
 relationships: {  }

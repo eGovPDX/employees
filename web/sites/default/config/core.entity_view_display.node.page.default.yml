@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.field_parent
     - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
+    - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
     - node.type.page
     - views.view.group_menu
@@ -181,6 +182,15 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: first
+  field_sort_weight:
+    weight: 5
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: first
   field_tags:
     weight: 2

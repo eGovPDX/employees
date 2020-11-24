@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_display_in_group
+    - group.type.employee
     - group.type.private
     - group.type.public
     - node.type.page
@@ -21,11 +22,12 @@ settings:
   handler: 'default:group'
   handler_settings:
     target_bundles:
+      employee: employee
       private: private
       public: public
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: null
+    auto_create_bundle: private
 field_type: entity_reference
