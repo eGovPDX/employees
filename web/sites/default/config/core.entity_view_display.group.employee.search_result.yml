@@ -1,0 +1,56 @@
+uuid: 21310495-ac4a-48c2-b89f-42272bab7776
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.search_result
+    - field.field.group.employee.field_group_description
+    - field.field.group.employee.field_group_path
+    - field.field.group.employee.field_org_type
+    - field.field.group.employee.field_parent_group
+    - group.type.employee
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+id: group.employee.search_result
+targetEntityType: group
+bundle: employee
+mode: search_result
+content:
+  label:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  search_api_excerpt:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_group_description: true
+  field_group_path: true
+  field_org_type: true
+  field_parent_group: true
+  langcode: true
+  uid: true

@@ -1,0 +1,54 @@
+uuid: 677af4ab-d407-497c-a930-50dab1257414
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.event.body
+    - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_feature
+    - field.field.node.event.field_reviewer
+    - field.field.node.event.field_tags
+    - field.field.node.event.field_when
+    - node.type.event
+  module:
+    - layout_builder
+    - smart_date
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+_core:
+  default_config_hash: XfXOESXjfDxqVoacpjrjq_1BNXO5tYsp7ocnbGrNuak
+id: node.event.search_result
+targetEntityType: node
+bundle: event
+mode: search_result
+content:
+  field_when:
+    weight: 0
+    label: inline
+    settings:
+      timezone_override: ''
+      format: compact
+      force_chronological: false
+      format_type: medium
+      add_classes: 0
+    third_party_settings: {  }
+    type: smartdate_default
+    region: content
+  search_api_excerpt:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  content_moderation_control: true
+  field_display_in_group: true
+  field_feature: true
+  field_reviewer: true
+  field_tags: true
+  langcode: true
+  links: true

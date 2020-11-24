@@ -1,0 +1,58 @@
+uuid: 9fd7e793-e604-47d5-bf9b-e621ab89d341
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.page.body
+    - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_menu_url_text
+    - field.field.node.page.field_parent
+    - field.field.node.page.field_reviewer
+    - field.field.node.page.field_show_in_menu
+    - field.field.node.page.field_sort_weight
+    - field.field.node.page.field_tags
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.search_result
+targetEntityType: node
+bundle: page
+mode: search_result
+content:
+  search_api_excerpt:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  content_moderation_control: true
+  field_display_in_group: true
+  field_menu_url_text: true
+  field_parent: true
+  field_reviewer: true
+  field_show_in_menu: true
+  field_sort_weight: true
+  field_tags: true
+  langcode: true
+  links: true
