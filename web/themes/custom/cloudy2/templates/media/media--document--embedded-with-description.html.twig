@@ -33,3 +33,7 @@
 <span{{ attributes.addClass(classes) }} aria-describedby="{{ name|clean_class }}">
   <a href="{{ content.field_media_document.0 }}">{{ name }}</a> ({{ mime_type }} {{ content.field_file_size.0|render|striptags|format_size }})
 </span>
+{% if content.field_description %}
+  <div id="{{ name|clean_class }}">{{ content.field_description.0 }}</div>
+{% endif %}
+

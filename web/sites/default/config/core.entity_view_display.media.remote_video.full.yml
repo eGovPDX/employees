@@ -1,9 +1,9 @@
-uuid: 204f74ac-efc6-44a7-a17f-6281cb53dce0
+uuid: 71ea1b9f-1592-434d-bc52-c151b819a669
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.embedded_50
+    - core.entity_view_mode.media.full
     - field.field.media.remote_video.field_display_in_group
     - field.field.media.remote_video.field_media_oembed_video
     - media.type.remote_video
@@ -16,10 +16,10 @@ third_party_settings:
     enabled: false
 _core:
   default_config_hash: gUaDZKMQD3lmLKWPn727X3JHVdKJ525g4EJCCcDVAqk
-id: media.remote_video.embedded_50
+id: media.remote_video.full
 targetEntityType: media
 bundle: remote_video
-mode: embedded_50
+mode: full
 content:
   field_media_oembed_video:
     type: oembed

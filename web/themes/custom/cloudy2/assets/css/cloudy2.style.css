@@ -9402,6 +9402,31 @@ a.text-dark:hover, a.text-dark:focus {
   background: #f8f9fa;
 }
 
+.embed-image.align-left {
+  margin-right: 1rem;
+}
+
+.embed-image.align-right, .embed-video.align-right {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+.embed-image.align-center, .embed-video.align-center {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+}
+
+@media (max-width: 767px) {
+  .embed-image.align-right, .embed-video.align-right {
+    margin-left: 0;
+  }
+  .embed-image.align-center, .embed-video.align-center {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 ul.nav-vertical ul.nav-vertical {
   margin-left: 1rem;
 }

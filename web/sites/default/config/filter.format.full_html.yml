@@ -4,7 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
-    - core.entity_view_mode.media.embedded_50
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.media.medium
   module:
     - editor
     - media
@@ -59,5 +60,6 @@ filters:
         image: image
         remote_video: remote_video
       allowed_view_modes:
-        embedded_50: embedded_50
         embedded: embedded
+        full: full
+        medium: medium
