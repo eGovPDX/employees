@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
@@ -14,6 +15,7 @@ dependencies:
     - views.view.group_menu
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - layout_library
     - text
@@ -128,6 +130,14 @@ third_party_settings:
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
 id: node.page.default
@@ -154,6 +164,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: first
+  field_reviewer:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: first
   field_show_in_menu:
     weight: 3

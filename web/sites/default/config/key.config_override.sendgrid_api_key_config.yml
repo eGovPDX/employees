@@ -1,0 +1,14 @@
+uuid: 7a54f1d6-af52-48e8-a1e9-122b42fb4955
+langcode: en
+status: true
+dependencies:
+  config:
+    - key.key.sendgrid_api
+    - sendgrid_integration.settings
+id: sendgrid_api_key_config
+label: 'SendGrid API key config'
+config_type: system.simple
+config_prefix: ''
+config_name: sendgrid_integration.settings
+config_item: apikey
+key_id: sendgrid_api

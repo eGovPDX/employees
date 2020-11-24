@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
@@ -67,8 +68,18 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_reviewer:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_show_in_menu:
-    weight: 2
+    weight: 3
     settings:
       display_label: true
     third_party_settings: {  }
@@ -99,7 +110,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
