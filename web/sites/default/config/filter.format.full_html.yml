@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
+    - core.entity_view_mode.media.embedded_with_description
     - core.entity_view_mode.media.full
     - core.entity_view_mode.media.medium
   module:
@@ -61,5 +62,6 @@ filters:
         remote_video: remote_video
       allowed_view_modes:
         embedded: embedded
+        embedded_with_description: embedded_with_description
         full: full
         medium: medium
