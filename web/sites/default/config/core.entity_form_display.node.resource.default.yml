@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.field.node.resource.field_display_in_group
     - field.field.node.resource.field_feature
+    - field.field.node.resource.field_menu_url_text
+    - field.field.node.resource.field_parent
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
+    - field.field.node.resource.field_show_in_menu
+    - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
     - node.type.resource
     - workflows.workflow.editorial
@@ -21,12 +25,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   field_display_in_group:
-    weight: 3
+    weight: 7
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -36,29 +40,21 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_feature:
-    weight: 5
+    weight: 9
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_resource_description:
-    weight: 2
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_resource_link:
+  field_menu_url_text:
     weight: 1
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: link_default
+    type: string_textfield
     region: content
-  field_tags:
+  field_parent:
     weight: 4
     settings:
       match_operator: CONTAINS
@@ -68,22 +64,55 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
+  field_resource_description:
+    weight: 6
     settings:
-      include_locked: true
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_resource_link:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_show_in_menu:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_sort_weight:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_tags:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   moderation_state:
     type: moderation_state_default
-    weight: 6
+    weight: 10
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -97,7 +126,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
@@ -106,11 +135,12 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 10
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  langcode: true
   promote: true
   status: true
   sticky: true
