@@ -17,6 +17,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - text
     - user
 third_party_settings:
   layout_builder:
@@ -39,13 +40,15 @@ targetEntityType: node
 bundle: page
 mode: search_result
 content:
-  search_api_excerpt:
+  body:
+    type: text_summary_or_trimmed
     weight: 0
     region: content
-    settings: {  }
+    label: hidden
+    settings:
+      trim_length: 255
     third_party_settings: {  }
 hidden:
-  body: true
   content_moderation_control: true
   field_display_in_group: true
   field_menu_url_text: true
@@ -56,3 +59,4 @@ hidden:
   field_tags: true
   langcode: true
   links: true
+  search_api_excerpt: true

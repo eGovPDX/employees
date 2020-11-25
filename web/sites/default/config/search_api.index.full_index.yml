@@ -4,17 +4,13 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - group
-    - media
     - node
-    - taxonomy
-    - user
+    - group
     - search_api
   config:
-    - field.storage.group.field_group_description
-    - field.storage.media.field_description
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.group.field_group_description
     - search_api.server.searchstax
 third_party_settings:
   search_api_solr:
@@ -110,14 +106,6 @@ field_settings:
     dependencies:
       module:
         - node
-  field_description:
-    label: Description
-    datasource_id: 'entity:media'
-    property_path: field_description
-    type: text
-    dependencies:
-      config:
-        - field.storage.media.field_description
   field_display_in_group:
     label: 'Content Displayed in'
     datasource_id: 'entity:node'
@@ -159,23 +147,6 @@ field_settings:
     dependencies:
       module:
         - group
-  mid:
-    label: ID
-    datasource_id: 'entity:media'
-    property_path: mid
-    type: integer
-    dependencies:
-      module:
-        - media
-  name:
-    label: Name
-    datasource_id: 'entity:media'
-    property_path: name
-    type: text
-    boost: !!float 5
-    dependencies:
-      module:
-        - media
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -195,47 +166,17 @@ field_settings:
           employee: default
           private: default
           public: default
+        'entity:media':
+          document: default
         'entity:node':
           event: default
           news: default
           page: default
           resource: default
         'entity:taxonomy_term':
-          org_type: default
           tags: default
-  taxonomy_changed:
-    label: 'Term Changed'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: changed
-    type: date
-    dependencies:
-      module:
-        - taxonomy
-  term_description:
-    label: 'Term Description'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: description
-    type: text
-    dependencies:
-      module:
-        - taxonomy
-  term_name:
-    label: 'Term Name'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: name
-    type: text
-    boost: !!float 5
-    dependencies:
-      module:
-        - taxonomy
-  term_name_str:
-    label: 'Term Name (String)'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: name
-    type: string
-    dependencies:
-      module:
-        - taxonomy
+        'entity:user':
+          user: default
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -246,39 +187,6 @@ field_settings:
     dependencies:
       module:
         - node
-  user_id:
-    label: 'User ID'
-    datasource_id: 'entity:user'
-    property_path: uid
-    type: integer
-    dependencies:
-      module:
-        - user
-  user_mail:
-    label: 'User Email'
-    datasource_id: 'entity:user'
-    property_path: mail
-    type: string
-    dependencies:
-      module:
-        - user
-  user_name:
-    label: 'User Name'
-    datasource_id: 'entity:user'
-    property_path: name
-    type: 'solr_text_custom:phonetic'
-    boost: !!float 5
-    dependencies:
-      module:
-        - user
-  user_roles:
-    label: 'User Roles'
-    datasource_id: 'entity:user'
-    property_path: roles
-    type: string
-    dependencies:
-      module:
-        - user
 datasource_settings:
   'entity:group':
     bundles:
@@ -287,29 +195,10 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
-  'entity:media':
-    bundles:
-      default: false
-      selected:
-        - document
-    languages:
-      default: true
-      selected: {  }
   'entity:node':
     bundles:
       default: true
       selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:taxonomy_term':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:user':
     languages:
       default: true
       selected: {  }
@@ -330,9 +219,6 @@ processor_settings:
       - group_title
       - group_type
       - rendered_item
-      - term_description
-      - term_name
-      - term_name_str
     title: true
     alt: true
     tags:
@@ -354,9 +240,6 @@ processor_settings:
       - group_title
       - group_type
       - rendered_item
-      - term_description
-      - term_name
-      - term_name_str
     ignorable: '[''¿¡!?,.:;]'
     ignorable_classes:
       - Pc
@@ -379,10 +262,6 @@ processor_settings:
       'entity:group':
         datasource_boost: !!float 1
       'entity:node':
-        datasource_boost: !!float 1
-      'entity:taxonomy_term':
-        datasource_boost: !!float 1
-      'entity:user':
         datasource_boost: !!float 1
     weights:
       preprocess_index: 0

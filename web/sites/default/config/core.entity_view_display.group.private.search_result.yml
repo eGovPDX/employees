@@ -12,6 +12,7 @@ dependencies:
   module:
     - layout_builder
     - layout_library
+    - text
 third_party_settings:
   layout_builder:
     allow_custom: false
@@ -23,6 +24,14 @@ targetEntityType: group
 bundle: private
 mode: search_result
 content:
+  field_group_description:
+    type: text_summary_or_trimmed
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: 255
+    third_party_settings: {  }
   label:
     label: hidden
     type: string
@@ -31,17 +40,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  search_api_excerpt:
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   changed: true
   created: true
-  field_group_description: true
   field_group_path: true
   field_org_type: true
   field_parent_group: true
   langcode: true
+  search_api_excerpt: true
   uid: true
