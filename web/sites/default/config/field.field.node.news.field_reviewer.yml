@@ -1,0 +1,28 @@
+uuid: 99b39b16-2a99-4e62-a18c-92ea9ba6da23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reviewer
+    - node.type.news
+id: node.news.field_reviewer
+field_name: field_reviewer
+entity_type: node
+bundle: news
+label: 'Notify reviewers'
+description: 'Assigned reviewers will be notified by email, with a revision log message, any time a change to this content is in review, published, or unpublished moderation states.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

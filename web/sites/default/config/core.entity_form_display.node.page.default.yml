@@ -7,7 +7,9 @@ dependencies:
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
+    - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
     - node.type.page
     - workflows.workflow.editorial
@@ -24,7 +26,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 4
+    weight: 5
     region: content
     settings:
       rows: 9
@@ -34,12 +36,12 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_display_in_group:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -57,7 +59,17 @@ content:
     type: string_textfield
     region: content
   field_parent:
-    weight: 3
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_reviewer:
+    weight: 9
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -67,14 +79,21 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_show_in_menu:
-    weight: 2
+    weight: 3
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_sort_weight:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_tags:
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -83,22 +102,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 7
+    weight: 8
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -112,7 +124,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -121,11 +133,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  langcode: true
   promote: true
   status: true
   sticky: true

@@ -577,7 +577,17 @@ display:
           plugin_id: entity_link_delete
       filters: {  }
       sorts: {  }
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
+          plugin_id: result
       footer: {  }
       empty:
         area_text_custom:

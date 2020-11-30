@@ -1,23 +1,23 @@
-uuid: 4814bfab-70c1-4081-b54a-6055c7710c1b
+uuid: 70724c85-e9c1-4140-aff4-4d88661ed7f6
 langcode: en
 status: true
 dependencies:
   module:
     - field_permissions
-    - group
     - node
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_display_in_group
-field_name: field_display_in_group
+id: node.field_sort_weight
+field_name: field_sort_weight
 entity_type: node
-type: entity_reference
+type: integer
 settings:
-  target_type: group
+  unsigned: false
+  size: normal
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

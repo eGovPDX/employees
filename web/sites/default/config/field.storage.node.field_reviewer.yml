@@ -1,20 +1,20 @@
-uuid: 4814bfab-70c1-4081-b54a-6055c7710c1b
+uuid: ff3f2377-80c6-4053-b41d-269be85a6cb8
 langcode: en
 status: true
 dependencies:
   module:
     - field_permissions
-    - group
     - node
+    - user
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_display_in_group
-field_name: field_display_in_group
+id: node.field_reviewer
+field_name: field_reviewer
 entity_type: node
 type: entity_reference
 settings:
-  target_type: group
+  target_type: user
 module: core
 locked: false
 cardinality: -1
