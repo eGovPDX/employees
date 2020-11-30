@@ -6,9 +6,11 @@ id: config_multidev
 label: MultiDev
 description: 'Config for Pantheon Multi-Dev environments'
 folder: sites/default/config_multidev
-module: {  }
+module:
+  clamav: 0
 theme: {  }
-blacklist: {  }
+blacklist:
+  - clamav.settings
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
