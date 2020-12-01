@@ -102,6 +102,114 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 2
+          0573ce62-fdc7-4738-8452-cfc3e3a879ed:
+            uuid: 0573ce62-fdc7-4738-8452-cfc3e3a879ed
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:page:content_moderation_control'
+            additional: {  }
+            weight: 0
+          b30dd3d0-6129-40e6-8a28-8cdfe6974791:
+            uuid: b30dd3d0-6129-40e6-8a28-8cdfe6974791
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 1
+          dea1b45c-a866-41d1-9093-c9634448b9ee:
+            uuid: dea1b45c-a866-41d1-9093-c9634448b9ee
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_tags'
+              formatter:
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 2
+          f9e1c6fd-3738-4e5d-8339-989bad99a872:
+            uuid: f9e1c6fd-3738-4e5d-8339-989bad99a872
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_show_in_menu'
+              formatter:
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+                type: boolean
+            additional: {  }
+            weight: 3
+          163fe552-7015-4e95-8c22-ee18793f2f81:
+            uuid: 163fe552-7015-4e95-8c22-ee18793f2f81
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_menu_url_text'
+              formatter:
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+                type: string
+            additional: {  }
+            weight: 4
+          b1f78dc4-0693-49e1-8b4c-57a6fdfd5f0c:
+            uuid: b1f78dc4-0693-49e1-8b4c-57a6fdfd5f0c
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_reviewer'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 5
+          7d1bb324-ee68-43ff-b3bb-d6929d728808:
+            uuid: 7d1bb324-ee68-43ff-b3bb-d6929d728808
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_sort_weight'
+              formatter:
+                label: above
+                settings:
+                  thousand_separator: ''
+                  prefix_suffix: true
+                third_party_settings: {  }
+                type: number_integer
+            additional: {  }
+            weight: 6
         third_party_settings: {  }
       -
         layout_id: layout_onecol
