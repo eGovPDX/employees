@@ -5,7 +5,10 @@ dependencies:
   config:
     - node.type.resource
 id: node_type_resource
+entity_type_id: node_type
+entity_id: resource
 action: display_page
 allow_override: 0
 redirect: '[node:field_resource_link:uri]'
 redirect_code: 301
+redirect_fallback_action: access_denied
