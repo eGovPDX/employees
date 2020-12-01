@@ -52,6 +52,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
 id: full_index
 name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
