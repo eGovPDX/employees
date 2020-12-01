@@ -15,24 +15,6 @@ targetEntityType: media
 bundle: remote_video
 mode: default
 content:
-  created:
-    type: timestamp
-    weight: 3
-    region: content
-    label: above
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
-  field_display_in_group:
-    weight: 1
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_media_oembed_video:
     type: oembed
     weight: 0
@@ -42,16 +24,11 @@ content:
       max_height: 0
     third_party_settings: {  }
     region: content
-  uid:
-    type: entity_reference_label
-    weight: 2
-    region: content
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
 hidden:
+  created: true
+  field_display_in_group: true
   langcode: true
   name: true
   search_api_excerpt: true
   thumbnail: true
+  uid: true

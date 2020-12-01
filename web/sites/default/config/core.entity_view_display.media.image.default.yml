@@ -5,10 +5,10 @@ dependencies:
   config:
     - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
-    - image.style.max_2600x2600
     - media.type.image
+    - responsive_image.styles.wide
   module:
-    - image
+    - responsive_image
 _core:
   default_config_hash: B1a2aBHmUulUZN6HrxITEH1tSResuVjXMBEv1lUBtOo
 id: media.image.default
@@ -19,10 +19,10 @@ content:
   field_media_image:
     label: visually_hidden
     settings:
-      image_style: max_2600x2600
+      responsive_image_style: wide
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     weight: 0
     region: content
 hidden:
