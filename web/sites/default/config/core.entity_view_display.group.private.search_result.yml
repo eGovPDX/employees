@@ -12,7 +12,7 @@ dependencies:
   module:
     - layout_builder
     - layout_library
-    - text
+    - smart_trim
 third_party_settings:
   layout_builder:
     allow_custom: false
@@ -25,12 +25,23 @@ bundle: private
 mode: search_result
 content:
   field_group_description:
-    type: text_summary_or_trimmed
+    type: smart_trim
     weight: 1
     region: content
     label: hidden
     settings:
-      trim_length: 255
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: true
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: true
+      more_link: false
     third_party_settings: {  }
   label:
     label: hidden
