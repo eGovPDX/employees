@@ -6,6 +6,7 @@ dependencies:
     - search_api.index.full_index
   module:
     - search_api
+    - user
 id: search_index
 label: 'Sitewide: Search index'
 module: views
@@ -21,10 +22,11 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -68,23 +70,12 @@ display:
       style:
         type: default
       row:
-        type: search_api
+        type: fields
         options:
-          view_modes:
-            'entity:group':
-              employee: default
-              private: default
-              public: default
-            'entity:node':
-              event: teaser
-              news: teaser
-              page: teaser
-              resource: teaser
-            'entity:taxonomy_term':
-              org_type: default
-              tags: default
-            'entity:user':
-              user: default
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -136,19 +127,14 @@ display:
           hide_alter_empty: true
           view_modes:
             'entity:group':
-              employee: default
-              private: default
-              public: default
+              employee: search_result
+              private: search_result
+              public: search_result
             'entity:node':
-              event: teaser
-              news: teaser
-              page: teaser
-              resource: teaser
-            'entity:taxonomy_term':
-              org_type: default
-              tags: default
-            'entity:user':
-              user: default
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
           plugin_id: search_api_rendered_item
       filters:
         search_api_fulltext:
@@ -196,7 +182,16 @@ display:
           parse_mode: terms
           min_length: null
           fields:
+            - content_body
+            - content_title
+            - field_description
+            - group_summary
+            - group_title
+            - name
             - rendered_item
+            - term_description
+            - term_name
+            - user_name
           plugin_id: search_api_fulltext
         search_api_datasource:
           id: search_api_datasource
@@ -240,6 +235,46 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: search_api_datasource
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_full_index
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            en: en
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_language
       sorts:
         search_api_relevance:
           id: search_api_relevance
@@ -290,6 +325,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
         - 'config:search_api.index.full_index'
   page_1:
@@ -308,5 +344,6 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
         - 'config:search_api.index.full_index'
