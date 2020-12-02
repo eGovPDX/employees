@@ -1,0 +1,71 @@
+uuid: 9996623b-5321-463f-9991-dc8b3426545f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.search_result
+    - field.field.group.public.field_group_description
+    - field.field.group.public.field_group_path
+    - field.field.group.public.field_org_type
+    - field.field.group.public.field_parent_group
+    - group.type.public
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - smart_trim
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+id: group.public.search_result
+targetEntityType: group
+bundle: public
+mode: search_result
+content:
+  field_group_description:
+    type: smart_trim
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: true
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: true
+      more_link: false
+    third_party_settings: {  }
+  label:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_group_path: true
+  field_org_type: true
+  field_parent_group: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

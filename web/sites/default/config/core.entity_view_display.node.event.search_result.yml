@@ -1,30 +1,37 @@
-uuid: 7cc9a93b-8a05-4fba-9c16-f2ac362e2d8e
+uuid: 677af4ab-d407-497c-a930-50dab1257414
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
-    - field.field.node.news.body
-    - field.field.node.news.field_display_in_group
-    - field.field.node.news.field_feature
-    - field.field.node.news.field_feature_until
-    - field.field.node.news.field_published_on
-    - field.field.node.news.field_reviewer
-    - field.field.node.news.field_tags
-    - node.type.news
+    - core.entity_view_mode.node.search_result
+    - field.field.node.event.body
+    - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_feature
+    - field.field.node.event.field_reviewer
+    - field.field.node.event.field_tags
+    - field.field.node.event.field_when
+    - node.type.event
   module:
+    - layout_builder
     - smart_date
     - smart_trim
     - user
-id: node.news.teaser
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+_core:
+  default_config_hash: XfXOESXjfDxqVoacpjrjq_1BNXO5tYsp7ocnbGrNuak
+id: node.event.search_result
 targetEntityType: node
-bundle: news
-mode: teaser
+bundle: event
+mode: search_result
 content:
   body:
-    label: hidden
     type: smart_trim
     weight: 1
+    region: content
+    label: hidden
     settings:
       trim_length: 50
       trim_type: words
@@ -39,24 +46,22 @@ content:
         trim_zero: true
       more_link: false
     third_party_settings: {  }
-    region: content
-  field_published_on:
-    type: smartdate_default
+  field_when:
     weight: 0
-    region: content
     label: inline
     settings:
       timezone_override: ''
-      format: date_only
+      format: compact
       force_chronological: false
       format_type: medium
       add_classes: 0
     third_party_settings: {  }
+    type: smartdate_default
+    region: content
 hidden:
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
-  field_feature_until: true
   field_reviewer: true
   field_tags: true
   langcode: true
