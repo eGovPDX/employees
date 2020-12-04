@@ -58,8 +58,15 @@ $settings['file_private_path'] = 'sites/default/files/private';
 $is_installer_url = (strpos($_SERVER['SCRIPT_NAME'], '/core/install.php') === 0);
 
 /**
- * Add the Drupal 8 CMI Directory Information directly in settings.php to make sure
- * Drupal knows all about that.
+ * Location of the site configuration files.
+ *
+ * The $settings['config_sync_directory'] specifies the location of file system
+ * directory used for syncing configuration data. On install, the directory is
+ * created. This is used for configuration imports.
+ *
+ * The default location for this directory is inside a randomly-named
+ * directory in the public files path. The setting below allows you to set
+ * its location.
  *
  * Issue: https://github.com/pantheon-systems/drops-8/issues/2
  *
@@ -70,17 +77,7 @@ $is_installer_url = (strpos($_SERVER['SCRIPT_NAME'], '/core/install.php') === 0)
  * at https://www.drupal.org/node/2431247
  *
  */
-if ($is_installer_url) {
-  $config_directories = array(
-    CONFIG_SYNC_DIRECTORY => 'sites/default/files',
-  );
-}
-else {
-  $config_directories = array(
-    CONFIG_SYNC_DIRECTORY => 'sites/default/config',
-  );
-}
-
+ $settings['config_sync_directory'] = 'sites/default/config';
 
 /**
  * Allow Drupal 8 to Cleanly Redirect to Install.php For New Sites.
