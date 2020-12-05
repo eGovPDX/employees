@@ -51,12 +51,12 @@ build_and_deploy: &build_and_deploy
         key: cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
         paths:
           - "web/themes/custom/cloudy2/node_modules"
-    - restore_cache:
-        name: Restore Composer Cache
-        keys:
-          - v1-dependencies-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+    # - restore_cache:
+    #     name: Restore Composer Cache
+    #     keys:
+    #       - v1-dependencies-{{ checksum "composer.lock" }}
+    #       # fallback to using the latest cache if no exact match is found
+    #       - v1-dependencies-
     - run:
         name: Composer install
         command: |
