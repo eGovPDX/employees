@@ -1,0 +1,62 @@
+uuid: ca90548e-3e50-4953-834b-028d1b59d319
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.teaser
+    - field.field.group.private.field_group_description
+    - field.field.group.private.field_group_path
+    - field.field.group.private.field_org_type
+    - field.field.group.private.field_parent_group
+    - group.type.private
+  module:
+    - layout_builder
+    - layout_library
+    - smart_trim
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_library:
+    enable: false
+id: group.private.teaser
+targetEntityType: group
+bundle: private
+mode: teaser
+content:
+  field_group_description:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: true
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: true
+      more_link: false
+    third_party_settings: {  }
+    type: smart_trim
+    region: content
+  label:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  field_group_path: true
+  field_org_type: true
+  field_parent_group: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

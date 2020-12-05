@@ -6,8 +6,6 @@ dependencies:
     - search_api_solr
     - node
     - group
-    - taxonomy
-    - user
     - search_api
   config:
     - field.storage.node.body
@@ -52,6 +50,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
 id: full_index
 name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
@@ -128,7 +129,7 @@ field_settings:
     label: 'Group Summary'
     datasource_id: 'entity:group'
     property_path: 'field_group_description:summary'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.group.field_group_description
@@ -136,7 +137,7 @@ field_settings:
     label: 'Group Title'
     datasource_id: 'entity:group'
     property_path: label
-    type: 'solr_text_custom:edge'
+    type: text
     boost: !!float 5
     dependencies:
       module:
@@ -168,49 +169,19 @@ field_settings:
           employee: default
           private: default
           public: default
+        'entity:media':
+          document: default
         'entity:node':
           event: default
           news: default
           page: default
           resource: default
         'entity:taxonomy_term':
-          org_type: default
           tags: default
-  taxonomy_changed:
-    label: 'Term Changed'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: changed
-    type: date
-    dependencies:
-      module:
-        - taxonomy
-  term_description:
-    label: 'Term Description'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: description
-    type: text
-    dependencies:
-      module:
-        - taxonomy
-  term_name:
-    label: 'Term Name'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: name
-    type: text
-    boost: !!float 21
-    dependencies:
-      module:
-        - taxonomy
-  term_name_str:
-    label: 'Term Name (String)'
-    datasource_id: 'entity:taxonomy_term'
-    property_path: name
-    type: string
-    dependencies:
-      module:
-        - taxonomy
+        'entity:user':
+          user: default
   uid:
-    label: null
+    label: uid
     datasource_id: 'entity:node'
     property_path: uid
     type: integer
@@ -219,39 +190,6 @@ field_settings:
     dependencies:
       module:
         - node
-  user_id:
-    label: 'User ID'
-    datasource_id: 'entity:user'
-    property_path: uid
-    type: integer
-    dependencies:
-      module:
-        - user
-  user_mail:
-    label: 'User Email'
-    datasource_id: 'entity:user'
-    property_path: mail
-    type: string
-    dependencies:
-      module:
-        - user
-  user_name:
-    label: 'User Name'
-    datasource_id: 'entity:user'
-    property_path: name
-    type: text
-    boost: !!float 3
-    dependencies:
-      module:
-        - user
-  user_roles:
-    label: 'User Roles'
-    datasource_id: 'entity:user'
-    property_path: roles
-    type: string
-    dependencies:
-      module:
-        - user
 datasource_settings:
   'entity:group':
     bundles:
@@ -264,17 +202,6 @@ datasource_settings:
     bundles:
       default: true
       selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:taxonomy_term':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:user':
     languages:
       default: true
       selected: {  }
@@ -295,9 +222,6 @@ processor_settings:
       - group_title
       - group_type
       - rendered_item
-      - term_description
-      - term_name
-      - term_name_str
     title: true
     alt: true
     tags:
@@ -319,9 +243,6 @@ processor_settings:
       - group_title
       - group_type
       - rendered_item
-      - term_description
-      - term_name
-      - term_name_str
     ignorable: '[''¿¡!?,.:;]'
     ignorable_classes:
       - Pc
@@ -344,10 +265,6 @@ processor_settings:
       'entity:group':
         datasource_boost: !!float 1
       'entity:node':
-        datasource_boost: !!float 1
-      'entity:taxonomy_term':
-        datasource_boost: !!float 1
-      'entity:user':
         datasource_boost: !!float 1
     weights:
       preprocess_index: 0

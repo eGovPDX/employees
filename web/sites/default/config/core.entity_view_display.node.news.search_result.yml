@@ -1,9 +1,9 @@
-uuid: 7cc9a93b-8a05-4fba-9c16-f2ac362e2d8e
+uuid: edda7aad-1f83-4921-9a7b-53adc8aa8406
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_result
     - field.field.node.news.body
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
@@ -13,18 +13,24 @@ dependencies:
     - field.field.node.news.field_tags
     - node.type.news
   module:
-    - smart_date
+    - datetime
+    - layout_builder
     - smart_trim
     - user
-id: node.news.teaser
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.news.search_result
 targetEntityType: node
 bundle: news
-mode: teaser
+mode: search_result
 content:
   body:
-    label: hidden
     type: smart_trim
     weight: 1
+    region: content
+    label: hidden
     settings:
       trim_length: 50
       trim_type: words
@@ -39,18 +45,14 @@ content:
         trim_zero: true
       more_link: false
     third_party_settings: {  }
-    region: content
   field_published_on:
-    type: smartdate_default
+    type: datetime_default
     weight: 0
     region: content
     label: inline
     settings:
-      timezone_override: ''
-      format: date_only
-      force_chronological: false
       format_type: medium
-      add_classes: 0
+      timezone_override: ''
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
