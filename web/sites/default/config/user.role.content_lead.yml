@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 id: content_lead
 label: 'Content Lead'
-weight: -7
+weight: -6
 is_admin: null
 permissions:
   - 'access content overview'
@@ -31,6 +31,7 @@ permissions:
   - 'create private_group group'
   - 'create public group'
   - 'create remote_video media'
+  - 'create resource content'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete all revisions'
@@ -39,6 +40,7 @@ permissions:
   - 'delete any landing_page content'
   - 'delete any news content'
   - 'delete any page content'
+  - 'delete any resource content'
   - 'delete event revisions'
   - 'delete media'
   - 'delete news revisions'
@@ -51,7 +53,9 @@ permissions:
   - 'delete own news content'
   - 'delete own page content'
   - 'delete own remote_video media'
+  - 'delete own resource content'
   - 'delete page revisions'
+  - 'delete resource revisions'
   - 'edit any article content'
   - 'edit any audio media'
   - 'edit any document media'
@@ -74,6 +78,7 @@ permissions:
   - 'edit own news content'
   - 'edit own page content'
   - 'edit own remote_video media'
+  - 'edit own resource content'
   - 'notify of path changes'
   - 'revert all revisions'
   - 'revert article revisions'
@@ -108,5 +113,6 @@ permissions:
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view page revisions'
+  - 'view resource revisions'
   - 'view the administration theme'
   - 'view workbench access information'
