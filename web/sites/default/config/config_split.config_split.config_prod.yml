@@ -6,9 +6,11 @@ id: config_prod
 label: Production
 description: 'Config for Pantheon production environment'
 folder: sites/default/config_prod
-module: {  }
+module:
+  clamav: 0
 theme: {  }
 blacklist:
+  - clamav.settings
   - key.key.solr_core
 graylist:
   - mailsystem.settings
