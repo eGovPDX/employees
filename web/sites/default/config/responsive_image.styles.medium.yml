@@ -1,24 +1,24 @@
-uuid: 5cffd3ef-5656-4446-b200-b771d8076568
+uuid: fa8342ab-1c80-4b83-b7be-5e3091d684c5
 langcode: en
 status: true
 dependencies:
   config:
     - image.style.max_1300x1300
-    - image.style.max_2600x2600
+    - image.style.max_325x325
     - image.style.max_650x650
 _core:
   default_config_hash: waBU_eXNHzwqmAXPugM2-ZD5Cuvzw_OGwPfSITxymOE
-id: wide
-label: Wide
+id: medium
+label: Medium
 image_style_mappings:
   -
     breakpoint_id: responsive_image.viewport_sizing
     multiplier: 1x
     image_mapping_type: sizes
     image_mapping:
-      sizes: '(min-width: 1290px) 1290px, 100vw'
+      sizes: '(min-width: 1290px) 325px, (min-width: 851px) 25vw, (min-width: 560px) 50vw, 100vw'
       sizes_image_styles:
         - max_1300x1300
-        - max_2600x2600
+        - max_650x650
 breakpoint_group: responsive_image
-fallback_image_style: max_650x650
+fallback_image_style: max_325x325

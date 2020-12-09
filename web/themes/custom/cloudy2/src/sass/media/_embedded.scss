@@ -1,0 +1,32 @@
+.embed-image.align-left {
+  margin-right: $spacer;
+}
+
+.embed-image.align-right, .embed-video.align-right {
+  margin-left: $spacer;
+  margin-right: 0;
+}
+
+.embed-image.align-center, .embed-video.align-center {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+}
+
+.embed-document {
+  margin-bottom: $spacer;
+}
+
+.embed-document .caption {
+  font-size: 90%;
+}
+
+@media (max-width: 767px) {
+  .embed-image.align-right, .embed-video.align-right {
+    margin-left: 0;
+  }
+  .embed-image.align-center, .embed-video.align-center {
+    margin-left: 0; 
+    margin-right: 0;
+  }
+}

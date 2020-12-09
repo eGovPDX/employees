@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @media print {
   *,
   *::before,
@@ -9402,6 +9403,39 @@ a.text-dark:hover, a.text-dark:focus {
   background: #f8f9fa;
 }
 
+.embed-image.align-left {
+  margin-right: 1rem;
+}
+
+.embed-image.align-right, .embed-video.align-right {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+.embed-image.align-center, .embed-video.align-center {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+}
+
+.embed-document {
+  margin-bottom: 1rem;
+}
+
+.embed-document .caption {
+  font-size: 90%;
+}
+
+@media (max-width: 767px) {
+  .embed-image.align-right, .embed-video.align-right {
+    margin-left: 0;
+  }
+  .embed-image.align-center, .embed-video.align-center {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 ul.nav-vertical ul.nav-vertical {
   margin-left: 1rem;
 }
@@ -9409,6 +9443,41 @@ ul.nav-vertical ul.nav-vertical {
 a.is-active {
   font-weight: bold;
   color: #212529;
+}
+
+/* -------------- Captions -------------- */
+.caption {
+  margin-bottom: 1.2em;
+}
+
+.caption > figcaption {
+  padding-top: 0.5ex;
+  border-top: none;
+  font-size: 90%;
+  color: #6c757d;
+}
+
+.embed-image .field, .embed-image .field .field__item, .embed-video .field, .embed-video .field .field__item {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Override Bartik's default blockquote and pre styles when captioned. */
+.caption-pre > pre,
+.caption-blockquote > blockquote {
+  margin: 0;
+}
+
+.caption-blockquote > figcaption::before {
+  content: "\2014   ";
+}
+
+.caption-blockquote > figcaption {
+  text-align: left;
+  /* LTR */
+}
+
+[dir="rtl"] .caption-blockquote > figcaption {
+  text-align: right;
 }
 
 .layout__region--first .block .views-element-container,

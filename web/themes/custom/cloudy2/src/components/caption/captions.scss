@@ -1,0 +1,30 @@
+/* -------------- Captions -------------- */
+.caption {
+  margin-bottom: 1.2em;
+}
+
+.caption > figcaption {
+  padding-top: 0.5ex;
+  border-top: none;
+  font-size: 90%;
+  color: #6c757d;
+}
+
+.embed-image .field, .embed-image .field .field__item, .embed-video .field, .embed-video .field .field__item {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Override Bartik's default blockquote and pre styles when captioned. */
+.caption-pre > pre,
+.caption-blockquote > blockquote {
+  margin: 0;
+}
+.caption-blockquote > figcaption::before {
+  content: "— ";
+}
+.caption-blockquote > figcaption {
+  text-align: left; /* LTR */
+}
+[dir="rtl"] .caption-blockquote > figcaption {
+  text-align: right;
+}
