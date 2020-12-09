@@ -1,0 +1,17 @@
+# Schema for the configuration files of the anonymous login module.
+anonymous_login_extranet.settings:
+  type: config_object
+  label: 'Anonymous login for extranets settings.'
+  mapping:
+    paths:
+      type: string
+      label: 'Anonymous login for extranets page paths.'
+    ip_exceptions:
+      type: string
+      label: 'Anonymous login for extranets IP address ranges.'
+    login_path:
+      type: string
+      label: 'Site login page path.'
+    message:
+      type: string
+      label: 'Anonymous login for extranets message.'
