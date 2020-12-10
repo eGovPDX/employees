@@ -11,7 +11,7 @@ dependencies:
     - node.type.resource
     - user.role.administrator
     - user.role.content_lead
-    - user.role.editor
+    - user.role.publisher
   module:
     - group
     - link
@@ -393,7 +393,7 @@ display:
         type: role
         options:
           role:
-            editor: editor
+            publisher: publisher
             content_lead: content_lead
             administrator: administrator
       defaults:
@@ -621,7 +621,7 @@ display:
         type: role
         options:
           role:
-            editor: editor
+            publisher: publisher
             content_lead: content_lead
             administrator: administrator
       defaults:
