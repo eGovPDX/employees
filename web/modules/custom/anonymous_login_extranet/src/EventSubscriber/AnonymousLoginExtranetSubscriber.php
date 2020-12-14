@@ -182,7 +182,7 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
 
     // Skip for internal IP addresses.
     $ip = $this->request->getClientIp();
-    drupal_set_message($ip);
+    // drupal_set_message($ip);
     $ip_ranges = $this->ip_ranges();
     foreach ($ip_ranges['lower'] as $key => $value) { 
       if (ip2long($ip) >= ip2long($ip_ranges['lower'][$key]) && ip2long($ip) <= ip2long($ip_ranges['upper'][$key])) {
