@@ -21,6 +21,76 @@
   font-size: 90%;
 }
 
+/* Force video player to be full or medium width */
+
+.field .embed-video.embedded-full, .field .embed-video.embedded-medium,
+figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
+  position: relative;
+  margin-bottom: $spacer;
+}
+
+.field .embed-video.embedded-full, figure .field .embed-video.embedded-full {
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.field .embed-video.embedded-medium, figure .field .embed-video.embedded-medium {
+  width: 50%;
+  padding-top: 28.125%;
+}
+
+.field .embed-video.embedded-full .field {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe {
+  height: 100%;
+  width: 100%;
+}
+
+figure.caption {
+  display: inline;
+}
+
+figure.caption .embed-video {
+  margin-bottom: 0 !important;
+}
+
+figure.caption figcaption {
+  display: inline-block;
+  margin-bottom: $spacer;
+}
+
+drupal-media[data-view-mode="medium"] {
+  width: 50%;
+}
+
+/* scenarios
+
+x Full, None
+- Full, None, Caption
+x Full, Left
+- Full, Left, Caption
+x Full, Center
+- Full, Center, Caption
+x Full, Right
+- Full, Right, Caption
+- Medium, None
+- Medium, None, Caption
+- Medium, Left
+- Medium, Left, Caption
+- Medium, Center
+- Medium, Center, Caption
+- Medium, Right
+- Medium, Right, Caption
+
+*/
+/* end video player */
+
 @media (max-width: 767px) {
   .embed-image.align-right, .embed-video.align-right {
     margin-left: 0;
