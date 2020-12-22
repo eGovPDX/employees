@@ -9432,6 +9432,23 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+/* At sizes below 560, center the Narrow image, don't make it 100% width because there's a good chance
+   it's a logo or other image that shouldn't be enlarged or may not have the pixels to enlarge cleanly. */
+@media (max-width: 559px) {
+  .embed-image.embedded-narrow {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    float: none;
+  }
+  .embed-image.embedded-narrow img {
+    width: 208px;
+  }
+}
+
 ul.nav-vertical ul.nav-vertical {
   margin-left: 1rem;
 }
