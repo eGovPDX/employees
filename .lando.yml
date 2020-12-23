@@ -7,6 +7,7 @@ config:
   index: false
   edge: false
   cache: false
+  composer_version: '1.10.19'
 services:
   database:
     type: mariadb:10.3
@@ -18,7 +19,10 @@ services:
       - /bin/sh -c "if [ ! -d /var/www/.terminus/plugins/terminus-secrets-plugin ]; then { mkdir -p /var/www/.terminus/plugins; composer create-project -d /var/www/.terminus/plugins pantheon-systems/terminus-secrets-plugin:~1; chown -R www-data:www-data /var/www/.terminus; } fi"
     xdebug: false
     config:
-      conf: xdebug.ini
+      php: xdebug.ini
+    overrides:
+      environment:
+        XDEBUG_MODE:
   node:
     type: node
     overrides:
