@@ -16,7 +16,21 @@
  */
 #}
 
-<figure role="group" class="caption caption-{{ tag }}{%- if classes %} {{ classes }}{%- endif %}">
+{#
+  We need to know the view mode (full or medium) of the media in the <figure> element so we can
+  appropriately set the width of this container. 
+#}
+{% set viewmode = "" %}
+{% if 'data-view-mode="medium"' in node|render %}
+{% set viewmode = "medium" %}
+{% elseif 'data-view-mode="full"' in node|render %}
+{% set viewmode = "medium" %}
+{% elseif 'data-view-mode="narrow"' in node|render %}
+{% set viewmode = "narrow" %}
+{% endif %}
+
+<figure role="group" class="caption caption-{{ tag }}{%- if classes %} {{ classes }}{%- endif %} {% if viewmode %} embedded-{{ viewmode }}{% endif %}">
   {{ node }}
   <figcaption>{{ caption }}</figcaption>
 </figure>
+

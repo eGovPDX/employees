@@ -21,25 +21,54 @@
   font-size: 90%;
 }
 
+// .embedded-full, .embedded-medium, .embedded-narrow {
+//   margin-bottom: $spacer;
+// }
+
+figure.align-left, figure.align-center, figure.align-right {
+  margin-bottom: 0;
+}
+
 /* Force video player to be full or medium width */
 
 .field .embed-video.embedded-full, .field .embed-video.embedded-medium,
 figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
-  margin-bottom: $spacer;
 }
 
-.field .embed-video.embedded-full, figure .field .embed-video.embedded-full {
+// .align-left.embed-video.embedded-medium, .align-right.embed-video.embedded-medium, .align-center.embed-video.embedded-medium {
+//   margin-bottom: 0;
+// }
+
+.field .embed-video.embedded-full, figure .embed-video.embedded-full, figure.embedded-medium .embedded-medium {
   width: 100%;
   padding-top: 56.25%;
 }
 
-.field .embed-video.embedded-medium, figure .field .embed-video.embedded-medium {
+.embed-video.embedded-medium, figure.embedded-medium {
   width: 50%;
+}
+
+.embed-video.embedded-medium {
   padding-top: 28.125%;
 }
 
-.field .embed-video.embedded-full .field {
+figure.align-center.embedded-medium {
+  width: 50%;
+  display: block;
+}
+
+/* .field .align-left.embed-video.embedded-medium, figure .field .align-left.embed-video.embedded-medium {*/
+
+div.align-left.embedded-medium, figure.align-left.embedded-medium {
+  margin-right: $spacer;
+}
+
+div.align-right.embedded-medium, figure.align-right.embedded-medium {
+  margin-left: $spacer;
+}
+
+.field .embed-video.embedded-full .field, .field .embed-video.embedded-medium .field {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -47,7 +76,8 @@ figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   right: 0;
 }
 
-.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe {
+.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe,
+.field .embed-video.embedded-medium .field__item, .embed-video.embedded-medium iframe {
   height: 100%;
   width: 100%;
 }
@@ -98,5 +128,17 @@ x Full, Right
   .embed-image.align-center, .embed-video.align-center {
     margin-left: 0; 
     margin-right: 0;
+  }
+  .embedded-medium, .embedded-narrow {
+    margin-right: 0;
+    float: none;
+    width: 100% !important;
+    padding-top: 56.5% !important;
+    display: block;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  figure.align-center.embedded-medium {
+    display: inline;
   }
 }
