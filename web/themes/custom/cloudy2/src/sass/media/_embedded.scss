@@ -21,24 +21,14 @@
   font-size: 90%;
 }
 
-// .embedded-full, .embedded-medium, .embedded-narrow {
-//   margin-bottom: $spacer;
-// }
-
 figure.align-left, figure.align-center, figure.align-right {
   margin-bottom: 0;
 }
-
-/* Force video player to be full or medium width */
 
 .field .embed-video.embedded-full, .field .embed-video.embedded-medium,
 figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
 }
-
-// .align-left.embed-video.embedded-medium, .align-right.embed-video.embedded-medium, .align-center.embed-video.embedded-medium {
-//   margin-bottom: 0;
-// }
 
 .field .embed-video.embedded-full, figure .embed-video.embedded-full, figure.embedded-medium .embedded-medium {
   width: 100%;
@@ -57,8 +47,6 @@ figure.align-center.embedded-medium {
   width: 50%;
   display: block;
 }
-
-/* .field .align-left.embed-video.embedded-medium, figure .field .align-left.embed-video.embedded-medium {*/
 
 div.align-left.embedded-medium, figure.align-left.embedded-medium {
   margin-right: $spacer;
@@ -83,7 +71,7 @@ div.align-right.embedded-medium, figure.align-right.embedded-medium {
 }
 
 figure.caption {
-  display: inline;
+  display: block;
 }
 
 figure.caption .embed-video {
@@ -98,28 +86,6 @@ figure.caption figcaption {
 drupal-media[data-view-mode="medium"] {
   width: 50%;
 }
-
-/* scenarios
-
-x Full, None
-- Full, None, Caption
-x Full, Left
-- Full, Left, Caption
-x Full, Center
-- Full, Center, Caption
-x Full, Right
-- Full, Right, Caption
-- Medium, None
-- Medium, None, Caption
-- Medium, Left
-- Medium, Left, Caption
-- Medium, Center
-- Medium, Center, Caption
-- Medium, Right
-- Medium, Right, Caption
-
-*/
-/* end video player */
 
 @media (max-width: 767px) {
   .embed-image.align-right, .embed-video.align-right {

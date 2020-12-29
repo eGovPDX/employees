@@ -24,7 +24,7 @@
 {% if 'data-view-mode="medium"' in node|render %}
 {% set viewmode = "medium" %}
 {% elseif 'data-view-mode="full"' in node|render %}
-{% set viewmode = "medium" %}
+{% set viewmode = "full" %}
 {% elseif 'data-view-mode="narrow"' in node|render %}
 {% set viewmode = "narrow" %}
 {% endif %}
