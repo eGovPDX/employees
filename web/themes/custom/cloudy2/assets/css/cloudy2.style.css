@@ -9430,7 +9430,6 @@ figure.align-left, figure.align-center, figure.align-right {
   margin-bottom: 0;
 }
 
-/* Force video player to be full or medium width */
 .field .embed-video.embedded-full, .field .embed-video.embedded-medium,
 figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
@@ -9454,7 +9453,6 @@ figure.align-center.embedded-medium {
   display: block;
 }
 
-/* .field .align-left.embed-video.embedded-medium, figure .field .align-left.embed-video.embedded-medium {*/
 div.align-left.embedded-medium, figure.align-left.embedded-medium {
   margin-right: 1rem;
 }
@@ -9494,27 +9492,6 @@ drupal-media[data-view-mode="medium"] {
   width: 50%;
 }
 
-/* scenarios
-
-x Full, None
-- Full, None, Caption
-x Full, Left
-- Full, Left, Caption
-x Full, Center
-- Full, Center, Caption
-x Full, Right
-- Full, Right, Caption
-- Medium, None
-- Medium, None, Caption
-- Medium, Left
-- Medium, Left, Caption
-- Medium, Center
-- Medium, Center, Caption
-- Medium, Right
-- Medium, Right, Caption
-
-*/
-/* end video player */
 @media (max-width: 767px) {
   .embed-image.align-right, .embed-video.align-right {
     margin-left: 0;
