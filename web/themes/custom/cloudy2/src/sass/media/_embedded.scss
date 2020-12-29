@@ -1,8 +1,8 @@
-.embed-image.align-left {
+.embed-image.align-left, .caption.align-left {
   margin-right: $spacer;
 }
 
-.embed-image.align-right, .embed-video.align-right {
+.embed-image.align-right, .caption.align-right, .embed-video.align-right {
   margin-left: $spacer;
   margin-right: 0;
 }
@@ -91,9 +91,24 @@ drupal-media[data-view-mode="medium"] {
   .embed-image.align-right, .embed-video.align-right {
     margin-left: 0;
   }
-  .embed-image.align-center, .embed-video.align-center {
-    margin-left: 0; 
-    margin-right: 0;
+}
+
+/* At sizes below 560, center the Narrow image, don't make it 100% width because there's a good chance
+   it's a logo or other image that shouldn't be enlarged or may not have the pixels to enlarge cleanly. */
+@media (max-width: 559px) {
+  .embed-image.embedded-narrow {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    float: none;
+  }
+  .embed-image.embedded-narrow img {
+    width: 208px;
+  }
+  .caption.caption-drupal-media {
+    width: 100%;
+    float: none;
   }
   .embedded-medium, .embedded-narrow {
     margin-right: 0;
