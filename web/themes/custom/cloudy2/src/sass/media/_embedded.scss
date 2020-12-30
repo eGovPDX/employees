@@ -1,18 +1,3 @@
-.embed-image.align-left, .caption.align-left {
-  margin-right: $spacer;
-}
-
-.embed-image.align-right, .caption.align-right, .embed-video.align-right {
-  margin-left: $spacer;
-  margin-right: 0;
-}
-
-.embed-image.align-center, .embed-video.align-center {
-  width: fit-content;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-}
-
 .embed-document {
   margin-bottom: $spacer;
 }
@@ -21,16 +6,22 @@
   font-size: 90%;
 }
 
-figure.align-left, figure.align-center, figure.align-right {
-  margin-bottom: 0;
+.embed-image.align-center, .embed-video.align-center {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
 }
+
+// figure.align-left, figure.align-center, figure.align-right {
+//   margin-bottom: 0;
+// }
 
 .field .embed-video.embedded-full, .field .embed-video.embedded-medium,
 figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
 }
 
-.field .embed-video.embedded-full, figure .embed-video.embedded-full, figure.embedded-medium .embedded-medium {
+.field .embed-video.embedded-full, figure .embed-video.embedded-full, figure.embedded-medium .embed-video.embedded-medium {
   width: 100%;
   padding-top: 56.25%;
 }
@@ -39,21 +30,30 @@ figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   width: 50%;
 }
 
+.embed-image img {
+  width: 100%;
+}
+
+figure.embedded-narrow {
+  width: 25%;
+}
+
 .embed-video.embedded-medium {
   padding-top: 28.125%;
 }
 
 figure.align-center.embedded-medium {
-  width: 50%;
   display: block;
 }
 
-div.align-left.embedded-medium, figure.align-left.embedded-medium {
+.align-left {
   margin-right: $spacer;
+  margin-left: 0;
 }
 
-div.align-right.embedded-medium, figure.align-right.embedded-medium {
+.align-right {
   margin-left: $spacer;
+  margin-right: 0;
 }
 
 .field .embed-video.embedded-full .field, .field .embed-video.embedded-medium .field {
@@ -80,7 +80,7 @@ figure.caption .embed-video {
 
 figure.caption figcaption {
   display: inline-block;
-  margin-bottom: $spacer;
+  // margin-bottom: $spacer;
 }
 
 drupal-media[data-view-mode="medium"] {
@@ -90,6 +90,12 @@ drupal-media[data-view-mode="medium"] {
 @media (max-width: 767px) {
   .embed-image.align-right, .embed-video.align-right {
     margin-left: 0;
+  }
+  figure.embedded-medium, div.embedded-medium {
+    width: 100% !important;
+  }
+  div.embedded-medium {
+    padding-top: 56.25% !important;
   }
 }
 
