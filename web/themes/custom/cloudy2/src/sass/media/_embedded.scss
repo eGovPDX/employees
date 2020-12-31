@@ -12,10 +12,6 @@
   width: -moz-fit-content;
 }
 
-// figure.align-left, figure.align-center, figure.align-right {
-//   margin-bottom: 0;
-// }
-
 .field .embed-video.embedded-full, .field .embed-video.embedded-medium,
 figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
@@ -92,47 +88,7 @@ figure.caption .embed-video {
 
 figure.caption figcaption {
   display: inline-block;
-  // margin-bottom: $spacer;
 }
-
-/* Because of the <drupal-media> element, the styles aren't applying cleanly in edit mode
-   and need a little help. */
-
-// .cke_editable .embed-image.embedded-medium {
-//   width: 50% !important;
-// }
-
-// .cke_widget_wrapper drupal-media {
-//   width: 100%;
-//   padding-top: 56.25%;
-// }
-
-// .cke_widget_wrapper .embed-video {
-//   position: inherit !important;
-// }
-
-// .cke_widget_wrapper .embed-video button {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   height: 30px;
-//   z-index: 1000;
-// }
-
-// .cke_widget_wrapper .embed-video .field {
-//   position: absolute;
-//   top: 30px;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-// }
-
-// .cke_widget_wrapper .embed-video .field .field__item {
-//   width: 100%;
-//   height: 100%;
-// }
 
 drupal-media[data-view-mode=full] {
   width: 100%;
