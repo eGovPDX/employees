@@ -9447,10 +9447,6 @@ figure.embedded-narrow .embedded-narrow {
   width: 100% !important;
 }
 
-.ck_container .embed-image.embedded-medium {
-  width: 50% !important;
-}
-
 .embed-image img {
   width: 100% !important;
 }
@@ -9499,28 +9495,31 @@ figure.caption figcaption {
   display: inline-block;
 }
 
+/* Because of the <drupal-media> element, the styles aren't applying cleanly in edit mode
+   and need a little help. */
 drupal-media[data-view-mode=full] {
   width: 100%;
+  padding-top: 0;
 }
 
 drupal-media[data-view-mode=medium] {
-  width: 50%;
+  width: 50% !important;
   margin-left: auto;
   margin-right: auto;
 }
 
 drupal-media[data-view-mode=narrow] {
-  width: 25%;
+  width: 25% !important;
   margin-left: auto;
   margin-right: auto;
 }
 
 drupal-media[data-view-mode=narrow] .embedded-narrow {
-  width: 100%;
+  width: 100% !important;
 }
 
 drupal-media[data-view-mode=medium] .embedded-medium {
-  width: 100%;
+  width: 100% !important;
 }
 
 drupal-media[data-align=right] {

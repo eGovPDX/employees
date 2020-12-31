@@ -46,17 +46,9 @@ figure.embedded-narrow .embedded-narrow {
   width: 100% !important;
 }
 
-.ck_container .embed-image.embedded-medium {
-  width: 50% !important;
-}
-
 .embed-image img {
   width: 100% !important;
 }
-
-// figure.embedded-narrow {
-//   width: 25%;
-// }
 
 .embed-video.embedded-medium {
   padding-top: 28.125%;
@@ -103,28 +95,68 @@ figure.caption figcaption {
   // margin-bottom: $spacer;
 }
 
+/* Because of the <drupal-media> element, the styles aren't applying cleanly in edit mode
+   and need a little help. */
+
+// .cke_editable .embed-image.embedded-medium {
+//   width: 50% !important;
+// }
+
+// .cke_widget_wrapper drupal-media {
+//   width: 100%;
+//   padding-top: 56.25%;
+// }
+
+// .cke_widget_wrapper .embed-video {
+//   position: inherit !important;
+// }
+
+// .cke_widget_wrapper .embed-video button {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   height: 30px;
+//   z-index: 1000;
+// }
+
+// .cke_widget_wrapper .embed-video .field {
+//   position: absolute;
+//   top: 30px;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+// }
+
+// .cke_widget_wrapper .embed-video .field .field__item {
+//   width: 100%;
+//   height: 100%;
+// }
+
 drupal-media[data-view-mode=full] {
   width: 100%;
+  padding-top: 0;
 }
 
 drupal-media[data-view-mode=medium] {
-  width: 50%;
+  width: 50% !important;
   margin-left: auto;
   margin-right: auto;
 }
 
 drupal-media[data-view-mode=narrow] {
-  width: 25%;
+  width: 25% !important;
   margin-left: auto;
   margin-right: auto;
 }
 
 drupal-media[data-view-mode=narrow] .embedded-narrow {
-  width: 100%;
+  width: 100% !important;
 }
 
 drupal-media[data-view-mode=medium] .embedded-medium {
-  width: 100%;
+  width: 100% !important;
 }
 
 drupal-media[data-align=right] {
