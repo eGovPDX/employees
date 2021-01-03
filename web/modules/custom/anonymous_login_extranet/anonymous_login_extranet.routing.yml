@@ -1,0 +1,9 @@
+anonymous_login_extranet.settings:
+  path: '/admin/config/user-interface/anonymous-login-extranet'
+  defaults:
+    _form: '\Drupal\anonymous_login_extranet\Form\AnonymousLoginExtranetSettings'
+    _title: 'Anonymous login for extranets'
+  requirements:
+    _permission: 'administer anonymous login extranet settings'
+  options:
+    _admin_route: TRUE
