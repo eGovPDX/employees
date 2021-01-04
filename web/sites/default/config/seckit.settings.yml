@@ -1,0 +1,56 @@
+seckit_xss:
+  csp:
+    checkbox: true
+    vendor-prefix:
+      x: false
+      webkit: false
+    report-only: false
+    default-src: '''self'' ''unsafe-inline'' ''unsafe-eval'' chrome-extension: data: *.portland.gov *.ssl.fastly.net cdnjs.cloudflare.com maxcdn.bootstrapcdn.com cdn.jsdelivr.net unpkg.com www.google-analytics.com www.googletagmanager.com tagmanager.google.com bam.nr-data.net bam-cell.nr-data.net js-agent.newrelic.com fontlibrary.org use.fontawesome.com *.googleapis.com *.gstatic.com *.googleusercontent.com *.portlandoregon.gov *.portlandmaps.com *.arcgis.com server.arcgisonline.com *.openstreetmap.org *.opentopomap.org *.tiles.wmflabs.org *.loop11.com *.rawgit.com api.mapbox.com'
+    script-src: ''
+    object-src: ''
+    img-src: ''
+    media-src: ''
+    frame-src: '''self'' https://www.youtube.com/embed/ https://player.vimeo.com https://www.google.com/maps/ https://www.portlandoregon.gov/ https://www.portlandmaps.com/ *.arcgis.com arcg.is https://online.tableau.com/ https://public.tableau.com/'
+    frame-ancestors: ''
+    child-src: ''
+    font-src: ''
+    connect-src: ''
+    report-uri: 'https://portlandgov.report-uri.com/r/d/csp/enforce'
+    upgrade-req: false
+    policy-uri: ''
+    style-src: ''
+  x_xss:
+    seckit_x_xss_option_disable: Disabled
+    seckit_x_xss_option_0: '0'
+    seckit_x_xss_option_1: 1;
+    seckit_x_xss_option_1_block: '1; mode=block'
+    select: 2
+seckit_csrf:
+  origin: true
+  origin_whitelist: ''
+seckit_clickjacking:
+  js_css_noscript: false
+  noscript_message: 'Sorry, you need to enable JavaScript to visit this website.'
+  x_frame: '1'
+  x_frame_allow_from: ''
+seckit_ssl:
+  hsts: true
+  hsts_subdomains: true
+  hsts_max_age: 2592000
+  hsts_preload: false
+seckit_ct:
+  expect_ct: true
+  max_age: 86400
+  report_uri: 'https://portlandgov.report-uri.com/r/d/ct/enforce'
+  enforce: false
+seckit_fp:
+  feature_policy: false
+  feature_policy_policy: ''
+seckit_various:
+  from_origin: false
+  from_origin_destination: same
+  referrer_policy: true
+  referrer_policy_policy: no-referrer-when-downgrade
+  disable_autocomplete: false
+_core:
+  default_config_hash: x6bhN6WZwfVUI_LLMvRJIUW_2c26VTaBozbfXmJWmro
