@@ -9411,7 +9411,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: 90%;
 }
 
-.embed-image.align-center, .embed-video.align-center {
+.embed-image.align-center {
   width: fit-content;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -9422,7 +9422,7 @@ figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
 }
 
-.field .embed-video.embedded-full, figure .embed-video.embedded-full, figure.embedded-medium .embed-video.embedded-medium {
+.field .embed-video.embedded-full, figure .embed-video.embedded-full {
   width: 100% !important;
   padding-top: 56.25%;
 }
@@ -9451,10 +9451,6 @@ figure.embedded-narrow .embedded-narrow {
   width: 100% !important;
 }
 
-.embed-video.embedded-medium {
-  padding-top: 28.125%;
-}
-
 figure.align-center.embedded-medium {
   display: block;
 }
@@ -9469,7 +9465,7 @@ figure.align-center.embedded-medium {
   margin-right: 0;
 }
 
-.field .embed-video.embedded-full .field, .field .embed-video.embedded-medium .field {
+.field .embed-video.embedded-full .field {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -9477,8 +9473,7 @@ figure.align-center.embedded-medium {
   right: 0;
 }
 
-.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe,
-.field .embed-video.embedded-medium .field__item, .embed-video.embedded-medium iframe {
+.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe {
   height: 100%;
   width: 100%;
 }
@@ -9531,14 +9526,11 @@ drupal-media[data-align=left] {
 }
 
 @media (max-width: 767px) {
-  .embed-image.align-right, .embed-video.align-right {
+  .embed-image.align-right {
     margin-left: 0;
   }
   figure.embedded-medium, div.embedded-medium {
     width: 100% !important;
-  }
-  div.embed-video.embedded-medium {
-    padding-top: 56.25% !important;
   }
 }
 
@@ -9568,12 +9560,6 @@ drupal-media[data-align=left] {
     display: block;
     margin-left: 0 !important;
     margin-right: 0 !important;
-  }
-  .embed-video.embedded-medium, .embed-video.embedded-narrow {
-    padding-top: 56.5% !important;
-  }
-  figure.align-center.embedded-medium {
-    display: inline;
   }
   figure.embedded-narrow, .embedded-narrow {
     width: 25% !important;
