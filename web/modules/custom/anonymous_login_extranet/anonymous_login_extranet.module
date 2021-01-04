@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * This is the module to redirect anonymous user to the login page.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function anonymous_login_extranet_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.anonymous_login_extranet':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module will redirect anonymous external users to the login page whenever they reach any admin-specified page paths, and will direct them back to the originally-requested page after successful login.') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Include paths') . '</dt>';
+      $output .= '<dd>' . t('Included paths are those that will redirect the user to the login page.<br/>Simply enter <em>"*"</em> as the only path to redirect and all anonymous traffic will be redirected to the login page. With this module enabled and configured to act on <em>node/*/edit</em> paths, if a user clicks a link to <em>site.com/node/123/edit</em>, they will be redirected to <em>site.com/user/login?destination=node/123/edit</em>.') . '</dd>';
+      $output .= '<dt>' . t('Exclude paths') . '</dt>';
+      $output .= '<dd>' . t('Excluded paths are those that will not redirect the user.<br/>Prefix a path with <em>"~"</em> to exclude it from being redirected.') . '</dd>';
+      $output .= '<dt>' . t('Internal IP addresses') . '</dt>';
+      $output .= '<dd>' . t('Requests from a matching IP address will be considered an internal user and won\'t be required to login. All other users will be redirected to login when requesting an included page path.') . '</dd>';
+      $output .= '</dl>';
+
+      return $output;
+  }
+}
