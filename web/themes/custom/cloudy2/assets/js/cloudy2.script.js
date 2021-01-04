@@ -97,8 +97,7 @@
   'use strict';
 
   Drupal.behaviors.helloWorld = {
-    attach: function attach(context) {
-      console.log('Hello World');
+    attach: function attach(context) {//      console.log('Hello World');
     }
   };
 })(jQuery, Drupal);
