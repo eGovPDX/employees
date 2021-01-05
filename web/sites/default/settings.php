@@ -36,9 +36,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'test') {
     /** Replace www.example.com with your registered domain name */
     // $primary_domain = 'test-employees.portland.gov';
-    // The below domain is the current Test URL. Leaving here to be optionally uncommented.
-    // $primary_domain = 'test-employees.pantheonsite.io'
-    $primary_domain = $_SERVER['HTTP_HOST'];    // Use default pantheon domain
+    $primary_domain = 'test-employees.pantheonsite.io';
     $config['environment_indicator.indicator']['bg_color'] = '#ffb81c';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Test';
