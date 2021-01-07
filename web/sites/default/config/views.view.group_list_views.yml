@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.group.field_group_description
     - group.type.employee
-    - group.type.public
     - system.menu.main
   module:
     - group
@@ -285,160 +284,6 @@ display:
           admin_label: ''
           operator: in
           value:
-            public: public
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: group
-          entity_field: type
-          plugin_id: bundle
-      sorts:
-        label:
-          id: label
-          table: groups_field_data
-          field: label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          entity_type: group
-          entity_field: label
-          plugin_id: standard
-      title: Groups
-      header:
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: '<p>Displaying @start - @end of @total</p>'
-          plugin_id: result
-      footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - user.permissions
-      tags:
-        - 'config:field.storage.group.field_group_description'
-  page_public_groups:
-    display_plugin: page
-    id: page_public_groups
-    display_title: 'Page: Public Groups'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: groups
-      menu:
-        type: normal
-        title: Groups
-        description: 'View and join public groups'
-        expanded: false
-        parent: ''
-        weight: 0
-        context: '0'
-        menu_name: main
-        enabled: true
-      display_description: ''
-      title: Groups
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-      filters:
-        combine:
-          id: combine
-          table: views
-          field: combine
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: combine_op
-            label: Keywords
-            description: ''
-            use_operator: false
-            operator: combine_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: combine
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              content_lead: '0'
-              administrator: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          fields:
-            label: label
-            field_group_description: field_group_description
-          plugin_id: combine
-        type:
-          id: type
-          table: groups_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
             employee: employee
           group: 1
           exposed: false
@@ -493,16 +338,76 @@ display:
           entity_type: group
           entity_field: type
           plugin_id: bundle
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
+      sorts:
+        label:
+          id: label
+          table: groups_field_data
+          field: label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: group
+          entity_field: label
+          plugin_id: standard
+      title: Groups
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
+          plugin_id: result
+      footer: {  }
+      empty: {  }
+      relationships: {  }
+      arguments: {  }
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
+        - url.query_args
+        - user.permissions
+      tags:
+        - 'config:field.storage.group.field_group_description'
+  page_public_groups:
+    display_plugin: page
+    id: page_public_groups
+    display_title: 'Page: Employee Groups'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: groups
+      menu:
+        type: normal
+        title: Groups
+        description: 'View and join public groups'
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
+        enabled: true
+      display_description: ''
+      title: Groups
+      defaults:
+        title: false
+        filters: true
+        filter_groups: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
         - url.query_args
         - user.permissions
       tags:

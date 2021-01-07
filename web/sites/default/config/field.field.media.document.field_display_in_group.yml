@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.media.field_display_in_group
     - group.type.private
-    - group.type.public
     - media.type.document
 id: media.document.field_display_in_group
 field_name: field_display_in_group
@@ -22,7 +21,6 @@ settings:
   handler_settings:
     target_bundles:
       private: private
-      public: public
     sort:
       field: label
       direction: ASC
