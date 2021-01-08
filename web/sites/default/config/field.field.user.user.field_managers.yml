@@ -1,0 +1,29 @@
+uuid: 044766ec-226a-4428-b67a-d561e74c718d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_managers
+  module:
+    - user
+id: user.user.field_managers
+field_name: field_managers
+entity_type: user
+bundle: user
+label: Managers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

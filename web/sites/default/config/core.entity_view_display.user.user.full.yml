@@ -7,6 +7,7 @@ dependencies:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -53,8 +54,9 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
-  langcode: true
-  search_api_excerpt: true
   field_active_directory_id: true
   field_first_name: true
   field_last_name: true
+  field_managers: true
+  langcode: true
+  search_api_excerpt: true

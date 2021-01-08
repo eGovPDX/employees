@@ -6,6 +6,7 @@ dependencies:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -20,13 +21,17 @@ bundle: user
 mode: default
 content:
   account:
-    weight: -10
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   contact:
-    weight: 5
+    weight: 7
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_active_directory_id:
-    weight: 31
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -34,7 +39,7 @@ content:
     type: string_textfield
     region: content
   field_first_name:
-    weight: 32
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -42,20 +47,32 @@ content:
     type: string_textfield
     region: content
   field_last_name:
-    weight: 33
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  language:
-    weight: 0
+  field_managers:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
+  language:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   masquerade_as:
     type: entity_reference_autocomplete
     region: content
-    weight: 7
+    weight: 9
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -64,20 +81,22 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 6
+    weight: 8
     region: content
+    settings: {  }
+    third_party_settings: {  }
   user_picture:
     type: image_image
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: -1
+    weight: 4
     region: content
 hidden:
   langcode: true

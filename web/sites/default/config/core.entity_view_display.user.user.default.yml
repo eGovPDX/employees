@@ -6,6 +6,7 @@ dependencies:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_first_name
     - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -42,6 +43,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_managers:
+    weight: 8
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   masquerade:
     weight: 1
