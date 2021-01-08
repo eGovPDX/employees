@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_last_name
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -21,6 +24,30 @@ content:
     region: content
   contact:
     weight: 5
+    region: content
+  field_active_directory_id:
+    weight: 31
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_first_name:
+    weight: 32
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_last_name:
+    weight: 33
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   language:
     weight: 0

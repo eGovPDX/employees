@@ -1,0 +1,195 @@
+<?php
+
+use Drupal\user\Entity\User;
+use Drupal\Core\Language\LanguageInterface;
+use GuzzleHttp\Exception\RequestException;
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function portland_openid_connect_form_openid_connect_login_form_alter(&$form, &$form_state)
+{
+  // Override the default label of the submit button
+  $form["openid_connect_client_windows_aad_login"]["#value"] = t('Log in with City of Portland network account');
+}
+
+
+/**
+ * Implement hook_cron()
+ * Retrieve a view and send it to powr@portlandoregon.gov
+ */
+function portland_openid_connect_cron()
+{
+  // Only run cron job on the test multidev
+  $should_run_user_sync = isset($_ENV['PANTHEON_ENVIRONMENT']) &&
+    in_array($_ENV['PANTHEON_ENVIRONMENT'], ['powr-1208']);
+  if( ! $should_run_user_sync ){
+    return;
+  }
+
+  // lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
+
+  // Call Microsoft Graph API to retrieve user info
+  $tokens = _get_access_token();
+  if(empty($tokens['access_token'])) return;
+
+  _get_all_users($tokens['access_token']);
+}
+
+
+function _add_users($response_data) {
+  $user_data_array = $response_data['value']; // array of users
+  if(empty($user_data_array)) return;
+
+  $count_user_created = 0;
+  $count_user_updated = 0;
+
+  foreach($user_data_array as $user_data) {
+    // Skip accounts without first or last names
+    if(empty($user_data['givenName']) || 
+      empty($user_data['surname']) || 
+      empty($user_data['mail']))
+      continue;
+
+    $users = \Drupal::entityTypeManager()
+      ->getStorage('user')
+      ->loadByProperties(['field_active_directory_id' => $user_data['id']]);
+    
+    if(count($users) == 0) {
+      $user = User::create([
+        'name' => $user_data['id'], //$user_data['givenName'] . ' ' . $user_data['surname'],
+        'mail' => $user_data['mail'],
+        'pass' => user_password(),
+        'status' => 1,
+        'field_active_directory_id' => $user_data['id'],
+        'field_first_name' => $user_data['givenName'],
+        'field_last_name' => $user_data['surname'],
+      ]);
+      $count_user_created++;
+    }
+    else {
+      $user = array_values($users)[0];
+      // $user->set('name', $user_data['id']);
+      $user->set('mail', $user_data['mail']);
+      // $user->set('field_active_directory_id', $user_data['id']);
+      $user->set('field_first_name', $user_data['givenName']);
+      $user->set('field_last_name', $user_data['surname']);
+      $count_user_updated++;
+    }
+    $user -> save();
+  }
+
+  $log_message = 'Retrieved ' . count($user_data_array) . ' users. ';
+  if($count_user_created != 0) {
+    $log_message .= " Created $count_user_created.";
+  }
+  if($count_user_updated != 0) {
+    $log_message .= " Updated $count_user_updated.";
+  }
+  \Drupal::logger('portland OpenID')->notice($log_message);
+}
+
+function _get_all_users($access_token) {
+  $system_state = \Drupal::state();
+
+  /* @var \GuzzleHttp\ClientInterface $client */
+  $client = new \GuzzleHttp\Client();
+  // Perform the request.
+  $options = [
+    'method' => 'GET',
+    'headers' => [
+      'Content-Type' => 'application/json',
+      'Authorization' => 'Bearer ' . $access_token,
+    ],
+  ];
+
+  try { 
+    // $system_state->delete('resumeLink');
+
+    if( $resumeLink = $system_state->get('resumeLink') ) {
+      \Drupal::logger('portland OpenID')->notice('Resume retrieving user information ...');
+    }
+    else {
+      \Drupal::logger('portland OpenID')->notice('Start retrieving user information ...');
+    }
+
+    $request_url = (empty($resumeLink)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resumeLink;
+    $response = $client->get($request_url, $options);
+    $response_data = json_decode((string) $response->getBody(), TRUE);
+    _add_users($response_data);
+
+    // Loop until there is no nextLink
+    $next_request_url = $response_data['@odata.nextLink'];
+    $request_limit = 5;
+    $request_count = 0;
+    while($next_request_url != null && $request_count < $request_limit) {
+      $response = $client->get($next_request_url, $options);
+      $response_data = json_decode((string) $response->getBody(), TRUE);
+      $next_request_url = $response_data['@odata.nextLink'];
+      _add_users($response_data);
+      $request_count++;
+    }
+
+    if($next_request_url == null) {
+      $system_state->set('resumeLink', $response_data['@odata.deltaLink']);
+      \Drupal::logger('portland OpenID')->notice('Finished retrieving all user information.');
+    }
+    else {
+      $system_state->set('resumeLink', $response_data['@odata.nextLink']);
+      \Drupal::logger('portland OpenID')->notice('More user information to be retrieved by the next cron job.');
+    }
+
+    return true;
+  }
+  catch (RequestException $e) {
+    $variables = [
+      '@message' => 'Could not retrieve user information',
+      '@error_message' => $e->getMessage(),
+    ];
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+    return FALSE;
+  }
+}
+
+function _get_access_token() {
+  $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
+  $client_id = $windows_aad_config->get('settings.client_id');
+  $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
+
+  $request_options = [
+    'form_params' => [
+      // 'code' => $authorization_code,
+      'client_id' => $client_id,
+      'client_secret' => $windows_aad_config->get('settings.client_secret'),
+      'grant_type' => 'client_credentials',
+      'scope' => 'https://graph.microsoft.com/.default',
+    ],
+  ];
+
+  /* @var \GuzzleHttp\ClientInterface $client */
+  $client = new \GuzzleHttp\Client();
+
+  try {
+    $response = $client->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", $request_options);
+    $response_data = json_decode((string) $response->getBody(), TRUE);
+
+    // Expected result.
+    $tokens = [
+      // 'id_token' => $response_data['id_token'],
+      'access_token' => $response_data['access_token'],
+    ];
+    if (array_key_exists('expires_in', $response_data)) {
+      $tokens['expire'] = \Drupal::time()->getRequestTime() + $response_data['expires_in'];
+    }
+    return $tokens;
+  }
+  catch (RequestException $e) {
+    $variables = [
+      '@message' => 'Could not retrieve tokens',
+      '@error_message' => $e->getMessage(),
+    ];
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+    return FALSE;
+  }
+}

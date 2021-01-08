@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.full
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_last_name
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -52,3 +55,6 @@ content:
 hidden:
   langcode: true
   search_api_excerpt: true
+  field_active_directory_id: true
+  field_first_name: true
+  field_last_name: true
