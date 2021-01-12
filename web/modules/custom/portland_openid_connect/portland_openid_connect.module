@@ -5,35 +5,17 @@ use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-// function portland_openid_connect_form_openid_connect_login_form_alter(&$form, &$form_state)
-// {
-//   // Override the default label of the submit button
-//   $form["openid_connect_client_windows_aad_login"]["#value"] = t('Log in with City of Portland network account');
-// }
-
-/**
  * Implement hook_cron()
- * Retrieve a view and send it to powr@portlandoregon.gov
  */
 function portland_openid_connect_cron()
 {    
-  // TEST ONLY: run cron job on the test multidev
-  $should_run_user_sync = isset($_ENV['PANTHEON_ENVIRONMENT']) &&
-    in_array($_ENV['PANTHEON_ENVIRONMENT'], ['powr-2428', 'lando']);
-  if( ! $should_run_user_sync ){
-    return;
-  }
-
   // When Cron got into a locked state, you will see the log "Attempting to re-run cron while it is already running.".
-  // Run this command:
-  // lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
+  // Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
   // Call Microsoft Graph API to retrieve user info
   $tokens = _get_access_token();
   if(empty($tokens['access_token'])) {
-    \Drupal::logger('portland OpenID')->notice("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
+    \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
     return;
   }
 
@@ -41,12 +23,66 @@ function portland_openid_connect_cron()
 }
 
 /**
+ * Find or create the user's manager.
+ *
+ * @param array $user_data
+ *   An associate array of user data from Microsoft Graph.
+ *
+ * @return array $manager_user_ids
+ *   An array of user IDs of managers.
+ */
+function _create_or_find_manager($user_data) {
+  // There manager field only contains the AD ID. Use the ID to look up the Drupal user.
+  // If not found, create a stub user whose details will be filled in later runs.
+  $manager_user_ids = [];
+  if(array_key_exists('manager@delta', $user_data)) {
+    $manager_array = $user_data['manager@delta'];
+    if(count($manager_array) > 0) {
+      foreach($manager_array as $manager_data) { // Could have multiple managers
+        if(array_key_exists('@odata.type', $manager_data) && 
+          $manager_data['@odata.type'] == "#microsoft.graph.user") {
+            $manager_ad_id = $manager_data['id'];
+            $manager_users = \Drupal::entityTypeManager()->getStorage('user')
+              ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
+
+            if(count($manager_users) > 0) {
+              // manager_users is an associate array with user ID as key, user entity as value
+              $manager_user_ids[] = key($manager_users);
+              // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
+            }
+            else {
+              $user = User::create([
+                'name' => $manager_ad_id, // temp name
+                'mail' => $manager_ad_id.'@portlandoregon.gov', // temp email
+                'pass' => user_password(), // temp password
+                'status' => 1,
+                'field_active_directory_id' => $manager_ad_id,
+              ]);
+              $user->save();
+              $manager_user_ids[] = $user->id();
+              // \Drupal::logger('portland OpenID')->notice('Created temp manager: ' . $manager_ad_id);
+            }
+          }
+      }
+    }
+  }
+  return $manager_user_ids;
+}
+
+
+/**
  * Parse the response from Microsoft Graph API to add users.
  * https://docs.microsoft.com/en-us/graph/delta-query-users
+ * 
+ * @param array $response_data
+ *   The decoded JSON response from Microsoft Graph.
  */
 function _process_users($response_data) {
   $user_data_array = $response_data['value']; // array of users
-  if(empty($user_data_array)) return;
+  if(empty($user_data_array)) {
+    \Drupal::logger('portland OpenID')->notice('No user change since the last sync.');
+    return;
+  }
 
   $count_user_created = 0;
   $count_user_updated = 0;
@@ -56,86 +92,44 @@ function _process_users($response_data) {
     // Skip accounts without first name, last name, or email. These are not people acount.
     if(empty($user_data['givenName']) || 
       empty($user_data['surname']) || 
-      empty($user_data['mail']))
+      empty($user_data['mail']) ||
+      empty($user_data['id']))
       continue;
-
-    // Check if this user is already in the system
 
     // Some users are added into the system before the batch import. We must 
     // look up using email first.
-    $users = \Drupal::entityTypeManager()
-      ->getStorage('user')
+    $users = \Drupal::entityTypeManager()->getStorage('user')
       ->loadByProperties(['mail' => $user_data['mail']]);
 
     // If found no user with email, use AD ID to look up again.
     // These are stub users created for managers
     if(count($users) == 0) {
-      $users = \Drupal::entityTypeManager()
-        ->getStorage('user')
+      $users = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['field_active_directory_id' => $user_data['id']]);
     }
 
     if(count($users) == 0) {
       /*
         {
-            "displayName": "Paton, Heather",
-            "givenName": "Heather",
-            "mail": "Heather.Paton@portlandoregon.gov",
-            "surname": "Paton",
-            "userPrincipalName": "Heather.Paton@portlandoregon.gov",
-            "id": "1dfb6f12-f5c2-4c30-b87c-5532ce6788f2",
+            "displayName": "Smith, Joe",
+            "givenName": "Joe",
+            "mail": "Joe.Smith@portlandoregon.gov",
+            "surname": "Smith",
+            "userPrincipalName": "Joe.Smith@portlandoregon.gov",
+            "id": "9afb6f12-f5c2-4c30-b87c-5532ce6788f2",
             "manager@delta": [
                 {
                     "@odata.type": "#microsoft.graph.user",
-                    "id": "c95995ed-515b-41fc-a318-93cf66f52f1f"
+                    "id": "872995ed-515b-41fc-a318-93cf66f52f1f"
                 }
             ]
         }
       */
 
-      // Handle manager data
-      $manager_user_ids = [];
-      if(array_key_exists('manager@delta', $user_data)) {
-        // Create a temp user with the manager's AD ID
-        $manager_array = $user_data['manager@delta'];
-        if(count($manager_array) > 0) {
-          foreach($manager_array as $manager_data) {
-            if(array_key_exists('@odata.type', $manager_data) && 
-              $manager_data['@odata.type'] == "#microsoft.graph.user") {
-                $manager_ad_id = $manager_data['id'];
-
-
-                $manager_users = \Drupal::entityTypeManager()
-                ->getStorage('user')
-                ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
-
-                if(count($manager_users) > 0) {
-                  $manager_user_ids[] = key($manager_users); // User ID is the first key
-                  // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
-                }
-                else {
-                  $user = User::create([
-                    'name' => $manager_ad_id, // temp name
-                    'mail' => $manager_ad_id.'@portlandoregon.gov', // temp email
-                    'pass' => user_password(), // temp password
-                    'status' => 1,
-                    'field_active_directory_id' => $manager_ad_id,
-                  ]);
-          
-                  $user->save();
-                  $manager_user_ids[] = $user->id();
-                  // \Drupal::logger('portland OpenID')->notice('Created temp manager: ' . $manager_ad_id);
-
-                }
-              }
-          }
-        }
-      }
-
       // Create a new user
       $user = User::create([
         // Some users have the same first and last name. But email is always unique.
-        'name' => $user_data['mail'], //$user_data['givenName'] . ' ' . $user_data['surname'],
+        'name' => $user_data['mail'],
         'mail' => $user_data['mail'],
         'pass' => user_password(), // Create a temp password
         'status' => 1,
@@ -144,6 +138,7 @@ function _process_users($response_data) {
         'field_last_name' => $user_data['surname'],
       ]);
 
+      $manager_user_ids = _create_or_find_manager($user_data);
       foreach($manager_user_ids as $manager_user_id) {
         $user->field_managers[] = $manager_user_id;
       }
@@ -151,30 +146,35 @@ function _process_users($response_data) {
       $user->save();
       $count_user_created++;
       // \Drupal::logger('portland OpenID')->notice('User added: ' . $user_data['givenName'] . ' ' . $user_data['surname']);
-
     }
+    // Else the user is already in Drupal. We need to either update or delete the user.
     else {
-      $user = array_values($users)[0];
+      $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Delete this user
       if(array_key_exists('@removed', $user_data)) {
-        \Drupal::logger('portland OpenID')->notice('User deleted: ' . $user->mail->value);
         $user->delete();
         $count_user_deleted++;
+        \Drupal::logger('portland OpenID')->notice('User deleted: ' . $user->mail->value);
       }
       // Update this user
       else {
-        // $user->set('name', $user_data['id']);
         $user->set('mail', $user_data['mail']);
         $user->set('field_first_name', $user_data['givenName']);
         $user->set('field_last_name', $user_data['surname']);
+        $user->setUsername($user_data['mail']); // Update account username
+
+        $manager_user_ids = _create_or_find_manager($user_data);
+        foreach($manager_user_ids as $manager_user_id) {
+          $user->field_managers[] = $manager_user_id;
+        }
+
         $user->save();
         $count_user_updated++;
-        // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user_data['mail'] );
       }
     }
   }
 
-  // Log the changes made in this batch
+  // Summarize the changes made in this batch
   $log_message = 'Retrieved ' . count($user_data_array) . ' users. ';
   if($count_user_created != 0) {
     $log_message .= " Created $count_user_created.";
@@ -205,10 +205,11 @@ function _get_all_users($access_token) {
     ],
   ];
 
-  try { 
-    // $system_state->delete('resumeLink');
+  try {
+    // Uncomment for debugging purpose
+    // $system_state->delete('resume_url');
 
-    if( $resumeLink = $system_state->get('resumeLink') ) {
+    if( $resume_url = $system_state->get('resume_url') ) {
       \Drupal::logger('portland OpenID')->notice('Resume retrieving user information ...');
     }
     else {
@@ -216,34 +217,29 @@ function _get_all_users($access_token) {
     }
 
     // If there is a resume link, use it. Otherwise start fresh
-    $request_url = (empty($resumeLink)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resumeLink;
-    $response = $client->get($request_url, $options);
-    // Response data schema at https://docs.microsoft.com/en-us/graph/delta-query-users
-    $response_data = json_decode((string) $response->getBody(), TRUE);
-    _process_users($response_data);
-
-    // Loop until there is no nextLink or reaching the preset limit.
-    // Making too many request at once will cause Cron to time out.
-    $next_request_url = $response_data['@odata.nextLink'];
+    $request_url = (empty($resume_url)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resume_url;
     $request_limit = 5;
     $request_count = 0;
-    while($next_request_url != null && $request_count < $request_limit) {
-      $response = $client->get($next_request_url, $options);
+    $response_data = null;
+    while(strlen($request_url) > 0 && $request_count < $request_limit) {
+      $response = $client->get($request_url, $options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
-      $next_request_url = $response_data['@odata.nextLink'];
+      if( (! isset($response_data['@odata.nextLink'])) && !($response_data['@odata.deltaLink']) ) {
+        \Drupal::logger('portland OpenID')->error('Response contains neither nextLink nor deltaLink.');
+        return false;
+      }
       _process_users($response_data);
+      $request_url = $response_data['@odata.nextLink'] ?? '';
       $request_count++;
     }
+    if($response_data == null) return false;
 
-    if($next_request_url == null) {
-      $system_state->set('resumeLink', $response_data['@odata.deltaLink']);
-      \Drupal::logger('portland OpenID')->notice('Finished retrieving all user information.');
-    }
-    else {
-      $system_state->set('resumeLink', $response_data['@odata.nextLink']);
-      \Drupal::logger('portland OpenID')->notice('More user information to be retrieved by the next cron job.');
-    }
-
+    // Where there is no nextLink, there is no new user info.
+    // Should use deltaLink to resume in the next Cron.
+    $system_state->set('resume_url', $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
+    \Drupal::logger('portland OpenID')->notice( isset($response_data['@odata.nextLink']) ? 
+      'More user information to be retrieved by the next cron job.' :
+      'Finished retrieving all user information.');
     return true;
   }
   catch (RequestException $e) {
@@ -294,7 +290,7 @@ function _get_access_token() {
   }
   catch (RequestException $e) {
     $variables = [
-      '@message' => 'Could not retrieve tokens',
+      '@message' => 'Could not retrieve access token',
       '@error_message' => $e->getMessage(),
     ];
     \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
