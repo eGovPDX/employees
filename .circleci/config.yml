@@ -148,7 +148,6 @@ build_and_deploy: &build_and_deploy
                 terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.$env_name -y
                 echo "Deleted multi-dev: $env_name"
               done <./matching_env_list.txt
-              fi
             fi
             echo "Waiting for sync code workflow to finish..."
             until [ $(terminus workflow:list --fields status,env --format string -- $CIRCLE_PROJECT_REPONAME | egrep -i $PANTHEON_ENV -m 1 | egrep -i -o "^\w+") == succeeded ]; do
