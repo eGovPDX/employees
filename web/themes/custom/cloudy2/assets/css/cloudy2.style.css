@@ -1790,6 +1790,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -9417,11 +9422,19 @@ figure .embed-video.embedded-full, figure .embed-video.embedded-medium {
   position: relative;
 }
 
-.field .embed-video.embedded-full, figure .embed-video.embedded-full {
+.embed-video.embedded-full {
+  position: relative;
   width: 100% !important;
   padding-top: 56.25%;
 }
 
+.embed-video.embedded-full button.media-library-item__edit {
+  position: absolute;
+  left: 0;
+  top: -5px;
+}
+
+/* can we remove figure.embedded-* below? */
 figure.embedded-full, .embedded-full {
   width: 100% !important;
 }
@@ -9460,15 +9473,22 @@ figure.align-center.embedded-medium {
   margin-right: 0;
 }
 
-.field .embed-video.embedded-full .field {
+.embed-video.embedded-full .field {
   position: absolute;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-.field .embed-video.embedded-full .field__item, .embed-video.embedded-full iframe {
+.field .embed-video.embedded-full .field {
+  top: 0;
+}
+
+drupal-media .embed-video.embedded-full .field {
+  top: 25px;
+}
+
+.embed-video.embedded-full .field__item, .embed-video.embedded-full iframe {
   height: 100%;
   width: 100%;
 }
