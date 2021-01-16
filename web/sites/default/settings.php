@@ -29,19 +29,39 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
     /** Replace www.example.com with your registered domain name */
     $primary_domain = 'employees.portland.gov';
+    $config['environment_indicator.indicator']['bg_color'] = '#0f0f0f';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Production';
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'test') {
     /** Replace www.example.com with your registered domain name */
     // $primary_domain = 'test-employees.portland.gov';
-    $primary_domain = $_SERVER['HTTP_HOST'];    // Use default pantheon domain
+    $primary_domain = 'test-employees.pantheonsite.io';
+    $config['environment_indicator.indicator']['bg_color'] = '#ffb81c';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Test';
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
     /** Replace www.example.com with your registered domain name */
     $primary_domain = 'employees.lndo.site';
+    $config['environment_indicator.indicator']['bg_color'] = '#046a38';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Local';
+
+  }
+  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'dev') {
+    /** Replace www.example.com with your registered domain name */
+    $primary_domain = 'dev-employees.pantheonsite.io';
+    $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Dev';
   }
   else {
     // Redirect to HTTPS on every Pantheon environment.
     $primary_domain = $_SERVER['HTTP_HOST'];
+    $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Multidev';
   }
 
   if ($_ENV['PANTHEON_ENVIRONMENT'] !== 'lando' &&
