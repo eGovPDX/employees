@@ -5,13 +5,16 @@ dependencies:
   config:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
     - path
+    - telephone
     - user
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
@@ -26,7 +29,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   contact:
-    weight: 7
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -40,6 +43,14 @@ content:
     region: content
   field_first_name:
     weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_group_names:
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -64,15 +75,22 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  language:
+  field_phone:
     weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  language:
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   masquerade_as:
     type: entity_reference_autocomplete
     region: content
-    weight: 9
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -81,12 +99,12 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 8
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }

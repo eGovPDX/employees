@@ -66,7 +66,7 @@ function _create_or_find_manager($user_data) {
       }
     }
   }
-  return $manager_user_ids;
+  return array_unique($manager_user_ids);
 }
 
 
@@ -77,7 +77,7 @@ function _create_or_find_manager($user_data) {
  * @param array $response_data
  *   The decoded JSON response from Microsoft Graph.
  */
-function _process_users($response_data) {
+function _process_users($response_data, $access_token) {
   $user_data_array = $response_data['value']; // array of users
   if(empty($user_data_array)) {
     \Drupal::logger('portland OpenID')->notice('No user change since the last sync.');
@@ -143,6 +143,11 @@ function _process_users($response_data) {
         $user->field_managers[] = $manager_user_id;
       }
 
+      $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
+
+      $user->set('field_phone', $user_profile['phone'] ?? '');
+      $user->set('field_group_names', $user_profile['group_names'] ?? '');
+
       $user->save();
       $count_user_created++;
       // \Drupal::logger('portland OpenID')->notice('User added: ' . $user_data['givenName'] . ' ' . $user_data['surname']);
@@ -152,9 +157,8 @@ function _process_users($response_data) {
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Delete this user
       if(array_key_exists('@removed', $user_data)) {
-        $user->delete();
         $count_user_deleted++;
-        \Drupal::logger('portland OpenID')->notice('User deleted: ' . $user->mail->value);
+        \Drupal::logger('portland OpenID')->notice('User deleted in AD: ' . $user->mail->value);
       }
       // Update this user
       else {
@@ -167,6 +171,11 @@ function _process_users($response_data) {
         foreach($manager_user_ids as $manager_user_id) {
           $user->field_managers[] = $manager_user_id;
         }
+
+        $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
+
+        $user->set('field_phone', $user_profile['phone'] ?? '');
+        $user->set('field_group_names', $user_profile['group_names'] ?? '');
 
         $user->save();
         $count_user_updated++;
@@ -186,6 +195,72 @@ function _process_users($response_data) {
     $log_message .= " Deleted $count_user_deleted.";
   }
   \Drupal::logger('portland OpenID')->notice($log_message);
+}
+
+
+
+/**
+ * Use the access token to get user profile
+ */
+function _get_user_profile_by_email($access_token, $user_email) {
+  if( strlen($access_token) === 0 || strlen($user_email) === 0) return [];
+
+  /* @var \GuzzleHttp\ClientInterface $client */
+  $client = new \GuzzleHttp\Client();
+  // Perform the request.
+  $options = [
+    'method' => 'GET',
+    'headers' => [
+      'Content-Type' => 'application/json',
+      'Authorization' => 'Bearer ' . $access_token,
+    ],
+  ];
+
+  try {
+    // If there is a resume link, use it. Otherwise start fresh
+    // Try it on https://developer.microsoft.com/en-us/graph/graph-explorer
+    $request_url = "https://graph.microsoft.com/beta/users/$user_email/profile";
+    $response = $client->get($request_url, $options);
+    $response_data = json_decode((string) $response->getBody(), TRUE);
+    if($response_data == null) return false;
+    return _process_user_profile($response_data, $user_email);
+  }
+  catch (RequestException $e) {
+    $variables = [
+      '@message' => 'Could not retrieve user profile for ' . $user_email,
+      '@error_message' => $e->getMessage(),
+    ];
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+    return [];
+  }
+}
+
+/**
+ * Update or create the user's bureau and phone
+ */
+function _process_user_profile($response_data) {
+  if($response_data == null) return [];
+
+  $phones = $response_data['phones'] ?? [];
+  $user_phone = '';
+  foreach($phones as $phone) {
+    if($phone['type'] == 'business') {
+      $user_phone = $phone['number'];
+    }
+  }
+  $positions = $response_data['positions'] ?? [];
+  $user_bureau_array = [];
+  foreach($positions as $position) {
+    if($position['isCurrent']) {
+      $user_bureau_array[] = $position['detail']['company']['displayName'];
+    }
+  }
+  $user_bureau_string = implode(',', $user_bureau_array);
+
+  return [
+    'phone' => $user_phone,
+    'group_names' => $user_bureau_string
+  ];
 }
 
 /**
@@ -228,7 +303,7 @@ function _get_all_users($access_token) {
         \Drupal::logger('portland OpenID')->error('Response contains neither nextLink nor deltaLink.');
         return false;
       }
-      _process_users($response_data);
+      _process_users($response_data, $access_token);
       $request_url = $response_data['@odata.nextLink'] ?? '';
       $request_count++;
     }

@@ -6,8 +6,10 @@ dependencies:
     - core.entity_view_mode.user.search_result
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -47,8 +49,10 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_group_names: true
   field_last_name: true
   field_managers: true
+  field_phone: true
   langcode: true
   masquerade: true
   masquerade_as: true

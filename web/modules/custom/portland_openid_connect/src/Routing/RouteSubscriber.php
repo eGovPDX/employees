@@ -60,7 +60,7 @@ class RouteSubscriber extends RouteSubscriberBase {
     // Custom overrides on Pantheon dev, test, and live environments to enable OpenID login form
     if(
       isset($_ENV['PANTHEON_ENVIRONMENT']) &&
-      in_array($_ENV['PANTHEON_ENVIRONMENT'], ['powr-2428', 'dev', 'test', 'live' /*, 'lando'*/])
+      in_array($_ENV['PANTHEON_ENVIRONMENT'], ['powr-3151', 'dev', 'test', 'live', 'lando'])
     ) {
       // only log in with an OpenID provider
       if ($route = $collection->get('user.login')) {
