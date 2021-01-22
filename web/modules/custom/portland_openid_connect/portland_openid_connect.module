@@ -155,10 +155,12 @@ function _process_users($response_data, $access_token) {
     // Else the user is already in Drupal. We need to either update or delete the user.
     else {
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
-      // Delete this user
+      // Deactivate this user
       if(array_key_exists('@removed', $user_data)) {
+        $user->status = 0;
+        $user->save();
         $count_user_deleted++;
-        \Drupal::logger('portland OpenID')->notice('User deleted in AD: ' . $user->mail->value);
+        \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
       // Update this user
       else {
@@ -192,7 +194,7 @@ function _process_users($response_data, $access_token) {
     $log_message .= " Updated $count_user_updated.";
   }
   if($count_user_deleted != 0) {
-    $log_message .= " Deleted $count_user_deleted.";
+    $log_message .= " Removed in AD $count_user_deleted.";
   }
   \Drupal::logger('portland OpenID')->notice($log_message);
 }
