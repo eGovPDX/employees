@@ -144,13 +144,13 @@ function _process_users($response_data, $access_token) {
       }
 
       $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
-
-      $user->set('field_phone', $user_profile['phone'] ?? '');
-      $user->set('field_group_names', $user_profile['group_names'] ?? '');
-
-      $user->save();
-      $count_user_created++;
-      // \Drupal::logger('portland OpenID')->notice('User added: ' . $user_data['givenName'] . ' ' . $user_data['surname']);
+      // If the profile is empty, assume the user is not with the City
+      if( !empty($user_profile) ) {
+        $user->set('field_phone', $user_profile['phone'] ?? '');
+        $user->set('field_group_names', $user_profile['group_names'] ?? '');
+        $user->save();
+        $count_user_created++;
+      }
     }
     // Else the user is already in Drupal. We need to either update or delete the user.
     else {
@@ -167,6 +167,7 @@ function _process_users($response_data, $access_token) {
         $user->set('mail', $user_data['mail']);
         $user->set('field_first_name', $user_data['givenName']);
         $user->set('field_last_name', $user_data['surname']);
+        $user->set('field_active_directory_id', $user_data['id']);
         $user->setUsername($user_data['mail']); // Update account username
 
         $manager_user_ids = _create_or_find_manager($user_data);
@@ -175,12 +176,12 @@ function _process_users($response_data, $access_token) {
         }
 
         $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
-
-        $user->set('field_phone', $user_profile['phone'] ?? '');
-        $user->set('field_group_names', $user_profile['group_names'] ?? '');
-
-        $user->save();
-        $count_user_updated++;
+        if( !empty($user_profile) ) {
+          $user->set('field_phone', $user_profile['phone'] ?? '');
+          $user->set('field_group_names', $user_profile['group_names'] ?? '');
+          $user->save();
+          $count_user_updated++;
+        }
       }
     }
   }
@@ -246,15 +247,21 @@ function _process_user_profile($response_data) {
   $phones = $response_data['phones'] ?? [];
   $user_phone = '';
   foreach($phones as $phone) {
-    if($phone['type'] == 'business') {
-      $user_phone = $phone['number'];
+    $phone_type = $phone['type'] ?? '';
+    if($phone_type == 'business') {
+      $user_phone = $phone['number'] ?? '';
     }
   }
   $positions = $response_data['positions'] ?? [];
   $user_bureau_array = [];
   foreach($positions as $position) {
-    if($position['isCurrent']) {
-      $user_bureau_array[] = $position['detail']['company']['displayName'];
+    $position_isCurrent = $position['isCurrent'] ?? false;
+    if($position_isCurrent) {
+      $detail = $position['detail'] ?? [];
+      $company = $detail['company'] ?? [];
+      if(array_key_exists('displayName', $company)) {
+        $user_bureau_array[] = $company['displayName'];
+      }
     }
   }
   $user_bureau_string = implode(',', $user_bureau_array);
