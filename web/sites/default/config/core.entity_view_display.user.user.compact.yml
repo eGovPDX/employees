@@ -4,6 +4,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
   module:
     - user
@@ -13,11 +19,21 @@ id: user.user.compact
 targetEntityType: user
 bundle: user
 mode: compact
-content: {  }
+content:
+  member_for:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
+  field_active_directory_id: true
+  field_first_name: true
+  field_group_names: true
+  field_last_name: true
+  field_managers: true
+  field_phone: true
   langcode: true
   masquerade: true
   masquerade_as: true
-  member_for: true
   search_api_excerpt: true
   user_picture: true

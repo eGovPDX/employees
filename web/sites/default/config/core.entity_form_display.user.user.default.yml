@@ -3,11 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
     - image
     - path
+    - telephone
     - user
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
@@ -17,18 +24,73 @@ bundle: user
 mode: default
 content:
   account:
-    weight: -10
-    region: content
-  contact:
-    weight: 5
-    region: content
-  language:
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  contact:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_active_directory_id:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_first_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_group_names:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_last_name:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_managers:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_phone:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  language:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   masquerade_as:
     type: entity_reference_autocomplete
     region: content
-    weight: 7
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -37,20 +99,22 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 6
+    weight: 10
     region: content
+    settings: {  }
+    third_party_settings: {  }
   user_picture:
     type: image_image
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: -1
+    weight: 4
     region: content
 hidden:
   langcode: true
