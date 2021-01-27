@@ -169,11 +169,8 @@ function _process_users($response_data, $access_token) {
         $user->set('field_last_name', $user_data['surname']);
         $user->set('field_active_directory_id', $user_data['id']);
         $user->setUsername($user_data['mail']); // Update account username
-
-        $manager_user_ids = _create_or_find_manager($user_data);
-        foreach($manager_user_ids as $manager_user_id) {
-          $user->field_managers[] = $manager_user_id;
-        }
+        $user->field_managers = [];
+        $user->set('field_managers', array_unique(_create_or_find_manager($user_data)) );
 
         $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
         if( !empty($user_profile) ) {
