@@ -137,11 +137,7 @@ function _process_users($response_data, $access_token) {
         'field_first_name' => $user_data['givenName'],
         'field_last_name' => $user_data['surname'],
       ]);
-
-      $manager_user_ids = _create_or_find_manager($user_data);
-      foreach($manager_user_ids as $manager_user_id) {
-        $user->field_managers[] = $manager_user_id;
-      }
+      $user->set('field_managers', _create_or_find_manager($user_data));
 
       $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
       // If the profile is empty, assume the user is not with the City
@@ -169,8 +165,14 @@ function _process_users($response_data, $access_token) {
         $user->set('field_last_name', $user_data['surname']);
         $user->set('field_active_directory_id', $user_data['id']);
         $user->setUsername($user_data['mail']); // Update account username
-        $user->field_managers = [];
-        $user->set('field_managers', array_unique(_create_or_find_manager($user_data)) );
+
+        $manager_user_ids = _create_or_find_manager($user_data);
+        $managers_orig = $user->get('field_managers');
+        $managers_orig_ids = [];
+        foreach($managers_orig as $manager_orig) {
+          $managers_orig_ids[] = $manager_orig->entity->id();
+        }
+        $user->set('field_managers', array_unique(array_merge($managers_orig_ids, $manager_user_ids)));  
 
         $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
         if( !empty($user_profile) ) {
@@ -287,10 +289,10 @@ function _get_all_users($access_token) {
   ];
 
   try {
-    // Uncomment for debugging purpose
-    // $system_state->delete('resume_url');
+    // Run this command to restart the sync process next time
+    // lando drush state:del user_sync.resume_url
 
-    if( $resume_url = $system_state->get('resume_url') ) {
+    if( $resume_url = $system_state->get('user_sync.resume_url') ) {
       \Drupal::logger('portland OpenID')->notice('Resume retrieving user information ...');
     }
     else {
@@ -317,7 +319,7 @@ function _get_all_users($access_token) {
 
     // Where there is no nextLink, there is no new user info.
     // Should use deltaLink to resume in the next Cron.
-    $system_state->set('resume_url', $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
+    $system_state->set('user_sync.resume_url', $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
     \Drupal::logger('portland OpenID')->notice( isset($response_data['@odata.nextLink']) ? 
       'More user information to be retrieved by the next cron job.' :
       'Finished retrieving all user information.');
