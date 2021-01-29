@@ -170,7 +170,9 @@ function _process_users($response_data, $access_token) {
         $managers_orig = $user->get('field_managers');
         $managers_orig_ids = [];
         foreach($managers_orig as $manager_orig) {
-          $managers_orig_ids[] = $manager_orig->entity->id();
+          if($manager_orig->entity !== null) {
+            $managers_orig_ids[] = $manager_orig->entity->id();
+          }
         }
         $user->set('field_managers', array_unique(array_merge($managers_orig_ids, $manager_user_ids)));  
 
