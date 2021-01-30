@@ -1,5 +1,5 @@
 diff --git a/src/Plugin/OpenIDConnectClient/WindowsAad.php b/src/Plugin/OpenIDConnectClient/WindowsAad.php
-index a84ef30..e0ae1f8 100644
+index a84ef30..5c22439 100644
 --- a/src/Plugin/OpenIDConnectClient/WindowsAad.php
 +++ b/src/Plugin/OpenIDConnectClient/WindowsAad.php
 @@ -137,6 +137,18 @@ class WindowsAad extends OpenIDConnectClientBase {
@@ -38,12 +38,15 @@ index a84ef30..e0ae1f8 100644
          break;
      }
  
-@@ -268,6 +279,16 @@ class WindowsAad extends OpenIDConnectClientBase {
+@@ -268,6 +279,19 @@ class WindowsAad extends OpenIDConnectClientBase {
        $userinfo['groups'] = $this->retrieveGroupInfo($access_token);
      }
  
 +    // Optionally, override the default name and use a combination of first and last name.
 +    switch ($this->configuration['override_name']) {
++      case 0:
++          $userinfo['name'] = $userinfo['mail']; // default username is email
++          break;
 +      case 1:
 +          $userinfo['name'] = $userinfo['givenName'] . ' ' . $userinfo['surname'];
 +          break;
