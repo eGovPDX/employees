@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_display_in_group
+    - group.type.employee
     - group.type.private
     - media.type.remote_video
 id: media.remote_video.field_display_in_group
@@ -12,7 +13,7 @@ entity_type: media
 bundle: remote_video
 label: 'Belongs to'
 description: 'Select the <em>bureau</em> or <em>group</em> this video belongs to for editing.'
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
@@ -20,10 +21,11 @@ settings:
   handler: 'default:group'
   handler_settings:
     target_bundles:
+      employee: employee
       private: private
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: null
+    auto_create_bundle: employee
 field_type: entity_reference
