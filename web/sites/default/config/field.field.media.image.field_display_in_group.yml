@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.media.field_display_in_group
+    - group.type.employee
     - group.type.private
     - media.type.image
 id: media.image.field_display_in_group
@@ -20,10 +21,11 @@ settings:
   handler: 'default:group'
   handler_settings:
     target_bundles:
+      employee: employee
       private: private
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: null
+    auto_create_bundle: employee
 field_type: entity_reference
