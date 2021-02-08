@@ -29,14 +29,6 @@ targetEntityType: user
 bundle: user
 mode: full
 content:
-  field_active_directory_id:
-    type: string
-    weight: 7
-    region: content
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_group_names:
     type: string
     weight: 6
@@ -89,6 +81,7 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_active_directory_id: true
   field_first_name: true
   field_last_name: true
   langcode: true

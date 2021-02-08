@@ -12,7 +12,10 @@ dependencies:
     - field.storage.group.field_group_description
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.user.field_first_name
+    - field.storage.user.field_last_name
     - search_api.server.searchstax
+    - core.entity_view_mode.user.compact
 third_party_settings:
   search_api_solr:
     finalize: true
@@ -118,6 +121,40 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_display_in_group
+  field_first_name:
+    label: 'First name'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_first_name_1:
+    label: 'First name'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_last_name:
+    label: 'Last name'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+  field_last_name_1:
+    label: 'Last name'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
   group_id:
     label: 'Group ID'
     datasource_id: 'entity:group'
@@ -151,15 +188,6 @@ field_settings:
     dependencies:
       module:
         - group
-  name:
-    label: Name
-    datasource_id: 'entity:user'
-    property_path: name
-    type: 'solr_text_custom_omit_norms:phonetic'
-    boost: !!float 5
-    dependencies:
-      module:
-        - user
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -179,18 +207,13 @@ field_settings:
         'entity:group':
           employee: default
           private: default
-          public: default
-        'entity:media':
-          document: default
         'entity:node':
           event: default
           news: default
           page: default
           resource: default
-        'entity:taxonomy_term':
-          tags: default
         'entity:user':
-          user: default
+          user: compact
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -201,15 +224,6 @@ field_settings:
     dependencies:
       module:
         - node
-  user_name:
-    label: Name
-    datasource_id: 'entity:user'
-    property_path: name
-    type: 'solr_text_custom_omit_norms:edge'
-    boost: !!float 5
-    dependencies:
-      module:
-        - user
   user_status:
     label: 'User status'
     datasource_id: 'entity:user'
@@ -299,7 +313,7 @@ processor_settings:
       'entity:node':
         datasource_boost: !!float 1
       'entity:user':
-        datasource_boost: !!float 5
+        datasource_boost: !!float 1
     weights:
       preprocess_index: 0
 tracker_settings:

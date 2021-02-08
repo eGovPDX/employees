@@ -23,14 +23,6 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
-  field_active_directory_id:
-    weight: 6
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_first_name:
     type: string
     weight: 4
@@ -40,7 +32,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   field_group_names:
-    weight: 9
+    weight: 8
     label: above
     settings:
       link_to_entity: false
@@ -56,7 +48,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   field_managers:
-    weight: 7
+    weight: 6
     label: above
     settings:
       link: true
@@ -64,7 +56,7 @@ content:
     type: entity_reference_label
     region: content
   field_phone:
-    weight: 8
+    weight: 7
     label: above
     settings:
       title: ''
@@ -99,5 +91,6 @@ content:
     third_party_settings: {  }
     label: hidden
 hidden:
+  field_active_directory_id: true
   langcode: true
   search_api_excerpt: true
