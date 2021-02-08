@@ -1,0 +1,31 @@
+uuid: 1cca6c25-8c87-4358-b8d0-4af8bdfd48d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.user_manager
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: views_block__user_manager_block_1
+theme: cloudy2
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:user_manager-block_1'
+settings:
+  id: 'views_block:user_manager-block_1'
+  label: Reports
+  provider: views
+  label_display: visible
+  views_label: Reports
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/*'
+    negate: false
+    context_mapping: {  }
