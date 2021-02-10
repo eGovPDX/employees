@@ -837,33 +837,36 @@ display:
           entity_type: user
           plugin_id: entity_operations
       filters:
-        combine:
-          id: combine
-          table: views
-          field: combine
+        uid_1:
+          id: uid_1
+          table: users_field_data
+          field: uid
           relationship: none
           group_type: group
           admin_label: ''
-          operator: contains
-          value: ''
+          operator: in
+          value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: combine_op
-            label: 'Name or email contains'
-            description: ''
+            operator_id: uid_1_op
+            label: Name
+            description: 'Type a name to view suggestions'
             use_operator: false
-            operator: combine_op
-            identifier: user
+            operator: uid_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: uid_1
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
               administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -876,10 +879,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          fields:
-            name: name
-            mail: mail
-          plugin_id: combine
+          entity_type: user
+          entity_field: uid
+          plugin_id: user_name
         status:
           id: status
           table: users_field_data
@@ -1196,7 +1198,7 @@ display:
           expose:
             operator_id: uid_op
             label: Manager
-            description: ''
+            description: 'Type a manager''s name to view suggestions'
             use_operator: false
             operator: uid_op
             operator_limit_selection: false
