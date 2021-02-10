@@ -36,7 +36,7 @@ display:
         type: views_query
         options:
           disable_sql_rewrite: false
-          distinct: true
+          distinct: false
           replica: false
           query_comment: ''
           query_tags: {  }
@@ -711,7 +711,7 @@ display:
           type: entity_reference_label
           settings:
             link: true
-          group_column: target_id
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1265,7 +1265,7 @@ display:
       use_ajax: false
       hide_attachment_summary: false
       show_admin_links: true
-      group_by: false
+      group_by: true
       link_url: ''
       link_display: page_1
       css_class: ''
