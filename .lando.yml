@@ -75,8 +75,6 @@ tooling:
       - appserver: drush updb -y
       - appserver: echo "Importing Drupal config..."
       - appserver: drush cim -y
-      - appserver: echo "Running cron..."
-      - appserver: drush core:cron -y
       - appserver: echo "Clearing cache..."
       - appserver: drush cr -y
   cupex:
