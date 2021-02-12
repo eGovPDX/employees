@@ -6,12 +6,16 @@ dependencies:
     - search_api_solr
     - node
     - group
+    - user
     - search_api
   config:
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.user.field_first_name
+    - field.storage.user.field_last_name
     - field.storage.group.field_group_description
     - search_api.server.searchstax
+    - core.entity_view_mode.user.compact
 third_party_settings:
   search_api_solr:
     finalize: true
@@ -46,13 +50,13 @@ third_party_settings:
       maxntp: 2000
       boost: false
       interestingTerms: none
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
     advanced:
       index_prefix: ''
       collection: ''
       timezone: ''
-    term_modifiers:
-      slop: 10000000
-      fuzzy: 2
 id: full_index
 name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
@@ -117,6 +121,40 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_display_in_group
+  field_first_name:
+    label: 'First name'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_first_name_1:
+    label: 'First name'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_last_name:
+    label: 'Last name'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+  field_last_name_1:
+    label: 'Last name'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
   group_id:
     label: 'Group ID'
     datasource_id: 'entity:group'
@@ -161,6 +199,7 @@ field_settings:
     label: 'Rendered HTML output'
     property_path: rendered_item
     type: text
+    boost: 0.8
     configuration:
       roles:
         anonymous: anonymous
@@ -168,18 +207,13 @@ field_settings:
         'entity:group':
           employee: default
           private: default
-          public: default
-        'entity:media':
-          document: default
         'entity:node':
           event: default
           news: default
           page: default
           resource: default
-        'entity:taxonomy_term':
-          tags: default
         'entity:user':
-          user: default
+          user: compact
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -190,6 +224,14 @@ field_settings:
     dependencies:
       module:
         - node
+  user_status:
+    label: 'User status'
+    datasource_id: 'entity:user'
+    property_path: status
+    type: boolean
+    dependencies:
+      module:
+        - user
 datasource_settings:
   'entity:group':
     bundles:
@@ -202,6 +244,10 @@ datasource_settings:
     bundles:
       default: true
       selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:user':
     languages:
       default: true
       selected: {  }
@@ -246,7 +292,6 @@ processor_settings:
     ignorable: '[''¿¡!?,.:;]'
     ignorable_classes:
       - Pc
-      - Pd
       - Pe
       - Pf
       - Pi
@@ -265,6 +310,8 @@ processor_settings:
       'entity:group':
         datasource_boost: !!float 1
       'entity:node':
+        datasource_boost: !!float 1
+      'entity:user':
         datasource_boost: !!float 1
     weights:
       preprocess_index: 0

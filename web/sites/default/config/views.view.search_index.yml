@@ -70,12 +70,19 @@ display:
       style:
         type: default
       row:
-        type: fields
+        type: search_api
         options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:node':
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: search_result
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -129,12 +136,13 @@ display:
             'entity:group':
               employee: search_result
               private: search_result
-              public: search_result
             'entity:node':
               event: search_result
               news: search_result
               page: search_result
               resource: search_result
+            'entity:user':
+              user: search_result
           plugin_id: search_api_rendered_item
       filters:
         search_api_fulltext:
@@ -163,7 +171,7 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
-              editor: '0'
+              publisher: '0'
               content_lead: '0'
               administrator: '0'
             placeholder: ''
@@ -184,14 +192,13 @@ display:
           fields:
             - content_body
             - content_title
-            - field_description
+            - field_first_name
+            - field_first_name_1
+            - field_last_name
+            - field_last_name_1
             - group_summary
             - group_title
-            - name
             - rendered_item
-            - term_description
-            - term_name
-            - user_name
           plugin_id: search_api_fulltext
         search_api_datasource:
           id: search_api_datasource
@@ -204,6 +211,7 @@ display:
           value:
             'entity:group': 'entity:group'
             'entity:node': 'entity:node'
+            'entity:user': 'entity:user'
           group: 1
           exposed: false
           expose:

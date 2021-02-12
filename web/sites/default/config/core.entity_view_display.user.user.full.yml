@@ -16,6 +16,7 @@ dependencies:
     - image
     - layout_builder
     - masquerade_field
+    - telephone
     - user
 third_party_settings:
   layout_builder:
@@ -28,21 +29,45 @@ targetEntityType: user
 bundle: user
 mode: full
 content:
+  field_group_names:
+    type: string
+    weight: 5
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_managers:
+    type: entity_reference_label
+    weight: 6
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_link
+    weight: 4
+    region: content
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
   masquerade:
-    weight: 50
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   masquerade_as:
     type: masquerade_field_default
     region: content
-    weight: 51
+    weight: 3
     label: above
     settings:
       link: true
     third_party_settings: {  }
   member_for:
-    weight: 5
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -58,9 +83,6 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
-  field_group_names: true
   field_last_name: true
-  field_managers: true
-  field_phone: true
   langcode: true
   search_api_excerpt: true

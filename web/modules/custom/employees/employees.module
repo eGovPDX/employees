@@ -5,7 +5,45 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
+use Drupal\user\Entity\User;
 
+/**
+ * Implements hook_query_TAG_alter().
+ * Alter user query from "John Doe" into "John.Doe" to support autocomplete.
+ */
+function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\AlterableInterface $query) {
+    $selection_handler = $query->getMetaData('entity_reference_selection_handler');
+    if($selection_handler != null && $selection_handler->getPluginId() == "default:user") {
+        $conditions = $query->conditions();
+        if( empty($conditions)) return;
+        foreach($conditions as $key=>$condition) {
+            if($condition['field'] != "users_field_data.name") continue;
+            $value_orig = $condition['value'];
+            if( !is_string($value_orig) ) continue;
+
+            // Replace the first blank space with "."
+            $pos = strpos($value_orig, ' ');
+            if ($pos !== false) {
+                $query->conditions()[$key]['value'] = substr_replace($value_orig, '.', $pos, strlen(' '));
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_user_format_name_alter().
+ */
+function employees_user_format_name_alter(&$name, $account) {
+  // Load the full user account.
+  $user = User::load($account->id());
+  // When the account is deleted, $user could be null.
+  if( $user == null ) return;
+  $full_name = $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value;
+  // Fall back to account name if first name and last name are empty
+  if ($full_name !== ' ') {
+    $name = $full_name;
+  }
+}
 
 /**
  * Implements hook_entity_insert().

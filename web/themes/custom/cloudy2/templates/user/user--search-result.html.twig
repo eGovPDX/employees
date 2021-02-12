@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Template for a user view.
+ */
+#}
+{% set classes = [
+  'user',
+  'user--' ~ view_mode|clean_class,
+] %}
+{# {{ drupal_breakpoint() }} #}
+<article{{ attributes.addClass(classes) }}>
+  {% block content %}
+    <h2><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h2>
+    {% if user.field_phone.value %}<a href="tel:{{user.field_phone.value}}">{{user.field_phone.value}}</a><br/>{% endif %}
+    <a href="mailto:{{user.mail.value}}">{{user.mail.value}}</a><br/>
+    Group: {{ user.field_group_names.value }}
+    {# {{- content|without('summary') -}} #}
+  {% endblock %}
+</article>
+
