@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_result
     - core.entity_view_mode.node.teaser
     - node.type.news
   module:
@@ -74,7 +75,8 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          relationship: none
+          view_mode: search_result
       fields:
         title:
           id: title

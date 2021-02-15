@@ -11,9 +11,7 @@ dependencies:
     - field.field.user.user.field_managers
     - field.field.user.user.field_phone
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
     - layout_builder
     - telephone
     - user
@@ -30,17 +28,25 @@ mode: search_result
 content:
   field_first_name:
     type: string
-    weight: 1
+    weight: 0
     region: content
-    label: above
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_group_names:
+    type: string
+    weight: 2
+    region: content
+    label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
   field_last_name:
     type: string
-    weight: 2
+    weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -48,25 +54,16 @@ content:
     type: telephone_link
     weight: 3
     region: content
-    label: above
+    label: visually_hidden
     settings:
       title: ''
     third_party_settings: {  }
-  user_picture:
-    type: image
-    weight: 0
-    region: content
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
-    label: hidden
 hidden:
   field_active_directory_id: true
-  field_group_names: true
   field_managers: true
   langcode: true
   masquerade: true
   masquerade_as: true
   member_for: true
   search_api_excerpt: true
+  user_picture: true
