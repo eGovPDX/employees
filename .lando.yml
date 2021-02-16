@@ -72,7 +72,7 @@ tooling:
       - appserver: echo "Rebuilding cache..."
       - appserver: drush cr
       - appserver: echo "Run drush deploy"
-      - appserver: drush deploy -v
+      - appserver: drush deploy -v -y
   cupex:
     description: Composer update, database update, and config export to get a clean module or theme update
     cmd:
