@@ -7,7 +7,7 @@
 <div class="page">
   {% embed '@radix/navbar/navbar.twig' with {
     placement: 'sticky-top',
-    container: 'fixed',
+    container: 'fluid',
     color: 'light',
     utility_classes: ['bg-light'],
   } %}
@@ -41,7 +41,7 @@
     {% endblock %}
   {% endembed %}
 
-  <main class="container">
+  <main class="container-fluid">
     {% if page.header %}
       <header class="page__header mb-3">
           {{ page.header }}
@@ -64,7 +64,7 @@
 
   {% if page.footer %}
     <footer class="page__footer mt-5">
-      <div class="container">
+      <div class="container-fluid">
         <div class="d-flex justify-content-md-between align-items-md-center">
           {{ page.footer }}
         </div>
