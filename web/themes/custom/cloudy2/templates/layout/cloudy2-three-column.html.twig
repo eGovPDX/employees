@@ -10,24 +10,29 @@
  * @ingroup themeable
  */
 #}
+{%
+  set classes = [
+    'layout',
+    'layout--cloudy2-three-column',
+    'row',
+  ]
+%}
 {% if content %}
-  <div class="layout">
-      <div class="row">
-      {% if content.main %}
-        <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col-md-7', 'col-sm-12', 'order-md-2', 'order-sm-1') }}>
-          {{ content.main }}
-        </div>
-      {% endif %}
-      {% if content.side %}
-        <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-md-3', 'col-sm-12', 'order-md-3', 'order-sm-2') }}>
-          {{ content.side }}
-        </div>
-      {% endif %}
-      {% if content.menu %}
-        <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-md-2', 'col-sm-12', 'order-md-1', 'order-sm-3') }}>
-          {{ content.menu }}
-        </div>
-      {% endif %}
-    </div>
+  <div{{ attributes.addClass(classes) }}>
+    {% if content.main %}
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col-md-7', 'col-sm-12', 'order-md-2', 'order-sm-1') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+    {% if content.side %}
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-md-3', 'col-sm-12', 'order-md-3', 'order-sm-2') }}>
+        {{ content.side }}
+      </div>
+    {% endif %}
+    {% if content.menu %}
+      <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-md-2', 'col-sm-12', 'order-md-1', 'order-sm-3') }}>
+        {{ content.menu }}
+      </div>
+    {% endif %}
   </div>
 {% endif %}

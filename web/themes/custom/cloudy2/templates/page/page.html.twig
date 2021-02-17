@@ -42,6 +42,7 @@
   {% endembed %}
 
   <main class="container-fluid">
+
     {% if page.header %}
       <header class="page__header mb-3">
           {{ page.header }}
@@ -50,13 +51,18 @@
 
     <div class="row">
     {% if page.content %}
-      <div class="page__content col">
+      <div class="page__content col order-md-2 order-sm-1">
           {{ page.content }}
       </div>
     {% endif %}
     {% if page.side %}
-      <div class="page__side col-lg-4 col-sm-12">
+      <div class="page__side col-md-3 col-sm-12 order-md-3 order-sm-2">
           {{ page.side }}
+      </div>
+    {% endif %}
+    {% if page.menu %}
+      <div class="page__menu col-md-2 col-sm-12 order-md-1 order-sm-3">
+        {{ page.menu }}
       </div>
     {% endif %}
     </div>
