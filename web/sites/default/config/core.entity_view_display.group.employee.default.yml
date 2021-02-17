@@ -93,19 +93,6 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
-          4aebada8-4d22-411b-a65b-c2339b8937cf:
-            uuid: 4aebada8-4d22-411b-a65b-c2339b8937cf
-            region: side
-            configuration:
-              id: 'views_block:group_documents-block_1'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
           e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c:
             uuid: e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c
             region: side
@@ -118,7 +105,33 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
+            weight: 4
+          4a3fde4a-f259-43f2-96e4-d05301e98a14:
+            uuid: 4a3fde4a-f259-43f2-96e4-d05301e98a14
+            region: side
+            configuration:
+              id: 'views_block:group_events-block_group_todays_events'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
             weight: 3
+          4aebada8-4d22-411b-a65b-c2339b8937cf:
+            uuid: 4aebada8-4d22-411b-a65b-c2339b8937cf
+            region: side
+            configuration:
+              id: 'views_block:group_documents-block_1'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 5
         third_party_settings: {  }
   layout_library:
     enable: false
