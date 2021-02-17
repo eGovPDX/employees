@@ -18,20 +18,21 @@ dependencies:
     - layout_library
     - text
     - views
+  theme:
+    - cloudy2
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: true
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: cloudy2_three_column
         layout_settings:
-          label: ''
-          column_widths: 75-25
+          label: 'Main Content'
         components:
           0899606a-1169-4eb8-a553-f505651a52dc:
             uuid: 0899606a-1169-4eb8-a553-f505651a52dc
-            region: first
+            region: main
             configuration:
               id: 'field_block:group:employee:field_group_description'
               label: 'Group Description'
@@ -49,7 +50,7 @@ third_party_settings:
             weight: 0
           1a03522c-c807-4a52-be35-c6dcf2b1e649:
             uuid: 1a03522c-c807-4a52-be35-c6dcf2b1e649
-            region: first
+            region: main
             configuration:
               id: 'views_block:group_news-block_group_news'
               label: News
@@ -60,41 +61,22 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
-          12d7020e-12de-416c-9e29-b0fdf034cd55:
-            uuid: 12d7020e-12de-416c-9e29-b0fdf034cd55
-            region: first
+          6fee4277-b445-4539-899c-fc9504d17855:
+            uuid: 6fee4277-b445-4539-899c-fc9504d17855
+            region: menu
             configuration:
-              id: 'views_block:group_events-block_group_events'
-              label: Events
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
               provider: views
-              label_display: visible
-              views_label: Events
+              label_display: '0'
+              views_label: ''
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 2
-          a451fcce-2cec-4bd8-85e2-e41927c54ba8:
-            uuid: a451fcce-2cec-4bd8-85e2-e41927c54ba8
-            region: second
-            configuration:
-              id: 'field_block:group:employee:field_org_type'
-              label: Type
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: inline
-                type: entity_reference_label
-                settings:
-                  link: false
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 2
+            weight: 0
           be73b75b-2f83-4931-918c-813ca43e2315:
             uuid: be73b75b-2f83-4931-918c-813ca43e2315
-            region: second
+            region: side
             configuration:
               id: 'field_block:group:employee:field_parent_group'
               label: Parent
@@ -110,10 +92,10 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 1
           4aebada8-4d22-411b-a65b-c2339b8937cf:
             uuid: 4aebada8-4d22-411b-a65b-c2339b8937cf
-            region: second
+            region: side
             configuration:
               id: 'views_block:group_documents-block_1'
               label: ''
@@ -123,20 +105,20 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 4
-          6fee4277-b445-4539-899c-fc9504d17855:
-            uuid: 6fee4277-b445-4539-899c-fc9504d17855
-            region: second
+            weight: 2
+          e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c:
+            uuid: e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c
+            region: side
             configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
+              id: 'views_block:group_events-block_group_events'
               label: ''
               provider: views
-              label_display: '0'
+              label_display: visible
               views_label: ''
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 0
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false

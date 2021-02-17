@@ -1790,6 +1790,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -9394,6 +9399,11 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important;
 }
 
+.layout__region--menu h2,
+.layout__region--side h2 {
+  font-size: 1.25rem;
+}
+
 .page__footer {
   background: #f8f9fa;
 }
@@ -9603,10 +9613,8 @@ a.is-active {
   text-align: right;
 }
 
-.layout__region--first .block .views-element-container,
-.layout__region--second .block .views-element-container,
-.page__content .block .views-element-container {
-  margin-bottom: 3rem;
+.layout__region .block {
+  margin-bottom: 1rem;
 }
 
 .field__item {

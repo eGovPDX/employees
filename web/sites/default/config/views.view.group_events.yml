@@ -314,8 +314,8 @@ display:
             value: all
             title_enable: false
             title: All
-          title_enable: true
-          title: '{{ arguments.field_display_in_group_target_id }} News'
+          title_enable: false
+          title: ''
           default_argument_type: group_id_from_url
           default_argument_options: {  }
           default_argument_skip_url: false
@@ -375,6 +375,7 @@ display:
         use_more: false
         use_more_always: false
         use_more_text: false
+        title: false
       row:
         type: 'entity:node'
         options:
@@ -454,6 +455,7 @@ display:
       use_more: true
       use_more_always: false
       use_more_text: 'More Events'
+      title: 'Upcoming Events'
     cache_metadata:
       max-age: -1
       contexts:
