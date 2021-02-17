@@ -17,7 +17,9 @@ function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\Alte
         $conditions = $query->conditions();
         if( empty($conditions)) return;
         foreach($conditions as $key=>$condition) {
-            if($condition['field'] != "users_field_data.name") continue;
+            if(!is_array($condition)) continue;
+            if(!array_key_exists('field', $condition)) continue;
+            if ($condition['field'] != "users_field_data.name") continue;
             $value_orig = $condition['value'];
             if( !is_string($value_orig) ) continue;
 
