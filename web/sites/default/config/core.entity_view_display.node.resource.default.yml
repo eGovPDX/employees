@@ -21,20 +21,47 @@ dependencies:
     - link
     - user
     - views
+  theme:
+    - cloudy2
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: true
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: cloudy2_three_column
         layout_settings:
-          label: ''
-          column_widths: 75-25
+          label: 'Main Content'
         components:
+          ede064cc-06de-49d5-98d6-fca5b942da73:
+            uuid: ede064cc-06de-49d5-98d6-fca5b942da73
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_sibling_page_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          d3daec97-2f9a-4189-998f-2a656df25743:
+            uuid: d3daec97-2f9a-4189-998f-2a656df25743
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_page_children_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
           daaabe62-3682-4753-8605-464756ed492f:
             uuid: daaabe62-3682-4753-8605-464756ed492f
-            region: first
+            region: main
             configuration:
               label_display: '0'
               context_mapping:
@@ -51,39 +78,10 @@ third_party_settings:
                 third_party_settings: {  }
                 type: link
             additional: {  }
-            weight: 2
-          f26222d0-c1af-4e55-b19c-d507e272a6ea:
-            uuid: f26222d0-c1af-4e55-b19c-d507e272a6ea
-            region: first
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:resource:field_tags'
-              formatter:
-                label: inline
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 3
-          ede064cc-06de-49d5-98d6-fca5b942da73:
-            uuid: ede064cc-06de-49d5-98d6-fca5b942da73
-            region: second
-            configuration:
-              id: 'views_block:group_menu-block_sibling_page_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
             weight: 0
           36a9812e-5146-4905-80ce-8bd26be68d93:
             uuid: 36a9812e-5146-4905-80ce-8bd26be68d93
-            region: first
+            region: main
             configuration:
               id: 'field_block:node:resource:field_resource_description'
               label: 'Resource Description'
@@ -99,16 +97,83 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
-          e5847ae2-0e50-4ee3-b1e2-e4e2ec280052:
-            uuid: e5847ae2-0e50-4ee3-b1e2-e4e2ec280052
-            region: first
+          f26222d0-c1af-4e55-b19c-d507e272a6ea:
+            uuid: f26222d0-c1af-4e55-b19c-d507e272a6ea
+            region: side
             configuration:
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:resource:content_moderation_control'
+              id: 'field_block:node:resource:field_tags'
+              formatter:
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
             additional: {  }
             weight: 0
+          b545ad53-e436-4eec-b259-b64d0b5ca8f2:
+            uuid: b545ad53-e436-4eec-b259-b64d0b5ca8f2
+            region: side
+            configuration:
+              id: 'field_block:node:resource:uid'
+              label: 'Authored by'
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          19c9305e-fae0-4c12-b05e-8039f3800f1f:
+            uuid: 19c9305e-fae0-4c12-b05e-8039f3800f1f
+            region: side
+            configuration:
+              id: 'field_block:node:resource:created'
+              label: 'Authored on'
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: timestamp
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          a3bdab0b-73a3-4d3f-8bcc-07a1e7eea190:
+            uuid: a3bdab0b-73a3-4d3f-8bcc-07a1e7eea190
+            region: side
+            configuration:
+              id: 'field_block:node:resource:changed'
+              label: Changed
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: timestamp
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false

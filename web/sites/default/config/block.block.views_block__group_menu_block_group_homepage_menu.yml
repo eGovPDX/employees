@@ -1,0 +1,31 @@
+uuid: b8e7c32f-3f89-4af4-8776-e2974f422ef6
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.group_menu
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: views_block__group_menu_block_group_homepage_menu
+theme: cloudy2
+region: menu
+weight: 0
+provider: null
+plugin: 'views_block:group_menu-block_group_homepage_menu'
+settings:
+  id: 'views_block:group_menu-block_group_homepage_menu'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/group/*/news\r\n/group/*/events\r\n/group/*/documents\r\n/group/*/resources"
+    negate: false
+    context_mapping: {  }

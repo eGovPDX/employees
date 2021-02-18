@@ -232,8 +232,10 @@ display:
             title: All
           title_enable: false
           title: ''
-          default_argument_type: group_id_from_url
-          default_argument_options: {  }
+          default_argument_type: raw
+          default_argument_options:
+            index: 1
+            use_alias: false
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -258,7 +260,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - route
         - url
         - 'user.node_grants:view'
         - user.permissions
@@ -367,7 +368,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - route
         - route.group
         - url
         - user.group_permissions
@@ -1373,7 +1373,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - route
         - url
         - 'user.node_grants:view'
         - user.permissions
@@ -3552,16 +3551,17 @@ display:
           relationship: group_content
           group_type: group
           admin_label: ''
-          default_action: 'access denied'
+          default_action: default
           exception:
             value: all
             title_enable: false
             title: All
           title_enable: true
           title: 'Manage {{ arguments.gid|placeholder }} Menu'
-          default_argument_type: fixed
+          default_argument_type: raw
           default_argument_options:
-            argument: ''
+            index: 1
+            use_alias: false
           default_argument_skip_url: false
           summary_options:
             base_path: ''
