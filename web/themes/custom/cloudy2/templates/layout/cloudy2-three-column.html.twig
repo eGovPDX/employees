@@ -25,12 +25,12 @@
       </div>
     {% endif %}
     {% if content.side %}
-      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-md-3', 'col-sm-12', 'order-md-3', 'order-sm-2') }}>
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-md-3', 'col-sm-12', 'order-md-3', 'order-sm-2', 'border-left') }}>
         {{ content.side }}
       </div>
     {% endif %}
     {% if content.menu %}
-      <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-md-2', 'col-sm-12', 'order-md-1', 'order-sm-3') }}>
+      <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-md-2', 'col-sm-12', 'order-md-1', 'order-sm-3', 'border-right') }}>
         {{ content.menu }}
       </div>
     {% endif %}

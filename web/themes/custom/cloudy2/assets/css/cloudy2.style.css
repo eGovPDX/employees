@@ -4590,7 +4590,7 @@ input[type="button"].btn-block {
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0;
   margin-bottom: 1rem;
   list-style: none;
   background-color: #fff;
@@ -9403,6 +9403,13 @@ a.text-dark:hover, a.text-dark:focus {
 .layout__region--side h2,
 .page__menu h2,
 .page__side h2 {
+  font-size: 1.5rem;
+}
+
+.layout__region--menu h3,
+.layout__region--side h3,
+.page__menu h3,
+.page__side h3 {
   font-size: 1.25rem;
 }
 
@@ -9650,6 +9657,10 @@ a.is-active {
   padding: 0;
 }
 
+.item-list .nav-link {
+  padding: 0.5rem 0;
+}
+
 .layout__region--side .block,
 .layout__region--menu .block,
 .page__menu .block,
@@ -9664,12 +9675,4 @@ a.is-active {
 .field--label-inline .field__label {
   font-weight: 700;
   margin-right: 0.25rem;
-}
-
-.field .field--label-hidden {
-  margin-bottom: 1.5rem;
-}
-
-.field--label-above {
-  margin-bottom: 3rem;
 }

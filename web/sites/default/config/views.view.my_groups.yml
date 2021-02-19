@@ -57,12 +57,17 @@ display:
         options:
           grouping: {  }
           row_class: nav-item
-          default_row_class: true
+          default_row_class: false
           type: ul
           wrapper_class: item-list
           class: 'nav flex-column'
       row:
         type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         view_group:
           id: view_group

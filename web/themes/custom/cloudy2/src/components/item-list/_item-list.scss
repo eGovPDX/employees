@@ -27,3 +27,10 @@
 [dir="rtl"] .item-list .item-list__comma-list li {
   padding: 0;
 }
+
+// Remove padding from vertical menus
+.item-list {
+  .nav-link {
+    padding: $nav-link-padding-y 0;
+  }
+}
