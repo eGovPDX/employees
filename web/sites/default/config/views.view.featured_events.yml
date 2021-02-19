@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.search_result
     - core.entity_view_mode.node.teaser
     - node.type.event
+    - system.menu.main
   module:
     - datetime
     - node
@@ -1093,12 +1095,31 @@ display:
       defaults:
         filters: false
         filter_groups: false
+        style: false
+        row: false
       filter_groups:
         operator: AND
         groups:
           1: AND
           2: OR
       display_description: ''
+      style:
+        type: default
+        options: {  }
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: search_result
+      menu:
+        type: normal
+        title: Events
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
     cache_metadata:
       max-age: -1
       contexts:
