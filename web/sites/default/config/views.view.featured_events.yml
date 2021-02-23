@@ -494,10 +494,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
+          operator: between
           value:
-            min: ''
-            max: ''
+            min: today
+            max: 'today +23 hours +59 minutes'
             value: today
             type: date
           group: 1
@@ -891,9 +891,9 @@ display:
           value:
             min: ''
             max: ''
-            value: today
+            value: 'today +23 hours +59 minutes'
             type: date
-          group: 2
+          group: 1
           exposed: false
           expose:
             operator_id: ''
@@ -929,7 +929,6 @@ display:
         operator: AND
         groups:
           1: AND
-          2: OR
     cache_metadata:
       max-age: -1
       contexts:
