@@ -9,6 +9,7 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
   module:
+    - path
     - text
 id: group.private.default
 targetEntityType: group
@@ -16,7 +17,7 @@ bundle: private
 mode: default
 content:
   field_group_description:
-    weight: 4
+    weight: 5
     settings:
       rows: 9
       summary_rows: 3
@@ -34,13 +35,13 @@ content:
     type: string_textfield
     region: content
   field_org_type:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_parent_group:
-    weight: 2
+    weight: 3
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -64,9 +65,15 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -74,5 +81,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  path: true
+hidden: {  }

@@ -1,31 +1,30 @@
-uuid: 65b96b9b-b53e-45f9-9c44-6def80d78f87
+uuid: 8e022836-d5a5-4beb-90db-9a1a07a1e4c1
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.my_groups
+    - views.view.featured_events
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__my_groups_block_my_groups
+id: views_block__featured_events_block_sitewide_today
 theme: cloudy2
-region: menu
-weight: -6
+region: side
+weight: -7
 provider: null
-plugin: 'views_block:my_groups-block_my_groups'
+plugin: 'views_block:featured_events-block_sitewide_today'
 settings:
-  id: 'views_block:my_groups-block_my_groups'
+  id: 'views_block:featured_events-block_sitewide_today'
   label: ''
   provider: views
   label_display: visible
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/bureaus\r\n/groups"
+    pages: '<front>'
     negate: false
     context_mapping: {  }

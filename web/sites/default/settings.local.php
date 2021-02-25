@@ -38,7 +38,7 @@ assert_options(ASSERT_ACTIVE, TRUE);
 /**
  * Enable local development services.
  */
-$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/default/services.local.yml';
+$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/default/local.services.yml';
 
 /**
  * Show all error messages, with backtrace information.
@@ -66,7 +66,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -88,7 +88,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['page'] = 'cache.backend.null';
+$settings['cache']['bins']['page'] = 'cache.backend.null';
 
 /**
  * Disable Dynamic Page Cache.
@@ -156,7 +156,7 @@ $settings['hash_salt'] = 'thisismysaltittasteslikesalt';
  * module needs to be disabled in order to allow file uploads.
  */
 
-// $config['clamav.settings']['enabled'] = 0;
+$config['clamav.settings']['enabled'] = 0;
 
 $settings['trusted_host_patterns'] = array(
   '.*'   // Allow any hostname

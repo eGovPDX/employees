@@ -7,16 +7,16 @@ dependencies:
 id: resources
 label: Resources
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent]/[node:title]'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/resources/[node:title]'
 selection_criteria:
-  03cc26b5-0324-49ae-a369-241605b85355:
+  ab25ed53-4c32-4f6b-a739-d878eab2e25a:
     id: node_type
     bundles:
       resource: resource
     negate: false
     context_mapping:
       node: node
-    uuid: 03cc26b5-0324-49ae-a369-241605b85355
+    uuid: ab25ed53-4c32-4f6b-a739-d878eab2e25a
 selection_logic: and
 weight: -5
 relationships: {  }

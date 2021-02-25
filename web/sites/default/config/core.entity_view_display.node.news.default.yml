@@ -12,9 +12,123 @@ dependencies:
     - field.field.node.news.field_tags
     - node.type.news
   module:
+    - layout_builder
+    - layout_library
     - smart_date
     - text
     - user
+  theme:
+    - cloudy2
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: cloudy2_three_column
+        layout_settings:
+          label: 'Main Content'
+        components:
+          0c8b2be5-5168-438a-a37d-cec392951e1a:
+            uuid: 0c8b2be5-5168-438a-a37d-cec392951e1a
+            region: side
+            configuration:
+              id: 'field_block:node:news:uid'
+              label: 'Authored by'
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          a88a7b79-259d-449b-b279-685b71028e60:
+            uuid: a88a7b79-259d-449b-b279-685b71028e60
+            region: side
+            configuration:
+              id: 'field_block:node:news:field_published_on'
+              label: 'Published on'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: datetime_default
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          c7a62cf3-e6b6-4b55-babb-abc364b8eb4a:
+            uuid: c7a62cf3-e6b6-4b55-babb-abc364b8eb4a
+            region: side
+            configuration:
+              id: 'field_block:node:news:changed'
+              label: Changed
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: timestamp
+                settings:
+                  date_format: medium
+                  custom_date_format: ''
+                  timezone: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          e4481ea8-507e-48d5-8ed0-72a3c151c2f8:
+            uuid: e4481ea8-507e-48d5-8ed0-72a3c151c2f8
+            region: main
+            configuration:
+              id: 'field_block:node:news:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2:
+            uuid: c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2
+            region: menu
+            configuration:
+              id: 'field_block:node:news:field_display_in_group'
+              label: 'Display in Group'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.news.default
 targetEntityType: node
 bundle: news

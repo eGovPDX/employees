@@ -18,20 +18,21 @@ dependencies:
     - layout_library
     - text
     - views
+  theme:
+    - cloudy2
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: true
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: cloudy2_three_column
         layout_settings:
-          label: ''
-          column_widths: 75-25
+          label: 'Main Content'
         components:
-          45c51865-55c7-4425-8419-62d05b28fbc1:
-            uuid: 45c51865-55c7-4425-8419-62d05b28fbc1
-            region: first
+          8aade6f3-f05d-402d-95e8-a5730c900075:
+            uuid: 8aade6f3-f05d-402d-95e8-a5730c900075
+            region: main
             configuration:
               id: 'field_block:group:private:field_group_description'
               label: 'Group Description'
@@ -46,36 +47,23 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 0
-          2a44a2e8-f121-4e7b-bdcd-c31a89a998e8:
-            uuid: 2a44a2e8-f121-4e7b-bdcd-c31a89a998e8
-            region: second
+            weight: 1
+          8905fb38-1023-47fb-9752-02c5035b67ef:
+            uuid: 8905fb38-1023-47fb-9752-02c5035b67ef
+            region: main
             configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
+              id: 'views_block:group_news-block_group_news'
               label: ''
               provider: views
-              label_display: '0'
+              label_display: visible
               views_label: ''
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 0
-          5d20a8e9-d549-4968-8582-d044d66d52b0:
-            uuid: 5d20a8e9-d549-4968-8582-d044d66d52b0
-            region: first
-            configuration:
-              id: 'views_block:group_news-block_group_news'
-              label: News
-              provider: views
-              label_display: visible
-              views_label: News
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 1
-          dea10b47-d0b6-45a9-ba8b-dd0ae226771f:
-            uuid: dea10b47-d0b6-45a9-ba8b-dd0ae226771f
-            region: second
+            weight: 2
+          3bab2477-0617-47fd-9bf1-cab585412c59:
+            uuid: 3bab2477-0617-47fd-9bf1-cab585412c59
+            region: side
             configuration:
               id: 'field_block:group:private:field_parent_group'
               label: Parent
@@ -92,24 +80,11 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
-          ccbcbfa4-4601-4cc1-89f5-bb62b39ae6b1:
-            uuid: ccbcbfa4-4601-4cc1-89f5-bb62b39ae6b1
-            region: first
+          44767b00-6c08-4869-bb2b-5148c65febfb:
+            uuid: 44767b00-6c08-4869-bb2b-5148c65febfb
+            region: side
             configuration:
               id: 'views_block:group_events-block_group_events'
-              label: Events
-              provider: views
-              label_display: visible
-              views_label: Events
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
-          152c2948-a0d9-4154-b8f9-0119ebf62eea:
-            uuid: 152c2948-a0d9-4154-b8f9-0119ebf62eea
-            region: second
-            configuration:
-              id: 'views_block:group_documents-block_1'
               label: ''
               provider: views
               label_display: visible
@@ -118,20 +93,30 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
-          b3842cf7-59b0-4e5d-bc44-25b38d8acd21:
-            uuid: b3842cf7-59b0-4e5d-bc44-25b38d8acd21
-            region: first
+          d572fea6-e7bb-4b1c-8311-20649161be58:
+            uuid: d572fea6-e7bb-4b1c-8311-20649161be58
+            region: menu
             configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              provider: views
               label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:group:private:field_org_type'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          76b6ae5c-9d49-435a-8f6d-9fc4123ce707:
+            uuid: 76b6ae5c-9d49-435a-8f6d-9fc4123ce707
+            region: side
+            configuration:
+              id: 'views_block:group_documents-block_1'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
             additional: {  }
             weight: 3
         third_party_settings: {  }
