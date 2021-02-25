@@ -69,14 +69,10 @@ tooling:
       - appserver: /bin/bash -c "if [[ \$(composer install --dry-run -d /app 2>&1 | grep -oPc 'Uninstalling drupal/\w+') -gt 0 ]]; then { echo Composer is about to remove one or more modules... Let\'s disable them in Drupal first.; for module in \$(composer install --dry-run -d /app 2>&1 | grep -oP 'Uninstalling drupal/\K\w+'); do { echo Disabling \$module...; drush pmu \$module -y;} done } fi"
       - appserver: echo "Installing Composer dependencies..."
       - appserver: composer install -d /app
-      - appserver: echo "Clearing cache..."
-      - appserver: drush cr -y
-      - appserver: echo "Run database updates..."
-      - appserver: drush updb -y
-      - appserver: echo "Importing Drupal config..."
-      - appserver: drush cim -y
-      - appserver: echo "Clearing cache..."
-      - appserver: drush cr -y
+      - appserver: echo "Rebuilding cache..."
+      - appserver: drush cr
+      - appserver: echo "Run drush deploy"
+      - appserver: drush deploy -v -y
   cupex:
     description: Composer update, database update, and config export to get a clean module or theme update
     cmd:
