@@ -126,6 +126,67 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 0
+          272cf86f-6112-4157-ab51-576ac7a265e1:
+            uuid: 272cf86f-6112-4157-ab51-576ac7a265e1
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:news:content_moderation_control'
+            additional: {  }
+            weight: 0
+          553a436e-c1c3-449a-8faf-11440b7b6eec:
+            uuid: 553a436e-c1c3-449a-8faf-11440b7b6eec
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:news:field_published_on'
+              formatter:
+                label: inline
+                settings:
+                  timezone_override: ''
+                  format: date_only
+                  force_chronological: false
+                  format_type: medium
+                  add_classes: 0
+                third_party_settings: {  }
+                type: smartdate_default
+            additional: {  }
+            weight: 1
+          337db39d-a11d-4ca7-b528-67a6326300a7:
+            uuid: 337db39d-a11d-4ca7-b528-67a6326300a7
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:news:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
+          927df208-c48e-4bed-84ac-be821b6cf7ee:
+            uuid: 927df208-c48e-4bed-84ac-be821b6cf7ee
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:news:field_tags'
+              formatter:
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false
