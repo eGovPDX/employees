@@ -147,6 +147,67 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
+          97b4b2e9-d991-48d6-9f91-6f196fb3b4e3:
+            uuid: 97b4b2e9-d991-48d6-9f91-6f196fb3b4e3
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:event:content_moderation_control'
+            additional: {  }
+            weight: 0
+          61fc3503-2c60-43eb-992e-22e9c6b76bb3:
+            uuid: 61fc3503-2c60-43eb-992e-22e9c6b76bb3
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:field_when'
+              formatter:
+                label: inline
+                settings:
+                  timezone_override: ''
+                  format: compact
+                  force_chronological: false
+                  format_type: medium
+                  add_classes: 0
+                third_party_settings: {  }
+                type: smartdate_default
+            additional: {  }
+            weight: 1
+          285faf61-088e-4efc-86a2-fc86b09e8584:
+            uuid: 285faf61-088e-4efc-86a2-fc86b09e8584
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 2
+          94a31a43-d8d9-425d-9d53-a2cb9e311ff6:
+            uuid: 94a31a43-d8d9-425d-9d53-a2cb9e311ff6
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:field_tags'
+              formatter:
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false
