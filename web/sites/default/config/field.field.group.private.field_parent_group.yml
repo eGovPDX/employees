@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.group.field_parent_group
+    - group.type.employee
     - group.type.private
 id: group.private.field_parent_group
 field_name: field_parent_group
@@ -18,10 +19,12 @@ default_value_callback: ''
 settings:
   handler: 'default:group'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      employee: employee
+      private: private
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: null
+    auto_create_bundle: employee
 field_type: entity_reference

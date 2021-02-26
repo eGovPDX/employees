@@ -38,9 +38,13 @@ content:
     region: content
   field_org_type:
     weight: 4
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_parent_group:
     weight: 3
@@ -79,14 +83,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   uid:
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     weight: 6
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
