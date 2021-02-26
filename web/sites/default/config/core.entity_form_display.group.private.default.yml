@@ -9,7 +9,9 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
   module:
+    - field_states_ui
     - path
+    - select2
     - text
 id: group.private.default
 targetEntityType: group
@@ -43,12 +45,17 @@ content:
   field_parent_group:
     weight: 3
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
+    type: select2_entity_reference
     region: content
   label:
     type: string_textfield
@@ -72,13 +79,18 @@ content:
     settings: {  }
     third_party_settings: {  }
   uid:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 6
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
 hidden: {  }
