@@ -15,7 +15,9 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_states_ui
     - path
+    - select2
     - text
 _core:
   default_config_hash: AD_lefuYmjsKeH3OQApsyP_nLj6ZnGaALznLQSQ0Z_o
@@ -47,7 +49,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
     type: entity_reference_autocomplete
     region: content
   field_menu_url_text:
@@ -65,31 +72,90 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list:
+            91d2baf8-cec3-40d8-8161-aa9f5773adb0:
+              operations:
+                edit: Edit
+                delete: Delete
+          add: Add
+        field_states:
+          91d2baf8-cec3-40d8-8161-aa9f5773adb0:
+            uuid: 91d2baf8-cec3-40d8-8161-aa9f5773adb0
+            id: invisible
+            data:
+              target: field_show_in_menu
+              comparison: unchecked
+              value: ''
+              submit: 'Add Cancel'
     type: entity_reference_autocomplete
     region: content
   field_reviewer:
     weight: 9
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
+    type: select2_entity_reference
     region: content
   field_show_in_menu:
     weight: 3
     settings:
       display_label: true
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list:
+            288eb652-2574-41ce-b3bd-d7b25f615a79:
+              operations:
+                edit: Edit
+                delete: Delete
+          add: Add
+        field_states:
+          288eb652-2574-41ce-b3bd-d7b25f615a79:
+            uuid: 288eb652-2574-41ce-b3bd-d7b25f615a79
+            id: disabled
+            data:
+              target: field_parent
+              comparison: filled
+              value: ''
+              submit: 'Add Cancel'
     type: boolean_checkbox
     region: content
   field_sort_weight:
     weight: 3
     settings:
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list:
+            dad4e9a8-45a4-462f-a4ae-8a2ec66935f9:
+              operations:
+                edit: Edit
+                delete: Delete
+          add: Add
+        field_states:
+          dad4e9a8-45a4-462f-a4ae-8a2ec66935f9:
+            uuid: dad4e9a8-45a4-462f-a4ae-8a2ec66935f9
+            id: invisible
+            data:
+              target: field_show_in_menu
+              comparison: unchecked
+              value: ''
+              submit: 'Update State Cancel'
     type: number
     region: content
   field_tags:
@@ -114,6 +180,23 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: 0
@@ -131,6 +214,18 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   url_redirects:
     weight: 12

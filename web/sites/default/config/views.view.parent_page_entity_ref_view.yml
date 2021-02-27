@@ -55,15 +55,14 @@ display:
         options:
           grouping: {  }
           row_class: ''
-          default_row_class: true
-          uses_fields: false
+          default_row_class: false
       row:
         type: fields
         options:
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: false
-          default_field_elements: true
       fields:
         status:
           id: status
@@ -142,8 +141,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: true
-            text: '<strong>{{ title }}</strong>'
+            alter_text: false
+            text: '{{ title }}'
             make_link: false
             path: ''
             absolute: false
@@ -327,7 +326,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{{ title }}{{ status }}<br>\r\n{{ view_node }}"
+            text: '{{ title }} {{ status }} {{ view_node }}'
             make_link: false
             path: ''
             absolute: false
@@ -538,7 +537,7 @@ display:
       row:
         type: entity_reference
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline:
             nothing: nothing
           separator: '-'
