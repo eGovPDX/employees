@@ -18,6 +18,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - text
+    - toc_js
     - user
     - views
   theme:
@@ -173,6 +174,33 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
+            additional: {  }
+            weight: 2
+          1f428280-961b-4095-85d1-b97de4b332a7:
+            uuid: 1f428280-961b-4095-85d1-b97de4b332a7
+            region: main
+            configuration:
+              id: toc_js_block
+              label: 'Toc.js block'
+              provider: toc_js
+              label_display: visible
+              title: 'Table of content'
+              selectors: 'h2, h3'
+              selectors_minimum: '0'
+              container: .node
+              prefix: toc
+              list_type: ul
+              back_to_top: 0
+              back_to_top_label: 'Back to top'
+              smooth_scrolling: 1
+              scroll_to_offset: '100'
+              highlight_on_scroll: 1
+              highlight_offset: '100'
+              sticky: 0
+              sticky_offset: '0'
+              sticky_stop: ''
+              sticky_stop_padding: '0'
+              context_mapping: {  }
             additional: {  }
             weight: 2
         third_party_settings: {  }
