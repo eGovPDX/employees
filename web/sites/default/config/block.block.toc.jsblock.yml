@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - ctools
-    - node
     - toc_js
     - user
   theme:
@@ -19,7 +18,7 @@ settings:
   id: toc_js_block
   label: 'Toc.js block'
   provider: toc_js
-  label_display: visible
+  label_display: 0
   title: 'Table of content'
   selectors: 'h2, h3'
   selectors_minimum: '0'
@@ -41,14 +40,7 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       page: page
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-  node_type:
-    id: node_type
-    bundles:
-      page: page
-    negate: false
+    negate: true
     context_mapping:
       node: '@node.node_route_context:node'
   user_role:
