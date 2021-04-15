@@ -1,0 +1,29 @@
+uuid: 4b6c3b04-761c-485e-a197-e42679261abf
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.taxonomy_term_and_description
+    - taxonomy.vocabulary.resource_classification
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: taxonomy_term.resource_classification.taxonomy_term_and_description
+targetEntityType: taxonomy_term
+bundle: resource_classification
+mode: taxonomy_term_and_description
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,23 @@
+uuid: fcd2426a-3a7a-4b21-a3c9-758e4135fae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.resource_classification
+  module:
+    - text
+id: taxonomy_term.resource_classification.default
+targetEntityType: taxonomy_term
+bundle: resource_classification
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
