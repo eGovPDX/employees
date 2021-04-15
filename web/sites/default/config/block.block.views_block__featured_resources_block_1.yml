@@ -1,4 +1,4 @@
-uuid: ec340b00-c6d3-474c-806a-0e6e6d0dd739
+uuid: 64c65e25-18d4-4f43-9968-371a9a967bea
 langcode: en
 status: true
 dependencies:
@@ -9,22 +9,22 @@ dependencies:
     - views
   theme:
     - cloudy2
-id: views_block__featured_resources_block_featured_resources
+id: views_block__featured_resources_block_1
 theme: cloudy2
 region: content
-weight: -3
+weight: 0
 provider: null
-plugin: 'views_block:featured_resources-block_featured_resources'
+plugin: 'views_block:featured_resources-block_1'
 settings:
-  id: 'views_block:featured_resources-block_featured_resources'
+  id: 'views_block:featured_resources-block_1'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/news\r\n/events"
+    pages: '<front>'
     negate: false
     context_mapping: {  }

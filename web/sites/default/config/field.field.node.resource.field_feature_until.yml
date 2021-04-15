@@ -1,0 +1,21 @@
+uuid: 61220e21-e459-458c-8b50-889bd3c8a5c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_until
+    - node.type.resource
+  module:
+    - datetime
+id: node.resource.field_feature_until
+field_name: field_feature_until
+entity_type: node
+bundle: resource
+label: 'Feature Until'
+description: 'Sets a date to stop featuring the item. If blank, item will be featured indefinitely.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
