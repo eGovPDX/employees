@@ -1,25 +1,25 @@
-uuid: 64c65e25-18d4-4f43-9968-371a9a967bea
+uuid: 15b22b8d-1c1c-4ca0-a439-8f659f5c8fff
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.featured_resources
+    - views.view.topics
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__featured_resources_block_1
+id: views_block__topics_block_1
 theme: cloudy2
 region: content
 weight: 0
 provider: null
-plugin: 'views_block:featured_resources-block_1'
+plugin: 'views_block:topics-block_1'
 settings:
-  id: 'views_block:featured_resources-block_1'
+  id: 'views_block:topics-block_1'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
 visibility:

@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
+    - field.field.node.page.field_topics
     - node.type.page
     - views.view.group_menu
   module:
@@ -175,6 +176,22 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 2
+          8c3a1888-1c4d-4a60-bfce-6c280c71bac4:
+            uuid: 8c3a1888-1c4d-4a60-bfce-6c280c71bac4
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_topics'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -248,6 +265,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_topics:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
 hidden:
   field_display_in_group: true
   field_parent: true
