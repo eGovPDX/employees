@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.taxonomy_term.taxonomy_term_and_description
+    - core.entity_view_mode.taxonomy_term.term_teaser
     - taxonomy.vocabulary.topics
   module:
     - taxonomy
@@ -59,14 +59,14 @@ display:
           automatic_width: false
           alignment: horizontal
           col_class_default: true
-          col_class_custom: homepage-grid
+          col_class_custom: 'col-sm-6 mb-4'
           row_class_default: true
           row_class_custom: ''
       row:
         type: 'entity:taxonomy_term'
         options:
           relationship: none
-          view_mode: taxonomy_term_and_description
+          view_mode: term_teaser
       fields:
         name:
           id: name
@@ -215,6 +215,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      css_class: homepage-grid
     cache_metadata:
       max-age: -1
       contexts:
