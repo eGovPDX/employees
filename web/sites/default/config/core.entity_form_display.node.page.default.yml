@@ -19,12 +19,30 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - field_group
     - field_states_ui
     - path
     - scheduler
     - scheduler_content_moderation_integration
     - select2
     - text
+third_party_settings:
+  field_group:
+    group_topics:
+      children:
+        - field_topics
+      parent_name: ''
+      weight: 14
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Topics
 _core:
   default_config_hash: AD_lefuYmjsKeH3OQApsyP_nLj6ZnGaALznLQSQ0Z_o
 id: node.page.default
@@ -64,14 +82,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_feature:
-    weight: 26
+    weight: 21
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_feature_until:
-    weight: 27
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -207,18 +225,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 19
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -242,18 +260,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
