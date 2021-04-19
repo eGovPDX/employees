@@ -1,0 +1,23 @@
+uuid: d86cbbb7-81f5-4561-9f65-2b8f14e5297d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature
+    - node.type.page
+id: node.page.field_feature
+field_name: field_feature
+entity_type: node
+bundle: page
+label: 'Feature Sitewide'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

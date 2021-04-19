@@ -1,0 +1,21 @@
+uuid: 70d5f27a-e840-47fc-a0da-d6a27178762f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_until
+    - node.type.page
+  module:
+    - datetime
+id: node.page.field_feature_until
+field_name: field_feature_until
+entity_type: node
+bundle: page
+label: 'Feature Until'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

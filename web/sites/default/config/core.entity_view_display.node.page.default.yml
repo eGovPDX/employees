@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_feature
+    - field.field.node.page.field_feature_until
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
     - field.field.node.page.field_reviewer
@@ -15,6 +17,7 @@ dependencies:
     - node.type.page
     - views.view.group_menu
   module:
+    - datetime
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -192,6 +195,41 @@ third_party_settings:
                 type: entity_reference_label
             additional: {  }
             weight: 2
+          8bb88404-c60c-4eb4-b6fb-bbe01cd31936:
+            uuid: 8bb88404-c60c-4eb4-b6fb-bbe01cd31936
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_feature'
+              formatter:
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+                type: boolean
+            additional: {  }
+            weight: 3
+          29766ecb-7fec-449e-b9eb-c7f61a193118:
+            uuid: 29766ecb-7fec-449e-b9eb-c7f61a193118
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_feature_until'
+              formatter:
+                label: above
+                settings:
+                  format_type: medium
+                  timezone_override: ''
+                third_party_settings: {  }
+                type: datetime_default
+            additional: {  }
+            weight: 4
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -222,6 +260,25 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_feature:
+    weight: 7
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: main
+  field_feature_until:
+    weight: 8
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: main
   field_menu_url_text:
     weight: 4
     label: above
