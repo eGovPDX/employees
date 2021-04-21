@@ -5,11 +5,9 @@
 ## Job to run the update path and Behat tests.
 build_and_deploy: &build_and_deploy
   docker:
-    # - image: juampynr/drupal8ci:latest
-    # updated CI image
-    - image: kxwang/drupal-ci:ci-php7.3-node12.16.1-yarn1.22.0
+    - image: egovpdx/drupal-ci:latest
       auth:
-        username: kxwang
+        username: egovpdx
         password: $DOCKERHUB_PASSWORD
   working_directory: /var/www/html
   steps:
@@ -57,24 +55,23 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore Composer Cache
         keys:
-          - v1-dependencies-{{ checksum "composer.lock" }}
+          - v2-dependencies-{{ checksum "composer.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v2-dependencies-
     - run:
         name: Composer install
         command: |
-          # hotfix - getting error on module but can't update due to lightning dependency, try removing and getting fresh
+          # TODO: [POWR-3429] I'm not sure we need this hotfix on employees - getting error on module but can't update due to lightning dependency, try removing and getting fresh
           rm -rf ./web/modules/contrib/search_api_solr
           # Pantheon does not allow these folders but Composer needs them
           rm -rf ./web/modules/contrib/facets
-          # Run composer install with hirak/prestissimo for better performance
+          # Run composer install
+          composer -V
           composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
-          composer install --no-suggest --no-interaction
-          # TODO: should only deploy non-dev packages
-          # --no-dev
+          composer install --no-interaction --no-dev
     - save_cache:
         name: Save Composer Cache
-        key: v1-dependencies-{{ checksum "composer.lock" }}
+        key: v2-dependencies-{{ checksum "composer.lock" }}
         paths:
           - ./vendor
           - ./web/core
@@ -220,10 +217,14 @@ build_and_deploy: &build_and_deploy
 
 run_tests: &run_tests
   docker:
-    # - image: juampynr/drupal8ci:latest
-    # updated CI image
-    - image: kxwang/drupal-ci:circleci
+    - image: egovpdx/drupal-ci:latest
+      auth:
+        username: egovpdx
+        password: $DOCKERHUB_PASSWORD
     - image: selenium/standalone-chrome-debug:3.7.1-beryllium
+      auth:
+        username: egovpdx
+        password: $DOCKERHUB_PASSWORD
   parallelism: 5
   working_directory: /var/www/html
   steps:
@@ -257,13 +258,13 @@ run_tests: &run_tests
           - "/tmp/vendor"
     - restore_cache:
         name: Restore Behat cache
-        key: v1-behat-dependencies-{{ checksum "tests/composer.lock" }}
+        key: v2-behat-dependencies-{{ checksum "tests/composer.lock" }}
     - run:
         name: Composer install for Behat dependencies
         command: |
           cd tests
           composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
-          composer install --no-suggest --no-interaction
+          composer install --no-interaction
     - run:
         name: Run tests against Pantheon
         when: on_success
@@ -299,7 +300,7 @@ run_tests: &run_tests
     - save_cache:
         paths:
           - ./tests/vendor
-        key: v1-behat-dependencies-{{ checksum "tests/composer.lock" }}
+        key: v2-behat-dependencies-{{ checksum "tests/composer.lock" }}
     - store_test_results:
         path: /var/www/html/tests/test-results
     - store_artifacts:
