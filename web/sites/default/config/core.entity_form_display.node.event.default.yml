@@ -8,16 +8,37 @@ dependencies:
     - field.field.node.event.field_feature
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_tags
+    - field.field.node.event.field_topics
     - field.field.node.event.field_when
     - node.type.event
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - field_states_ui
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
     - select2
     - smart_date
     - text
+third_party_settings:
+  field_group:
+    group_topics:
+      children:
+        - field_topics
+      parent_name: ''
+      weight: 13
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Topics
 _core:
   default_config_hash: CVAKxLp27yWdjTSep4DYtCnqX23XA8AYXXryfMA0Q3A
 id: node.event.default
@@ -37,7 +58,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -52,7 +73,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_feature:
-    weight: 2
+    weight: 1
     settings:
       display_label: true
     third_party_settings: {  }
@@ -88,8 +109,14 @@ content:
           add: Add
     type: select2_entity_reference
     region: content
+  field_topics:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_when:
-    weight: 1
+    weight: 2
     settings:
       default_duration_increments: "30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
       default_duration: 60
@@ -106,32 +133,32 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 20
+    weight: 15
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 12
     region: content
     third_party_settings: {  }
   title:
@@ -154,18 +181,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 30
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 12
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
