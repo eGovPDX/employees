@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.resource.field_parent
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
+    - field.field.node.resource.field_reviewer
     - field.field.node.resource.field_show_in_menu
     - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
@@ -19,7 +20,8 @@ dependencies:
     - field_states_ui
     - link
     - path
-    - select2
+    - scheduler
+    - scheduler_content_moderation_integration
 id: node.resource.default
 targetEntityType: node
 bundle: resource
@@ -100,6 +102,16 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  field_reviewer:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_show_in_menu:
     weight: 3
     settings:
@@ -153,17 +165,17 @@ content:
   field_tags:
     weight: 9
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete_tags
     region: content
   moderation_state:
     type: moderation_state_default
@@ -191,9 +203,9 @@ content:
     third_party_settings: {  }
   scheduler_settings:
     weight: 20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 0

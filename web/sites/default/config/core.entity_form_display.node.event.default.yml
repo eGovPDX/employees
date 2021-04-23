@@ -15,7 +15,8 @@ dependencies:
     - content_moderation
     - field_states_ui
     - path
-    - select2
+    - scheduler
+    - scheduler_content_moderation_integration
     - smart_date
     - text
 _core:
@@ -61,32 +62,32 @@ content:
   field_reviewer:
     weight: 7
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     region: content
   field_tags:
     weight: 5
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete_tags
     region: content
   field_when:
     weight: 1
@@ -95,6 +96,7 @@ content:
       default_duration: 60
       modal: false
       show_extra: true
+      hide_date: true
     third_party_settings: {  }
     type: smartdate_default
     region: content
@@ -124,9 +126,9 @@ content:
     third_party_settings: {  }
   scheduler_settings:
     weight: 20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:

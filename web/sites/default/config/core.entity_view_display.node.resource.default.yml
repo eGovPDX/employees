@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.resource.field_parent
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
+    - field.field.node.resource.field_reviewer
     - field.field.node.resource.field_show_in_menu
     - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
@@ -174,6 +175,22 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 3
+          f6ea9172-07b1-447f-bd62-59ab7ecf78e2:
+            uuid: f6ea9172-07b1-447f-bd62-59ab7ecf78e2
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:resource:field_reviewer'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -248,6 +265,14 @@ content:
     third_party_settings: {  }
     type: link
     region: content
+  field_reviewer:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
   field_show_in_menu:
     weight: 7
     label: above

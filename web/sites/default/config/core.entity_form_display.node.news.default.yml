@@ -17,7 +17,8 @@ dependencies:
     - datetime
     - field_states_ui
     - path
-    - select2
+    - scheduler
+    - scheduler_content_moderation_integration
     - text
 id: node.news.default
 targetEntityType: node
@@ -72,32 +73,32 @@ content:
   field_reviewer:
     weight: 7
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     region: content
   field_tags:
     weight: 5
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete_tags
     region: content
   moderation_state:
     type: moderation_state_default
@@ -125,9 +126,9 @@ content:
     third_party_settings: {  }
   scheduler_settings:
     weight: 20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 0
