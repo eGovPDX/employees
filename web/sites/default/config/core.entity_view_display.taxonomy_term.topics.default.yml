@@ -1,0 +1,26 @@
+uuid: d4688768-96a8-4c25-a8be-799d5e4a4ccb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.topics.field_homepage
+    - taxonomy.vocabulary.topics
+  module:
+    - text
+id: taxonomy_term.topics.default
+targetEntityType: taxonomy_term
+bundle: topics
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  content_by_topic_entity_view_1: true
+  field_homepage: true
+  langcode: true
+  search_api_excerpt: true

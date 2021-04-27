@@ -1,0 +1,23 @@
+uuid: e375d22a-230c-4ff7-be87-39f8efbe428c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_homepage
+    - taxonomy.vocabulary.topics
+id: taxonomy_term.topics.field_homepage
+field_name: field_homepage
+entity_type: taxonomy_term
+bundle: topics
+label: 'Homepage Topic'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
