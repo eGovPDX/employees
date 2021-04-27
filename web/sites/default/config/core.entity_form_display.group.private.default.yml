@@ -11,7 +11,6 @@ dependencies:
   module:
     - field_states_ui
     - path
-    - select2
     - text
 id: group.private.default
 targetEntityType: group
@@ -38,28 +37,24 @@ content:
     region: content
   field_org_type:
     weight: 4
-    settings:
-      autocomplete: false
-      match_operator: CONTAINS
-      match_limit: 10
-      width: 100%
+    settings: {  }
     third_party_settings: {  }
-    type: select2_entity_reference
+    type: options_select
     region: content
   field_parent_group:
     weight: 3
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
           type: ''
           list: ''
           add: Add
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     region: content
   label:
     type: string_textfield
