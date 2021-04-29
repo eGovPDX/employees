@@ -88,7 +88,7 @@
         "drupal/views_bulk_operations": "^3.9",
         "drush/drush": "^10.0",
         "npm-asset/select2": "^4.0",
-        "toc/toc": "*",
+        "toc/toc": "^0.3.2",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "wikimedia/composer-merge-plugin": "^2.0"
@@ -97,28 +97,28 @@
         "drupal-composer/drupal-security-advisories": "8.x-dev",
         "roave/security-advisories": "dev-master"
     },
-    "repositories": {
-        "0": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        "1": {
+        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         },
-        "2": {
-             "type": "package",
-             "package": {
-                 "name": "toc/toc",
-                 "version": "v0.3.2",
-                 "type": "drupal-library",
-                 "dist": {
-                     "url": "https://raw.githubusercontent.com/jgallen23/toc/greenkeeper/update-all/dist/toc.min.js",
-                     "type": "file"
-                 }
-             }
-         }
-    },
+        {
+            "type": "package",
+            "package": {
+                "name": "toc/toc",
+                "version": "v0.3.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://raw.githubusercontent.com/jgallen23/toc/greenkeeper/update-all/dist/toc.min.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "conflict": {
         "drupal/drupal": "*"
     },
