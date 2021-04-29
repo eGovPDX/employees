@@ -22,6 +22,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - text
+    - toc_js_per_node
     - user
     - views
   theme:
@@ -79,7 +80,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 3
           f4b204f2-ce95-4ec0-988b-a3c1bcf350f2:
             uuid: f4b204f2-ce95-4ec0-988b-a3c1bcf350f2
             region: side
@@ -194,7 +195,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
-            weight: 2
+            weight: 4
           8bb88404-c60c-4eb4-b6fb-bbe01cd31936:
             uuid: 8bb88404-c60c-4eb4-b6fb-bbe01cd31936
             region: main
@@ -212,7 +213,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: boolean
             additional: {  }
-            weight: 3
+            weight: 5
           29766ecb-7fec-449e-b9eb-c7f61a193118:
             uuid: 29766ecb-7fec-449e-b9eb-c7f61a193118
             region: main
@@ -229,7 +230,36 @@ third_party_settings:
                 third_party_settings: {  }
                 type: datetime_default
             additional: {  }
-            weight: 4
+            weight: 6
+          0458ca11-2fca-4996-9d9e-fa9b35336bea:
+            uuid: 0458ca11-2fca-4996-9d9e-fa9b35336bea
+            region: main
+            configuration:
+              id: toc_js_node
+              label: 'Toc.js node block'
+              provider: toc_js_per_node
+              label_display: '0'
+              title: 'On this page'
+              selectors: h2
+              selectors_minimum: '0'
+              container: .field--name-body
+              prefix: toc
+              list_type: ul
+              classes: ''
+              back_to_top: 0
+              back_to_top_label: 'Back to top'
+              smooth_scrolling: 1
+              scroll_to_offset: '100'
+              highlight_on_scroll: 1
+              highlight_offset: '100'
+              sticky: 0
+              sticky_offset: '0'
+              sticky_stop: ''
+              sticky_stop_padding: '0'
+              context_mapping:
+                node: layout_builder.entity
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -336,3 +366,4 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  toc_js: true
