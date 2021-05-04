@@ -14,9 +14,11 @@ dependencies:
     - node.type.news
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_library
     - smart_date
     - text
+    - toc_js_per_node
     - user
   theme:
     - cloudy2
@@ -107,7 +109,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 3
           c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2:
             uuid: c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2
             region: menu
@@ -203,10 +205,47 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
+            weight: 4
+          3d3db562-0fdb-4945-a728-c57a90d72fc1:
+            uuid: 3d3db562-0fdb-4945-a728-c57a90d72fc1
+            region: main
+            configuration:
+              id: toc_js_node
+              label: 'Toc.js node block'
+              provider: toc_js_per_node
+              label_display: '0'
+              title: 'In this article'
+              selectors: h2
+              selectors_minimum: '0'
+              container: .field--name-body
+              prefix: ''
+              list_type: ul
+              classes: ''
+              back_to_top: 0
+              back_to_top_label: 'Back to top'
+              smooth_scrolling: 1
+              scroll_to_offset: '100'
+              highlight_on_scroll: 1
+              highlight_offset: '100'
+              sticky: 0
+              sticky_offset: '0'
+              sticky_stop: ''
+              sticky_stop_padding: '0'
+              context_mapping:
+                node: layout_builder.entity
+            additional: {  }
             weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -260,3 +299,4 @@ hidden:
   langcode: true
   links: true
   search_api_excerpt: true
+  toc_js: true
