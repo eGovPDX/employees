@@ -5,6 +5,8 @@ dependencies:
   module:
     - menu_ui
     - scheduler
+    - toc_js
+    - toc_js_per_node
 third_party_settings:
   menu_ui:
     available_menus: {  }
@@ -22,6 +24,27 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: true
+  toc_js:
+    toc_js_active: 1
+    title: 'On this page'
+    selectors: h2
+    selectors_minimum: '0'
+    container: .field--name-body
+    list_type: ul
+    smooth_scrolling: 1
+    scroll_to_offset: '0'
+    prefix: ''
+    back_to_top: 0
+    back_to_top_label: 'Back to top'
+    highlight_on_scroll: 1
+    highlight_offset: '100'
+    sticky: 0
+    sticky_offset: '0'
+    sticky_stop: ''
+    sticky_stop_padding: '0'
+  toc_js_per_node:
+    override: 1
+    override_default: 0
 _core:
   default_config_hash: KuyA4NHPXcmKAjRtwa0vQc2ZcyrUJy6IlS2TAyMNRbc
 name: Page
