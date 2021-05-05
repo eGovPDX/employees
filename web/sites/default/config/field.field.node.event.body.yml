@@ -6,7 +6,14 @@ dependencies:
     - field.storage.node.body
     - node.type.event
   module:
+    - allowed_formats
     - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
 _core:
   default_config_hash: _-djmcVu3bv-WkyjUTjJABeNbj1zAqrZAFpij-CtEI0
 id: node.event.body
