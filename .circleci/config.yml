@@ -27,18 +27,21 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore Terminus cache
         keys:
-          - terminus_-{{ checksum "composer.lock" }}
+          - terminus_2_with_build_tools_2
     - run:
         name: Install Terminus
         command: |
           if [ ! -f "/tmp/vendor/pantheon-systems/terminus/bin/terminus" ]; then
-          cd /tmp && composer require pantheon-systems/terminus:^2.0.0
+            cd /tmp && composer require pantheon-systems/terminus:^2.0.0
+            mkdir -p ~/.terminus/plugins
+            composer create-project --no-dev -d ~/.terminus/plugins pantheon-systems/terminus-build-tools-plugin:^2.0.0
           fi
     - save_cache:
         name: Save Terminus cache
-        key: terminus_-{{ checksum "composer.lock" }}
+        key: terminus_2_with_build_tools_2
         paths:
           - "/tmp/vendor"
+          - "/root/.terminus"
     - restore_cache:
         name: Restore theme dependencies cache
         keys:
@@ -92,24 +95,21 @@ build_and_deploy: &build_and_deploy
           # Terminus log in with the user email that will be displayed as the commit user in Pantheon Git repo
           terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email"
           # Git operations
+          git config --global user.name $CIRCLE_USERNAME
+          git config --global user.email $eGov_Email
+          git config --global core.safecrlf false
           git remote add pantheon ssh://codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435@codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435.drush.in:2222/~/repository.git
-          git config --global user.email "$eGov_Email"
+
           # Force add all files to include those excluded by .gitignore
-          cd /var/www/html && find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
-          cd /var/www/html && find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
+          cd /var/www/html
+          find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
+          find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
+          rm -r ./web/themes/custom/cloudy2/node_modules/
           git add -f /var/www/html
+          
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
-
-          # Set the git commit user name and email address so it's clear in Pantheon log who made the change
-          if [[ $CIRCLE_USERNAME = "" ]]; then
-            git config --global user.name Dependabot
-          else
-            git config --global user.name $CIRCLE_USERNAME
-          fi
-          git config --global user.email $eGov_Email
-
           export COMMIT_MSG="$(git log -1 --pretty=%B)"
           git commit -m "CircleCI deployment for: " -m "$COMMIT_MSG" --quiet
 
@@ -118,11 +118,43 @@ build_and_deploy: &build_and_deploy
             echo "Deploy to Pantheon DEV site"
             # Set Pantheon environment name
             echo "export PANTHEON_ENV=dev" >> $BASH_ENV && source $BASH_ENV
-            # Set the connection type to GIT
-            terminus connection:set $CIRCLE_PROJECT_REPONAME.dev git
-            git push -f pantheon master
-            # TODO: Sanitize DB here
-            # terminus env:clone-content $CIRCLE_PROJECT_REPONAME.test dev
+          else
+            echo "export PANTHEON_ENV=$CIRCLE_BRANCH" >> $BASH_ENV && source $BASH_ENV
+
+            # Check if the multidev branch site exists. If not, create it
+            terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
+            if grep -Fxq "$PANTHEON_ENV" ./env_list.txt; then
+              echo "Found multidev site"
+            else
+              # Determine base branch of PR
+              #   - Extract PR number from pull request URL
+              #   - Query GitHub API for PR data and extract base branch from JSON base.ref property
+              [[ $CIRCLE_PULL_REQUEST =~ \/pull\/([0-9]+)$ ]]
+              BASE=$(curl -s https://api.github.com/repos/egovPDX/$CIRCLE_PROJECT_REPONAME/pulls/${BASH_REMATCH[1]} | grep -Pzo '(?s)"base":.*?"ref": "\K[A-Za-z0-9_-]+' | tr -d '\0')
+              if [[ $BASE = "master" ]]; then
+                BASE=dev
+              fi
+              # Create a new multidev with files and database from site corresponding to PR's base branch.
+              echo "Creating new multidev site cloned from $BASE. Please wait."
+              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV
+            fi
+            rm -rf ./env_list.txt
+          fi
+
+          # Set the connection type to GIT
+          terminus connection:set $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV git
+
+          # Force push $CIRCLE_BRANCH to Pantheon
+          git push -f pantheon $CIRCLE_BRANCH:$CIRCLE_BRANCH
+
+          echo "Waiting for the workflow: Sync code on $PANTHEON_ENV..."
+          terminus build:workflow:wait $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV "Sync code on \"$PANTHEON_ENV\""
+          echo "Rebuilding cache..."
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+          echo "Running drush deploy..."
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- deploy -v -y
+
+          if [[ $CIRCLE_BRANCH = "master" ]]; then
             # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
             # Read the last Git log in the master branch. Get the story ID from the start of the log.
             # Example: POWR-3058 Delete all related multi-devs when a branch is merged
@@ -145,73 +177,6 @@ build_and_deploy: &build_and_deploy
                 terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.$env_name -y
                 echo "Deleted multi-dev: $env_name"
               done <./matching_env_list.txt
-            fi
-            echo "Waiting for sync code workflow to finish..."
-            until [ $(terminus workflow:list --fields status,env --format string -- $CIRCLE_PROJECT_REPONAME | egrep -i $PANTHEON_ENV -m 1 | egrep -i -o "^\w+") == succeeded ]; do
-              sleep 30
-            done
-            echo "Rebuilding cache..."
-            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
-            echo "Running drush deploy..."
-            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- deploy -v -y
-          else  # All other commits deploy to a multidev
-            # Set Pantheon environment name
-            if [[ $CIRCLE_BRANCH =~ ^dependabot\/ ]] && [[ $CIRCLE_PULL_REQUEST =~ \/pull\/([0-9]+)$ ]]; then
-              echo "export PANTHEON_ENV=bot-${BASH_REMATCH[1]}" >> $BASH_ENV && source $BASH_ENV
-            else
-              echo "export PANTHEON_ENV=$CIRCLE_BRANCH" >> $BASH_ENV && source $BASH_ENV
-            fi
-            echo "Pantheon environment name is $PANTHEON_ENV"
-
-            # Check if the multidev branch site exists. If not, create it
-            terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
-            if grep -Fxq "$PANTHEON_ENV" ./env_list.txt; then
-              echo "Found multidev site"
-            else
-              # Determine base branch of PR
-              #   - Extract PR number from pull request URL
-              #   - Query GitHub API for PR data and extract base branch from JSON base.ref property
-              [[ $CIRCLE_PULL_REQUEST =~ \/pull\/([0-9]+)$ ]]
-              BASE=$(curl -s https://api.github.com/repos/egovPDX/$CIRCLE_PROJECT_REPONAME/pulls/${BASH_REMATCH[1]} | grep -Pzo '(?s)"base":.*?"ref": "\K[A-Za-z0-9_-]+' | tr -d '\0')
-              if [[ $BASE = "master" ]]; then
-                BASE=dev
-              fi
-              # Create a new multidev with files and database from site corresponding to PR's base branch.
-              echo "Creating new multidev site cloned from $BASE. Please wait."
-              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV
-            fi
-            rm -rf ./env_list.txt
-            # Set the connection type to GIT
-            terminus connection:set $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV git
-            # Force push $CIRCLE_BRANCH to Pantheon as branch named $PANTHEON_ENV
-            git push -f pantheon $CIRCLE_BRANCH:$PANTHEON_ENV
-
-            echo "Waiting for sync code workflow to finish..."
-            until [ $(terminus workflow:list --fields status,env --format string -- $CIRCLE_PROJECT_REPONAME | egrep -i $PANTHEON_ENV -m 1 | egrep -i -o "^\w+") == succeeded ]; do
-              sleep 30
-            done
-            echo "Rebuilding cache..."
-            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
-            echo "Running drush deploy..."
-            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- deploy -v -y
-
-            if [[ $CIRCLE_BRANCH =~ ^dependabot\/ ]]; then
-              echo "Dependabot branch detected..."
-
-              # Set the connection type to SFTP
-              terminus connection:set $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV sftp
-
-              # Clone database from DEV
-              # This is necessary if the build gets re-run because the drush cim above can
-              # interfere with the drush cex below (by importing what was previously exported)
-              terminus env:clone-content $CIRCLE_PROJECT_REPONAME.dev $PANTHEON_ENV --db-only --cc -y
-              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y
-
-              # Abort if there's any database updates that cause a configuration change
-              echo "Run database update... and abort if there's a configuration change"
-              echo "IMPORTANT: If there's a configuation change, download this branch and manually update the dependency"
-              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- updb -y
-              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cex --no   # this will return failure code if there's config to export
             fi
           fi
 
