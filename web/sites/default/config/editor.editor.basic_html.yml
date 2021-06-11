@@ -15,48 +15,51 @@ settings:
     rows:
       -
         -
-          name: 'Block Formatting'
-          items:
-            - Format
-        -
           name: Formatting
           items:
+            - Format
             - Styles
+            - RemoveFormat
             - Bold
             - Italic
             - Strike
-            - Blockquote
-            - HorizontalRule
-            - Table
             - Superscript
             - Subscript
-            - SpecialChar
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+            - Outdent
+            - Indent
         -
           name: Linking
           items:
             - DrupalLink
             - DrupalUnlink
         -
-          name: Lists
-          items:
-            - BulletedList
-            - NumberedList
-        -
           name: Media
           items:
             - DrupalMediaLibrary
         -
+          name: Insert
+          items:
+            - Blockquote
+            - SpecialChar
+            - HorizontalRule
+            - Table
+        -
           name: Tools
           items:
-            - Maximize
-            - RemoveFormat
+            - PasteText
             - ShowBlocks
             - Source
+            - Maximize
   plugins:
-    stylescombo:
-      styles: ''
     language:
       language_list: un
+    stylescombo:
+      styles: 'a.btn.btn-primary|Primary Button'
 image_upload:
   status: true
   scheme: public

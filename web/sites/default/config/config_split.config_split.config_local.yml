@@ -6,7 +6,9 @@ id: config_local
 label: Local
 description: 'Config for local Lando environments'
 folder: sites/default/config_local
-module: {  }
+module:
+  devel: 0
+  kint: 0
 theme: {  }
 blacklist: {  }
 graylist: {  }

@@ -20,10 +20,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: false
+    status: true
     weight: -10
     settings:
-      allowed_html: '<a href hreflang !href accesskey id rel target title class=" btn-cta btn-cta-outline"> <abbr title> <blockquote cite> <br> <caption class> <figcaption> <cite> <code> <dd> <div class> <dl> <drupal-entity data-* title alt data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <dt> <em> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <hr> <i class=""> <img src alt data-entity-type data-entity-uuid data-align data-caption width height> <li> <ol type start class> <p class> <pre> <s> <span> <strong> <sub> <sup> <table class summary> <tbody class> <td class scope colspan rowspan> <tfoot class> <th scope colspan rowspan> <thead class> <tr class scope> <ul type>'
+      allowed_html: '<drupal-entity data-* title alt data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title><em> <strong> <cite> <blockquote cite> <code> <span lang=""> <ul type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p class=""> <hr> <sup> <sub> <s> <img src alt data-entity-type data-entity-uuid> <pre> <i class=""> <drupal-entity data-* title alt data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode> <a href hreflang !href accesskey id rel target title class="btn btn-primary"> <div class> <ol type start class="code-section-list"> <br> <table class summary> <th scope colspan rowspan> <tr class scope> <td class scope colspan rowspan> <thead class> <tbody class> <tfoot class> <abbr title> <caption class>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_align:
