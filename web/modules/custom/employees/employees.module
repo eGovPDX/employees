@@ -200,3 +200,17 @@ function _load_latest_revision($node)
         "previous" =>  $previous_vid ? \Drupal::entityTypeManager()->getStorage('node')->loadRevision($previous_vid) : null,
     ];
 }
+
+/**
+ * Add destination parameter to log in/out URLs.
+ * 
+ * Implements hook_preprocess_menu__account().
+ */
+function cloudy2_preprocess_menu__account(array &$variables) {
+    $variables['#cache']['max-age'] = 0;
+    $destination = \Drupal::request()->getRequestUri();
+
+    if (isset($variables['items']['user.logout']['url'])) {
+        $variables['items']['user.logout']['url']->setRouteParameter("destination", $destination);
+    }
+}

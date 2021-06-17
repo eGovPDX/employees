@@ -233,7 +233,7 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     $redirect = FALSE;
 
     // Iterate the current path and alias.
-    foreach ($current as &$check) {
+    foreach ($current as $check) {
       // Remove the leading or trailer slash.
       $check = $this->pathSlashCut($check);
 
