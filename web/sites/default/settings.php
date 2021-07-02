@@ -24,6 +24,17 @@ if (file_exists($local_settings)) {
   include $local_settings;
 }
 
+// Set environment variable for config_split module
+if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
+  // Pantheon environments are 'live', 'test', 'dev', and '[multidev name]'
+  $env = $_ENV['PANTHEON_ENVIRONMENT'];
+}
+else {
+  // Default to lando if no Pantheon Environment is set.
+  $env = 'lando';
+  $_ENV['PANTHEON_ENVIRONMENT'] = 'lando';
+}
+
 if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   // Redirect to https://$primary_domain in the Live environment
   if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
@@ -84,16 +95,6 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   }
 }
 
-// Set environment variable for config_split module
-if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
-  // Pantheon environments are 'live', 'test', 'dev', and '[multidev name]'
-  $env = $_ENV['PANTHEON_ENVIRONMENT'];
-}
-else {
-  // Treat local dev same as Pantheon 'dev'
-  $env = 'dev';
-}
-
 // Enable/disable config_split configurations based on the current environment
 $config['config_split.config_split.config_multidev']['status'] = FALSE;
 $config['config_split.config_split.config_dev']['status'] = FALSE;
@@ -125,4 +126,10 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
     $config['google_tag.container.portland.gov']['environment_id'] = 'env-1';
     $config['google_tag.container.portland.gov']['environment_token'] = 'ooMp5LjvXgMdbFJ9wE617g';
   }
+}
+
+// Automatically generated include for settings managed by ddev.
+$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
+if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
+  require $ddev_settings;
 }
