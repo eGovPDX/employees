@@ -10,7 +10,7 @@ config:
   composer_version: 2
 services:
   database:
-    type: mariadb:10.3
+    type: mariadb:10.4
   appserver:
     build_as_root:
       - /bin/sh -c "cp /app/cop_ca_*.crt /usr/local/share/ca-certificates/"
