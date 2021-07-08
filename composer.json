@@ -17,8 +17,9 @@
         "drupal/clamav": "^2.0",
         "drupal/config_split": "^1.4",
         "drupal/console": "~1.0",
-        "drupal/core-composer-scaffold": "^8.9",
-        "drupal/core-recommended": "^8.9",
+        "drupal/core-composer-scaffold": "^9",
+        "drupal/core-project-message": "^9",
+        "drupal/core-recommended": "^9",
         "drupal/crop": "^2.0",
         "drupal/ctools": "^3.0",
         "drupal/datalayer": "^1.0@beta",
@@ -95,7 +96,7 @@
     },
     "require-dev": {
         "drupal-composer/drupal-security-advisories": "8.x-dev",
-        "drupal/kint": "^2.1",
+        "drupal/devel": "^4.1",
         "roave/security-advisories": "dev-master"
     },
     "repositories": [
@@ -144,15 +145,12 @@
             "drupal/core": {
                 "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
                 "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2019-04-28/2797583-102_8_7_x.patch",
-                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2019-11-13/1349080-429.patch",
+                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2021-04-02/1349080-487.patch",
                 "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2018-04-19/node-revisions-missing-local-tasks-2885278-11.patch",
                 "2769289 - Revision User information not displayed in views when content revision user is selected for View type Content": "https://www.drupal.org/files/issues/2018-09-07/node_revision_author-2769289-11.patch",
-                "2457999 - Cannot use relationship for rendered entity on Views": "https://www.drupal.org/files/issues/2020-06-17/cannot-use-relationship-2457999-244.patch",
-                "2998826 - Term route context (allows block placed on term pages)": "https://www.drupal.org/files/issues/2019-04-12/term_route_context-2998826-31.patch",
                 "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2020-03-23/3114467-8.patch",
-                "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2020-04-16/962664-drupal-add-unpublished-nodes-to-taxonomy-index-149.patch",
+                "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2021-02-03/962664-drupal-add-unpublished-nodes-to-taxonomy-index-168.patch",
                 "3099878 - Media Library: Default value for data-align attribute should not be center": "https://www.drupal.org/files/issues/2019-12-09/3099878-1.patch",
-                "3097416 - When embedding media, don't let authors choose view modes that are not enabled for that media type": "https://www.drupal.org/files/issues/2020-01-31/3097416-ckeditor-view-modes-8.9-combined.patch",
                 "2719797 - New option for Views page displays to use the admin theme": "https://www.drupal.org/files/issues/2020-10-07/2719797-109.patch"
             },
             "drupal/datetime_range": {
