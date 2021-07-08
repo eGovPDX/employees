@@ -1,0 +1,42 @@
+uuid: f44693be-64e1-447e-87a8-169e90c4e6eb
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:5eee3025-2943-4412-9d7b-4c13f4e0984e'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - cloudy2
+id: feedbacklink
+theme: cloudy2
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:5eee3025-2943-4412-9d7b-4c13f4e0984e'
+settings:
+  id: 'block_content:5eee3025-2943-4412-9d7b-4c13f4e0984e'
+  label: 'Feedback link'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/feedback\r\n/thank-you-for-feedback\r\n/user/login\r\n/user/password\r\n/entity-browser/*"
+    negate: true
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+      publisher: publisher
+      content_lead: content_lead
+      administrator: administrator
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
