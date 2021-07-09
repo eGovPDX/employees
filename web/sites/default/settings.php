@@ -135,4 +135,4 @@ if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
 }
 
 // Set the configuration sync directory
-$settings['config_sync_directory'] = 'sites/default/files';
+$settings['config_sync_directory'] = 'sites/default/config';
