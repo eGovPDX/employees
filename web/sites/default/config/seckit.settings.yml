@@ -1,9 +1,6 @@
 seckit_xss:
   csp:
     checkbox: true
-    vendor-prefix:
-      x: false
-      webkit: false
     report-only: false
     default-src: '''self'' ''unsafe-inline'' ''unsafe-eval'' chrome-extension: data: *.portland.gov *.ssl.fastly.net cdnjs.cloudflare.com maxcdn.bootstrapcdn.com cdn.jsdelivr.net unpkg.com www.google-analytics.com www.googletagmanager.com tagmanager.google.com bam.nr-data.net bam-cell.nr-data.net js-agent.newrelic.com fontlibrary.org use.fontawesome.com *.googleapis.com *.gstatic.com *.googleusercontent.com *.portlandoregon.gov *.portlandmaps.com *.arcgis.com server.arcgisonline.com *.openstreetmap.org *.opentopomap.org *.tiles.wmflabs.org *.loop11.com *.rawgit.com api.mapbox.com'
     script-src: ''
@@ -16,9 +13,12 @@ seckit_xss:
     font-src: ''
     connect-src: ''
     report-uri: 'https://portlandgov.report-uri.com/r/d/csp/enforce'
-    upgrade-req: false
     policy-uri: ''
     style-src: ''
+    vendor-prefix:
+      x: false
+      webkit: false
+    upgrade-req: false
   x_xss:
     seckit_x_xss_option_disable: Disabled
     seckit_x_xss_option_0: '0'
@@ -42,10 +42,7 @@ seckit_ct:
   expect_ct: true
   max_age: 86400
   report_uri: 'https://portlandgov.report-uri.com/r/d/ct/enforce'
-  enforce: false
-seckit_fp:
-  feature_policy: false
-  feature_policy_policy: ''
+  enforce: true
 seckit_various:
   from_origin: false
   from_origin_destination: same
@@ -54,3 +51,6 @@ seckit_various:
   disable_autocomplete: false
 _core:
   default_config_hash: x6bhN6WZwfVUI_LLMvRJIUW_2c26VTaBozbfXmJWmro
+seckit_fp:
+  feature_policy: false
+  feature_policy_policy: ''
