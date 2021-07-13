@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eebb7ff5e6609944cd2bb2466d6a7998",
+    "content-hash": "a82ecacf87659403158f6888cb2ac3ca",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5935,27 +5935,30 @@
         },
         {
             "name": "drupal/radix",
-            "version": "dev-4.x",
+            "version": "4.10.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/radix.git",
-                "reference": "ad865d31d9d7c7ac258eb7f64bcb688782ac19c4"
+                "reference": "8.x-4.10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/radix-8.x-4.10.zip",
+                "reference": "8.x-4.10",
+                "shasum": "b9fd9c0f12be58fc39c06318d3fe081550f5cbf7"
             },
             "require": {
-                "drupal/components": "^2.1",
+                "drupal/components": "~2.0@beta",
                 "drupal/core": "^8.7.7 || ^9.0"
             },
             "type": "drupal-theme",
             "extra": {
-                "branch-alias": {
-                    "dev-4.x": "4.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-4.10+19-dev",
-                    "datestamp": "1625411104",
+                    "version": "8.x-4.10",
+                    "datestamp": "1601449009",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -5971,7 +5974,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -5981,10 +5984,8 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "Ng Chin Kiong",
-                    "homepage": "https://www.o8.agency",
-                    "email": "ck@o8.agency",
-                    "role": "Maintainer"
+                    "name": "ckng",
+                    "homepage": "https://www.drupal.org/user/16307"
                 },
                 {
                     "name": "doxigo",
@@ -7054,53 +7055,22 @@
         },
         {
             "name": "drupal/toc_js",
-            "version": "dev-2.0.x",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/toc_js.git",
-                "reference": "eb56c639f96d5116386d80b7fd7e6ffa78b3c2ec"
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/toc_js-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "1d4e3a522faaf542019414aa73957fdd26dda587"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-2.0.x": "2.0.x-dev"
-                },
-                "drupal": {
-                    "version": "2.0.0+1-dev",
-                    "datestamp": "1602596541",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "flocondetoile",
-                    "homepage": "https://www.drupal.org/user/2006064"
-                }
-            ],
-            "description": "Build a hierarchical table of contents from header tags present on a page with the toc.js library.",
-            "homepage": "https://www.drupal.org/project/toc_js",
-            "support": {
-                "source": "https://git.drupalcode.org/project/toc_js"
-            }
-        },
-        {
-            "name": "drupal/toc_js_per_node",
-            "version": "2.0.0",
-            "require": {
-                "drupal/core": "^8 || ^9",
-                "drupal/toc_js": "*"
-            },
-            "type": "metapackage",
             "extra": {
                 "drupal": {
                     "version": "2.0.0",
@@ -7121,7 +7091,7 @@
                     "homepage": "https://www.drupal.org/user/2006064"
                 }
             ],
-            "description": "Allow to override per node Toc.js settings.",
+            "description": "Build a hierarchical table of contents from header tags present on a node with the toc.js library.",
             "homepage": "https://www.drupal.org/project/toc_js",
             "support": {
                 "source": "https://git.drupalcode.org/project/toc_js"
@@ -9932,16 +9902,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.91",
+            "version": "0.12.92",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "8226701cd228a0d63c2df995de7ab6070c69ac6a"
+                "reference": "64d4c5dc8ea96972bc18432d137a330239a5d2b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8226701cd228a0d63c2df995de7ab6070c69ac6a",
-                "reference": "8226701cd228a0d63c2df995de7ab6070c69ac6a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/64d4c5dc8ea96972bc18432d137a330239a5d2b2",
+                "reference": "64d4c5dc8ea96972bc18432d137a330239a5d2b2",
                 "shasum": ""
             },
             "require": {
@@ -9972,7 +9942,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.91"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.92"
             },
             "funding": [
                 {
@@ -9992,7 +9962,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-04T15:31:48+00:00"
+            "time": "2021-07-10T13:53:49+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -14686,12 +14656,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "1a08d0c7ab47e57fad0d254951a615f07445e91f"
+                "reference": "88c4d972f82b364386c98eebecf38512708a4de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1a08d0c7ab47e57fad0d254951a615f07445e91f",
-                "reference": "1a08d0c7ab47e57fad0d254951a615f07445e91f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/88c4d972f82b364386c98eebecf38512708a4de4",
+                "reference": "88c4d972f82b364386c98eebecf38512708a4de4",
                 "shasum": ""
             },
             "conflict": {
@@ -14749,6 +14719,7 @@
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
+                "ether/logs": "<3.0.4",
                 "ezsystems/demobundle": ">=5.4,<5.4.6.1",
                 "ezsystems/ez-support-tools": ">=2.2,<2.2.3",
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1",
@@ -15053,7 +15024,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-02T20:02:51+00:00"
+            "time": "2021-07-12T17:14:45+00:00"
         }
     ],
     "aliases": [],
@@ -15073,10 +15044,8 @@
         "drupal/moderation_dashboard": 10,
         "drupal/openid_connect": 10,
         "drupal/rabbit_hole": 10,
-        "drupal/radix": 20,
         "drupal/search_api_location": 15,
         "drupal/search_api_page": 10,
-        "drupal/toc_js": 20,
         "drupal-composer/drupal-security-advisories": 20,
         "roave/security-advisories": 20
     },

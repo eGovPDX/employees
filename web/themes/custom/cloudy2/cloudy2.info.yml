@@ -28,7 +28,6 @@ libraries-override:
 ckeditor_stylesheets:
   - assets/css/cloudy2.style.css
 
-component-libraries:
-  cloudy2:
-    paths:
-      - ./src/components
+components:
+  namespaces:
+    radix: src/components
