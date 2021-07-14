@@ -1,0 +1,28 @@
+uuid: 53a30a13-b0be-4c01-a52d-e12ac5300b90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_group
+    - group.type.employee
+    - taxonomy.vocabulary.group_ad_name_list
+id: taxonomy_term.group_ad_name_list.field_group
+field_name: field_group
+entity_type: taxonomy_term
+bundle: group_ad_name_list
+label: Group
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

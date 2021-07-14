@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
     - field.field.user.user.field_phone
+    - field.field.user.user.field_primary_group
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -62,6 +63,14 @@ content:
       title: ''
     third_party_settings: {  }
     type: telephone_link
+    region: content
+  field_primary_group:
+    weight: 9
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   masquerade:
     weight: 1

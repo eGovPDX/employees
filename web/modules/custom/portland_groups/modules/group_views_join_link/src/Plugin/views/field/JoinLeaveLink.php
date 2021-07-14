@@ -75,7 +75,16 @@ final class JoinLeaveLink extends FieldPluginBase {
     $build = NULL;
     $user = \Drupal::currentUser();
     $current_path = \Drupal::service('path.current')->getPath();
-    if (empty($group->getMember($user))) {
+    $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    // Do not display join/leave link for primary group
+    if($account->hasField('field_primary_group') &&
+      $account->field_primary_group->count() === 1 &&
+      $group->id() === $account->field_primary_group[0]->entity->id()) {
+      $build = [
+        '#markup' => \Drupal\Core\Render\Markup::create("Primary group"),
+      ];
+    }
+    else if (empty($group->getMember($user))) {
       if ($group->hasPermission('join group', $user)) {
         $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(),'destination' => $current_path])->toString();
       }

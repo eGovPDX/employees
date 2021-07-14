@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
     - field.field.user.user.field_phone
+    - field.field.user.user.field_primary_group
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -29,7 +30,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   contact:
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -50,7 +51,7 @@ content:
     type: string_textfield
     region: content
   field_group_names:
-    weight: 7
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -82,15 +83,25 @@ content:
     third_party_settings: {  }
     type: telephone_default
     region: content
+  field_primary_group:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   language:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   masquerade_as:
     type: entity_reference_autocomplete
     region: content
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -99,12 +110,12 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

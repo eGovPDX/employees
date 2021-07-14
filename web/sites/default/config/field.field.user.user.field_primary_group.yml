@@ -1,0 +1,29 @@
+uuid: fd09962b-82fb-41ee-9f32-016c88415837
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_primary_group
+    - group.type.employee
+  module:
+    - user
+id: user.user.field_primary_group
+field_name: field_primary_group
+entity_type: user
+bundle: user
+label: 'Primary group'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
