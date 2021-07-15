@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.field_feature_until
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
@@ -16,6 +17,7 @@ dependencies:
     - field.field.node.page.field_topics
     - node.type.page
     - views.view.group_menu
+    - views.view.related_content
   module:
     - datetime
     - layout_builder
@@ -260,6 +262,45 @@ third_party_settings:
                 node: layout_builder.entity
             additional: {  }
             weight: 2
+          d907ed51-1ebc-4381-8151-ed77fccb7eca:
+            uuid: d907ed51-1ebc-4381-8151-ed77fccb7eca
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_static'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 4
+          fab7f09a-bb3e-4f64-bb3b-bfae477653bb:
+            uuid: fab7f09a-bb3e-4f64-bb3b-bfae477653bb
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_news'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 5
+          1efb7963-7003-4428-bf26-565020ed649b:
+            uuid: 1efb7963-7003-4428-bf26-565020ed649b
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_events'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 6
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -317,6 +358,14 @@ content:
     third_party_settings: {  }
     type: string
     region: first
+  field_related_content:
+    weight: 9
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
   field_reviewer:
     weight: 5
     label: above

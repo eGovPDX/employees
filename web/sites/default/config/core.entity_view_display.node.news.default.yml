@@ -8,10 +8,12 @@ dependencies:
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
+    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -20,6 +22,7 @@ dependencies:
     - text
     - toc_js_per_node
     - user
+    - views
   theme:
     - cloudy2
 third_party_settings:
@@ -235,6 +238,45 @@ third_party_settings:
                 node: layout_builder.entity
             additional: {  }
             weight: 2
+          b80d468d-d30d-4e2a-9e04-1fbce2d7cc62:
+            uuid: b80d468d-d30d-4e2a-9e04-1fbce2d7cc62
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_static'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 4
+          904e17ab-d25b-4ba8-bc7b-8251486e434f:
+            uuid: 904e17ab-d25b-4ba8-bc7b-8251486e434f
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_news'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 5
+          df503ef2-05ac-438b-8b72-f0a1b8714e4f:
+            uuid: df503ef2-05ac-438b-8b72-f0a1b8714e4f
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_events'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 6
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -275,6 +317,14 @@ content:
     third_party_settings: {  }
     type: smartdate_default
     region: content
+  field_related_content:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
   field_tags:
     weight: 3
     label: inline
