@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.featured
     - core.entity_view_mode.node.teaser
     - field.storage.node.field_resource_link
     - node.type.event
@@ -294,6 +295,7 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
@@ -398,7 +400,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: teaser
+          view_mode: featured
           entity_type: node
           plugin_id: rendered_entity
     cache_metadata:
@@ -410,6 +412,7 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
