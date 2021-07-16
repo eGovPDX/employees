@@ -8,11 +8,14 @@ dependencies:
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
+    - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
   module:
+    - smart_date
     - smart_trim
     - user
 id: node.news.teaser
@@ -23,7 +26,7 @@ content:
   body:
     label: hidden
     type: smart_trim
-    weight: 2
+    weight: 1
     settings:
       trim_length: 50
       trim_type: words
@@ -39,10 +42,17 @@ content:
       more_link: false
     third_party_settings: {  }
     region: content
-  links:
+  field_published_on:
+    type: smartdate_default
     weight: 0
     region: content
-    settings: {  }
+    label: inline
+    settings:
+      timezone_override: ''
+      format: date_only
+      force_chronological: false
+      format_type: medium
+      add_classes: false
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
@@ -54,5 +64,6 @@ hidden:
   field_tags: true
   field_topics: true
   langcode: true
+  links: true
   search_api_excerpt: true
   toc_js: true

@@ -8,11 +8,14 @@ dependencies:
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
+    - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
   module:
+    - datetime
     - layout_builder
     - smart_trim
     - user
@@ -43,6 +46,15 @@ content:
         text: true
         trim_zero: true
       more_link: false
+    third_party_settings: {  }
+  field_published_on:
+    type: datetime_default
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      format_type: medium
+      timezone_override: ''
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
