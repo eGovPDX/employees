@@ -1,22 +1,22 @@
-uuid: 65b96b9b-b53e-45f9-9c44-6def80d78f87
+uuid: 4cba2c40-0169-4883-aa82-c2fb1428048e
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.my_groups
+    - views.view.my_content_views
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__my_groups_block_my_groups
+id: views_block__my_content_views_block_my_news
 theme: cloudy2
-region: menu
-weight: -7
+region: content
+weight: -4
 provider: null
-plugin: 'views_block:my_groups-block_my_groups'
+plugin: 'views_block:my_content_views-block_my_news'
 settings:
-  id: 'views_block:my_groups-block_my_groups'
+  id: 'views_block:my_content_views-block_my_news'
   label: ''
   provider: views
   label_display: visible
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/bureaus\r\n/groups\r\n/news*\r\n/events*"
+    pages: '<front>'
     negate: false
     context_mapping: {  }
