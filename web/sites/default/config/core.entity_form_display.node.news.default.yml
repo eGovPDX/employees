@@ -38,6 +38,21 @@ third_party_settings:
         required_fields: true
         weight: 0
       label: Topics
+    group_related:
+      children:
+        - field_related_content
+      parent_name: ''
+      weight: 11
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Related
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -132,13 +147,13 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -167,13 +182,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }

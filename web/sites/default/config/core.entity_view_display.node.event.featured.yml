@@ -1,9 +1,9 @@
-uuid: 677af4ab-d407-497c-a930-50dab1257414
+uuid: bea19ccd-c092-4b76-b873-356b9aa85565
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.search_result
+    - core.entity_view_mode.node.featured
     - field.field.node.event.body
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_feature
@@ -15,52 +15,37 @@ dependencies:
     - node.type.event
   module:
     - layout_builder
+    - layout_library
     - smart_date
-    - smart_trim
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
+  layout_library:
+    enable: false
 _core:
   default_config_hash: XfXOESXjfDxqVoacpjrjq_1BNXO5tYsp7ocnbGrNuak
-id: node.event.search_result
+id: node.event.featured
 targetEntityType: node
 bundle: event
-mode: search_result
+mode: featured
 content:
-  body:
-    type: smart_trim
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      trim_length: 50
-      trim_type: words
-      trim_suffix: ''
-      wrap_output: true
-      wrap_class: trimmed
-      more_text: More
-      more_class: more-link
-      summary_handler: full
-      trim_options:
-        text: true
-        trim_zero: true
-      more_link: false
-    third_party_settings: {  }
   field_when:
     weight: 0
-    label: inline
+    label: hidden
     settings:
       timezone_override: ''
       format: compact
       force_chronological: false
       format_type: medium
       add_classes: false
+      time_wrapper: true
     third_party_settings: {  }
     type: smartdate_default
     region: content
 hidden:
+  body: true
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
