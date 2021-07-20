@@ -8,9 +8,14 @@ dependencies:
     - node.type.news
     - node.type.page
     - node.type.resource
+    - taxonomy.vocabulary.org_type
+  content:
+    - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
+    - datetime
     - group
     - node
+    - taxonomy
     - user
 id: my_content_views
 label: 'My content views'
@@ -235,23 +240,43 @@ display:
           entity_type: group_content
           entity_field: gid
           plugin_id: standard
-        uid:
-          id: uid
-          table: group_content_field_data
-          field: uid
-          relationship: group_content
+        group_content_id:
+          id: group_content_id
+          table: groups_field_data
+          field: group_content_id
+          relationship: gid
           group_type: group
-          admin_label: User
-          required: false
+          admin_label: 'Group content'
+          required: true
+          group_content_plugins:
+            'group_node:event': 'group_node:event'
+            'group_node:news': 'group_node:news'
+            'group_node:page': 'group_node:page'
+            'group_node:resource': 'group_node:resource'
+            group_membership: group_membership
+            'group_media:document': '0'
+            'group_media:image': '0'
+            'group_media:remote_video': '0'
+          entity_type: group
+          plugin_id: group_to_group_content
+        gc__user:
+          id: gc__user
+          table: group_content_field_data
+          field: gc__user
+          relationship: group_content_id
+          group_type: group
+          admin_label: 'Group content User'
+          required: true
+          group_content_plugins:
+            group_membership: group_membership
           entity_type: group_content
-          entity_field: uid
-          plugin_id: standard
+          plugin_id: group_content_to_entity
       arguments:
         uid:
           id: uid
           table: users_field_data
           field: uid
-          relationship: uid
+          relationship: gc__user
           group_type: group
           admin_label: ''
           default_action: default
@@ -296,6 +321,7 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
@@ -396,6 +422,457 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  block_my_events_today:
+    display_plugin: block
+    id: block_my_events_today
+    display_title: 'Block: My events today'
+    position: 6
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'My Events Today'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        link_display: false
+        link_url: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        pager: false
+        sorts: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: between
+          value:
+            min: today
+            max: 'today +23 hours +59 minutes'
+            value: ''
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: gid
+          group_type: group
+          admin_label: ''
+          operator: not
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        status_1:
+          id: status_1
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_when_value_1:
+          id: field_when_value_1
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<'
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: date
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: today
+            type: offset
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_org_type_target_id_1:
+          id: field_org_type_target_id_1
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: gid
+          group_type: group
+          admin_label: ''
+          operator: not
+          value:
+            47: 47
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+      filter_groups:
+        operator: OR
+        groups:
+          1: AND
+          2: AND
+      link_display: page_2
+      link_url: ''
+      use_more: false
+      use_more_always: false
+      use_more_text: 'more news from groups followed'
+      pager:
+        type: some
+        options:
+          items_per_page: 8
+          offset: 0
+      block_hide_empty: true
+      sorts:
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+      block_description: 'My Events Today'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
+        - 'config:core.entity_view_display.node.event.search_result'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.news.default'
+        - 'config:core.entity_view_display.node.news.search_result'
+        - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.search_result'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.resource.default'
+        - 'config:core.entity_view_display.node.resource.search_result'
+        - 'config:core.entity_view_display.node.resource.teaser'
   block_my_news:
     display_plugin: block
     id: block_my_news
@@ -471,6 +948,52 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: gid
+          group_type: group
+          admin_label: ''
+          operator: not
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
@@ -486,6 +1009,7 @@ display:
           items_per_page: 8
           offset: 0
       block_hide_empty: true
+      block_description: 'My News'
     cache_metadata:
       max-age: -1
       contexts:
@@ -496,6 +1020,239 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
+        - 'config:core.entity_view_display.node.event.search_result'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.news.default'
+        - 'config:core.entity_view_display.node.news.search_result'
+        - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.search_result'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.resource.default'
+        - 'config:core.entity_view_display.node.resource.search_result'
+        - 'config:core.entity_view_display.node.resource.teaser'
+  block_my_upcoming_events:
+    display_plugin: block
+    id: block_my_upcoming_events
+    display_title: 'Block: My upcoming events'
+    position: 5
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'My Upcoming Events'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        link_display: false
+        link_url: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        pager: false
+        sorts: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: 'today +23 hours +59 minutes'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: gid
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+      filter_groups:
+        operator: OR
+        groups:
+          1: AND
+      link_display: page_2
+      link_url: ''
+      use_more: true
+      use_more_always: true
+      use_more_text: 'more news from groups followed'
+      pager:
+        type: some
+        options:
+          items_per_page: 8
+          offset: 0
+      block_hide_empty: true
+      sorts:
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+      block_description: 'My Upcoming Events'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
@@ -526,6 +1283,7 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
@@ -541,7 +1299,7 @@ display:
     display_plugin: page
     id: page_my_news
     display_title: 'Page: My news'
-    position: 3
+    position: 4
     display_options:
       display_extenders: {  }
       path: news/my-news
@@ -685,6 +1443,209 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
+        - 'config:core.entity_view_display.node.event.search_result'
+        - 'config:core.entity_view_display.node.event.teaser'
+        - 'config:core.entity_view_display.node.news.default'
+        - 'config:core.entity_view_display.node.news.search_result'
+        - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.search_result'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.resource.default'
+        - 'config:core.entity_view_display.node.resource.search_result'
+        - 'config:core.entity_view_display.node.resource.teaser'
+  page_my_upcoming_events:
+    display_plugin: page
+    id: page_my_upcoming_events
+    display_title: 'Page: My Events'
+    position: 7
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'My Upcoming Events'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        link_display: false
+        link_url: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        pager: false
+        sorts: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            event: event
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: 'today +23 hours +59 minutes'
+            type: offset
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: OR
+        groups:
+          1: AND
+      link_display: page_my_news
+      link_url: ''
+      use_more: true
+      use_more_always: true
+      use_more_text: 'more news from groups followed'
+      pager:
+        type: full
+        options:
+          items_per_page: 25
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      sorts:
+        field_when_value:
+          id: field_when_value
+          table: node__field_when
+          field: field_when_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+        field_when_end_value:
+          id: field_when_end_value
+          table: node__field_when
+          field: field_when_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
+      path: events/my-events
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.event.default'
+        - 'config:core.entity_view_display.node.event.featured'
         - 'config:core.entity_view_display.node.event.search_result'
         - 'config:core.entity_view_display.node.event.teaser'
         - 'config:core.entity_view_display.node.news.default'
