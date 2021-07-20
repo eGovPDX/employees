@@ -1,27 +1,28 @@
-uuid: 39137375-d72f-453d-9f12-f02aeef113e0
+uuid: a879e0d1-a01b-40fa-9797-c2694ac202ba
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.featured_events
+    - views.view.my_content_views
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__featured_events_block_upcoming_sitewide_events
+id: views_block__my_content_views_block_my_upcoming_events
 theme: cloudy2
 region: side
-weight: -7
+weight: 0
 provider: null
-plugin: 'views_block:featured_events-block_upcoming_sitewide_events'
+plugin: 'views_block:my_content_views-block_my_upcoming_events'
 settings:
-  id: 'views_block:featured_events-block_upcoming_sitewide_events'
+  id: 'views_block:my_content_views-block_my_upcoming_events'
   label: ''
   provider: views
   label_display: visible
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path

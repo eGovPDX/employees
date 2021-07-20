@@ -81,6 +81,14 @@
 <article{{ attributes.addClass(classes) }}>
   <header>
     {{ title_prefix }}
+    {% if label and not page %}
+      <div class="node__top-wrapper">
+        {{ content.field_image }}
+        <h3{{ title_attributes.addClass('node__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h3>
+      </div>
+    {% endif %}
     {{ title_suffix }}
     {% if display_submitted %}
       <div class="node__meta">
@@ -88,14 +96,6 @@
           {{ 'By'|t }} {% apply spaceless %}<span class="node__author">{{ author_name }}</span>{% endapply %}, {{ date }}
         </span>
         {{ metadata }}
-      </div>
-    {% endif %}
-    {% if label and not page %}
-      <div class="node__top-wrapper">
-        {{ content.field_image }}
-        <h3{{ title_attributes.addClass('node__title') }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h3>
       </div>
     {% endif %}
   </header>

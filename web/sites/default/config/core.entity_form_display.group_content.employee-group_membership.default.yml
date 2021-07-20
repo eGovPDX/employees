@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.group_content.employee-group_membership.group_roles
     - group.content_type.employee-group_membership
+  module:
+    - field_states_ui
 id: group_content.employee-group_membership.default
 targetEntityType: group_content
 bundle: employee-group_membership
@@ -25,7 +27,12 @@ content:
     weight: 1
     region: content
     settings: {  }
-    third_party_settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
 hidden:
   langcode: true
   path: true
