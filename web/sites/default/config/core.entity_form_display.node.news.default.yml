@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
@@ -39,6 +40,21 @@ third_party_settings:
         required_fields: true
         weight: 0
       label: Topics
+    group_related:
+      children:
+        - field_related_content
+      parent_name: ''
+      weight: 11
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Related
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -84,10 +100,20 @@ content:
     type: datetime_default
     region: content
   field_published_on:
-    weight: 13
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_related_content:
+    weight: 12
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_reviewer:
     weight: 7
@@ -133,19 +159,19 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -174,18 +200,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 11
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }

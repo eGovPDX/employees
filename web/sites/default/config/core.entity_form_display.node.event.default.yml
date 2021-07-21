@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_feature
+    - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_tags
     - field.field.node.event.field_topics
@@ -38,6 +39,21 @@ third_party_settings:
         required_fields: true
         weight: 0
       label: Topics
+    group_related:
+      children:
+        - field_related_content
+      parent_name: ''
+      weight: 20
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Related
 _core:
   default_config_hash: CVAKxLp27yWdjTSep4DYtCnqX23XA8AYXXryfMA0Q3A
 id: node.event.default
@@ -77,6 +93,16 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_related_content:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_reviewer:
     weight: 7
