@@ -87,14 +87,20 @@ build_and_deploy: &build_and_deploy
         when: on_success
         no_output_timeout: 15m # allow 15 minutes instead of 10 minute default for script to complete
         command: |
+          # Add terminus into path
           export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
+
           # Don't check the repo host key
           export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
           # Don't check for host key for Pantheon sites
           echo -e "host *.drush.in\n    StrictHostKeyChecking no" >> ~/.ssh/config
+
           # Terminus log in with the user email that will be displayed as the commit user in Pantheon Git repo
           terminus auth:login --machine-token="$eGov_Terminus" --email="$eGov_Email"
+
           # Git operations
+          # Set the git commit user name and email address so it's clear in Pantheon log who made the change
           git config --global user.name $CIRCLE_USERNAME
           git config --global user.email $eGov_Email
           git config --global core.safecrlf false
@@ -110,6 +116,8 @@ build_and_deploy: &build_and_deploy
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
+
+          # Commit to Pantheon
           export COMMIT_MSG="$(git log -1 --pretty=%B)"
           git commit -m "CircleCI deployment for: " -m "$COMMIT_MSG" --quiet
 
@@ -149,34 +157,69 @@ build_and_deploy: &build_and_deploy
 
           echo "Waiting for the workflow: Sync code on $PANTHEON_ENV..."
           terminus build:workflow:wait $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV "Sync code on \"$PANTHEON_ENV\""
+
+          # Run the equivalent of a drush deploy
+
           echo "Rebuilding cache..."
           terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
-          echo "Running drush deploy..."
-          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- deploy -v -y
+          echo "Running database updates..."
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- updb -y
+          echo "Importing config..."
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y -vvv
+          echo "Rebuilding cache..."
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
 
-          if [[ $CIRCLE_BRANCH = "master" ]]; then
-            # After success deployment to DEV, remove the multidev site if this is a merge of a PR.
-            # Read the last Git log in the master branch. Get the story ID from the start of the log.
-            # Example: POWR-3058 Delete all related multi-devs when a branch is merged
+          # When commit on a permanent branch or master, delete the multi-dev site with name like "powr-1234a"
+          if [[ $PANTHEON_ENV = "release" ]]; then
+            # After success deployment to release, remove the multidev site if this is a merge of a PR.
             cd /var/www/html
+
             # Must read the last commit message from Github. The last one in local repo is "CircleCI Deployment"
-            last_log=$(git log origin/master --pretty=format:%s -1)
-            lowercase_last_log=`php -r "print strtolower('$last_log');"`
-            if [[ $lowercase_last_log =~ ^(powr-[0-9]+)[[:space:]]+.+$ ]]; then
-              echo "Found the story ID: '${BASH_REMATCH[1]}'";
+            last_log=$(git log origin/$CIRCLE_BRANCH --pretty=format:%s -1)
+            lowercase_last_log="${last_log,,}"
+            JIRA_STORY_ID=""
+            # Simple merge
+            # Example: Merge pull request #35 from eGovPDX/powr-152
+            if [[ $lowercase_last_log =~ (^merge pull request #[0-9]* from egovpdx\/)([^,]*) ]]; then
+              echo "Found story ID from merge commit message: '${BASH_REMATCH[2]}'";
+              JIRA_STORY_ID=${BASH_REMATCH[2]}
+            # Squash and Merge on other feature branches
+            # Example: POWR-3058 Delete all related multi-devs when a branch is merged
+            elif [[ $lowercase_last_log =~ ^(powr-[0-9]+)[[:space:]]+.+$ ]]; then
+              echo "Found story ID from squash and merge commit message: '${BASH_REMATCH[1]}'";
+              JIRA_STORY_ID=${BASH_REMATCH[1]}
+            else
+              echo "Cannot find JIRA story ID from the last commit message: $lowercase_last_log"
+              exit 0
+            fi
 
-              # Save all multi-dev names in a file
-              terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
+            # Save all multi-dev names in a file
+            terminus multidev:list --format=list --field=Name $CIRCLE_PROJECT_REPONAME > ./env_list.txt
+            echo "Multi-dev site list saved into env_list.txt"
 
-              # Pattern to match "powr-1234a" or "powr-1234-1" or "powr-1234-a". Not "powr-12345"
-              env_pattern="^${BASH_REMATCH[1]}([a-z]*|(-\d+)|(-[a-z]+))$"
+            # Pattern to match "powr-1234a" or "powr-1234-1" or "powr-1234-a". Not "powr-12345"
+            env_pattern="^${JIRA_STORY_ID}([a-z]*|(-\d+)|(-[a-z]+))$"
 
-              # Find and delete all multidevs starting with the story ID
-              grep -E "${env_pattern}" ./env_list.txt > ./matching_env_list.txt
-              while read env_name; do
-                terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.$env_name -y
-                echo "Deleted multi-dev: $env_name"
-              done <./matching_env_list.txt
+            # Find and delete all multidevs starting with the story ID
+            if [ -f "./env_list.txt" ]
+            then
+              echo "Found multi-dev sites:";
+              # cat ./env_list.txt
+              grep -E "${env_pattern}" ./env_list.txt > ./matching_env_list.txt || true
+              # cat ./matching_env_list.txt
+              # If the file is NOT empty
+              if [ -s "./matching_env_list.txt" ]
+              then
+                echo "Start to delete multi-dev..."
+                while read env_name; do
+                  terminus multidev:delete --delete-branch $CIRCLE_PROJECT_REPONAME.$env_name -y
+                  echo "Deleted multi-dev: $env_name"
+                done <./matching_env_list.txt
+                echo "Done deleting multi-dev"
+                rm -f ./matching_env_list.txt
+              else
+                echo "No multi-dev site found matching the story ID: $JIRA_STORY_ID."
+              fi
             fi
           fi
 
