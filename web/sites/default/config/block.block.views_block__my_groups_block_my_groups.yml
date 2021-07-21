@@ -12,7 +12,7 @@ dependencies:
 id: views_block__my_groups_block_my_groups
 theme: cloudy2
 region: menu
-weight: -6
+weight: -7
 provider: null
 plugin: 'views_block:my_groups-block_my_groups'
 settings:
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/bureaus\r\n/groups"
+    pages: "<front>\r\n/bureaus\r\n/groups\r\n/news*\r\n/events*"
     negate: false
     context_mapping: {  }

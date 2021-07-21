@@ -1,0 +1,25 @@
+uuid: 219b1e6c-60ce-4423-a90b-aecf986d2edb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_content
+    - node.type.event
+id: node.event.field_related_content
+field_name: field_related_content
+entity_type: node
+bundle: event
+label: Related
+description: 'Relate pages, resources, news, and events. Related news will display as a list of recent news within the past 2 months ordered by last updated. Related events will display as a list of up to 5 upcoming events ordered by date. Related pages and resources will display under the “Related” section heading in the order entered in this field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: ent_ref_related
+      display_name: ent_ref_related
+      arguments: {  }
+field_type: entity_reference
