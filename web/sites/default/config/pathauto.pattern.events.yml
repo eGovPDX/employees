@@ -7,16 +7,16 @@ dependencies:
 id: events
 label: Events
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/events/[node:field_when:value-format:numeric_year]/[node:field_when:value-format:numeric_month]/[node:field_when:value-format:numeric_day]/[node:title]'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/events/[node:field_when:start_date:numeric_year]/[node:field_when:start_date:numeric_month]/[node:field_when:start_date:numeric_day]/[node:title]'
 selection_criteria:
-  ee73a958-d869-44a2-a112-d06ecb9eb6d9:
+  b093d68b-377e-4e54-89fe-6fe54e7f3075:
     id: node_type
     bundles:
       event: event
     negate: false
     context_mapping:
       node: node
-    uuid: ee73a958-d869-44a2-a112-d06ecb9eb6d9
+    uuid: b093d68b-377e-4e54-89fe-6fe54e7f3075
 selection_logic: and
-weight: -5
+weight: -10
 relationships: {  }
