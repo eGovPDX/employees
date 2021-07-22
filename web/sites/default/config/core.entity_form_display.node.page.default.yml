@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.field_feature_until
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
+    - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
@@ -42,6 +43,21 @@ third_party_settings:
         required_fields: true
         weight: 0
       label: Topics
+    group_related:
+      children:
+        - field_related_content
+      parent_name: ''
+      weight: 14
+      format_type: details_sidebar
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+        weight: 0
+      label: Related
 _core:
   default_config_hash: AD_lefuYmjsKeH3OQApsyP_nLj6ZnGaALznLQSQ0Z_o
 id: node.page.default
@@ -81,14 +97,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_feature:
-    weight: 20
+    weight: 21
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_feature_until:
-    weight: 21
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -114,6 +130,16 @@ content:
           type: ''
           list: ''
           add: Add
+    type: entity_reference_autocomplete
+    region: content
+  field_related_content:
+    weight: 23
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
   field_reviewer:
@@ -203,18 +229,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 19
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -238,18 +264,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -1,0 +1,31 @@
+uuid: 6bd6b077-6578-4e94-b218-f6f903fa72e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.my_content_views
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: views_block__my_content_views_block_my_events_today
+theme: cloudy2
+region: side
+weight: -8
+provider: null
+plugin: 'views_block:my_content_views-block_my_events_today'
+settings:
+  id: 'views_block:my_content_views-block_my_events_today'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

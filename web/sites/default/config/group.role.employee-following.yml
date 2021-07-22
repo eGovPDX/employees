@@ -1,0 +1,24 @@
+uuid: d55f6888-0c04-408f-bdea-599d61be1116
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+id: employee-following
+label: Following
+weight: -10
+internal: false
+audience: member
+group_type: employee
+permissions_ui: true
+permissions:
+  - 'leave group'
+  - 'view group'
+  - 'view group_media:document entity'
+  - 'view group_media:image entity'
+  - 'view group_media:remote_video entity'
+  - 'view group_membership content'
+  - 'view group_node:event entity'
+  - 'view group_node:news entity'
+  - 'view group_node:page entity'
+  - 'view group_node:resource entity'

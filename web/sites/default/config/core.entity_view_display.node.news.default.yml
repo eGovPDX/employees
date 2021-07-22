@@ -8,10 +8,12 @@ dependencies:
     - field.field.node.news.field_feature
     - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
+    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -19,6 +21,7 @@ dependencies:
     - smart_date
     - text
     - user
+    - views
   theme:
     - cloudy2
 third_party_settings:
@@ -245,6 +248,14 @@ content:
     third_party_settings: {  }
     type: smartdate_default
     region: content
+  field_related_content:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
   field_tags:
     weight: 3
     label: inline
