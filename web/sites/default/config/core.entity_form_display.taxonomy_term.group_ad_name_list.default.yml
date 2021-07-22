@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.group_ad_name_list.field_group
+    - field.field.taxonomy_term.group_ad_name_list.field_employee_groups
     - taxonomy.vocabulary.group_ad_name_list
   module:
     - path
@@ -21,7 +21,7 @@ content:
       placeholder: ''
       rows: 5
     third_party_settings: {  }
-  field_group:
+  field_employee_groups:
     weight: 1
     settings:
       match_operator: CONTAINS

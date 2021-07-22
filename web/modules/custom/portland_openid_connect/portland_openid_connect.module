@@ -3,6 +3,27 @@
 use Drupal\user\Entity\User;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
+use Drupal\portland_openid_connect\Plugin\Action\UpdateUserPrimaryGroups;
+
+/**
+ * Implement hook_user_update()
+ */
+function portland_openid_connect_user_update($account)
+{
+  // Check if the AD group names field is updated or not
+  if($account->original->field_group_names->value !== $account->field_group_names->value) {
+
+  }
+}
+
+/**
+ * Implement hook_user_insert()
+ */
+function portland_openid_connect_user_insert($account)
+{
+  // Ensure the user has the "Employee" role by default in all his AD groups
+  UpdateUserPrimaryGroups::addUserToGroupWithRoles($account, $new_primary_group_id, ['employee-employee']);
+}
 
 /**
  * Implement hook_cron()
@@ -265,7 +286,7 @@ function _process_user_profile($response_data) {
       }
     }
   }
-  $user_bureau_string = implode(',', $user_bureau_array);
+  $user_bureau_string = implode(',', array_unique($user_bureau_array) );
 
   return [
     'phone' => $user_phone,

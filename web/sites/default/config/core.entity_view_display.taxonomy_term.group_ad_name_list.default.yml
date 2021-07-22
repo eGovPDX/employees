@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.group_ad_name_list.field_group
+    - field.field.taxonomy_term.group_ad_name_list.field_employee_groups
     - taxonomy.vocabulary.group_ad_name_list
   module:
     - text
@@ -15,12 +15,12 @@ content:
   description:
     label: hidden
     type: text_default
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_group:
-    weight: 1
+  field_employee_groups:
+    weight: 0
     label: above
     settings:
       link: true
