@@ -1,0 +1,108 @@
+node.type.*.third_party.toc_js:
+  type: mapping
+  label: 'Per-content type tocjs node settings'
+  mapping:
+    toc_js_active:
+      type: integer
+      label: 'Enable Toc.js for content type'
+    title:
+      type: label
+      label: 'Toc title'
+    selectors:
+      type: string
+      label: 'Elements to use as headings'
+    selectors_minimum:
+      type: string
+      label: 'Set a minimum of elements to display the toc'
+    container:
+      type: string
+      label: 'Element to find all selectors in'
+    prefix:
+      type: string
+      label: 'Prefix for anchor tags and class names'
+    list_type:
+      type: string
+      label: 'The HTML list type to use'
+    back_to_top:
+      type: integer
+      label: 'Add back to top link on heading'
+    back_to_top_label:
+      type: label
+      label: 'Back to top link label'
+    smooth_scrolling:
+      type: integer
+      label: 'Enable or disable smooth scrolling on click'
+    scroll_to_offset:
+      type: string
+      label: 'Offset to trigger with smooth scrolling enabled'
+    highlight_on_scroll:
+      type: integer
+      label: 'Add class to heading that is currently in focus'
+    highlight_offset:
+      type: string
+      label: 'Offset to trigger the next headline'
+    sticky:
+      type: integer
+      label: 'Stick the toc on window scroll'
+    sticky_offset:
+      type: string
+      label: 'The offset to apply when toc is sticky'
+    sticky_stop:
+      type: string
+      label: 'Selector to use as a sticky stop'
+    sticky_stop_padding:
+      type: string
+      label: 'The padding to apply before the sticky stop'
+
+block.settings.toc_js_block:
+  type: mapping
+  label: 'Toc.js block settings'
+  mapping:
+    title:
+      type: label
+      label: 'Toc title'
+    selectors:
+      type: string
+      label: 'Elements to use as headings'
+    selectors_minimum:
+      type: string
+      label: 'Set a minimum of elements to display the toc'
+    container:
+      type: string
+      label: 'Element to find all selectors in'
+    prefix:
+      type: string
+      label: 'Prefix for anchor tags and class names'
+    list_type:
+      type: string
+      label: 'The HTML list type to use'
+    back_to_top:
+      type: integer
+      label: 'Add back to top link on heading'
+    back_to_top_label:
+      type: label
+      label: 'Back to top link label'
+    smooth_scrolling:
+      type: integer
+      label: 'Enable or disable smooth scrolling on click'
+    scroll_to_offset:
+      type: string
+      label: 'Offset to trigger with smooth scrolling enabled'
+    highlight_on_scroll:
+      type: integer
+      label: 'Add class to heading that is currently in focus'
+    highlight_offset:
+      type: string
+      label: 'Offset to trigger the next headline'
+    sticky:
+      type: integer
+      label: 'Stick the toc on window scroll'
+    sticky_offset:
+      type: string
+      label: 'The offset to apply when toc is sticky'
+    sticky_stop:
+      type: string
+      label: 'Selector to use as a sticky stop'
+    sticky_stop_padding:
+      type: string
+      label: 'The padding to apply before the sticky stop'
