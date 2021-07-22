@@ -3,6 +3,7 @@
 use Drupal\user\Entity\User;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
+use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 
 /**
  * Implement hook_user_presave()
@@ -194,6 +195,10 @@ function _process_users($response_data, $access_token)
         $user->set('field_phone', $user_profile['phone'] ?? '');
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
+
+        // Add the user to AD groups as Employee
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+
         $count_user_created++;
       }
     }
@@ -230,6 +235,10 @@ function _process_users($response_data, $access_token)
           $user->set('field_phone', $user_profile['phone'] ?? '');
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
+
+          // Add the user to AD groups as Employee
+          PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+
           $count_user_updated++;
         }
       }
