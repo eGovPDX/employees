@@ -83,19 +83,21 @@ final class JoinLeaveLink extends FieldPluginBase
     $current_path = \Drupal::service('path.current')->getPath();
     $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     // Do not display join/leave link for primary group
-    foreach ($account->field_primary_groups as $primary_group) {
+    foreach ($account->field_primary_groups->getValue() as $primary_group) {
       if ($primary_group->getValue()['target_id'] == $group->id()) {
-        $build = [
+        return [
           '#markup' => \Drupal\Core\Render\Markup::create("Primary group"),
         ];
-      } else if (empty($group->getMember($user))) {
-        if ($group->hasPermission('join group', $user)) {
-          $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(), 'destination' => $current_path])->toString();
-        }
-      } else {
-        if ($group->getMember($user) and $group->hasPermission('leave group', $user)) {
-          $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(), 'destination' => $current_path])->toString();
-        }
+      }
+    }
+
+    if (empty($group->getMember($user))) {
+      if ($group->hasPermission('join group', $user)) {
+        $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(), 'destination' => $current_path])->toString();
+      }
+    } else {
+      if ($group->getMember($user) and $group->hasPermission('leave group', $user)) {
+        $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(), 'destination' => $current_path])->toString();
       }
     }
 
