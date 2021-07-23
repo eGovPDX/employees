@@ -84,7 +84,7 @@ final class JoinLeaveLink extends FieldPluginBase
     $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     // Do not display join/leave link for primary group
     foreach ($account->field_primary_groups->getValue() as $primary_group) {
-      if ($primary_group->getValue()['target_id'] == $group->id()) {
+      if ($primary_group['target_id'] == $group->id()) {
         return [
           '#markup' => \Drupal\Core\Render\Markup::create("Primary group"),
         ];

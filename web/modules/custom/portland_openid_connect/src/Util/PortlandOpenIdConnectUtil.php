@@ -19,11 +19,16 @@ class PortlandOpenIdConnectUtil
     $group_content = $membership->getGroupContent();
     $group_content->group_roles = [];
     foreach ($roles as $role) {
-      if ($role['target_id'] === 'employee_employee') {
+      if ($role->id() === 'employee-employee') {
         $has_employee_role = true;
         continue;
       }
-      $group_content->group_roles->appendItem(['target_id' => $role['target_id']]);
+      // Remove the "member" role
+      else if($role->id() === 'employee-member') {
+        $has_employee_role = true;
+        continue;
+      }
+      $group_content->group_roles->appendItem(['target_id' => $role->id()]);
     }
     if ($has_employee_role) $group_content->save();    
 
@@ -76,11 +81,6 @@ class PortlandOpenIdConnectUtil
       $current_primary_group_ids = [];
     } else {
       $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
-    }
-
-    // Check the new and current group ID arrays and update the user's groups
-    if (empty(array_diff($new_primary_group_ids, $current_primary_group_ids))) {
-      return;
     }
 
     if (empty($new_primary_group_ids)) {
