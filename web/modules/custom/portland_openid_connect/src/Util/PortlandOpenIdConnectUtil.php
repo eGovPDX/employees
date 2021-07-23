@@ -9,9 +9,27 @@ class PortlandOpenIdConnectUtil
    */
   public static function removeUserFromGroup($account, $group_id)
   {
+    // Automated removal should only remove the "Employee" role
     $group = \Drupal\group\Entity\Group::load($group_id);
-    $group->removeMember($account);
-    $group->save();
+    $membership = $group->getMember($account);
+    if (empty($membership)) return;
+
+    $roles = $membership->getRoles();
+    $has_employee_role = false;
+    $group_content = $membership->getGroupContent();
+    $group_content->group_roles = [];
+    foreach ($roles as $role) {
+      if ($role['target_id'] === 'employee_employee') {
+        $has_employee_role = true;
+        continue;
+      }
+      $group_content->group_roles->appendItem(['target_id' => $role['target_id']]);
+    }
+    if ($has_employee_role) $group_content->save();    
+
+    // $group = \Drupal\group\Entity\Group::load($group_id);
+    // $group->removeMember($account);
+    // $group->save();
   }
 
   /**
@@ -34,6 +52,7 @@ class PortlandOpenIdConnectUtil
       $group_content = $membership->getGroupContent();
       $has_new_role = false;
       foreach ($role_id_array as $role_id) {
+        // Check if the user has the new role
         if (!isset($roles[$role_id])) {
           $group_content->group_roles->appendItem(['target_id' => $role_id]);
           $has_new_role = true;
@@ -42,7 +61,6 @@ class PortlandOpenIdConnectUtil
       if ($has_new_role) $group_content->save();
     }
   }
-
 
   /**
    * Helper function to remove a user from a group.
@@ -61,10 +79,10 @@ class PortlandOpenIdConnectUtil
     }
 
     // Check the new and current group ID arrays and update the user's groups
-    if (empty($new_primary_group_ids) && empty($current_primary_group_ids)) {
+    if (empty(array_diff($new_primary_group_ids, $current_primary_group_ids))) {
       return;
     }
-    
+
     if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {

@@ -196,7 +196,7 @@ function _process_users($response_data, $access_token)
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
 
-        // Add the user to AD groups as Employee
+        // Add the user to primary groups as Employee
         PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
         $count_user_created++;
@@ -208,7 +208,10 @@ function _process_users($response_data, $access_token)
       // Deactivate this user
       if (array_key_exists('@removed', $user_data)) {
         $user->status = 0;
+        $user->set('field_group_names', '');
         $user->save();
+        // Find all group this user belongs to and remove the Employee role
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
         $count_user_deleted++;
         \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
@@ -236,7 +239,7 @@ function _process_users($response_data, $access_token)
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
 
-          // Add the user to AD groups as Employee
+          // Update the user's primary group membership to match the AD group names
           PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
           $count_user_updated++;
@@ -362,7 +365,7 @@ function _get_all_users($access_token)
 
     // If there is a resume link, use it. Otherwise start fresh
     $request_url = (empty($resume_url)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resume_url;
-    $request_limit = 5;
+    $request_limit = 3;
     $request_count = 0;
     $response_data = null;
     while (strlen($request_url) > 0 && $request_count < $request_limit) {
