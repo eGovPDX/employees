@@ -6,6 +6,7 @@ use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Implements hook_query_TAG_alter().
@@ -213,4 +214,50 @@ function cloudy2_preprocess_menu__account(array &$variables) {
     if (isset($variables['items']['user.logout']['url'])) {
         $variables['items']['user.logout']['url']->setRouteParameter("destination", $destination);
     }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function employees_token_info()
+{
+  $info = [];
+
+  $info['types']['server'] = [
+    'name' => t('Server vars'),
+    'description' => t('Tokens from _SERVER.'),
+  ];
+
+  $info['tokens']['server']['HTTP_REFERER'] = [
+    'name' => t('HTTP_REFERER'),
+    'description' => t("Referrer header value from _SERVER"),
+  ];
+
+  $info['tokens']['server']['HTTP_USER_AGENT'] = [
+    'name' => t('HTTP_USER_AGENT'),
+    'description' => t("User-agent header value from _SERVER"),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function employees_tokens($type, $tokens, array $data = array(), array $options = array(), BubbleableMetadata $bubbleable_metadata)
+{
+  $replacements = [];
+  $sanitize = !empty($options['sanitize']);
+
+  // Text format tokens.
+  if ($type == 'server') {
+    foreach ($tokens as $name => $original) {
+      $replacements[$original] = $_SERVER[$name];
+      if ($sanitize) {
+        $replacements[$original] = filter_xss($replacements[$original]);
+      }
+    }
+  }
+
+  return $replacements;
 }

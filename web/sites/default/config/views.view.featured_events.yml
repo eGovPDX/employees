@@ -7,9 +7,14 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - node.type.event
     - system.menu.main
+    - taxonomy.vocabulary.org_type
+  content:
+    - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - datetime
+    - group
     - node
+    - taxonomy
     - user
 id: featured_events
 label: 'Featured Events'
@@ -181,44 +186,6 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_feature_value:
-          id: field_feature_value
-          table: node__field_feature
-          field: field_feature_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: boolean
         field_when_end_value:
           id: field_when_end_value
           table: node__field_when
@@ -309,6 +276,52 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: date
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts:
         field_when_value:
           id: field_when_value
@@ -336,11 +349,20 @@ display:
             label: ''
           granularity: second
           plugin_id: date
-      title: Events
+      title: 'Citywide Events'
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        field_display_in_group:
+          id: field_display_in_group
+          table: node__field_display_in_group
+          field: field_display_in_group
+          relationship: none
+          group_type: group
+          admin_label: 'field_display_in_group: Group'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
       use_more: false
@@ -359,6 +381,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -449,44 +472,6 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_feature_value:
-          id: field_feature_value
-          table: node__field_feature
-          field: field_feature_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: boolean
         field_when_value_1:
           id: field_when_value_1
           table: node__field_when
@@ -532,6 +517,98 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: datetime
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_org_type_target_id_1:
+          id: field_org_type_target_id_1
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
         status_1:
           id: status_1
           table: node_field_data
@@ -571,44 +648,6 @@ display:
             group_items: {  }
           entity_type: node
           entity_field: status
-          plugin_id: boolean
-        field_feature_value_1:
-          id: field_feature_value_1
-          table: node__field_feature
-          field: field_feature_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
           plugin_id: boolean
         type_1:
           id: type_1
@@ -752,6 +791,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -783,7 +823,7 @@ display:
       link_display: page_river
       link_url: ''
       block_description: 'Featured Upcoming Events'
-      title: 'Featured Events'
+      title: 'Citywide Events'
       block_hide_empty: true
       display_description: ''
       filters:
@@ -842,44 +882,6 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_feature_value:
-          id: field_feature_value
-          table: node__field_feature
-          field: field_feature_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: boolean
         field_when_value:
           id: field_when_value
           table: node__field_when
@@ -925,6 +927,52 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: date
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
@@ -934,6 +982,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1091,6 +1140,52 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: date
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            47: 47
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       defaults:
         filters: false
         filter_groups: false
@@ -1125,6 +1220,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

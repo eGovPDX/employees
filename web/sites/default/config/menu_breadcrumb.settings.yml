@@ -6,7 +6,7 @@ stop_on_first_match: false
 append_member_page: false
 member_page_as_link: false
 remove_home: false
-add_home: false
+add_home: true
 front_title: 0
 exclude_empty_url: false
 derived_active_trail: false
@@ -17,6 +17,11 @@ menu_breadcrumb_menus:
     taxattach: 0
     langhandle: 0
   admin:
+    weight: 0
+    enabled: 0
+    taxattach: 0
+    langhandle: 0
+  devel:
     weight: 0
     enabled: 0
     taxattach: 0
@@ -41,10 +46,6 @@ menu_breadcrumb_menus:
     enabled: 0
     taxattach: 0
     langhandle: 0
-  workbench:
-    weight: 0
-    enabled: 0
-    taxattach: 0
-    langhandle: 0
 _core:
   default_config_hash: dp50LLB10ui-pYgDqHSZdREslQ7DqY71aF20tyaas6I
+exclude_disabled_menu_items: false
