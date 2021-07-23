@@ -4,15 +4,13 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_reviewer
-    - user.role.authenticated
   module:
     - content_moderation
     - group
     - node
-    - user
     - views_bulk_operations
 id: manage_group_content
-label: 'Manage: Group: Content'
+label: 'Group Content'
 module: views
 description: ''
 tag: ''
@@ -26,10 +24,9 @@ display:
     position: 0
     display_options:
       access:
-        type: role
+        type: group_permission
         options:
-          role:
-            authenticated: authenticated
+          group_permission: 'access group_node overview'
       cache:
         type: tag
         options: {  }
@@ -1056,12 +1053,17 @@ display:
           entity_field: type
           plugin_id: bundle
       sorts: {  }
-      title: 'Manage Content'
+      title: Content
       header:
         result:
           id: result
           table: views
           field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
           plugin_id: result
       footer: {  }
       empty:
@@ -1111,13 +1113,13 @@ display:
           relationship: group_content
           group_type: group
           admin_label: ''
-          default_action: default
+          default_action: ignore
           exception:
             value: all
             title_enable: false
             title: All
-          title_enable: false
-          title: ''
+          title_enable: true
+          title: '{{ arguments.gid|placeholder }} content'
           default_argument_type: group_id_from_url
           default_argument_options: {  }
           default_argument_skip_url: false
@@ -1147,10 +1149,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - route
+        - route.group
         - url
         - url.query_args
+        - user.group_permissions
         - 'user.node_grants:view'
-        - user.roles
       tags:
         - 'config:field.storage.node.field_reviewer'
         - 'config:workflow_list'
@@ -1178,10 +1181,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - route
+        - route.group
         - url
         - url.query_args
+        - user.group_permissions
         - 'user.node_grants:view'
-        - user.roles
       tags:
         - 'config:field.storage.node.field_reviewer'
         - 'config:workflow_list'
