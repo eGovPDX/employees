@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.page.field_topics
     - node.type.page
     - views.view.group_menu
-    - views.view.related_content
   module:
     - datetime
     - layout_builder
@@ -81,7 +80,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 4
           f4b204f2-ce95-4ec0-988b-a3c1bcf350f2:
             uuid: f4b204f2-ce95-4ec0-988b-a3c1bcf350f2
             region: side
@@ -196,7 +195,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
-            weight: 4
+            weight: 5
           8bb88404-c60c-4eb4-b6fb-bbe01cd31936:
             uuid: 8bb88404-c60c-4eb4-b6fb-bbe01cd31936
             region: main
@@ -214,7 +213,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: boolean
             additional: {  }
-            weight: 5
+            weight: 6
           29766ecb-7fec-449e-b9eb-c7f61a193118:
             uuid: 29766ecb-7fec-449e-b9eb-c7f61a193118
             region: main
@@ -231,7 +230,22 @@ third_party_settings:
                 third_party_settings: {  }
                 type: datetime_default
             additional: {  }
-            weight: 6
+            weight: 7
+          a6cbe979-ec4e-43e2-828c-7b8940b71515:
+            uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
+            region: main
+            configuration:
+              id: 'extra_field_block:node:page:toc_js'
+              label: Toc
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false

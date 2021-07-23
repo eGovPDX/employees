@@ -13,7 +13,6 @@ dependencies:
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
-    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -21,7 +20,6 @@ dependencies:
     - smart_date
     - text
     - user
-    - views
   theme:
     - cloudy2
 third_party_settings:
@@ -111,7 +109,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 4
           c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2:
             uuid: c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2
             region: menu
@@ -207,7 +205,22 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
-            weight: 4
+            weight: 5
+          7cd5c2bf-f5ab-4115-8fa7-dfeb304b6a82:
+            uuid: 7cd5c2bf-f5ab-4115-8fa7-dfeb304b6a82
+            region: main
+            configuration:
+              id: 'extra_field_block:node:news:toc_js'
+              label: Toc
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false
