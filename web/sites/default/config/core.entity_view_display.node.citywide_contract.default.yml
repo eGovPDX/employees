@@ -1,0 +1,90 @@
+uuid: bf3d2a96-19fa-442e-ae8f-b95c4421915a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.citywide_contract.body
+    - field.field.node.citywide_contract.field_category
+    - field.field.node.citywide_contract.field_contract_document
+    - field.field.node.citywide_contract.field_contract_expiration_date
+    - field.field.node.citywide_contract.field_contract_start_date
+    - field.field.node.citywide_contract.field_mandated_purchases
+    - field.field.node.citywide_contract.field_p_card_allowed
+    - field.field.node.citywide_contract.field_vendor_contact
+    - node.type.citywide_contract
+  module:
+    - datetime
+    - file
+    - text
+    - user
+id: node.citywide_contract.default
+targetEntityType: node
+bundle: citywide_contract
+mode: default
+content:
+  field_category:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_contract_document:
+    weight: 1
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_contract_expiration_date:
+    weight: 5
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium_date
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_contract_start_date:
+    weight: 4
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium_date
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_mandated_purchases:
+    weight: 2
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_p_card_allowed:
+    weight: 3
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_vendor_contact:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  body: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

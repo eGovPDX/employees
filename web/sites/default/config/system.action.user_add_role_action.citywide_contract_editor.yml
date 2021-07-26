@@ -1,0 +1,14 @@
+uuid: 23b5d827-4ad1-4050-9806-aeaa83308baf
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.citywide_contract_editor
+  module:
+    - user
+id: user_add_role_action.citywide_contract_editor
+label: 'Add the Citywide Contract Editor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: citywide_contract_editor

@@ -1,0 +1,27 @@
+uuid: 5dec1996-dcfe-4c6f-b598-4fa492e9c365
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contract_document
+    - node.type.citywide_contract
+  module:
+    - file
+id: node.citywide_contract.field_contract_document
+field_name: field_contract_document
+entity_type: node
+bundle: citywide_contract
+label: 'Contract Document'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: pdf
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

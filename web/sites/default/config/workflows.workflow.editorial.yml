@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.citywide_contract
     - node.type.event
     - node.type.news
     - node.type.page
@@ -75,6 +76,7 @@ type_settings:
       weight: 1
   entity_types:
     node:
+      - citywide_contract
       - event
       - news
       - page

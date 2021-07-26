@@ -1,0 +1,22 @@
+uuid: 0e0ec700-e61a-48fe-bdaa-53f20ba17300
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: citywide_contracts
+label: 'Citywide Contracts'
+type: 'canonical_entities:node'
+pattern: 'citywide-contracts/[node:title]'
+selection_criteria:
+  dea49764-3d96-4947-b8de-d4fa1f988dab:
+    id: node_type
+    bundles:
+      citywide_contract: citywide_contract
+    negate: false
+    context_mapping:
+      node: node
+    uuid: dea49764-3d96-4947-b8de-d4fa1f988dab
+selection_logic: and
+weight: -5
+relationships: {  }
