@@ -1,0 +1,23 @@
+uuid: a6c56fd8-9d09-4c0c-8585-7de12ced3715
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_p_card_allowed
+    - node.type.citywide_contract
+id: node.citywide_contract.field_p_card_allowed
+field_name: field_p_card_allowed
+entity_type: node
+bundle: citywide_contract
+label: 'P-Card Allowed'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

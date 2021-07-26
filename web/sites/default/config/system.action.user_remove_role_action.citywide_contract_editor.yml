@@ -1,0 +1,14 @@
+uuid: cfff912e-4410-490d-85a6-ab8ec1535adf
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.citywide_contract_editor
+  module:
+    - user
+id: user_remove_role_action.citywide_contract_editor
+label: 'Remove the Citywide Contract Editor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: citywide_contract_editor

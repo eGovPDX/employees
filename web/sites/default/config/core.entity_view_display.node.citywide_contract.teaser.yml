@@ -1,0 +1,46 @@
+uuid: 87687f23-5499-41a3-bd64-4a2e7755c560
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.citywide_contract.body
+    - field.field.node.citywide_contract.field_category
+    - field.field.node.citywide_contract.field_contract_document
+    - field.field.node.citywide_contract.field_contract_expiration_date
+    - field.field.node.citywide_contract.field_contract_start_date
+    - field.field.node.citywide_contract.field_mandated_purchases
+    - field.field.node.citywide_contract.field_p_card_allowed
+    - field.field.node.citywide_contract.field_vendor_contact
+    - node.type.citywide_contract
+  module:
+    - text
+    - user
+id: node.citywide_contract.teaser
+targetEntityType: node
+bundle: citywide_contract
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_category: true
+  field_contract_document: true
+  field_contract_expiration_date: true
+  field_contract_start_date: true
+  field_mandated_purchases: true
+  field_p_card_allowed: true
+  field_vendor_contact: true
+  langcode: true
+  search_api_excerpt: true
