@@ -4,16 +4,19 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - node
     - group
+    - node
     - user
     - search_api
   config:
+    - field.storage.group.field_group_description
+    - field.storage.node.field_category
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.node.field_contract_expiration_date
+    - field.storage.node.field_contract_start_date
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
-    - field.storage.group.field_group_description
     - search_api.server.searchstax
     - core.entity_view_mode.user.compact
 third_party_settings:
@@ -113,6 +116,30 @@ field_settings:
     dependencies:
       module:
         - node
+  field_category:
+    label: Category
+    datasource_id: 'entity:node'
+    property_path: field_category
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_category
+  field_contract_expiration_date:
+    label: 'Contract Expiration Date'
+    datasource_id: 'entity:node'
+    property_path: field_contract_expiration_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_contract_expiration_date
+  field_contract_start_date:
+    label: 'Contract Start Date'
+    datasource_id: 'entity:node'
+    property_path: field_contract_start_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_contract_start_date
   field_display_in_group:
     label: 'Content Displayed in'
     datasource_id: 'entity:node'
