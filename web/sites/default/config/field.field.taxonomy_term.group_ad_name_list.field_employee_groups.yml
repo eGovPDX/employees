@@ -1,0 +1,29 @@
+uuid: 6aa01fcc-cb43-4230-86bc-bf843dd3325a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_employee_groups
+    - group.type.employee
+    - taxonomy.vocabulary.group_ad_name_list
+id: taxonomy_term.group_ad_name_list.field_employee_groups
+field_name: field_employee_groups
+entity_type: taxonomy_term
+bundle: group_ad_name_list
+label: 'Employee Groups'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

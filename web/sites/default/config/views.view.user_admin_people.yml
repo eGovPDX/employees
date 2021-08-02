@@ -204,18 +204,35 @@ display:
           clear_on_exposed: true
           action_title: Action
           selected_actions:
+            0:
+              action_id: user_update_user_primary_groups
+              preconfiguration:
+                add_confirmation: 0
             1:
               action_id: user_add_role_action
+              preconfiguration:
+                add_confirmation: 0
             2:
               action_id: user_block_user_action
+              preconfiguration:
+                add_confirmation: 0
             3:
               action_id: user_remove_role_action
+              preconfiguration:
+                add_confirmation: 0
             4:
               action_id: user_unblock_user_action
+              preconfiguration:
+                add_confirmation: 0
             5:
               action_id: vbo_cancel_user_action
+              preconfiguration:
+                add_confirmation: 0
             7:
-              action_id: pathauto_update_alias
+              action_id: 'entity:save_action:user'
+              preconfiguration:
+                add_confirmation: 0
+          force_selection_info: false
           plugin_id: views_bulk_operations_bulk_form
         field_phone:
           id: field_phone
