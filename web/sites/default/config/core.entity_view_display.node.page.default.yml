@@ -17,14 +17,12 @@ dependencies:
     - field.field.node.page.field_topics
     - node.type.page
     - views.view.group_menu
-    - views.view.related_content
   module:
     - datetime
     - layout_builder
     - layout_builder_restrictions
     - layout_library
     - text
-    - toc_js_per_node
     - user
     - views
   theme:
@@ -82,7 +80,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 4
           f4b204f2-ce95-4ec0-988b-a3c1bcf350f2:
             uuid: f4b204f2-ce95-4ec0-988b-a3c1bcf350f2
             region: side
@@ -197,7 +195,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
-            weight: 4
+            weight: 5
           8bb88404-c60c-4eb4-b6fb-bbe01cd31936:
             uuid: 8bb88404-c60c-4eb4-b6fb-bbe01cd31936
             region: main
@@ -215,7 +213,7 @@ third_party_settings:
                 third_party_settings: {  }
                 type: boolean
             additional: {  }
-            weight: 5
+            weight: 6
           29766ecb-7fec-449e-b9eb-c7f61a193118:
             uuid: 29766ecb-7fec-449e-b9eb-c7f61a193118
             region: main
@@ -232,75 +230,22 @@ third_party_settings:
                 third_party_settings: {  }
                 type: datetime_default
             additional: {  }
-            weight: 6
-          0458ca11-2fca-4996-9d9e-fa9b35336bea:
-            uuid: 0458ca11-2fca-4996-9d9e-fa9b35336bea
+            weight: 7
+          a6cbe979-ec4e-43e2-828c-7b8940b71515:
+            uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
             region: main
             configuration:
-              id: toc_js_node
-              label: 'Toc.js node block'
-              provider: toc_js_per_node
+              id: 'extra_field_block:node:page:toc_js'
+              label: Toc
+              provider: layout_builder
               label_display: '0'
-              title: 'On this page'
-              selectors: h2
-              selectors_minimum: '0'
-              container: .field--name-body
-              prefix: toc
-              list_type: ul
-              classes: ''
-              back_to_top: 0
-              back_to_top_label: 'Back to top'
-              smooth_scrolling: 1
-              scroll_to_offset: '100'
-              highlight_on_scroll: 1
-              highlight_offset: '100'
-              sticky: 0
-              sticky_offset: '0'
-              sticky_stop: ''
-              sticky_stop_padding: '0'
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
               context_mapping:
-                node: layout_builder.entity
+                entity: layout_builder.entity
             additional: {  }
-            weight: 2
-          d907ed51-1ebc-4381-8151-ed77fccb7eca:
-            uuid: d907ed51-1ebc-4381-8151-ed77fccb7eca
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_static'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 4
-          fab7f09a-bb3e-4f64-bb3b-bfae477653bb:
-            uuid: fab7f09a-bb3e-4f64-bb3b-bfae477653bb
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_news'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 5
-          1efb7963-7003-4428-bf26-565020ed649b:
-            uuid: 1efb7963-7003-4428-bf26-565020ed649b
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_events'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 6
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false

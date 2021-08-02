@@ -13,16 +13,13 @@ dependencies:
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - node.type.news
-    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
     - smart_date
     - text
-    - toc_js_per_node
     - user
-    - views
   theme:
     - cloudy2
 third_party_settings:
@@ -112,7 +109,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 4
           c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2:
             uuid: c1adfd2d-cb62-4b0e-be3c-e9f83809dcf2
             region: menu
@@ -208,75 +205,22 @@ third_party_settings:
                 third_party_settings: {  }
                 type: entity_reference_label
             additional: {  }
-            weight: 4
-          3d3db562-0fdb-4945-a728-c57a90d72fc1:
-            uuid: 3d3db562-0fdb-4945-a728-c57a90d72fc1
+            weight: 5
+          7cd5c2bf-f5ab-4115-8fa7-dfeb304b6a82:
+            uuid: 7cd5c2bf-f5ab-4115-8fa7-dfeb304b6a82
             region: main
             configuration:
-              id: toc_js_node
-              label: 'Toc.js node block'
-              provider: toc_js_per_node
+              id: 'extra_field_block:node:news:toc_js'
+              label: Toc
+              provider: layout_builder
               label_display: '0'
-              title: 'In this article'
-              selectors: h2
-              selectors_minimum: '0'
-              container: .field--name-body
-              prefix: ''
-              list_type: ul
-              classes: ''
-              back_to_top: 0
-              back_to_top_label: 'Back to top'
-              smooth_scrolling: 1
-              scroll_to_offset: '100'
-              highlight_on_scroll: 1
-              highlight_offset: '100'
-              sticky: 0
-              sticky_offset: '0'
-              sticky_stop: ''
-              sticky_stop_padding: '0'
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
               context_mapping:
-                node: layout_builder.entity
+                entity: layout_builder.entity
             additional: {  }
-            weight: 2
-          b80d468d-d30d-4e2a-9e04-1fbce2d7cc62:
-            uuid: b80d468d-d30d-4e2a-9e04-1fbce2d7cc62
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_static'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 4
-          904e17ab-d25b-4ba8-bc7b-8251486e434f:
-            uuid: 904e17ab-d25b-4ba8-bc7b-8251486e434f
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_news'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 5
-          df503ef2-05ac-438b-8b72-f0a1b8714e4f:
-            uuid: df503ef2-05ac-438b-8b72-f0a1b8714e4f
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_events'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 6
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false

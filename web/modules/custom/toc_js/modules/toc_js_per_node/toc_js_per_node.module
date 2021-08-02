@@ -1,0 +1,191 @@
+<?php
+
+/**
+ * @file
+ * Contains toc_js_per_node.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeTypeInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_help().
+ */
+function toc_js_per_node_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the toc_js module.
+    case 'help.page.toc_js_per_node':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allow to override Toc.js settings per node') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function toc_js_per_node_entity_extra_field_info() {
+  $extra = [];
+
+  /** @var \Drupal\node\Entity\NodeType $bundle */
+  foreach (NodeType::loadMultiple() as $bundle) {
+    if ($bundle->getThirdPartySetting('toc_js', 'toc_js_active', 0)) {
+      $extra['node'][$bundle->Id()]['display']['toc_js'] = [
+        'label' => t('Toc'),
+        'description' => t('Table of content of node generated with Toc.js'),
+        'weight' => 100,
+        'visible' => FALSE,
+      ];
+    }
+  }
+
+  return $extra;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function toc_js_per_node_form_node_type_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\node\NodeTypeInterface $type */
+  $type = $form_state->getFormObject()->getEntity();
+
+  $form['toc_js']['override'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Permit to enable/disable toc per node'),
+    '#default_value' => $type->getThirdPartySetting('toc_js_per_node', 'override', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+    '#weight' => 100,
+  ];
+
+  $form['toc_js']['override_default'] = [
+    '#type' => 'radios',
+    '#title' => t('Default state for table of contents per node'),
+    '#default_value' => $type->getThirdPartySetting('toc_js_per_node', 'override_default', 1),
+    '#options' => [
+      1 => t('Enabled'),
+      0 => t('Disabled'),
+    ],
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="override"]' => ['checked' => TRUE],
+      ],
+    ],
+    '#weight' => 100,
+  ];
+
+  $form['#entity_builders'][] = 'toc_js_per_node_form_node_type_form_builder';
+}
+
+/**
+ * Entity builder for the node type form with TOC node option.
+ */
+function toc_js_per_node_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('toc_js_per_node', 'override', $form_state->getValue('override'));
+  $type->setThirdPartySetting('toc_js_per_node', 'override_default', $form_state->getValue('override_default'));
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function toc_js_per_node_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() === 'node') {
+    $fields['toc_js_active'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Toc active'))
+      ->setName('toc_js_active')
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setDescription(t('Stores whether the Toc is displayed or not.'))
+      ->setDefaultValue(TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * This module adds a simple checkbox to the node form labeled social_share.
+ * If the checkox is unchecked then the social share inks are not displayed
+ * for this node.
+ */
+function toc_js_per_node_form_node_form_alter(&$form, FormStateInterface &$form_state) {
+  /** @var \Drupal\Node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  /** @var \Drupal\node\NodeTypeInterface $node_type */
+  $node_type = $node->type->entity;
+  $toc_override = $node_type->getThirdPartySetting('toc_js_per_node', 'override', 0);
+  $toc_override_default = $node_type->getThirdPartySetting('toc_js_per_node', 'override_default', 1);
+
+  // Default value for displaying the Toc from the node type.
+  $toc_active = $node_type->getThirdPartySetting('toc_js', 'toc_js_active', 0);
+
+  // Use default override value if new or not set.
+  if (NULL == $node->id() || $node->toc_js_active->value == NULL) {
+    $node->toc_js_active->value = $toc_override_default;
+  }
+
+  if ($toc_override && $toc_active) {
+
+    // If a value has been set on the node, get it as the default value.
+    if (isset($node->toc_js_active)) {
+      if ($node->toc_js_active->value !== NULL) {
+        $toc_active = $node->toc_js_active->value;
+      }
+    }
+
+    if (\Drupal::currentUser()->hasPermission('administer toc_js per node') ||
+      \Drupal::currentUser()->hasPermission('administer nodes')) {
+
+      $form['toc_js'] = [
+        '#type' => 'details',
+        '#group' => isset($form['additional_settings']) ? 'additional_settings' : 'advanced',
+        '#title' => t('Table of contents'),
+        '#weight' => 7,
+        '#access' => TRUE,
+      ];
+
+      $form['toc_js']['toc_js_active'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Display a table of contents'),
+        '#attributes' => ['title' => t('When unchecked, the table of contents no longer displays.')],
+        '#description' => t("Generates an automatic table of contents based on this node's content."),
+        '#group' => 'toc_js',
+        '#default_value' => $toc_active,
+      ];
+    }
+
+    else {
+      $form['toc_js_active'] = [
+        '#type' => 'value',
+        '#value' => $toc_active,
+      ];
+    }
+  }
+
+  // If the toc override is disabled on the nofr type then we set
+  // the value to NULL. It's a way too to permit to uninstall this module
+  // properly (you can then disable the toc for the node type and
+  // mass update all nodes. Then Drupal don't prevent you to uninstall the
+  // module because the toc_js_active base field has data).
+  else {
+    $form['toc_js_active'] = [
+      '#type' => 'value',
+      '#value' => NULL,
+    ];
+  }
+
+}
