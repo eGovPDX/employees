@@ -1,30 +1,30 @@
-uuid: 97d19f7e-e6b9-4216-be3c-2aef9a21295d
+uuid: ca46de0a-4120-4216-a71b-b546e13a2dcf
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.group_list_views
+    - views.view.my_groups
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__group_list_views_block_citywide_portals
+id: views_block__my_groups_block_groups_followed
 theme: cloudy2
 region: menu
-weight: -10
+weight: -8
 provider: null
-plugin: 'views_block:group_list_views-block_citywide_portals'
+plugin: 'views_block:my_groups-block_groups_followed'
 settings:
-  id: 'views_block:group_list_views-block_citywide_portals'
+  id: 'views_block:my_groups-block_groups_followed'
   label: ''
   provider: views
   label_display: visible
   views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
     pages: "<front>\r\n/bureaus\r\n/groups\r\n/news*\r\n/events*"
     negate: false
-    context_mapping: {  }

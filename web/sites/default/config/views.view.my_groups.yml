@@ -3,9 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - taxonomy.vocabulary.org_type
     - user.role.authenticated
+  content:
+    - 'taxonomy_term:org_type:2975d081-7bb6-4288-9a8e-f7df0078a81d'
+    - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - group
+    - taxonomy
     - user
 id: my_groups
 label: 'My Groups'
@@ -187,7 +192,53 @@ display:
           entity_type: null
           entity_field: label
           plugin_id: field
-      filters: {  }
+      filters:
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            1: 1
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts:
         label:
           id: label
@@ -203,7 +254,7 @@ display:
           entity_type: group
           entity_field: label
           plugin_id: standard
-      title: 'My Groups'
+      title: 'My Bureaus/Offices'
       header: {  }
       footer: {  }
       empty:
@@ -217,7 +268,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<p>You don't belong to any bureaus or groups. Join to add them to \"my groups\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
+            value: "<p>You are not following any groups.</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
             format: full_html
           plugin_id: text
       relationships:
@@ -299,14 +350,107 @@ display:
         - user
         - user.roles
       tags: {  }
-  block_my_groups:
+  block_groups_followed:
     display_plugin: block
-    id: block_my_groups
-    display_title: Block
+    id: block_groups_followed
+    display_title: 'Groups Followed'
     position: 1
     display_options:
       display_extenders: {  }
-      block_description: 'My Groups'
+      block_description: 'Groups Followed'
+      display_description: ''
+      filters:
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: not
+          value:
+            47: 47
+            1: 1
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: org_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+      defaults:
+        filters: false
+        filter_groups: false
+        title: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      title: 'Groups Followed'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - user.roles
+      tags: {  }
+  block_my_bureau_offices:
+    display_plugin: block
+    id: block_my_bureau_offices
+    display_title: 'My Bureau/Offices'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      block_description: 'My Bureau/Office'
+      display_description: ''
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
+            format: full_html
+          plugin_id: text
+      defaults:
+        empty: false
+      block_hide_empty: false
     cache_metadata:
       max-age: -1
       contexts:
