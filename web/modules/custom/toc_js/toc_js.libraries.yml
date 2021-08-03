@@ -1,0 +1,20 @@
+toc:
+  css:
+    theme:
+      css/toc.css: {}
+  js:
+    js/toc_js.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - toc_js/tocjs
+
+tocjs:
+  remote: https://github.com/jgallen23/toc
+  version: "0.3.2"
+  license:
+    name: MIT
+    url: https://github.com/jgallen23/toc/blob/greenkeeper/update-all/LICENSE
+    gpl-compatible: true
+  js:
+    /libraries/toc/dist/toc.min.js: {minified: true }

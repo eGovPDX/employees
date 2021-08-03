@@ -6,7 +6,6 @@ dependencies:
     - menu_ui
     - scheduler
     - toc_js
-    - toc_js_per_node
 third_party_settings:
   menu_ui:
     available_menus: {  }
@@ -28,7 +27,7 @@ third_party_settings:
     toc_js_active: 1
     title: 'In this article'
     selectors: h2
-    selectors_minimum: '0'
+    selectors_minimum: '3'
     container: .field--name-body
     list_type: ul
     smooth_scrolling: 1
@@ -43,13 +42,10 @@ third_party_settings:
     sticky_stop: ''
     sticky_stop_padding: '0'
     classes: ''
-  toc_js_per_node:
-    override: 1
-    override_default: 0
 name: News
 type: news
 description: 'Use <em>news</em> to post content by date such as articles, announcements, and blog posts. You can feature news to pin it to your group or bureau homepage.'
-help: ''
+help: 'A table of contents labeled "in this article" will automatically appear when three or more section headers are used (<code>&lt;h2&gt;</code>).'
 new_revision: true
 preview_mode: 1
 display_submitted: false

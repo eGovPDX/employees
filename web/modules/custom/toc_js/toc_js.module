@@ -1,0 +1,403 @@
+<?php
+
+/**
+ * @file
+ * Contains toc_js.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\NodeType;
+use \Drupal\Core\Entity\EntityInterface;
+use \Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeTypeInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_help().
+ */
+function toc_js_node_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the toc_js module.
+    case 'help.page.toc_js':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provide a table of content for a full node with toc.js') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function toc_js_theme() {
+  return [
+    'toc_js' => [
+      'variables' => [
+        'title' => NULL,
+        'tag' => NULL,
+        'title_attributes' => NULL,
+        'attributes' => NULL,
+        'entity' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for table of contents theme.
+ *
+ * Default template: toc-js.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing the following keys:
+ *   - entity: the entity the TOC belongs to.
+ *   - title: the TOC title.
+ *   - tag: the tag title.
+ */
+function template_preprocess_toc_js(&$variables) {
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function toc_js_theme_suggestions_toc_js_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\Core\Entity\EntityInterface $entity */
+  if ($entity = $variables['entity']) {
+    $suggestions[] = 'toc_js__' . $entity->getEntityTypeId();
+    $suggestions[] = 'toc_js__' . $entity->getEntityTypeId() . '__' . $entity->bundle();
+    $suggestions[] = 'toc_js__' . $entity->getEntityTypeId() . '__' . $entity->bundle() . '__' . $entity->id();
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function toc_js_entity_extra_field_info() {
+  $extra = [];
+
+  /** @var \Drupal\node\Entity\NodeType $bundle */
+  foreach (NodeType::loadMultiple() as $bundle) {
+    if ($bundle->getThirdPartySetting('toc_js', 'toc_js_active', 0)) {
+      $extra['node'][$bundle->Id()]['display']['toc_js'] = [
+        'label' => t('Toc'),
+        'description' => t('Table of content of node generated with Toc.js'),
+        'weight' => 100,
+        'visible' => FALSE,
+      ];
+    }
+  }
+
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function toc_js_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('toc_js')) {
+    /** @var \Drupal\node\NodeTypeInterface $node_type */
+    $node_type = $entity->type->entity;
+    $toc_override = $node_type->getThirdPartySetting('toc_js_per_node', 'override', 0);
+    $toc_override_default = $node_type->getThirdPartySetting('toc_js_per_node', 'override_default', 1);
+
+    // Support toc_js per node feature.
+    if ($entity->hasField('toc_js_active') && $toc_override) {
+      // Use default override value if not set
+      if ($entity->toc_js_active->value == NULL) {
+        $entity->toc_js_active->value = $toc_override_default;
+      }
+      if (empty($entity->toc_js_active->value)) {
+        return;
+      }
+    }
+
+    $toc_js_settings = $node_type->getThirdPartySettings('toc_js');
+    if (empty($toc_js_settings['toc_js_active'])) {
+      // Toc has been disabled but the extra field hasn't been disabled.
+      return;
+    }
+
+    $attributes = new Attribute(['class' => ['toc-js']]);
+    $attributes->setAttribute('id', 'toc-js-node-' . $entity->id());
+    $title_attributes = new Attribute(['class' => ['toc-title', 'h2']]);
+
+    if ($node_type->getThirdPartySetting('toc_js', 'sticky', 0)) {
+      $attributes->addClass('sticky');
+    }
+
+    foreach ($toc_js_settings as $name => $setting) {
+      if ($name == 'toc_js_active' || $name == 'title') {
+        continue;
+      }
+      $data_name = 'data-' . Html::cleanCssIdentifier($name);
+      $attributes->setAttribute($data_name, $setting);
+    }
+
+    $build['toc_js'] = [
+      '#theme' => 'toc_js',
+      '#title' => $node_type->getThirdPartySetting('toc_js', 'title', 'Table of contents'),
+      '#tag' => 'div',
+      '#title_attributes' => $title_attributes,
+      '#attributes' => $attributes,
+      '#entity' => $entity,
+      '#attached' => [
+        'library' => [
+          'toc_js/toc',
+        ],
+      ],
+    ];
+
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function toc_js_form_node_type_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\node\NodeTypeInterface $type */
+  $type = $form_state->getFormObject()->getEntity();
+
+  $form['toc_js'] = [
+    '#type' => 'details',
+    '#group' => isset($form['additional_settings']) ? 'additional_settings' : 'advanced',
+    '#title' => t('Table of content'),
+    '#access' => (\Drupal::currentUser()->hasPermission('administer toc_js') || \Drupal::currentUser()->hasPermission('administer nodes')),
+  ];
+
+  $form['toc_js']['toc_js_active'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable Table of content'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'toc_js_active', 0),
+  ];
+
+  $form['toc_js']['title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#description' => t('the title to use for the table of contents.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'title', 'Table of contents'),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['selectors'] = [
+    '#type' => 'textfield',
+    '#title' => t('Selectors'),
+    '#description' => t('Elements to use as headings. Each element separated by comma.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'selectors', 'h2, h3'),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['selectors_minimum'] = [
+    '#type' => 'number',
+    '#title' => t('Minimum elements'),
+    '#description' => t('Set a minimum of elements to display the toc. Set 0 to always display the TOC.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'selectors_minimum', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['container'] = [
+    '#type' => 'textfield',
+    '#title' => t('Container'),
+    '#description' => t('Element to find all selectors in.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'container', '.node'),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['list_type'] = [
+    '#type' => 'select',
+    '#title' => t('List type'),
+    '#description' => t('Select the list type to use.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'list_type', 'ul'),
+    '#options' => [
+      'ul' => t('Unordered HTML list (ul)'),
+      'ol' => t('Ordered HTML list (ol)'),
+    ],
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['prefix'] = [
+    '#type' => 'textfield',
+    '#title' => t('Prefix'),
+    '#description' => t('Prefix for anchor tags and class names.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'prefix', 'toc'),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['back_to_top'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Back to top link'),
+    '#description' => t('Add a back to top link on heading.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'back_to_top', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['back_to_top_label'] = [
+    '#type' => 'textfield',
+    '#title' => t('Back to top label'),
+    '#description' => t('The back to top link label.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'back_to_top_label', 'Back to top'),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="back_to_top"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['smooth_scrolling'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Smooth scrolling'),
+    '#description' => t('Enable or disable smooth scrolling on click.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'smooth_scrolling', 1),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['scroll_to_offset'] = [
+    '#type' => 'number',
+    '#title' => t('ScrollTo offset'),
+    '#description' => t('Offset to trigger with smooth scrolling enabled.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'scroll_to_offset', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="smooth_scrolling"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['highlight_on_scroll'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Highlight on scroll'),
+    '#description' => t('Add class to heading that is currently in focus.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'highlight_on_scroll', 1),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['highlight_offset'] = [
+    '#type' => 'number',
+    '#title' => t('Highlight offset'),
+    '#description' => t('Offset to trigger the next headline.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'highlight_offset', 100),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="highlight_on_scroll"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['sticky'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Sticky'),
+    '#description' => t('Stick the toc on window scroll.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'sticky', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['sticky_offset'] = [
+    '#type' => 'number',
+    '#title' => t('Sticky offset'),
+    '#description' => t('The offset (in px) to apply when the toc is sticky.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'sticky_offset', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="sticky"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['sticky_stop'] = [
+    '#type' => 'textfield',
+    '#title' => t('Sticky Stop'),
+    '#description' => t('Selector to use as a sticky stop. Leave empty if you don\'t need a stop for the sticky toc.'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'sticky_stop', ''),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="sticky"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['toc_js']['sticky_stop_padding'] = [
+    '#type' => 'number',
+    '#title' => t('Sticky Stop padding (px)'),
+    '#description' => t('The padding to apply before the sticky stop (in pixels).'),
+    '#default_value' => $type->getThirdPartySetting('toc_js', 'sticky_stop_padding', 0),
+    '#states' => [
+      'visible' => [
+        ':input[name="toc_js_active"]' => ['checked' => TRUE],
+        ':input[name="sticky"]' => ['checked' => TRUE],
+      ],
+    ],
+  ];
+
+  $form['#entity_builders'][] = 'toc_js_form_node_type_form_builder';
+}
+
+/**
+ * Entity builder for the node type form with TOC node option.
+ */
+function toc_js_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('toc_js', 'toc_js_active', $form_state->getValue('toc_js_active'));
+  $type->setThirdPartySetting('toc_js', 'title', $form_state->getValue('title'));
+  $type->setThirdPartySetting('toc_js', 'selectors', $form_state->getValue('selectors'));
+  $type->setThirdPartySetting('toc_js', 'selectors_minimum', $form_state->getValue('selectors_minimum'));
+  $type->setThirdPartySetting('toc_js', 'container', $form_state->getValue('container'));
+  $type->setThirdPartySetting('toc_js', 'list_type', $form_state->getValue('list_type'));
+  $type->setThirdPartySetting('toc_js', 'smooth_scrolling', $form_state->getValue('smooth_scrolling'));
+  $type->setThirdPartySetting('toc_js', 'scroll_to_offset', $form_state->getValue('scroll_to_offset'));
+  $type->setThirdPartySetting('toc_js', 'prefix', $form_state->getValue('prefix'));
+  $type->setThirdPartySetting('toc_js', 'back_to_top', $form_state->getValue('back_to_top'));
+  $type->setThirdPartySetting('toc_js', 'back_to_top_label', $form_state->getValue('back_to_top_label'));
+  $type->setThirdPartySetting('toc_js', 'highlight_on_scroll', $form_state->getValue('highlight_on_scroll'));
+  $type->setThirdPartySetting('toc_js', 'highlight_offset', $form_state->getValue('highlight_offset'));
+  $type->setThirdPartySetting('toc_js', 'sticky', $form_state->getValue('sticky'));
+  $type->setThirdPartySetting('toc_js', 'sticky_offset', $form_state->getValue('sticky_offset'));
+  $type->setThirdPartySetting('toc_js', 'sticky_stop', $form_state->getValue('sticky_stop'));
+  $type->setThirdPartySetting('toc_js', 'sticky_stop_padding', $form_state->getValue('sticky_stop_padding'));
+}

@@ -1,0 +1,32 @@
+uuid: 9206ddcb-e8c9-40d3-bc9f-95c4bb2814a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.group_ad_name_list.field_employee_groups
+    - taxonomy.vocabulary.group_ad_name_list
+  module:
+    - text
+id: taxonomy_term.group_ad_name_list.default
+targetEntityType: taxonomy_term
+bundle: group_ad_name_list
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_employee_groups:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -3,18 +3,63 @@
 use Drupal\user\Entity\User;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
+use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
+
+/**
+ * Implement hook_user_presave()
+ */
+function portland_openid_connect_user_presave($account)
+{
+  if (!empty($account->field_group_names->value)) {
+    // Remove the duplicated group names
+    $primary_group_names = array_unique(
+      array_map(
+        'trim',
+        explode(',', $account->field_group_names->value)
+      )
+    );
+
+    // Update the group_names field
+    $account->field_group_names->value = implode(',', $primary_group_names);
+
+    // Build new primary group ID array with AD group names
+    $group_ad_name_list = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('group_ad_name_list', 0, 1, true);
+    $new_primary_group_ids = [];
+    foreach ($group_ad_name_list as $group_ad_name) {
+      if (in_array($group_ad_name->name->value, $primary_group_names)) {
+        $drupal_groups = $group_ad_name->field_employee_groups->getValue();
+        foreach ($drupal_groups as $drupal_group) {
+          $new_primary_group_ids[] = $drupal_group['target_id'];
+        }
+      }
+    }
+    // Remove duplicates
+    $new_primary_group_ids = array_unique($new_primary_group_ids);
+
+    // Update the user's primary_groups field
+    $new_primary_groups = [];
+    foreach ($new_primary_group_ids as $new_primary_group_id) {
+      $new_primary_groups[] = ['target_id' => $new_primary_group_id];
+    }
+    $account->field_primary_groups = $new_primary_groups;
+  } else {
+    $account->field_primary_groups = [];
+  }
+}
 
 /**
  * Implement hook_cron()
  */
 function portland_openid_connect_cron()
-{    
+{
   // When Cron got into a locked state, you will see the log "Attempting to re-run cron while it is already running.".
   // Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
   // Call Microsoft Graph API to retrieve user info
   $tokens = _get_access_token();
-  if(empty($tokens['access_token'])) {
+  if (empty($tokens['access_token'])) {
     \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
     return;
   }
@@ -31,38 +76,40 @@ function portland_openid_connect_cron()
  * @return array $manager_user_ids
  *   An array of user IDs of managers.
  */
-function _create_or_find_manager($user_data) {
+function _create_or_find_manager($user_data)
+{
   // There manager field only contains the AD ID. Use the ID to look up the Drupal user.
   // If not found, create a stub user whose details will be filled in later runs.
   $manager_user_ids = [];
-  if(array_key_exists('manager@delta', $user_data)) {
+  if (array_key_exists('manager@delta', $user_data)) {
     $manager_array = $user_data['manager@delta'];
-    if(count($manager_array) > 0) {
-      foreach($manager_array as $manager_data) { // Could have multiple managers
-        if(array_key_exists('@odata.type', $manager_data) && 
-          $manager_data['@odata.type'] == "#microsoft.graph.user") {
-            $manager_ad_id = $manager_data['id'];
-            $manager_users = \Drupal::entityTypeManager()->getStorage('user')
-              ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
+    if (count($manager_array) > 0) {
+      foreach ($manager_array as $manager_data) { // Could have multiple managers
+        if (
+          array_key_exists('@odata.type', $manager_data) &&
+          $manager_data['@odata.type'] == "#microsoft.graph.user"
+        ) {
+          $manager_ad_id = $manager_data['id'];
+          $manager_users = \Drupal::entityTypeManager()->getStorage('user')
+            ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
 
-            if(count($manager_users) > 0) {
-              // manager_users is an associate array with user ID as key, user entity as value
-              $manager_user_ids[] = key($manager_users);
-              // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
-            }
-            else {
-              $user = User::create([
-                'name' => $manager_ad_id, // temp name
-                'mail' => $manager_ad_id.'@portlandoregon.gov', // temp email
-                'pass' => user_password(), // temp password
-                'status' => 1,
-                'field_active_directory_id' => $manager_ad_id,
-              ]);
-              $user->save();
-              $manager_user_ids[] = $user->id();
-              // \Drupal::logger('portland OpenID')->notice('Created temp manager: ' . $manager_ad_id);
-            }
+          if (count($manager_users) > 0) {
+            // manager_users is an associate array with user ID as key, user entity as value
+            $manager_user_ids[] = key($manager_users);
+            // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
+          } else {
+            $user = User::create([
+              'name' => $manager_ad_id, // temp name
+              'mail' => $manager_ad_id . '@portlandoregon.gov', // temp email
+              'pass' => user_password(), // temp password
+              'status' => 1,
+              'field_active_directory_id' => $manager_ad_id,
+            ]);
+            $user->save();
+            $manager_user_ids[] = $user->id();
+            // \Drupal::logger('portland OpenID')->notice('Created temp manager: ' . $manager_ad_id);
           }
+        }
       }
     }
   }
@@ -77,9 +124,10 @@ function _create_or_find_manager($user_data) {
  * @param array $response_data
  *   The decoded JSON response from Microsoft Graph.
  */
-function _process_users($response_data, $access_token) {
+function _process_users($response_data, $access_token)
+{
   $user_data_array = $response_data['value']; // array of users
-  if(empty($user_data_array)) {
+  if (empty($user_data_array)) {
     \Drupal::logger('portland OpenID')->notice('No user change since the last sync.');
     return;
   }
@@ -88,12 +136,14 @@ function _process_users($response_data, $access_token) {
   $count_user_updated = 0;
   $count_user_deleted = 0;
 
-  foreach($user_data_array as $user_data) {
+  foreach ($user_data_array as $user_data) {
     // Skip accounts without first name, last name, or email. These are not people acount.
-    if(empty($user_data['givenName']) || 
-      empty($user_data['surname']) || 
+    if (
+      empty($user_data['givenName']) ||
+      empty($user_data['surname']) ||
       empty($user_data['mail']) ||
-      empty($user_data['id']))
+      empty($user_data['id'])
+    )
       continue;
 
     // Some users are added into the system before the batch import. We must 
@@ -103,12 +153,12 @@ function _process_users($response_data, $access_token) {
 
     // If found no user with email, use AD ID to look up again.
     // These are stub users created for managers
-    if(count($users) == 0) {
+    if (count($users) == 0) {
       $users = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['field_active_directory_id' => $user_data['id']]);
     }
 
-    if(count($users) == 0) {
+    if (count($users) == 0) {
       /*
         {
             "displayName": "Smith, Joe",
@@ -141,10 +191,14 @@ function _process_users($response_data, $access_token) {
 
       $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
       // If the profile is empty, assume the user is not with the City
-      if( !empty($user_profile) ) {
+      if (!empty($user_profile)) {
         $user->set('field_phone', $user_profile['phone'] ?? '');
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
+
+        // Add the user to primary groups as Employee
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+
         $count_user_created++;
       }
     }
@@ -152,9 +206,12 @@ function _process_users($response_data, $access_token) {
     else {
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Deactivate this user
-      if(array_key_exists('@removed', $user_data)) {
+      if (array_key_exists('@removed', $user_data)) {
         $user->status = 0;
+        $user->set('field_group_names', '');
         $user->save();
+        // Find all group this user belongs to and remove the Employee role
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
         $count_user_deleted++;
         \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
@@ -169,18 +226,22 @@ function _process_users($response_data, $access_token) {
         $manager_user_ids = _create_or_find_manager($user_data);
         $managers_orig = $user->get('field_managers');
         $managers_orig_ids = [];
-        foreach($managers_orig as $manager_orig) {
-          if($manager_orig->entity !== null) {
+        foreach ($managers_orig as $manager_orig) {
+          if ($manager_orig->entity !== null) {
             $managers_orig_ids[] = $manager_orig->entity->id();
           }
         }
-        $user->set('field_managers', array_unique(array_merge($managers_orig_ids, $manager_user_ids)));  
+        $user->set('field_managers', array_unique(array_merge($managers_orig_ids, $manager_user_ids)));
 
         $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
-        if( !empty($user_profile) ) {
+        if (!empty($user_profile)) {
           $user->set('field_phone', $user_profile['phone'] ?? '');
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
+
+          // Update the user's primary group membership to match the AD group names
+          PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+
           $count_user_updated++;
         }
       }
@@ -189,13 +250,13 @@ function _process_users($response_data, $access_token) {
 
   // Summarize the changes made in this batch
   $log_message = 'Retrieved ' . count($user_data_array) . ' users. ';
-  if($count_user_created != 0) {
+  if ($count_user_created != 0) {
     $log_message .= " Created $count_user_created.";
   }
-  if($count_user_updated != 0) {
+  if ($count_user_updated != 0) {
     $log_message .= " Updated $count_user_updated.";
   }
-  if($count_user_deleted != 0) {
+  if ($count_user_deleted != 0) {
     $log_message .= " Removed in AD $count_user_deleted.";
   }
   \Drupal::logger('portland OpenID')->notice($log_message);
@@ -206,8 +267,9 @@ function _process_users($response_data, $access_token) {
 /**
  * Use the access token to get user profile
  */
-function _get_user_profile_by_email($access_token, $user_email) {
-  if( strlen($access_token) === 0 || strlen($user_email) === 0) return [];
+function _get_user_profile_by_email($access_token, $user_email)
+{
+  if (strlen($access_token) === 0 || strlen($user_email) === 0) return [];
 
   /* @var \GuzzleHttp\ClientInterface $client */
   $client = new \GuzzleHttp\Client();
@@ -226,10 +288,9 @@ function _get_user_profile_by_email($access_token, $user_email) {
     $request_url = "https://graph.microsoft.com/beta/users/$user_email/profile";
     $response = $client->get($request_url, $options);
     $response_data = json_decode((string) $response->getBody(), TRUE);
-    if($response_data == null) return false;
+    if ($response_data == null) return false;
     return _process_user_profile($response_data, $user_email);
-  }
-  catch (RequestException $e) {
+  } catch (RequestException $e) {
     $variables = [
       '@message' => 'Could not retrieve user profile for ' . $user_email,
       '@error_message' => $e->getMessage(),
@@ -242,30 +303,31 @@ function _get_user_profile_by_email($access_token, $user_email) {
 /**
  * Update or create the user's bureau and phone
  */
-function _process_user_profile($response_data) {
-  if($response_data == null) return [];
+function _process_user_profile($response_data)
+{
+  if ($response_data == null) return [];
 
   $phones = $response_data['phones'] ?? [];
   $user_phone = '';
-  foreach($phones as $phone) {
+  foreach ($phones as $phone) {
     $phone_type = $phone['type'] ?? '';
-    if($phone_type == 'business') {
+    if ($phone_type == 'business') {
       $user_phone = $phone['number'] ?? '';
     }
   }
   $positions = $response_data['positions'] ?? [];
   $user_bureau_array = [];
-  foreach($positions as $position) {
+  foreach ($positions as $position) {
     $position_isCurrent = $position['isCurrent'] ?? false;
-    if($position_isCurrent) {
+    if ($position_isCurrent) {
       $detail = $position['detail'] ?? [];
       $company = $detail['company'] ?? [];
-      if(array_key_exists('displayName', $company)) {
+      if (array_key_exists('displayName', $company)) {
         $user_bureau_array[] = $company['displayName'];
       }
     }
   }
-  $user_bureau_string = implode(',', $user_bureau_array);
+  $user_bureau_string = implode(',', array_unique($user_bureau_array));
 
   return [
     'phone' => $user_phone,
@@ -276,7 +338,8 @@ function _process_user_profile($response_data) {
 /**
  * Use the access token to get user info
  */
-function _get_all_users($access_token) {
+function _get_all_users($access_token)
+{
   $system_state = \Drupal::state();
 
   /* @var \GuzzleHttp\ClientInterface $client */
@@ -294,22 +357,21 @@ function _get_all_users($access_token) {
     // Run this command to restart the sync process next time
     // lando drush state:del user_sync.resume_url
 
-    if( $resume_url = $system_state->get('user_sync.resume_url') ) {
+    if ($resume_url = $system_state->get('user_sync.resume_url')) {
       \Drupal::logger('portland OpenID')->notice('Resume retrieving user information ...');
-    }
-    else {
+    } else {
       \Drupal::logger('portland OpenID')->notice('Start retrieving user information ...');
     }
 
     // If there is a resume link, use it. Otherwise start fresh
     $request_url = (empty($resume_url)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resume_url;
-    $request_limit = 5;
+    $request_limit = 3;
     $request_count = 0;
     $response_data = null;
-    while(strlen($request_url) > 0 && $request_count < $request_limit) {
+    while (strlen($request_url) > 0 && $request_count < $request_limit) {
       $response = $client->get($request_url, $options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
-      if( (! isset($response_data['@odata.nextLink'])) && !($response_data['@odata.deltaLink']) ) {
+      if ((!isset($response_data['@odata.nextLink'])) && !($response_data['@odata.deltaLink'])) {
         \Drupal::logger('portland OpenID')->error('Response contains neither nextLink nor deltaLink.');
         return false;
       }
@@ -317,17 +379,16 @@ function _get_all_users($access_token) {
       $request_url = $response_data['@odata.nextLink'] ?? '';
       $request_count++;
     }
-    if($response_data == null) return false;
+    if ($response_data == null) return false;
 
     // Where there is no nextLink, there is no new user info.
     // Should use deltaLink to resume in the next Cron.
     $system_state->set('user_sync.resume_url', $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
-    \Drupal::logger('portland OpenID')->notice( isset($response_data['@odata.nextLink']) ? 
+    \Drupal::logger('portland OpenID')->notice(isset($response_data['@odata.nextLink']) ?
       'More user information to be retrieved by the next cron job.' :
       'Finished retrieving all user information.');
     return true;
-  }
-  catch (RequestException $e) {
+  } catch (RequestException $e) {
     $variables = [
       '@message' => 'Could not retrieve user information',
       '@error_message' => $e->getMessage(),
@@ -341,7 +402,8 @@ function _get_all_users($access_token) {
  * Call Microsoft Azure AD OAuth API to retrieve the access token.
  * Need a fresh token for each CRON job run.
  */
-function _get_access_token() {
+function _get_access_token()
+{
   $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
   $client_id = $windows_aad_config->get('settings.client_id');
   $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
@@ -372,8 +434,7 @@ function _get_access_token() {
       $tokens['expire'] = \Drupal::time()->getRequestTime() + $response_data['expires_in'];
     }
     return $tokens;
-  }
-  catch (RequestException $e) {
+  } catch (RequestException $e) {
     $variables = [
       '@message' => 'Could not retrieve access token',
       '@error_message' => $e->getMessage(),

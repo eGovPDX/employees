@@ -9,7 +9,8 @@ folder: sites/default/config_local
 module:
   devel: 0
 theme: {  }
-blacklist: {  }
+blacklist:
+  - group_notifications.mail
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true

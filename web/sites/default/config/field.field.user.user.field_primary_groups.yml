@@ -1,0 +1,30 @@
+uuid: a24c1a48-1704-46d5-bf15-02b57b6ba364
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_primary_groups
+    - group.type.employee
+  module:
+    - user
+id: user.user.field_primary_groups
+field_name: field_primary_groups
+entity_type: user
+bundle: user
+label: 'Primary groups'
+description: 'This field value is automatically populated by the AD Group Names field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
