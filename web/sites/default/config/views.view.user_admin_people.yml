@@ -207,31 +207,31 @@ display:
             0:
               action_id: user_update_user_primary_groups
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             1:
               action_id: user_add_role_action
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             2:
               action_id: user_block_user_action
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             3:
               action_id: user_remove_role_action
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             4:
               action_id: user_unblock_user_action
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             5:
               action_id: vbo_cancel_user_action
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
             7:
               action_id: 'entity:save_action:user'
               preconfiguration:
-                add_confirmation: 0
+                add_confirmation: false
           force_selection_info: false
           plugin_id: views_bulk_operations_bulk_form
         field_phone:
@@ -1376,6 +1376,49 @@ display:
           entity_type: user
           entity_field: uid
           plugin_id: user_name
+        field_group_names_value:
+          id: field_group_names_value
+          table: user__field_group_names
+          field: field_group_names_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_group_names_value_op
+            label: 'AD Group (contains)'
+            description: ''
+            use_operator: false
+            operator: field_group_names_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_group_names_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: string
       sorts:
         created:
           id: created
@@ -1456,10 +1499,10 @@ display:
         - 'config:field.storage.user.field_last_name'
         - 'config:field.storage.user.field_managers'
         - 'config:field.storage.user.field_phone'
-  page_1:
+  page_admin_people:
     display_plugin: page
-    id: page_1
-    display_title: Page
+    id: page_admin_people
+    display_title: 'Page: Administer People'
     position: 1
     display_options:
       path: admin/people/list
@@ -1480,6 +1523,7 @@ display:
       defaults:
         show_admin_links: false
       display_extenders: {  }
+      display_description: ''
     cache_metadata:
       contexts:
         - 'languages:language_content'
