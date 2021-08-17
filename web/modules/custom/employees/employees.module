@@ -8,6 +8,17 @@ use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
 
+
+/**
+ * Implements hook_form_alter()
+ */
+function employees_form_alter(&$form, &$form_state, $form_id) {
+    // POWR-3694 - disable HTML 5 validation for all forms
+    $form['#attributes']['novalidate'] = '';
+    // TOOD: remove this once something similar is included in core, or the Drupal community
+    // decides how it wants to handle accessible and usable validation.
+}
+
 /**
  * Implements hook_query_TAG_alter().
  * Alter user query from "John Doe" into "John.Doe" to support autocomplete.
