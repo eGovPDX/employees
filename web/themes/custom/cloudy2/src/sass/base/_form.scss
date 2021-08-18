@@ -1,0 +1,37 @@
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 2px solid red;
+}
+
+// /* Inline error messages. */
+// .form-item--error-message:before {
+//   display: inline-block;
+//   width: 14px;
+//   height: 14px;
+//   content: "";
+//   vertical-align: sub;
+//   background: url(/core/misc/icons/e32700/error.svg) no-repeat;
+//   background-size: contain;
+// }
+
+.form-required:after {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0.3em;
+  content: "";
+  vertical-align: super;
+  /* Use a background image to prevent screen readers from announcing the text. */
+  background-image: url(/core/misc/icons/ee0000/required.svg);
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+}
+
+.form-item--error-message {
+    display: inherit;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
