@@ -258,7 +258,8 @@ display:
       use_more_always: true
       use_more_text: 'All news'
       link_url: ''
-      link_display: page_1
+      link_display: page_group_news
+      css_class: mb-3
     cache_metadata:
       max-age: -1
       contexts:
@@ -365,8 +366,8 @@ display:
       block_description: 'Group News'
       block_hide_empty: true
       use_more: true
-      use_more_always: false
-      use_more_text: 'More news'
+      use_more_always: true
+      use_more_text: 'All News'
       arguments:
         gid:
           id: gid
