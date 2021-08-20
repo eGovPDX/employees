@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_category
     - field.storage.node.field_contract_expiration_date
+    - field.storage.node.field_contract_number
     - field.storage.node.field_mandated_purchases
     - field.storage.node.field_p_card_allowed
     - search_api.index.full_index
@@ -485,56 +486,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: search_api_date
-        field_contract_expiration_date:
-          id: field_contract_expiration_date
-          table: search_api_index_full_index
-          field: field_contract_expiration_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: today-12hr
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: field_contract_expiration_date_op
-            label: 'Contract Expiration Date'
-            description: ''
-            use_operator: false
-            operator: field_contract_expiration_date_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_contract_expiration_date
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              citywide_contract_editor: '0'
-              administrator: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: search_api_date
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_full_index
@@ -548,7 +499,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: 'Search vendors'
+            label: Search
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -584,6 +535,7 @@ display:
           min_length: null
           fields:
             - content_title
+            - field_contract_number
           plugin_id: search_api_fulltext
         field_category:
           id: field_category
@@ -674,6 +626,7 @@ display:
           columns:
             content_title: content_title
             field_category: field_category
+            field_contract_number_1: field_contract_number_1
             field_mandated_purchases: field_mandated_purchases
             field_p_card_allowed: field_p_card_allowed
             field_contract_expiration_date_1: field_contract_expiration_date_1
@@ -692,13 +645,20 @@ display:
               separator: ''
               empty_column: false
               responsive: priority-medium
-            field_mandated_purchases:
+            field_contract_number_1:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
+            field_mandated_purchases:
+              align: views-align-center
+              separator: ''
+              empty_column: false
+              responsive: ''
             field_p_card_allowed:
-              align: ''
+              align: views-align-center
               separator: ''
               empty_column: false
               responsive: ''
@@ -870,6 +830,76 @@ display:
                 display_method: label
                 view_mode: default
           plugin_id: search_api_field
+        field_contract_number_1:
+          id: field_contract_number_1
+          table: search_api_index_full_index
+          field: field_contract_number
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Contract Number'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
         field_mandated_purchases:
           id: field_mandated_purchases
           table: search_api_datasource_full_index_entity_node
@@ -1034,8 +1064,8 @@ display:
           label: 'Expiration Date'
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{% if field_contract_expiration_date_1__value < ''now''|date(''Y-m-d'') %}<em>{% set expired = true %}{% endif %}{{ field_contract_expiration_date_1 }}{% if expired %}</em>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1144,6 +1174,16 @@ display:
           empty: false
           content: '<p>Displaying @start - @end of @total</p>'
           plugin_id: result
+      menu:
+        type: none
+        title: ''
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
+      use_admin_theme: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -1157,6 +1197,7 @@ display:
       tags:
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_contract_expiration_date'
+        - 'config:field.storage.node.field_contract_number'
         - 'config:field.storage.node.field_mandated_purchases'
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:search_api.index.full_index'

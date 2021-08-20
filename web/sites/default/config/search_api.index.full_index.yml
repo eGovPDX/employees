@@ -14,6 +14,7 @@ dependencies:
     - field.storage.node.body
     - field.storage.node.field_display_in_group
     - field.storage.node.field_contract_expiration_date
+    - field.storage.node.field_contract_number
     - field.storage.node.field_contract_start_date
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
@@ -132,6 +133,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_contract_expiration_date
+  field_contract_number:
+    label: 'Contract Number'
+    datasource_id: 'entity:node'
+    property_path: field_contract_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contract_number
   field_contract_start_date:
     label: 'Contract Start Date'
     datasource_id: 'entity:node'

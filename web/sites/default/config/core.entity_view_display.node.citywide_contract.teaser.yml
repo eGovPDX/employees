@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.citywide_contract.field_category
     - field.field.node.citywide_contract.field_contract_document
     - field.field.node.citywide_contract.field_contract_expiration_date
+    - field.field.node.citywide_contract.field_contract_number
     - field.field.node.citywide_contract.field_contract_start_date
     - field.field.node.citywide_contract.field_mandated_purchases
     - field.field.node.citywide_contract.field_p_card_allowed
@@ -29,6 +30,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -38,6 +44,7 @@ hidden:
   field_category: true
   field_contract_document: true
   field_contract_expiration_date: true
+  field_contract_number: true
   field_contract_start_date: true
   field_mandated_purchases: true
   field_p_card_allowed: true
