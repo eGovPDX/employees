@@ -4,12 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_address
+    - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_title
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -36,6 +40,22 @@ content:
     third_party_settings: {  }
   field_active_directory_id:
     weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_address:
+    weight: 18
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_division_name:
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -76,6 +96,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_office_location:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_phone:
     weight: 6
     settings:
@@ -92,6 +120,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_title:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   language:
     weight: 9
