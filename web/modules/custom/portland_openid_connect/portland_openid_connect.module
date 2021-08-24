@@ -1,9 +1,47 @@
 <?php
 
 use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
+
+
+/**
+ * Implement hook_user_login()
+ */
+function portland_openid_connect_user_login(UserInterface $account) {
+  if (empty($account)) return;
+
+  // If cannot find a Drupal user with the email, skip
+  $users = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['mail' => $account->getEmail()]);
+  if( empty($users) ) return;
+  $user = array_values($users)[0];
+  // If the user is not active, skip
+  if ( ! $user->status->value ) return;
+  $azure_ad_id = $user->field_active_directory_id->value;
+  // If the user doesn't have an Azure AD ID, skip
+  if( empty($azure_ad_id)) return;
+
+  // Always skip these users
+  $skip_emails = [
+    'BTS-eGov@portlandoregon.gov',
+    'ally.admin@portlandoregon.gov',
+    'marty.member@portlandoregon.gov',
+    'oliver.outsider@portlandoregon.gov',
+  ];
+  if (in_array(strtolower($account->getEmail()), array_map('strtolower', $skip_emails))) return;
+
+  $tokens = PortlandOpenIdConnectUtil::GetAccessToken();
+  if (empty($tokens) || empty($tokens['access_token'])) {
+    \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
+    return;
+  }
+
+  PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+  PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+}
 
 /**
  * Implement hook_user_presave()

@@ -248,7 +248,17 @@ class PortlandOpenIdConnectUtil
         if( !empty($address['city']) ) $address_parts[] = $address['city'];
         if( !empty($address['state']) ) $address_parts[] = $address['state'];
         if( !empty($address['postalCode']) ) $address_parts[] = $address['postalCode'];
-        $user_info['address'] = implode(",", $address_parts);
+        $user_info['address'] = implode(', ', $address_parts);
+
+        // Get the user's business phone number
+        $user_info['phone'] = '';
+        $phones = $response_data["phones"];
+        foreach($phones as $phone) {
+          if($phone['type'] == 'business') {
+            $user_info['phone'] = $phone['number'];
+            break;
+          }
+        }
       }
 
       // Load the Drupal user with email
@@ -261,6 +271,7 @@ class PortlandOpenIdConnectUtil
         $user->field_division_name = $user_info['division'];
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
+        $user->field_phone = $user_info['phone'];
         $user->save();
         // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
       }
@@ -318,11 +329,12 @@ class PortlandOpenIdConnectUtil
         ->loadByProperties(['mail' => $email]);
       if (count($users) != 0) {
         $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+        $user_display_name = $user->field_first_name->value . ' ' . $user->field_last_name->value;
         $user->user_picture->setValue(
           [
             'target_id' => $user_photo_file->id(),
-            'alt'       => 'alt text',
-            'title'     => 'image title',
+            'alt'       => $user_display_name . ' profile picture',
+            'title'     => $user_display_name,
           ]
         );
         $user->save();
