@@ -8,10 +8,10 @@ dependencies:
     - field.field.group.private.field_org_type
     - field.field.group.private.field_parent_group
     - group.type.private
-    - views.view.group_documents
     - views.view.group_events
     - views.view.group_menu
     - views.view.group_news
+    - views.view.group_search_index
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -106,11 +106,11 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 0
-          76b6ae5c-9d49-435a-8f6d-9fc4123ce707:
-            uuid: 76b6ae5c-9d49-435a-8f6d-9fc4123ce707
+          25200171-e124-4ca7-8084-a08b85933dbc:
+            uuid: 25200171-e124-4ca7-8084-a08b85933dbc
             region: side
             configuration:
-              id: 'views_block:group_documents-block_1'
+              id: 'views_block:group_search_index-block_documents'
               label: ''
               provider: views
               label_display: visible
