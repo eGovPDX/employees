@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_tags
     - field.field.node.event.field_topics
+    - field.field.node.event.field_type
     - field.field.node.event.field_when
     - node.type.event
     - views.view.related_content
@@ -268,6 +269,22 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 4
+          4c2acc77-f6f0-4ff8-bdef-a96aeff5bd4d:
+            uuid: 4c2acc77-f6f0-4ff8-bdef-a96aeff5bd4d
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:field_type'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 4
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -317,6 +334,14 @@ content:
     region: content
   field_topics:
     weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
+  field_type:
+    weight: 6
     label: above
     settings:
       link: true
