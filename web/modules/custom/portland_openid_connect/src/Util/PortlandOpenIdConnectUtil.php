@@ -2,8 +2,15 @@
 
 namespace Drupal\portland_openid_connect\Util;
 
+use Drupal\group\Entity\GroupInterface;
+use Drupal\Core\File\FileSystemInterface;
+use GuzzleHttp\Exception\RequestException;
+
 class PortlandOpenIdConnectUtil
 {
+  /* @var \GuzzleHttp\ClientInterface $client */
+  private static $client;
+
   /**
    * Helper function to remove a user from a group
    */
@@ -24,13 +31,13 @@ class PortlandOpenIdConnectUtil
         continue;
       }
       // Remove the "member" role
-      else if($role->id() === 'employee-member') {
+      else if ($role->id() === 'employee-member') {
         $has_employee_role = true;
         continue;
       }
       $group_content->group_roles->appendItem(['target_id' => $role->id()]);
     }
-    if ($has_employee_role) $group_content->save();    
+    if ($has_employee_role) $group_content->save();
 
     // $group = \Drupal\group\Entity\Group::load($group_id);
     // $group->removeMember($account);
@@ -145,5 +152,202 @@ class PortlandOpenIdConnectUtil
       $group_ids[] = $grp->getGroup()->id();
     }
     return $group_ids;
+  }
+
+  /**
+   * Call Microsoft Azure AD OAuth API to retrieve the access token.
+   * Need a fresh token for each CRON job run.
+   */
+  public static function GetAccessToken()
+  {
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+
+    static $token_expire_time = 0;
+    static $tokens = null;
+    // If the token has not expired, return the previous token
+    if (time() < ( $token_expire_time - 300 )) return $tokens;
+
+    $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
+    $client_id = $windows_aad_config->get('settings.client_id');
+    $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
+
+    $request_options = [
+      'form_params' => [
+        // 'code' => $authorization_code,
+        'client_id' => $client_id,
+        'client_secret' => $windows_aad_config->get('settings.client_secret'),
+        'grant_type' => 'client_credentials',
+        'scope' => 'https://graph.microsoft.com/.default',
+      ],
+    ];
+
+    try {
+      $response = self::$client->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", $request_options);
+      $response_data = json_decode((string) $response->getBody(), TRUE);
+
+      // Expected result.
+      $tokens = [
+        // 'id_token' => $response_data['id_token'],
+        'access_token' => $response_data['access_token'],
+      ];
+      if (array_key_exists('expires_in', $response_data)) {
+        $tokens['expire'] = \Drupal::time()->getRequestTime() + $response_data['expires_in'];
+      }
+      $token_expire_time = time() + $response_data['expires_in'];
+      return $tokens;
+    } catch (RequestException $e) {
+      $variables = [
+        '@message' => 'Could not retrieve access token',
+        '@error_message' => $e->getMessage(),
+      ];
+      \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+      return FALSE;
+    }
+  }
+
+  /**
+   * Look up the AD principal name by email.
+   * A user's principal name never changes. But the email may get modified after legal name change.
+   */
+  public static function GetUserProfile($access_token, $email, $azure_ad_id)
+  {
+    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+    // Perform the request.
+    $options = [
+      'method' => 'GET',
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => 'Bearer ' . $access_token,
+        'ConsistencyLevel' => 'eventual', // required by Graph search API
+      ],
+    ];
+
+    try {
+      // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
+      // Example: https://graph.microsoft.com/beta/users/xinju.wang@portlandoregon.gov/profile
+      $response = self::$client->get(
+        'https://graph.microsoft.com/beta/users/' . $azure_ad_id . '/profile',
+        $options
+      );
+      $response_data = json_decode((string) $response->getBody(), TRUE);
+
+      $user_info = [];
+      if (
+        array_key_exists('positions', $response_data) &&
+        !empty($response_data["positions"]) &&
+        array_key_exists('detail', $response_data["positions"][0])
+      ) {
+        $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
+        $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];
+        $user_info['officeLocation'] = $response_data["positions"][0]["detail"]["company"]["officeLocation"];
+        $address = $response_data["positions"][0]["detail"]["company"]["address"];
+        $address_parts = [];
+        if( !empty($address['street']) ) $address_parts[] = $address['street'];
+        if( !empty($address['city']) ) $address_parts[] = $address['city'];
+        if( !empty($address['state']) ) $address_parts[] = $address['state'];
+        if( !empty($address['postalCode']) ) $address_parts[] = $address['postalCode'];
+        $user_info['address'] = implode(', ', $address_parts);
+
+        // Get the user's business phone number
+        $user_info['phone'] = '';
+        $phones = $response_data["phones"];
+        foreach($phones as $phone) {
+          if($phone['type'] == 'business') {
+            $user_info['phone'] = $phone['number'];
+            break;
+          }
+        }
+      }
+
+      // Load the Drupal user with email
+      $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $email]);
+
+      if (count($users) != 0) {
+        $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+        $user->field_title = $user_info['title'];
+        $user->field_division_name = $user_info['division'];
+        $user->field_office_location = $user_info['officeLocation'];
+        $user->field_address = $user_info['address'];
+        $user->field_phone = $user_info['phone'];
+        $user->save();
+        // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
+      }
+    } catch (RequestException $e) {
+      // Do not log 404 errors since some users don't have profile
+      if ($e->getCode() != 404) {
+        $variables = [
+          '@message' => 'Could not retrieve user information for email ' . $email,
+          '@error_message' => $e->getMessage(),
+        ];
+        \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+      }
+    }
+  }
+
+  /**
+   * Get a user's photo.
+   */
+  public static function GetUserPhoto($access_token, $email, $azure_ad_id)
+  {
+    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+    // Perform the request.
+    $options = [
+      'method' => 'GET',
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => 'Bearer ' . $access_token,
+      ],
+    ];
+
+    try {
+      // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
+      // Example: https://graph.microsoft.com/v1.0/users/xinju.wang@portlandoregon.gov/photo/$value
+      $response = self::$client->get(
+        'https://graph.microsoft.com/v1.0/users/' . $azure_ad_id . '/photo/$value',
+        $options
+      );
+      $file_name = str_replace('@', '_', $email);
+      $file_name = str_replace('.', '_', $file_name);
+      $user_photo_folder_name = "public://user-photo";
+      \Drupal::service('file_system')->prepareDirectory(
+        $user_photo_folder_name,
+        FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
+      );
+      $user_photo_file = file_save_data(
+        (string) $response->getBody(),
+        'public://user-photo/' . $file_name . '.jpg',
+        FileSystemInterface::EXISTS_REPLACE
+      );
+
+      // Load the Drupal user with email
+      $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $email]);
+      if (count($users) != 0) {
+        $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+        $user_display_name = $user->field_first_name->value . ' ' . $user->field_last_name->value;
+        $user->user_picture->setValue(
+          [
+            'target_id' => $user_photo_file->id(),
+            'alt'       => $user_display_name . ' profile picture',
+            'title'     => $user_display_name,
+          ]
+        );
+        $user->save();
+      }
+    } catch (RequestException $e) {
+      // Do not log 404 errors since some users don't have pictures
+      if ($e->getCode() != 404) {
+        $variables = [
+          '@message' => 'Could not retrieve user picture for email ' . $email,
+          '@error_message' => $e->getMessage(),
+        ];
+        \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+      }
+    }
   }
 }
