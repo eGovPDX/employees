@@ -3,12 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.user.field_address
+    - field.storage.user.field_division_name
     - field.storage.user.field_first_name
     - field.storage.user.field_group_names
     - field.storage.user.field_last_name
     - field.storage.user.field_managers
+    - field.storage.user.field_office_location
     - field.storage.user.field_phone
+    - field.storage.user.field_title
+    - field.storage.user.user_picture
+    - responsive_image.styles.medium
   module:
+    - responsive_image
     - telephone
     - user
     - views_bulk_operations
@@ -204,31 +211,35 @@ display:
           clear_on_exposed: true
           action_title: Action
           selected_actions:
-            0:
-              action_id: user_update_user_primary_groups
-              preconfiguration:
-                add_confirmation: false
-            1:
-              action_id: user_add_role_action
-              preconfiguration:
-                add_confirmation: false
-            2:
-              action_id: user_block_user_action
-              preconfiguration:
-                add_confirmation: false
-            3:
-              action_id: user_remove_role_action
-              preconfiguration:
-                add_confirmation: false
             4:
-              action_id: user_unblock_user_action
+              action_id: retrieve_user_info_from_ad
               preconfiguration:
                 add_confirmation: false
             5:
-              action_id: vbo_cancel_user_action
+              action_id: user_update_user_primary_groups
+              preconfiguration:
+                add_confirmation: false
+            6:
+              action_id: user_add_role_action
               preconfiguration:
                 add_confirmation: false
             7:
+              action_id: user_block_user_action
+              preconfiguration:
+                add_confirmation: false
+            8:
+              action_id: user_remove_role_action
+              preconfiguration:
+                add_confirmation: false
+            9:
+              action_id: user_unblock_user_action
+              preconfiguration:
+                add_confirmation: false
+            11:
+              action_id: vbo_cancel_user_action
+              preconfiguration:
+                add_confirmation: false
+            13:
               action_id: 'entity:save_action:user'
               preconfiguration:
                 add_confirmation: false
@@ -362,6 +373,133 @@ display:
           plugin_id: field
           entity_type: user
           entity_field: name
+        user_picture:
+          id: user_picture
+          table: user__user_picture
+          field: user_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Picture
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: responsive_image
+          settings:
+            responsive_image_style: medium
+            image_link: ''
+          group_column: entity_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_title:
+          id: field_title
+          table: user__field_title
+          field: field_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         roles_target_id:
           id: roles_target_id
           table: user__roles
@@ -741,6 +879,69 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_division_name:
+          id: field_division_name
+          table: user__field_division_name
+          field: field_division_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Division name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         field_group_names:
           id: field_group_names
           table: user__field_group_names
@@ -804,57 +1005,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        operations:
-          id: operations
-          table: users
-          field: operations
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Operations
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          destination: true
-          entity_type: user
-          plugin_id: entity_operations
         field_first_name:
           id: field_first_name
           table: user__field_first_name
@@ -981,6 +1131,183 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_office_location:
+          id: field_office_location
+          table: user__field_office_location
+          field: field_office_location
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Mail stop'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_address:
+          id: field_address
+          table: user__field_address
+          field: field_address
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Address
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        operations:
+          id: operations
+          table: users
+          field: operations
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Operations
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          destination: true
+          entity_type: user
+          plugin_id: entity_operations
       filters:
         combine:
           id: combine
@@ -1494,11 +1821,16 @@ display:
         - user.permissions
       max-age: 0
       tags:
+        - 'config:field.storage.user.field_address'
+        - 'config:field.storage.user.field_division_name'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_group_names'
         - 'config:field.storage.user.field_last_name'
         - 'config:field.storage.user.field_managers'
+        - 'config:field.storage.user.field_office_location'
         - 'config:field.storage.user.field_phone'
+        - 'config:field.storage.user.field_title'
+        - 'config:field.storage.user.user_picture'
   page_admin_people:
     display_plugin: page
     id: page_admin_people
@@ -1533,8 +1865,13 @@ display:
         - user.permissions
       max-age: 0
       tags:
+        - 'config:field.storage.user.field_address'
+        - 'config:field.storage.user.field_division_name'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_group_names'
         - 'config:field.storage.user.field_last_name'
         - 'config:field.storage.user.field_managers'
+        - 'config:field.storage.user.field_office_location'
         - 'config:field.storage.user.field_phone'
+        - 'config:field.storage.user.field_title'
+        - 'config:field.storage.user.user_picture'

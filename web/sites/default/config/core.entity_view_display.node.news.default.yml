@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
+    - field.field.node.news.field_type
     - node.type.news
   module:
     - layout_builder
@@ -221,6 +222,22 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 3
+          a85083db-ef0d-47f6-b5ac-315492fa527f:
+            uuid: a85083db-ef0d-47f6-b5ac-315492fa527f
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:news:field_type'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 6
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -279,6 +296,14 @@ content:
     region: content
   field_topics:
     weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
+  field_type:
+    weight: 6
     label: above
     settings:
       link: true

@@ -5,12 +5,16 @@ dependencies:
   config:
     - core.entity_view_mode.user.search_result
     - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_address
+    - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_title
     - field.field.user.user.user_picture
   module:
     - layout_builder
@@ -61,8 +65,12 @@ content:
     third_party_settings: {  }
 hidden:
   field_active_directory_id: true
+  field_address: true
+  field_division_name: true
   field_managers: true
+  field_office_location: true
   field_primary_groups: true
+  field_title: true
   langcode: true
   masquerade: true
   masquerade_as: true

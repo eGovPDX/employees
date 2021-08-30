@@ -1,0 +1,39 @@
+uuid: 0c9d3f73-ef36-48ab-9c86-28b4cc41bc2b
+langcode: en
+status: true
+dependencies:
+  module:
+    - webform
+id: employees_portland.gov
+label: 'Employees Portland.gov'
+weight: 0
+container_id: GTM-558BXL5
+data_layer: dataLayer
+include_classes: false
+whitelist_classes: |-
+  google
+  nonGooglePixels
+  nonGoogleScripts
+  nonGoogleIframes
+blacklist_classes: |-
+  customScripts
+  customPixels
+include_environment: false
+environment_id: ''
+environment_token: ''
+path_toggle: 'exclude listed'
+path_list: |-
+  /admin*
+  /batch*
+  /node/add*
+  /node/*/edit
+  /node/*/delete
+  /user/*/edit*
+  /user/*/cancel*
+role_toggle: 'exclude listed'
+role_list: {  }
+status_toggle: 'exclude listed'
+status_list: |-
+  403
+  404
+conditions: {  }

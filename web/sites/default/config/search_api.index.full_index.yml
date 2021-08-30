@@ -16,6 +16,7 @@ dependencies:
     - field.storage.media.field_tags
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.node.field_type
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
     - search_api.server.searchstax
@@ -167,6 +168,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_tags
+  field_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_type
   group_id:
     label: 'Group ID'
     datasource_id: 'entity:group'
