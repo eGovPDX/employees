@@ -5,11 +5,15 @@ dependencies:
   module:
     - search_api_solr
     - group
+    - media
     - node
     - user
     - search_api
   config:
     - field.storage.group.field_group_description
+    - field.storage.media.field_display_in_group
+    - field.storage.media.field_description
+    - field.storage.media.field_tags
     - field.storage.node.body
     - field.storage.node.field_display_in_group
     - field.storage.node.field_type
@@ -156,6 +160,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_last_name
+  field_tags:
+    label: Tags
+    datasource_id: 'entity:media'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_tags
   field_type:
     label: Type
     datasource_id: 'entity:node'
@@ -197,6 +209,47 @@ field_settings:
     dependencies:
       module:
         - group
+  media_bundle:
+    label: 'Media type'
+    datasource_id: 'entity:media'
+    property_path: bundle
+    type: string
+    dependencies:
+      module:
+        - media
+  media_changed:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - media
+  media_field_description:
+    label: Description
+    datasource_id: 'entity:media'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_description
+  media_field_display_in_group:
+    label: 'Belongs to'
+    datasource_id: 'entity:media'
+    property_path: field_display_in_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_display_in_group
+  media_name:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
+    boost: !!float 5
+    dependencies:
+      module:
+        - media
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -246,6 +299,14 @@ datasource_settings:
     bundles:
       default: true
       selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:media':
+    bundles:
+      default: false
+      selected:
+        - document
     languages:
       default: true
       selected: {  }
