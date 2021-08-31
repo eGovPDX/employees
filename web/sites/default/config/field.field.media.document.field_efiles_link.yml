@@ -1,0 +1,23 @@
+uuid: 238f1870-cba2-438a-aaa0-4b3e9fa03642
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_efiles_link
+    - media.type.document
+  module:
+    - link
+id: media.document.field_efiles_link
+field_name: field_efiles_link
+entity_type: media
+bundle: document
+label: 'e-Files link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link
