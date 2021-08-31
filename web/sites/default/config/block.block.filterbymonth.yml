@@ -1,0 +1,28 @@
+uuid: 7a78de43-b21a-4bb2-bb03-9bbaf41b67c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.changed_month
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: filterbymonth
+theme: cloudy2
+region: side
+weight: -3
+provider: null
+plugin: 'facet_block:changed_month'
+settings:
+  id: 'facet_block:changed_month'
+  label: 'Filter by Month'
+  provider: facets
+  label_display: '0'
+  block_id: filterbymonth
+visibility:
+  request_path:
+    id: request_path
+    pages: '/group/*/documents'
+    negate: false

@@ -76,6 +76,8 @@ display:
             'entity:group':
               employee: search_result
               private: search_result
+            'entity:media':
+              document: search_result
             'entity:node':
               event: search_result
               news: search_result
@@ -175,6 +177,8 @@ display:
               content_lead: '0'
               administrator: '0'
             placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
           is_grouped: false
           group_info:
             label: ''
@@ -198,6 +202,8 @@ display:
             - field_last_name_1
             - group_summary
             - group_title
+            - media_field_description
+            - media_name
             - rendered_item
           plugin_id: search_api_fulltext
         search_api_datasource:
@@ -210,6 +216,7 @@ display:
           operator: or
           value:
             'entity:group': 'entity:group'
+            'entity:media': 'entity:media'
             'entity:node': 'entity:node'
             'entity:user': 'entity:user'
           group: 1
@@ -345,6 +352,10 @@ display:
       display_extenders: {  }
       path: search
       exposed_block: false
+      cache:
+        type: none
+      defaults:
+        cache: false
     cache_metadata:
       max-age: -1
       contexts:

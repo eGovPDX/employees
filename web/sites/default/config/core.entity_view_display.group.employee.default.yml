@@ -8,10 +8,10 @@ dependencies:
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
-    - views.view.group_documents
     - views.view.group_events
     - views.view.group_menu
     - views.view.group_news
+    - views.view.group_search_index
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -119,11 +119,11 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 3
-          4aebada8-4d22-411b-a65b-c2339b8937cf:
-            uuid: 4aebada8-4d22-411b-a65b-c2339b8937cf
+          0fc807be-4a07-466f-a88b-597417870461:
+            uuid: 0fc807be-4a07-466f-a88b-597417870461
             region: side
             configuration:
-              id: 'views_block:group_documents-block_1'
+              id: 'views_block:group_search_index-block_documents'
               label: ''
               provider: views
               label_display: visible
@@ -131,7 +131,7 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 5
+            weight: 6
         third_party_settings: {  }
   layout_library:
     enable: false
