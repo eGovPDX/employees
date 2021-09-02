@@ -286,10 +286,10 @@ function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_s
     if ($form_state->hasValue('field_efiles_link')) {
       // DO NOT validate when the user clicks on the remove document button.
       // ONLY validate when the entire form is submitted.
-      if($form_state->getTriggeringElement()["#name"] === "field_document_0_remove_button") return;
+      if($form_state->getTriggeringElement()["#name"] === "field_media_document_0_remove_button") return;
   
       $efiles_link = $form_state->getValue('field_efiles_link');
-      $document = $form_state->getValue('field_document');
+      $document = $form_state->getValue('field_media_document');
       // If the eFiles link has value
       if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) ) {
         $user_input_file_url = strtolower($efiles_link[0]['uri']);
@@ -354,10 +354,10 @@ function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_s
         }
       }
       else {
-        $document = $form_state->getValue('field_document');
+        $document = $form_state->getValue('field_media_document');
         // The document field can't be empty when the eFile link is empty
         if( empty($document) || empty($document[0]["fids"]) ) {
-          $form_state->setErrorByName('field_document', t('Please upload a file or add an external file link'));
+          $form_state->setErrorByName('field_media_document', t('Please upload a file or add an external file link'));
         }
       }
     }
