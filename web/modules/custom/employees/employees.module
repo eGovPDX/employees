@@ -290,6 +290,12 @@ function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_s
   
       $efiles_link = $form_state->getValue('field_efiles_link');
       $document = $form_state->getValue('field_media_document');
+
+      if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document)) {
+        $form_state->setErrorByName('field_media_document', t('Please remove either the Document or the eFiles link.'));
+        return;
+      }
+
       // If the eFiles link has value
       if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) ) {
         $user_input_file_url = strtolower($efiles_link[0]['uri']);
