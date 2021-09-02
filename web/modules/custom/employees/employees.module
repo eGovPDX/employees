@@ -278,7 +278,6 @@ function employees_tokens($type, $tokens, array $data = array(), array $options 
   return $replacements;
 }
 
-
 /**
  * A helper function to validate document.
  */
@@ -291,7 +290,7 @@ function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_s
       $efiles_link = $form_state->getValue('field_efiles_link');
       $document = $form_state->getValue('field_media_document');
 
-      if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document)) {
+      if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document) && !empty($document[0]["fids"])) {
         $form_state->setErrorByName('field_media_document', t('Please remove either the Document or the eFiles link.'));
         return;
       }
