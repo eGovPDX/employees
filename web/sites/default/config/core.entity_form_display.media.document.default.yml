@@ -54,13 +54,6 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
-  field_file_size:
-    type: number
-    weight: 11
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_media_document:
     settings:
       progress_indicator: throbber
@@ -68,14 +61,6 @@ content:
     type: file_generic
     weight: 1
     region: content
-  field_mime_type:
-    type: string_textfield
-    weight: 12
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_tags:
     weight: 6
     settings:
@@ -124,4 +109,6 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_file_size: true
+  field_mime_type: true
