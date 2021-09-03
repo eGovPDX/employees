@@ -1,0 +1,28 @@
+uuid: b32f9f38-4c7e-45bb-a8fd-1b8387dd1828
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.changed_year
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: filterbyyear
+theme: cloudy2
+region: side
+weight: -4
+provider: null
+plugin: 'facet_block:changed_year'
+settings:
+  id: 'facet_block:changed_year'
+  label: 'Filter by Year'
+  provider: facets
+  label_display: '0'
+  block_id: filterbyyear
+visibility:
+  request_path:
+    id: request_path
+    pages: '/group/*/documents'
+    negate: false

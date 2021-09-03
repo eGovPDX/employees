@@ -1,9 +1,9 @@
-uuid: 84fd8845-2577-4b3b-83f0-db508da4bba5
+uuid: 8ba9b06a-5db1-4abf-9dfc-7f4d28495afb
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.embedded_with_description
+    - core.entity_view_mode.media.search_result
     - field.field.media.document.field_description
     - field.field.media.document.field_display_in_group
     - field.field.media.document.field_file_size
@@ -14,59 +14,75 @@ dependencies:
   module:
     - file
     - layout_builder
+    - smart_trim
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
 _core:
   default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
-id: media.document.embedded_with_description
+id: media.document.search_result
 targetEntityType: media
 bundle: document
-mode: embedded_with_description
+mode: search_result
 content:
   field_description:
-    weight: 3
+    weight: 1
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ...
+      wrap_output: true
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      trim_options:
+        text: true
+        trim_zero: true
+      more_link: false
+      summary_handler: full
     third_party_settings: {  }
-    type: basic_string
+    type: smart_trim
     region: content
   field_file_size:
     type: number_integer
-    weight: 2
+    weight: 4
     region: content
-    label: hidden
+    label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
   field_media_document:
+    type: file_url_plain
+    weight: 2
+    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_url_plain
-    weight: 0
-    region: content
   field_mime_type:
     type: string
-    weight: 1
+    weight: 3
     region: content
-    label: hidden
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  media_last_updated_media_changed_date:
-    weight: 4
+  name:
+    type: string
+    weight: 0
     region: content
-    settings: {  }
+    label: hidden
+    settings:
+      link_to_entity: true
     third_party_settings: {  }
 hidden:
   created: true
   field_display_in_group: true
   field_tags: true
   langcode: true
-  name: true
+  media_last_updated_media_changed_date: true
   search_api_excerpt: true
   thumbnail: true
   uid: true
