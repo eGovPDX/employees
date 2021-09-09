@@ -33,8 +33,7 @@
 <div{{attributes.addClass(classes)}} aria-describedby="{{ name|clean_class }}">
 
   {% if content.field_efiles_link['#object'] %}
-    {% set file_url = content.field_efiles_link.content['#url'].uri %}
-    <a href="{{ file_url }}">{{ name }}</a></h2>
+    <a href="{{ content.field_efiles_link.0['#title'] }}">{{ name }}</a></h2>
   {% elseif content.field_document %}
     <h2><a href="{{ content.field_media_document.0 }}">{{ name }}</a></h2>
   {% endif %}
