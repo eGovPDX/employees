@@ -1,0 +1,29 @@
+uuid: 7583547d-f6b0-45e6-a0de-efbc51f66d91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_contact
+    - group.type.employee
+id: group.employee.field_group_contact
+field_name: field_group_contact
+entity_type: group
+bundle: employee
+label: 'Group Contact'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

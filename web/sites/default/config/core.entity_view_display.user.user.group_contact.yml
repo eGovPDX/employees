@@ -1,0 +1,72 @@
+uuid: 65b28d4f-3763-4ad2-ad56-7278eb35c105
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.group_contact
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_address
+    - field.field.user.user.field_division_name
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
+    - field.field.user.user.field_office_location
+    - field.field.user.user.field_phone
+    - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_title
+    - field.field.user.user.user_picture
+  module:
+    - layout_builder
+    - telephone
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+_core:
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
+id: user.user.group_contact
+targetEntityType: user
+bundle: user
+mode: group_contact
+content:
+  field_phone:
+    type: telephone_link
+    weight: 1
+    region: content
+    label: visually_hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+  field_title:
+    weight: 0
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  mail:
+    type: basic_string
+    weight: 2
+    region: content
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_active_directory_id: true
+  field_address: true
+  field_division_name: true
+  field_first_name: true
+  field_group_names: true
+  field_last_name: true
+  field_managers: true
+  field_office_location: true
+  field_primary_groups: true
+  langcode: true
+  masquerade: true
+  masquerade_as: true
+  member_for: true
+  search_api_excerpt: true
+  user_picture: true

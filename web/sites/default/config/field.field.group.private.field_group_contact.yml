@@ -1,0 +1,29 @@
+uuid: 9ce36d45-0ecb-4447-a9c5-accf9f08b634
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_contact
+    - group.type.private
+id: group.private.field_group_contact
+field_name: field_group_contact
+entity_type: group
+bundle: private
+label: 'Group Contact'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference
