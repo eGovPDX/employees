@@ -1,0 +1,34 @@
+uuid: 2c714a43-9e07-4865-8ce7-06631032ac17
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.group_menu
+  module:
+    - ctools
+    - views
+  theme:
+    - cloudy2
+id: views_block__group_menu_block_group_menu_on_lists
+theme: cloudy2
+region: menu
+weight: 0
+provider: null
+plugin: 'views_block:group_menu-block_group_menu_on_lists'
+settings:
+  id: 'views_block:group_menu-block_group_menu_on_lists'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      event: event
+      news: news
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
