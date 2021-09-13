@@ -2,3 +2,24 @@
 .cke_editable {
   margin: 10px;
 }
+
+// External links
+
+span.ext {
+  &:after {
+    padding-left: ($spacer * 0.5);
+  }
+}
+
+span.mailto::before {
+  background: none;
+}
+
+/* Hide the extra spans when printing. */
+@media print {
+  span.ext,
+  span.mailto {
+    display: none;
+    padding: 0;
+  }
+}
