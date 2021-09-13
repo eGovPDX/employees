@@ -210,7 +210,17 @@ display:
           entity_field: changed
           plugin_id: date
       title: 'My content'
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: 'Displaying @start - @end of @total'
+          plugin_id: result
       footer: {  }
       empty: {  }
       relationships:
@@ -348,6 +358,7 @@ display:
       defaults:
         pager: false
         fields: false
+        header: false
       fields:
         title:
           id: title
@@ -412,6 +423,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -442,6 +454,7 @@ display:
         use_more_text: false
         pager: false
         sorts: false
+        header: false
       filters:
         status:
           value: '1'
@@ -812,7 +825,7 @@ display:
         groups:
           1: AND
           2: AND
-      link_display: page_2
+      link_display: '0'
       link_url: ''
       use_more: false
       use_more_always: false
@@ -851,6 +864,7 @@ display:
           granularity: second
           plugin_id: datetime
       block_description: 'My Events Today'
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -892,6 +906,7 @@ display:
         use_more_always: false
         use_more_text: false
         pager: false
+        header: false
       filters:
         status:
           value: '1'
@@ -998,8 +1013,8 @@ display:
         operator: AND
         groups:
           1: AND
-      link_display: page_my_news
-      link_url: ''
+      link_display: custom_url
+      link_url: news/my-news
       use_more: true
       use_more_always: true
       use_more_text: 'more news from groups followed'
@@ -1010,6 +1025,9 @@ display:
           offset: 0
       block_hide_empty: true
       block_description: 'My News'
+      allow:
+        items_per_page: false
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -1052,6 +1070,7 @@ display:
         use_more_text: false
         pager: false
         sorts: false
+        header: false
       filters:
         status:
           value: '1'
@@ -1203,11 +1222,11 @@ display:
         operator: OR
         groups:
           1: AND
-      link_display: page_2
-      link_url: ''
+      link_display: custom_url
+      link_url: events/my-events
       use_more: true
       use_more_always: true
-      use_more_text: 'more events from groups followed'
+      use_more_text: 'More upcoming events you follow'
       pager:
         type: some
         options:
@@ -1242,6 +1261,7 @@ display:
           granularity: second
           plugin_id: datetime
       block_description: 'My Upcoming Events'
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
