@@ -10,7 +10,6 @@ dependencies:
     - field.field.group.employee.field_parent_group
     - group.type.employee
     - views.view.group_events
-    - views.view.group_menu
     - views.view.group_news
     - views.view.group_search_index
   module:
@@ -62,19 +61,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
-          6fee4277-b445-4539-899c-fc9504d17855:
-            uuid: 6fee4277-b445-4539-899c-fc9504d17855
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
           be73b75b-2f83-4931-918c-813ca43e2315:
             uuid: be73b75b-2f83-4931-918c-813ca43e2315
             region: side
