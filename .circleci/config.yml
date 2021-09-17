@@ -11,14 +11,14 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Retore Git cache before checkout
         keys:
-          - source-v1-{{ .Branch }}-{{ .Revision }}
-          - source-v1-{{ .Branch }}-
-          - source-v1-
+          - source-v2-{{ .Branch }}-{{ .Revision }}
+          - source-v2-{{ .Branch }}-
+          - source-v2-
     - checkout
     - run: git gc
     - save_cache:
         name: Save Git cache after checkout
-        key: source-v1-{{ .Branch }}-{{ .Revision }}
+        key: source-v2-{{ .Branch }}-{{ .Revision }}
         paths:
           - ".git"
     - restore_cache:
