@@ -5,20 +5,23 @@
 ## Job to run the update path and Behat tests.
 build_and_deploy: &build_and_deploy
   docker:
-    - image: cimg/php:7.4-node
+    - image: egovpdx/drupal-ci:latest
+      auth:
+        username: egovpdx
+        password: $DOCKERHUB_PASSWORD
   working_directory: /var/www/html
   steps:
     - restore_cache:
         name: Retore Git cache before checkout
         keys:
-          - source-v2-{{ .Branch }}-{{ .Revision }}
-          - source-v2-{{ .Branch }}-
-          - source-v2-
+          - source-v1-{{ .Branch }}-{{ .Revision }}
+          - source-v1-{{ .Branch }}-
+          - source-v1-
     - checkout
     - run: git gc
     - save_cache:
         name: Save Git cache after checkout
-        key: source-v2-{{ .Branch }}-{{ .Revision }}
+        key: source-v1-{{ .Branch }}-{{ .Revision }}
         paths:
           - ".git"
     - restore_cache:
