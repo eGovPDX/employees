@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Template for a user contact.
+ */
+#}
+{%
+  set classes = [
+  'user',
+  view_mode|clean_class,
+]
+%}
+{# {{ drupal_breakpoint() }} #}
+<div{{ attributes.addClass(classes) }}>
+<div class="field__item">
+  {% block content %}
+    {{ user.field_title.value }}<br>
+    {{ user.field_first_name.value }} {{ user.field_last_name.value }} <br>
+    {{ user.email}}<br>
+    {{ user.field_phone.value }}
+  {% endblock %}
+  </div>
+</div>
+
