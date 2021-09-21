@@ -17,13 +17,34 @@ dependencies:
     - field.field.user.user.field_title
     - field.field.user.user.user_picture
   module:
+    - field_group
     - layout_builder
-    - telephone
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
+  field_group:
+    group_username:
+      children:
+        - field_first_name
+        - field_last_name
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Username
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
 id: user.user.group_contact
@@ -31,13 +52,29 @@ targetEntityType: user
 bundle: user
 mode: group_contact
 content:
-  field_phone:
-    type: telephone_link
+  field_first_name:
+    type: string
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_last_name:
+    type: string
     weight: 1
     region: content
     label: visually_hidden
     settings:
-      title: ''
+      link_to_entity: false
+    third_party_settings: {  }
+  field_phone:
+    type: string
+    weight: 2
+    region: content
+    label: visually_hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
   field_title:
     weight: 0
@@ -49,7 +86,7 @@ content:
     region: content
   mail:
     type: basic_string
-    weight: 2
+    weight: 3
     region: content
     label: visually_hidden
     settings: {  }
@@ -58,9 +95,7 @@ hidden:
   field_active_directory_id: true
   field_address: true
   field_division_name: true
-  field_first_name: true
   field_group_names: true
-  field_last_name: true
   field_managers: true
   field_office_location: true
   field_primary_groups: true
@@ -70,3 +105,4 @@ hidden:
   member_for: true
   search_api_excerpt: true
   user_picture: true
+  username_entity_view_1: true
