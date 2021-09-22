@@ -9,7 +9,6 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
     - views.view.group_events
-    - views.view.group_menu
     - views.view.group_news
     - views.view.group_search_index
   module:
@@ -93,19 +92,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
-          d572fea6-e7bb-4b1c-8311-20649161be58:
-            uuid: d572fea6-e7bb-4b1c-8311-20649161be58
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
           25200171-e124-4ca7-8084-a08b85933dbc:
             uuid: 25200171-e124-4ca7-8084-a08b85933dbc
             region: side
