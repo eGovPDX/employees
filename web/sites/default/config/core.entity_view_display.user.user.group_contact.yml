@@ -27,12 +27,11 @@ third_party_settings:
   field_group:
     group_username:
       children:
-        - field_first_name
         - field_last_name
       parent_name: ''
-      weight: 1
+      weight: 17
       format_type: html_element
-      region: content
+      region: hidden
       format_settings:
         show_empty_fields: false
         id: ''
@@ -52,25 +51,9 @@ targetEntityType: user
 bundle: user
 mode: group_contact
 content:
-  field_first_name:
-    type: string
-    weight: 0
-    region: content
-    label: visually_hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_last_name:
-    type: string
-    weight: 1
-    region: content
-    label: visually_hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_phone:
     type: string
-    weight: 2
+    weight: 1
     region: content
     label: visually_hidden
     settings:
@@ -86,7 +69,7 @@ content:
     region: content
   mail:
     type: basic_string
-    weight: 3
+    weight: 2
     region: content
     label: visually_hidden
     settings: {  }
@@ -95,7 +78,9 @@ hidden:
   field_active_directory_id: true
   field_address: true
   field_division_name: true
+  field_first_name: true
   field_group_names: true
+  field_last_name: true
   field_managers: true
   field_office_location: true
   field_primary_groups: true
