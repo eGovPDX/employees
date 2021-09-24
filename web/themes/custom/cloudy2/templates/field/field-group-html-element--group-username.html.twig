@@ -16,9 +16,9 @@
  */
 #}
 
-<{{ wrapper_element }} {{ attributes.addClass('d-flex') }}>
+<{{ wrapper_element }}>
   {% if title %}
   <{{ title_element }}{{ title_attributes }}>{{ title }}</{{ title_element }}>
   {% endif %}
-  {{ children }}
+      <h3><a href="/user/{{ user.id }}" class='d-flex'>{{ children }}</a></h3>
 </{{ wrapper_element }}>
