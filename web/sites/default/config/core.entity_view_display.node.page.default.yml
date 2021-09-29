@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_contact
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
@@ -99,7 +100,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 0
           7f9d0bef-711b-4394-a89a-1f96ea3904d6:
             uuid: 7f9d0bef-711b-4394-a89a-1f96ea3904d6
             region: side
@@ -180,6 +181,57 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 2
+          8c3a1888-1c4d-4a60-bfce-6c280c71bac4:
+            uuid: 8c3a1888-1c4d-4a60-bfce-6c280c71bac4
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_topics'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 5
+          8bb88404-c60c-4eb4-b6fb-bbe01cd31936:
+            uuid: 8bb88404-c60c-4eb4-b6fb-bbe01cd31936
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_feature'
+              formatter:
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+                type: boolean
+            additional: {  }
+            weight: 6
+          29766ecb-7fec-449e-b9eb-c7f61a193118:
+            uuid: 29766ecb-7fec-449e-b9eb-c7f61a193118
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:page:field_feature_until'
+              formatter:
+                label: above
+                settings:
+                  format_type: medium
+                  timezone_override: ''
+                third_party_settings: {  }
+                type: datetime_default
+            additional: {  }
+            weight: 7
           a6cbe979-ec4e-43e2-828c-7b8940b71515:
             uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
             region: main
@@ -195,41 +247,25 @@ third_party_settings:
                 entity: layout_builder.entity
             additional: {  }
             weight: 3
-          8c3a1888-1c4d-4a60-bfce-6c280c71bac4:
-            uuid: 8c3a1888-1c4d-4a60-bfce-6c280c71bac4
+          95d879e7-c3f1-4e37-93a0-afbca46d9c6a:
+            uuid: 95d879e7-c3f1-4e37-93a0-afbca46d9c6a
             region: side
             configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:page:field_topics'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 5
-          69412e0c-3b23-4ab1-9e6d-cb5e919ec3fd:
-            uuid: 69412e0c-3b23-4ab1-9e6d-cb5e919ec3fd
-            region: side
-            configuration:
-              id: 'field_block:node:page:field_related_content'
-              label: Related
+              id: 'field_block:node:page:field_contact'
+              label: Contact
               provider: layout_builder
-              label_display: '0'
+              label_display: visible
               formatter:
-                label: above
-                type: entity_reference_label
+                label: visually_hidden
+                type: entity_reference_entity_view
                 settings:
-                  link: true
+                  view_mode: group_contact
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 6
+            weight: 1
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -339,6 +375,7 @@ content:
     type: entity_reference_label
     region: main
 hidden:
+  field_contact: true
   field_display_in_group: true
   field_parent: true
   langcode: true
