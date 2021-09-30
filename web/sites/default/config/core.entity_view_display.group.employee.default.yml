@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_org_type
@@ -91,7 +92,7 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 4
+            weight: 5
           4a3fde4a-f259-43f2-96e4-d05301e98a14:
             uuid: 4a3fde4a-f259-43f2-96e4-d05301e98a14
             region: side
@@ -104,7 +105,7 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 3
+            weight: 4
           0fc807be-4a07-466f-a88b-597417870461:
             uuid: 0fc807be-4a07-466f-a88b-597417870461
             region: side
@@ -118,6 +119,25 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 6
+          5c497031-9536-4ed2-adc1-46e5b10a041d:
+            uuid: 5c497031-9536-4ed2-adc1-46e5b10a041d
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_group_contact'
+              label: 'Group Contact'
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: visually_hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -176,6 +196,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_group_contact: true
   langcode: true
   search_api_excerpt: true
   uid: true

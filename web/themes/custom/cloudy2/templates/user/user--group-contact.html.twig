@@ -11,10 +11,10 @@
 ]
 %}
 
-<article{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes) }}>
   {% block content %}
-    <h2><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h2>
+    <h3><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h3>
     {{ content|without('field_first_name','field_last_name') }}
   {% endblock %}
-</article>
+</div>
 
