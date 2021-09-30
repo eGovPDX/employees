@@ -1,0 +1,21 @@
+uuid: 8bfab664-b814-4bb0-bdd9-c2d399c9e2c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_publisher_role_changed
+  module:
+    - datetime
+    - user
+id: user.user.field_publisher_role_changed
+field_name: field_publisher_role_changed
+entity_type: user
+bundle: user
+label: 'Publisher role changed'
+description: 'When the user gained or lost the Publisher role.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
