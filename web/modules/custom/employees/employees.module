@@ -223,13 +223,14 @@ function _notify_reviewer($entity, $entity_event_type)
  */
 function _send_email($key, $to, $langcode, $params, $from)
 {
-  $result = \Drupal::service('plugin.manager.mail')->mail('employees', $key, 'afsd@aadfs', $langcode, $params, $from, true);
-  \Drupal::logger('mail-log')->notice('Email result: ' . print_r($result));
+  $result = \Drupal::service('plugin.manager.mail')->mail('employees', $key, $to, $langcode, $params, $from, true);
   if ($result['result'] != true) {
     \Drupal::logger('mail-log')->error(t('Error sending to @email.', array('@email' => $to)));
+    return false;
   } else {
     // drupal_set_message($message);
     \Drupal::logger('mail-log')->notice(t('Email sent to @email ', array('@email' => $to)));
+    return true;
   }
 }
 
@@ -414,8 +415,6 @@ function employees_cron()
   if ($hour >= 12) {
     // If an email is already sent today, do not send again
     $last_daily_email_sent = \Drupal::state()->get('portland.last_daily_email_sent');
-    \Drupal::logger('mail-log')->notice('Last daily email sent:' . $last_daily_email_sent);
-
     if (!empty($last_daily_email_sent) && $last_daily_email_sent === date('m/d/Y')) {
       return;
     }
