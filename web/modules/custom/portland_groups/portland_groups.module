@@ -20,6 +20,15 @@ function portland_groups_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+
+
+
+
+
+
+
+
+
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -88,6 +97,27 @@ function portland_groups_entity_insert($entity) {
   }
 }
 
+/**
+ * Helper function
+ * 
+ * This is the function that determines which group to assign new content to based
+ * on the first delta of the display_in_groups field. If that field has at least one
+ * value, the first one is used as the node "owner" and a group content relationship
+ * is created. This function gets called on entity insert and update, since both of
+ * those cases could result in the node ownership changing. The POWR convention is
+ * that a single node can only be "owned" by a single group, though normally the
+ * group module allows unlimited group content relationships. This function, called
+ * by entity insert and update hooks, prevents nodes from having a relationship
+ * with more than one group. The field_displayed_in field is used to show nodes in
+ * multiple groups without a group content relationship; it is used in views to show
+ * content owned by other groups in a group context.
+ * 
+ * If a node is created using Quick Node Clone, that module will also clone the group
+ * content relationship as part of its insert/update routine, which also causes this
+ * funtion to be called. Boh QNC and this function attempt to create a group node
+ * relationship, so we need to check whether that relationship already exists before
+ * creation, or we will get duplicates. 
+ */
 function _portland_groups_synchronize_entity_group_ownership($entity) {
 
   // start building entity type id; we only support node and media entity types
@@ -136,16 +166,46 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
 
     if ($orig_owner_group != $new_owner_group) {
       if ($orig_owner_group) {
-        // remove from old group
+        // node was originally in a different group, remove it and reassign
         $old_group = \Drupal\group\Entity\Group::load($orig_owner_group);
         if ($old_group) {
           $current_node = $old_group->getContent($plugin_id, ['entity_id' => $eid]);
-          $content = array_values($current_node)[0];
-          $content->delete();
+          if(count($current_node) > 0) {
+            $content = array_values($current_node)[0];
+            $content->delete();
+          }
         }
       }
       // assign to new group
       _portland_groups_add_entity_to_group($entity, $new_owner_group, $plugin_id);
+    }
+    else {
+      // node was not already in a differnt group, assign it to the first group in display_in_groups field
+      $new_group = \Drupal\group\Entity\Group::load($new_owner_group);
+      if ($new_group) {
+        // When the Display In field has a group but there is no group content relationship,
+        // add a group content relationship
+        $current_node = $new_group->getContent($plugin_id, ['entity_id' => $eid]);
+        if(count($current_node) == 0) {
+          _portland_groups_add_entity_to_group($entity, $new_owner_group, $plugin_id);
+        }
+        else if (count($current_node) > 1) {
+          // POWR-2800 One entity added to the same group many times, delete all group content but the first one
+          for($i=1; $i<count($current_node); $i++) {
+            array_values($current_node)[$i]->delete();
+          }
+        }
+
+        // POWR-2800 One entity added to many different groups, delete all but the first Displayed In group
+        $group_content_nodes = GroupContent::loadByEntity($entity);
+        if (count($group_content_nodes) > 1) {
+          foreach($group_content_nodes as $group_content_node) {
+            if($group_content_node->getGroup()->id() != $new_owner_group) {
+              $group_content_node->delete();
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -154,13 +214,10 @@ function _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id) {
   // make sure entity isn't already in group; the entity may already be assigned to
   // the group by virtue of having been created in that context.
   $group = \Drupal\group\Entity\Group::load($group_id);
-  $group->addContent($entity, $plugin_id);
-
-  // use this code if we ever need to check if a node is in a group before adding it.
-  // $current_node = $group->getContent($plugin_id, ['entity_id' => $entity->id()]);
-  // if (!$current_node || count($current_node) < 1) {
-  //  $group->addContent($entity, $plugin_id);
-  // }
+  $current_node = $group->getContent($plugin_id, ['entity_id' => $entity->id()]);
+  if (!$current_node || count($current_node) < 1) {
+   $group->addContent($entity, $plugin_id);
+  }
 }
 
 /**
