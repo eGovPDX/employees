@@ -1,0 +1,24 @@
+uuid: ec7b1a44-88a9-4542-b02b-4c53b9f85fb0
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - field_permissions
+    - user
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: user.field_publisher_role_changed
+field_name: field_publisher_role_changed
+entity_type: user
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
