@@ -12,51 +12,54 @@ use Drupal\Core\Render\BubbleableMetadata;
 /**
  * Implements hook_form_alter()
  */
-function employees_form_alter(&$form, &$form_state, $form_id) {
-    // POWR-3694 - disable HTML 5 validation for all forms
-    $form['#attributes']['novalidate'] = '';
-    // TOOD: remove this once something similar is included in core, or the Drupal community
-    // decides how it wants to handle accessible and usable validation.
+function employees_form_alter(&$form, &$form_state, $form_id)
+{
+  // POWR-3694 - disable HTML 5 validation for all forms
+  $form['#attributes']['novalidate'] = '';
+  // TOOD: remove this once something similar is included in core, or the Drupal community
+  // decides how it wants to handle accessible and usable validation.
 
-    // Validate the file field in Document
-    if( $form_id === "media_document_add_form" || $form_id === "media_document_edit_form" ) {
-        $form['#validate'][] = '_validate_document';
-    }
+  // Validate the file field in Document
+  if ($form_id === "media_document_add_form" || $form_id === "media_document_edit_form") {
+    $form['#validate'][] = '_validate_document';
+  }
 }
 
 /**
  * Implements hook_query_TAG_alter().
  * Alter user query from "John Doe" into "John.Doe" to support autocomplete.
  */
-function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\AlterableInterface $query) {
-    $selection_handler = $query->getMetaData('entity_reference_selection_handler');
-    if($selection_handler != null && $selection_handler->getPluginId() == "default:user") {
-        $conditions = $query->conditions();
-        if( empty($conditions)) return;
-        foreach($conditions as $key=>$condition) {
-            if(!is_array($condition)) continue;
-            if(!array_key_exists('field', $condition)) continue;
-            if ($condition['field'] != "users_field_data.name") continue;
-            $value_orig = $condition['value'];
-            if( !is_string($value_orig) ) continue;
+function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\AlterableInterface $query)
+{
+  $selection_handler = $query->getMetaData('entity_reference_selection_handler');
+  if ($selection_handler != null && $selection_handler->getPluginId() == "default:user") {
+    $conditions = $query->conditions();
+    if (empty($conditions)) return;
+    foreach ($conditions as $key => $condition) {
+      if (!is_array($condition)) continue;
+      if (!array_key_exists('field', $condition)) continue;
+      if ($condition['field'] != "users_field_data.name") continue;
+      $value_orig = $condition['value'];
+      if (!is_string($value_orig)) continue;
 
-            // Replace the first blank space with "."
-            $pos = strpos($value_orig, ' ');
-            if ($pos !== false) {
-                $query->conditions()[$key]['value'] = substr_replace($value_orig, '.', $pos, strlen(' '));
-            }
-        }
+      // Replace the first blank space with "."
+      $pos = strpos($value_orig, ' ');
+      if ($pos !== false) {
+        $query->conditions()[$key]['value'] = substr_replace($value_orig, '.', $pos, strlen(' '));
+      }
     }
+  }
 }
 
 /**
  * Implements hook_user_format_name_alter().
  */
-function employees_user_format_name_alter(&$name, $account) {
+function employees_user_format_name_alter(&$name, $account)
+{
   // Load the full user account.
   $user = User::load($account->id());
   // When the account is deleted, $user could be null.
-  if( $user == null ) return;
+  if ($user == null) return;
   $full_name = $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value;
   // Fall back to account name if first name and last name are empty
   if ($full_name !== ' ') {
@@ -69,7 +72,7 @@ function employees_user_format_name_alter(&$name, $account) {
  */
 function employees_entity_insert($entity)
 {
-    _notify_reviewer($entity, 'created');
+  _notify_reviewer($entity, 'created');
 }
 
 /**
@@ -77,7 +80,31 @@ function employees_entity_insert($entity)
  */
 function employees_entity_update($entity)
 {
-    _notify_reviewer($entity, 'updated');
+  _notify_reviewer($entity, 'updated');
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function employees_user_presave($entity)
+{
+  $is_publisher = in_array('publisher', $entity->getRoles());
+  if($entity->isNew() && $is_publisher) {
+    // Record the date time
+    $now = new Drupal\Core\Datetime\DrupalDateTime('now', 'UTC');
+    $entity->field_publisher_role_changed = $now->format('Y-m-d\TH:i:s');
+  }
+  else if ($entity->original != null){
+    // Check if the user's publisher role changed
+    $was_publisher_before_update = in_array('publisher', $entity->original->getRoles());
+    if( ($was_publisher_before_update != $is_publisher) || // Publisher role changed
+        // Was Publisher AND Status was changed in this update
+       ($was_publisher_before_update && ($entity->status->value != $entity->original->status->value))) {
+      // Record the date time
+      $now = new Drupal\Core\Datetime\DrupalDateTime('now', 'UTC');
+      $entity->field_publisher_role_changed = $now->format('Y-m-d\TH:i:s');
+    }
+  }
 }
 
 /**
@@ -85,18 +112,18 @@ function employees_entity_update($entity)
  */
 function employees_mail($key, &$message, $params)
 {
-    $options = array(
-        'langcode' => $message['langcode'],
-    );
-    switch ($key) {
-        case 'employees_daily_mail':
-        case 'employees_notify_reviewers':
-            $message['from'] = \Drupal::config('system.site')->get('mail');
-            $message['subject'] = t('@title', array('@title' => $params['title']), $options);
-            $message['body'][] = $params['message'];
-            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
-            break;
-    }
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'employees_daily_mail':
+    case 'employees_notify_reviewers':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@title', array('@title' => $params['title']), $options);
+      $message['body'][] = $params['message'];
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      break;
+  }
 }
 
 /**
@@ -104,14 +131,14 @@ function employees_mail($key, &$message, $params)
  */
 function employees_mail_alter(&$message)
 {
-    // id = module + key
-    if ($message['id'] == "employees_employees_notify_reviewers") {
-        // Make the email appear to be from the current Editor
-        $user = \Drupal::currentUser()->getAccount();
-        $user_name = $user->name;
-        $user_email = $user->getEmail();
-        $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
-    }
+  // id = module + key
+  if ($message['id'] == "employees_employees_notify_reviewers") {
+    // Make the email appear to be from the current Editor
+    $user = \Drupal::currentUser()->getAccount();
+    $user_name = $user->name;
+    $user_email = $user->getEmail();
+    $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
+  }
 }
 
 /**
@@ -124,69 +151,71 @@ function employees_mail_alter(&$message)
  */
 function _notify_reviewer($entity, $entity_event_type)
 {
-    // Only notify on nodes that has Moderation State and has the Reviewer field
-    if ($entity->getEntityTypeId() != 'node' ||
-        !$entity->hasField('moderation_state') ||
-        !$entity->hasField('field_reviewer')) {
-        return;
+  // Only notify on nodes that has Moderation State and has the Reviewer field
+  if (
+    $entity->getEntityTypeId() != 'node' ||
+    !$entity->hasField('moderation_state') ||
+    !$entity->hasField('field_reviewer')
+  ) {
+    return;
+  }
+  $node = $entity;
+  $status_message = $entity_event_type;
+
+  // Group module would save the node twice when creating a new node.
+  // We only want to send out email once.
+  if ($entity->hasField('field_display_groups') && $node->field_display_groups->count() > 0) {
+    $vids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
+    if (count($vids) ==  1 && $entity_event_type == 'created') {
+      return;
     }
-    $node = $entity;
-    $status_message = $entity_event_type;
-
-    // Group module would save the node twice when creating a new node.
-    // We only want to send out email once.
-    if ($entity->hasField('field_display_groups') && $node->field_display_groups->count() > 0) {
-        $vids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
-        if (count($vids) ==  1 && $entity_event_type == 'created') {
-            return;
-        }
-        if (count($vids) ==  2 && $entity_event_type == 'updated') {
-            $status_message = 'created';
-        }
+    if (count($vids) ==  2 && $entity_event_type == 'updated') {
+      $status_message = 'created';
     }
+  }
 
-    $reviewers = null;
-    $latest_and_previous_revs = _load_latest_revision($node);
-    $latest_rev = $latest_and_previous_revs['latest'];
-    $reviewers = $node->field_reviewer;
+  $reviewers = null;
+  $latest_and_previous_revs = _load_latest_revision($node);
+  $latest_rev = $latest_and_previous_revs['latest'];
+  $reviewers = $node->field_reviewer;
 
-    $revision_log_output = $node->revision_log->value ?
-        "<div><h3>Revision log:</h3>\r\n".$node->revision_log->value."</div>\r\n<p/>\r\n<div>" : '';
+  $revision_log_output = $node->revision_log->value ?
+    "<div><h3>Revision log:</h3>\r\n" . $node->revision_log->value . "</div>\r\n<p/>\r\n<div>" : '';
 
-    $moderation_state_message = [
-        'review' => 'In review',
-        'draft' => 'Draft',
-        'archived' => 'Unpublished/Archived',
-        'published' => 'Published',
-    ];
+  $moderation_state_message = [
+    'review' => 'In review',
+    'draft' => 'Draft',
+    'archived' => 'Unpublished/Archived',
+    'published' => 'Published',
+  ];
 
-    // send email for any moderation state except draft
-    if ($latest_rev->moderation_state->value != 'draft') {
-        $key = 'employees_notify_reviewers';
-        $params['title'] = 'Employees.portland.gov reviewer update';
-        $langcode = \Drupal::currentUser()->getPreferredLangcode();
-        $params['message'] = "You have been assigned to review <a href=\"/node/".$node->id().
-            "/revisions/".$node->vid->value."/view\"> ".$latest_rev->label().
-            "</a> . You will be notified of all changes to this content.<p/>".
-            "<a href=\"".$node->revision_uid->entity->toUrl()->toString()."\">".$node->revision_uid->entity->label().
-            "</a> ".$status_message." a new <strong>".$moderation_state_message[$latest_rev->moderation_state->value].
-            "</strong> revision at ".
-            \Drupal::service('date.formatter')->format($node->changed->value, 'custom', 'l Y/n/j g:i A').
-            ".<p/>".$revision_log_output;
+  // send email for any moderation state except draft
+  if ($latest_rev->moderation_state->value != 'draft') {
+    $key = 'employees_notify_reviewers';
+    $params['title'] = 'Employees.portland.gov reviewer update';
+    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    $params['message'] = "You have been assigned to review <a href=\"/node/" . $node->id() .
+      "/revisions/" . $node->vid->value . "/view\"> " . $latest_rev->label() .
+      "</a> . You will be notified of all changes to this content.<p/>" .
+      "<a href=\"" . $node->revision_uid->entity->toUrl()->toString() . "\">" . $node->revision_uid->entity->label() .
+      "</a> " . $status_message . " a new <strong>" . $moderation_state_message[$latest_rev->moderation_state->value] .
+      "</strong> revision at " .
+      \Drupal::service('date.formatter')->format($node->changed->value, 'custom', 'l Y/n/j g:i A') .
+      ".<p/>" . $revision_log_output;
 
-        if ($reviewers == null) {
-            return;
-        }
-        $current_user_email = \Drupal::currentUser()->getAccount()->getEmail();
-        // Send email to all reviewers EXCEPT the author
-        $to_emails = [];
-        foreach ($reviewers->referencedEntities() as $reviewer) {
-            if ($reviewer->id() != $node->revision_uid->entity->id()) {
-                $to_emails[] = $reviewer->mail->value;
-            }
-        }
-        if( !empty($to_emails)) _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
+    if ($reviewers == null) {
+      return;
     }
+    $current_user_email = \Drupal::currentUser()->getAccount()->getEmail();
+    // Send email to all reviewers EXCEPT the author
+    $to_emails = [];
+    foreach ($reviewers->referencedEntities() as $reviewer) {
+      if ($reviewer->id() != $node->revision_uid->entity->id()) {
+        $to_emails[] = $reviewer->mail->value;
+      }
+    }
+    if (!empty($to_emails)) _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
+  }
 }
 
 /**
@@ -194,14 +223,15 @@ function _notify_reviewer($entity, $entity_event_type)
  */
 function _send_email($key, $to, $langcode, $params, $from)
 {
-    $result = $mailManager = \Drupal::service('plugin.manager.mail')->
-        mail('employees', $key, $to, $langcode, $params, $from, true);
-    if ($result['result'] != true) {
-        \Drupal::logger('mail-log')->error(t('Error sending to @email.', array('@email' => $to)));
-    } else {
-        // drupal_set_message($message);
-        \Drupal::logger('mail-log')->notice(t('Email sent to @email ', array('@email' => $to)));
-    }
+  $result = \Drupal::service('plugin.manager.mail')->mail('employees', $key, $to, $langcode, $params, $from, true);
+  if ($result['result'] != true) {
+    \Drupal::logger('mail-log')->error(t('Error sending to @email.', array('@email' => $to)));
+    return false;
+  } else {
+    // drupal_set_message($message);
+    \Drupal::logger('mail-log')->notice(t('Email sent to @email ', array('@email' => $to)));
+    return true;
+  }
 }
 
 /**
@@ -209,13 +239,13 @@ function _send_email($key, $to, $langcode, $params, $from)
  */
 function _load_latest_revision($node)
 {
-    $vids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
-    $latest_vid = end($vids);
-    $previous_vid = prev($vids);
-    return [
-        "latest" => \Drupal::entityTypeManager()->getStorage('node')->loadRevision($latest_vid),
-        "previous" =>  $previous_vid ? \Drupal::entityTypeManager()->getStorage('node')->loadRevision($previous_vid) : null,
-    ];
+  $vids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node);
+  $latest_vid = end($vids);
+  $previous_vid = prev($vids);
+  return [
+    "latest" => \Drupal::entityTypeManager()->getStorage('node')->loadRevision($latest_vid),
+    "previous" =>  $previous_vid ? \Drupal::entityTypeManager()->getStorage('node')->loadRevision($previous_vid) : null,
+  ];
 }
 
 /**
@@ -223,13 +253,14 @@ function _load_latest_revision($node)
  * 
  * Implements hook_preprocess_menu__account().
  */
-function cloudy2_preprocess_menu__account(array &$variables) {
-    $variables['#cache']['max-age'] = 0;
-    $destination = \Drupal::request()->getRequestUri();
+function cloudy2_preprocess_menu__account(array &$variables)
+{
+  $variables['#cache']['max-age'] = 0;
+  $destination = \Drupal::request()->getRequestUri();
 
-    if (isset($variables['items']['user.logout']['url'])) {
-        $variables['items']['user.logout']['url']->setRouteParameter("destination", $destination);
-    }
+  if (isset($variables['items']['user.logout']['url'])) {
+    $variables['items']['user.logout']['url']->setRouteParameter("destination", $destination);
+  }
 }
 
 /**
@@ -281,89 +312,161 @@ function employees_tokens($type, $tokens, array $data = array(), array $options 
 /**
  * A helper function to validate document.
  */
-function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-    if ($form_state->hasValue('field_efiles_link')) {
-      // DO NOT validate when the user clicks on the remove document button.
-      // ONLY validate when the entire form is submitted.
-      if($form_state->getTriggeringElement()["#name"] === "field_media_document_0_remove_button") return;
-  
-      $efiles_link = $form_state->getValue('field_efiles_link');
-      $document = $form_state->getValue('field_media_document');
+function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+  if ($form_state->hasValue('field_efiles_link')) {
+    // DO NOT validate when the user clicks on the remove document button.
+    // ONLY validate when the entire form is submitted.
+    if ($form_state->getTriggeringElement()["#name"] === "field_media_document_0_remove_button") return;
 
-      if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document) && !empty($document[0]["fids"])) {
-        $form_state->setErrorByName('field_media_document', t('Please remove either the Document or the eFiles link.'));
+    $efiles_link = $form_state->getValue('field_efiles_link');
+    $document = $form_state->getValue('field_media_document');
+
+    if (!empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document) && !empty($document[0]["fids"])) {
+      $form_state->setErrorByName('field_media_document', t('Please remove either the Document or the eFiles link.'));
+      return;
+    }
+
+    // If the eFiles link has value
+    if (!empty($efiles_link) && !empty($efiles_link[0]['uri'])) {
+      $user_input_file_url = strtolower($efiles_link[0]['uri']);
+      $external_file_url = $user_input_file_url;
+      // Validate the file URL is an eFiles link
+      $efiles_url_regex = '/^https:\/\/efiles.portlandoregon.gov\/(.*)/i';
+      if (!preg_match($efiles_url_regex, $external_file_url)) {
+        $form_state->setErrorByName('field_efiles_link', t('The eFiles link must start with https://efiles.portlandoregon.gov/.'));
         return;
       }
 
-      // If the eFiles link has value
-      if( !empty($efiles_link) && !empty($efiles_link[0]['uri']) ) {
-        $user_input_file_url = strtolower($efiles_link[0]['uri']);
-        $external_file_url = $user_input_file_url;
-        // Validate the file URL is an eFiles link
-        $efiles_url_regex = '/^https:\/\/efiles.portlandoregon.gov\/(.*)/i';
-        if( !preg_match($efiles_url_regex, $external_file_url) ) {
-          $form_state->setErrorByName('field_efiles_link', t('The eFiles link must start with https://efiles.portlandoregon.gov/.'));
+      // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
+      if (
+        strpos($external_file_url, 'https://efiles.portlandoregon.gov/') === 0 &&
+        !(substr_compare($external_file_url, "/file/document", -strlen("/file/document")) === 0)
+      ) {
+        $external_file_url .= "/file/document";
+      }
+
+      // Get eFiles file size and MIME type
+      try {
+        $headers = get_headers($external_file_url, 1);
+      } catch (Exception $e) {
+        $form_state->setErrorByName('field_efiles_link', 'Cannot retrieve file size and mimetype from this link.');
+        return;
+      }
+      if (
+        !empty($headers) &&
+        (substr_compare($headers[0], "200 OK", -strlen("200 OK")) === 0) &&
+        array_key_exists('Content-Type', $headers) &&
+        array_key_exists('Content-Length', $headers)
+      ) {
+        $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
+        if ($file_size === 0) {
+          $form_state->setErrorByName('field_efiles_link', t('The linked file is empty.'));
           return;
         }
-  
-        // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
-        if( strpos($external_file_url, 'https://efiles.portlandoregon.gov/') === 0 &&
-          ! ( substr_compare($external_file_url, "/file/document", -strlen("/file/document") ) === 0) ) {
-          $external_file_url .= "/file/document";
+        // Content-Type header can be "text/html; charset=utf-8"
+        $content_type_array = explode(';', $headers['Content-Type']);
+        // If content type is text/HTML, it's not a file
+        if (empty($content_type_array) || $content_type_array[0] === "text/html") {
+          // Commented this line out to support existing documents that are linked to an eFiles folder
+          // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+          return;
         }
-  
-        // Get eFiles file size and MIME type
+
+        $form_state->setValue('field_file_size', [["value" => $file_size]]);
+        $form_state->setValue('field_mime_type', [["value" => $content_type_array[0]]]);
+      } else {
+        // Verify it's a valid eFiles folder
         try {
-          $headers = get_headers($external_file_url, 1);
-        }catch (Exception $e) {
-          $form_state->setErrorByName('field_efiles_link', 'Cannot retrieve file size and mimetype from this link.');
+          $headers = get_headers($user_input_file_url, 1);
+        } catch (Exception $e) {
+          $form_state->setErrorByName('field_efiles_link', 'Please verify the eFiles link is valid.');
           return;
         }
-        if( !empty($headers) &&
-            (substr_compare($headers[0], "200 OK", -strlen("200 OK") ) === 0) &&
-            array_key_exists('Content-Type', $headers) &&
-            array_key_exists('Content-Length', $headers)) {
-          $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
-          if($file_size === 0) {
-            $form_state->setErrorByName('field_efiles_link', t('The linked file is empty.'));
-            return;
-          }
-          // Content-Type header can be "text/html; charset=utf-8"
-          $content_type_array = explode(';', $headers['Content-Type']);
-          // If content type is text/HTML, it's not a file
-          if(empty($content_type_array) || $content_type_array[0] === "text/html") {
-            // Commented this line out to support existing documents that are linked to an eFiles folder
-            // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
-            return;
-          }
-  
-          $form_state->setValue('field_file_size', [["value" => $file_size]]);
-          $form_state->setValue('field_mime_type', [["value" => $content_type_array[0]]] );
-        }
-        else {
-          // Verify it's a valid eFiles folder
-          try {
-            $headers = get_headers($user_input_file_url, 1);
-          }catch (Exception $e) {
-            $form_state->setErrorByName('field_efiles_link', 'Please verify the eFiles link is valid.');
-            return;
-          }
-  
-          // Make sure the response code is 200 and content type is HTML
-          if( empty($headers) ||
-              (substr_compare($headers[0], "200 OK", -strlen("200 OK") ) !== 0) ||
-              ( ! array_key_exists('Content-Type', $headers) ) ||
-              substr($headers['Content-Type'], 0, strlen("text/html")) !== "text/html" ) {
-              $form_state->setErrorByName('field_efiles_link', t('Please verify the eFiles link is valid.'));
-          }
+
+        // Make sure the response code is 200 and content type is HTML
+        if (
+          empty($headers) ||
+          (substr_compare($headers[0], "200 OK", -strlen("200 OK")) !== 0) ||
+          (!array_key_exists('Content-Type', $headers)) ||
+          substr($headers['Content-Type'], 0, strlen("text/html")) !== "text/html"
+        ) {
+          $form_state->setErrorByName('field_efiles_link', t('Please verify the eFiles link is valid.'));
         }
       }
-      else {
-        $document = $form_state->getValue('field_media_document');
-        // The document field can't be empty when the eFile link is empty
-        if( empty($document) || empty($document[0]["fids"]) ) {
-          $form_state->setErrorByName('field_media_document', t('Please upload a file or add an external file link'));
-        }
+    } else {
+      $document = $form_state->getValue('field_media_document');
+      // The document field can't be empty when the eFile link is empty
+      if (empty($document) || empty($document[0]["fids"])) {
+        $form_state->setErrorByName('field_media_document', t('Please upload a file or add an external file link'));
       }
     }
   }
+}
+
+/**
+ * Implement hook_cron()
+ * Retrieve a view and send it to powr@portlandoregon.gov
+ */
+function employees_cron()
+{
+  // In each cron run after 12pm, check if we've sent the content update summary email today.
+  $hour = (int)(date('G')); // 0 to 23
+  if ($hour >= 12) {
+    // If an email is already sent today, do not send again
+    $last_daily_email_sent = \Drupal::state()->get('portland.last_daily_email_sent');
+    if (!empty($last_daily_email_sent) && $last_daily_email_sent === date('m/d/Y')) {
+      return;
+    }
+
+    $results = '';
+
+    // Define a list of views that will be included in the email
+    $views[] = ['view_id' => 'content_updated_recently', 'block_id' => 'block_tables'];  // Tables
+    $views[] = ['view_id' => 'content_updated_recently', 'block_id' => 'block_urls'];    // Body text URLs
+    $views[] = ['view_id' => 'media_updated_recently', 'block_id' => 'block_videos_updated'];    // Videos
+    $views[] = ['view_id' => 'users_updated_recently', 'block_id' => 'block_publishers_updated'];    // Publishers
+
+    foreach ($views as $view) {
+      // Get the view by machine id
+      $theview = \Drupal\views\Views::getView($view['view_id']);
+      // Set the display machine id
+      $theview->setDisplay($view['block_id']);
+      $theview->preExecute();
+      $theview->execute();
+
+      if (count($theview->result)) {
+        // Render the view and append to results
+        $rendered = $theview->render($view['block_id']);
+        $results .= \Drupal::service('renderer')->render($rendered);
+      }
+    }
+
+    // If all views are empty, do not send the email
+    if (!strlen($results)) {
+      \Drupal::state()->set('portland.last_daily_email_sent', date('m/d/Y'));
+      \Drupal::logger('mail-log')->notice(t('No content updated in the past day.'));
+      return;
+    }
+
+    // Add environment name to the email subject if it's not Live
+    $environment_name = '';
+    if(isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] != 'live') {
+        $environment_name = ' (' . $_ENV['PANTHEON_ENVIRONMENT'] . ')';
+    }
+
+    // Send email
+    $key = 'employees_daily_mail'; // Replace with Your key
+    $to = 'BTS-eGov@portlandoregon.gov';
+    $params['message'] = '<p>These Employees.portland.gov items were updated in the last 24 hours and should
+            be reviewed according to the specific instructions below.<p/>' . $results;
+    $params['title'] = 'Employees.portland.gov list of content to review' . $environment_name;
+    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+
+    $sent_successfully = _send_email($key, $to, $langcode, $params, 'powr@portlandoregon.gov');
+    if ($sent_successfully) {
+      \Drupal::logger('mail-log')->notice(t('Daily content update summary email sent successfully.'));
+      \Drupal::state()->set('portland.last_daily_email_sent', date('m/d/Y'));
+    }
+  }
+}
