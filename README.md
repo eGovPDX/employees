@@ -161,7 +161,7 @@ There are a few extra steps for the assigned build master. This person is the fi
    - Do permissions need to be rebuilt?
    - If all work from the issue is merged and the build was successful, you can move the issue to the done column on our Jira board and delete the feature branch from Github.
 3. Repeat steps 1-2 to merge additional PRs until you've bundled all of the changes together that you want to go into the next "deployment" to Test, and Live.
-4. Before the last merge to `master` for the desired deployment. Clone the `live` database to `dev` using the following command: `lando terminus env:clone-content  employees.live dev`
+4. Before the last merge to `master` for the desired deployment. Clone the `live` database to `dev` using the following command: `lando terminus env:clone-content employees.live dev`
 5. After the clone is complete, merging to master will trigger an automated CircleCI build, deployment, and test process on the Dev environment similar to the multidev deployment.
     - Verify that the CircleCI build on Dev is successful and passes our automated tests.
 
