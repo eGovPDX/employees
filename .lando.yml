@@ -46,12 +46,12 @@ tooling:
     description: Run node commands
     service: node
   latest:
-    description: Download and import the latest database from Test
+    description: Download and import the latest database from Dev
     cmd:
       - appserver: mkdir -p /app/artifacts
-      - appserver: echo "Downloading latest database..."
+      - appserver: echo "Downloading latest dev database..."
       - appserver: rm -f /app/artifacts/database.tar.gz
-      - appserver: terminus backup:get employees.test --element=database --to=/app/artifacts/database.tar.gz
+      - appserver: terminus backup:get employees.dev --element=database --to=/app/artifacts/database.tar.gz
       - appserver: echo "Importing database..."
       - database: /helpers/sql-import.sh artifacts/database.tar.gz
 #      - appserver: echo "Sanitizing database..."
