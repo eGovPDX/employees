@@ -144,7 +144,7 @@ build_and_deploy: &build_and_deploy
               fi
               # Create a new multidev with files and database from site corresponding to PR's base branch.
               echo "Creating new multidev site cloned from $BASE. Please wait."
-              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV --no-files
+              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV
             fi
             rm -rf ./env_list.txt
           fi
