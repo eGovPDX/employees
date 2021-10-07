@@ -1,0 +1,25 @@
+uuid: 9ce36d45-0ecb-4447-a9c5-accf9f08b634
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_contact
+    - group.type.private
+id: group.private.field_group_contact
+field_name: field_group_contact
+entity_type: group
+bundle: private
+label: 'Group Contact'
+description: 'To add a contact, begin typing a person''s name and select from the drop down list. Displays title, phone number, and email address.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: notifiy_reviewer
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

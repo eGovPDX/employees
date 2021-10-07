@@ -10,7 +10,7 @@
   view_mode|clean_class,
 ]
 %}
-{# {{ drupal_breakpoint() }} #}
+
 <article{{ attributes.addClass(classes) }}>
   {% block content %}
     <h2><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h2>

@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.search_result
     - field.field.node.page.body
+    - field.field.node.page.field_contact
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
@@ -65,6 +66,7 @@ content:
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
+  field_contact: true
   field_display_in_group: true
   field_feature: true
   field_feature_until: true

@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
     - field.field.group.private.field_org_type
     - field.field.group.private.field_parent_group
     - group.type.private
     - views.view.group_events
-    - views.view.group_menu
     - views.view.group_news
     - views.view.group_search_index
   module:
@@ -93,19 +93,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 2
-          d572fea6-e7bb-4b1c-8311-20649161be58:
-            uuid: d572fea6-e7bb-4b1c-8311-20649161be58
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
           25200171-e124-4ca7-8084-a08b85933dbc:
             uuid: 25200171-e124-4ca7-8084-a08b85933dbc
             region: side
@@ -118,7 +105,26 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 3
+            weight: 4
+          e17e4de9-033f-456b-8e92-70cd95158815:
+            uuid: e17e4de9-033f-456b-8e92-70cd95158815
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_group_contact'
+              label: 'Group contact'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -177,6 +183,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_group_contact: true
   langcode: true
   search_api_excerpt: true
   uid: true
