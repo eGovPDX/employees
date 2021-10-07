@@ -1,0 +1,28 @@
+uuid: 7f7990dc-e706-44ac-b12c-3bb9a30edec1
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contract_category
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: filterbycategory
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:contract_category'
+settings:
+  id: 'facet_block:contract_category'
+  label: 'Filter by Category'
+  provider: facets
+  label_display: '0'
+  block_id: filterbycategory
+visibility:
+  request_path:
+    id: request_path
+    pages: /contracts
+    negate: false

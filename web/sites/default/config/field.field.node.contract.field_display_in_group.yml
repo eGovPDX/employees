@@ -1,0 +1,29 @@
+uuid: ed4f7a31-bf0e-416b-8209-2d9806facbb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_in_group
+    - group.type.employee
+    - node.type.contract
+id: node.contract.field_display_in_group
+field_name: field_display_in_group
+entity_type: node
+bundle: contract
+label: 'Displayed in'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

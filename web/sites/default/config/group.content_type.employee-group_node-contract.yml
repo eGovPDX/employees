@@ -1,0 +1,19 @@
+uuid: 310cac1d-44d2-4533-bb80-fa95c2a8787e
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+    - node.type.contract
+  module:
+    - gnode
+    - node
+id: employee-group_node-contract
+label: 'Employee Group: Group node (Contract)'
+description: 'Adds <em class="placeholder">Contract</em> content to groups both publicly and privately.'
+group_type: employee
+content_plugin: 'group_node:contract'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

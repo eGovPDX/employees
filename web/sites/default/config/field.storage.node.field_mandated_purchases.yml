@@ -1,21 +1,19 @@
-uuid: 3a71220c-51a5-493a-abcc-2ee2c4739207
+uuid: cd9f5898-ccea-40ca-b377-802c565e3d4a
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime_range
     - field_permissions
     - node
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_when
-field_name: field_when
+id: node.field_mandated_purchases
+field_name: field_mandated_purchases
 entity_type: node
-type: daterange
-settings:
-  datetime_type: datetime
-module: datetime_range
+type: boolean
+settings: {  }
+module: core
 locked: false
 cardinality: 1
 translatable: true
