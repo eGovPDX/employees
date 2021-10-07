@@ -9,8 +9,6 @@ config:
   cache: false
   composer_version: 2
 services:
-  database:
-    type: mariadb:10.4
   appserver:
     build_as_root:
       - /bin/sh -c "cp /app/cop_ca_*.crt /usr/local/share/ca-certificates/"
@@ -51,7 +49,7 @@ tooling:
     description: Download and import the latest database from Dev
     cmd:
       - appserver: mkdir -p /app/artifacts
-      - appserver: echo "Downloading latest database..."
+      - appserver: echo "Downloading latest dev database..."
       - appserver: rm -f /app/artifacts/database.tar.gz
       - appserver: terminus backup:get employees.dev --element=database --to=/app/artifacts/database.tar.gz
       - appserver: echo "Importing database..."
