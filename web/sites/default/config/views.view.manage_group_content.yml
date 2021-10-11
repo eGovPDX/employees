@@ -11,7 +11,6 @@ dependencies:
     - content_moderation
     - group
     - node
-    - user
     - views_bulk_operations
 _core:
   default_config_hash: Kjqf5d4F134C3zua0tXV7LA3m5OEeS_Fowa2dP9kk2I
@@ -30,9 +29,9 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: group_permission
         options:
-          perm: 'view any unpublished content'
+          group_permission: 'access group_node overview'
       cache:
         type: tag
         options: {  }
@@ -1268,10 +1267,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - route
+        - route.group
         - url
         - url.query_args
+        - user.group_permissions
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_reviewer'
         - 'config:workflow_list'
@@ -1300,10 +1300,11 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - route
+        - route.group
         - url
         - url.query_args
+        - user.group_permissions
         - 'user.node_grants:view'
-        - user.permissions
       tags:
         - 'config:field.storage.node.field_reviewer'
         - 'config:workflow_list'
