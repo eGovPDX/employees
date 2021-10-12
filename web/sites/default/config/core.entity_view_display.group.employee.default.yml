@@ -3,9 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.employee.field_contract_search_text
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
+    - field.field.group.employee.field_has_contracts
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
@@ -147,6 +149,7 @@ third_party_settings:
       whitelisted_blocks: {  }
       blacklisted_blocks: {  }
       allowed_layouts: {  }
+      restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
 id: group.employee.default
@@ -154,6 +157,13 @@ targetEntityType: group
 bundle: employee
 mode: default
 content:
+  field_contract_search_text:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: main
   field_group_description:
     weight: -4
     label: above
@@ -169,6 +179,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_has_contracts:
+    weight: 0
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: main
   field_org_type:
     weight: -1
     label: above
