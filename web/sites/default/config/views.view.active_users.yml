@@ -1,10 +1,12 @@
-uuid: e8510b14-b87f-4fcf-a451-945c1b2c645a
+uuid: ed391491-e9f6-4202-bf33-b94e59844274
 langcode: en
 status: true
 dependencies:
+  config:
+    - user.role.authenticated
   module:
     - user
-id: notifiy_reviewer
+id: active_users
 label: 'Active Users'
 module: views
 description: ''
@@ -19,9 +21,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access user profiles'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -149,7 +152,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.permissions
+        - user.roles
       tags: {  }
   entity_reference_1:
     display_plugin: entity_reference
@@ -367,5 +370,5 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.permissions
+        - user.roles
       tags: {  }
