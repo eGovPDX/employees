@@ -2,10 +2,6 @@ uuid: e8510b14-b87f-4fcf-a451-945c1b2c645a
 langcode: en
 status: true
 dependencies:
-  config:
-    - user.role.administrator
-    - user.role.content_lead
-    - user.role.publisher
   module:
     - user
 id: notifiy_reviewer
@@ -23,12 +19,9 @@ display:
     position: 0
     display_options:
       access:
-        type: role
+        type: perm
         options:
-          role:
-            publisher: publisher
-            content_lead: content_lead
-            administrator: administrator
+          perm: 'access user profiles'
       cache:
         type: tag
         options: {  }
@@ -156,7 +149,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
+        - user.permissions
       tags: {  }
   entity_reference_1:
     display_plugin: entity_reference
@@ -374,5 +367,5 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.roles
+        - user.permissions
       tags: {  }
