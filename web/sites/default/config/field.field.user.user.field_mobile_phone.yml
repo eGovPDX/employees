@@ -1,20 +1,21 @@
-uuid: 2735bd07-cc4c-4b79-a762-138cd9be2d42
+uuid: bbcc7176-c697-4eef-85e1-d81e0eccf2e0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_division_name
+    - field.storage.user.field_mobile_phone
   module:
+    - telephone
     - user
-id: user.user.field_division_name
-field_name: field_division_name
+id: user.user.field_mobile_phone
+field_name: field_mobile_phone
 entity_type: user
 bundle: user
-label: Division
+label: 'Mobile phone'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string
+field_type: telephone

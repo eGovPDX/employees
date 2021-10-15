@@ -1,0 +1,38 @@
+uuid: b502fc68-c03e-451a-9f4d-1514ab4f6943
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_picture
+    - node.type.contact
+  module:
+    - image
+id: node.contact.field_contact_picture
+field_name: field_contact_picture
+entity_type: node
+bundle: contact
+label: 'Contact picture'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

@@ -1,0 +1,20 @@
+uuid: ac282f78-1d58-4022-93e0-34aa17d81d30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_section
+  module:
+    - user
+id: user.user.field_section
+field_name: field_section
+entity_type: user
+bundle: user
+label: Section
+description: 'Field inherited from BDS Contacts app to display the level of organization below Division.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

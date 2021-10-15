@@ -1,9 +1,9 @@
-uuid: 4ed08c88-a72f-4e67-9fea-1e7ce97a792b
+uuid: 46f2c98d-0fd0-483a-b804-10f17d6dc9fd
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.user.search_result
+    - core.entity_view_mode.user.contact_list
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_address
     - field.field.user.user.field_division_name
@@ -22,7 +22,9 @@ dependencies:
     - field.field.user.user.field_title
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
+    - image.style.medium
   module:
+    - image
     - layout_builder
     - telephone
     - user
@@ -32,61 +34,119 @@ third_party_settings:
     enabled: false
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
-id: user.user.search_result
+id: user.user.contact_list
 targetEntityType: user
 bundle: user
-mode: search_result
+mode: contact_list
 content:
-  field_first_name:
-    type: string
-    weight: 0
-    region: content
+  field_address:
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    type: string
+    region: content
+  field_division_name:
+    weight: 9
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_group_names:
+    weight: 10
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     type: string
-    weight: 2
     region: content
+  field_keep_mobile_phone_private:
+    weight: 5
     label: visually_hidden
     settings:
-      link_to_entity: false
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-  field_last_name:
-    type: string
-    weight: 1
+    type: boolean
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_phone:
-    type: telephone_link
+  field_mobile_phone:
     weight: 3
-    region: content
-    label: visually_hidden
+    label: inline
     settings:
       title: ''
     third_party_settings: {  }
+    type: telephone_link
+    region: content
+  field_phone:
+    weight: 2
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
+    region: content
+  field_search_keywords:
+    weight: 11
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_section:
+    weight: 8
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_workspace:
+    weight: 6
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  mail:
+    type: email_mailto
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image
+    weight: 0
+    region: content
+    settings:
+      image_style: medium
+      image_link: content
+    third_party_settings: {  }
+    label: hidden
 hidden:
   field_active_directory_id: true
-  field_address: true
-  field_division_name: true
-  field_keep_mobile_phone_private: true
+  field_first_name: true
+  field_last_name: true
   field_managers: true
-  field_mobile_phone: true
   field_office_location: true
   field_primary_groups: true
   field_publisher_role_changed: true
-  field_search_keywords: true
-  field_section: true
-  field_title: true
-  field_workspace: true
   langcode: true
-  mail: true
   masquerade: true
   masquerade_as: true
   member_for: true
   search_api_excerpt: true
-  user_picture: true

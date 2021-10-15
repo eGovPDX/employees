@@ -14,13 +14,24 @@ dependencies:
     - field.storage.media.field_display_in_group
     - field.storage.media.field_description
     - field.storage.media.field_tags
+    - field.storage.node.field_contact_email
+    - field.storage.node.field_contact_title
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.node.field_first_name
+    - field.storage.node.field_last_name
+    - field.storage.node.field_search_keywords
     - field.storage.node.field_type
+    - field.storage.user.field_division_name
     - field.storage.user.field_first_name
+    - field.storage.user.field_group_names
     - field.storage.user.field_last_name
+    - field.storage.user.field_primary_groups
+    - field.storage.user.field_search_keywords
+    - field.storage.user.field_section
+    - field.storage.user.field_title
+    - field.storage.user.field_workspace
     - search_api.server.searchstax
-    - core.entity_view_mode.user.compact
 third_party_settings:
   search_api_solr:
     finalize: true
@@ -118,6 +129,22 @@ field_settings:
     dependencies:
       module:
         - node
+  field_contact_email:
+    label: 'Contact email'
+    datasource_id: 'entity:node'
+    property_path: field_contact_email
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_contact_email
+  field_contact_title:
+    label: 'Contact title'
+    datasource_id: 'entity:node'
+    property_path: field_contact_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contact_title
   field_display_in_group:
     label: 'Content Displayed in'
     datasource_id: 'entity:node'
@@ -126,8 +153,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_display_in_group
+  field_division_name:
+    label: 'Division name'
+    datasource_id: 'entity:user'
+    property_path: field_division_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_division_name
   field_first_name:
-    label: 'First name'
+    label: 'First name phonetic'
     datasource_id: 'entity:user'
     property_path: field_first_name
     type: 'solr_text_custom_omit_norms:phonetic'
@@ -143,8 +178,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_first_name
+  field_first_name_2:
+    label: 'First name'
+    datasource_id: 'entity:node'
+    property_path: field_first_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_first_name
+  field_group_names:
+    label: 'Group names'
+    datasource_id: 'entity:user'
+    property_path: field_group_names
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_group_names
   field_last_name:
-    label: 'Last name'
+    label: 'Last name phonetic'
     datasource_id: 'entity:user'
     property_path: field_last_name
     type: 'solr_text_custom_omit_norms:phonetic'
@@ -160,6 +211,48 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_last_name
+  field_last_name_2:
+    label: 'Last name'
+    datasource_id: 'entity:node'
+    property_path: field_last_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_last_name
+  field_primary_groups:
+    label: 'Primary groups'
+    datasource_id: 'entity:user'
+    property_path: field_primary_groups
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_primary_groups
+  field_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:user'
+    property_path: field_search_keywords
+    type: 'solr_text_custom:edge'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_search_keywords
+  field_search_keywords_1:
+    label: 'Search keywords'
+    datasource_id: 'entity:node'
+    property_path: field_search_keywords
+    type: 'solr_text_custom:edge'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_search_keywords
+  field_section:
+    label: Section
+    datasource_id: 'entity:user'
+    property_path: field_section
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_section
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
@@ -168,6 +261,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_tags
+  field_title:
+    label: Title
+    datasource_id: 'entity:user'
+    property_path: field_title
+    type: string
+    dependencies:
+      config:
+        - field.storage.user.field_title
   field_type:
     label: Type
     datasource_id: 'entity:node'
@@ -176,6 +277,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_type
+  field_workspace:
+    label: Workspace
+    datasource_id: 'entity:user'
+    property_path: field_workspace
+    type: string
+    dependencies:
+      config:
+        - field.storage.user.field_workspace
   group_id:
     label: 'Group ID'
     datasource_id: 'entity:group'
@@ -269,13 +378,25 @@ field_settings:
         'entity:group':
           employee: default
           private: default
+        'entity:media':
+          document: ''
         'entity:node':
+          contact: default
           event: default
           news: default
           page: default
           resource: default
         'entity:user':
-          user: compact
+          user: default
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 3
+    dependencies:
+      module:
+        - node
   uid:
     label: uid
     datasource_id: 'entity:node'

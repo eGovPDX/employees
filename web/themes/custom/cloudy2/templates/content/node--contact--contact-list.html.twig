@@ -1,0 +1,68 @@
+{#
+/**
+ * @file
+ * Template for a Node component.
+ */
+#}
+{%
+  set classes = [
+  'node',
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  node.bundle|clean_class,
+  view_mode|clean_class,
+  node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {% if display_submitted %}
+    <div class="node__meta">
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        <p>
+        {% trans %}
+        Submitted by {{ author_name }}<br>
+        Created on {{ date }}
+        {% endtrans %}
+        {% if updated %}
+          {% trans %}<br>Updated on {{ updated }}<br>{% endtrans %}
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('node__content') }}>
+    <div class="float-left align-left field__item">
+      {{ content.field_contact_picture }}
+    </div>
+
+    <div class="float-left align-left field__item">
+      <div>
+        {% if label and not page %}
+          {{ title_prefix }}
+          <h3{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h3>
+          {{ title_suffix }}
+        {% endif %}
+        <div class="float-left align-left field__item">
+          <strong>{{ content.field_contact_title }}</strong>
+          {{ content.field_section }}
+          {{ content.field_division }}
+          {{ content.field_bureau }}
+        </div>
+        <div class="float-left align-left field__item">
+          {{ content.field_contact_work_phone }}
+          {{ content.field_contact_mobile_phone }}
+          {% if field_keep_mobile_phone_private %} Keep mobile phone private {% endif %}
+          {{ content.field_contact_email }}
+          {{ content.field_workspace }}
+        </div>
+        {# <div class="float-left align-left field__item">
+          {{ content.field_search_keywords }}
+        </div> #}
+      </div>
+    </div>
+  </div>
+</article>

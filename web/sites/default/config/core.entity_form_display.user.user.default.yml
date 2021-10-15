@@ -8,13 +8,18 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -105,6 +110,13 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_keep_mobile_phone_private:
+    weight: 29
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_last_name:
     weight: 2
     settings:
@@ -122,6 +134,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_mobile_phone:
+    weight: 28
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
     region: content
   field_office_location:
     weight: 22
@@ -148,8 +167,32 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_search_keywords:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_section:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_title:
     weight: 16
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_workspace:
+    weight: 25
     settings:
       size: 60
       placeholder: ''

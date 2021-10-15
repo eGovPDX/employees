@@ -1,0 +1,46 @@
+uuid: 34d0c5de-84fc-441a-a57e-840ac3e255f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.contact.field_bureau
+    - field.field.node.contact.field_contact_email
+    - field.field.node.contact.field_contact_mobile_phone
+    - field.field.node.contact.field_contact_picture
+    - field.field.node.contact.field_contact_title
+    - field.field.node.contact.field_contact_work_phone
+    - field.field.node.contact.field_division
+    - field.field.node.contact.field_first_name
+    - field.field.node.contact.field_keep_mobile_phone_private
+    - field.field.node.contact.field_last_name
+    - field.field.node.contact.field_search_keywords
+    - field.field.node.contact.field_section
+    - node.type.contact
+  module:
+    - user
+id: node.contact.teaser
+targetEntityType: node
+bundle: contact
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_bureau: true
+  field_contact_email: true
+  field_contact_mobile_phone: true
+  field_contact_picture: true
+  field_contact_title: true
+  field_contact_work_phone: true
+  field_division: true
+  field_first_name: true
+  field_keep_mobile_phone_private: true
+  field_last_name: true
+  field_search_keywords: true
+  field_section: true
+  langcode: true
+  search_api_excerpt: true

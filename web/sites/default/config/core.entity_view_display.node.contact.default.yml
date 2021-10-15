@@ -1,0 +1,133 @@
+uuid: 0f656112-15dd-4625-be69-8fe7ea31f467
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.contact.field_bureau
+    - field.field.node.contact.field_contact_email
+    - field.field.node.contact.field_contact_mobile_phone
+    - field.field.node.contact.field_contact_picture
+    - field.field.node.contact.field_contact_title
+    - field.field.node.contact.field_contact_work_phone
+    - field.field.node.contact.field_division
+    - field.field.node.contact.field_first_name
+    - field.field.node.contact.field_keep_mobile_phone_private
+    - field.field.node.contact.field_last_name
+    - field.field.node.contact.field_search_keywords
+    - field.field.node.contact.field_section
+    - node.type.contact
+  module:
+    - image
+    - telephone
+    - user
+id: node.contact.default
+targetEntityType: node
+bundle: contact
+mode: default
+content:
+  field_bureau:
+    weight: 11
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact_email:
+    weight: 5
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_contact_mobile_phone:
+    weight: 7
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
+    region: content
+  field_contact_picture:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_contact_title:
+    weight: 4
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact_work_phone:
+    weight: 6
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
+    region: content
+  field_division:
+    weight: 10
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_first_name:
+    weight: 3
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_keep_mobile_phone_private:
+    weight: 8
+    label: inline
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_last_name:
+    weight: 2
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_search_keywords:
+    weight: 12
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_section:
+    weight: 9
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true

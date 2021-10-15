@@ -1,0 +1,24 @@
+uuid: 26a75dbf-08e8-4f08-a3ee-c2b5d1d4dd6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_keep_mobile_phone_private
+  module:
+    - user
+id: user.user.field_keep_mobile_phone_private
+field_name: field_keep_mobile_phone_private
+entity_type: user
+bundle: user
+label: 'Keep mobile phone private'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

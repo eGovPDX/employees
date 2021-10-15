@@ -9,13 +9,18 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -39,7 +44,7 @@ content:
     type: string
     weight: 10
     region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -47,7 +52,7 @@ content:
     type: string
     weight: 7
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -55,7 +60,7 @@ content:
     type: string
     weight: 8
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -63,7 +68,7 @@ content:
     type: entity_reference_label
     weight: 6
     region: content
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
@@ -71,7 +76,7 @@ content:
     type: string
     weight: 9
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -79,7 +84,7 @@ content:
     type: telephone_link
     weight: 5
     region: content
-    label: above
+    label: inline
     settings:
       title: ''
     third_party_settings: {  }
@@ -87,7 +92,7 @@ content:
     type: string
     weight: 4
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -121,9 +126,14 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_keep_mobile_phone_private: true
   field_last_name: true
+  field_mobile_phone: true
   field_primary_groups: true
   field_publisher_role_changed: true
+  field_search_keywords: true
+  field_section: true
+  field_workspace: true
   langcode: true
   mail: true
   search_api_excerpt: true

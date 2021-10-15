@@ -1,16 +1,16 @@
-uuid: 6c5c76a7-f680-4f88-b179-2939c51d6d17
+uuid: f13817b3-bd60-4536-999c-f89af1852ac9
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.user.field_phone
+    - field.storage.node.field_contact_work_phone
+    - node.type.contact
   module:
     - telephone
-    - user
-id: user.user.field_phone
-field_name: field_phone
-entity_type: user
-bundle: user
+id: node.contact.field_contact_work_phone
+field_name: field_contact_work_phone
+entity_type: node
+bundle: contact
 label: 'Work phone'
 description: ''
 required: false
