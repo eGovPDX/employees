@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.contact.field_contact_title
     - field.field.node.contact.field_contact_work_phone
     - field.field.node.contact.field_division
+    - field.field.node.contact.field_favorited_by
     - field.field.node.contact.field_first_name
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
@@ -80,6 +81,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_favorited_by:
+    weight: 13
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_first_name:
     weight: 3

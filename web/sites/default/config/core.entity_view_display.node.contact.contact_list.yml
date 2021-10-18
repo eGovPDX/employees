@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.contact.field_contact_title
     - field.field.node.contact.field_contact_work_phone
     - field.field.node.contact.field_division
+    - field.field.node.contact.field_favorited_by
     - field.field.node.contact.field_first_name
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
@@ -115,6 +116,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  field_favorited_by: true
   field_first_name: true
   field_last_name: true
   langcode: true

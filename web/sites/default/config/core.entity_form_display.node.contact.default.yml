@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.contact.field_contact_title
     - field.field.node.contact.field_contact_work_phone
     - field.field.node.contact.field_division
+    - field.field.node.contact.field_favorited_by
     - field.field.node.contact.field_first_name
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
@@ -88,6 +89,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_favorited_by:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_first_name:
     weight: 12

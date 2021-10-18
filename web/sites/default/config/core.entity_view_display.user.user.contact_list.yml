@@ -7,6 +7,7 @@ dependencies:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_address
     - field.field.user.user.field_division_name
+    - field.field.user.user.field_favorited_by
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
     - field.field.user.user.field_keep_mobile_phone_private
@@ -139,6 +140,7 @@ content:
     label: hidden
 hidden:
   field_active_directory_id: true
+  field_favorited_by: true
   field_first_name: true
   field_last_name: true
   field_managers: true
