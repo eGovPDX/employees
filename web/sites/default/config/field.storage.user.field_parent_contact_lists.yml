@@ -1,4 +1,4 @@
-uuid: c1414bd7-89ca-4118-a265-46dd69598525
+uuid: f2bd2703-d0dc-4c78-9c99-70bccf25deab
 langcode: en
 status: true
 dependencies:
@@ -9,12 +9,12 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_favorited_by
-field_name: field_favorited_by
-entity_type: node
+id: user.field_parent_contact_lists
+field_name: field_parent_contact_lists
+entity_type: user
 type: entity_reference
 settings:
-  target_type: user
+  target_type: node
 module: core
 locked: false
 cardinality: -1

@@ -10,10 +10,10 @@ dependencies:
     - field.field.node.contact.field_contact_title
     - field.field.node.contact.field_contact_work_phone
     - field.field.node.contact.field_division
-    - field.field.node.contact.field_favorited_by
     - field.field.node.contact.field_first_name
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
+    - field.field.node.contact.field_parent_contact_lists
     - field.field.node.contact.field_search_keywords
     - field.field.node.contact.field_section
     - node.type.contact
@@ -82,14 +82,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_favorited_by:
-    weight: 13
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_first_name:
     weight: 3
     label: inline
@@ -115,6 +107,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_parent_contact_lists:
+    weight: 14
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_search_keywords:
     weight: 12

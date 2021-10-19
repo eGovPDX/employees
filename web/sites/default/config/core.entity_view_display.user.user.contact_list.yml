@@ -7,7 +7,6 @@ dependencies:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_address
     - field.field.user.user.field_division_name
-    - field.field.user.user.field_favorited_by
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
     - field.field.user.user.field_keep_mobile_phone_private
@@ -15,6 +14,7 @@ dependencies:
     - field.field.user.user.field_managers
     - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
+    - field.field.user.user.field_parent_contact_lists
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
@@ -82,6 +82,14 @@ content:
     third_party_settings: {  }
     type: telephone_link
     region: content
+  field_parent_contact_lists:
+    type: entity_reference_label
+    weight: 12
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
   field_phone:
     weight: 2
     label: hidden
@@ -140,7 +148,6 @@ content:
     label: hidden
 hidden:
   field_active_directory_id: true
-  field_favorited_by: true
   field_first_name: true
   field_last_name: true
   field_managers: true

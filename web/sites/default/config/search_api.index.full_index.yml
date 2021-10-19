@@ -20,12 +20,14 @@ dependencies:
     - field.storage.node.field_display_in_group
     - field.storage.node.field_first_name
     - field.storage.node.field_last_name
+    - field.storage.node.field_parent_contact_lists
     - field.storage.node.field_search_keywords
     - field.storage.node.field_type
     - field.storage.user.field_division_name
     - field.storage.user.field_first_name
     - field.storage.user.field_group_names
     - field.storage.user.field_last_name
+    - field.storage.user.field_parent_contact_lists
     - field.storage.user.field_primary_groups
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
@@ -78,15 +80,6 @@ name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
 read_only: false
 field_settings:
-  aggregated_favorited_by:
-    label: 'Aggregated favorited by'
-    property_path: aggregated_field
-    type: integer
-    configuration:
-      type: union
-      fields:
-        - 'entity:node/field_favorited_by'
-        - 'entity:user/field_favorited_by'
   aggregated_first_name:
     label: 'Aggregated first name'
     property_path: aggregated_field
@@ -105,6 +98,24 @@ field_settings:
       fields:
         - 'entity:node/field_last_name'
         - 'entity:user/field_last_name'
+  aggregated_parent_contact_list:
+    label: 'Aggregated parent contact list'
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/field_parent_contact_lists:entity:title'
+        - 'entity:user/field_parent_contact_lists:entity:title'
+  aggregated_parent_contact_list_author:
+    label: 'Aggregated parent contact list author'
+    property_path: aggregated_field
+    type: integer
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/field_parent_contact_lists:entity:uid'
+        - 'entity:user/field_parent_contact_lists:entity:uid'
   content_body:
     label: 'Content Body'
     datasource_id: 'entity:node'
@@ -127,6 +138,16 @@ field_settings:
     property_path: nid
     type: integer
     dependencies:
+      module:
+        - node
+  content_parent_contact_list_uid:
+    label: 'Parent contact lists » Content » Authored by'
+    datasource_id: 'entity:node'
+    property_path: 'field_parent_contact_lists:entity:uid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_parent_contact_lists
       module:
         - node
   content_status:
@@ -442,6 +463,16 @@ field_settings:
     dependencies:
       module:
         - user
+  user_parent_contact_list_uid:
+    label: 'Parent contact lists » Content » Authored by'
+    datasource_id: 'entity:user'
+    property_path: 'field_parent_contact_lists:entity:uid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_parent_contact_lists
+      module:
+        - node
   user_status:
     label: 'User status'
     datasource_id: 'entity:user'

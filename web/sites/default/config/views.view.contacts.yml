@@ -8,6 +8,7 @@ dependencies:
   module:
     - search_api
     - user
+    - views_bulk_operations
 id: contacts
 label: Contacts
 module: views
@@ -28,7 +29,7 @@ display:
           role:
             authenticated: authenticated
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -69,6 +70,33 @@ display:
           quantity: 9
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            search_api_rendered_item: search_api_rendered_item
+            aggregated_parent_contact_list: aggregated_parent_contact_list
+          info:
+            search_api_rendered_item:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            aggregated_parent_contact_list:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: '-1'
+          empty_table: false
       row:
         type: fields
       fields:
@@ -398,14 +426,147 @@ display:
   page:
     display_plugin: page
     id: page
-    display_title: Page
+    display_title: 'Page: Contacts'
     position: 1
     display_options:
       display_extenders: {  }
       path: contacts
       use_admin_theme: false
+      fields:
+        views_bulk_operations_bulk_form:
+          id: views_bulk_operations_bulk_form
+          table: views
+          field: views_bulk_operations_bulk_form
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Views bulk operations'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          batch: true
+          batch_size: 10
+          form_step: true
+          buttons: false
+          clear_on_exposed: true
+          action_title: Action
+          selected_actions:
+            3:
+              action_id: employees_add_to_contact_list
+              preconfiguration:
+                label_override: 'Add to contact list'
+          force_selection_info: false
+          plugin_id: views_bulk_operations_bulk_form
+        search_api_rendered_item:
+          id: search_api_rendered_item
+          table: search_api_index_full_index
+          field: search_api_rendered_item
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_modes:
+            'entity:group':
+              employee: default
+              private: default
+            'entity:media':
+              document: default
+            'entity:node':
+              contact: contact_list
+              event: default
+              news: default
+              page: default
+              resource: default
+            'entity:user':
+              user: contact_list
+          plugin_id: search_api_rendered_item
+      defaults:
+        fields: false
+        relationships: false
+        cache: false
+      display_description: ''
+      relationships: {  }
+      cache:
+        type: none
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_interface'
         - url
@@ -414,20 +575,20 @@ display:
         - user.roles
       tags:
         - 'config:search_api.index.full_index'
-  page_1:
+  page_my_contact_lists:
     display_plugin: page
-    id: page_1
-    display_title: Page
+    id: page_my_contact_lists
+    display_title: 'Page: My contact list'
     position: 1
     display_options:
       display_extenders: {  }
       path: user/%/contacts
       use_admin_theme: false
       arguments:
-        aggregated_favorited_by:
-          id: aggregated_favorited_by
+        aggregated_parent_contact_list_author:
+          id: aggregated_parent_contact_list_author
           table: search_api_index_full_index
-          field: aggregated_favorited_by
+          field: aggregated_parent_contact_list_author
           relationship: none
           group_type: group
           admin_label: ''
@@ -459,6 +620,9 @@ display:
         relationships: false
         filters: false
         filter_groups: false
+        title: false
+        fields: false
+        cache: false
       relationships: {  }
       filters:
         content_type:
@@ -649,6 +813,127 @@ display:
         groups:
           1: OR
           2: AND
+      title: 'My contacts'
+      fields:
+        search_api_rendered_item:
+          id: search_api_rendered_item
+          table: search_api_index_full_index
+          field: search_api_rendered_item
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_modes:
+            'entity:group':
+              employee: default
+              private: default
+            'entity:media':
+              document: default
+            'entity:node':
+              contact: contact_list
+              event: default
+              news: default
+              page: default
+              resource: default
+            'entity:user':
+              user: contact_list
+          plugin_id: search_api_rendered_item
+        aggregated_parent_contact_list:
+          id: aggregated_parent_contact_list
+          table: search_api_index_full_index
+          field: aggregated_parent_contact_list
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<h3>{{ aggregated_parent_contact_list }}</h3>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          link_to_item: false
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+          plugin_id: search_api
+      display_description: ''
+      cache:
+        type: none
     cache_metadata:
       max-age: -1
       contexts:
