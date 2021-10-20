@@ -1,0 +1,23 @@
+uuid: 6994869f-e216-424e-8373-f1ea324424aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mandated_purchases
+    - node.type.contract
+id: node.contract.field_mandated_purchases
+field_name: field_mandated_purchases
+entity_type: node
+bundle: contract
+label: 'Mandated Purchases'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
