@@ -1,0 +1,28 @@
+uuid: 25373032-bdfe-42c5-858e-80b2d5331c4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vendor_contact_info
+    - node.type.contract
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.contract.field_vendor_contact_info
+field_name: field_vendor_contact_info
+entity_type: node
+bundle: contract
+label: 'Vendor Contact Information'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

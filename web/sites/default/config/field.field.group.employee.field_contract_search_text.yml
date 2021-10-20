@@ -1,0 +1,28 @@
+uuid: 8e464c6a-07e2-4497-af46-a35ad96fc0e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_contract_search_text
+    - group.type.employee
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: group.employee.field_contract_search_text
+field_name: field_contract_search_text
+entity_type: group
+bundle: employee
+label: 'Contract Search Text'
+description: 'Enter the custom header text that will be displayed on this group''s Contracts page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

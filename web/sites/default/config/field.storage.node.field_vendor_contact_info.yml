@@ -1,21 +1,20 @@
-uuid: 3a71220c-51a5-493a-abcc-2ee2c4739207
+uuid: 6447a7fc-38b0-4df0-8e1c-63a7a452f13c
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime_range
     - field_permissions
     - node
+    - text
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_when
-field_name: field_when
+id: node.field_vendor_contact_info
+field_name: field_vendor_contact_info
 entity_type: node
-type: daterange
-settings:
-  datetime_type: datetime
-module: datetime_range
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true

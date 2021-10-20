@@ -1,0 +1,55 @@
+uuid: 2d660d55-25a4-410b-bfe0-7634564ac8b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.contract.body
+    - field.field.node.contract.field_category
+    - field.field.node.contract.field_contract_number
+    - field.field.node.contract.field_date_range
+    - field.field.node.contract.field_display_in_group
+    - field.field.node.contract.field_document
+    - field.field.node.contract.field_mandated_purchases
+    - field.field.node.contract.field_p_card_allowed
+    - field.field.node.contract.field_type
+    - field.field.node.contract.field_vendor_contact_info
+    - node.type.contract
+  module:
+    - text
+    - user
+id: node.contract.teaser
+targetEntityType: node
+bundle: contract
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_category: true
+  field_contract_number: true
+  field_date_range: true
+  field_display_in_group: true
+  field_document: true
+  field_mandated_purchases: true
+  field_p_card_allowed: true
+  field_type: true
+  field_vendor_contact_info: true
+  langcode: true
+  search_api_excerpt: true

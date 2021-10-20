@@ -14,8 +14,13 @@ dependencies:
     - field.storage.media.field_display_in_group
     - field.storage.media.field_description
     - field.storage.media.field_tags
+    - field.storage.node.field_category
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.node.field_date_range
+    - field.storage.node.field_contract_number
+    - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
@@ -118,6 +123,38 @@ field_settings:
     dependencies:
       module:
         - node
+  field_category:
+    label: Category
+    datasource_id: 'entity:node'
+    property_path: field_category
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_category
+  field_contract_number:
+    label: 'Contract Number'
+    datasource_id: 'entity:node'
+    property_path: field_contract_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contract_number
+  field_date_range:
+    label: 'Contract Date'
+    datasource_id: 'entity:node'
+    property_path: field_date_range
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_date_range
+  field_date_range_end_value:
+    label: 'Contract Date » End date'
+    datasource_id: 'entity:node'
+    property_path: 'field_date_range:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_date_range
   field_display_in_group:
     label: 'Content Displayed in'
     datasource_id: 'entity:node'
@@ -160,6 +197,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_last_name
+  field_mandated_purchases:
+    label: 'Mandated Purchases'
+    datasource_id: 'entity:node'
+    property_path: field_mandated_purchases
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_mandated_purchases
+  field_p_card_allowed:
+    label: 'P-Card Allowed'
+    datasource_id: 'entity:node'
+    property_path: field_p_card_allowed
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_p_card_allowed
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
