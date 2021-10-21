@@ -68,6 +68,15 @@ function employees_user_format_name_alter(&$name, $account)
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function employees_form_openid_connect_login_form_alter(&$form, &$form_state)
+{
+  // Override the default label of the submit button
+  $form["openid_connect_client_windows_aad_login"]["#value"] = t('Log in with City of Portland network account');
+}
+
+/**
  * Implements hook_entity_insert().
  */
 function employees_entity_insert($entity)

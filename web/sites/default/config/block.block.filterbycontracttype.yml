@@ -1,0 +1,28 @@
+uuid: 6ae4f623-ceae-4d1a-aaf4-df7ce6313f12
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contract_type
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: filterbycontracttype
+theme: cloudy2
+region: side
+weight: -1
+provider: null
+plugin: 'facet_block:contract_type'
+settings:
+  id: 'facet_block:contract_type'
+  label: 'Filter by Contract Type'
+  provider: facets
+  label_display: '0'
+  block_id: filterbycontracttype
+visibility:
+  request_path:
+    id: request_path
+    pages: /contracts
+    negate: false
