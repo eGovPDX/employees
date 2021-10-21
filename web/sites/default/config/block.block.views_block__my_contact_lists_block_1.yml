@@ -1,31 +1,30 @@
-uuid: b8e7c32f-3f89-4af4-8776-e2974f422ef6
+uuid: 59e8eae2-6e10-47e4-8bcc-b250643d310b
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.group_menu
+    - views.view.my_contact_lists
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__group_menu_block_group_homepage_menu
+id: views_block__my_contact_lists_block_1
 theme: cloudy2
 region: menu
-weight: -11
+weight: -15
 provider: null
-plugin: 'views_block:group_menu-block_group_homepage_menu'
+plugin: 'views_block:my_contact_lists-block_1'
 settings:
-  id: 'views_block:group_menu-block_group_homepage_menu'
+  id: 'views_block:my_contact_lists-block_1'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
   context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: '/group/*'
+    pages: '/user/*/contacts'
     negate: false
-    context_mapping: {  }
