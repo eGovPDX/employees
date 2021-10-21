@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - search_api.index.full_index
+    - system.menu.main
     - user.role.authenticated
   module:
     - search_api
@@ -565,6 +566,15 @@ display:
       relationships: {  }
       cache:
         type: none
+      menu:
+        type: normal
+        title: Contacts
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
     cache_metadata:
       max-age: 0
       contexts:
@@ -582,7 +592,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: user/%/contacts
+      path: user/%user/contacts
       use_admin_theme: false
       arguments:
         aggregated_parent_contact_list_author:
@@ -599,8 +609,9 @@ display:
             title: All
           title_enable: false
           title: ''
-          default_argument_type: current_user
-          default_argument_options: {  }
+          default_argument_type: user
+          default_argument_options:
+            user: false
           default_argument_skip_url: false
           summary_options: {  }
           summary:
@@ -934,13 +945,21 @@ display:
       display_description: ''
       cache:
         type: none
+      menu:
+        type: none
+        title: 'My contacts'
+        description: ''
+        expanded: false
+        parent: user.page
+        weight: 0
+        context: '0'
+        menu_name: account
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.roles
       tags:
