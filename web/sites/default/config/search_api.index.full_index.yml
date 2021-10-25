@@ -24,7 +24,6 @@ dependencies:
     - field.storage.user.field_group_names
     - field.storage.node.field_mandated_purchases
     - field.storage.node.field_p_card_allowed
-
     - field.storage.user.field_division
     - field.storage.user.field_primary_groups
     - field.storage.user.field_search_keywords
@@ -274,7 +273,7 @@ field_settings:
       config:
         - field.storage.node.field_display_in_group
   field_division:
-    label: 'Division'
+    label: Division
     datasource_id: 'entity:user'
     property_path: field_division
     type: text
