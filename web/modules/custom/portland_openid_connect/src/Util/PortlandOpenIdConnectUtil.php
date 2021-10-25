@@ -268,7 +268,7 @@ class PortlandOpenIdConnectUtil
       if (count($users) != 0) {
         $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
         $user->field_title = $user_info['title'];
-        $user->field_division_name = $user_info['division'];
+        $user->field_division = $user_info['division'];
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
         $user->field_phone = $user_info['phone'];

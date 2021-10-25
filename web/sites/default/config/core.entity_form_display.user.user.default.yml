@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_address
-    - field.field.user.user.field_division_name
+    - field.field.user.user.field_division
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
     - field.field.user.user.field_keep_mobile_phone_private
@@ -37,7 +37,7 @@ third_party_settings:
         - field_title
         - field_phone
         - field_managers
-        - field_division_name
+        - field_division
         - field_group_names
         - field_primary_groups
         - field_office_location
@@ -87,7 +87,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_division_name:
+  field_division:
     weight: 19
     settings:
       size: 60

@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.user.field_address
-    - field.storage.user.field_division_name
+    - field.storage.user.field_division
     - field.storage.user.field_first_name
     - field.storage.user.field_group_names
     - field.storage.user.field_last_name
@@ -879,14 +879,14 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_division_name:
-          id: field_division_name
-          table: user__field_division_name
-          field: field_division_name
+        field_division:
+          id: field_division
+          table: user__field_division
+          field: field_division
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Division name'
+          label: 'Division'
           exclude: false
           alter:
             alter_text: false
@@ -1822,7 +1822,7 @@ display:
       max-age: 0
       tags:
         - 'config:field.storage.user.field_address'
-        - 'config:field.storage.user.field_division_name'
+        - 'config:field.storage.user.field_division'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_group_names'
         - 'config:field.storage.user.field_last_name'
@@ -1866,7 +1866,7 @@ display:
       max-age: 0
       tags:
         - 'config:field.storage.user.field_address'
-        - 'config:field.storage.user.field_division_name'
+        - 'config:field.storage.user.field_division'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_group_names'
         - 'config:field.storage.user.field_last_name'
