@@ -1,0 +1,22 @@
+employees.delete_contact_from_contact_list:
+  path: '/node/{node}/delete-from-contact-list/{contact_list_id}'
+  defaults:
+    _controller: '\Drupal\employees\Controller\ContactListController::deleteContactFromContactList'
+  requirements:
+    _role: 'authenticated'
+  options:
+    no_cache: 'TRUE'
+    parameters:
+      node:
+        type: entity:node
+employees.delete_user_from_contact_list:
+  path: '/user/{user}/delete-from-contact-list/{contact_list_id}'
+  defaults:
+    _controller: '\Drupal\employees\Controller\ContactListController::deleteUserFromContactList'
+  requirements:
+    _role: 'authenticated'
+  options:
+    no_cache: 'TRUE'
+    parameters:
+      user:
+        type: entity:user
