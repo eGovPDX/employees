@@ -1,0 +1,22 @@
+uuid: cd3ef244-0258-4660-afee-574acb58dddd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: user_contact_list
+label: 'User contact list'
+type: 'canonical_entities:node'
+pattern: '[node:author:field_first_name].[node:author:field_last_name]/contact_list/[node:title]'
+selection_criteria:
+  3bea5eb7-9c87-49ae-99dc-8a4f77414cfc:
+    id: node_type
+    bundles:
+      contact_list: contact_list
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 3bea5eb7-9c87-49ae-99dc-8a4f77414cfc
+selection_logic: and
+weight: -5
+relationships: {  }

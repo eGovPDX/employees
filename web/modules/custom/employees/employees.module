@@ -479,3 +479,21 @@ function employees_cron()
     }
   }
 }
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function employees_views_pre_view($view, $display_id, array &$args) {
+  // In the contact list view, hide the "Delete from list" link if the current user is 
+  // NOT the contact list author.
+  if ($view->id() === 'contacts' && $display_id === "eva_contact_list") {
+    $current_user_id = \Drupal::currentUser()->id();
+    $contact_list_id = $view->args[0];
+    $contact_list = \Drupal::entityTypeManager()->getStorage('node')->load($contact_list_id);
+    // If the contact list author is NOT the current user, remove the custom text field 
+    // that has the "Delete from list" link
+    if($contact_list && $contact_list->getOwner()->id() != $current_user_id) {
+      $view->removeHandler($display_id, 'field', 'nothing');
+    }
+  }
+}
