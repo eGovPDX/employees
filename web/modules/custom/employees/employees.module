@@ -497,3 +497,31 @@ function employees_views_pre_view($view, $display_id, array &$args) {
     }
   }
 }
+
+/**
+ * Preprocess views
+ */
+function employees_preprocess_views_view(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == "view.contacts.page_my_contact_lists") {
+    // Hide edit and delete buttons when the current user is NOT the author of the contact list
+    if( $variables["id"] == "my_contact_lists" && $variables["display_id"] == "block_my_contact_lists") {
+      $contact_list_author_id = $variables["view"]->args[0];
+      $current_user_id = \Drupal::currentUser()->id();
+      if ($contact_list_author_id != $current_user_id) {
+        unset($variables['header']['area']);
+        $variables['current_user_is_author'] = false;
+      }
+      else {
+        $variables['current_user_is_author'] = true;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_plugins_field_alter().
+ */
+function employees_views_plugins_field_alter(array &$plugins) {
+  $plugins['custom']['class'] = 'Drupal\employees\Plugin\views\field\CustomToken';
+}

@@ -994,7 +994,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: 'This contact list is empty.'
+            value: '<p>This contact list is empty. Please visit the <a href="/contacts">Contacts</a> page to add users and contacts.</p>'
             format: basic_html
           plugin_id: text
     cache_metadata:
@@ -1540,6 +1540,7 @@ display:
         weight: 0
         context: '0'
         menu_name: account
+      enabled: true
     cache_metadata:
       max-age: -1
       contexts:
