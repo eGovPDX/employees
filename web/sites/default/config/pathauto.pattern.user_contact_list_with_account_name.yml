@@ -1,22 +1,22 @@
-uuid: cd3ef244-0258-4660-afee-574acb58dddd
+uuid: fa74c310-9743-4e7b-9ff9-db10b725a315
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: user_contact_list
-label: 'User contact list'
+id: user_contact_list_with_account_name
+label: 'User contact list with account name'
 type: 'canonical_entities:node'
-pattern: '[node:author:field_first_name].[node:author:field_last_name]/contact-list/[node:title]'
+pattern: '[node:author:account-name]/contact-list/[node:title]'
 selection_criteria:
-  725f9801-7000-460b-ab0b-a29926fe035c:
+  9574e0f2-130d-4f60-8831-a07053de950c:
     id: node_type
     bundles:
       contact_list: contact_list
     negate: false
     context_mapping:
       node: node
-    uuid: 725f9801-7000-460b-ab0b-a29926fe035c
+    uuid: 9574e0f2-130d-4f60-8831-a07053de950c
 selection_logic: and
 weight: -5
 relationships: {  }

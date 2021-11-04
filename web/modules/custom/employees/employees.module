@@ -7,7 +7,7 @@ use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
-
+use Drupal\search_api\Entity\Index;
 
 /**
  * Implements hook_form_alter()
@@ -499,7 +499,7 @@ function employees_views_pre_view($view, $display_id, array &$args) {
 }
 
 /**
- * Preprocess views
+ * Implements hook_preprocess_views_view().
  */
 function employees_preprocess_views_view(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
@@ -521,7 +521,19 @@ function employees_preprocess_views_view(&$variables) {
 
 /**
  * Implements hook_views_plugins_field_alter().
+ * Allow global token to be used in view's Custom Text field
  */
 function employees_views_plugins_field_alter(array &$plugins) {
   $plugins['custom']['class'] = 'Drupal\employees\Plugin\views\field\CustomToken';
+}
+
+/**
+ * Implement hook_ENTITY_TYPE_delete()
+ */
+function employees_node_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  if( $entity->bundle() == 'contact_list') {
+    // Force reindex all users/contacts inside this contact-list
+    $index = Index::load('full_index');
+    if($index) $index->indexItems();
+  }
 }
