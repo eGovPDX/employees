@@ -70,10 +70,13 @@ class AddToContactList extends ViewsBulkOperationsActionBase implements PluginFo
       $options[$contact_list->id()] = $contact_list->title->value;
     }
 
+    // If there is only one contact list, make it the default automatically
+    $default_value = ( count($contact_lists) == 1 ) ? array_keys($contact_lists)[0] : null;
+
     $form['existing_contact_list'] = [
       '#title' => t('Select a contact list'),
       '#type' => 'select',
-      '#default_value' => null,
+      '#default_value' => $default_value,
       '#options' => $options,
       '#description' => t('Add content to an existing contact list'),
     ];

@@ -185,16 +185,12 @@ display:
               action_id: 'moderation_state_change:node'
               preconfiguration:
                 label_override: 'Change moderation state'
-            7:
-              action_id: node_save_action
-            12:
-              action_id: pathauto_update_alias
-              preconfiguration:
-                label_override: 'Update URL alias'
-            16:
-              action_id: 'entity:delete_action:node'
+                add_confirmation: false
+            13:
+              action_id: views_bulk_operations_delete_entity
               preconfiguration:
                 label_override: Delete
+          force_selection_info: false
           plugin_id: views_bulk_operations_bulk_form
         title:
           id: title

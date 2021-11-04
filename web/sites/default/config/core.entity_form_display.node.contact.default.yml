@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.contact.field_bureau
     - field.field.node.contact.field_contact_email
     - field.field.node.contact.field_contact_mobile_phone
     - field.field.node.contact.field_contact_picture
@@ -14,6 +13,7 @@ dependencies:
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
     - field.field.node.contact.field_parent_contact_lists
+    - field.field.node.contact.field_primary_groups
     - field.field.node.contact.field_search_keywords
     - field.field.node.contact.field_section
     - image.style.thumbnail
@@ -36,14 +36,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_bureau:
-    weight: 22
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_contact_email:
     weight: 14
     settings:
@@ -114,7 +106,17 @@ content:
     type: string_textfield
     region: content
   field_parent_contact_lists:
-    weight: 27
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_primary_groups:
+    weight: 23
     settings:
       match_operator: CONTAINS
       match_limit: 10

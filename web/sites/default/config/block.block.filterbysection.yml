@@ -1,28 +1,28 @@
-uuid: a0375244-1e91-44a3-b2d4-a52ba0ecaaf3
+uuid: 5f0ced08-b757-4613-b8f2-fb502c730af1
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.type
+    - facets.facet.aggregated_section
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: type
+id: filterbysection
 theme: cloudy2
 region: side
-weight: -8
+weight: 0
 provider: null
-plugin: 'facet_block:type'
+plugin: 'facet_block:aggregated_section'
 settings:
-  id: 'facet_block:type'
-  label: 'Filter by Type'
+  id: 'facet_block:aggregated_section'
+  label: 'Filter by section'
   provider: facets
   label_display: '0'
-  block_id: type
+  block_id: filterbysection
 visibility:
   request_path:
     id: request_path
-    pages: /search
+    pages: /contacts
     negate: false

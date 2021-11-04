@@ -1218,6 +1218,7 @@ display:
         title: false
         fields: false
         cache: false
+        empty: false
       relationships: {  }
       filters:
         content_type:
@@ -1299,68 +1300,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: search_api_boolean
-        search_api_fulltext:
-          id: search_api_fulltext
-          table: search_api_index_full_index
-          field: search_api_fulltext
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: and
-          value: ''
-          group: 2
-          exposed: true
-          expose:
-            operator_id: search_api_fulltext_op
-            label: 'Search by names, keywords, section, bureau, etc'
-            description: ''
-            use_operator: false
-            operator: search_api_fulltext_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search_api_fulltext
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
-            placeholder: ''
-            expose_fields: false
-            searched_fields_id: search_api_fulltext_searched_fields
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          parse_mode: sloppy_terms
-          min_length: null
-          fields:
-            - content_title
-            - field_contact_title
-            - field_content_first_name
-            - field_content_last_name
-            - field_content_search_keywords
-            - field_division
-            - field_group_names
-            - field_search_keywords
-            - field_section
-            - field_user_first_name
-            - field_user_first_name_phonetic
-            - field_user_last_name
-            - field_user_last_name_phonetic
-            - title
-          plugin_id: search_api_fulltext
         aggregated_last_name:
           id: aggregated_last_name
           table: search_api_index_full_index
@@ -1541,6 +1480,20 @@ display:
         context: '0'
         menu_name: account
       enabled: true
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<p>No contact list found. Please <a href="/node/add/contact_list">create a contact list</a> to save your favorite contacts.</p>'
+            format: basic_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:

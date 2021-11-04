@@ -56,14 +56,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_group_names:
-    weight: 10
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_keep_mobile_phone_private:
     weight: 5
     label: visually_hidden
@@ -98,6 +90,14 @@ content:
     third_party_settings: {  }
     type: telephone_link
     region: content
+  field_primary_groups:
+    type: entity_reference_label
+    weight: 10
+    region: content
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
   field_search_keywords:
     weight: 11
     label: inline
@@ -149,10 +149,10 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_group_names: true
   field_last_name: true
   field_managers: true
   field_office_location: true
-  field_primary_groups: true
   field_publisher_role_changed: true
   langcode: true
   masquerade: true

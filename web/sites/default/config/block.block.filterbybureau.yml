@@ -1,0 +1,28 @@
+uuid: a14e92b5-df99-4cc1-a8e1-208e40174301
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.aggregated_primary_groups
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: filterbybureau
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:aggregated_primary_groups'
+settings:
+  id: 'facet_block:aggregated_primary_groups'
+  label: 'Filter by bureau'
+  provider: facets
+  label_display: '0'
+  block_id: filterbybureau
+visibility:
+  request_path:
+    id: request_path
+    pages: /contacts
+    negate: false

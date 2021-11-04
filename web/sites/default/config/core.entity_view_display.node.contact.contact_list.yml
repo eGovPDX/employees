@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.contact_list
-    - field.field.node.contact.field_bureau
     - field.field.node.contact.field_contact_email
     - field.field.node.contact.field_contact_mobile_phone
     - field.field.node.contact.field_contact_picture
@@ -15,6 +14,7 @@ dependencies:
     - field.field.node.contact.field_keep_mobile_phone_private
     - field.field.node.contact.field_last_name
     - field.field.node.contact.field_parent_contact_lists
+    - field.field.node.contact.field_primary_groups
     - field.field.node.contact.field_search_keywords
     - field.field.node.contact.field_section
     - image.style.medium
@@ -33,14 +33,6 @@ targetEntityType: node
 bundle: contact
 mode: contact_list
 content:
-  field_bureau:
-    type: string
-    weight: 8
-    region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_contact_email:
     weight: 2
     label: hidden
@@ -101,14 +93,22 @@ content:
     region: content
   field_parent_contact_lists:
     type: entity_reference_label
-    weight: 10
+    weight: 11
     region: content
     label: inline
     settings:
       link: false
     third_party_settings: {  }
-  field_search_keywords:
+  field_primary_groups:
+    type: entity_reference_label
     weight: 9
+    region: content
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_search_keywords:
+    weight: 10
     label: inline
     settings:
       link_to_entity: false

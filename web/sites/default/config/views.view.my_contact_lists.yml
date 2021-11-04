@@ -213,20 +213,7 @@ display:
             format: full_html
           plugin_id: text
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p><a href="/node/add/contact_list" class="btn btn-sm btn-outline-dark" hreflang="en">Add a contact list</a></p>'
-            format: full_html
-          plugin_id: text
+      empty: {  }
       relationships:
         uid:
           id: uid

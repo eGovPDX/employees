@@ -15,6 +15,22 @@ use Drupal\Core\File\FileSystemInterface;
  */
 class BatchCommands extends DrushCommands
 {
+  public $bureau_name_id_map = [
+    'Bureau of Development Services' => 21,
+    'City Attorney' => 24,
+    'Bureau of Environmental Services' => 19,
+    'Bureau of Transportation' => 17,
+    // 'Office of Management & Finance' => 1,
+    // 'Water Bureau' => 1,
+    'Fire Bureau' => 26,
+    'Bureau of Technology Services' => 48,
+    'Portland Parks and Recreation' => 36,
+    'Office of Neighborhood Involvement' => 35,
+    'Revenue' => 45,
+    'Bureau of Human Resources' => 43,
+    'Portland Housing Bureau' => 22,
+    'Planning & Sustainability' => 28,
+  ];
 
   /**
    * Entity type service.
@@ -123,7 +139,7 @@ class BatchCommands extends DrushCommands
             'field_search_keywords' => $row[$csv_columns['keywords']],
             'field_contact_email' => $row[$csv_columns['email']],
             'field_section' => $row[$csv_columns['section']],
-            'field_bureau' => $row[$csv_columns['bureau']],
+            'field_primary_groups' => ['target_id' => $this->bureau_name_id_map[$row[$csv_columns['bureau']]]],
           ];
           // Skip the default image
           preg_match('/\/([^\/]+)\?/', $row[$csv_columns['image_large_src']], $file_names);
