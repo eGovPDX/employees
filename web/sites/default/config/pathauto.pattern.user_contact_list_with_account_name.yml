@@ -7,16 +7,16 @@ dependencies:
 id: user_contact_list_with_account_name
 label: 'User contact list with account name'
 type: 'canonical_entities:node'
-pattern: '[node:author:account-name]/contact-list/[node:title]'
+pattern: '[node:author:account-name]/contacts/[node:title]'
 selection_criteria:
-  9574e0f2-130d-4f60-8831-a07053de950c:
+  5a41fd37-1b87-4bf2-8d46-034e0f953b24:
     id: node_type
     bundles:
       contact_list: contact_list
     negate: false
     context_mapping:
       node: node
-    uuid: 9574e0f2-130d-4f60-8831-a07053de950c
+    uuid: 5a41fd37-1b87-4bf2-8d46-034e0f953b24
 selection_logic: and
 weight: -5
 relationships: {  }

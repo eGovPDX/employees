@@ -7,16 +7,16 @@ dependencies:
 id: user_contact_list
 label: 'User contact list'
 type: 'canonical_entities:node'
-pattern: '[node:author:field_first_name].[node:author:field_last_name]/contact-list/[node:title]'
+pattern: '[node:author:field_first_name].[node:author:field_last_name]/contacts/[node:title]'
 selection_criteria:
-  725f9801-7000-460b-ab0b-a29926fe035c:
+  9d1cf0c7-e816-4d3f-9ca6-fb622f0ff8e4:
     id: node_type
     bundles:
       contact_list: contact_list
     negate: false
     context_mapping:
       node: node
-    uuid: 725f9801-7000-460b-ab0b-a29926fe035c
+    uuid: 9d1cf0c7-e816-4d3f-9ca6-fb622f0ff8e4
 selection_logic: and
 weight: -5
 relationships: {  }
