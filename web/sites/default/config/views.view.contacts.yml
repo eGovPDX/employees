@@ -259,7 +259,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: 'Search by names, keywords, section, bureau, etc'
+            label: 'Search by names, keywords, section, bureau, phone numbers, etc'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -294,18 +294,20 @@ display:
           min_length: null
           fields:
             - content_title
+            - field_contact_mobile_phone
             - field_contact_title
+            - field_contact_work_phone
             - field_content_first_name
             - field_content_last_name
             - field_content_search_keywords
-            - field_division_name
             - field_group_names
             - field_search_keywords
-            - field_section
             - field_user_first_name
             - field_user_first_name_phonetic
             - field_user_last_name
             - field_user_last_name_phonetic
+            - field_user_mobile_phone
+            - field_user_phone
             - title
           plugin_id: search_api_fulltext
         aggregated_last_name:

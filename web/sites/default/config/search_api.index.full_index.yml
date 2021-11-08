@@ -24,14 +24,17 @@ dependencies:
     - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
     - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_contact_mobile_phone
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_parent_contact_lists
     - field.storage.node.field_primary_groups
     - field.storage.node.field_search_keywords
     - field.storage.node.field_section
     - field.storage.node.field_type
+    - field.storage.node.field_contact_work_phone
     - field.storage.user.field_division
     - field.storage.user.field_group_names
+    - field.storage.user.field_mobile_phone
     - field.storage.user.field_parent_contact_lists
     - field.storage.user.field_primary_groups
     - field.storage.user.field_search_keywords
@@ -39,6 +42,7 @@ dependencies:
     - field.storage.user.field_title
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
+    - field.storage.user.field_phone
     - field.storage.user.field_workspace
     - search_api.server.searchstax
 third_party_settings:
@@ -235,6 +239,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_contact_email
+  field_contact_mobile_phone:
+    label: 'Mobile phone'
+    datasource_id: 'entity:node'
+    property_path: field_contact_mobile_phone
+    type: 'solr_text_custom:ngram'
+    dependencies:
+      config:
+        - field.storage.node.field_contact_mobile_phone
   field_contact_primary_groups:
     label: 'Primary groups'
     datasource_id: 'entity:node'
@@ -251,6 +263,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_contact_title
+  field_contact_work_phone:
+    label: 'Work phone'
+    datasource_id: 'entity:node'
+    property_path: field_contact_work_phone
+    type: 'solr_text_custom:ngram'
+    dependencies:
+      config:
+        - field.storage.node.field_contact_work_phone
   field_content_first_name:
     label: 'Content first name'
     datasource_id: 'entity:node'
@@ -407,6 +427,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_last_name
+  field_user_mobile_phone:
+    label: 'Mobile phone'
+    datasource_id: 'entity:user'
+    property_path: field_mobile_phone
+    type: 'solr_text_custom:ngram'
+    dependencies:
+      config:
+        - field.storage.user.field_mobile_phone
+  field_user_phone:
+    label: 'Work phone'
+    datasource_id: 'entity:user'
+    property_path: field_phone
+    type: 'solr_text_custom:ngram'
+    dependencies:
+      config:
+        - field.storage.user.field_phone
   field_user_primary_groups:
     label: 'Primary groups'
     datasource_id: 'entity:user'
