@@ -14,6 +14,7 @@ dependencies:
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_publisher_role_changed
     - field.field.user.user.field_title
     - field.field.user.user.user_picture
   module:
@@ -68,7 +69,7 @@ content:
     type: string
     region: content
   mail:
-    type: basic_string
+    type: email_mailto
     weight: 2
     region: content
     label: visually_hidden

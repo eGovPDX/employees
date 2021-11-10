@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_contact
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_feature
     - field.field.node.event.field_related_content
@@ -70,7 +71,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 0
+            weight: 1
           e9d08502-bc82-45f6-b3e2-60c0f5c0fda7:
             uuid: e9d08502-bc82-45f6-b3e2-60c0f5c0fda7
             region: side
@@ -91,7 +92,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 1
+            weight: 2
           0d4fb67f-a6b9-478e-bcea-30865ce0092f:
             uuid: 0d4fb67f-a6b9-478e-bcea-30865ce0092f
             region: side
@@ -112,7 +113,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 2
+            weight: 3
           d6ebb44d-839a-4841-9b44-788a8e8926b7:
             uuid: d6ebb44d-839a-4841-9b44-788a8e8926b7
             region: main
@@ -288,6 +289,41 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 1
+          77fdea03-ea2c-447c-ae2f-4cdf87bc1412:
+            uuid: 77fdea03-ea2c-447c-ae2f-4cdf87bc1412
+            region: main
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:field_contact'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 4
+          2f439790-2f85-45c9-a682-64986410c666:
+            uuid: 2f439790-2f85-45c9-a682-64986410c666
+            region: side
+            configuration:
+              id: 'field_block:node:event:field_contact'
+              label: Contact
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: visually_hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -319,6 +355,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_contact:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: main
   field_related_content:
     weight: 5
     label: above

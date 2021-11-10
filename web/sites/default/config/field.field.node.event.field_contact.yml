@@ -1,0 +1,25 @@
+uuid: 17b1a672-6ba7-44d0-96e5-e5708eaebda1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact
+    - node.type.event
+id: node.event.field_contact
+field_name: field_contact
+entity_type: node
+bundle: event
+label: Contact
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: notifiy_reviewer
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference
