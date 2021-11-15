@@ -8,6 +8,7 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_job_description
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
     - field.field.user.user.field_office_location
@@ -55,6 +56,14 @@ content:
     third_party_settings: {  }
   field_group_names:
     weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_job_description:
+    weight: 14
     label: above
     settings:
       link_to_entity: false

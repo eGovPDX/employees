@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_job_description
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
     - field.field.user.user.field_office_location
@@ -122,7 +123,7 @@ third_party_settings:
                   title: ''
                 third_party_settings: {  }
             additional: {  }
-            weight: 6
+            weight: 7
           20bf412b-eb2e-47b2-ace5-2501e24561f2:
             uuid: 20bf412b-eb2e-47b2-ace5-2501e24561f2
             region: content
@@ -138,7 +139,7 @@ third_party_settings:
                   link: true
                 third_party_settings: {  }
             additional: {  }
-            weight: 7
+            weight: 8
           8d472346-33cc-4304-9014-40686c3dbbb6:
             uuid: 8d472346-33cc-4304-9014-40686c3dbbb6
             region: content
@@ -154,7 +155,7 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             additional: {  }
-            weight: 8
+            weight: 9
           452dac6d-47bc-46b4-a8c0-cac45e81a7ee:
             uuid: 452dac6d-47bc-46b4-a8c0-cac45e81a7ee
             region: content
@@ -170,7 +171,7 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             additional: {  }
-            weight: 9
+            weight: 10
           b28a9dd0-61d5-402f-84e0-6961b9da8b4a:
             uuid: b28a9dd0-61d5-402f-84e0-6961b9da8b4a
             region: content
@@ -186,7 +187,7 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             additional: {  }
-            weight: 10
+            weight: 11
           09ff48ae-a318-436b-8b0d-5a614f6695a6:
             uuid: 09ff48ae-a318-436b-8b0d-5a614f6695a6
             region: content
@@ -202,7 +203,7 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             additional: {  }
-            weight: 11
+            weight: 12
           31aaacad-5f16-460f-becd-8502a17e9e36:
             uuid: 31aaacad-5f16-460f-becd-8502a17e9e36
             region: content
@@ -220,7 +221,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 5
+            weight: 6
           4ba324c8-1630-4410-9819-11db9c179ddf:
             uuid: 4ba324c8-1630-4410-9819-11db9c179ddf
             region: content
@@ -233,7 +234,26 @@ third_party_settings:
               items_per_page: none
               context_mapping: {  }
             additional: {  }
-            weight: 12
+            weight: 13
+          814b3d22-5d01-4d01-a6e0-95327a5dbeaa:
+            uuid: 814b3d22-5d01-4d01-a6e0-95327a5dbeaa
+            region: content
+            configuration:
+              id: 'field_block:user:user:field_job_description'
+              label: 'Job description'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 5
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -330,6 +350,7 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_job_description: true
   field_last_name: true
   field_primary_groups: true
   field_publisher_role_changed: true
