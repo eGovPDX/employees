@@ -350,6 +350,43 @@ display:
         - user
         - user.roles
       tags: {  }
+  block_assigned_groups:
+    display_plugin: block
+    id: block_assigned_groups
+    display_title: 'Groups Assigned'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      block_description: 'Groups Assigned'
+      display_description: ''
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
+            format: full_html
+          plugin_id: text
+      defaults:
+        empty: false
+        title: false
+      block_hide_empty: false
+      title: 'Groups Assigned'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - user.roles
+      tags: {  }
   block_groups_followed:
     display_plugin: block
     id: block_groups_followed
@@ -416,41 +453,6 @@ display:
         groups:
           1: AND
       title: 'Groups Followed'
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - user
-        - user.roles
-      tags: {  }
-  block_my_bureau_offices:
-    display_plugin: block
-    id: block_my_bureau_offices
-    display_title: 'My Bureau/Offices'
-    position: 1
-    display_options:
-      display_extenders: {  }
-      block_description: 'My Bureau/Office'
-      display_description: ''
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
-            format: full_html
-          plugin_id: text
-      defaults:
-        empty: false
-      block_hide_empty: false
     cache_metadata:
       max-age: -1
       contexts:
