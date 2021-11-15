@@ -18,16 +18,225 @@ dependencies:
     - field.field.user.user.field_title
     - field.field.user.user.user_picture
     - image.style.thumbnail
+    - views.view.my_groups
   module:
     - image
     - layout_builder
+    - layout_discovery
+    - layout_library
     - masquerade_field
     - telephone
     - user
+    - views
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          4a0e945b-cc73-4a27-95e6-3de3bc294085:
+            uuid: 4a0e945b-cc73-4a27-95e6-3de3bc294085
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:user_picture'
+              formatter:
+                type: image
+                settings:
+                  image_style: thumbnail
+                  image_link: content
+                third_party_settings: {  }
+                label: hidden
+            additional: {  }
+            weight: 0
+          0046b7c9-8995-4901-883e-da9993073402:
+            uuid: 0046b7c9-8995-4901-883e-da9993073402
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:user:user:member_for'
+            additional: {  }
+            weight: 1
+          b84fa678-fa6f-465d-b034-c16af6758a64:
+            uuid: b84fa678-fa6f-465d-b034-c16af6758a64
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:user:user:masquerade'
+            additional: {  }
+            weight: 2
+          d77490ba-f0f6-4919-9b29-f1527a44e536:
+            uuid: d77490ba-f0f6-4919-9b29-f1527a44e536
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:masquerade_as'
+              formatter:
+                type: masquerade_field_default
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            additional: {  }
+            weight: 3
+          37cdd6b3-acfd-4baa-bc2f-e3cb542e45a1:
+            uuid: 37cdd6b3-acfd-4baa-bc2f-e3cb542e45a1
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_title'
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 4
+          23b42a4c-9ecc-4860-9fef-aa5df7983f8e:
+            uuid: 23b42a4c-9ecc-4860-9fef-aa5df7983f8e
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_phone'
+              formatter:
+                type: telephone_link
+                label: inline
+                settings:
+                  title: ''
+                third_party_settings: {  }
+            additional: {  }
+            weight: 6
+          20bf412b-eb2e-47b2-ace5-2501e24561f2:
+            uuid: 20bf412b-eb2e-47b2-ace5-2501e24561f2
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_managers'
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            additional: {  }
+            weight: 7
+          8d472346-33cc-4304-9014-40686c3dbbb6:
+            uuid: 8d472346-33cc-4304-9014-40686c3dbbb6
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_division_name'
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 8
+          452dac6d-47bc-46b4-a8c0-cac45e81a7ee:
+            uuid: 452dac6d-47bc-46b4-a8c0-cac45e81a7ee
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_group_names'
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 9
+          b28a9dd0-61d5-402f-84e0-6961b9da8b4a:
+            uuid: b28a9dd0-61d5-402f-84e0-6961b9da8b4a
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_office_location'
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 10
+          09ff48ae-a318-436b-8b0d-5a614f6695a6:
+            uuid: 09ff48ae-a318-436b-8b0d-5a614f6695a6
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:user:user:field_address'
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            additional: {  }
+            weight: 11
+          31aaacad-5f16-460f-becd-8502a17e9e36:
+            uuid: 31aaacad-5f16-460f-becd-8502a17e9e36
+            region: content
+            configuration:
+              id: 'field_block:user:user:mail'
+              label: Email
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: inline
+                type: email_mailto
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 5
+          4ba324c8-1630-4410-9819-11db9c179ddf:
+            uuid: 4ba324c8-1630-4410-9819-11db9c179ddf
+            region: content
+            configuration:
+              id: 'views_block:my_groups-block_groups_for_user'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 12
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
 id: user.user.full
