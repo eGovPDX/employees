@@ -503,14 +503,21 @@ function _notify_group_admin_for_group_change($entity)
   }
   $node = $entity;
 
-  //TODO: check if "display_in_group" changed since last revision
-
-  //TODO: find the difference
-
   // Get the author of the latest revision
   $latest_and_previous_revs = _load_latest_revision($node);
   $latest_rev = $latest_and_previous_revs['latest'];
-  if( $latest_rev == null ) return;
+  $previous_rev = $latest_and_previous_revs['previous'];
+  if( $latest_rev == null) return;
+
+  //Check if "display_in_group" changed since last revision
+  $latest_parent_groups = $latest_rev->get('field_display_in_group')->referencedEntities();
+  if( $previous_rev != null ) {
+    //Check if "display_in_group" changed since last revision
+    $previous_parent_groups = $previous_rev->get('field_display_in_group')->referencedEntities();
+    // Do nothing if the display_in group didn't change from the previous revision
+    if($latest_parent_groups == $previous_parent_groups) return;
+  }
+
   $revision_author_user_id = $latest_rev->revision_uid->target_id;
   $revision_author = \Drupal\user\Entity\User::load($revision_author_user_id);
 
@@ -527,9 +534,8 @@ function _notify_group_admin_for_group_change($entity)
 
   // For each group in field_display_in_group, check if the revision author is an 
   // admin/editor in that group. If NOT, send a email to the group's admin
-  $entity_parent_groups = $entity->get('field_display_in_group')->referencedEntities();
   $groups_to_notify = [];
-  foreach($entity_parent_groups as $entity_parent_group) {
+  foreach($latest_parent_groups as $entity_parent_group) {
     // Get the user's group membership
     $membership = $entity_parent_group->getMember($revision_author);
     // The user is NOT in the group
