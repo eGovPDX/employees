@@ -532,6 +532,9 @@ function _notify_group_admin_for_group_change($entity)
     if( in_array($site_role, $site_wide_editor_or_admin) ) return;
   }
 
+  // Rare but possible: there could be duplicated groups
+  $latest_parent_groups = array_unique($latest_parent_groups, SORT_REGULAR);
+
   // For each group in field_display_in_group, check if the revision author is an 
   // admin/editor in that group. If NOT, send a email to the group's admin
   $groups_to_notify = [];
