@@ -5,8 +5,6 @@ dependencies:
   enforced:
     module:
       - webform
-_core:
-  default_config_hash: Q4QShRpLvlheaOjtXj4lKYXCOGMiuBopVI6GYCCWRK8
 open: null
 close: null
 weight: 0
@@ -83,6 +81,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -251,13 +252,13 @@ handlers:
       html: true
       attachments: false
       twig: false
-      theme_name: ''
-      parameters: {  }
       debug: false
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
+      parameters: {  }
   email_notification:
     id: email
     label: 'Email notification'
@@ -288,11 +289,13 @@ handlers:
       html: true
       attachments: false
       twig: false
-      theme_name: ''
-      parameters: {  }
       debug: false
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
+      theme_name: ''
+      parameters: {  }
 variants: {  }
+_core:
+  default_config_hash: Q4QShRpLvlheaOjtXj4lKYXCOGMiuBopVI6GYCCWRK8
