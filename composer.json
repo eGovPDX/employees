@@ -145,6 +145,14 @@
         "patchLevel": {
             "drupal/core": "-p2"
         },
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "merge-extra": false
+        },
         "patches": {
             "drupal/core": {
                 "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
