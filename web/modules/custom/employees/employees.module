@@ -82,6 +82,7 @@ function employees_form_openid_connect_login_form_alter(&$form, &$form_state)
 function employees_entity_insert($entity)
 {
   _notify_reviewer($entity, 'created');
+  _notify_group_admin_for_group_change($entity);
 }
 
 /**
@@ -90,6 +91,7 @@ function employees_entity_insert($entity)
 function employees_entity_update($entity)
 {
   _notify_reviewer($entity, 'updated');
+  _notify_group_admin_for_group_change($entity);
 }
 
 /**
@@ -477,5 +479,109 @@ function employees_cron()
       \Drupal::logger('mail-log')->notice(t('Daily content update summary email sent successfully.'));
       \Drupal::state()->set('portland.last_daily_email_sent', date('m/d/Y'));
     }
+  }
+}
+
+/**
+ * Helper function to notify group admin when editor/admin outside the group added the content 
+ * into this group.
+ *
+ * @param $entity
+ *   The entity being created or updated
+ * @param $entity_event_type
+ *   "created" or "updated"
+ */
+function _notify_group_admin_for_group_change($entity)
+{
+  // Only notify on nodes that has Displayed In Group field and the field is NOT empty
+  if (
+    $entity->getEntityTypeId() != 'node' ||
+    !$entity->hasField('field_display_in_group')
+    //  || $entity->field_display_in_group->count() === 0
+  ) {
+    return;
+  }
+  $node = $entity;
+
+  // Get the author of the latest revision
+  $latest_and_previous_revs = _load_latest_revision($node);
+  $latest_rev = $latest_and_previous_revs['latest'];
+  $previous_rev = $latest_and_previous_revs['previous'];
+  if( $latest_rev == null) return;
+
+  //Check if "display_in_group" changed since last revision
+  $latest_parent_groups = $latest_rev->get('field_display_in_group')->referencedEntities();
+  if( $previous_rev != null ) {
+    //Check if "display_in_group" changed since last revision
+    $previous_parent_groups = $previous_rev->get('field_display_in_group')->referencedEntities();
+    // Do nothing if the display_in group didn't change from the previous revision
+    if($latest_parent_groups == $previous_parent_groups) return;
+  }
+
+  $revision_author_user_id = $latest_rev->revision_uid->target_id;
+  $revision_author = \Drupal\user\Entity\User::load($revision_author_user_id);
+
+  // DO NOT send the notification if the user is a site-wide admin or editor
+  $site_roles = $revision_author->getRoles();
+  $site_wide_editor_or_admin = [
+    "publisher",
+    "content_lead",
+    "administrator",
+  ];
+  foreach($site_roles as $site_role) {
+    if( in_array($site_role, $site_wide_editor_or_admin) ) return;
+  }
+
+  // Rare but possible: there could be duplicated groups
+  $latest_parent_groups = array_unique($latest_parent_groups, SORT_REGULAR);
+
+  // For each group in field_display_in_group, check if the revision author is an 
+  // admin/editor in that group. If NOT, send a email to the group's admin
+  $groups_to_notify = [];
+  foreach($latest_parent_groups as $entity_parent_group) {
+    // Get the user's group membership
+    $membership = $entity_parent_group->getMember($revision_author);
+    // The user is NOT in the group
+    if( $membership == null ) {
+      $groups_to_notify []= $entity_parent_group;
+    }
+    else {
+      $roles = $membership->getRoles();
+      if( in_array("employee-editor", array_keys($roles)) ||
+          in_array("employee-admin", array_keys($roles))
+        ) continue;
+      
+      // If the user is neither Admin nor Editor, the group should be notified
+      $groups_to_notify []= $entity_parent_group;
+    }
+  }
+
+  if( empty($groups_to_notify) ) return;
+
+  // send email for any moderation state except draft
+  $key = 'employees_notify_reviewers';
+  $params['title'] = 'Employees.portland.gov content added to your group by non-group members';
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $revision_log_output = $node->revision_log->value ?
+    "<div><h3>Revision log:</h3>\r\n" . $node->revision_log->value . "</div>\r\n<p/>\r\n<div>" : '';
+
+  foreach($groups_to_notify as $group_to_notify) {
+    $params['message'] = "As the group admin for <a href=\"/group/" . $group_to_notify->id() .
+    "\"> " . $group_to_notify->label() . "</a>, you are being notified that <a href=\"" . $node->revision_uid->entity->toUrl()->toString() . "\">" . $node->revision_uid->entity->label() .
+    "</a> has added <a href=\"/node/" . $node->id() .
+      "/revisions/" . $node->vid->value . "/view\"> " . $latest_rev->label() .
+      "</a> to <a href=\"/group/" . $group_to_notify->id() .
+      "\"> " . $group_to_notify->label() . "</a> at " .
+      \Drupal::service('date.formatter')->format($node->changed->value, 'custom', 'l Y/n/j g:i A') .
+      ".<p/>" . $revision_log_output;
+
+    $current_user_email = \Drupal::currentUser()->getAccount()->getEmail();
+    // Send email to all group admins
+    $group_to_notify_admins = $group_to_notify->getMembers(['employee-admin']);
+    $to_emails = [];
+    foreach ($group_to_notify_admins as $group_to_notify_admin) {
+      $to_emails[] = $group_to_notify_admin->getUser()->mail->value;
+    }
+    if (!empty($to_emails)) _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
   }
 }
