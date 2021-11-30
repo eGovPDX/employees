@@ -1,0 +1,20 @@
+uuid: 18cabcdf-3ace-4215-9b6c-72625ab69d86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_job_description
+  module:
+    - user
+id: user.user.field_job_description
+field_name: field_job_description
+entity_type: user
+bundle: user
+label: 'Job description'
+description: 'Provide a title that helps describe your position and specialties.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
