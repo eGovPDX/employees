@@ -585,3 +585,22 @@ function _notify_group_admin_for_group_change($entity)
     if (!empty($to_emails)) _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
   }
 }
+
+/**
+ * Implement hook_preprocess_HOOK(&$variables) 
+ */
+function employees_preprocess_fieldset(&$variables) {
+  // If the fieldset ID matches certain string and the Description is not empty, move 
+  // description into prefix so it will be displayed right below the fieldset title.
+  // See web/core/themes/claro/templates/fieldset.html.twig
+  if( 
+    // Find your fieldset ID in the <fieldset id="ID_HERE" ...> tag.
+    // Comment out this line below if you want to target all Fieldsets
+    $variables["attributes"]["id"] == "group-user-profile" &&
+    !empty($variables['description']) && 
+    !empty($variables['description']["content"])
+  ) {
+    $variables['prefix'] = $variables['description']["content"];
+    unset($variables['description']);
+  }
+}
