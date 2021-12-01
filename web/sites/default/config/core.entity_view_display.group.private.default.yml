@@ -10,6 +10,8 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
     - views.view.group_events
+    - views.view.group_list_views
+    - views.view.group_menu
     - views.view.group_news
     - views.view.group_search_index
   module:
@@ -125,6 +127,32 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 2
+          f8d34865-d40e-47dd-b9e6-8ad65baa30c7:
+            uuid: f8d34865-d40e-47dd-b9e6-8ad65baa30c7
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          d0ab284d-659b-4420-8e2a-a44b923ef97e:
+            uuid: d0ab284d-659b-4420-8e2a-a44b923ef97e
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_subgroups_for_group'
+              label: ''
+              provider: views
+              label_display: visible
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            additional: {  }
+            weight: 1
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -134,6 +162,7 @@ third_party_settings:
       whitelisted_blocks: {  }
       blacklisted_blocks: {  }
       allowed_layouts: {  }
+      restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
 id: group.private.default
