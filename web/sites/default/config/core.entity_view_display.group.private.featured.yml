@@ -1,17 +1,15 @@
-uuid: 21310495-ac4a-48c2-b89f-42272bab7776
+uuid: e295ec98-652c-48bb-8e97-15285d396035
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.group.search_result
-    - field.field.group.employee.field_contract_search_text
-    - field.field.group.employee.field_group_contact
-    - field.field.group.employee.field_group_description
-    - field.field.group.employee.field_group_path
-    - field.field.group.employee.field_has_contracts
-    - field.field.group.employee.field_org_type
-    - field.field.group.employee.field_parent_group
-    - group.type.employee
+    - core.entity_view_mode.group.featured
+    - field.field.group.private.field_group_contact
+    - field.field.group.private.field_group_description
+    - field.field.group.private.field_group_path
+    - field.field.group.private.field_org_type
+    - field.field.group.private.field_parent_group
+    - group.type.private
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -31,37 +29,35 @@ third_party_settings:
       allowed_layouts: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
-id: group.employee.search_result
+id: group.private.featured
 targetEntityType: group
-bundle: employee
-mode: search_result
+bundle: private
+mode: featured
 content:
   field_group_description:
-    type: smart_trim
     weight: 0
-    region: content
     label: hidden
     settings:
       trim_length: 50
       trim_type: words
       trim_suffix: ''
-      wrap_output: true
       wrap_class: trimmed
       more_text: More
       more_class: more-link
       summary_handler: full
       trim_options:
         text: true
-        trim_zero: true
+        trim_zero: false
+      wrap_output: false
       more_link: false
     third_party_settings: {  }
+    type: smart_trim
+    region: content
 hidden:
   changed: true
   created: true
-  field_contract_search_text: true
   field_group_contact: true
   field_group_path: true
-  field_has_contracts: true
   field_org_type: true
   field_parent_group: true
   label: true
