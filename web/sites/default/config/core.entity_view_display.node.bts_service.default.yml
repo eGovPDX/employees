@@ -1,0 +1,161 @@
+uuid: 4b9bffc2-3534-457f-beb9-ef341ac2e2b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.bts_service.field_additional_info
+    - field.field.node.bts_service.field_business_priority
+    - field.field.node.bts_service.field_customer_responsibilities
+    - field.field.node.bts_service.field_description
+    - field.field.node.bts_service.field_example_applications
+    - field.field.node.bts_service.field_option_costs
+    - field.field.node.bts_service.field_optional_features
+    - field.field.node.bts_service.field_service_hours
+    - field.field.node.bts_service.field_service_initiation
+    - field.field.node.bts_service.field_service_owner
+    - field.field.node.bts_service.field_service_scope
+    - field.field.node.bts_service.field_sla_target
+    - field.field.node.bts_service.field_standard_cost
+    - field.field.node.bts_service.field_standard_service_features
+    - field.field.node.bts_service.field_support_hours
+    - field.field.node.bts_service.field_support_owner
+    - node.type.bts_service
+  module:
+    - link
+    - masquerade_field
+    - text
+    - user
+id: node.bts_service.default
+targetEntityType: node
+bundle: bts_service
+mode: default
+content:
+  field_additional_info:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_business_priority:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_customer_responsibilities:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_example_applications:
+    weight: 117
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_option_costs:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_optional_features:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_service_hours:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_service_initiation:
+    weight: 112
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_service_owner:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_service_scope:
+    weight: 111
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_sla_target:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_standard_cost:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_standard_service_features:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_support_hours:
+    weight: 114
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_support_owner:
+    weight: 113
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: masquerade_field_default
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true

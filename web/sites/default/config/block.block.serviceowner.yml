@@ -1,0 +1,28 @@
+uuid: 7323671f-e67a-469b-babc-a2af8c4a2cfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.service_owner
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: serviceowner
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:service_owner'
+settings:
+  id: 'facet_block:service_owner'
+  label: 'Service owner'
+  provider: facets
+  label_display: '0'
+  block_id: serviceowner
+visibility:
+  request_path:
+    id: request_path
+    pages: /service-catalog
+    negate: false

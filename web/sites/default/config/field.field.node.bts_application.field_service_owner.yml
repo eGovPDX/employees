@@ -1,0 +1,29 @@
+uuid: a66768ee-9fce-402d-a4e2-336b381e9ca7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_owner
+    - group.type.employee
+    - node.type.bts_application
+id: node.bts_application.field_service_owner
+field_name: field_service_owner
+entity_type: node
+bundle: bts_application
+label: 'Service owner'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

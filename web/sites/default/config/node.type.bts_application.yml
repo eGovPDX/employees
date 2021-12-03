@@ -1,0 +1,50 @@
+uuid: ecf99949-d1f7-4acb-8a63-b515e267f364
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - scheduler
+    - toc_js
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+  toc_js:
+    toc_js_active: 0
+    title: 'Table of contents'
+    selectors: 'h2, h3'
+    selectors_minimum: '0'
+    container: .node
+    list_type: ul
+    smooth_scrolling: 1
+    scroll_to_offset: '0'
+    prefix: toc
+    back_to_top: 0
+    back_to_top_label: 'Back to top'
+    highlight_on_scroll: 1
+    highlight_offset: '100'
+    sticky: 0
+    sticky_offset: '0'
+    sticky_stop: ''
+    sticky_stop_padding: '0'
+name: 'BTS Application'
+type: bts_application
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,29 @@
+uuid: 13b14669-79ed-48a9-82fd-64343df68b95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bureaus
+    - group.type.employee
+    - node.type.bts_application
+id: node.bts_application.field_bureaus
+field_name: field_bureaus
+entity_type: node
+bundle: bts_application
+label: Bureaus
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

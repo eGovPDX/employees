@@ -1,0 +1,80 @@
+uuid: 7b7c9863-4f71-47ac-9186-fa9f527a6b31
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.bts_service.field_additional_info
+    - field.field.node.bts_service.field_business_priority
+    - field.field.node.bts_service.field_customer_responsibilities
+    - field.field.node.bts_service.field_description
+    - field.field.node.bts_service.field_example_applications
+    - field.field.node.bts_service.field_option_costs
+    - field.field.node.bts_service.field_optional_features
+    - field.field.node.bts_service.field_service_hours
+    - field.field.node.bts_service.field_service_initiation
+    - field.field.node.bts_service.field_service_owner
+    - field.field.node.bts_service.field_service_scope
+    - field.field.node.bts_service.field_sla_target
+    - field.field.node.bts_service.field_standard_cost
+    - field.field.node.bts_service.field_standard_service_features
+    - field.field.node.bts_service.field_support_hours
+    - field.field.node.bts_service.field_support_owner
+    - node.type.bts_service
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.bts_service.search_result
+targetEntityType: node
+bundle: bts_service
+mode: search_result
+content:
+  field_business_priority:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_description:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_service_owner:
+    weight: 2
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_additional_info: true
+  field_customer_responsibilities: true
+  field_example_applications: true
+  field_option_costs: true
+  field_optional_features: true
+  field_service_hours: true
+  field_service_initiation: true
+  field_service_scope: true
+  field_sla_target: true
+  field_standard_cost: true
+  field_standard_service_features: true
+  field_support_hours: true
+  field_support_owner: true
+  langcode: true
+  search_api_excerpt: true

@@ -14,13 +14,28 @@ dependencies:
     - field.storage.media.field_display_in_group
     - field.storage.media.field_description
     - field.storage.media.field_tags
+    - field.storage.node.field_additional_info
+    - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.body
     - field.storage.node.field_display_in_group
     - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
+    - field.storage.node.field_customer_responsibilities
+    - field.storage.node.field_description
+    - field.storage.node.field_example_applications
     - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_optional_features
+    - field.storage.node.field_option_costs
     - field.storage.node.field_p_card_allowed
+    - field.storage.node.field_service_hours
+    - field.storage.node.field_service_initiation
+    - field.storage.node.field_service_owner
+    - field.storage.node.field_sla_target
+    - field.storage.node.field_standard_cost
+    - field.storage.node.field_standard_service_features
+    - field.storage.node.field_support_hours
+    - field.storage.node.field_support_owner
     - field.storage.node.field_type
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
@@ -88,6 +103,14 @@ field_settings:
     dependencies:
       module:
         - node
+  content_field_description:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description
   content_id:
     label: 'Content ID'
     datasource_id: 'entity:node'
@@ -123,6 +146,22 @@ field_settings:
     dependencies:
       module:
         - node
+  field_additional_info:
+    label: 'Additional Info'
+    datasource_id: 'entity:node'
+    property_path: field_additional_info
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_additional_info
+  field_business_priority:
+    label: 'Business priority'
+    datasource_id: 'entity:node'
+    property_path: field_business_priority
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_business_priority
   field_category:
     label: Category
     datasource_id: 'entity:node'
@@ -139,6 +178,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_contract_number
+  field_customer_responsibilities:
+    label: 'Customer Responsibilities'
+    datasource_id: 'entity:node'
+    property_path: field_customer_responsibilities
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_customer_responsibilities
   field_date_range:
     label: 'Contract Date'
     datasource_id: 'entity:node'
@@ -163,6 +210,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_display_in_group
+  field_example_applications:
+    label: 'Example applications'
+    datasource_id: 'entity:node'
+    property_path: field_example_applications
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_example_applications
   field_first_name:
     label: 'First name'
     datasource_id: 'entity:user'
@@ -205,6 +260,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_mandated_purchases
+  field_option_costs:
+    label: 'Option costs'
+    datasource_id: 'entity:node'
+    property_path: field_option_costs
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_option_costs
+  field_optional_features:
+    label: 'Optional Features'
+    datasource_id: 'entity:node'
+    property_path: field_optional_features
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_optional_features
   field_p_card_allowed:
     label: 'P-Card Allowed'
     datasource_id: 'entity:node'
@@ -213,6 +284,54 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_p_card_allowed
+  field_service_hours:
+    label: 'Service Hours'
+    datasource_id: 'entity:node'
+    property_path: field_service_hours
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_service_hours
+  field_service_initiation:
+    label: 'Service Initiation'
+    datasource_id: 'entity:node'
+    property_path: field_service_initiation
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_service_initiation
+  field_sla_target:
+    label: 'SLA Target'
+    datasource_id: 'entity:node'
+    property_path: field_sla_target
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_sla_target
+  field_standard_cost:
+    label: 'Standard cost'
+    datasource_id: 'entity:node'
+    property_path: field_standard_cost
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_standard_cost
+  field_standard_service_features:
+    label: 'Standard Service Features'
+    datasource_id: 'entity:node'
+    property_path: field_standard_service_features
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_standard_service_features
+  field_support_hours:
+    label: 'Support Hours'
+    datasource_id: 'entity:node'
+    property_path: field_support_hours
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_support_hours
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
@@ -262,6 +381,16 @@ field_settings:
     dependencies:
       module:
         - group
+  label:
+    label: 'Service owner » Group » Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_service_owner:entity:label'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_service_owner
+      module:
+        - group
   media_bundle:
     label: 'Media type'
     datasource_id: 'entity:media'
@@ -303,6 +432,16 @@ field_settings:
     dependencies:
       module:
         - media
+  name:
+    label: 'Support Owner » User » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_support_owner:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_support_owner
+      module:
+        - user
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants

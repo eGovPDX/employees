@@ -1,0 +1,28 @@
+uuid: fc3a91f5-81b8-44d6-9464-1217153b0f16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.bts_application
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    restricted_html: restricted_html
+    basic_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.bts_application.field_description
+field_name: field_description
+entity_type: node
+bundle: bts_application
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

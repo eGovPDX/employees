@@ -1,0 +1,28 @@
+uuid: 5c81da96-78ae-4e46-8fd9-2605590d82fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.support_owner
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: supportowner
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:support_owner'
+settings:
+  id: 'facet_block:support_owner'
+  label: 'Support Owner'
+  provider: facets
+  label_display: '0'
+  block_id: supportowner
+visibility:
+  request_path:
+    id: request_path
+    pages: /service-catalog
+    negate: false

@@ -1,0 +1,28 @@
+uuid: 1e64af64-c758-41ea-9753-7109677a0671
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_standard_cost
+    - node.type.bts_service
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    restricted_html: restricted_html
+    basic_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.bts_service.field_standard_cost
+field_name: field_standard_cost
+entity_type: node
+bundle: bts_service
+label: 'Standard cost'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

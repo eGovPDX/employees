@@ -1,0 +1,28 @@
+uuid: a8856a8e-57da-4436-bdff-8bc70b642ecd
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.business_priority
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: businesspriority
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:business_priority'
+settings:
+  id: 'facet_block:business_priority'
+  label: 'Business priority'
+  provider: facets
+  label_display: '0'
+  block_id: businesspriority
+visibility:
+  request_path:
+    id: request_path
+    pages: /service-catalog
+    negate: false

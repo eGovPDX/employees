@@ -1,0 +1,19 @@
+uuid: 06b2e20b-6d72-4324-a6d6-2749f66cc42a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_hours
+    - node.type.bts_service
+id: node.bts_service.field_service_hours
+field_name: field_service_hours
+entity_type: node
+bundle: bts_service
+label: 'Service Hours'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

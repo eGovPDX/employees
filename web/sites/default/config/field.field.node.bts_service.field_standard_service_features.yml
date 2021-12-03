@@ -1,0 +1,28 @@
+uuid: 1808891b-5efb-4cb2-a76f-54f3902fb352
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_standard_service_features
+    - node.type.bts_service
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    restricted_html: restricted_html
+    basic_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.bts_service.field_standard_service_features
+field_name: field_standard_service_features
+entity_type: node
+bundle: bts_service
+label: 'Standard Service Features'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
