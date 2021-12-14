@@ -1,0 +1,50 @@
+uuid: 5d92b0ba-f624-4c48-afe9-e667c384b66a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.bts_business_priority.field_bumpable
+    - field.field.taxonomy_term.bts_business_priority.field_example
+    - field.field.taxonomy_term.bts_business_priority.field_sla
+    - taxonomy.vocabulary.bts_business_priority
+  module:
+    - text
+id: taxonomy_term.bts_business_priority.default
+targetEntityType: taxonomy_term
+bundle: bts_business_priority
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_bumpable:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_example:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_sla:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

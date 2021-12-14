@@ -1,0 +1,28 @@
+uuid: d145ae39-b5c0-440c-98ff-a386253bdc26
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.business_owner
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: businessowner
+theme: cloudy2
+region: side
+weight: -7
+provider: null
+plugin: 'facet_block:business_owner'
+settings:
+  id: 'facet_block:business_owner'
+  label: 'Business owner'
+  provider: facets
+  label_display: '0'
+  block_id: businessowner
+visibility:
+  request_path:
+    id: request_path
+    pages: /application-catalog
+    negate: false

@@ -1,0 +1,28 @@
+uuid: 008f9c7a-f607-40e6-8522-41be0c499dbf
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.support_model
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: supportmodel
+theme: cloudy2
+region: side
+weight: -1
+provider: null
+plugin: 'facet_block:support_model'
+settings:
+  id: 'facet_block:support_model'
+  label: 'Support model'
+  provider: facets
+  label_display: '0'
+  block_id: supportmodel
+visibility:
+  request_path:
+    id: request_path
+    pages: /application-catalog
+    negate: false

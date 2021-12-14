@@ -1,0 +1,29 @@
+uuid: 3734616c-3a64-452f-8196-29a04bc956db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_owner
+    - node.type.bts_application
+    - taxonomy.vocabulary.business_owner
+id: node.bts_application.field_business_owner
+field_name: field_business_owner
+entity_type: node
+bundle: bts_application
+label: 'Business owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      business_owner: business_owner
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,29 @@
+uuid: 1538628e-e27f-47f6-a57e-18c8c0fd1f40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bts_application_exception
+    - node.type.bts_application
+    - taxonomy.vocabulary.bts_application_exception
+id: node.bts_application.field_bts_application_exception
+field_name: field_bts_application_exception
+entity_type: node
+bundle: bts_application
+label: 'BTS Application Exception'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      bts_application_exception: bts_application_exception
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

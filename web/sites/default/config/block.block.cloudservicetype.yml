@@ -1,0 +1,28 @@
+uuid: 6eb4cc6e-64af-485b-aadf-205293eb9c48
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.cloud_service_type
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: cloudservicetype
+theme: cloudy2
+region: side
+weight: -5
+provider: null
+plugin: 'facet_block:cloud_service_type'
+settings:
+  id: 'facet_block:cloud_service_type'
+  label: 'Cloud service type'
+  provider: facets
+  label_display: '0'
+  block_id: cloudservicetype
+visibility:
+  request_path:
+    id: request_path
+    pages: /application-catalog
+    negate: false

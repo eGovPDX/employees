@@ -1,0 +1,28 @@
+uuid: e2256091-8170-4d44-bafa-abf986459bb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.business_capability
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: businesscapability
+theme: cloudy2
+region: side
+weight: -10
+provider: null
+plugin: 'facet_block:business_capability'
+settings:
+  id: 'facet_block:business_capability'
+  label: 'Business capability'
+  provider: facets
+  label_display: '0'
+  block_id: businesscapability
+visibility:
+  request_path:
+    id: request_path
+    pages: /application-catalog
+    negate: false

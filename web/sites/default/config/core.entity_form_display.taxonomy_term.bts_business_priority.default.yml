@@ -1,0 +1,78 @@
+uuid: 6149c69a-d626-4a38-b0fc-d8d02d19625d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.bts_business_priority.field_bumpable
+    - field.field.taxonomy_term.bts_business_priority.field_example
+    - field.field.taxonomy_term.bts_business_priority.field_sla
+    - taxonomy.vocabulary.bts_business_priority
+  module:
+    - path
+    - text
+id: taxonomy_term.bts_business_priority.default
+targetEntityType: taxonomy_term
+bundle: bts_business_priority
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_bumpable:
+    weight: 101
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_example:
+    weight: 103
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_sla:
+    weight: 102
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
+hidden: {  }

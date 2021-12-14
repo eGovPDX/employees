@@ -1,0 +1,29 @@
+uuid: ff96e1e6-3b2f-49ad-9247-f341237458e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_support_model
+    - node.type.bts_application
+    - taxonomy.vocabulary.support_model
+id: node.bts_application.field_support_model
+field_name: field_support_model
+entity_type: node
+bundle: bts_application
+label: 'Support model'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      support_model: support_model
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
