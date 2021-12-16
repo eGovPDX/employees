@@ -247,6 +247,36 @@ display:
         - user.permissions
       max-age: -1
       tags: {  }
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: 'Block: taxonomy content'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      query:
+        type: views_query
+        options: {  }
+      display_description: ''
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+        link_display: false
+        link_url: false
+      link_display: '0'
+      link_url: ''
+      block_hide_empty: true
+    cache_metadata:
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      max-age: -1
+      tags: {  }
   page_1:
     id: page_1
     display_title: Page

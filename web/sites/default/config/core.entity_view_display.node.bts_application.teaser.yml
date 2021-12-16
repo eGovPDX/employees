@@ -19,17 +19,25 @@ dependencies:
     - field.field.node.bts_application.field_vendor
     - node.type.bts_application
   module:
+    - text
     - user
 id: node.bts_application.teaser
 targetEntityType: node
 bundle: bts_application
 mode: teaser
 content:
-  links:
-    weight: 100
+  field_description:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+  links:
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_annual_user_cost: true
   field_bts_application_exception: true
@@ -38,7 +46,6 @@ hidden:
   field_business_owner: true
   field_cloud_service_type: true
   field_cost_per_ticket: true
-  field_description: true
   field_hosting_environment: true
   field_restricted: true
   field_service_owner: true

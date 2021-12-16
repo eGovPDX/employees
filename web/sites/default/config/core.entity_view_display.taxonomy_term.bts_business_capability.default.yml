@@ -1,0 +1,23 @@
+uuid: 106d0620-9f23-490f-b429-d37eb836df56
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.bts_business_capability
+  module:
+    - text
+id: taxonomy_term.bts_business_capability.default
+targetEntityType: taxonomy_term
+bundle: bts_business_capability
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  search_api_excerpt: true
