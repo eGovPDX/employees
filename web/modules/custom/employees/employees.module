@@ -625,7 +625,16 @@ function employees_views_query_alter($view, $query)
         in_array("employee-editor", array_keys($roles)) ||
         in_array("employee-admin", array_keys($roles))
       ) {
-        $query->where[1]["conditions"][1] = $query->where[1]["conditions"][0];
+        // Conditions in Group 1. Group 0 is the contexual filter for term ID
+        $conditions = $query->where[1]["conditions"];
+        $restricted_condition_index = -1;
+        foreach($conditions as $key => $condition) {
+          if($condition['field'] === "node__field_restricted.field_restricted_value") {
+            $restricted_condition_index = $key;
+          }
+        }
+        if($restricted_condition_index != -1)
+          $query->where[1]["conditions"][$restricted_condition_index] = $query->where[1]["conditions"][0];
         return;
       }
     }
