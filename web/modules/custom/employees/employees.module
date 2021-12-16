@@ -604,3 +604,30 @@ function employees_preprocess_fieldset(&$variables) {
     unset($variables['description']);
   }
 }
+
+/**
+ * Implement hook_views_query_alter() 
+ */
+function employees_views_query_alter($view, $query)
+{
+  if ($view->id() === 'taxonomy_term' && $view->current_display == "page_1" ) { //"block_business_capability") {
+    $bts_group = \Drupal\group\Entity\Group::load(48); // The BTS Employees group
+    $membership = $bts_group->getMember(\Drupal::currentUser());
+    // The user is NOT in the group
+    if ($membership == null) {
+      return;
+    } else {
+      $roles = $membership->getRoles();
+      // Check if the user is member, editor, employee, or admin
+      if (
+        in_array("employee-assigned_member", array_keys($roles)) ||
+        in_array("employee-employee", array_keys($roles)) ||
+        in_array("employee-editor", array_keys($roles)) ||
+        in_array("employee-admin", array_keys($roles))
+      ) {
+        $query->where[1]["conditions"][1] = $query->where[1]["conditions"][0];
+        return;
+      }
+    }
+  }
+}
