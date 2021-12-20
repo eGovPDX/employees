@@ -16,8 +16,8 @@ dependencies:
     - smart_trim
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   layout_library:
     enable: false
 id: group.private.search_result
@@ -27,8 +27,6 @@ mode: search_result
 content:
   field_group_description:
     type: smart_trim
-    weight: 0
-    region: content
     label: hidden
     settings:
       trim_length: 50
@@ -36,14 +34,16 @@ content:
       trim_suffix: ''
       wrap_output: true
       wrap_class: trimmed
-      more_text: More
+      more_link: false
       more_class: more-link
+      more_text: More
       summary_handler: full
       trim_options:
         text: true
         trim_zero: true
-      more_link: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   changed: true
   created: true

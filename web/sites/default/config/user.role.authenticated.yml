@@ -1,7 +1,19 @@
 uuid: 43d97cc6-985e-4588-bf2e-2166a8a36199
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_permissions
+    - filter
+    - media
+    - pathauto
+    - system
+    - toolbar
+    - tour
 _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated
@@ -13,10 +25,7 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'administer toc_js per node'
   - 'notify of path changes'
-  - 'search content'
-  - 'use advanced search'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use text format basic_html'

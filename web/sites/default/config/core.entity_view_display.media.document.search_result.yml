@@ -19,8 +19,8 @@ dependencies:
     - smart_trim
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 _core:
   default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
 id: media.document.search_result
@@ -29,7 +29,7 @@ bundle: document
 mode: search_result
 content:
   field_description:
-    weight: 1
+    type: smart_trim
     label: hidden
     settings:
       trim_length: 50
@@ -37,20 +37,18 @@ content:
       trim_suffix: ...
       wrap_output: true
       wrap_class: trimmed
-      more_text: More
+      more_link: false
       more_class: more-link
+      more_text: More
+      summary_handler: full
       trim_options:
         text: true
         trim_zero: true
-      more_link: false
-      summary_handler: full
     third_party_settings: {  }
-    type: smart_trim
+    weight: 1
     region: content
   field_efiles_link:
     type: link
-    weight: 3
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -59,38 +57,40 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_file_size:
     type: number_integer
-    weight: 5
-    region: content
     label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_media_document:
     type: file_url_plain
-    weight: 2
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_mime_type:
     type: string
-    weight: 4
-    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 4
+    region: content
   name:
     type: string
-    weight: 0
-    region: content
     label: hidden
     settings:
       link_to_entity: true
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   created: true
   field_display_in_group: true

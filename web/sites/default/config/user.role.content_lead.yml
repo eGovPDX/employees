@@ -1,7 +1,35 @@
 uuid: baf86895-37e5-4133-80ea-b6555e694f61
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - node.type.contract
+    - node.type.event
+    - node.type.news
+    - node.type.page
+    - node.type.resource
+    - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_permissions
+    - filter
+    - group
+    - media
+    - moderation_sidebar
+    - node
+    - path
+    - pathauto
+    - quick_node_clone
+    - quickedit
+    - redirect
+    - scheduler
+    - system
+    - taxonomy
 id: content_lead
 label: 'Content Lead'
 weight: -6
@@ -11,7 +39,6 @@ permissions:
   - 'access group overview'
   - 'access in-place editing'
   - 'access media overview'
-  - 'access workbench'
   - 'administer menu'
   - 'administer redirects'
   - 'clone contract content'
@@ -19,32 +46,22 @@ permissions:
   - 'clone news content'
   - 'clone page content'
   - 'clone resource content'
-  - 'create article content'
-  - 'create audio media'
-  - 'create basic_group group'
   - 'create contract content'
   - 'create document media'
   - 'create event content'
   - 'create field_homepage'
-  - 'create field_resource'
-  - 'create group group'
   - 'create image media'
-  - 'create landing_page content'
   - 'create media'
   - 'create news content'
   - 'create page content'
   - 'create private group'
-  - 'create private_group group'
-  - 'create public group'
   - 'create remote_video media'
   - 'create resource content'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete all revisions'
-  - 'delete any article content'
   - 'delete any contract content'
   - 'delete any event content'
-  - 'delete any landing_page content'
   - 'delete any news content'
   - 'delete any page content'
   - 'delete any resource content'
@@ -52,81 +69,59 @@ permissions:
   - 'delete event revisions'
   - 'delete media'
   - 'delete news revisions'
-  - 'delete own article content'
-  - 'delete own audio media'
   - 'delete own contract content'
   - 'delete own document media'
   - 'delete own event content'
   - 'delete own image media'
-  - 'delete own landing_page content'
   - 'delete own news content'
   - 'delete own page content'
   - 'delete own remote_video media'
   - 'delete own resource content'
   - 'delete page revisions'
   - 'delete resource revisions'
-  - 'edit any article content'
-  - 'edit any audio media'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
   - 'edit any image media'
-  - 'edit any landing_page content'
   - 'edit any news content'
   - 'edit any page content'
   - 'edit any remote_video media'
   - 'edit field_homepage'
-  - 'edit field_resource'
-  - 'edit own article content'
-  - 'edit own audio media'
   - 'edit own contract content'
   - 'edit own document media'
   - 'edit own event content'
   - 'edit own field_homepage'
-  - 'edit own field_resource'
   - 'edit own image media'
-  - 'edit own landing_page content'
   - 'edit own news content'
   - 'edit own page content'
   - 'edit own remote_video media'
   - 'edit own resource content'
   - 'notify of path changes'
   - 'revert all revisions'
-  - 'revert article revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
-  - 'revert landing_page revisions'
   - 'revert news revisions'
   - 'revert page revisions'
   - 'schedule publishing of nodes'
   - 'update any media'
   - 'update media'
-  - 'use editorial transition archive'
-  - 'use editorial transition archived_draft'
-  - 'use editorial transition archived_published'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use editorial transition publish'
   - 'use editorial transition unpublish'
   - 'use moderation sidebar'
   - 'use text format basic_html'
-  - 'use workbench access'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
-  - 'view article revisions'
   - 'view contract revisions'
   - 'view event revisions'
   - 'view field_homepage'
-  - 'view field_resource'
-  - 'view landing_page revisions'
   - 'view latest version'
   - 'view news revisions'
   - 'view own field_homepage'
-  - 'view own field_resource'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view page revisions'
   - 'view resource revisions'
   - 'view the administration theme'
-  - 'view workbench access information'
