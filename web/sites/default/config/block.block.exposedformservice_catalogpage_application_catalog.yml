@@ -1,0 +1,28 @@
+uuid: d3319cd9-977a-4be3-8115-3f215d8a01fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.service_catalog
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: exposedformservice_catalogpage_application_catalog
+theme: cloudy2
+region: content
+weight: -16
+provider: null
+plugin: 'views_exposed_filter_block:service_catalog-page_application_catalog'
+settings:
+  id: 'views_exposed_filter_block:service_catalog-page_application_catalog'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/application-catalog\r\n/application-catalog/search"
+    negate: false

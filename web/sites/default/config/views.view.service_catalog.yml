@@ -275,7 +275,20 @@ display:
       title: 'Service catalog'
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No result found.'
+            format: basic_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -298,9 +311,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: application-catalog
+      path: application-catalog/search
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       defaults:
         cache: false
         filters: false
@@ -417,6 +431,7 @@ display:
           1: AND
       title: 'Application catalog'
       display_description: ''
+      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -436,9 +451,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: service-catalog
+      path: service-catalog/search
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       defaults:
         cache: false
         filters: false
@@ -538,13 +554,10 @@ display:
             - field_additional_info
             - field_contract_number
             - field_customer_responsibilities
-            - field_option_costs
             - field_optional_features
             - field_service_hours
             - field_service_initiation
             - field_sla_target
-            - field_standard_cost
-            - field_standard_service_features
             - field_support_hours
             - rendered_item
           plugin_id: search_api_fulltext
@@ -553,6 +566,7 @@ display:
         groups:
           1: AND
       display_description: ''
+      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:
