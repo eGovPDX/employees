@@ -6,11 +6,12 @@ id: config_local
 label: Local
 description: 'Config for local Lando environments'
 weight: 0
-storage: folder
 folder: sites/default/config_local
 module:
   devel: 0
 theme: {  }
-complete_list:
+blacklist:
   - group_notifications.mail
-partial_list: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
