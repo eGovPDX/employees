@@ -2,13 +2,13 @@ uuid: e911a3ae-ca27-462c-acc2-17524bcca465
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - media
   module:
     - field_permissions
     - file
     - media
+  enforced:
+    module:
+      - media
 third_party_settings:
   field_permissions:
     permission_type: public
@@ -19,10 +19,10 @@ field_name: field_media_document
 entity_type: media
 type: file
 settings:
-  uri_scheme: public
   target_type: file
   display_field: false
   display_default: false
+  uri_scheme: public
 module: file
 locked: false
 cardinality: 1

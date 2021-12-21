@@ -5,12 +5,12 @@ dependencies: {  }
 id: config_dev
 label: Development
 description: 'Config for Pantheon development environment'
+weight: 0
 storage: folder
 folder: sites/default/config_dev
 module:
   clamav: 0
 theme: {  }
-weight: 0
 complete_list:
   - group_notifications.mail
   - clamav.settings

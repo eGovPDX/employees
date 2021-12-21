@@ -24,84 +24,84 @@ bundle: contract
 mode: default
 content:
   body:
-    label: above
     type: text_default
-    weight: 10
+    label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 10
     region: content
   field_category:
-    weight: 1
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: content
   field_contract_number:
-    weight: 2
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_date_range:
-    weight: 6
+    type: smartdate_default
     label: above
     settings:
       timezone_override: UTC
+      format_type: medium
       format: compact_date_only
-      time_wrapper: true
       force_chronological: false
       add_classes: false
-      format_type: medium
+      time_wrapper: true
     third_party_settings: {  }
-    type: smartdate_default
+    weight: 6
     region: content
   field_document:
     type: entity_reference_entity_view
-    weight: 3
     label: above
     settings:
       view_mode: embedded
       link: false
     third_party_settings: {  }
+    weight: 3
     region: content
   field_mandated_purchases:
-    weight: 4
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 4
     region: content
   field_p_card_allowed:
-    weight: 5
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 5
     region: content
   field_type:
-    weight: 0
+    type: entity_reference_label
     label: above
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: content
   field_vendor_contact_info:
-    weight: 9
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 9
     region: content
 hidden:
   content_moderation_control: true
