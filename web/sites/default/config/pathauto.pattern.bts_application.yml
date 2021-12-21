@@ -1,0 +1,22 @@
+uuid: 3c6dc2e7-8c59-487e-bf8f-5d9b1eed20f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: bts_application
+label: 'BTS application'
+type: 'canonical_entities:node'
+pattern: 'application-catalog/[node:title]'
+selection_criteria:
+  a7af974c-6d89-41b1-a9e0-3d6a1174e3d2:
+    id: node_type
+    bundles:
+      bts_application: bts_application
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a7af974c-6d89-41b1-a9e0-3d6a1174e3d2
+selection_logic: and
+weight: -10
+relationships: {  }
