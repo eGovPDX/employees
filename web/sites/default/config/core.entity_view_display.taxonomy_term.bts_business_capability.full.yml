@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.taxonomy_term.full
     - taxonomy.vocabulary.bts_business_capability
     - views.view.taxonomy_list
-    - views.view.taxonomy_term
   module:
     - layout_builder
     - layout_discovery
@@ -51,19 +50,6 @@ third_party_settings:
               context_mapping: {  }
             additional: {  }
             weight: 1
-          7be13c5c-34e9-44a7-9624-bc58eb9e8e7d:
-            uuid: 7be13c5c-34e9-44a7-9624-bc58eb9e8e7d
-            region: content
-            configuration:
-              id: 'views_block:taxonomy_term-block_business_capability'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 2
         third_party_settings: {  }
   layout_library:
     enable: false

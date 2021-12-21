@@ -625,16 +625,14 @@ function employees_views_query_alter($view, $query)
         in_array("employee-editor", array_keys($roles)) ||
         in_array("employee-admin", array_keys($roles))
       ) {
-        // Conditions in Group 1. Group 0 is the contexual filter for term ID
+        // Remove the filter on field_restricted if the current user is a BTS employee
         $conditions = $query->where[1]["conditions"];
         $restricted_condition_index = -1;
         foreach($conditions as $key => $condition) {
           if($condition['field'] === "node__field_restricted.field_restricted_value") {
-            $restricted_condition_index = $key;
+            unset($query->where[1]["conditions"][$key]);
           }
         }
-        if($restricted_condition_index != -1)
-          $query->where[1]["conditions"][$restricted_condition_index] = $query->where[1]["conditions"][0];
         return;
       }
     }
