@@ -7,7 +7,8 @@ use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
-
+use Drupal\Core\Utility\Token;
+use Drupal\Core\Language\LanguageInterface;
 
 /**
  * Implements hook_form_alter()
@@ -669,5 +670,60 @@ function employees_search_api_query_alter(\Drupal\search_api\Query\QueryInterfac
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_pathauto_pattern_alter().
+ */
+function employees_pathauto_alias_alter(&$alias, array &$context) {
+  if($context['module'] == "taxonomy") {
+    $term = $context['data']['term'];
+    $vocabulary_id = $term->bundle();
+    if($vocabulary_id == "bts_business_capability") {
+      $original_source = $context["source"];
+      // $context["source"] = $original_source . "/service_catalog";
+
+      // Add alias to application catalog
+      $alias_cleaner = \Drupal::service("pathauto.alias_cleaner");
+      // [term:vocabulary]/[term:parent]/[term:name]
+      $token_service = \Drupal::token();
+      $term_vocabulary = $alias_cleaner->cleanString($token_service->replace("[term:vocabulary]", ['term' => $term]));
+      $term_parent = $token_service->replace("[term:parent]", ['term' => $term]);
+      // Where there is no parent, provide empty string
+      $term_parent = ($term_parent == "[term:parent]") ? "" : $alias_cleaner->cleanString($term_parent);
+      $term_name = $alias_cleaner->cleanString($token_service->replace("[term:name]", ['term' => $term]));
+      if($term_parent == "") {
+        $term_alias = $term_vocabulary . '/' . $term_name;
+      }
+      else {
+        $term_alias = $term_vocabulary . '/' . $term_parent . "/" . $term_name;
+      }
+      // $application_catalog_alias = "/application_catalog/" . $term_alias;
+      // $system_path = "/application_catalog/" . $original_source;
+      _create_or_update_alias("/application-catalog" . $original_source, "/application-catalog/" . $term_alias);
+      _create_or_update_alias("/service-catalog" . $original_source, "/service-catalog/" . $term_alias);
+    }
+  }
+}
+
+/**
+ * Helper function to create or update an alias to a system path
+ */
+function _create_or_update_alias($system_path, $new_alias) {
+  $path_alias_manager = \Drupal::entityTypeManager()->getStorage('path_alias');
+  $original_alias = $path_alias_manager->loadByProperties(["path" => $system_path]);
+  if(empty($original_alias)) {
+    $new_alias = $path_alias_manager->create([
+      'path' => $system_path,
+      'alias' => $new_alias,
+      'langcode' => 'en',
+    ]);
+    $new_alias->save();
+  }
+  else {
+    $original_alias = array_values($original_alias)[0];
+    $original_alias->setAlias($new_alias);
+    $path_alias_manager->save($original_alias);
   }
 }

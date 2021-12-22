@@ -4,13 +4,12 @@ status: true
 dependencies:
   config:
     - taxonomy.vocabulary.bts_business_capability
-    - taxonomy.vocabulary.bts_business_priority
   module:
     - taxonomy
     - text
     - user
 id: taxonomy_list
-label: 'Taxonomy list'
+label: 'Taxonomy term list'
 module: views
 description: ''
 tag: ''
@@ -318,7 +317,7 @@ display:
   page_business_capability:
     display_plugin: page
     id: page_business_capability
-    display_title: 'Page: Business capability'
+    display_title: 'Page: Applications by business capability'
     position: 2
     display_options:
       display_extenders: {  }
@@ -445,7 +444,7 @@ display:
   page_business_priority:
     display_plugin: page
     id: page_business_priority
-    display_title: 'Page: Business priority'
+    display_title: 'Page: Services by business capability'
     position: 2
     display_options:
       display_extenders: {  }
@@ -472,7 +471,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            bts_business_priority: bts_business_priority
+            bts_business_capability: bts_business_capability
           group: 1
           exposed: false
           expose:
