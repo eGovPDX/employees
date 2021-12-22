@@ -6,12 +6,11 @@ id: config_test
 label: Test
 description: 'Config for Pantheon test environment'
 weight: 0
+storage: folder
 folder: sites/default/config_test
 module:
   clamav: 0
 theme: {  }
-blacklist:
+complete_list:
   - group_notifications.mail
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }

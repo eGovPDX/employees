@@ -6,14 +6,13 @@ id: config_prod
 label: Production
 description: 'Config for Pantheon production environment'
 weight: 0
+storage: folder
 folder: sites/default/config_prod
 module:
   clamav: 0
 theme: {  }
-blacklist:
+complete_list:
   - group_notifications.mail
   - key.key.solr_core
-graylist:
+partial_list:
   - mailsystem.settings
-graylist_dependents: true
-graylist_skip_equal: true
