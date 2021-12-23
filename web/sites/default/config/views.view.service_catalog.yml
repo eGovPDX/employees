@@ -271,7 +271,31 @@ display:
             - field_support_hours
             - rendered_item
           plugin_id: search_api_fulltext
-      sorts: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: 'Service catalog'
       header: {  }
       footer: {  }
@@ -307,11 +331,11 @@ display:
   page_application_catalog:
     display_plugin: page
     id: page_application_catalog
-    display_title: 'Page: Application Catalog'
+    display_title: 'Page: Search application catalog'
     position: 1
     display_options:
       display_extenders: {  }
-      path: application-catalog/search
+      path: technology-services/application-catalog/search
       cache:
         type: search_api_tag
         options: {  }
@@ -485,11 +509,11 @@ display:
   page_service_catalog:
     display_plugin: page
     id: page_service_catalog
-    display_title: 'Page: Service Catalog'
+    display_title: 'Page: Search service catalog'
     position: 1
     display_options:
       display_extenders: {  }
-      path: service-catalog/search
+      path: technology-services/service-catalog/search
       cache:
         type: search_api_tag
         options: {  }

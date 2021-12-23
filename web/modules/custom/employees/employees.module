@@ -636,8 +636,8 @@ function _is_current_user_bts_employee() {
 function employees_views_query_alter($view, $query)
 {
   if ( $view->id() === 'taxonomy_term' && (
-    $view->current_display == "page_applications_business_capability" || 
-    $view->current_display == "page_services_business_capability"
+    $view->current_display == "page_applications_with_term" || 
+    $view->current_display == "page_services_with_term"
   )) {
     if( ! _is_current_user_bts_employee() ) return;
 
@@ -683,31 +683,42 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
   if($context['module'] == "taxonomy") {
     $term = $context['data']['term'];
     $vocabulary_id = $term->bundle();
+    $original_source = $context["source"];
     if($vocabulary_id == "bts_business_capability") {
-      $original_source = $context["source"];
-      // $context["source"] = $original_source . "/service_catalog";
-
-      // Add alias to application catalog
-      $alias_cleaner = \Drupal::service("pathauto.alias_cleaner");
-      // [term:vocabulary]/[term:parent]/[term:name]
-      $token_service = \Drupal::token();
-      $term_vocabulary = $alias_cleaner->cleanString($token_service->replace("[term:vocabulary]", ['term' => $term]));
-      $term_parent = $token_service->replace("[term:parent]", ['term' => $term]);
-      // Where there is no parent, provide empty string
-      $term_parent = ($term_parent == "[term:parent]") ? "" : $alias_cleaner->cleanString($term_parent);
-      $term_name = $alias_cleaner->cleanString($token_service->replace("[term:name]", ['term' => $term]));
-      if($term_parent == "") {
-        $term_alias = $term_vocabulary . '/' . $term_name;
-      }
-      else {
-        $term_alias = $term_vocabulary . '/' . $term_parent . "/" . $term_name;
-      }
-      // $application_catalog_alias = "/application_catalog/" . $term_alias;
-      // $system_path = "/application_catalog/" . $original_source;
+      // Build the alias for the term
+      $term_alias = _build_alias_for_term($term);
       _create_or_update_alias("/technology-services/application-catalog" . $original_source, "/technology-services/application-catalog/" . $term_alias);
       _create_or_update_alias("/technology-services/service-catalog" . $original_source, "/technology-services/service-catalog/" . $term_alias);
     }
+    // For the Bureaus taxonomy, only create the Application Catalog alias
+    else if($vocabulary_id == "bureaus") {
+      // Build the alias for the term
+      $term_alias = _build_alias_for_term($term);
+      _create_or_update_alias("/technology-services/application-catalog" . $original_source, "/technology-services/application-catalog/" . $term_alias);
+    }
   }
+}
+
+/**
+ * Helper function to create or update an alias to a system path
+ */
+function _build_alias_for_term($term) {
+  // Build the alias for the term
+  $alias_cleaner = \Drupal::service("pathauto.alias_cleaner");
+  // [term:vocabulary]/[term:parent]/[term:name]
+  $token_service = \Drupal::token();
+  $term_vocabulary = $alias_cleaner->cleanString($token_service->replace("[term:vocabulary]", ['term' => $term]));
+  $term_parent = $token_service->replace("[term:parent]", ['term' => $term]);
+  // Where there is no parent, provide empty string
+  $term_parent = ($term_parent == "[term:parent]") ? "" : $alias_cleaner->cleanString($term_parent);
+  $term_name = $alias_cleaner->cleanString($token_service->replace("[term:name]", ['term' => $term]));
+  if($term_parent == "") {
+    $term_alias = $term_vocabulary . '/' . $term_name;
+  }
+  else {
+    $term_alias = $term_vocabulary . '/' . $term_parent . "/" . $term_name;
+  }
+  return $term_alias;
 }
 
 /**

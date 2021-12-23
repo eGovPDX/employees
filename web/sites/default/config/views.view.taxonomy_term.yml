@@ -7,6 +7,7 @@ dependencies:
     - node.type.bts_application
     - node.type.bts_service
     - taxonomy.vocabulary.bts_business_capability
+    - taxonomy.vocabulary.bureaus
   module:
     - node
     - taxonomy
@@ -401,9 +402,9 @@ display:
         - user.permissions
       max-age: -1
       tags: {  }
-  page_applications_business_capability:
-    id: page_applications_business_capability
-    display_title: 'Page: applications'
+  page_applications_with_term:
+    id: page_applications_with_term
+    display_title: 'Page: Applications'
     display_plugin: page
     position: 1
     display_options:
@@ -597,13 +598,10 @@ display:
             title: All
           title_enable: true
           title: '{{ arguments.tid }}'
-          default_argument_type: taxonomy_tid
+          default_argument_type: raw
           default_argument_options:
-            term_page: '1'
-            anyall: ','
-            node: false
-            limit: false
-            vids: {  }
+            index: 3
+            use_alias: true
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -621,6 +619,7 @@ display:
           validate_options:
             bundles:
               bts_business_capability: bts_business_capability
+              bureaus: bureaus
             access: true
             operation: view
             multiple: 0
@@ -640,8 +639,8 @@ display:
         - user.permissions
       max-age: -1
       tags: {  }
-  page_services_business_capability:
-    id: page_services_business_capability
+  page_services_with_term:
+    id: page_services_with_term
     display_title: 'Page: services'
     display_plugin: page
     position: 1
