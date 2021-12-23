@@ -1,31 +1,30 @@
-uuid: 4cba2c40-0169-4883-aa82-c2fb1428048e
+uuid: 09c51efd-3024-4a1f-859a-45bda52cdd17
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.my_content_views
+    - views.view.taxonomy_list
   module:
     - system
     - views
   theme:
     - cloudy2
-id: views_block__my_content_views_block_my_news
+id: views_block__taxonomy_list_block_2
 theme: cloudy2
 region: content
-weight: -13
+weight: -15
 provider: null
-plugin: 'views_block:my_content_views-block_my_news'
+plugin: 'views_block:taxonomy_list-block_2'
 settings:
-  id: 'views_block:my_content_views-block_my_news'
+  id: 'views_block:taxonomy_list-block_2'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
   items_per_page: none
   context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: '/technology-services/service-catalog/*'
     negate: false
-    context_mapping: {  }

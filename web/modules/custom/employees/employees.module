@@ -635,7 +635,10 @@ function _is_current_user_bts_employee() {
  */
 function employees_views_query_alter($view, $query)
 {
-  if ( ($view->id() === 'taxonomy_term' && $view->current_display == "page_1") ) {
+  if ( $view->id() === 'taxonomy_term' && (
+    $view->current_display == "page_applications_business_capability" || 
+    $view->current_display == "page_services_business_capability"
+  )) {
     if( ! _is_current_user_bts_employee() ) return;
 
     // Remove the filter on field_restricted if the current user is a BTS employee
@@ -701,8 +704,8 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
       }
       // $application_catalog_alias = "/application_catalog/" . $term_alias;
       // $system_path = "/application_catalog/" . $original_source;
-      _create_or_update_alias("/application-catalog" . $original_source, "/application-catalog/" . $term_alias);
-      _create_or_update_alias("/service-catalog" . $original_source, "/service-catalog/" . $term_alias);
+      _create_or_update_alias("/technology-services/application-catalog" . $original_source, "/technology-services/application-catalog/" . $term_alias);
+      _create_or_update_alias("/technology-services/service-catalog" . $original_source, "/technology-services/service-catalog/" . $term_alias);
     }
   }
 }
