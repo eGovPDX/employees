@@ -32,7 +32,7 @@
         "drupal/environment_indicator": "^4.0",
         "drupal/eva": "^2.1",
         "drupal/extlink": "^1.5",
-        "drupal/facets": "^1.4",
+        "drupal/facets": "^2.0",
         "drupal/field_group": "^3.1",
         "drupal/field_permissions": "^1.1",
         "drupal/field_states_ui": "^2.0",
@@ -118,7 +118,16 @@
     },
     "config": {
         "process-timeout": 0,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/console-extend-plugin": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "oomphinc/composer-installers-extender": true,
+            "wikimedia/composer-merge-plugin": true
+        }
     },
     "extra": {
         "drupal-scaffold": {
