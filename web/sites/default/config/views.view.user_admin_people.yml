@@ -1746,6 +1746,48 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: string
+        field_is_contact_only_value:
+          id: field_is_contact_only_value
+          table: user__field_is_contact_only
+          field: field_is_contact_only_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Is contact only (field_is_contact_only)'
+            description: ''
+            use_operator: false
+            operator: field_is_contact_only_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_is_contact_only_value
+            required: true
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: boolean
       sorts:
         created:
           id: created

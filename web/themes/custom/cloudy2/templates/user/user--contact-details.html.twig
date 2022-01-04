@@ -30,12 +30,13 @@
         {{ content.field_phone }}
         {{ content.field_mobile_phone }}
         {% if user.field_keep_mobile_phone_private.value %} Keep mobile phone private {% endif %}
+        {% if not ('no.email' in user.mail.value) %}
         {{ content.mail }}
+        {% endif %}
         {{ content.field_workspace }}
       </div>
       {# <div class="float-left align-left field__item">
         {{ content.field_search_keywords }}
-        {{ content.field_parent_contact_lists }}
       </div> #}
     </div>
   </div>

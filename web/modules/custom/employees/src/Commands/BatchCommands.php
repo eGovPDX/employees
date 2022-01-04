@@ -160,6 +160,7 @@ class BatchCommands extends DrushCommands
             );
           }
           $user->field_is_contact_only->value = true;
+          $user->activate();
           $user->save();
           $this->output()->writeln("Created new user " . $contact_name);
         }

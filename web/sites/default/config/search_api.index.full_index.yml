@@ -24,6 +24,7 @@ dependencies:
     - field.storage.node.field_type
     - field.storage.user.field_division_name
     - field.storage.user.field_first_name
+    - field.storage.user.field_is_contact_only
     - field.storage.user.field_last_name
     - field.storage.user.field_address
     - field.storage.user.field_phone
@@ -204,6 +205,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_first_name
+  field_is_contact_only:
+    label: 'Is contact only'
+    datasource_id: 'entity:user'
+    property_path: field_is_contact_only
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.user.field_is_contact_only
   field_last_name:
     label: 'Last name'
     datasource_id: 'entity:user'
