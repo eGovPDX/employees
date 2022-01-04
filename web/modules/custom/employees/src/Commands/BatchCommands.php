@@ -130,7 +130,7 @@ class BatchCommands extends DrushCommands
           $contact_name = trim($row[$csv_columns['name']], ", \n\r\t\v\0");
           $contact_email = $row[$csv_columns['email']];
           $user_info_array = [
-            'name' => substr($contact_name, 0, 255),
+            'name' => substr($contact_name, 0, \Drupal\user\UserInterface::USERNAME_MAX_LENGTH),
             'pass' => user_password(),
             'mail' => $contact_email ? $contact_email : 'no.email.'.rand(1000000, 10000000).'@portland.gov',
             'field_first_name' => $row[$csv_columns['first']],
@@ -159,7 +159,7 @@ class BatchCommands extends DrushCommands
               ]
             );
           }
-          $user->field_is_contact->value = true;
+          $user->field_is_contact_only->value = true;
           $user->save();
           $this->output()->writeln("Created new user " . $contact_name);
         }
