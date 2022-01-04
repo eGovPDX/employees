@@ -9,6 +9,7 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
+    - system.menu.main
     - user.role.authenticated
   module:
     - search_api
@@ -562,6 +563,15 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       title: Contacts
+      menu:
+        type: normal
+        title: Contacts
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
     cache_metadata:
       max-age: -1
       contexts:
