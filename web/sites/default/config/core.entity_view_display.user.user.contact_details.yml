@@ -1,8 +1,9 @@
-uuid: 6c9f07d3-b1a3-4b00-840d-c0dd545bda4b
+uuid: cb29c82e-157e-4a2d-8cf6-41e59076654e
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.user.contact_details
     - field.field.user.user.field_active_directory_id
     - field.field.user.user.field_address
     - field.field.user.user.field_division_name
@@ -26,27 +27,31 @@ dependencies:
     - image.style.thumbnail
   module:
     - image
-    - masquerade_field
+    - layout_builder
     - telephone
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
-id: user.user.default
+id: user.user.contact_details
 targetEntityType: user
 bundle: user
-mode: default
+mode: contact_details
 content:
   field_address:
-    weight: 13
-    label: above
+    weight: 14
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_division_name:
-    weight: 11
-    label: above
+    weight: 9
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -54,23 +59,15 @@ content:
     region: content
   field_first_name:
     type: string
-    weight: 4
+    weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_group_names:
-    weight: 8
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_is_contact_only:
-    weight: 15
-    label: above
+    weight: 11
+    label: inline
     settings:
       format: default
       format_custom_false: ''
@@ -78,17 +75,9 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_job_description:
-    weight: 14
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_keep_mobile_phone_private:
-    weight: 16
-    label: above
+    weight: 7
+    label: inline
     settings:
       format: default
       format_custom_false: ''
@@ -98,100 +87,73 @@ content:
     region: content
   field_last_name:
     type: string
-    weight: 5
+    weight: 2
     region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_managers:
-    weight: 6
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_mobile_phone:
-    weight: 17
-    label: above
+    weight: 6
+    label: inline
     settings:
       title: ''
     third_party_settings: {  }
     type: telephone_link
     region: content
-  field_office_location:
-    weight: 12
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_phone:
-    weight: 7
-    label: above
+    weight: 5
+    label: inline
     settings:
       title: ''
     third_party_settings: {  }
     type: telephone_link
     region: content
   field_primary_groups:
-    weight: 9
-    label: above
+    weight: 8
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_search_keywords:
-    weight: 18
-    label: above
+    weight: 12
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_section:
-    weight: 19
-    label: above
+    weight: 10
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_title:
-    weight: 10
-    label: above
+    weight: 3
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_workspace:
-    weight: 20
-    label: above
+    weight: 13
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-  masquerade:
-    weight: 1
+  mail:
+    type: email_mailto
+    weight: 4
     region: content
-    settings: {  }
-    third_party_settings: {  }
-  masquerade_as:
-    type: masquerade_field_default
-    region: content
-    weight: 3
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-  member_for:
-    weight: 2
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
   user_picture:
@@ -205,7 +167,13 @@ content:
     label: hidden
 hidden:
   field_active_directory_id: true
+  field_group_names: true
+  field_job_description: true
+  field_managers: true
+  field_office_location: true
   field_publisher_role_changed: true
   langcode: true
-  mail: true
+  masquerade: true
+  masquerade_as: true
+  member_for: true
   search_api_excerpt: true

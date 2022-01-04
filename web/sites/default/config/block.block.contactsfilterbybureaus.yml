@@ -1,0 +1,28 @@
+uuid: 84e5c45f-4976-45bb-9bbb-05d3035c5963
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contacts_filter_by_bureaus
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: contactsfilterbybureaus
+theme: cloudy2
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:contacts_filter_by_bureaus'
+settings:
+  id: 'facet_block:contacts_filter_by_bureaus'
+  label: 'Contacts: Filter by Bureaus'
+  provider: facets
+  label_display: '0'
+  block_id: contactsfilterbybureaus
+visibility:
+  request_path:
+    id: request_path
+    pages: /contacts
+    negate: false
