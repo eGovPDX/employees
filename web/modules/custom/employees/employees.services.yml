@@ -1,0 +1,6 @@
+services:
+  employees.commands:
+    class: \Drupal\employees\Commands\BatchCommands
+    arguments: ['@entity_type.manager', '@logger.factory']
+    tags:
+      - { name: drush.command }
