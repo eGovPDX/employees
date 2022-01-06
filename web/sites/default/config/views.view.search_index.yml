@@ -9,6 +9,7 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
+    - user.role.authenticated
   module:
     - search_api
     - user
@@ -151,90 +152,6 @@ display:
             - media_name
             - rendered_item
           plugin_id: search_api_fulltext
-        search_api_datasource:
-          id: search_api_datasource
-          table: search_api_index_full_index
-          field: search_api_datasource
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            'entity:group': 'entity:group'
-            'entity:media': 'entity:media'
-            'entity:node': 'entity:node'
-            'entity:user': 'entity:user'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          plugin_id: search_api_datasource
-        search_api_language:
-          id: search_api_language
-          table: search_api_index_full_index
-          field: search_api_language
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            en: en
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: search_api_language
       sorts:
         search_api_relevance:
           id: search_api_relevance
@@ -309,6 +226,249 @@ display:
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
+      tags:
+        - 'config:search_api.index.full_index'
+  page_application_catalog:
+    display_plugin: page
+    id: page_application_catalog
+    display_title: 'Page: Search application catalog'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Search application catalog'
+      defaults:
+        title: false
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        access: false
+        exposed_form: false
+      style:
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:media':
+              document: search_result
+            'entity:node':
+              bts_application: default
+              bts_catalog_item: search_result
+              bts_service: default
+              contract: default
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: search_result
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter your keywords'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - content_field_description
+            - content_title
+            - field_additional_info
+            - field_customer_responsibilities
+            - field_optional_features
+            - field_service_hours
+            - field_service_initiation
+            - field_sla_target
+            - field_support_hours
+          plugin_id: search_api_fulltext
+        content_type:
+          id: content_type
+          table: search_api_index_full_index
+          field: content_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            bts_catalog_item: bts_catalog_item
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_bts_catalog_type:
+          id: field_bts_catalog_type
+          table: search_api_index_full_index
+          field: field_bts_catalog_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            Application: Application
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      path: technology-services/application-catalog/search
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      exposed_block: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.roles
       tags:
         - 'config:search_api.index.full_index'
   page_contracts:
@@ -1314,4 +1474,247 @@ display:
         - 'config:field.storage.node.field_mandated_purchases'
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:field.storage.node.field_type'
+        - 'config:search_api.index.full_index'
+  page_service_catalog:
+    display_plugin: page
+    id: page_service_catalog
+    display_title: 'Page: Search service catalog'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'Search service catalog'
+      defaults:
+        title: false
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        access: false
+        exposed_form: false
+      style:
+        type: html_list
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+          type: ul
+          wrapper_class: item-list
+          class: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:media':
+              document: search_result
+            'entity:node':
+              bts_application: default
+              bts_catalog_item: search_result
+              bts_service: default
+              contract: default
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: search_result
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter your keywords'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - content_field_description
+            - content_title
+            - field_additional_info
+            - field_customer_responsibilities
+            - field_optional_features
+            - field_service_hours
+            - field_service_initiation
+            - field_sla_target
+            - field_support_hours
+          plugin_id: search_api_fulltext
+        content_type:
+          id: content_type
+          table: search_api_index_full_index
+          field: content_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            bts_catalog_item: bts_catalog_item
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+        field_bts_catalog_type:
+          id: field_bts_catalog_type
+          table: search_api_index_full_index
+          field: field_bts_catalog_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            Service: Service
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_options
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      path: technology-services/service-catalog/search
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      exposed_block: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.roles
+      tags:
         - 'config:search_api.index.full_index'

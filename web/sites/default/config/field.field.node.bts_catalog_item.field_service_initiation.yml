@@ -1,0 +1,28 @@
+uuid: b3018b88-af3f-4354-a127-354a77d0adb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_initiation
+    - node.type.bts_catalog_item
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    restricted_html: restricted_html
+    basic_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: node.bts_catalog_item.field_service_initiation
+field_name: field_service_initiation
+entity_type: node
+bundle: bts_catalog_item
+label: 'Service Initiation'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

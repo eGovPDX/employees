@@ -4,12 +4,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - node.type.bts_application
-    - node.type.bts_service
+    - node.type.bts_catalog_item
     - taxonomy.vocabulary.bts_business_capability
     - taxonomy.vocabulary.bureaus
   module:
     - node
+    - options
     - taxonomy
     - user
 _core:
@@ -56,10 +56,13 @@ display:
       pager:
         type: mini
         options:
-          items_per_page: 10
+          items_per_page: 20
           offset: 0
           id: 0
           total_pages: 0
+          tags:
+            previous: ‹‹
+            next: ››
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -68,9 +71,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
       sorts:
         title:
           id: title
@@ -541,7 +541,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            bts_application: bts_application
+            bts_catalog_item: bts_catalog_item
           group: 1
           exposed: false
           expose:
@@ -574,6 +574,47 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        field_bts_catalog_type_value:
+          id: field_bts_catalog_type_value
+          table: node__field_bts_catalog_type
+          field: field_bts_catalog_type_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            Application: Application
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       defaults:
         filters: false
         filter_groups: false
@@ -740,7 +781,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            bts_service: bts_service
+            bts_catalog_item: bts_catalog_item
           group: 1
           exposed: false
           expose:
@@ -773,6 +814,47 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        field_bts_catalog_type_value:
+          id: field_bts_catalog_type_value
+          table: node__field_bts_catalog_type
+          field: field_bts_catalog_type_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            Service: Service
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       defaults:
         filters: false
         filter_groups: false

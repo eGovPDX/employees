@@ -1,0 +1,269 @@
+uuid: a951ef8d-cd6f-4bf4-939c-bd850d89121c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.bts_catalog_item.field_additional_info
+    - field.field.node.bts_catalog_item.field_annual_user_cost
+    - field.field.node.bts_catalog_item.field_bts_application_exception
+    - field.field.node.bts_catalog_item.field_bts_catalog_type
+    - field.field.node.bts_catalog_item.field_bureaus
+    - field.field.node.bts_catalog_item.field_business_capability
+    - field.field.node.bts_catalog_item.field_business_owner
+    - field.field.node.bts_catalog_item.field_business_priority
+    - field.field.node.bts_catalog_item.field_cloud_service_type
+    - field.field.node.bts_catalog_item.field_cost_per_ticket
+    - field.field.node.bts_catalog_item.field_customer_responsibilities
+    - field.field.node.bts_catalog_item.field_description
+    - field.field.node.bts_catalog_item.field_example_applications
+    - field.field.node.bts_catalog_item.field_hosting_environment
+    - field.field.node.bts_catalog_item.field_option_costs
+    - field.field.node.bts_catalog_item.field_optional_features
+    - field.field.node.bts_catalog_item.field_restricted
+    - field.field.node.bts_catalog_item.field_service_hours
+    - field.field.node.bts_catalog_item.field_service_initiation
+    - field.field.node.bts_catalog_item.field_service_owner
+    - field.field.node.bts_catalog_item.field_service_scope
+    - field.field.node.bts_catalog_item.field_sla_target
+    - field.field.node.bts_catalog_item.field_standard_cost
+    - field.field.node.bts_catalog_item.field_standard_service_features
+    - field.field.node.bts_catalog_item.field_support_hours
+    - field.field.node.bts_catalog_item.field_support_model
+    - field.field.node.bts_catalog_item.field_support_owner
+    - field.field.node.bts_catalog_item.field_vendor
+    - node.type.bts_catalog_item
+  module:
+    - link
+    - options
+    - text
+    - user
+id: node.bts_catalog_item.default
+targetEntityType: node
+bundle: bts_catalog_item
+mode: default
+content:
+  field_additional_info:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_annual_user_cost:
+    weight: 118
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_bts_application_exception:
+    weight: 119
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_bts_catalog_type:
+    weight: 128
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_bureaus:
+    weight: 120
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_business_capability:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_business_owner:
+    weight: 121
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_business_priority:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_cloud_service_type:
+    weight: 122
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_cost_per_ticket:
+    weight: 123
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_customer_responsibilities:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_description:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_example_applications:
+    weight: 106
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_hosting_environment:
+    weight: 124
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_option_costs:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_optional_features:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_restricted:
+    weight: 125
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_service_hours:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_service_initiation:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_service_owner:
+    weight: 111
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_service_scope:
+    weight: 112
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_sla_target:
+    weight: 113
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_standard_cost:
+    weight: 114
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_standard_service_features:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_support_hours:
+    weight: 116
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_support_model:
+    weight: 126
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_support_owner:
+    weight: 117
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_vendor:
+    weight: 127
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
