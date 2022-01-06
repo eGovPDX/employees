@@ -52,7 +52,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_additional_info:
-    weight: 24
+    weight: 28
     settings:
       rows: 5
       placeholder: ''
@@ -60,7 +60,7 @@ content:
     type: string_textarea
     region: content
   field_annual_user_cost:
-    weight: 30
+    weight: 38
     settings:
       size: 60
       placeholder: ''
@@ -68,7 +68,7 @@ content:
     type: string_textfield
     region: content
   field_bts_application_exception:
-    weight: 31
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -80,7 +80,7 @@ content:
     type: options_select
     region: content
   field_bureaus:
-    weight: 32
+    weight: 31
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -90,7 +90,7 @@ content:
     type: select2_entity_reference
     region: content
   field_business_capability:
-    weight: 14
+    weight: 13
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -100,33 +100,25 @@ content:
     type: select2_entity_reference
     region: content
   field_business_owner:
-    weight: 33
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
-      width: 100%
-    third_party_settings: {  }
-    type: select2_entity_reference
-    region: content
-  field_business_priority:
-    weight: 15
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
-      width: 100%
-    third_party_settings: {  }
-    type: select2_entity_reference
-    region: content
-  field_cloud_service_type:
     weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_cost_per_ticket:
+  field_business_priority:
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cloud_service_type:
     weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cost_per_ticket:
+    weight: 39
     settings:
       size: 60
       placeholder: ''
@@ -134,7 +126,7 @@ content:
     type: string_textfield
     region: content
   field_customer_responsibilities:
-    weight: 16
+    weight: 21
     settings:
       rows: 5
       placeholder: ''
@@ -142,7 +134,7 @@ content:
     type: string_textarea
     region: content
   field_description:
-    weight: 13
+    weight: 15
     settings:
       rows: 5
       placeholder: ''
@@ -150,7 +142,7 @@ content:
     type: text_textarea
     region: content
   field_example_applications:
-    weight: 17
+    weight: 29
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -164,29 +156,6 @@ content:
     type: options_select
     region: content
   field_option_costs:
-    weight: 19
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_optional_features:
-    weight: 18
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_restricted:
-    weight: 37
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
-  field_service_hours:
     weight: 20
     settings:
       rows: 5
@@ -194,8 +163,31 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_optional_features:
+    weight: 19
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_restricted:
+    weight: 32
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_service_hours:
+    weight: 22
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_service_initiation:
-    weight: 21
+    weight: 24
     settings:
       rows: 5
       placeholder: ''
@@ -203,7 +195,7 @@ content:
     type: text_textarea
     region: content
   field_service_owner:
-    weight: 23
+    weight: 16
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -213,7 +205,7 @@ content:
     type: select2_entity_reference
     region: content
   field_service_scope:
-    weight: 22
+    weight: 23
     settings:
       size: 60
       placeholder: ''
@@ -221,22 +213,6 @@ content:
     type: string_textfield
     region: content
   field_sla_target:
-    weight: 25
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_standard_cost:
-    weight: 26
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
-    region: content
-  field_standard_service_features:
     weight: 27
     settings:
       rows: 5
@@ -244,8 +220,24 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_standard_cost:
+    weight: 18
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_standard_service_features:
+    weight: 17
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_support_hours:
-    weight: 28
+    weight: 26
     settings:
       rows: 5
       placeholder: ''
@@ -253,13 +245,13 @@ content:
     type: string_textarea
     region: content
   field_support_model:
-    weight: 38
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_support_owner:
-    weight: 29
+    weight: 25
     settings:
       rows: 5
       placeholder: ''
@@ -267,7 +259,7 @@ content:
     type: string_textarea
     region: content
   field_vendor:
-    weight: 39
+    weight: 30
     settings:
       size: 60
       placeholder: ''
