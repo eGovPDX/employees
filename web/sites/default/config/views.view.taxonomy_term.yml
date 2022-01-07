@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_result
     - node.type.bts_catalog_item
     - taxonomy.vocabulary.bts_business_capability
     - taxonomy.vocabulary.bureaus
@@ -238,7 +238,8 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          relationship: none
+          view_mode: search_result
       header: {  }
       footer: {  }
       empty: {  }

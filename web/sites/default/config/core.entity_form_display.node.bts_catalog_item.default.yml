@@ -196,13 +196,9 @@ content:
     region: content
   field_service_owner:
     weight: 16
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
-      width: 100%
+    settings: {  }
     third_party_settings: {  }
-    type: select2_entity_reference
+    type: options_select
     region: content
   field_service_scope:
     weight: 23
