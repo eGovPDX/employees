@@ -21,24 +21,34 @@ base_table: search_api_index_full_index
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
+      title: Search
+      fields: {  }
+      pager:
+        type: full
         options:
-          perm: 'access content'
-      cache:
-        type: search_api_tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          skip_access: 0
-          bypass_access: 0
-          preserve_facet_query_args: false
+          offset: 0
+          items_per_page: 20
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       exposed_form:
         type: input_required
         options:
@@ -51,46 +61,42 @@ display:
           sort_desc_label: Desc
           text_input_required: ''
           text_input_required_format: basic_html
-      pager:
-        type: full
+      access:
+        type: perm
         options:
-          items_per_page: 20
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
+          perm: 'access content'
+      cache:
+        type: search_api_tag
+        options: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<p>No results found.</p>'
+            format: basic_html
+          tokenize: false
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
           expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: default
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:group':
-              employee: search_result
-              private: search_result
-            'entity:media':
-              document: search_result
-            'entity:node':
-              event: search_result
-              news: search_result
-              page: search_result
-              resource: search_result
-            'entity:user':
-              user: search_result
-      fields: {  }
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+      arguments: {  }
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -99,6 +105,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: and
           value: ''
           group: 1
@@ -121,8 +128,8 @@ display:
               publisher: '0'
               content_lead: '0'
               administrator: '0'
-            placeholder: ''
             expose_fields: false
+            placeholder: ''
             searched_fields_id: ''
           is_grouped: false
           group_info:
@@ -150,7 +157,6 @@ display:
             - media_field_description
             - media_name
             - rendered_item
-          plugin_id: search_api_fulltext
         search_api_datasource:
           id: search_api_datasource
           table: search_api_index_full_index
@@ -158,6 +164,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_datasource
           operator: or
           value:
             'entity:group': 'entity:group'
@@ -194,7 +201,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_datasource
         search_api_language:
           id: search_api_language
           table: search_api_index_full_index
@@ -202,6 +208,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_language
           operator: in
           value:
             en: en
@@ -234,21 +241,31 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_language
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_full_index
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      title: Search
+      style:
+        type: default
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:media':
+              document: search_result
+            'entity:node':
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: search_result
+      query:
+        type: views_query
+        options:
+          skip_access: 0
+          bypass_access: 0
+          preserve_facet_query_args: false
+      relationships: {  }
       header:
         result:
           id: result
@@ -257,26 +274,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: result
           empty: false
           content: 'Displaying @start - @end of @total'
-          plugin_id: result
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p>No results found.</p>'
-            format: basic_html
-          plugin_id: text
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -289,18 +290,18 @@ display:
       tags:
         - 'config:search_api.index.full_index'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: search
-      exposed_block: false
       cache:
         type: none
       defaults:
         cache: false
+      exposed_block: false
+      display_extenders: {  }
+      path: search
     cache_metadata:
       max-age: -1
       contexts:
@@ -312,144 +313,12 @@ display:
       tags:
         - 'config:search_api.index.full_index'
   page_contracts:
-    display_plugin: page
     id: page_contracts
     display_title: 'Page: Contracts'
+    display_plugin: page
     position: 2
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: Contracts
-      defaults:
-        title: false
-        header: false
-        exposed_form: false
-        style: false
-        row: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        cache: false
-      path: contracts
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p>The following contracts are authorized for use by all City bureaus.</p>'
-            format: basic_html
-          plugin_id: text
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: '<p>Displaying @start - @end of @total</p>'
-          plugin_id: result
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Search
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            field_date_range_end_value_1: field_date_range_end_value_1
-            content_title: content_title
-            field_category: field_category
-            field_type: field_type
-            field_contract_number: field_contract_number
-            field_mandated_purchases: field_mandated_purchases
-            field_p_card_allowed: field_p_card_allowed
-            field_date_range_end_value: field_date_range_end_value
-          info:
-            field_date_range_end_value_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            content_title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_category:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_type:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_contract_number:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_mandated_purchases:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_p_card_allowed:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_date_range_end_value:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
       fields:
         field_date_range_end_value_1:
           id: field_date_range_end_value_1
@@ -458,6 +327,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_date
           label: 'Contract Date » End date'
           exclude: true
           alter:
@@ -506,7 +376,6 @@ display:
           use_highlighting: false
           multi_type: separator
           multi_separator: ', '
-          plugin_id: search_api_date
         field_mandated_purchases:
           id: field_mandated_purchases
           table: search_api_index_full_index
@@ -514,6 +383,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'Mandated Purchases'
           exclude: true
           alter:
@@ -559,8 +429,8 @@ display:
           type: boolean
           settings:
             format: default
-            format_custom_true: ''
             format_custom_false: ''
+            format_custom_true: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -582,7 +452,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_p_card_allowed:
           id: field_p_card_allowed
           table: search_api_index_full_index
@@ -590,6 +459,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'P-Card Allowed'
           exclude: true
           alter:
@@ -635,8 +505,8 @@ display:
           type: boolean
           settings:
             format: default
-            format_custom_true: ''
             format_custom_false: ''
+            format_custom_true: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -658,7 +528,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         content_title:
           id: content_title
           table: search_api_index_full_index
@@ -666,6 +535,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'Vendor Name'
           exclude: false
           alter:
@@ -728,7 +598,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_category:
           id: field_category
           table: search_api_index_full_index
@@ -736,6 +605,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: Category
           exclude: false
           alter:
@@ -818,7 +688,6 @@ display:
               topics:
                 display_method: label
                 view_mode: default
-          plugin_id: search_api_field
         field_type:
           id: field_type
           table: search_api_index_full_index
@@ -826,6 +695,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'Contract Type'
           exclude: false
           alter:
@@ -908,7 +778,6 @@ display:
               topics:
                 display_method: label
                 view_mode: default
-          plugin_id: search_api_field
         field_contract_number:
           id: field_contract_number
           table: search_api_index_full_index
@@ -916,6 +785,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'Contract Number'
           exclude: false
           alter:
@@ -978,7 +848,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_date_range_end_value:
           id: field_date_range_end_value
           table: search_api_index_full_index
@@ -986,6 +855,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_date
           label: 'Expiration Date'
           exclude: false
           alter:
@@ -1034,7 +904,45 @@ display:
           use_highlighting: false
           multi_type: separator
           multi_separator: ', '
-          plugin_id: search_api_date
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      cache:
+        type: none
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: content_title
+          exposed: false
       filters:
         search_api_datasource:
           id: search_api_datasource
@@ -1043,6 +951,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_datasource
           operator: or
           value:
             'entity:node': 'entity:node'
@@ -1076,7 +985,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_datasource
         content_type:
           id: content_type
           table: search_api_index_full_index
@@ -1084,6 +992,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_options
           operator: or
           value:
             contract: contract
@@ -1117,7 +1026,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          plugin_id: search_api_options
         search_api_fulltext:
           id: search_api_fulltext
           table: search_api_index_full_index
@@ -1125,6 +1033,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: and
           value: ''
           group: 1
@@ -1147,8 +1056,8 @@ display:
               publisher: '0'
               content_lead: '0'
               administrator: '0'
-            placeholder: ''
             expose_fields: false
+            placeholder: ''
             searched_fields_id: ''
           is_grouped: false
           group_info:
@@ -1167,7 +1076,6 @@ display:
           fields:
             - content_title
             - field_contract_number
-          plugin_id: search_api_fulltext
         field_mandated_purchases:
           id: field_mandated_purchases
           table: search_api_index_full_index
@@ -1175,6 +1083,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: All
           group: 1
@@ -1217,7 +1126,6 @@ display:
                 title: 'No'
                 operator: '='
                 value: '0'
-          plugin_id: search_api_boolean
         field_p_card_allowed:
           id: field_p_card_allowed
           table: search_api_index_full_index
@@ -1225,6 +1133,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: All
           group: 1
@@ -1267,38 +1176,132 @@ display:
                 title: 'No'
                 operator: '='
                 value: '0'
-          plugin_id: search_api_boolean
       filter_groups:
         operator: AND
         groups:
           1: AND
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_full_index
-          field: search_api_relevance
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            field_date_range_end_value_1: field_date_range_end_value_1
+            content_title: content_title
+            field_category: field_category
+            field_type: field_type
+            field_contract_number: field_contract_number
+            field_mandated_purchases: field_mandated_purchases
+            field_p_card_allowed: field_p_card_allowed
+            field_date_range_end_value: field_date_range_end_value
+          default: '-1'
+          info:
+            field_date_range_end_value_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            content_title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_category:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_type:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_contract_number:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_mandated_purchases:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_p_card_allowed:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_date_range_end_value:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        cache: false
+        title: false
+        exposed_form: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+        header: false
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
           relationship: none
           group_type: group
           admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        content_title:
-          id: content_title
-          table: search_api_index_full_index
-          field: content_title
+          plugin_id: text
+          empty: true
+          content:
+            value: '<p>The following contracts are authorized for use by all City bureaus.</p>'
+            format: basic_html
+          tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      cache:
-        type: none
+          plugin_id: result
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
+      display_extenders: {  }
+      path: contracts
     cache_metadata:
       max-age: -1
       contexts:

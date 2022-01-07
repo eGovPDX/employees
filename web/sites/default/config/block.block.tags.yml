@@ -18,11 +18,11 @@ plugin: 'facet_block:tags'
 settings:
   id: 'facet_block:tags'
   label: 'Filter by Tags'
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: tags
 visibility:
   request_path:
     id: request_path
-    pages: '/group/*/documents'
     negate: false
+    pages: '/group/*/documents'

@@ -5,6 +5,7 @@ dependencies: {  }
 id: config_prod
 label: Production
 description: 'Config for Pantheon production environment'
+weight: 0
 folder: sites/default/config_prod
 module:
   clamav: 0
@@ -17,4 +18,3 @@ graylist:
   - mailsystem.settings
 graylist_dependents: true
 graylist_skip_equal: true
-weight: 0

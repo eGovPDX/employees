@@ -23,8 +23,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   layout_library:
     enable: false
 id: node.resource.search_result
@@ -34,11 +34,11 @@ mode: search_result
 content:
   field_resource_description:
     type: basic_string
-    weight: 0
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   content_moderation_control: true
   field_display_in_group: true

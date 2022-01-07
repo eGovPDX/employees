@@ -26,36 +26,36 @@ bundle: news
 mode: teaser
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 1
+    label: hidden
     settings:
       trim_length: 50
       trim_type: words
       trim_suffix: ''
       wrap_output: true
       wrap_class: trimmed
-      more_text: More
+      more_link: false
       more_class: more-link
+      more_text: More
       summary_handler: full
       trim_options:
         text: true
         trim_zero: true
-      more_link: false
     third_party_settings: {  }
+    weight: 1
     region: content
   field_published_on:
     type: smartdate_default
-    weight: 0
-    region: content
     label: inline
     settings:
       timezone_override: ''
+      format_type: medium
       format: date_only
       force_chronological: false
-      format_type: medium
       add_classes: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   content_moderation_control: true
   field_contact: true

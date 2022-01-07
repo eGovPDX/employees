@@ -12,13 +12,13 @@ id: medium
 label: Medium
 image_style_mappings:
   -
-    breakpoint_id: responsive_image.viewport_sizing
-    multiplier: 1x
     image_mapping_type: sizes
     image_mapping:
       sizes: '(min-width: 1290px) 417px, (min-width: 991px) 35vw, (min-width: 640px) 27vw, (min-width: 560px) 50vw, 100vw'
       sizes_image_styles:
         - max_1300x1300
         - max_650x650
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
 breakpoint_group: responsive_image
 fallback_image_style: max_325x325
