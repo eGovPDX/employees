@@ -670,7 +670,20 @@ display:
           require_value: false
           reduce_duplicates: false
           plugin_id: taxonomy_index_tid
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: test
+            format: basic_html
+          plugin_id: text
       display_description: ''
     cache_metadata:
       contexts:

@@ -1,26 +1,26 @@
-uuid: 926edab0-4674-434c-825c-7e6dbac701ce
+uuid: f9af8036-737e-4c11-8154-a533fc651fbc
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.service_owner
+    - facets.facet.filter_by_service_owner
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: serviceowner
+id: filterbyserviceowner
 theme: cloudy2
 region: side
-weight: -2
+weight: 0
 provider: null
-plugin: 'facet_block:service_owner'
+plugin: 'facet_block:filter_by_service_owner'
 settings:
-  id: 'facet_block:service_owner'
-  label: 'Service owner'
+  id: 'facet_block:filter_by_service_owner'
+  label: 'Filter by service owner'
   provider: facets
   label_display: '0'
-  block_id: serviceowner
+  block_id: filterbyserviceowner
 visibility:
   request_path:
     id: request_path

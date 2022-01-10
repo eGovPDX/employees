@@ -4,17 +4,17 @@ status: true
 dependencies:
   config:
     - search_api.index.full_index
-    - views.view.service_catalog
+    - views.view.search_index
   module:
     - search_api
 id: support_model
 name: 'Filter by support model'
 url_alias: support_model
-weight: 0
+weight: 2
 min_count: 1
 show_only_one_result: false
 field_identifier: field_support_model
-facet_source_id: 'search_api:views_page__service_catalog__page_application_catalog'
+facet_source_id: 'search_api:views_page__search_index__page_application_catalog'
 widget:
   type: checkbox
   config:

@@ -293,9 +293,9 @@ display:
         - 'languages:language_interface'
         - user.permissions
       tags: {  }
-  block_1:
+  block_child_terms_for_applications:
     display_plugin: block
-    id: block_1
+    id: block_child_terms_for_applications
     display_title: 'Block: child terms for applications'
     position: 1
     display_options:
@@ -557,9 +557,9 @@ display:
         - url
         - user.permissions
       tags: {  }
-  block_2:
+  block_child_terms_for_services:
     display_plugin: block
-    id: block_2
+    id: block_child_terms_for_services
     display_title: 'Block: child terms for services'
     position: 1
     display_options:
@@ -935,6 +935,7 @@ display:
         filter_groups: false
         title: false
         fields: false
+        arguments: false
       filter_groups:
         operator: AND
         groups:
@@ -1126,6 +1127,7 @@ display:
           entity_type: taxonomy_term
           entity_field: description
           plugin_id: field
+      arguments: {  }
     cache_metadata:
       max-age: -1
       contexts:

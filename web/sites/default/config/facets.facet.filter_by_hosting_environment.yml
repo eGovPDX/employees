@@ -1,20 +1,20 @@
-uuid: 1730d89b-9c46-43e9-9a2a-917e9ebd801f
+uuid: a08cc97b-8f53-4037-8e37-b1a4114b71a3
 langcode: en
 status: true
 dependencies:
   config:
     - search_api.index.full_index
-    - views.view.service_catalog
+    - views.view.search_index
   module:
     - search_api
-id: business_priority
-name: 'Filter by business priority'
-url_alias: business_priority
+id: filter_by_hosting_environment
+name: 'Filter by hosting environment'
+url_alias: hosting_environment
 weight: -1
 min_count: 1
 show_only_one_result: false
-field_identifier: field_business_priority
-facet_source_id: 'search_api:views_page__service_catalog__page_service_catalog'
+field_identifier: field_hosting_environment
+facet_source_id: 'search_api:views_page__search_index__page_application_catalog'
 widget:
   type: checkbox
   config:
@@ -35,17 +35,10 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
-  count_limit:
-    processor_id: count_limit
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      build: 50
-    settings:
-      minimum_items: 1
-      maximum_items: null
-  term_weight_widget_order:
-    processor_id: term_weight_widget_order
-    weights:
-      sort: 60
+      sort: 40
     settings:
       sort: ASC
   translate_entity:

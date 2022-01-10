@@ -1,20 +1,20 @@
-uuid: eca2861c-af81-4b6c-bdb1-e2b82b1788af
+uuid: f37fdb50-638f-4703-babd-2cdfc5a16aa9
 langcode: en
 status: true
 dependencies:
   config:
     - search_api.index.full_index
-    - views.view.service_catalog
+    - views.view.search_index
   module:
     - search_api
-id: application_service_owner
+id: filter_by_service_owner
 name: 'Filter by service owner'
 url_alias: service_owner
 weight: 0
 min_count: 1
 show_only_one_result: false
 field_identifier: field_service_owner
-facet_source_id: 'search_api:views_page__service_catalog__page_application_catalog'
+facet_source_id: 'search_api:views_page__search_index__page_service_catalog'
 widget:
   type: checkbox
   config:
@@ -35,6 +35,13 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
+  count_limit:
+    processor_id: count_limit
+    weights:
+      build: 50
+    settings:
+      minimum_items: 1
+      maximum_items: null
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:

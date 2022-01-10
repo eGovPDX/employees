@@ -5,52 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
     - taxonomy.vocabulary.bts_business_capability
-    - views.view.taxonomy_list
   module:
     - layout_builder
-    - layout_discovery
     - layout_library
     - text
-    - views
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          34f91b26-7055-4d26-96e0-69a239450b81:
-            uuid: 34f91b26-7055-4d26-96e0-69a239450b81
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:taxonomy_term:bts_business_capability:description'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 0
-          dff0c6e4-1fff-4ef8-961b-3200963783fc:
-            uuid: dff0c6e4-1fff-4ef8-961b-3200963783fc
-            region: content
-            configuration:
-              id: 'views_block:taxonomy_list-block_1'
-              label: ''
-              provider: views
-              label_display: '0'
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 1
-        third_party_settings: {  }
+    enabled: false
   layout_library:
     enable: false
 id: taxonomy_term.bts_business_capability.full
