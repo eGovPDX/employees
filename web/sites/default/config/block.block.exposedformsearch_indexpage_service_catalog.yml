@@ -1,0 +1,28 @@
+uuid: 4eba4b3c-ef7a-4383-904a-95bddd831d94
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_index
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: exposedformsearch_indexpage_service_catalog
+theme: cloudy2
+region: content
+weight: -18
+provider: null
+plugin: 'views_exposed_filter_block:search_index-page_service_catalog'
+settings:
+  id: 'views_exposed_filter_block:search_index-page_service_catalog'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/technology-services/service-catalog\r\n/technology-services/service-catalog/search"
+    negate: false

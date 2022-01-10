@@ -656,7 +656,8 @@ function employees_views_query_alter($view, $query)
  * Implements hook_search_api_query_alter().
  */
 function employees_search_api_query_alter(\Drupal\search_api\Query\QueryInterface $query) {
-  if($query->getSearchId() == "views_page:service_catalog__page_application_catalog") {
+  if($query->getSearchId() == "views_page:search_index__page_application_catalog" || 
+    $query->getSearchId() == "views_page:search_index__page_service_catalog" ) {
     if(!_is_current_user_bts_employee()) return;
     
     // Remove the filter on field_restricted if the current user is a BTS employee

@@ -1,0 +1,28 @@
+uuid: 5608e232-543f-4e97-8dbf-17add6042689
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_index
+  module:
+    - system
+    - views
+  theme:
+    - cloudy2
+id: exposedformsearch_indexpage_application_catalog
+theme: cloudy2
+region: content
+weight: -17
+provider: null
+plugin: 'views_exposed_filter_block:search_index-page_application_catalog'
+settings:
+  id: 'views_exposed_filter_block:search_index-page_application_catalog'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/technology-services/application-catalog\r\n/technology-services/application-catalog/search"
+    negate: false
