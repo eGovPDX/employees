@@ -604,3 +604,15 @@ function employees_preprocess_fieldset(&$variables) {
     unset($variables['description']);
   }
 }
+
+
+/**
+ * Implement hook_preprocess_HOOK(&$variables) 
+ * Hide user email field if email starts with "no.email"
+ */
+function employees_preprocess_block(&$variables) {
+  if($variables["plugin_id"] == "field_block:user:user:mail" &&
+    substr($variables["content"][0]["#title"], 0, 8) == "no.email" ) {
+    $variables["content"] = [];
+  }
+}

@@ -90,7 +90,7 @@ class BatchCommands extends DrushCommands
       while (($row = fgetcsv($handle)) !== FALSE) {
         // Skip the table header
         if( $row[0] == 'first' ) continue;
-        $email = $row[$csv_columns['email']];
+        $email = trim($row[$csv_columns['email']]);
         // If it's a City email address, try to find the user with email
         if (preg_match('/(?i)portlandoregon.gov$/', $email)) {
           $users = $user_storage->loadByProperties(['mail' => $email]);
