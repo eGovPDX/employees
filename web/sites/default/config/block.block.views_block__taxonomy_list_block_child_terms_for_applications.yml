@@ -1,4 +1,4 @@
-uuid: 09c51efd-3024-4a1f-859a-45bda52cdd17
+uuid: 28ae7bff-29aa-480e-a685-40c0e4801dc7
 langcode: en
 status: true
 dependencies:
@@ -9,14 +9,14 @@ dependencies:
     - views
   theme:
     - cloudy2
-id: views_block__taxonomy_list_block_2
+id: views_block__taxonomy_list_block_child_terms_for_applications
 theme: cloudy2
 region: content
 weight: -15
 provider: null
-plugin: 'views_block:taxonomy_list-block_2'
+plugin: 'views_block:taxonomy_list-block_child_terms_for_applications'
 settings:
-  id: 'views_block:taxonomy_list-block_2'
+  id: 'views_block:taxonomy_list-block_child_terms_for_applications'
   label: ''
   provider: views
   label_display: '0'
@@ -26,5 +26,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/technology-services/service-catalog/*'
+    pages: '/technology-services/application-catalog/taxonomy/term/*'
     negate: false
