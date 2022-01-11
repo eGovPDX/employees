@@ -623,8 +623,8 @@ function employees_preprocess_block(&$variables) {
 function employees_pathauto_alias_alter(&$alias, array &$context) {
   if($context['module'] == "user") {
     $user = $context['data']['user'];
-    $first_name = $user->field_first_name->value;
-    $last_name = $user->field_last_name->value;
+    $first_name = trim($user->field_first_name->value);
+    $last_name = trim($user->field_last_name->value);
 
     // Do nothing if the user has both first name and last name
     if( !empty($first_name) && !empty($last_name ) ) return;
