@@ -681,10 +681,10 @@ function employees_search_api_query_alter(\Drupal\search_api\Query\QueryInterfac
  * Implements hook_pathauto_pattern_alter().
  */
 function employees_pathauto_alias_alter(&$alias, array &$context) {
+  $original_source = $context["source"];
   if($context['module'] == "taxonomy") {
     $term = $context['data']['term'];
     $vocabulary_id = $term->bundle();
-    $original_source = $context["source"];
     if($vocabulary_id == "bts_business_capability") {
       // Build the alias for the term
       $term_alias = _build_alias_for_term($term);
@@ -698,6 +698,17 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
       _create_or_update_alias("/technology-services/application-catalog" . $original_source, "/technology-services/application-catalog/" . $term_alias);
     }
   }
+  // else if($context['module'] == "node") {
+  //   $node = $context['data']['node'];
+  //   if( $node->bundle() == "bts_catalog_item" ) {
+  //     if($node->field_bts_catalog_type->value == 'Application') {
+  //       _create_or_update_alias($original_source, "/technology-services/application-catalog" . $alias);
+  //     }
+  //     else if($node->field_bts_catalog_type->value == 'Service') {
+  //       _create_or_update_alias($original_source, "/technology-services/service-catalog" . $alias);
+  //     }
+  //   }
+  // }
 }
 
 /**

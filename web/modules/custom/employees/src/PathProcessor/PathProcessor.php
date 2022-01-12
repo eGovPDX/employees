@@ -23,7 +23,8 @@ class PathProcessor implements OutboundPathProcessorInterface {
   public function processOutbound($path, &$options = array(), Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
     $route_name = \Drupal::routeMatch()->getRouteName();
 
-    if( in_array($route_name, ["view.taxonomy_term.page_applications_with_term", "view.taxonomy_term.page_applications_with_term"]) ) {
+    if( in_array($route_name, ["view.taxonomy_term.page_applications_with_term", 
+    "view.taxonomy_term.page_services_with_term"]) ) {
       // Modify link to taxonomy term pages if the current page is a BTS Catalog page
       if( array_key_exists("entity_type", $options) && $options["entity_type"] == "taxonomy_term") {
         $term = $options["entity"];
