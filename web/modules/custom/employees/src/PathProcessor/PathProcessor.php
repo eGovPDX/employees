@@ -32,6 +32,12 @@ class PathProcessor implements OutboundPathProcessorInterface {
           $path = PathProcessor::$prefix_map[$route_name] . $path;
         }
       }
+      // Modify link to BTS catalog items if the current page is a BTS Catalog page
+      else if( array_key_exists("entity_type", $options) && 
+            $options["entity_type"] == "node" && 
+            $options["entity"]->bundle() == "bts_catalog_item" ) {
+        $path = PathProcessor::$prefix_map[$route_name] . $path;
+      }
     }
     return $path;
   }
