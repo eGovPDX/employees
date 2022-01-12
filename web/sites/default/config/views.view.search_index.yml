@@ -10,7 +10,6 @@ dependencies:
     - field.storage.node.field_type
     - search_api.index.full_index
     - system.menu.main
-    - user.role.authenticated
   module:
     - search_api
     - user
@@ -56,7 +55,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 50
+          items_per_page: 20
           offset: 0
           id: 0
           total_pages: null
@@ -86,7 +85,7 @@ display:
             'entity:media':
               document: search_result
             'entity:node':
-              contract: default
+              contract: teaser
               event: search_result
               news: search_result
               page: search_result
@@ -330,7 +329,7 @@ display:
         filters: false
         filter_groups: false
         sorts: false
-        access: false
+        access: true
         empty: false
         exposed_form: false
         title: false
@@ -546,11 +545,6 @@ display:
           expose:
             label: ''
           plugin_id: search_api
-      access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
       empty: {  }
       exposed_form:
         type: basic
@@ -579,7 +573,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags:
         - 'config:search_api.index.full_index'
   page_contracts:
