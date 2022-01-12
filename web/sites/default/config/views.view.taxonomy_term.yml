@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.search_result
     - node.type.bts_catalog_item
     - taxonomy.vocabulary.bts_business_capability
+    - taxonomy.vocabulary.bts_business_priority
     - taxonomy.vocabulary.bureaus
+    - views.view.taxonomy_list
   module:
     - node
     - options
@@ -240,7 +242,18 @@ display:
         options:
           relationship: none
           view_mode: search_result
-      header: {  }
+      header:
+        view:
+          id: view
+          table: views
+          field: view
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          view_to_insert: 'taxonomy_list:block_taxonomy_term_description'
+          inherit_arguments: true
+          plugin_id: view
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -390,6 +403,7 @@ display:
       defaults:
         filters: false
         filter_groups: false
+        header: true
       filter_groups:
         operator: AND
         groups:
@@ -620,7 +634,7 @@ display:
         filters: false
         filter_groups: false
         arguments: false
-        header: false
+        header: true
       filter_groups:
         operator: AND
         groups:
@@ -661,6 +675,7 @@ display:
           validate_options:
             bundles:
               bts_business_capability: bts_business_capability
+              bts_business_priority: bts_business_priority
               bureaus: bureaus
             access: true
             operation: view
@@ -670,20 +685,6 @@ display:
           require_value: false
           reduce_duplicates: false
           plugin_id: taxonomy_index_tid
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: test
-            format: basic_html
-          plugin_id: text
       display_description: ''
     cache_metadata:
       contexts:

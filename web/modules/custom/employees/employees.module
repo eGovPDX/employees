@@ -692,7 +692,7 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
       _create_or_update_alias("/technology-services/service-catalog" . $original_source, "/technology-services/service-catalog/" . $term_alias);
     }
     // For the Bureaus taxonomy, only create the Application Catalog alias
-    else if($vocabulary_id == "bureaus") {
+    else if( in_array($vocabulary_id, ["bureaus", "bts_business_priority"]) ) {
       // Build the alias for the term
       $term_alias = _build_alias_for_term($term);
       _create_or_update_alias("/technology-services/application-catalog" . $original_source, "/technology-services/application-catalog/" . $term_alias);
