@@ -9,6 +9,7 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
+    - system.menu.main
   module:
     - search_api
     - user
@@ -84,12 +85,13 @@ display:
             'entity:media':
               document: search_result
             'entity:node':
+              contract: teaser
               event: search_result
               news: search_result
               page: search_result
               resource: search_result
             'entity:user':
-              user: search_result
+              user: contact_details
       fields: {  }
       filters:
         search_api_fulltext:
@@ -301,6 +303,269 @@ display:
         type: none
       defaults:
         cache: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:search_api.index.full_index'
+  page_contacts:
+    display_plugin: page
+    id: page_contacts
+    display_title: 'Page: Directory'
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: contacts
+      exposed_block: false
+      cache:
+        type: none
+      defaults:
+        cache: false
+        filters: false
+        filter_groups: false
+        sorts: false
+        access: true
+        empty: false
+        exposed_form: false
+        title: false
+      display_description: ''
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter your keywords'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - field_address
+            - field_first_name
+            - field_first_name_1
+            - field_last_name
+            - field_last_name_1
+            - field_phone
+            - field_search_keywords
+            - field_section
+            - field_title
+            - field_workspace
+          plugin_id: search_api_fulltext
+        search_api_datasource:
+          id: search_api_datasource
+          table: search_api_index_full_index
+          field: search_api_datasource
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            'entity:user': 'entity:user'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: search_api_datasource
+        user_status:
+          id: user_status
+          table: search_api_index_full_index
+          field: user_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+        field_last_name:
+          id: field_last_name
+          table: search_api_index_full_index
+          field: field_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_text
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+        field_last_name:
+          id: field_last_name
+          table: search_api_index_full_index
+          field: field_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
+      empty: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      title: Directory
+      menu:
+        type: normal
+        title: Directory
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
     cache_metadata:
       max-age: -1
       contexts:
