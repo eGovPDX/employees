@@ -163,3 +163,16 @@ $settings['trusted_host_patterns'] = array(
 );
 
 $settings['file_temp_path'] = '/tmp';
+
+// For our local environments, the Search API Server is the SOLR8 service.
+$config['search_api.server.local_dev']['status'] = TRUE;
+$config['search_api.index.full_index']['server'] = 'local_dev';
+
+// Until it is supported, the Pantheon server is disabled.
+$config['search_api.server.pantheon']['status'] = FALSE;
+$config['search_api.server.pantheon']['description'] = "This will always remain disabled on your local environment.";
+
+// SOLR on Pantheon defines the scheme as an environment variable.
+// We define this just so that the module doesn't break.
+putenv('PANTHEON_INDEX_SCHEME=https');
+putenv('PANTHEON_INDEX_PORT=449');

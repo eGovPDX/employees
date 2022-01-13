@@ -36,6 +36,11 @@ services:
     build:
       - echo "Installing Node.js dependencies..."
       - npm -C /app/web/themes/custom/cloudy2 install
+  solr8:
+    type: solr:8
+    ssl: true
+    config:
+      dir: web/modules/composer/search_api_solr/jump-start/solr8/config-set
 tooling:
   drush:
     description: Run drush commands
