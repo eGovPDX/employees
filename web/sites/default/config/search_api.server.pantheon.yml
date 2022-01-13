@@ -30,28 +30,37 @@ dependencies:
     - search_api_solr
 _core:
   default_config_hash: hOaNP_V6A13_xW6_NFX0BavSryQpDTQ9-TAueHIamWU
-id: pantheon_solr8
+id: pantheon
 name: 'Pantheon Search'
-description: ''
+description: 'Currently configured with a Pantheon Solr server on a Pantheon environment.'
 backend: search_api_solr
 backend_config:
+  retrieve_data: false
+  highlight_data: false
+  site_hash: false
+  server_prefix: ''
+  domain: generic
+  environment: default
   connector: pantheon
   connector_config:
+    scheme: https
+    host: index
+    port: 449
+    path: false
+    core: false
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10
     finalize_timeout: 30
+    solr_version: '8'
+    http_method: AUTO
     commit_within: 1000
-    workarounds:
-      solr_version: ''
-      http_method: AUTO
-      skip_schema_check: 0
-    advanced:
-      jmx: 0
-      solr_install_dir: ''
     jmx: false
-    skip_schema_check: false
-    endpoint: {  }
+    solr_install_dir: ''
+    skip_schema_check: true
+    schema: false
+  optimize: false
+  fallback_multiple: false
   disabled_field_types: {  }
   disabled_caches: {  }
   disabled_request_handlers:
@@ -61,11 +70,3 @@ backend_config:
     - request_dispatcher_httpcachingnever_default_7_0_0
   rows: 10
   index_single_documents_fallback_count: 10
-  retrieve_data: false
-  highlight_data: false
-  fallback_multiple: false
-  server_prefix: ''
-  domain: generic
-  environment: default
-  optimize: false
-  site_hash: false

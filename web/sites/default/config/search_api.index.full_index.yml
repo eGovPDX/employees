@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.body
+<<<<<<< HEAD
     - field.storage.node.field_description
     - field.storage.user.field_address
     - field.storage.node.field_bts_catalog_type
@@ -21,6 +22,13 @@ dependencies:
     - field.storage.node.field_topics
     - field.storage.node.field_type
     - field.storage.node.field_when
+=======
+    - field.storage.user.field_address
+    - field.storage.node.field_category
+    - field.storage.node.field_contract_number
+    - field.storage.node.field_date_range
+    - field.storage.node.field_display_in_group
+>>>>>>> 2d865bb (POWR-3939 attempt at getting a local solr server connected.)
     - field.storage.user.field_division_name
     - field.storage.user.field_first_name
     - field.storage.node.field_hosting_environment
@@ -32,7 +40,10 @@ dependencies:
     - field.storage.user.field_primary_groups
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
+<<<<<<< HEAD
     - field.storage.node.field_support_model
+=======
+>>>>>>> 2d865bb (POWR-3939 attempt at getting a local solr server connected.)
     - field.storage.media.field_tags
     - field.storage.user.field_title
     - field.storage.node.field_type
@@ -40,7 +51,11 @@ dependencies:
     - field.storage.group.field_group_description
     - field.storage.media.field_description
     - field.storage.media.field_display_in_group
+<<<<<<< HEAD
     - search_api.server.searchstax
+=======
+    - search_api.server.pantheon
+>>>>>>> 2d865bb (POWR-3939 attempt at getting a local solr server connected.)
     - core.entity_view_mode.user.compact
   module:
     - search_api_solr
@@ -670,5 +685,4 @@ tracker_settings:
 options:
   cron_limit: 50
   index_directly: true
-  track_changes_in_references: true
-server: searchstax
+server: pantheon
