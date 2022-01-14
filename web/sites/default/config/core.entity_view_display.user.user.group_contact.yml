@@ -9,14 +9,20 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
   module:
     - field_group
@@ -82,12 +88,18 @@ hidden:
   field_division_name: true
   field_first_name: true
   field_group_names: true
+  field_is_contact_only: true
   field_job_description: true
+  field_keep_mobile_phone_private: true
   field_last_name: true
   field_managers: true
+  field_mobile_phone: true
   field_office_location: true
   field_primary_groups: true
   field_publisher_role_changed: true
+  field_search_keywords: true
+  field_section: true
+  field_workspace: true
   langcode: true
   masquerade: true
   masquerade_as: true
