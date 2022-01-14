@@ -18,11 +18,11 @@ plugin: 'facet_block:contract_category'
 settings:
   id: 'facet_block:contract_category'
   label: 'Filter by Category'
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: filterbycategory
 visibility:
   request_path:
     id: request_path
-    pages: /contracts
     negate: false
+    pages: /contracts

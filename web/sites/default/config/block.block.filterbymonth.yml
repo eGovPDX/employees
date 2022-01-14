@@ -18,11 +18,11 @@ plugin: 'facet_block:changed_month'
 settings:
   id: 'facet_block:changed_month'
   label: 'Filter by Month'
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: filterbymonth
 visibility:
   request_path:
     id: request_path
-    pages: '/group/*/documents'
     negate: false
+    pages: '/group/*/documents'

@@ -18,17 +18,17 @@ plugin: 'views_block:group_menu-block_group_menu_on_lists'
 settings:
   id: 'views_block:group_menu-block_group_menu_on_lists'
   label: ''
-  provider: views
   label_display: '0'
+  provider: views
+  context_mapping: {  }
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      event: event
-      news: news
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      event: event
+      news: news

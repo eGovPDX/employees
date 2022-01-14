@@ -19,41 +19,43 @@ bundle: private
 mode: default
 content:
   field_group_contact:
+    type: entity_reference_autocomplete
     weight: 6
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_group_description:
+    type: text_textarea_with_summary
     weight: 5
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    type: text_textarea_with_summary
-    region: content
   field_group_path:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_org_type:
+    type: options_select
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_parent_group:
+    type: entity_reference_autocomplete
     weight: 3
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -65,8 +67,6 @@ content:
           type: ''
           list: ''
           add: Add
-    type: entity_reference_autocomplete
-    region: content
   label:
     type: string_textfield
     weight: 0
@@ -90,10 +90,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 9
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

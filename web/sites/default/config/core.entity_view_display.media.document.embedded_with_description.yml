@@ -18,8 +18,8 @@ dependencies:
     - link
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 _core:
   default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
 id: media.document.embedded_with_description
@@ -28,16 +28,14 @@ bundle: document
 mode: embedded_with_description
 content:
   field_description:
-    weight: 4
+    type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 4
     region: content
   field_efiles_link:
     type: link
-    weight: 1
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -46,35 +44,37 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_file_size:
     type: number_integer
-    weight: 3
-    region: content
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_media_document:
+    type: file_url_plain
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_url_plain
     weight: 0
     region: content
   field_mime_type:
     type: string
-    weight: 2
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  media_last_updated_media_changed_date:
-    weight: 5
+    weight: 2
     region: content
+  media_last_updated_media_changed_date:
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
 hidden:
   created: true
   field_display_in_group: true

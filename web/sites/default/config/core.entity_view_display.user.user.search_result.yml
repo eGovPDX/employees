@@ -30,8 +30,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
 id: user.user.search_result
@@ -41,36 +41,36 @@ mode: search_result
 content:
   field_first_name:
     type: string
-    weight: 0
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_group_names:
     type: string
-    weight: 2
-    region: content
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_last_name:
     type: string
-    weight: 1
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_phone:
     type: telephone_link
-    weight: 3
-    region: content
     label: visually_hidden
     settings:
       title: ''
     third_party_settings: {  }
+    weight: 3
+    region: content
 hidden:
   field_active_directory_id: true
   field_address: true

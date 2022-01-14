@@ -30,20 +30,21 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   field_group:
     group_username:
       children:
         - field_last_name
+      label: Username
       parent_name: ''
+      region: hidden
       weight: 17
       format_type: html_element
-      region: hidden
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
         element: div
         show_label: false
         label_element: h3
@@ -51,7 +52,6 @@ third_party_settings:
         attributes: ''
         effect: none
         speed: fast
-      label: Username
 _core:
   default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
 id: user.user.group_contact
@@ -61,27 +61,27 @@ mode: group_contact
 content:
   field_phone:
     type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 1
     region: content
-    label: visually_hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_title:
-    weight: 0
+    type: string
     label: visually_hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
   mail:
     type: email_mailto
-    weight: 2
-    region: content
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_active_directory_id: true
   field_address: true

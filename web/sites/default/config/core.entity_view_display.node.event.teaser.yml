@@ -27,17 +27,17 @@ mode: teaser
 content:
   field_when:
     type: smartdate_default
-    weight: 0
-    region: content
     label: hidden
     settings:
       timezone_override: ''
+      format_type: medium
       format: compact
       force_chronological: false
-      format_type: medium
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   body: true
   content_moderation_control: true

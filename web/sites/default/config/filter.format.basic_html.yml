@@ -57,16 +57,16 @@ filters:
     weight: 100
     settings:
       default_view_mode: embedded
-      allowed_media_types:
-        document: document
-        image: image
-        remote_video: remote_video
       allowed_view_modes:
         embedded: embedded
         embedded_with_description: embedded_with_description
         full: full
         medium: medium
         narrow: narrow
+      allowed_media_types:
+        document: document
+        image: image
+        remote_video: remote_video
   filter_url:
     id: filter_url
     provider: filter
