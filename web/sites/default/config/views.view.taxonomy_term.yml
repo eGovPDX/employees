@@ -419,14 +419,14 @@ display:
       tags: {  }
   page_applications_with_term:
     id: page_applications_with_term
-    display_title: 'Page: Applications'
+    display_title: 'Page: BTS catalog'
     display_plugin: page
     position: 1
     display_options:
       query:
         type: views_query
         options: {  }
-      path: technology-services/application-catalog/taxonomy/term/%
+      path: technology-services/bts-catalog/taxonomy/term/%
       display_extenders: {  }
       filters:
         langcode:
@@ -923,6 +923,7 @@ display:
           reduce_duplicates: false
           plugin_id: taxonomy_index_tid
       display_description: ''
+      enabled: false
     cache_metadata:
       contexts:
         - 'languages:language_interface'
