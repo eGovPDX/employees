@@ -636,8 +636,7 @@ function _is_current_user_bts_employee() {
 function employees_views_query_alter($view, $query)
 {
   if ( $view->id() === 'taxonomy_term' && (
-    $view->current_display == "page_applications_with_term" || 
-    $view->current_display == "page_services_with_term"
+    $view->current_display == "page_bts_catalog_by_term"
   )) {
     if( ! _is_current_user_bts_employee() ) return;
 

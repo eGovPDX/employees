@@ -1,26 +1,26 @@
-uuid: e2256091-8170-4d44-bafa-abf986459bb3
+uuid: b09497ab-53a5-4ad5-adf7-1afec3193385
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.business_capability
+    - facets.facet.bts_catalog_type
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: businesscapability
+id: btscatalogtype
 theme: cloudy2
 region: side
-weight: -8
+weight: -9
 provider: null
-plugin: 'facet_block:business_capability'
+plugin: 'facet_block:bts_catalog_type'
 settings:
-  id: 'facet_block:business_capability'
-  label: 'Business capability'
+  id: 'facet_block:bts_catalog_type'
+  label: 'BTS catalog type'
   provider: facets
   label_display: '0'
-  block_id: businesscapability
+  block_id: btscatalogtype
 visibility:
   request_path:
     id: request_path

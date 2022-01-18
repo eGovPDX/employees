@@ -246,6 +246,7 @@ display:
         sorts: false
         access: false
         exposed_form: false
+        cache: false
       style:
         type: html_list
         options:
@@ -374,16 +375,15 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: search_api_options
-        field_bts_catalog_type:
-          id: field_bts_catalog_type
+        field_restricted:
+          id: field_restricted
           table: search_api_index_full_index
-          field: field_bts_catalog_type
+          field: field_restricted
           relationship: none
           group_type: group
           admin_label: ''
-          operator: or
-          value:
-            Application: Application
+          operator: '='
+          value: '0'
           group: 1
           exposed: false
           expose:
@@ -400,7 +400,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -413,8 +412,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          plugin_id: search_api_options
+          plugin_id: search_api_boolean
       filter_groups:
         operator: AND
         groups:
@@ -461,6 +459,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       exposed_block: true
+      cache:
+        type: none
     cache_metadata:
       max-age: -1
       contexts:
