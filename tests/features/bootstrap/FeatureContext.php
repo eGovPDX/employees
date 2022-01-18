@@ -66,7 +66,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
         else {
           $uli = shell_exec("terminus drush employees.$site_name -- uli --mail \"$name\"");
         }
+        // Remove any extraneous characters from the link (like "Ok" output on a new line after the link)
         $uli = trim($uli);
+        $uli = preg_replace('/\n.*$/m', '', $uli);
+        // echo "Drush ULI link: '$uli'\n";
       }
   
       // Log in
@@ -76,8 +79,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
       
       // Check for successful login
       $redirect_url = $this->getSession()->getCurrentUrl();
-      echo "Login request redirected to $redirect_url";
+      // echo "Login request redirected to '$redirect_url'\n";
       $login_success = preg_match("/\/edit\?pass-reset-token=/", $redirect_url);
+      // echo "Login success: $login_success\n";
     }
 
     $driver = $this->getDriver();
