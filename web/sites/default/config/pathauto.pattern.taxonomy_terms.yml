@@ -8,9 +8,9 @@ dependencies:
 id: taxonomy_terms
 label: 'Taxonomy Terms'
 type: 'canonical_entities:taxonomy_term'
-pattern: 'technology-services/bts-catalog/[term:vocabulary]/[term:parent]/[term:name]'
+pattern: '[term:vocabulary]/[term:parent]/[term:name]'
 selection_criteria:
-  f39c8127-aeeb-40f5-ab08-dd173b613624:
+  749115e7-8a89-4120-ac6f-85bf51af955e:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       bts_business_capability: bts_business_capability
@@ -19,7 +19,7 @@ selection_criteria:
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: f39c8127-aeeb-40f5-ab08-dd173b613624
+    uuid: 749115e7-8a89-4120-ac6f-85bf51af955e
 selection_logic: and
 weight: 1
 relationships: {  }

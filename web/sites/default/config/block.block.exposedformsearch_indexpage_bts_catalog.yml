@@ -9,14 +9,14 @@ dependencies:
     - views
   theme:
     - cloudy2
-id: exposedformsearch_indexpage_application_catalog
+id: exposedformsearch_indexpage_bts_catalog
 theme: cloudy2
 region: content
-weight: -16
+weight: -15
 provider: null
-plugin: 'views_exposed_filter_block:search_index-page_application_catalog'
+plugin: 'views_exposed_filter_block:search_index-page_bts_catalog'
 settings:
-  id: 'views_exposed_filter_block:search_index-page_application_catalog'
+  id: 'views_exposed_filter_block:search_index-page_bts_catalog'
   label: ''
   provider: views
   label_display: '0'
@@ -24,5 +24,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/technology-services/application-catalog\r\n/technology-services/application-catalog/search"
+    pages: "/technology-services/bts-catalog\r\n/technology-services/bts-catalog/search"
     negate: false
