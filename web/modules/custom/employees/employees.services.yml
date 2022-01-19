@@ -1,0 +1,5 @@
+services:
+  employees.context_path_processor:
+    class: Drupal\employees\PathProcessor\PathProcessor
+    tags:
+      - { name: path_processor_outbound }
