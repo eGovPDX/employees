@@ -687,7 +687,7 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
     if( in_array($vocabulary_id, ["bts_business_capability", "bureaus", "bts_business_priority"]) ) {
       // Build the alias for the term
       $term_alias = _build_alias_for_term($term);
-      _create_or_update_alias("/technology-services/bts-catalog" . $original_source, "/technology-services/bts-catalog/" . $term_alias);
+      _create_or_update_alias("/technology-services/catalog" . $original_source, "/technology-services/catalog/" . $term_alias);
     }
   }
 }

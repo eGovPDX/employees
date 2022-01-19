@@ -15,7 +15,7 @@ class PathProcessor implements OutboundPathProcessorInterface {
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = array(), Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
-    if (strpos($path, "/technology-services/bts-catalog") === 0) {
+    if (strpos($path, "/technology-services/catalog") === 0) {
       return $path;
     }
 
@@ -27,7 +27,7 @@ class PathProcessor implements OutboundPathProcessorInterface {
         $term = $options["entity"];
         $vocabulary_id = $term->vid[0]->entity->id();
         if( in_array($vocabulary_id, ["bts_business_capability", "bts_business_priority", "bureaus"]) ) {
-          $path = "/technology-services/bts-catalog" . $path;
+          $path = "/technology-services/catalog" . $path;
         }
       }
     }

@@ -132,7 +132,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/technology-services/bts-catalog{{ view_taxonomy_term }}">{{ name }}</a>'
+            text: '<a href="/technology-services/catalog{{ view_taxonomy_term }}">{{ name }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -835,7 +835,7 @@ display:
         operator: AND
         groups:
           1: AND
-      path: technology-services/bts-catalog/bureaus
+      path: technology-services/catalog/bureaus
       title: 'BTS catalog by bureau'
       display_description: ''
       arguments: {  }
@@ -964,7 +964,7 @@ display:
         operator: AND
         groups:
           1: AND
-      path: technology-services/bts-catalog/bts-business-priority
+      path: technology-services/catalog/bts-business-priority
       title: 'BTS catalog by business priority'
       display_description: ''
       fields:
@@ -1223,7 +1223,7 @@ display:
         operator: AND
         groups:
           1: AND
-      path: technology-services/bts-catalog/bts-business-capability
+      path: technology-services/catalog/bts-business-capability
       title: 'BTS catalog by business capability'
       display_description: ''
     cache_metadata:
