@@ -20,7 +20,8 @@ class PathProcessor implements OutboundPathProcessorInterface {
     }
 
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if( $route_name == "view.taxonomy_term.page_bts_catalog_by_term" ) {
+    if( $route_name == "view.taxonomy_term.page_bts_catalog_by_term" || 
+      $route_name == "entity.node.canonical") {
       // Modify link to taxonomy term pages if the current page is a BTS Catalog page
       if( array_key_exists("entity_type", $options) && $options["entity_type"] == "taxonomy_term") {
         $term = $options["entity"];
@@ -29,12 +30,6 @@ class PathProcessor implements OutboundPathProcessorInterface {
           $path = "/technology-services/bts-catalog" . $path;
         }
       }
-      // Modify link to BTS catalog items if the current page is a BTS Catalog page
-      // else if( array_key_exists("entity_type", $options) && 
-      //       $options["entity_type"] == "node" && 
-      //       $options["entity"]->bundle() == "bts_catalog_item" ) {
-      //   $path = "/technology-services/bts-catalog" . $path;
-      // }
     }
     return $path;
   }
