@@ -11,12 +11,12 @@ pattern: 'technology-services/catalog/[node:title]'
 selection_criteria:
   1db283ef-8800-43c8-a87b-e1db2e77cc27:
     id: node_type
-    bundles:
-      bts_catalog_item: bts_catalog_item
     negate: false
+    uuid: 1db283ef-8800-43c8-a87b-e1db2e77cc27
     context_mapping:
       node: node
-    uuid: 1db283ef-8800-43c8-a87b-e1db2e77cc27
+    bundles:
+      bts_catalog_item: bts_catalog_item
 selection_logic: and
 weight: -5
 relationships: {  }

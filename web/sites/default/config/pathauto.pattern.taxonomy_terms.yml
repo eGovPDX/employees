@@ -12,14 +12,14 @@ pattern: '[term:vocabulary]/[term:parent]/[term:name]'
 selection_criteria:
   749115e7-8a89-4120-ac6f-85bf51af955e:
     id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 749115e7-8a89-4120-ac6f-85bf51af955e
+    context_mapping:
+      taxonomy_term: taxonomy_term
     bundles:
       bts_business_capability: bts_business_capability
       bts_business_priority: bts_business_priority
       bureaus: bureaus
-    negate: false
-    context_mapping:
-      taxonomy_term: taxonomy_term
-    uuid: 749115e7-8a89-4120-ac6f-85bf51af955e
 selection_logic: and
 weight: 1
 relationships: {  }

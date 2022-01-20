@@ -74,13 +74,14 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
           entity_type: node
           entity_field: title
           plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: title
+          exposed: false
         changed:
           id: changed
           table: node_field_data
@@ -116,10 +117,10 @@ display:
           default_argument_type: taxonomy_tid
           default_argument_options:
             term_page: '1'
-            anyall: ','
             node: false
             limit: false
             vids: {  }
+            anyall: ','
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -297,11 +298,55 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      query:
-        type: views_query
-        options: {  }
-      path: technology-services/catalog/taxonomy/term/%
-      display_extenders: {  }
+      arguments:
+        tid:
+          id: tid
+          table: taxonomy_index
+          field: tid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          default_action: default
+          exception:
+            value: ''
+            title_enable: false
+            title: All
+          title_enable: true
+          title: '{{ arguments.tid }}'
+          default_argument_type: taxonomy_tid
+          default_argument_options:
+            term_page: '1'
+            node: false
+            limit: false
+            vids: {  }
+            anyall: ','
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: 'entity:taxonomy_term'
+            fail: 'not found'
+          validate_options:
+            bundles:
+              bts_business_capability: bts_business_capability
+              bts_business_priority: bts_business_priority
+              bureaus: bureaus
+            access: true
+            operation: view
+            multiple: 0
+          break_phrase: false
+          add_table: false
+          require_value: false
+          reduce_duplicates: false
       filters:
         langcode:
           id: langcode
@@ -310,6 +355,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
           operator: in
           value:
             '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
@@ -321,6 +369,8 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
@@ -328,8 +378,6 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -342,9 +390,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: language
-          entity_type: node
-          entity_field: langcode
         status:
           id: status
           table: taxonomy_index
@@ -352,6 +397,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: boolean
           operator: '='
           value: '1'
           group: 1
@@ -362,14 +408,14 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -382,7 +428,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: boolean
         field_restricted_value:
           id: field_restricted_value
           table: node__field_restricted
@@ -390,6 +435,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: boolean
           operator: '='
           value: '0'
           group: 1
@@ -420,7 +466,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: boolean
         type:
           id: type
           table: node_field_data
@@ -428,6 +473,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value:
             bts_catalog_item: bts_catalog_item
@@ -460,67 +508,18 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-      defaults:
-        filters: false
-        filter_groups: false
-        arguments: false
-        header: false
       filter_groups:
         operator: AND
         groups:
           1: AND
-      arguments:
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          default_action: default
-          exception:
-            value: ''
-            title_enable: false
-            title: All
-          title_enable: true
-          title: '{{ arguments.tid }}'
-          default_argument_type: taxonomy_tid
-          default_argument_options:
-            term_page: '1'
-            anyall: ','
-            node: false
-            limit: false
-            vids: {  }
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            items_per_page: 25
-            override: false
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: 'entity:taxonomy_term'
-            fail: 'not found'
-          validate_options:
-            bundles:
-              bts_business_capability: bts_business_capability
-              bts_business_priority: bts_business_priority
-              bureaus: bureaus
-            access: true
-            operation: view
-            multiple: 0
-          break_phrase: false
-          add_table: false
-          require_value: false
-          reduce_duplicates: false
-          plugin_id: taxonomy_index_tid
+      query:
+        type: views_query
+        options: {  }
+      defaults:
+        arguments: false
+        filters: false
+        filter_groups: false
+        header: false
       display_description: ''
       header:
         view_1:
@@ -530,16 +529,18 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Child term list'
+          plugin_id: view
           empty: true
           view_to_insert: 'taxonomy_list:block_child_terms_for_bts_catalog'
           inherit_arguments: true
-          plugin_id: view
+      display_extenders: {  }
+      path: technology-services/catalog/taxonomy/term/%
     cache_metadata:
+      max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
-      max-age: -1
       tags: {  }

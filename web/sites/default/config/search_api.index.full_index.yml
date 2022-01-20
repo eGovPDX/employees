@@ -167,6 +167,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_additional_info
+  field_address:
+    label: 'Office location'
+    datasource_id: 'entity:user'
+    property_path: field_address
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_address
   field_bts_catalog_type:
     label: 'BTS catalog type'
     datasource_id: 'entity:node'
@@ -207,14 +215,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_business_priority
-  field_address:
-    label: 'Office location'
-    datasource_id: 'entity:user'
-    property_path: field_address
-    type: text
-    dependencies:
-      config:
-        - field.storage.user.field_address
   field_category:
     label: Category
     datasource_id: 'entity:node'
@@ -271,14 +271,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_display_in_group
-  field_example_applications:
-    label: 'Example applications'
-    datasource_id: 'entity:node'
-    property_path: field_example_applications
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_example_applications
   field_division_name:
     label: 'Division name'
     datasource_id: 'entity:user'
@@ -287,6 +279,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_division_name
+  field_example_applications:
+    label: 'Example applications'
+    datasource_id: 'entity:node'
+    property_path: field_example_applications
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_example_applications
   field_first_name:
     label: 'First name'
     datasource_id: 'entity:user'
@@ -361,6 +361,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_p_card_allowed
+  field_phone:
+    label: Phone
+    datasource_id: 'entity:user'
+    property_path: field_phone
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_phone
+  field_primary_groups:
+    label: 'Primary groups'
+    datasource_id: 'entity:user'
+    property_path: field_primary_groups
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_primary_groups
   field_restricted:
     label: Restricted
     datasource_id: 'entity:node'
@@ -369,6 +385,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_restricted
+  field_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:user'
+    property_path: field_search_keywords
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_search_keywords
+  field_section:
+    label: Section
+    datasource_id: 'entity:user'
+    property_path: field_section
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_section
   field_service_hours:
     label: 'Service Hours'
     datasource_id: 'entity:node'
@@ -417,38 +449,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_support_model
-  field_phone:
-    label: Phone
-    datasource_id: 'entity:user'
-    property_path: field_phone
-    type: text
-    dependencies:
-      config:
-        - field.storage.user.field_phone
-  field_primary_groups:
-    label: 'Primary groups'
-    datasource_id: 'entity:user'
-    property_path: field_primary_groups
-    type: integer
-    dependencies:
-      config:
-        - field.storage.user.field_primary_groups
-  field_search_keywords:
-    label: 'Search keywords'
-    datasource_id: 'entity:user'
-    property_path: field_search_keywords
-    type: text
-    dependencies:
-      config:
-        - field.storage.user.field_search_keywords
-  field_section:
-    label: Section
-    datasource_id: 'entity:user'
-    property_path: field_section
-    type: text
-    dependencies:
-      config:
-        - field.storage.user.field_section
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
@@ -642,10 +642,10 @@ processor_settings:
       preprocess_query: -30
   entity_status: {  }
   hierarchy:
-    fields:
-      field_business_capability: taxonomy_term-parent
     weights:
       preprocess_index: -45
+    fields:
+      field_business_capability: taxonomy_term-parent
   html_filter:
     weights:
       preprocess_index: -15
