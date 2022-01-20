@@ -10,50 +10,72 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
   module:
+    - field_group
     - field_states_ui
     - path
     - text
+third_party_settings:
+  field_group:
+    group_administrative_fields:
+      children:
+        - field_group_path
+        - field_org_type
+      label: 'Administrative fields'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+        weight: 0
 id: group.private.default
 targetEntityType: group
 bundle: private
 mode: default
 content:
   field_group_contact:
-    weight: 6
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_group_description:
-    weight: 5
+    type: text_textarea_with_summary
+    weight: 3
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    type: text_textarea_with_summary
-    region: content
   field_group_path:
-    weight: 1
+    type: string_textfield
+    weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_org_type:
-    weight: 4
+    type: options_select
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_parent_group:
-    weight: 3
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -65,8 +87,6 @@ content:
           type: ''
           list: ''
           add: Add
-    type: entity_reference_autocomplete
-    region: content
   label:
     type: string_textfield
     weight: 0
@@ -75,29 +95,22 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 7
+    region: content
     settings:
       display_label: true
-    weight: 9
-    region: content
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -110,4 +123,5 @@ content:
           type: ''
           list: ''
           add: Add
-hidden: {  }
+hidden:
+  langcode: true

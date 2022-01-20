@@ -8,14 +8,20 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -31,123 +37,129 @@ bundle: user
 mode: default
 content:
   field_address:
-    weight: 13
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 13
     region: content
   field_division_name:
-    weight: 11
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 11
     region: content
   field_first_name:
     type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 4
     region: content
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_group_names:
-    weight: 8
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 8
     region: content
   field_job_description:
-    weight: 14
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 14
     region: content
   field_last_name:
     type: string
-    weight: 5
-    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_managers:
-    weight: 6
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 6
     region: content
   field_office_location:
-    weight: 12
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 12
     region: content
   field_phone:
-    weight: 7
+    type: telephone_link
     label: above
     settings:
       title: ''
     third_party_settings: {  }
-    type: telephone_link
+    weight: 7
     region: content
   field_primary_groups:
-    weight: 9
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 9
     region: content
   field_title:
-    weight: 10
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 10
     region: content
   masquerade:
-    weight: 1
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   masquerade_as:
     type: masquerade_field_default
-    region: content
-    weight: 3
     label: above
     settings:
       link: true
     third_party_settings: {  }
-  member_for:
-    weight: 2
+    weight: 3
     region: content
+  member_for:
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   user_picture:
     type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
     weight: 0
     region: content
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
-    label: hidden
 hidden:
   field_active_directory_id: true
+  field_is_contact_only: true
+  field_keep_mobile_phone_private: true
+  field_mobile_phone: true
   field_publisher_role_changed: true
+  field_search_keywords: true
+  field_section: true
+  field_workspace: true
   langcode: true
   mail: true
   search_api_excerpt: true

@@ -5,6 +5,7 @@ dependencies: {  }
 id: config_local
 label: Local
 description: 'Config for local Lando environments'
+weight: 0
 folder: sites/default/config_local
 module:
   devel: 0
@@ -14,4 +15,3 @@ blacklist:
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
-weight: 0

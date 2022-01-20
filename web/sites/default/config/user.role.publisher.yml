@@ -1,7 +1,27 @@
 uuid: dce681d0-d968-482e-a0da-e52010a29c10
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - node.type.contract
+    - node.type.event
+    - node.type.news
+    - node.type.page
+    - node.type.resource
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - filter
+    - media
+    - moderation_sidebar
+    - node
+    - quick_node_clone
+    - quickedit
+    - scheduler
 id: publisher
 label: Publisher
 weight: -8

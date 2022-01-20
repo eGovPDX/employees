@@ -9,10 +9,9 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
-    - user.role.authenticated
+    - system.menu.main
   module:
     - search_api
-    - user
 id: search_index
 label: 'Sitewide: Search index'
 module: views
@@ -22,46 +21,23 @@ base_table: search_api_index_full_index
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: search_api_tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          skip_access: 0
-          bypass_access: 0
-          preserve_facet_query_args: false
-      exposed_form:
-        type: input_required
-        options:
-          submit_button: Search
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-          text_input_required: ''
-          text_input_required_format: basic_html
+      title: Search
+      fields: {  }
       pager:
         type: full
         options:
-          items_per_page: 20
           offset: 0
-          id: 0
+          items_per_page: 20
           total_pages: null
+          id: 0
           tags:
-            previous: ‹‹
             next: ››
+            previous: ‹‹
             first: '« First'
             last: 'Last »'
           expose:
@@ -73,10 +49,8 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-      style:
-        type: default
-      row:
-        type: search_api
+      exposed_form:
+        type: input_required
         options:
           view_modes:
             'entity:group':
@@ -85,13 +59,13 @@ display:
             'entity:media':
               document: search_result
             'entity:node':
+              contract: teaser
               event: search_result
               news: search_result
               page: search_result
               resource: search_result
             'entity:user':
-              user: search_result
-      fields: {  }
+              user: contact_details
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -100,6 +74,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: and
           value: ''
           group: 1
@@ -122,8 +97,8 @@ display:
               publisher: '0'
               content_lead: '0'
               administrator: '0'
-            placeholder: ''
             expose_fields: false
+            placeholder: ''
             searched_fields_id: ''
           is_grouped: false
           group_info:
@@ -151,21 +126,116 @@ display:
             - media_field_description
             - media_name
             - rendered_item
-          plugin_id: search_api_fulltext
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
+        search_api_datasource:
+          id: search_api_datasource
           table: search_api_index_full_index
-          field: search_api_relevance
+          field: search_api_datasource
           relationship: none
           group_type: group
           admin_label: ''
-          order: DESC
+          plugin_id: search_api_datasource
+          operator: or
+          value:
+            'entity:group': 'entity:group'
+            'entity:media': 'entity:media'
+            'entity:node': 'entity:node'
+            'entity:user': 'entity:user'
+          group: 1
           exposed: false
           expose:
+            operator_id: ''
             label: ''
-          plugin_id: search_api
-      title: Search
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        search_api_language:
+          id: search_api_language
+          table: search_api_index_full_index
+          field: search_api_language
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_language
+          operator: in
+          value:
+            en: en
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      style:
+        type: default
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:media':
+              document: search_result
+            'entity:node':
+              contract: teaser
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: contact_details
+      query:
+        type: views_query
+        options:
+          skip_access: 0
+          bypass_access: 0
+          preserve_facet_query_args: false
+      relationships: {  }
       header:
         result:
           id: result
@@ -174,11 +244,1271 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: result
           empty: false
           content: 'Displaying @start - @end of @total'
-          plugin_id: result
       footer: {  }
-      empty:
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.full_index'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      cache:
+        type: none
+      defaults:
+        cache: false
+      exposed_block: false
+      display_extenders: {  }
+      path: search
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.full_index'
+  page_contacts:
+    id: page_contacts
+    display_title: 'Page: Directory'
+    display_plugin: page
+    position: 1
+    display_options:
+      title: Directory
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      cache:
+        type: none
+      empty: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+        field_last_name:
+          id: field_last_name
+          table: search_api_index_full_index
+          field: field_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: field_last_name
+          exposed: false
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter your keywords'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - field_address
+            - field_first_name
+            - field_first_name_1
+            - field_last_name
+            - field_last_name_1
+            - field_phone
+            - field_search_keywords
+            - field_section
+            - field_title
+            - field_workspace
+        search_api_datasource:
+          id: search_api_datasource
+          table: search_api_index_full_index
+          field: search_api_datasource
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_datasource
+          operator: or
+          value:
+            'entity:user': 'entity:user'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        user_status:
+          id: user_status
+          table: search_api_index_full_index
+          field: user_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_last_name:
+          id: field_last_name
+          table: search_api_index_full_index
+          field: field_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_text
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        empty: false
+        access: true
+        cache: false
+        title: false
+        exposed_form: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      exposed_block: false
+      display_extenders: {  }
+      path: contacts
+      menu:
+        type: normal
+        title: Directory
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.full_index'
+  page_contracts:
+    id: page_contracts
+    display_title: 'Page: Contracts'
+    display_plugin: page
+    position: 2
+    display_options:
+      title: Contracts
+      fields:
+        field_date_range_end_value_1:
+          id: field_date_range_end_value_1
+          table: search_api_index_full_index
+          field: field_date_range_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_date
+          label: 'Contract Date » End date'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          date_format: short_date_only
+          custom_date_format: ''
+          timezone: UTC
+          link_to_item: false
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+        field_mandated_purchases:
+          id: field_mandated_purchases
+          table: search_api_index_full_index
+          field: field_mandated_purchases
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: 'Mandated Purchases'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: default
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_boolean
+          fallback_options:
+            type: yes-no
+            type_custom_true: ''
+            type_custom_false: ''
+            not: false
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_p_card_allowed:
+          id: field_p_card_allowed
+          table: search_api_index_full_index
+          field: field_p_card_allowed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: 'P-Card Allowed'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: default
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_boolean
+          fallback_options:
+            type: yes-no
+            type_custom_true: ''
+            type_custom_false: ''
+            not: false
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: 'Vendor Name'
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge badge-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_category:
+          id: field_category
+          table: search_api_index_full_index
+          field: field_category
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: Category
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ul
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        field_type:
+          id: field_type
+          table: search_api_index_full_index
+          field: field_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: 'Contract Type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        field_contract_number:
+          id: field_contract_number
+          table: search_api_index_full_index
+          field: field_contract_number
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: 'Contract Number'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_date_range_end_value:
+          id: field_date_range_end_value
+          table: search_api_index_full_index
+          field: field_date_range_end_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_date
+          label: 'Expiration Date'
+          exclude: false
+          alter:
+            alter_text: true
+            text: '{% if field_date_range_end_value|date(''Y-m-d'') < ''now''|date(''Y-m-d'') %}<em>{% set expired = true %}{% endif %}{{ field_date_range_end_value }}{% if expired %}</em>{% endif %}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          date_format: short_date_only
+          custom_date_format: ''
+          timezone: UTC
+          link_to_item: false
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      cache:
+        type: none
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+        content_title:
+          id: content_title
+          table: search_api_index_full_index
+          field: content_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: content_title
+          exposed: false
+      filters:
+        search_api_datasource:
+          id: search_api_datasource
+          table: search_api_index_full_index
+          field: search_api_datasource
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_datasource
+          operator: or
+          value:
+            'entity:node': 'entity:node'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        content_type:
+          id: content_type
+          table: search_api_index_full_index
+          field: content_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            contract: contract
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: Search
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - content_title
+            - field_contract_number
+        field_mandated_purchases:
+          id: field_mandated_purchases
+          table: search_api_index_full_index
+          field: field_mandated_purchases
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Mandated Purchases'
+            description: ''
+            use_operator: false
+            operator: field_mandated_purchases_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: mandated_purchases
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+          is_grouped: true
+          group_info:
+            label: 'Mandated Purchases'
+            description: ''
+            identifier: mandated_purchases
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Yes'
+                operator: '='
+                value: '1'
+              2:
+                title: 'No'
+                operator: '='
+                value: '0'
+        field_p_card_allowed:
+          id: field_p_card_allowed
+          table: search_api_index_full_index
+          field: field_p_card_allowed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'P-Card Allowed'
+            description: ''
+            use_operator: false
+            operator: field_p_card_allowed_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: p_card
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              content_lead: '0'
+              administrator: '0'
+          is_grouped: true
+          group_info:
+            label: 'P-Card Allowed'
+            description: ''
+            identifier: p_card
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Yes'
+                operator: '='
+                value: '1'
+              2:
+                title: 'No'
+                operator: '='
+                value: '0'
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            field_date_range_end_value_1: field_date_range_end_value_1
+            content_title: content_title
+            field_category: field_category
+            field_type: field_type
+            field_contract_number: field_contract_number
+            field_mandated_purchases: field_mandated_purchases
+            field_p_card_allowed: field_p_card_allowed
+            field_date_range_end_value: field_date_range_end_value
+          default: '-1'
+          info:
+            field_date_range_end_value_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            content_title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_category:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_type:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_contract_number:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_mandated_purchases:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_p_card_allowed:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_date_range_end_value:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        cache: false
+        title: false
+        exposed_form: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+        header: false
+      display_description: ''
+      header:
         area:
           id: area
           table: views
@@ -186,47 +1516,38 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p>No results found.</p>'
-            format: basic_html
           plugin_id: text
-      relationships: {  }
-      arguments: {  }
+          empty: true
+          content:
+            value: '<p>The following contracts are authorized for use by all City bureaus.</p>'
+            format: basic_html
+          tokenize: false
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
+      path: contracts
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
       tags:
-        - 'config:search_api.index.full_index'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: search
-      exposed_block: false
-      cache:
-        type: none
-      defaults:
-        cache: false
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
+        - 'config:field.storage.node.field_category'
+        - 'config:field.storage.node.field_contract_number'
+        - 'config:field.storage.node.field_mandated_purchases'
+        - 'config:field.storage.node.field_p_card_allowed'
+        - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
   page_bts_catalog:
     display_plugin: page
@@ -470,1008 +1791,4 @@ display:
         - 'user.node_grants:view'
         - user.roles
       tags:
-        - 'config:search_api.index.full_index'
-  page_contracts:
-    display_plugin: page
-    id: page_contracts
-    display_title: 'Page: Contracts'
-    position: 2
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      title: Contracts
-      defaults:
-        title: false
-        header: false
-        exposed_form: false
-        style: false
-        row: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        cache: false
-      path: contracts
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<p>The following contracts are authorized for use by all City bureaus.</p>'
-            format: basic_html
-          plugin_id: text
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: '<p>Displaying @start - @end of @total</p>'
-          plugin_id: result
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Search
-          reset_button: true
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            field_date_range_end_value_1: field_date_range_end_value_1
-            content_title: content_title
-            field_category: field_category
-            field_type: field_type
-            field_contract_number: field_contract_number
-            field_mandated_purchases: field_mandated_purchases
-            field_p_card_allowed: field_p_card_allowed
-            field_date_range_end_value: field_date_range_end_value
-          info:
-            field_date_range_end_value_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            content_title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_category:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_type:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_contract_number:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_mandated_purchases:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_p_card_allowed:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_date_range_end_value:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
-      fields:
-        field_date_range_end_value_1:
-          id: field_date_range_end_value_1
-          table: search_api_index_full_index
-          field: field_date_range_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Contract Date » End date'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          date_format: short_date_only
-          custom_date_format: ''
-          timezone: UTC
-          link_to_item: false
-          use_highlighting: false
-          multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api_date
-        field_mandated_purchases:
-          id: field_mandated_purchases
-          table: search_api_index_full_index
-          field: field_mandated_purchases
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Mandated Purchases'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: default
-            format_custom_true: ''
-            format_custom_false: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_boolean
-          fallback_options:
-            type: yes-no
-            type_custom_true: ''
-            type_custom_false: ''
-            not: false
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        field_p_card_allowed:
-          id: field_p_card_allowed
-          table: search_api_index_full_index
-          field: field_p_card_allowed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'P-Card Allowed'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: default
-            format_custom_true: ''
-            format_custom_false: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_boolean
-          fallback_options:
-            type: yes-no
-            type_custom_true: ''
-            type_custom_false: ''
-            not: false
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        content_title:
-          id: content_title
-          table: search_api_index_full_index
-          field: content_title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Vendor Name'
-          exclude: false
-          alter:
-            alter_text: true
-            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge badge-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        field_category:
-          id: field_category
-          table: search_api_index_full_index
-          field: field_category
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Category
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: ul
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_entity
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            display_methods:
-              contract_category:
-                display_method: label
-              contract_type:
-                display_method: label
-              event_type:
-                display_method: label
-              group_ad_name_list:
-                display_method: label
-                view_mode: default
-              news_type:
-                display_method: label
-              org_type:
-                display_method: label
-              tags:
-                display_method: label
-                view_mode: default
-              topics:
-                display_method: label
-                view_mode: default
-          plugin_id: search_api_field
-        field_type:
-          id: field_type
-          table: search_api_index_full_index
-          field: field_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Contract Type'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_entity
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            display_methods:
-              contract_category:
-                display_method: label
-              contract_type:
-                display_method: label
-              event_type:
-                display_method: label
-              group_ad_name_list:
-                display_method: label
-                view_mode: default
-              news_type:
-                display_method: label
-              org_type:
-                display_method: label
-              tags:
-                display_method: label
-                view_mode: default
-              topics:
-                display_method: label
-                view_mode: default
-          plugin_id: search_api_field
-        field_contract_number:
-          id: field_contract_number
-          table: search_api_index_full_index
-          field: field_contract_number
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Contract Number'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        field_date_range_end_value:
-          id: field_date_range_end_value
-          table: search_api_index_full_index
-          field: field_date_range_end_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Expiration Date'
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{% if field_date_range_end_value|date(''Y-m-d'') < ''now''|date(''Y-m-d'') %}<em>{% set expired = true %}{% endif %}{{ field_date_range_end_value }}{% if expired %}</em>{% endif %}'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          date_format: short_date_only
-          custom_date_format: ''
-          timezone: UTC
-          link_to_item: false
-          use_highlighting: false
-          multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api_date
-      filters:
-        search_api_datasource:
-          id: search_api_datasource
-          table: search_api_index_full_index
-          field: search_api_datasource
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            'entity:node': 'entity:node'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          plugin_id: search_api_datasource
-        content_type:
-          id: content_type
-          table: search_api_index_full_index
-          field: content_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            contract: contract
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          plugin_id: search_api_options
-        search_api_fulltext:
-          id: search_api_fulltext
-          table: search_api_index_full_index
-          field: search_api_fulltext
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: and
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: search_api_fulltext_op
-            label: Search
-            description: ''
-            use_operator: false
-            operator: search_api_fulltext_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: search
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
-            placeholder: ''
-            expose_fields: false
-            searched_fields_id: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          parse_mode: terms
-          min_length: null
-          fields:
-            - content_title
-            - field_contract_number
-          plugin_id: search_api_fulltext
-        field_mandated_purchases:
-          id: field_mandated_purchases
-          table: search_api_index_full_index
-          field: field_mandated_purchases
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: All
-          group: 1
-          exposed: true
-          expose:
-            operator_id: ''
-            label: 'Mandated Purchases'
-            description: ''
-            use_operator: false
-            operator: field_mandated_purchases_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: mandated_purchases
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
-          is_grouped: true
-          group_info:
-            label: 'Mandated Purchases'
-            description: ''
-            identifier: mandated_purchases
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: 'Yes'
-                operator: '='
-                value: '1'
-              2:
-                title: 'No'
-                operator: '='
-                value: '0'
-          plugin_id: search_api_boolean
-        field_p_card_allowed:
-          id: field_p_card_allowed
-          table: search_api_index_full_index
-          field: field_p_card_allowed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: All
-          group: 1
-          exposed: true
-          expose:
-            operator_id: ''
-            label: 'P-Card Allowed'
-            description: ''
-            use_operator: false
-            operator: field_p_card_allowed_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: p_card
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
-          is_grouped: true
-          group_info:
-            label: 'P-Card Allowed'
-            description: ''
-            identifier: p_card
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: 'Yes'
-                operator: '='
-                value: '1'
-              2:
-                title: 'No'
-                operator: '='
-                value: '0'
-          plugin_id: search_api_boolean
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      sorts:
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_full_index
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        content_title:
-          id: content_title
-          table: search_api_index_full_index
-          field: content_title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      cache:
-        type: none
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_category'
-        - 'config:field.storage.node.field_contract_number'
-        - 'config:field.storage.node.field_mandated_purchases'
-        - 'config:field.storage.node.field_p_card_allowed'
-        - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'

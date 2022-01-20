@@ -11,25 +11,25 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: taxonomy_term.topics.term_teaser
 targetEntityType: taxonomy_term
 bundle: topics
 mode: term_teaser
 content:
   content_by_topic_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
+  description:
+    type: text_default
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-  description:
-    label: hidden
-    type: text_default
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_homepage: true
   langcode: true

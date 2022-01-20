@@ -1,0 +1,179 @@
+uuid: cb29c82e-157e-4a2d-8cf6-41e59076654e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.contact_details
+    - field.field.user.user.field_active_directory_id
+    - field.field.user.user.field_address
+    - field.field.user.user.field_division_name
+    - field.field.user.user.field_first_name
+    - field.field.user.user.field_group_names
+    - field.field.user.user.field_is_contact_only
+    - field.field.user.user.field_job_description
+    - field.field.user.user.field_keep_mobile_phone_private
+    - field.field.user.user.field_last_name
+    - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
+    - field.field.user.user.field_office_location
+    - field.field.user.user.field_phone
+    - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
+    - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - layout_builder
+    - telephone
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
+id: user.user.contact_details
+targetEntityType: user
+bundle: user
+mode: contact_details
+content:
+  field_address:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_division_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_first_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_is_contact_only:
+    type: boolean
+    label: inline
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_keep_mobile_phone_private:
+    type: boolean
+    label: inline
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_last_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_mobile_phone:
+    type: telephone_link
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_phone:
+    type: telephone_link
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_primary_groups:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_search_keywords:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_section:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_workspace:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  mail:
+    type: email_mailto
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_active_directory_id: true
+  field_group_names: true
+  field_job_description: true
+  field_managers: true
+  field_office_location: true
+  field_publisher_role_changed: true
+  langcode: true
+  masquerade: true
+  masquerade_as: true
+  member_for: true
+  search_api_excerpt: true

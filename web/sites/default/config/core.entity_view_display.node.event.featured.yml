@@ -22,8 +22,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
   layout_library:
     enable: false
 _core:
@@ -34,17 +34,17 @@ bundle: event
 mode: featured
 content:
   field_when:
-    weight: 0
+    type: smartdate_default
     label: hidden
     settings:
       timezone_override: ''
+      format_type: medium
       format: compact
       force_chronological: false
-      format_type: medium
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    type: smartdate_default
+    weight: 0
     region: content
 hidden:
   body: true

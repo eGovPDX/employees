@@ -9,14 +9,20 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
     - views.view.my_groups
@@ -31,8 +37,8 @@ dependencies:
     - views
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: true
+    allow_custom: false
     sections:
       -
         layout_id: layout_onecol
@@ -43,217 +49,217 @@ third_party_settings:
             uuid: 4a0e945b-cc73-4a27-95e6-3de3bc294085
             region: content
             configuration:
+              id: 'field_block:user:user:user_picture'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:user_picture'
               formatter:
                 type: image
-                settings:
-                  image_style: thumbnail
-                  image_link: content
-                third_party_settings: {  }
                 label: hidden
-            additional: {  }
+                settings:
+                  image_link: content
+                  image_style: thumbnail
+                third_party_settings: {  }
             weight: 0
+            additional: {  }
           0046b7c9-8995-4901-883e-da9993073402:
             uuid: 0046b7c9-8995-4901-883e-da9993073402
             region: content
             configuration:
+              id: 'extra_field_block:user:user:member_for'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:user:user:member_for'
-            additional: {  }
             weight: 1
+            additional: {  }
           b84fa678-fa6f-465d-b034-c16af6758a64:
             uuid: b84fa678-fa6f-465d-b034-c16af6758a64
             region: content
             configuration:
+              id: 'extra_field_block:user:user:masquerade'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:user:user:masquerade'
-            additional: {  }
             weight: 2
+            additional: {  }
           d77490ba-f0f6-4919-9b29-f1527a44e536:
             uuid: d77490ba-f0f6-4919-9b29-f1527a44e536
             region: content
             configuration:
+              id: 'field_block:user:user:masquerade_as'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:masquerade_as'
               formatter:
                 type: masquerade_field_default
                 label: inline
                 settings:
                   link: true
                 third_party_settings: {  }
-            additional: {  }
             weight: 3
+            additional: {  }
           37cdd6b3-acfd-4baa-bc2f-e3cb542e45a1:
             uuid: 37cdd6b3-acfd-4baa-bc2f-e3cb542e45a1
             region: content
             configuration:
+              id: 'field_block:user:user:field_title'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_title'
               formatter:
                 type: string
                 label: inline
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 4
+            additional: {  }
           23b42a4c-9ecc-4860-9fef-aa5df7983f8e:
             uuid: 23b42a4c-9ecc-4860-9fef-aa5df7983f8e
             region: content
             configuration:
+              id: 'field_block:user:user:field_phone'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_phone'
               formatter:
                 type: telephone_link
                 label: inline
                 settings:
                   title: ''
                 third_party_settings: {  }
-            additional: {  }
             weight: 7
+            additional: {  }
           20bf412b-eb2e-47b2-ace5-2501e24561f2:
             uuid: 20bf412b-eb2e-47b2-ace5-2501e24561f2
             region: content
             configuration:
+              id: 'field_block:user:user:field_managers'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_managers'
               formatter:
                 type: entity_reference_label
                 label: inline
                 settings:
                   link: true
                 third_party_settings: {  }
-            additional: {  }
             weight: 8
+            additional: {  }
           8d472346-33cc-4304-9014-40686c3dbbb6:
             uuid: 8d472346-33cc-4304-9014-40686c3dbbb6
             region: content
             configuration:
+              id: 'field_block:user:user:field_division_name'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_division_name'
               formatter:
                 type: string
                 label: inline
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 9
+            additional: {  }
           452dac6d-47bc-46b4-a8c0-cac45e81a7ee:
             uuid: 452dac6d-47bc-46b4-a8c0-cac45e81a7ee
             region: content
             configuration:
+              id: 'field_block:user:user:field_group_names'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_group_names'
               formatter:
                 type: string
                 label: inline
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 10
+            additional: {  }
           b28a9dd0-61d5-402f-84e0-6961b9da8b4a:
             uuid: b28a9dd0-61d5-402f-84e0-6961b9da8b4a
             region: content
             configuration:
+              id: 'field_block:user:user:field_office_location'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_office_location'
               formatter:
                 type: string
                 label: inline
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 11
+            additional: {  }
           09ff48ae-a318-436b-8b0d-5a614f6695a6:
             uuid: 09ff48ae-a318-436b-8b0d-5a614f6695a6
             region: content
             configuration:
+              id: 'field_block:user:user:field_address'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:user:user:field_address'
               formatter:
                 type: string
                 label: inline
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            additional: {  }
             weight: 12
+            additional: {  }
           31aaacad-5f16-460f-becd-8502a17e9e36:
             uuid: 31aaacad-5f16-460f-becd-8502a17e9e36
             region: content
             configuration:
               id: 'field_block:user:user:mail'
               label: Email
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: inline
-                type: email_mailto
-                settings: {  }
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: email_mailto
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
             weight: 6
+            additional: {  }
           4ba324c8-1630-4410-9819-11db9c179ddf:
             uuid: 4ba324c8-1630-4410-9819-11db9c179ddf
             region: content
             configuration:
               id: 'views_block:my_groups-block_groups_for_user'
               label: ''
-              provider: views
               label_display: visible
+              provider: views
+              context_mapping: {  }
               views_label: ''
               items_per_page: none
-              context_mapping: {  }
-            additional: {  }
             weight: 13
+            additional: {  }
           814b3d22-5d01-4d01-a6e0-95327a5dbeaa:
             uuid: 814b3d22-5d01-4d01-a6e0-95327a5dbeaa
             region: content
             configuration:
               id: 'field_block:user:user:field_job_description'
               label: 'Job description'
-              provider: layout_builder
               label_display: '0'
-              formatter:
-                label: inline
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
-            additional: {  }
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
             weight: 5
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -266,94 +272,100 @@ mode: full
 content:
   field_address:
     type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 10
     region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_division_name:
     type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 7
     region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_group_names:
     type: string
-    weight: 8
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 8
+    region: content
   field_managers:
     type: entity_reference_label
-    weight: 6
-    region: content
     label: inline
     settings:
       link: true
     third_party_settings: {  }
+    weight: 6
+    region: content
   field_office_location:
     type: string
-    weight: 9
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 9
+    region: content
   field_phone:
     type: telephone_link
-    weight: 5
-    region: content
     label: inline
     settings:
       title: ''
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_title:
     type: string
-    weight: 4
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  masquerade:
-    weight: 2
+    weight: 4
     region: content
+  masquerade:
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   masquerade_as:
     type: masquerade_field_default
-    region: content
-    weight: 3
     label: inline
     settings:
       link: true
     third_party_settings: {  }
-  member_for:
-    weight: 1
+    weight: 3
     region: content
+  member_for:
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   user_picture:
     type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
     weight: 0
     region: content
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
-    label: hidden
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_is_contact_only: true
   field_job_description: true
+  field_keep_mobile_phone_private: true
   field_last_name: true
+  field_mobile_phone: true
   field_primary_groups: true
   field_publisher_role_changed: true
+  field_search_keywords: true
+  field_section: true
+  field_workspace: true
   langcode: true
   mail: true
   search_api_excerpt: true

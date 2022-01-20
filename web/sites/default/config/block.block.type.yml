@@ -18,11 +18,11 @@ plugin: 'facet_block:type'
 settings:
   id: 'facet_block:type'
   label: 'Filter by Type'
-  provider: facets
   label_display: '0'
+  provider: facets
   block_id: type
 visibility:
   request_path:
     id: request_path
-    pages: /search
     negate: false
+    pages: /search

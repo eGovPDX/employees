@@ -2,13 +2,6 @@ uuid: 5c7dd420-b47a-490e-9ad0-9b2a4f31bd9d
 langcode: en
 status: true
 dependencies:
-  module:
-    - search_api_solr
-    - group
-    - media
-    - node
-    - user
-    - search_api
   config:
     - field.storage.group.field_group_description
     - field.storage.media.field_display_in_group
@@ -41,28 +34,41 @@ dependencies:
     - field.storage.node.field_support_hours
     - field.storage.node.field_support_model
     - field.storage.node.field_type
+    - field.storage.user.field_division_name
     - field.storage.user.field_first_name
+    - field.storage.user.field_is_contact_only
     - field.storage.user.field_last_name
+    - field.storage.user.field_address
+    - field.storage.user.field_phone
+    - field.storage.user.field_primary_groups
+    - field.storage.user.field_search_keywords
+    - field.storage.user.field_section
+    - field.storage.user.field_title
+    - field.storage.user.field_workspace
     - search_api.server.searchstax
     - core.entity_view_mode.user.compact
+  module:
+    - search_api_solr
+    - group
+    - media
+    - node
+    - user
+    - search_api
 third_party_settings:
   search_api_solr:
     finalize: true
     commit_before_finalize: false
     commit_after_finalize: true
-    multilingual:
-      limit_to_content_language: false
-      include_language_independent: true
     highlighter:
       maxAnalyzedChars: 51200
       fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
       regex:
         slop: 0.5
         pattern: blank
         maxAnalyzedChars: 10000
-      usePhraseHighlighter: true
-      highlightMultiTerm: true
-      preserveMulti: false
       highlight:
         mergeContiguous: false
         requireFieldMatch: false
@@ -86,6 +92,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
 id: full_index
 name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
@@ -198,6 +207,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_business_priority
+  field_address:
+    label: 'Office location'
+    datasource_id: 'entity:user'
+    property_path: field_address
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_address
   field_category:
     label: Category
     datasource_id: 'entity:node'
@@ -262,6 +279,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_example_applications
+  field_division_name:
+    label: 'Division name'
+    datasource_id: 'entity:user'
+    property_path: field_division_name
+    type: string
+    dependencies:
+      config:
+        - field.storage.user.field_division_name
   field_first_name:
     label: 'First name'
     datasource_id: 'entity:user'
@@ -287,6 +312,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_hosting_environment
+  field_is_contact_only:
+    label: 'Is contact only'
+    datasource_id: 'entity:user'
+    property_path: field_is_contact_only
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.user.field_is_contact_only
   field_last_name:
     label: 'Last name'
     datasource_id: 'entity:user'
@@ -384,6 +417,38 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_support_model
+  field_phone:
+    label: Phone
+    datasource_id: 'entity:user'
+    property_path: field_phone
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_phone
+  field_primary_groups:
+    label: 'Primary groups'
+    datasource_id: 'entity:user'
+    property_path: field_primary_groups
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_primary_groups
+  field_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:user'
+    property_path: field_search_keywords
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_search_keywords
+  field_section:
+    label: Section
+    datasource_id: 'entity:user'
+    property_path: field_section
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_section
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
@@ -392,6 +457,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_tags
+  field_title:
+    label: Title
+    datasource_id: 'entity:user'
+    property_path: field_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_title
   field_type:
     label: Type
     datasource_id: 'entity:node'
@@ -400,6 +473,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_type
+  field_workspace:
+    label: Workspace
+    datasource_id: 'entity:user'
+    property_path: field_workspace
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_workspace
   group_id:
     label: 'Group ID'
     datasource_id: 'entity:group'
@@ -433,6 +514,14 @@ field_settings:
     dependencies:
       module:
         - group
+  mail:
+    label: Email
+    datasource_id: 'entity:user'
+    property_path: mail
+    type: string
+    dependencies:
+      module:
+        - user
   media_bundle:
     label: 'Media type'
     datasource_id: 'entity:media'
@@ -558,6 +647,9 @@ processor_settings:
     weights:
       preprocess_index: -45
   html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
     all_fields: false
     fields:
       - content_body
@@ -575,10 +667,10 @@ processor_settings:
       h2: 3
       h3: 2
       strong: 2
-    weights:
-      preprocess_index: -15
-      preprocess_query: -15
   ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
     all_fields: false
     fields:
       - content_body
@@ -596,15 +688,14 @@ processor_settings:
       - Pi
       - Po
       - Ps
-    weights:
-      preprocess_index: -10
-      preprocess_query: -10
   language_with_fallback: {  }
   rendered_item: {  }
   solr_date_range:
     weights:
       preprocess_index: 0
   type_boost:
+    weights:
+      preprocess_index: 0
     boosts:
       'entity:group':
         datasource_boost: !!float 1
@@ -614,12 +705,10 @@ processor_settings:
         datasource_boost: !!float 1
       'entity:user':
         datasource_boost: !!float 1
-    weights:
-      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
 server: searchstax

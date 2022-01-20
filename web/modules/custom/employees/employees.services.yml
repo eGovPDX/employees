@@ -3,3 +3,8 @@ services:
     class: Drupal\employees\PathProcessor\PathProcessor
     tags:
       - { name: path_processor_outbound }
+  employees.commands:
+    class: \Drupal\employees\Commands\BatchCommands
+    arguments: ['@entity_type.manager', '@logger.factory']
+    tags:
+      - { name: drush.command }

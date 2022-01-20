@@ -8,14 +8,20 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
+    - field.field.user.user.field_keep_mobile_phone_private
     - field.field.user.user.field_last_name
     - field.field.user.user.field_managers
+    - field.field.user.user.field_mobile_phone
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
     - field.field.user.user.field_publisher_role_changed
+    - field.field.user.user.field_search_keywords
+    - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -39,32 +45,32 @@ third_party_settings:
         - field_office_location
         - field_address
         - field_active_directory_id
+      label: 'Active Directory profile'
+      region: content
       parent_name: ''
       weight: 4
       format_type: fieldset
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
         description: 'Information retrieved from Active Directory.'
         required_fields: true
-      label: 'Active Directory profile'
     group_user_profile:
       children:
         - field_job_description
         - user_picture
+      label: 'User profile'
+      region: content
       parent_name: ''
       weight: 1
       format_type: fieldset
-      region: content
       format_settings:
-        description: 'The fields contained in this group are not updated by Active Directory and can be modified.'
-        required_fields: true
-        id: ''
         classes: ''
         show_empty_fields: false
-      label: 'User profile'
+        id: ''
+        description: 'The fields contained in this group are not updated by Active Directory and can be modified.'
+        required_fields: true
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
 id: user.user.default
@@ -83,104 +89,149 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_active_directory_id:
+    type: string_textfield
     weight: 12
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_address:
+    type: string_textfield
     weight: 11
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_division_name:
+    type: string_textfield
     weight: 7
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_first_name:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_group_names:
+    type: string_textfield
     weight: 8
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+  field_is_contact_only:
+    type: boolean_checkbox
+    weight: 13
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_job_description:
+    type: string_textfield
     weight: 10
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+  field_keep_mobile_phone_private:
+    type: boolean_checkbox
+    weight: 14
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_last_name:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_managers:
+    type: entity_reference_autocomplete
     weight: 6
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_office_location:
-    weight: 10
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_phone:
-    weight: 5
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
+  field_mobile_phone:
     type: telephone_default
+    weight: 15
     region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_office_location:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_default
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_primary_groups:
+    type: entity_reference_autocomplete
     weight: 9
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+  field_search_keywords:
+    type: string_textfield
+    weight: 16
     region: content
-  field_title:
-    weight: 4
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_section:
     type: string_textfield
+    weight: 17
     region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_workspace:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   language:
     weight: 5
     region: content
@@ -188,8 +239,8 @@ content:
     third_party_settings: {  }
   masquerade_as:
     type: entity_reference_autocomplete
-    region: content
     weight: 8
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -209,12 +260,12 @@ content:
     third_party_settings: {  }
   user_picture:
     type: image_image
+    weight: 11
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: 11
-    region: content
 hidden:
   field_publisher_role_changed: true
   langcode: true

@@ -20,8 +20,9 @@ class PathProcessor implements OutboundPathProcessorInterface {
     }
 
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if( $route_name == "view.taxonomy_term.page_bts_catalog_by_term" || 
-      $route_name == "entity.node.canonical") {
+    if( in_array($route_name, ["view.taxonomy_term.page_bts_catalog_by_term" , 
+      "entity.node.canonical",
+      "view.search_index.page_bts_catalog"]) ) {
       // Modify link to taxonomy term pages if the current page is a BTS Catalog page
       if( array_key_exists("entity_type", $options) && $options["entity_type"] == "taxonomy_term") {
         $term = $options["entity"];
