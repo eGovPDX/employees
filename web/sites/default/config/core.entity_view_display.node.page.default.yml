@@ -80,7 +80,7 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           f4b204f2-ce95-4ec0-988b-a3c1bcf350f2:
             uuid: f4b204f2-ce95-4ec0-988b-a3c1bcf350f2
@@ -162,25 +162,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          ddd5ae3e-9756-4a94-9b32-9fe77a52da05:
-            uuid: ddd5ae3e-9756-4a94-9b32-9fe77a52da05
-            region: menu
-            configuration:
-              id: 'field_block:node:page:field_display_in_group'
-              label: 'Displayed in'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
           a6cbe979-ec4e-43e2-828c-7b8940b71515:
             uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
             region: main
@@ -194,7 +175,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 3
+            weight: 4
             additional: {  }
           95d879e7-c3f1-4e37-93a0-afbca46d9c6a:
             uuid: 95d879e7-c3f1-4e37-93a0-afbca46d9c6a
@@ -231,6 +212,40 @@ third_party_settings:
                 label: above
                 settings:
                   link: true
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          ddd5ae3e-9756-4a94-9b32-9fe77a52da05:
+            uuid: ddd5ae3e-9756-4a94-9b32-9fe77a52da05
+            region: side
+            configuration:
+              id: 'field_block:node:page:field_display_in_group'
+              label: 'Displayed in'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          c85d9999-ebe8-4112-a56f-fa7cb4290703:
+            uuid: c85d9999-ebe8-4112-a56f-fa7cb4290703
+            region: main
+            configuration:
+              id: 'extra_field_block:node:page:content_moderation_control'
+              label: 'Moderation control'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
                 third_party_settings: {  }
             weight: 3
             additional: {  }
