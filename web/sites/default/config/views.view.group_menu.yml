@@ -551,6 +551,73 @@ display:
           text: view
           output_url_as_text: true
           absolute: false
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         nothing:
           id: nothing
           table: views
@@ -563,7 +630,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active{% endif %}">{{ field_menu_url_text }}</a>'
+            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active{% endif %}">{{ field_menu_url_text }}{{ status }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -1401,6 +1468,46 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: reverse__node__field_display_in_group
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1492,7 +1599,7 @@ display:
           id: field_menu_url_text
           table: node__field_menu_url_text
           field: field_menu_url_text
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: 'Pages Menu Text'
           plugin_id: field
@@ -1555,7 +1662,7 @@ display:
           id: status
           table: node_field_data
           field: status
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: 'Are Pages Published (status)'
           entity_type: node
@@ -1564,8 +1671,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1622,7 +1729,7 @@ display:
           id: view_node
           table: node
           field: view_node
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -1675,7 +1782,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -1741,7 +1848,7 @@ display:
           id: field_resource_link
           table: node__field_resource_link
           field: field_resource_link
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -1816,7 +1923,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active disabled{% endif %}">{{ field_menu_url_text }}</a>'
+            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active disabled{% endif %}">{{ field_menu_url_text }}{{ status }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -1866,8 +1973,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1932,7 +2039,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_menu_url_text_1 }}{% if status_1 == "No" %}<span class="badge badge-danger ml-2">Unpublished</span>{% endif %}'
+            text: '{{ field_menu_url_text_1 }}{{ status_1 }}'
             make_link: false
             path: ''
             absolute: false
@@ -1988,7 +2095,7 @@ display:
           id: field_sort_weight_value
           table: node__field_sort_weight
           field: field_sort_weight_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: standard
@@ -2001,7 +2108,7 @@ display:
           id: field_menu_url_text_value
           table: node__field_menu_url_text
           field: field_menu_url_text_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: standard
@@ -2015,7 +2122,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: none
+          relationship: field_parent
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2052,7 +2159,7 @@ display:
           id: type
           table: node_field_data
           field: type
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2095,7 +2202,7 @@ display:
           id: field_parent_target_id
           table: node__field_parent
           field: field_parent_target_id
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: numeric
@@ -2139,7 +2246,7 @@ display:
           id: field_show_in_menu_value
           table: node__field_show_in_menu
           field: field_show_in_menu_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: boolean
@@ -2207,25 +2314,15 @@ display:
         filters: false
         filter_groups: false
       relationships:
-        reverse__node__field_parent:
-          id: reverse__node__field_parent
-          table: node_field_data
-          field: reverse__node__field_parent
-          relationship: none
-          group_type: group
-          admin_label: 'Pages under the parent'
-          entity_type: node
-          plugin_id: entity_reverse
-          required: true
         field_parent:
           id: field_parent
           table: node__field_parent
           field: field_parent
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: 'field_parent: Content'
           plugin_id: standard
-          required: false
+          required: true
       display_description: 'Block to show the current page''s children.'
       display_extenders: {  }
       block_description: 'Page Children Menu'
@@ -2248,78 +2345,11 @@ display:
     position: 7
     display_options:
       fields:
-        status_1:
-          id: status_1
-          table: node_field_data
-          field: status
-          relationship: reverse__node__field_parent
-          group_type: group
-          admin_label: 'Are Pages Published (status_1)'
-          entity_type: node
-          entity_field: status
-          plugin_id: field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: yes-no
-            format_custom_false: ''
-            format_custom_true: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_menu_url_text:
           id: field_menu_url_text
           table: node__field_menu_url_text
           field: field_menu_url_text
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: 'Pages Menu Text'
           plugin_id: field
@@ -2382,7 +2412,7 @@ display:
           id: view_node
           table: node
           field: view_node
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2435,7 +2465,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2497,11 +2527,78 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_resource_link:
           id: field_resource_link
           table: node__field_resource_link
           field: field_resource_link
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -2576,7 +2673,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active disabled{% endif %}">{{ field_menu_url_text }}</a>'
+            text: '<a href="{% if field_resource_link %}{{ field_resource_link}}{% else %}{{ view_node }}{% endif %}" class="nav-link{% if nid == raw_arguments.nid %} active disabled{% endif %}">{{ field_menu_url_text }}{{ status }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -2613,21 +2710,21 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
-        status:
-          id: status
+        status_1:
+          id: status_1
           table: node_field_data
           field: status
-          relationship: field_parent
+          relationship: field_parent_1
           group_type: group
-          admin_label: 'Is Parent Published (status)'
+          admin_label: ''
           entity_type: node
           entity_field: status
           plugin_id: field
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2684,7 +2781,7 @@ display:
           id: field_menu_url_text_1
           table: node__field_menu_url_text
           field: field_menu_url_text
-          relationship: field_parent
+          relationship: field_parent_1
           group_type: group
           admin_label: 'Parent Menu Text'
           plugin_id: field
@@ -2692,7 +2789,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<span class="sr-only">Menu for </span> {% if field_menu_url_text_1 %}{{ field_menu_url_text_1 }}{% else %}{{ title_1 }}{% endif %}'
+            text: '<span class="sr-only">Menu for </span> {{ field_menu_url_text_1 }}{{ status_1 }}'
             make_link: false
             path: ''
             absolute: false
@@ -2748,7 +2845,7 @@ display:
           id: field_sort_weight_value
           table: node__field_sort_weight
           field: field_sort_weight_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: standard
@@ -2761,7 +2858,7 @@ display:
           id: field_menu_url_text_value
           table: node__field_menu_url_text
           field: field_menu_url_text_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: standard
@@ -2775,7 +2872,7 @@ display:
           id: nid
           table: node_field_data
           field: nid
-          relationship: none
+          relationship: reverse__node__field_parent
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2812,7 +2909,7 @@ display:
           id: type
           table: node_field_data
           field: type
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -2855,7 +2952,7 @@ display:
           id: field_show_in_menu_value
           table: node__field_show_in_menu
           field: field_show_in_menu_value
-          relationship: reverse__node__field_parent
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: boolean
@@ -2940,28 +3037,28 @@ display:
           field: field_parent
           relationship: none
           group_type: group
-          admin_label: 'field_parent: Content'
+          admin_label: 'Layer 1'
           plugin_id: standard
-          required: false
+          required: true
         reverse__node__field_parent:
           id: reverse__node__field_parent
           table: node_field_data
           field: reverse__node__field_parent
           relationship: field_parent
           group_type: group
-          admin_label: 'Pages under the parent'
+          admin_label: 'Layer 2'
           entity_type: node
           plugin_id: entity_reverse
-          required: false
+          required: true
         field_parent_1:
           id: field_parent_1
           table: node__field_parent
           field: field_parent
-          relationship: field_parent
+          relationship: reverse__node__field_parent
           group_type: group
-          admin_label: 'field_parent: Content'
+          admin_label: 'Layer 3'
           plugin_id: standard
-          required: false
+          required: true
       display_description: 'Block to show the current page and its siblings under a common parent.'
       header: {  }
       display_extenders: {  }
