@@ -46,6 +46,26 @@ function portland_openid_connect_user_login(UserInterface $account) {
 }
 
 /**
+ * Implement hook_user_update()
+ */
+function portland_openid_connect_user_update($account)
+{
+  if( $account->field_is_contact_only->value == $account->original->field_is_contact_only->value) return;
+  if($account->field_is_contact_only->value == 1) {
+    $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
+    foreach ($current_primary_group_ids as $current_primary_group_id) {
+      $group = \Drupal\group\Entity\Group::load($current_primary_group_id);
+      $group->removeMember($account);
+      $group->save();
+      \Drupal\Core\Cache\Cache::invalidateTags($group->getCacheTagsToInvalidate());
+    }
+  }
+  else {
+    PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+  }
+}
+
+/**
  * Implement hook_user_presave()
  */
 function portland_openid_connect_user_presave($account)
@@ -88,7 +108,7 @@ function portland_openid_connect_user_presave($account)
     $account->field_primary_groups = [];
   }
 
-  PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+  // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
 }
 
 /**

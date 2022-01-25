@@ -38,8 +38,8 @@ class PortlandOpenIdConnectUtil
       $group_content->group_roles->appendItem(['target_id' => $role->id()]);
     }
     // If the user has no role in the group, remove the user completely
-    if($group_content->group_roles->count() === 0) {
       $group = \Drupal\group\Entity\Group::load($group_id);
+    if($group_content->group_roles->count() === 0) {
       $group->removeMember($account);
       $group->save();
     }
@@ -96,8 +96,7 @@ class PortlandOpenIdConnectUtil
     }
 
     // If the primary group is empty or the account is Contact Only, remove all group memberships
-    if (empty($new_primary_group_ids) || 
-      $account->field_is_contact_only->value == 1) {
+    if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {
         PortlandOpenIdConnectUtil::removeUserFromGroup($account, $current_primary_group_id);
