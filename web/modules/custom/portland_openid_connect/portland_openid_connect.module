@@ -107,8 +107,6 @@ function portland_openid_connect_user_presave($account)
   } else {
     $account->field_primary_groups = [];
   }
-
-  // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
 }
 
 /**

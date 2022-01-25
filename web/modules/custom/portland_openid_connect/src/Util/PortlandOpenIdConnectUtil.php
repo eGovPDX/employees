@@ -95,7 +95,7 @@ class PortlandOpenIdConnectUtil
       $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     }
 
-    // If the primary group is empty or the account is Contact Only, remove all group memberships
+    // If the primary group is empty, remove all group memberships
     if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {
