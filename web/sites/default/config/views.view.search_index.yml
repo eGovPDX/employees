@@ -3,6 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_bts_catalog_type
+    - field.storage.node.field_bureaus
+    - field.storage.node.field_business_capability
+    - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.field_contract_number
     - field.storage.node.field_mandated_purchases
@@ -12,6 +16,7 @@ dependencies:
     - system.menu.main
     - user.role.authenticated
   module:
+    - options
     - search_api
     - user
 id: search_index
@@ -29,7 +34,370 @@ display:
     position: 0
     display_options:
       title: Search
-      fields: {  }
+      fields:
+        field_bts_catalog_type:
+          id: field_bts_catalog_type
+          table: search_api_datasource_full_index_entity_node
+          field: field_bts_catalog_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Type
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_business_capability:
+          id: field_business_capability
+          table: search_api_datasource_full_index_entity_node
+          field: field_business_capability
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Capability
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              bts_application_exception:
+                display_method: label
+              bts_business_capability:
+                display_method: label
+                view_mode: default
+              bts_business_priority:
+                display_method: label
+                view_mode: default
+              bts_service_owner:
+                display_method: label
+              bureaus:
+                display_method: label
+              business_owner:
+                display_method: label
+              cloud_service_type:
+                display_method: label
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              hosting_environment:
+                display_method: label
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              support_model:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        field_business_priority:
+          id: field_business_priority
+          table: search_api_datasource_full_index_entity_node
+          field: field_business_priority
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Priority
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              bts_application_exception:
+                display_method: label
+              bts_business_capability:
+                display_method: label
+                view_mode: default
+              bts_business_priority:
+                display_method: label
+                view_mode: default
+              bts_service_owner:
+                display_method: label
+              bureaus:
+                display_method: label
+              business_owner:
+                display_method: label
+              cloud_service_type:
+                display_method: label
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              hosting_environment:
+                display_method: label
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              support_model:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        title:
+          id: title
+          table: search_api_datasource_full_index_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Name
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
       pager:
         type: full
         options:
@@ -259,11 +627,15 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:field.storage.node.field_bts_catalog_type'
+        - 'config:field.storage.node.field_business_capability'
+        - 'config:field.storage.node.field_business_priority'
         - 'config:search_api.index.full_index'
   page_1:
     id: page_1
@@ -281,11 +653,15 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:field.storage.node.field_bts_catalog_type'
+        - 'config:field.storage.node.field_business_capability'
+        - 'config:field.storage.node.field_business_priority'
         - 'config:search_api.index.full_index'
   page_bts_catalog:
     id: page_bts_catalog
@@ -294,6 +670,496 @@ display:
     position: 3
     display_options:
       title: 'Technology Services Catalog'
+      fields:
+        title:
+          id: title
+          table: search_api_datasource_full_index_entity_node
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Name
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_bts_catalog_type:
+          id: field_bts_catalog_type
+          table: search_api_datasource_full_index_entity_node
+          field: field_bts_catalog_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Type
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        field_business_capability:
+          id: field_business_capability
+          table: search_api_datasource_full_index_entity_node
+          field: field_business_capability
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Capability
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              bts_application_exception:
+                display_method: label
+              bts_business_capability:
+                display_method: label
+                view_mode: default
+              bts_business_priority:
+                display_method: label
+                view_mode: default
+              bts_service_owner:
+                display_method: label
+              bureaus:
+                display_method: label
+              business_owner:
+                display_method: label
+              cloud_service_type:
+                display_method: label
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              hosting_environment:
+                display_method: label
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              support_model:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        field_bureaus:
+          id: field_bureaus
+          table: search_api_datasource_full_index_entity_node
+          field: field_bureaus
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Bureaus
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_entity
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            display_methods:
+              bts_application_exception:
+                display_method: label
+              bts_business_capability:
+                display_method: label
+                view_mode: default
+              bts_business_priority:
+                display_method: label
+                view_mode: default
+              bts_service_owner:
+                display_method: label
+              bureaus:
+                display_method: label
+              business_owner:
+                display_method: label
+              cloud_service_type:
+                display_method: label
+              contract_category:
+                display_method: label
+              contract_type:
+                display_method: label
+              event_type:
+                display_method: label
+              group_ad_name_list:
+                display_method: label
+                view_mode: default
+              hosting_environment:
+                display_method: label
+              news_type:
+                display_method: label
+              org_type:
+                display_method: label
+              support_model:
+                display_method: label
+              tags:
+                display_method: label
+                view_mode: default
+              topics:
+                display_method: label
+                view_mode: default
+        changed:
+          id: changed
+          table: search_api_datasource_full_index_entity_node
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: search_api_field
+          label: Changed
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: medium_date
+            custom_date_format: ''
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api_date
+          fallback_options:
+            date_format: fallback
+            custom_date_format: ''
+            timezone: ''
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+        search_api_operations:
+          id: search_api_operations
+          table: search_api_index_full_index
+          field: search_api_operations
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_entity_operations
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          destination: true
       exposed_form:
         type: basic
         options:
@@ -482,32 +1348,67 @@ display:
         groups:
           1: AND
       style:
-        type: html_list
+        type: table
         options:
+          grouping:
+            -
+              field: field_bts_catalog_type
+              rendered: true
+              rendered_strip: false
           row_class: ''
           default_row_class: true
-          uses_fields: false
-          type: ul
-          wrapper_class: item-list
-          class: ''
+          columns:
+            title: title
+            field_bts_catalog_type: field_bts_catalog_type
+            field_business_capability: field_business_capability
+            field_bureaus: field_bureaus
+            changed: changed
+            search_api_operations: search_api_operations
+          default: '-1'
+          info:
+            title:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_bts_catalog_type:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_business_capability:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_bureaus:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            search_api_operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
-        type: search_api
+        type: fields
         options:
-          view_modes:
-            'entity:group':
-              employee: teaser
-              private: teaser
-            'entity:media':
-              document: search_result
-            'entity:node':
-              bts_catalog_item: teaser
-              contract: teaser
-              event: teaser
-              news: teaser
-              page: teaser
-              resource: teaser
-            'entity:user':
-              user: search_result
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         access: false
         cache: false
@@ -515,6 +1416,7 @@ display:
         exposed_form: false
         style: false
         row: false
+        fields: false
         sorts: false
         filters: false
         filter_groups: false
@@ -564,12 +1466,16 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
         - user.roles
       tags:
+        - 'config:field.storage.node.field_bts_catalog_type'
+        - 'config:field.storage.node.field_bureaus'
+        - 'config:field.storage.node.field_business_capability'
         - 'config:search_api.index.full_index'
   page_contacts:
     id: page_contacts
@@ -829,11 +1735,15 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:field.storage.node.field_bts_catalog_type'
+        - 'config:field.storage.node.field_business_capability'
+        - 'config:field.storage.node.field_business_priority'
         - 'config:search_api.index.full_index'
   page_contracts:
     id: page_contracts
