@@ -5,7 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
     - taxonomy.vocabulary.bts_business_capability
-    - views.view.terms_by_parent
+    - views.view.taxonomy_list
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -38,13 +38,13 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          6923aa51-8187-4dbc-9ab4-c6ec58d65902:
-            uuid: 6923aa51-8187-4dbc-9ab4-c6ec58d65902
+          9fa1e2ad-1cb4-4b6b-8c1b-41649b0dc994:
+            uuid: 9fa1e2ad-1cb4-4b6b-8c1b-41649b0dc994
             region: content
             configuration:
-              id: 'views_block:terms_by_parent-block_grid_child_terms'
+              id: 'views_block:taxonomy_list-block_grid_child_terms'
               label: ''
-              label_display: visible
+              label_display: '0'
               provider: views
               context_mapping: {  }
               views_label: ''
