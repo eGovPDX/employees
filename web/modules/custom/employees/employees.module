@@ -7,8 +7,7 @@ use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\Core\Utility\Token;
-use Drupal\Core\Language\LanguageInterface;
+
 
 /**
  * Implements hook_form_alter()
@@ -606,74 +605,6 @@ function employees_preprocess_fieldset(&$variables) {
   }
 }
 
-/**
- * A helper function that returns TRUE if the current user belongs to BTS Employees (ID:48)
- */
-function _is_current_user_bts_employee() {
-  $bts_group = \Drupal\group\Entity\Group::load(48); // The BTS Employees group
-  $membership = $bts_group->getMember(\Drupal::currentUser());
-  // The user is NOT in the group
-  if ($membership == null) {
-    return false;
-  } else {
-    $roles = $membership->getRoles();
-    // Check if the user is member, editor, employee, or admin
-    if (
-      in_array("employee-assigned_member", array_keys($roles)) ||
-      in_array("employee-employee", array_keys($roles)) ||
-      in_array("employee-editor", array_keys($roles)) ||
-      in_array("employee-admin", array_keys($roles))
-    ) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/**
- * Implement hook_views_query_alter() 
- */
-function employees_views_query_alter($view, $query)
-{
-  if ( $view->id() === 'taxonomy_term' && (
-    $view->current_display == "page_bts_catalog_by_term"
-  )) {
-    if( ! _is_current_user_bts_employee() ) return;
-
-    // Remove the filter on field_restricted if the current user is a BTS employee
-    $conditions = $query->where[1]["conditions"];
-    $restricted_condition_index = -1;
-    foreach($conditions as $key => $condition) {
-      if($condition['field'] === "node__field_restricted.field_restricted_value") {
-        unset($query->where[1]["conditions"][$key]);
-      }
-    }
-  }
-}
-
-/**
- * Implements hook_search_api_query_alter().
- */
-function employees_search_api_query_alter(\Drupal\search_api\Query\QueryInterface $query) {
-  if($query->getSearchId() == "views_page:search_index__page_bts_catalog") {
-    if(!_is_current_user_bts_employee()) return;
-    
-    // Remove the filter on field_restricted if the current user is a BTS employee
-    $conditions = &$query->getConditionGroup()->getConditions();
-    foreach ($conditions as $i => $condition) {
-      if ($condition instanceof \Drupal\search_api\Query\ConditionGroupInterface) {
-        $child_conditions = &$condition->getConditions();
-        foreach ($child_conditions as $j => $child_condition) {
-          // Don't go to the next level of condition groups
-          if ($child_condition instanceof \Drupal\search_api\Query\ConditionGroupInterface) continue;
-          if($child_condition->getField() === "field_restricted") {
-            unset($child_conditions[$j]);
-          }
-        }
-      }
-    }
-  }
-}
 
 /**
  * Implement hook_preprocess_HOOK(&$variables) 
@@ -690,17 +621,7 @@ function employees_preprocess_block(&$variables) {
  * Implements hook_pathauto_pattern_alter().
  */
 function employees_pathauto_alias_alter(&$alias, array &$context) {
-  if($context['module'] == "taxonomy") {
-    $term = $context['data']['term'];
-    $vocabulary_id = $term->bundle();
-    $original_source = $context["source"];
-    if( in_array($vocabulary_id, ["bts_business_capability", "bureaus", "bts_business_priority"]) ) {
-      // Build the alias for the term
-      $term_alias = _build_alias_for_term($term);
-      _create_or_update_alias("/technology-services/catalog" . $original_source, "/technology-services/catalog/" . $term_alias);
-    }
-  }
-  else if($context['module'] == "user") {
+  if($context['module'] == "user") {
     $user = $context['data']['user'];
     $first_name = trim($user->field_first_name->value);
     $last_name = trim($user->field_last_name->value);
@@ -722,48 +643,5 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
     if( empty($last_name) ) {
       $alias = rtrim($alias, '.');
     }
-  }
-}
-
-/**
- * Helper function to create or update an alias to a system path
- */
-function _build_alias_for_term($term) {
-  // Build the alias for the term
-  $alias_cleaner = \Drupal::service("pathauto.alias_cleaner");
-  // [term:vocabulary]/[term:parent]/[term:name]
-  $token_service = \Drupal::token();
-  $term_vocabulary = $alias_cleaner->cleanString($token_service->replace("[term:vocabulary]", ['term' => $term]));
-  $term_parent = $token_service->replace("[term:parent]", ['term' => $term]);
-  // Where there is no parent, provide empty string
-  $term_parent = ($term_parent == "[term:parent]") ? "" : $alias_cleaner->cleanString($term_parent);
-  $term_name = $alias_cleaner->cleanString($token_service->replace("[term:name]", ['term' => $term]));
-  if($term_parent == "") {
-    $term_alias = $term_vocabulary . '/' . $term_name;
-  }
-  else {
-    $term_alias = $term_vocabulary . '/' . $term_parent . "/" . $term_name;
-  }
-  return $term_alias;
-}
-
-/**
- * Helper function to create or update an alias to a system path
- */
-function _create_or_update_alias($system_path, $new_alias) {
-  $path_alias_manager = \Drupal::entityTypeManager()->getStorage('path_alias');
-  $original_alias = $path_alias_manager->loadByProperties(["path" => $system_path]);
-  if(empty($original_alias)) {
-    $new_alias = $path_alias_manager->create([
-      'path' => $system_path,
-      'alias' => $new_alias,
-      'langcode' => 'en',
-    ]);
-    $new_alias->save();
-  }
-  else {
-    $original_alias = array_values($original_alias)[0];
-    $original_alias->setAlias($new_alias);
-    $path_alias_manager->save($original_alias);
   }
 }

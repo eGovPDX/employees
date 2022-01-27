@@ -15,11 +15,13 @@ dependencies:
     - field.field.node.bts_catalog_item.field_cost_per_ticket
     - field.field.node.bts_catalog_item.field_customer_responsibilities
     - field.field.node.bts_catalog_item.field_description
+    - field.field.node.bts_catalog_item.field_display_in_group
     - field.field.node.bts_catalog_item.field_example_applications
     - field.field.node.bts_catalog_item.field_hosting_environment
     - field.field.node.bts_catalog_item.field_option_costs
     - field.field.node.bts_catalog_item.field_optional_features
     - field.field.node.bts_catalog_item.field_restricted
+    - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service_hours
     - field.field.node.bts_catalog_item.field_service_initiation
     - field.field.node.bts_catalog_item.field_service_owner
@@ -32,6 +34,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - link
@@ -53,7 +56,7 @@ content:
     third_party_settings: {  }
   field_additional_info:
     type: string_textarea
-    weight: 28
+    weight: 30
     region: content
     settings:
       rows: 5
@@ -61,7 +64,7 @@ content:
     third_party_settings: {  }
   field_annual_user_cost:
     type: string_textfield
-    weight: 38
+    weight: 40
     region: content
     settings:
       size: 60
@@ -69,7 +72,7 @@ content:
     third_party_settings: {  }
   field_bts_application_exception:
     type: options_select
-    weight: 37
+    weight: 39
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -81,7 +84,7 @@ content:
     third_party_settings: {  }
   field_bureaus:
     type: select2_entity_reference
-    weight: 31
+    weight: 33
     region: content
     settings:
       width: 100%
@@ -91,7 +94,7 @@ content:
     third_party_settings: {  }
   field_business_capability:
     type: select2_entity_reference
-    weight: 13
+    weight: 14
     region: content
     settings:
       width: 100%
@@ -101,25 +104,25 @@ content:
     third_party_settings: {  }
   field_business_owner:
     type: options_select
-    weight: 34
+    weight: 36
     region: content
     settings: {  }
     third_party_settings: {  }
   field_business_priority:
     type: options_select
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   field_cloud_service_type:
     type: options_select
-    weight: 35
+    weight: 37
     region: content
     settings: {  }
     third_party_settings: {  }
   field_cost_per_ticket:
     type: string_textfield
-    weight: 39
+    weight: 41
     region: content
     settings:
       size: 60
@@ -127,7 +130,7 @@ content:
     third_party_settings: {  }
   field_customer_responsibilities:
     type: string_textarea
-    weight: 21
+    weight: 23
     region: content
     settings:
       rows: 5
@@ -135,15 +138,25 @@ content:
     third_party_settings: {  }
   field_description:
     type: text_textarea
-    weight: 15
+    weight: 16
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_display_in_group:
+    type: entity_reference_autocomplete
+    weight: 42
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_example_applications:
     type: link_default
-    weight: 29
+    weight: 31
     region: content
     settings:
       placeholder_url: ''
@@ -151,13 +164,13 @@ content:
     third_party_settings: {  }
   field_hosting_environment:
     type: options_select
-    weight: 36
+    weight: 38
     region: content
     settings: {  }
     third_party_settings: {  }
   field_option_costs:
     type: string_textarea
-    weight: 20
+    weight: 21
     region: content
     settings:
       rows: 5
@@ -165,7 +178,7 @@ content:
     third_party_settings: {  }
   field_optional_features:
     type: string_textarea
-    weight: 19
+    weight: 20
     region: content
     settings:
       rows: 5
@@ -173,14 +186,24 @@ content:
     third_party_settings: {  }
   field_restricted:
     type: boolean_checkbox
-    weight: 32
+    weight: 34
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
+  field_reviewer:
+    type: entity_reference_autocomplete
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_service_hours:
     type: string_textarea
-    weight: 22
+    weight: 24
     region: content
     settings:
       rows: 5
@@ -188,7 +211,7 @@ content:
     third_party_settings: {  }
   field_service_initiation:
     type: text_textarea
-    weight: 24
+    weight: 26
     region: content
     settings:
       rows: 5
@@ -196,13 +219,13 @@ content:
     third_party_settings: {  }
   field_service_owner:
     type: options_select
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   field_service_scope:
     type: string_textfield
-    weight: 23
+    weight: 25
     region: content
     settings:
       size: 60
@@ -210,7 +233,7 @@ content:
     third_party_settings: {  }
   field_sla_target:
     type: string_textarea
-    weight: 27
+    weight: 29
     region: content
     settings:
       rows: 5
@@ -218,7 +241,7 @@ content:
     third_party_settings: {  }
   field_standard_cost:
     type: string_textarea
-    weight: 18
+    weight: 19
     region: content
     settings:
       rows: 5
@@ -226,7 +249,7 @@ content:
     third_party_settings: {  }
   field_standard_service_features:
     type: string_textarea
-    weight: 17
+    weight: 18
     region: content
     settings:
       rows: 5
@@ -234,7 +257,7 @@ content:
     third_party_settings: {  }
   field_support_hours:
     type: string_textarea
-    weight: 26
+    weight: 28
     region: content
     settings:
       rows: 5
@@ -242,13 +265,13 @@ content:
     third_party_settings: {  }
   field_support_model:
     type: options_select
-    weight: 33
+    weight: 35
     region: content
     settings: {  }
     third_party_settings: {  }
   field_support_owner:
     type: string_textarea
-    weight: 25
+    weight: 27
     region: content
     settings:
       rows: 5
@@ -256,7 +279,7 @@ content:
     third_party_settings: {  }
   field_vendor:
     type: string_textfield
-    weight: 30
+    weight: 32
     region: content
     settings:
       size: 60
@@ -293,9 +316,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  scheduler_settings:
+    weight: 22
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 12
+    weight: 13
     region: content
     settings:
       display_label: true

@@ -15,11 +15,13 @@ dependencies:
     - field.field.node.bts_catalog_item.field_cost_per_ticket
     - field.field.node.bts_catalog_item.field_customer_responsibilities
     - field.field.node.bts_catalog_item.field_description
+    - field.field.node.bts_catalog_item.field_display_in_group
     - field.field.node.bts_catalog_item.field_example_applications
     - field.field.node.bts_catalog_item.field_hosting_environment
     - field.field.node.bts_catalog_item.field_option_costs
     - field.field.node.bts_catalog_item.field_optional_features
     - field.field.node.bts_catalog_item.field_restricted
+    - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service_hours
     - field.field.node.bts_catalog_item.field_service_initiation
     - field.field.node.bts_catalog_item.field_service_owner
@@ -42,6 +44,11 @@ targetEntityType: node
 bundle: bts_catalog_item
 mode: default
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_additional_info:
     type: basic_string
     label: inline
@@ -134,6 +141,14 @@ content:
     third_party_settings: {  }
     weight: 4
     region: content
+  field_display_in_group:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 30
+    region: content
   field_example_applications:
     type: link
     label: inline
@@ -177,6 +192,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 20
+    region: content
+  field_reviewer:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 29
     region: content
   field_service_hours:
     type: basic_string

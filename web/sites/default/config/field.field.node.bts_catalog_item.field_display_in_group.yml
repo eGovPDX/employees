@@ -1,4 +1,4 @@
-uuid: 1752c3ce-3d79-4994-a355-c5ddad629120
+uuid: 28b1d143-4a64-46d1-9cd7-78e0c19c93eb
 langcode: en
 status: true
 dependencies:
@@ -6,15 +6,15 @@ dependencies:
     - field.storage.node.field_display_in_group
     - group.type.employee
     - group.type.private
-    - node.type.page
-id: node.page.field_display_in_group
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_display_in_group
 field_name: field_display_in_group
 entity_type: node
-bundle: page
+bundle: bts_catalog_item
 label: 'Displayed in'
-description: 'Select the <em>bureau</em>, <em>employee group</em>, or <em>private group</em> to which this page belongs.'
+description: 'BTS catalog items should belong to "Technology Services" (available to all employees) or "BTS Only Documentation" (a private group for BTS employees).'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -27,5 +27,5 @@ settings:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: private
+    auto_create_bundle: employee
 field_type: entity_reference

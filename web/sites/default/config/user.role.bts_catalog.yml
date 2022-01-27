@@ -1,0 +1,54 @@
+uuid: b9e9bdb7-489a-4426-a9cd-ab3edd4392a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.bts_catalog_item
+    - taxonomy.vocabulary.bts_application_exception
+    - taxonomy.vocabulary.bts_business_capability
+    - taxonomy.vocabulary.bts_business_priority
+    - taxonomy.vocabulary.bts_service_owner
+    - taxonomy.vocabulary.bureaus
+    - taxonomy.vocabulary.business_owner
+    - taxonomy.vocabulary.cloud_service_type
+    - taxonomy.vocabulary.hosting_environment
+    - taxonomy.vocabulary.support_model
+  module:
+    - moderation_sidebar
+    - node
+    - quick_node_clone
+    - scheduler
+    - taxonomy
+id: bts_catalog
+label: 'BTS Catalog'
+weight: -7
+is_admin: null
+permissions:
+  - 'clone bts_catalog_item content'
+  - 'create terms in bts_application_exception'
+  - 'create terms in bts_business_capability'
+  - 'create terms in bts_business_priority'
+  - 'create terms in bts_service_owner'
+  - 'create terms in bureaus'
+  - 'create terms in business_owner'
+  - 'create terms in cloud_service_type'
+  - 'create terms in hosting_environment'
+  - 'create terms in support_model'
+  - 'delete own bts_catalog_item content'
+  - 'edit any bts_catalog_item content'
+  - 'edit own bts_catalog_item content'
+  - 'edit terms in bts_application_exception'
+  - 'edit terms in bts_business_capability'
+  - 'edit terms in bts_business_priority'
+  - 'edit terms in bts_service_owner'
+  - 'edit terms in bureaus'
+  - 'edit terms in business_owner'
+  - 'edit terms in cloud_service_type'
+  - 'edit terms in hosting_environment'
+  - 'edit terms in support_model'
+  - 'revert bts_catalog_item revisions'
+  - 'schedule publishing of nodes'
+  - 'use moderation sidebar'
+  - 'view all revisions'
+  - 'view bts_catalog_item revisions'
+  - 'view own unpublished content'

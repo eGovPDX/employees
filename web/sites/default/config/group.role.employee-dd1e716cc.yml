@@ -1,0 +1,24 @@
+uuid: 8f470ce1-186a-4877-8ab5-f6385c45a401
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+  enforced:
+    config:
+      - user.role.bts_catalog
+id: employee-dd1e716cc
+label: 'BTS Catalog'
+weight: -4
+internal: true
+audience: outsider
+group_type: employee
+permissions_ui: false
+permissions:
+  - 'create group_node:bts_catalog_item entity'
+  - 'delete any group_node:bts_catalog_item entity'
+  - 'delete own group_node:bts_catalog_item entity'
+  - 'update any group_node:bts_catalog_item entity'
+  - 'update own group_node:bts_catalog_item entity'
+  - 'view group_node:bts_catalog_item entity'
+  - 'view unpublished group_node:bts_catalog_item entity'
