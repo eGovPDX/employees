@@ -548,17 +548,7 @@ display:
     position: 1
     display_options:
       title: 'Groups Followed'
-      empty:
-        title:
-          id: title
-          table: views
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: title
-          empty: true
-          title: 'No groups followed'
+      empty: {  }
       arguments:
         uid:
           id: uid
@@ -658,6 +648,7 @@ display:
       display_description: 'Profile Followed Groups'
       display_extenders: {  }
       block_description: 'Groups Followed'
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
