@@ -596,6 +596,7 @@ function employees_preprocess_fieldset(&$variables) {
   if( 
     // Find your fieldset ID in the <fieldset id="ID_HERE" ...> tag.
     // Comment out this line below if you want to target all Fieldsets
+    array_key_exists('id', $variables["attributes"]) &&
     $variables["attributes"]["id"] == "group-user-profile" &&
     !empty($variables['description']) && 
     !empty($variables['description']["content"])
