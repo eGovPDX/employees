@@ -1,0 +1,19 @@
+uuid: 1e93bc9e-c178-42a5-aa5b-6787501f4c34
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - node.type.bts_catalog_item
+  module:
+    - gnode
+    - node
+id: group_content_type_857fcdcbb71b0
+label: 'Private Group: Group node (BTS catalog item)'
+description: 'Adds <em class="placeholder">BTS catalog item</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_node:bts_catalog_item'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

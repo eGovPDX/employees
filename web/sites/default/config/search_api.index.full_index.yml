@@ -3,11 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_group_description
-    - field.storage.media.field_display_in_group
-    - field.storage.media.field_description
-    - field.storage.media.field_tags
+    - field.storage.node.body
+    - field.storage.node.field_description
     - field.storage.node.field_additional_info
+    - field.storage.user.field_address
     - field.storage.node.field_bts_catalog_type
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
@@ -15,44 +14,45 @@ dependencies:
     - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
-    - field.storage.node.body
-    - field.storage.node.field_display_in_group
-    - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
     - field.storage.node.field_customer_responsibilities
-    - field.storage.node.field_description
+    - field.storage.node.field_date_range
+    - field.storage.node.field_display_in_group
+    - field.storage.user.field_division_name
     - field.storage.node.field_example_applications
+    - field.storage.user.field_first_name
     - field.storage.node.field_hosting_environment
+    - field.storage.user.field_is_contact_only
+    - field.storage.user.field_last_name
     - field.storage.node.field_mandated_purchases
     - field.storage.node.field_optional_features
     - field.storage.node.field_p_card_allowed
+    - field.storage.user.field_phone
+    - field.storage.user.field_primary_groups
     - field.storage.node.field_restricted
+    - field.storage.user.field_search_keywords
+    - field.storage.user.field_section
     - field.storage.node.field_service_hours
     - field.storage.node.field_service_initiation
     - field.storage.node.field_service_owner
     - field.storage.node.field_sla_target
     - field.storage.node.field_support_hours
     - field.storage.node.field_support_model
-    - field.storage.node.field_type
-    - field.storage.user.field_division_name
-    - field.storage.user.field_first_name
-    - field.storage.user.field_is_contact_only
-    - field.storage.user.field_last_name
-    - field.storage.user.field_address
-    - field.storage.user.field_phone
-    - field.storage.user.field_primary_groups
-    - field.storage.user.field_search_keywords
-    - field.storage.user.field_section
+    - field.storage.media.field_tags
     - field.storage.user.field_title
+    - field.storage.node.field_type
     - field.storage.user.field_workspace
+    - field.storage.group.field_group_description
+    - field.storage.media.field_description
+    - field.storage.media.field_display_in_group
     - search_api.server.searchstax
     - core.entity_view_mode.user.compact
   module:
     - search_api_solr
-    - group
-    - media
     - node
+    - group
     - user
+    - media
     - search_api
 third_party_settings:
   search_api_solr:
