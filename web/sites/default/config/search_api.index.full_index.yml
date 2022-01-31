@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_description
-    - field.storage.node.field_additional_info
     - field.storage.user.field_address
     - field.storage.node.field_bts_catalog_type
     - field.storage.node.field_bureaus
@@ -15,7 +14,6 @@ dependencies:
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
     - field.storage.node.field_contract_number
-    - field.storage.node.field_customer_responsibilities
     - field.storage.node.field_date_range
     - field.storage.node.field_display_in_group
     - field.storage.user.field_division_name
@@ -25,18 +23,12 @@ dependencies:
     - field.storage.user.field_is_contact_only
     - field.storage.user.field_last_name
     - field.storage.node.field_mandated_purchases
-    - field.storage.node.field_optional_features
     - field.storage.node.field_p_card_allowed
     - field.storage.user.field_phone
     - field.storage.user.field_primary_groups
-    - field.storage.node.field_restricted
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
-    - field.storage.node.field_service_hours
-    - field.storage.node.field_service_initiation
     - field.storage.node.field_service_owner
-    - field.storage.node.field_sla_target
-    - field.storage.node.field_support_hours
     - field.storage.node.field_support_model
     - field.storage.media.field_tags
     - field.storage.user.field_title
@@ -159,14 +151,6 @@ field_settings:
     dependencies:
       module:
         - node
-  field_additional_info:
-    label: 'Additional Info'
-    datasource_id: 'entity:node'
-    property_path: field_additional_info
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_additional_info
   field_address:
     label: 'Office location'
     datasource_id: 'entity:user'
@@ -239,14 +223,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_contract_number
-  field_customer_responsibilities:
-    label: 'Customer Responsibilities'
-    datasource_id: 'entity:node'
-    property_path: field_customer_responsibilities
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_customer_responsibilities
   field_date_range:
     label: 'Contract Date'
     datasource_id: 'entity:node'
@@ -345,14 +321,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_mandated_purchases
-  field_optional_features:
-    label: 'Optional Features'
-    datasource_id: 'entity:node'
-    property_path: field_optional_features
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_optional_features
   field_p_card_allowed:
     label: 'P-Card Allowed'
     datasource_id: 'entity:node'
@@ -377,14 +345,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_primary_groups
-  field_restricted:
-    label: Restricted
-    datasource_id: 'entity:node'
-    property_path: field_restricted
-    type: boolean
-    dependencies:
-      config:
-        - field.storage.node.field_restricted
   field_search_keywords:
     label: 'Search keywords'
     datasource_id: 'entity:user'
@@ -401,22 +361,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_section
-  field_service_hours:
-    label: 'Service Hours'
-    datasource_id: 'entity:node'
-    property_path: field_service_hours
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_service_hours
-  field_service_initiation:
-    label: 'Service Initiation'
-    datasource_id: 'entity:node'
-    property_path: field_service_initiation
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_service_initiation
   field_service_owner:
     label: 'Service owner'
     datasource_id: 'entity:node'
@@ -425,22 +369,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_service_owner
-  field_sla_target:
-    label: 'SLA Target'
-    datasource_id: 'entity:node'
-    property_path: field_sla_target
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_sla_target
-  field_support_hours:
-    label: 'Support Hours'
-    datasource_id: 'entity:node'
-    property_path: field_support_hours
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_support_hours
   field_support_model:
     label: 'Support model'
     datasource_id: 'entity:node'
