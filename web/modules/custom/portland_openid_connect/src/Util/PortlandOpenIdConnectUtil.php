@@ -277,13 +277,109 @@ class PortlandOpenIdConnectUtil
       }
     } catch (RequestException $e) {
       // Do not log 404 errors since some users don't have profile
-      if ($e->getCode() != 404) {
+      if ($e->getCode() == 404) {
+        // Load the Drupal user with email
+        $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $email]);
+        if (count($users) != 0) {
+          $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+          $user->status->value = false;
+          $user->save();
+        }
+      }
+      else {
         $variables = [
           '@message' => 'Could not retrieve user information for email ' . $email,
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
       }
+    }
+  }
+
+  /**
+   * Look up the user's manager.
+   * A user's principal name never changes. But the email may get modified after legal name change.
+   */
+  public static function GetUserManager($access_token, $email, $azure_ad_id)
+  {
+    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+    // Perform the request.
+    $options = [
+      'method' => 'GET',
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => 'Bearer ' . $access_token,
+        'ConsistencyLevel' => 'eventual', // required by Graph search API
+      ],
+    ];
+
+    // Load the Drupal user with AD ID
+    $users = \Drupal::entityTypeManager()->getStorage('user')
+      ->loadByProperties(['field_active_directory_id' => $azure_ad_id]);
+    if (count($users) == 0) return;
+    $user = array_values($users)[0];
+
+    try {
+      // Example: https://graph.microsoft.com/v1.0/users/xinju.wang@portlandoregon.gov/manager
+      $response = self::$client->get(
+        'https://graph.microsoft.com/v1.0/users/' . $azure_ad_id . '/manager',
+        $options
+      );
+      $response_data = json_decode((string) $response->getBody(), TRUE);
+/*
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#directoryObjects/$entity",
+    "@odata.type": "#microsoft.graph.user",
+    "id": "d8f3158f-2589-4b3d-86e4-d09c048c6635",
+    "businessPhones": [],
+    "displayName": "Nixon, Rick",
+    "givenName": "Rick",
+    "jobTitle": null,
+    "mail": "Rick.Nixon@portlandoregon.gov",
+    "mobilePhone": null,
+    "officeLocation": null,
+    "preferredLanguage": null,
+    "surname": "Nixon",
+    "userPrincipalName": "Rick.Nixon@portlandoregon.gov"
+}
+*/
+      if (
+        array_key_exists('@odata.type', $response_data) &&
+        $response_data["@odata.type"] === "#microsoft.graph.user"
+      ) {
+        // Try to load the Drupal user with AD ID
+        $manager_ad_id = $response_data['id'];
+        $manager_users = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
+
+        $manager_user_ids = [];
+        if (count($manager_users) > 0) {
+          // manager_users is an associate array with user ID as key, user entity as value
+          $manager_user_ids[] = key($manager_users);
+          // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
+        } else {
+          $manager_stub_user = User::create([
+            'name' => $manager_ad_id, // temp name
+            'mail' => $manager_ad_id . '@portlandoregon.gov', // temp email
+            'pass' => user_password(), // temp password
+            'status' => 1,
+            'field_active_directory_id' => $manager_ad_id,
+          ]);
+          $manager_stub_user->save();
+          $manager_user_ids[] = $manager_stub_user->id();
+        }
+        $user->set('field_managers', $manager_user_ids);
+        $user->save();
+      }
+    } catch (RequestException $e) {
+      $variables = [
+        '@message' => 'Could not retrieve user\'s manager information for email ' . $email,
+        '@error_message' => $e->getMessage(),
+      ];
+      \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
     }
   }
 
