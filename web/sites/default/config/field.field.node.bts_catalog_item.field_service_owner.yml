@@ -1,29 +1,29 @@
-uuid: 06c2e5a4-842f-4d74-b08a-fd4f91ca1253
+uuid: 189b0b28-c188-4ba3-a63f-b0942f9d0d16
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_service_owner
     - node.type.bts_catalog_item
-    - taxonomy.vocabulary.bts_service_owner
 id: node.bts_catalog_item.field_service_owner
 field_name: field_service_owner
 entity_type: node
 bundle: bts_catalog_item
-label: 'Service owner'
-description: 'What organization in BTS is responsible for this service or application?'
+label: 'Service Owner'
+description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:user'
   handler_settings:
-    target_bundles:
-      bts_service_owner: bts_service_owner
+    target_bundles: null
     sort:
       field: name
-      direction: asc
+      direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    filter:
+      type: _none
+    include_anonymous: true
 field_type: entity_reference

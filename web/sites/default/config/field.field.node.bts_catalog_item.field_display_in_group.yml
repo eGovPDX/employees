@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_display_in_group
-    - group.type.employee
-    - group.type.private
     - node.type.bts_catalog_item
 id: node.bts_catalog_item.field_display_in_group
 field_name: field_display_in_group
@@ -18,14 +16,10 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:group'
+  handler: views
   handler_settings:
-    target_bundles:
-      employee: employee
-      private: private
-    sort:
-      field: label
-      direction: ASC
-    auto_create: false
-    auto_create_bundle: employee
+    view:
+      view_name: group_list_views
+      display_name: entity_ref_bts_groups
+      arguments: {  }
 field_type: entity_reference

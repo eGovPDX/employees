@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.bts_catalog_item.field_business_owner
     - field.field.node.bts_catalog_item.field_business_priority
     - field.field.node.bts_catalog_item.field_cloud_service_type
-    - field.field.node.bts_catalog_item.field_contact
     - field.field.node.bts_catalog_item.field_description
     - field.field.node.bts_catalog_item.field_display_in_group
     - field.field.node.bts_catalog_item.field_example_applications
@@ -19,6 +18,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service_owner
     - field.field.node.bts_catalog_item.field_support_model
+    - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
@@ -57,7 +57,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 7
     region: content
   field_business_capability:
     type: entity_reference_label
@@ -71,9 +71,9 @@ content:
     type: entity_reference_label
     label: inline
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 10
+    weight: 13
     region: content
   field_business_priority:
     type: entity_reference_label
@@ -89,15 +89,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 13
-    region: content
-  field_contact:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 7
+    weight: 10
     region: content
   field_description:
     type: text_default
@@ -116,7 +108,7 @@ content:
       rel: '0'
       target: _blank
     third_party_settings: {  }
-    weight: 12
+    weight: 9
     region: content
   field_hosting_environment:
     type: entity_reference_label
@@ -124,7 +116,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 14
+    weight: 11
     region: content
   field_related_content:
     type: entity_reference_label
@@ -132,15 +124,15 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 15
+    weight: 12
     region: content
   field_service_owner:
     type: entity_reference_label
     label: inline
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 15
     region: content
   field_support_model:
     type: entity_reference_label
@@ -148,7 +140,15 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 11
+    weight: 8
+    region: content
+  field_support_owner:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 14
     region: content
   field_vendor:
     type: string
@@ -156,7 +156,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 6
     region: content
 hidden:
   field_display_in_group: true

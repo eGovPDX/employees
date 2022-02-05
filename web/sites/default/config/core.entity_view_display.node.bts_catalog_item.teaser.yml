@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.bts_catalog_item.field_business_owner
     - field.field.node.bts_catalog_item.field_business_priority
     - field.field.node.bts_catalog_item.field_cloud_service_type
-    - field.field.node.bts_catalog_item.field_contact
     - field.field.node.bts_catalog_item.field_description
     - field.field.node.bts_catalog_item.field_display_in_group
     - field.field.node.bts_catalog_item.field_example_applications
@@ -20,6 +19,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service_owner
     - field.field.node.bts_catalog_item.field_support_model
+    - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
@@ -61,14 +61,6 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_service_owner:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_vendor:
     type: string
     label: inline
@@ -82,14 +74,15 @@ hidden:
   field_bts_application_exception: true
   field_business_owner: true
   field_cloud_service_type: true
-  field_contact: true
   field_description: true
   field_display_in_group: true
   field_example_applications: true
   field_hosting_environment: true
   field_related_content: true
   field_reviewer: true
+  field_service_owner: true
   field_support_model: true
+  field_support_owner: true
   langcode: true
   links: true
   search_api_excerpt: true

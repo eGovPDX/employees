@@ -1,18 +1,18 @@
-uuid: 3cf978e8-4368-42c8-928b-4babeed688a8
+uuid: dd5ed283-dd9c-4e3f-85ff-f22094c130cf
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_contact
+    - field.storage.node.field_support_owner
     - node.type.bts_catalog_item
-id: node.bts_catalog_item.field_contact
-field_name: field_contact
+id: node.bts_catalog_item.field_support_owner
+field_name: field_support_owner
 entity_type: node
 bundle: bts_catalog_item
-label: Contact
-description: 'List the primary BTS or bureau contacts for supporting this service or application. These contacts own the support process for this catalog item.'
+label: 'Support Owner'
+description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
