@@ -7,12 +7,12 @@ dependencies:
 id: bts_catalog_item
 label: 'BTS catalog item'
 type: 'canonical_entities:node'
-pattern: 'technology/catalog/[node:title]'
+pattern: 'technology/catalog/[node:field_service:entity:title]/[node:title]'
 selection_criteria:
-  679968af-c861-4257-b811-74c17418ea91:
+  4cd8223a-bd29-4ea8-a9ca-666476004cda:
     id: node_type
     negate: false
-    uuid: 679968af-c861-4257-b811-74c17418ea91
+    uuid: 4cd8223a-bd29-4ea8-a9ca-666476004cda
     context_mapping:
       node: node
     bundles:

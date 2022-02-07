@@ -16,7 +16,6 @@ dependencies:
     - field.storage.node.field_date_range
     - field.storage.node.field_display_in_group
     - field.storage.user.field_division_name
-    - field.storage.node.field_example_applications
     - field.storage.user.field_first_name
     - field.storage.node.field_hosting_environment
     - field.storage.user.field_is_contact_only
@@ -245,14 +244,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_division_name
-  field_example_applications:
-    label: 'Example applications'
-    datasource_id: 'entity:node'
-    property_path: field_example_applications
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_example_applications
   field_first_name:
     label: 'First name'
     datasource_id: 'entity:user'

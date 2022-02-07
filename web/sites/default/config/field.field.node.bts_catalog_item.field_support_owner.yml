@@ -1,4 +1,4 @@
-uuid: dd5ed283-dd9c-4e3f-85ff-f22094c130cf
+uuid: c3f0071a-e096-49be-866a-901cb5a82cf0
 langcode: en
 status: true
 dependencies:
@@ -16,14 +16,10 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:user'
+  handler: views
   handler_settings:
-    target_bundles: null
-    sort:
-      field: name
-      direction: ASC
-    auto_create: false
-    filter:
-      type: _none
-    include_anonymous: false
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
 field_type: entity_reference
