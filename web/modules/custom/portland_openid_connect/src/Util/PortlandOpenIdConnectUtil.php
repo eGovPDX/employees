@@ -284,6 +284,12 @@ class PortlandOpenIdConnectUtil
         if (count($users) != 0) {
           $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
           $user->status->value = false;
+          $user->field_title = "";
+          $user->field_division_name = "";
+          $user->field_office_location = "";
+          $user->field_address = "";
+          $user->field_phone = "";
+          $user->set('field_managers', []);
           $user->save();
         }
       }
