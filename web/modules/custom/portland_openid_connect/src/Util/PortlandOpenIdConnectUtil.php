@@ -40,8 +40,9 @@ class PortlandOpenIdConnectUtil
     // If the user has no role in the group, remove the user completely
       $group = \Drupal\group\Entity\Group::load($group_id);
     if($group_content->group_roles->count() === 0) {
-      $group->removeMember($account);
-      $group->save();
+      // Hotfix: comment out to avoid removal of membership
+      // $group->removeMember($account);
+      // $group->save();
     }
     // Else only remove the Employee roles. Keep roles like Following
     else {
