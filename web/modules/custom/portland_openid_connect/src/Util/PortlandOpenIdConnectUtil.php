@@ -37,11 +37,17 @@ class PortlandOpenIdConnectUtil
       }
       $group_content->group_roles->appendItem(['target_id' => $role->id()]);
     }
-    if ($has_employee_role) $group_content->save();
-
-    // $group = \Drupal\group\Entity\Group::load($group_id);
-    // $group->removeMember($account);
-    // $group->save();
+    // If the user has no role in the group, remove the user completely
+      $group = \Drupal\group\Entity\Group::load($group_id);
+    if($group_content->group_roles->count() === 0) {
+      // Hotfix: comment out to avoid removal of membership
+      // $group->removeMember($account);
+      // $group->save();
+    }
+    // Else only remove the Employee roles. Keep roles like Following
+    else {
+      $group_content->save();
+    }
   }
 
   /**
@@ -90,6 +96,7 @@ class PortlandOpenIdConnectUtil
       $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     }
 
+    // If the primary group is empty, remove all group memberships
     if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {

@@ -19,7 +19,8 @@ function portland_openid_connect_user_login(UserInterface $account) {
   if( empty($users) ) return;
   $user = array_values($users)[0];
   // If the user is not active, skip
-  if ( ! $user->status->value ) return;
+  // If the user is "Contact Only", do not sync from AD
+  if ( ! $user->status->value || $user->field_is_contact_only->value == "1") return;
   $azure_ad_id = $user->field_active_directory_id->value;
   // If the user doesn't have an Azure AD ID, skip
   if( empty($azure_ad_id)) return;
@@ -41,7 +42,28 @@ function portland_openid_connect_user_login(UserInterface $account) {
 
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
   PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+  // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+}
+
+/**
+ * Implement hook_user_update()
+ */
+function portland_openid_connect_user_update($account)
+{
+  if( $account->field_is_contact_only->value == $account->original->field_is_contact_only->value) return;
+  if($account->field_is_contact_only->value == 1) {
+    $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
+    foreach ($current_primary_group_ids as $current_primary_group_id) {
+      $group = \Drupal\group\Entity\Group::load($current_primary_group_id);
+      $group->removeMember($account);
+      $group->save();
+      \Drupal\Core\Cache\Cache::invalidateTags($group->getCacheTagsToInvalidate());
+    }
+  }
+  else {
+    PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+  }
 }
 
 /**
