@@ -4,12 +4,18 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - node.type.contract
+    - node.type.event
+    - node.type.news
+    - node.type.page
+    - node.type.resource
     - workflows.workflow.editorial
   module:
     - content_moderation
     - field_permissions
     - filter
     - media
+    - node
     - pathauto
     - system
     - toolbar
@@ -29,10 +35,17 @@ permissions:
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use text format basic_html'
+  - 'view field_group_path'
+  - 'view all revisions'
+  - 'view contract revisions'
+  - 'view event revisions'
   - 'view field_org_type'
   - 'view latest version'
   - 'view media'
+  - 'view news revisions'
   - 'view own field_org_type'
   - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view resource revisions'
   - 'view the administration theme'
   - 'view user email addresses'
