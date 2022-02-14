@@ -1,18 +1,17 @@
-uuid: 548ae67a-c7dc-4ec8-9871-8b1d994ec3a5
+uuid: 40292d1f-bb49-4e3a-8cc1-74e102e28bdd
 langcode: en
 status: true
 dependencies:
   config:
     - group.type.employee
-id: employee-outsider
-label: Outsider
-weight: -101
-internal: true
-audience: outsider
+id: employee-assigned
+label: Assigned
+weight: -9
+internal: false
+audience: member
 group_type: employee
 permissions_ui: true
 permissions:
-  - 'join group'
   - 'view group'
   - 'view group_media:document entity'
   - 'view group_media:image entity'
