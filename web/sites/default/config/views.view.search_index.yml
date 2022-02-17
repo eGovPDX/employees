@@ -52,20 +52,15 @@ display:
       exposed_form:
         type: input_required
         options:
-          view_modes:
-            'entity:group':
-              employee: search_result
-              private: search_result
-            'entity:media':
-              document: search_result
-            'entity:node':
-              contract: teaser
-              event: search_result
-              news: search_result
-              page: search_result
-              resource: search_result
-            'entity:user':
-              user: contact_details
+          submit_button: Search
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: basic_html
       filters:
         search_api_fulltext:
           id: search_api_fulltext
