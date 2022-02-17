@@ -1,25 +1,23 @@
-uuid: 548ae67a-c7dc-4ec8-9871-8b1d994ec3a5
+uuid: 1c2816b7-bb7f-413b-a4c6-b811baba0d8a
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.employee
-id: employee-outsider
-label: Outsider
-weight: -101
-internal: true
-audience: outsider
-group_type: employee
+    - group.type.private
+id: private-assigned
+label: Assigned
+weight: -9
+internal: false
+audience: member
+group_type: private
 permissions_ui: true
 permissions:
-  - 'join group'
   - 'view group'
   - 'view group_media:document entity'
   - 'view group_media:image entity'
   - 'view group_media:remote_video entity'
   - 'view group_membership content'
-  - 'view group_node:contract entity'
   - 'view group_node:event entity'
   - 'view group_node:news entity'
   - 'view group_node:page entity'
-  - 'view group_node:resource revision'
+  - 'view group_node:resource entity'
