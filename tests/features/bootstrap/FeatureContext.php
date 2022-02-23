@@ -120,6 +120,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   /** @Given I am using a 1440x900 browser window */
   public function iAmUsingA1440x900BrowserWindow()
   {
+    $this->visitPath('/');
     $this->getSession()->resizeWindow(1440, 900, 'current');
   }
 
