@@ -41,6 +41,7 @@ function portland_openid_connect_user_login(UserInterface $account) {
   }
 
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getEmail(), $azure_ad_id);
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
 }
@@ -149,6 +150,10 @@ function _create_or_find_manager($user_data)
           array_key_exists('@odata.type', $manager_data) &&
           $manager_data['@odata.type'] == "#microsoft.graph.user"
         ) {
+          // Skip removed manager
+          // See https://github.com/microsoftgraph/microsoft-graph-docs/issues/4500
+          if(array_key_exists('@removed', $manager_data)) continue;
+
           $manager_ad_id = $manager_data['id'];
           $manager_users = \Drupal::entityTypeManager()->getStorage('user')
             ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);

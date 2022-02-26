@@ -1,24 +1,23 @@
-uuid: 3b71444a-39aa-4ffb-8d4e-1e157c2efe8c
+uuid: 1c2816b7-bb7f-413b-a4c6-b811baba0d8a
 langcode: en
 status: true
 dependencies:
   config:
-    - group.type.employee
-id: employee-anonymous
-label: Anonymous
-weight: -102
-internal: true
-audience: anonymous
-group_type: employee
+    - group.type.private
+id: private-assigned
+label: Assigned
+weight: -9
+internal: false
+audience: member
+group_type: private
 permissions_ui: true
 permissions:
   - 'view group'
   - 'view group_media:document entity'
   - 'view group_media:image entity'
   - 'view group_media:remote_video entity'
-  - 'view group_node:bts_catalog_item entity'
-  - 'view group_node:contract entity'
+  - 'view group_membership content'
   - 'view group_node:event entity'
   - 'view group_node:news entity'
   - 'view group_node:page entity'
-  - 'view group_node:resource revision'
+  - 'view group_node:resource entity'
