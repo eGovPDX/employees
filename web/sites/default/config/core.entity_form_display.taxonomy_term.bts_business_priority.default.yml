@@ -3,9 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.bts_business_priority.field_bumpable
-    - field.field.taxonomy_term.bts_business_priority.field_example
-    - field.field.taxonomy_term.bts_business_priority.field_sla
     - taxonomy.vocabulary.bts_business_priority
   module:
     - path
@@ -18,30 +15,6 @@ content:
   description:
     type: text_textfield
     weight: 0
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_bumpable:
-    type: string_textfield
-    weight: 101
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_example:
-    type: string_textfield
-    weight: 103
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_sla:
-    type: string_textfield
-    weight: 102
     region: content
     settings:
       size: 60

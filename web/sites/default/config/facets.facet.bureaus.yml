@@ -17,8 +17,11 @@ field_identifier: field_bureaus
 query_operator: and
 hard_limit: 0
 exclude: false
-use_hierarchy: false
-keep_hierarchy_parents_active: false
+use_hierarchy: true
+keep_hierarchy_parents_active: true
+hierarchy:
+  type: taxonomy
+  config: {  }
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 widget:
@@ -45,10 +48,10 @@ processor_configs:
     settings:
       minimum_items: 1
       maximum_items: null
-  display_value_widget_order:
-    processor_id: display_value_widget_order
+  term_weight_widget_order:
+    processor_id: term_weight_widget_order
     weights:
-      sort: 40
+      sort: 60
     settings:
       sort: ASC
   translate_entity:

@@ -14,7 +14,8 @@ dependencies:
     - field.storage.node.field_type
     - search_api.index.full_index
     - system.menu.main
-    - user.role.authenticated
+    - user.role.administrator
+    - user.role.bts_catalog
   module:
     - options
     - search_api
@@ -1244,10 +1245,10 @@ display:
         type: role
         options:
           role:
-            authenticated: authenticated
+            bts_catalog: bts_catalog
+            administrator: administrator
       cache:
-        type: search_api_tag
-        options: {  }
+        type: none
       sorts:
         search_api_relevance:
           id: search_api_relevance

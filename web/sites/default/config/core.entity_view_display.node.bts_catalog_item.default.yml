@@ -24,7 +24,6 @@ dependencies:
     - node.type.bts_catalog_item
   module:
     - layout_builder
-    - layout_discovery
     - layout_library
     - link
     - options
@@ -35,23 +34,6 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-          context_mapping: {  }
-        components:
-          bfb2a378-e8f3-4fb1-a4e7-2d944bb84552:
-            uuid: bfb2a378-e8f3-4fb1-a4e7-2d944bb84552
-            region: content
-            configuration:
-              id: 'extra_field_block:node:bts_catalog_item:content_moderation_control'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-            weight: 0
-            additional: {  }
-        third_party_settings: {  }
       -
         layout_id: layout_twocol_section
         layout_settings:
@@ -145,14 +127,17 @@ third_party_settings:
             region: second
             configuration:
               id: 'field_block:node:bts_catalog_item:field_business_priority'
+              label: 'Business priority'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: inline
                 settings:
-                  link: false
+                  link: true
                 third_party_settings: {  }
             weight: 6
             additional: {  }
@@ -177,14 +162,17 @@ third_party_settings:
             region: second
             configuration:
               id: 'field_block:node:bts_catalog_item:field_support_model'
+              label: 'Application support model'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: inline
                 settings:
-                  link: false
+                  link: true
                 third_party_settings: {  }
             weight: 11
             additional: {  }
@@ -193,14 +181,17 @@ third_party_settings:
             region: second
             configuration:
               id: 'field_block:node:bts_catalog_item:field_cloud_service_type'
+              label: 'Application cloud service type'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: inline
                 settings:
-                  link: false
+                  link: true
                 third_party_settings: {  }
             weight: 4
             additional: {  }
@@ -209,14 +200,17 @@ third_party_settings:
             region: second
             configuration:
               id: 'field_block:node:bts_catalog_item:field_hosting_environment'
+              label: 'Application hosting environment'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
                 type: entity_reference_label
                 label: inline
                 settings:
-                  link: false
+                  link: true
                 third_party_settings: {  }
             weight: 3
             additional: {  }

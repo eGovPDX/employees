@@ -1,9 +1,9 @@
-uuid: 5d92b0ba-f624-4c48-afe9-e667c384b66a
+uuid: ccde8872-164d-43ac-b8d3-7e88b6b6466a
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.bts_business_priority
+    - taxonomy.vocabulary.support_model
     - views.view.content_per_term
     - views.view.taxonomy_list
   module:
@@ -22,11 +22,11 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          cf5e445a-5a9a-4e00-9a3c-1ca60cf89c70:
-            uuid: cf5e445a-5a9a-4e00-9a3c-1ca60cf89c70
+          4185228a-0631-4253-90b0-0e77bb780508:
+            uuid: 4185228a-0631-4253-90b0-0e77bb780508
             region: content
             configuration:
-              id: 'field_block:taxonomy_term:bts_business_priority:description'
+              id: 'field_block:taxonomy_term:support_model:description'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
@@ -37,8 +37,8 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          10c2be3f-a0e2-4302-8b36-bc5b59b4c9a2:
-            uuid: 10c2be3f-a0e2-4302-8b36-bc5b59b4c9a2
+          52e4f302-5ab6-4cb1-a14a-7ba1d78fea94:
+            uuid: 52e4f302-5ab6-4cb1-a14a-7ba1d78fea94
             region: content
             configuration:
               id: 'views_block:taxonomy_list-block_grid_child_terms'
@@ -50,8 +50,8 @@ third_party_settings:
               items_per_page: none
             weight: 1
             additional: {  }
-          6d832bf2-a46c-4f44-8b85-2aeb11f73d0e:
-            uuid: 6d832bf2-a46c-4f44-8b85-2aeb11f73d0e
+          9efd20da-a168-4f9e-8aba-b4e6aaf60e76:
+            uuid: 9efd20da-a168-4f9e-8aba-b4e6aaf60e76
             region: content
             configuration:
               id: 'views_block:content_per_term-block_catalog_items_per_term'
@@ -66,9 +66,9 @@ third_party_settings:
         third_party_settings: {  }
   layout_library:
     enable: false
-id: taxonomy_term.bts_business_priority.default
+id: taxonomy_term.support_model.default
 targetEntityType: taxonomy_term
-bundle: bts_business_priority
+bundle: support_model
 mode: default
 content:
   description:

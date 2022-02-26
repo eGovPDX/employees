@@ -1,26 +1,27 @@
-uuid: b09497ab-53a5-4ad5-adf7-1afec3193385
+uuid: 4ecb107c-f4a8-4e2d-818b-8b12294f46ed
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.bts_catalog_type
+    - facets.facet.bts_business_priority
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: btscatalogtype
+id: businesspriority
 theme: cloudy2
 region: side
-weight: 10
+weight: 14
 provider: null
-plugin: 'facet_block:bts_catalog_type'
+plugin: 'facet_block:bts_business_priority'
 settings:
-  id: 'facet_block:bts_catalog_type'
-  label: 'BTS Catalog by Type'
+  id: 'facet_block:bts_business_priority'
+  label: 'BTS Filter by Business priority'
   label_display: '0'
   provider: facets
-  block_id: btscatalogtype
+  context_mapping: {  }
+  block_id: businesspriority
 visibility:
   request_path:
     id: request_path

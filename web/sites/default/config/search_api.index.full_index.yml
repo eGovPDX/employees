@@ -542,11 +542,16 @@ processor_settings:
     weights:
       preprocess_query: -30
   entity_status: {  }
+  entity_type: {  }
   hierarchy:
     weights:
       preprocess_index: -45
     fields:
+      field_bureaus: taxonomy_term-parent
       field_business_capability: taxonomy_term-parent
+      field_business_priority: taxonomy_term-parent
+      field_tags: taxonomy_term-parent
+      field_type: taxonomy_term-parent
   html_filter:
     weights:
       preprocess_index: -15
@@ -599,13 +604,25 @@ processor_settings:
       preprocess_index: 0
     boosts:
       'entity:group':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
+        bundle_boosts:
+          employee: !!float 0
+          private: !!float 0
       'entity:media':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
+        bundle_boosts:
+          document: !!float 0
       'entity:node':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
+        bundle_boosts:
+          bts_catalog_item: !!float 0
+          contract: !!float 0
+          event: !!float 0
+          news: !!float 0
+          page: !!float 0
+          resource: !!float 0
       'entity:user':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
 tracker_settings:
   default:
     indexing_order: fifo

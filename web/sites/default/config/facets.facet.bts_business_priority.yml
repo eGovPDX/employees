@@ -1,4 +1,4 @@
-uuid: 13bd0d57-fc63-4d6e-b1e4-cba5771e27ee
+uuid: b155dcaa-de2a-43b0-a268-e7698f99ed4a
 langcode: en
 status: true
 dependencies:
@@ -7,18 +7,18 @@ dependencies:
     - views.view.search_index
   module:
     - search_api
-id: bts_catalog_type
-name: 'Filter by type'
-weight: -3
+id: bts_business_priority
+name: 'Filter by business priority'
+weight: 0
 min_count: 1
-url_alias: bts_catalog_type
+url_alias: bts_business_priority
 facet_source_id: 'search_api:views_page__search_index__page_bts_catalog'
-field_identifier: field_bts_catalog_type
-query_operator: and
+field_identifier: field_business_priority
+query_operator: or
 hard_limit: 0
 exclude: false
-use_hierarchy: false
-keep_hierarchy_parents_active: false
+use_hierarchy: true
+keep_hierarchy_parents_active: true
 hierarchy:
   type: taxonomy
   config: {  }
@@ -29,9 +29,9 @@ widget:
   config:
     show_numbers: true
     soft_limit: 0
-    show_reset_link: false
+    show_reset_link: true
     reset_text: 'Show all'
-    hide_reset_when_no_selection: false
+    hide_reset_when_no_selection: true
     soft_limit_settings:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
@@ -41,21 +41,19 @@ only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: true
 processor_configs:
-  count_limit:
-    processor_id: count_limit
+  hide_non_narrowing_result_processor:
+    processor_id: hide_non_narrowing_result_processor
     weights:
-      build: 50
-    settings:
-      minimum_items: 1
-      maximum_items: null
-  display_value_widget_order:
-    processor_id: display_value_widget_order
+      build: 40
+    settings: {  }
+  term_weight_widget_order:
+    processor_id: term_weight_widget_order
     weights:
-      sort: 40
+      sort: 60
     settings:
       sort: ASC
-  list_item:
-    processor_id: list_item
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }
