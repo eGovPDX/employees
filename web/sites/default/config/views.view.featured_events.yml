@@ -1135,7 +1135,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: '<p>There are no past events in the citywide groups.</p>'
+            value: '<p>There are no upcoming events in the citywide groups.</p>'
             format: basic_html
           tokenize: false
       filters:
@@ -1364,7 +1364,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<div class=\"sr-only\">{{ type }} Menu</div>\r\n<ul class=\"nav nav-group-menu nav-group-menu\">\r\n<li class=\"nav-item\"><a href=\"/events\" class=\"nav-link{% if path('<current>') matches '[events$]' %} active{% endif %}\">Events</a></li>\r\n<li class=\"nav-item\"><a href=\"/events/past\" class=\"nav-link{% if path('<current>') matches '[events/past$]' %} active{% endif %}\">Past Events</a></li>\r\n</ul>\r\n"
+          content: "<div class=\"sr-only\">{{ field_type }} Menu</div>\r\n<ul class=\"nav nav-pills mb-3\">\r\n<li class=\"nav-item\"><a href=\"/events\" class=\"nav-link{% if path('<current>') matches '[events$]' %} active{% endif %}\">Events</a></li>\r\n<li class=\"nav-item\"><a href=\"/events/past\" class=\"nav-link{% if path('<current>') matches '[events/past$]' %} active{% endif %}\">Past Events</a></li>\r\n</ul>\r\n"
           tokenize: true
         result:
           id: result
@@ -1375,7 +1375,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       path: events
       menu:
@@ -1808,7 +1808,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<div class=\"sr-only\">{{ type }} Menu</div>\r\n<ul class=\"nav nav-group-menu nav-group-menu\">\r\n<li class=\"nav-item\"><a href=\"/events\" class=\"nav-link{% if path('<current>') matches '[events$]' %} active{% endif %}\">Events</a></li>\r\n<li class=\"nav-item\"><a href=\"/events/past\" class=\"nav-link{% if path('<current>') matches '[events/past$]' %} active{% endif %}\">Past Events</a></li>\r\n</ul>\r\n"
+          content: "<div class=\"sr-only\">{{ type }} Menu</div>\r\n<ul class=\"nav nav-pills mb-3\">\r\n<li class=\"nav-item\"><a href=\"/events\" class=\"nav-link{% if path('<current>') matches '[events$]' %} active{% endif %}\">Events</a></li>\r\n<li class=\"nav-item\"><a href=\"/events/past\" class=\"nav-link{% if path('<current>') matches '[events/past$]' %} active{% endif %}\">Past Events</a></li>\r\n</ul>"
           tokenize: true
         result:
           id: result
@@ -1819,11 +1819,11 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       path: events/past
       menu:
-        type: normal
+        type: none
         title: Events
         description: ''
         weight: 10
