@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.taxonomy_term.field_employee_groups
     - group.type.employee
+    - group.type.private
     - taxonomy.vocabulary.group_ad_name_list
 id: taxonomy_term.group_ad_name_list.field_employee_groups
 field_name: field_employee_groups
@@ -21,9 +22,10 @@ settings:
   handler_settings:
     target_bundles:
       employee: employee
+      private: private
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: employee
 field_type: entity_reference
