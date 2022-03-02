@@ -82,12 +82,17 @@ final class JoinLeaveLink extends FieldPluginBase
     $user = \Drupal::currentUser();
     $current_path = \Drupal::service('path.current')->getPath();
     $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-    // Do not display join/leave link for primary group
-    foreach ($account->field_primary_groups->getValue() as $primary_group) {
-      if ($primary_group['target_id'] == $group->id()) {
-        return [
-          '#markup' => \Drupal\Core\Render\Markup::create("Primary group"),
-        ];
+    $membership = $group->getMember($account);
+    if (!empty($membership)) {
+      // Do not display join/leave link if the user has Employee or Assigned role
+      $roles = $membership->getRoles();
+      $roles_to_match = ["employee-employee", "employee-assigned", "private-employee", "private-assigned"];
+      foreach ($roles as $role) {
+        if ( in_array($role->id(), $roles_to_match) ) {
+          return [
+            '#markup' => \Drupal\Core\Render\Markup::create("Assigned group"),
+          ];
+        }
       }
     }
 
