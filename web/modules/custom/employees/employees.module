@@ -23,19 +23,16 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   if ($form_id === "media_document_add_form" || $form_id === "media_document_edit_form") {
     $form['#validate'][] = '_validate_document';
   }
-  else if( $form_id === "group_content_private-group_membership_add_form") {
+  else if( $form_id === "group_content_employee-group_membership_add_form" ||
+  $form_id === "group_content_employee-group_membership_edit_form" ||
+  $form_id === "group_content_private-group_membership_add_form" ||
+  $form_id === "group_content_private-group_membership_edit_form") {
     // Don't modify role checkboxes for site admins
     $current_user_roles = \Drupal::currentUser()->getRoles();
     if( in_array("administrator", $current_user_roles) ) return;
-    
+    $form['#attached']['library'][] = 'employees/employees';
+
     $form["group_roles"]["widget"]["#required"] = true;
-    $form["group_roles"]["widget"]["#type"] = "radios";
-    $roles_to_remove = ["private-employee", "employee-employee", "employee-following"];
-    foreach( array_keys($form["group_roles"]["widget"]["#options"]) as $role_option) {
-      if( in_array($role_option, $roles_to_remove) ){
-        unset($form["group_roles"]["widget"]["#options"][$role_option]);
-      }
-    }
   }
 }
 
