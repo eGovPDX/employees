@@ -1,28 +1,29 @@
-uuid: a0375244-1e91-44a3-b2d4-a52ba0ecaaf4
+uuid: 2c20c2a6-4d7a-40f0-b177-c20fafd4c5fd
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.type
+    - facets.facet.events_group
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: type
+id: events_group
 theme: cloudy2
 region: side
-weight: -2
+weight: 2
 provider: null
-plugin: 'facet_block:type'
+plugin: 'facet_block:events_group'
 settings:
-  id: 'facet_block:type'
-  label: 'Filter by Type'
+  id: 'facet_block:events_group'
+  label: 'Filter by Group'
   label_display: '0'
   provider: facets
-  block_id: type
+  context_mapping: {  }
+  block_id: events_group
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /search
+    pages: /events
