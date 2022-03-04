@@ -34,6 +34,12 @@ function employees_form_alter(&$form, &$form_state, $form_id)
 
     $form["group_roles"]["widget"]["#required"] = true;
   }
+  else if ( $form_id === "group_content_employee-group_membership_group-join_form" ) {
+    $form['actions']['submit']['#value'] = t('Follow group');
+  }
+  // else if ( $form_id === "group_content_employee-group_membership_group-leave_form" ) {
+  //   $form['actions']['submit']['#value'] = t('Unfollow group');
+  // }
 }
 
 /**

@@ -98,7 +98,7 @@ final class JoinLeaveLink extends FieldPluginBase
 
     if (empty($group->getMember($user))) {
       if ($group->hasPermission('join group', $user)) {
-        $build = Link::createFromRoute('Join to Follow', 'entity.group.join', ['group' => $group->id(), 'destination' => $current_path])->toString();
+        $build = Link::createFromRoute('Join to Follow', 'entity.group.follow', ['group' => $group->id(), 'destination' => $current_path])->toString();
       }
     } else {
       if ($group->getMember($user) and $group->hasPermission('leave group', $user)) {

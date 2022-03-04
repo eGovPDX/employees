@@ -7,8 +7,13 @@ dependencies:
     - user.role.anonymous
     - user.role.authenticated
   content:
+    - 'taxonomy_term:org_type:1106f9aa-8bb3-47db-a265-52d211d6311d'
     - 'taxonomy_term:org_type:2975d081-7bb6-4288-9a8e-f7df0078a81d'
     - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
+    - 'taxonomy_term:org_type:30401b89-863e-4716-804a-5c16906019c0'
+    - 'taxonomy_term:org_type:359a3a49-a544-46ab-ae51-c3eac0ef3db3'
+    - 'taxonomy_term:org_type:c3b9dc79-97e4-4307-8077-efce99a6fca6'
+    - 'taxonomy_term:org_type:c88b87ed-e73c-438e-9301-1a7b2ce1809c'
   module:
     - group
     - taxonomy
@@ -362,9 +367,223 @@ display:
             value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>"
             format: full_html
           tokenize: false
+      filters:
+        field_org_type_target_id:
+          id: field_org_type_target_id
+          table: group__field_org_type
+          field: field_org_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            1: 1
+            427: 427
+            5: 5
+            3: 3
+            4: 4
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: org_type
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+        group_roles_target_id_2:
+          id: group_roles_target_id_2
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: private-assigned
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        group_roles_target_id_1:
+          id: group_roles_target_id_1
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: employee-employee
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        group_roles_target_id_3:
+          id: group_roles_target_id_3
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: employee-assigned
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        group_roles_target_id:
+          id: group_roles_target_id
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: private-employee
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+          2: OR
       defaults:
         empty: false
         title: false
+        filters: false
+        filter_groups: false
       display_description: ''
       display_extenders: {  }
       block_description: 'Groups Assigned'
@@ -408,9 +627,9 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          operator: not
+          operator: or
           value:
-            47: 47
+            2: 2
             1: 1
           group: 1
           exposed: false
@@ -447,6 +666,45 @@ display:
           hierarchy: false
           limit: true
           error_message: true
+        group_roles_target_id_1:
+          id: group_roles_target_id_1
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: employee-following
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
