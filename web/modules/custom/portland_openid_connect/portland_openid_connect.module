@@ -52,6 +52,7 @@ function portland_openid_connect_user_login(UserInterface $account) {
 function portland_openid_connect_user_update($account)
 {
   if( $account->field_is_contact_only->value == $account->original->field_is_contact_only->value) return;
+  // Exclude "contact only" users from all groups
   if($account->field_is_contact_only->value == 1) {
     $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     foreach ($current_primary_group_ids as $current_primary_group_id) {
@@ -71,6 +72,14 @@ function portland_openid_connect_user_update($account)
  */
 function portland_openid_connect_user_presave($account)
 {
+  // If a user is being blocked, remove all sidewide roles
+  if( $account->status->value == false ) {
+    $roles = $account->getRoles();
+    foreach($roles as $role) {
+      $account->removeRole($role);
+    }
+  }
+
   if (!empty($account->field_group_names->value)) {
     // Remove the duplicated group names
     $primary_group_names = array_unique(
