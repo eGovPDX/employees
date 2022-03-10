@@ -1,4 +1,4 @@
-uuid: cc7bc16e-2ee3-466a-b8ac-1b30d5423a13
+uuid: fcef54bf-a414-48ef-a4b8-e0e2f45926b6
 langcode: en
 status: true
 dependencies:
@@ -7,14 +7,14 @@ dependencies:
     - views.view.search_index
   module:
     - search_api
-id: type
-name: 'Filter by Type'
+id: events_group
+name: 'Filter by Group'
 weight: 0
 min_count: 1
-url_alias: type
-facet_source_id: 'search_api:views_page__search_index__page_search'
-field_identifier: field_type
-query_operator: and
+url_alias: group
+facet_source_id: 'search_api:views_page__search_index__page_events'
+field_identifier: field_display_in_group
+query_operator: or
 hard_limit: 0
 exclude: false
 use_hierarchy: false
@@ -29,9 +29,9 @@ widget:
   config:
     show_numbers: true
     soft_limit: 0
-    show_reset_link: false
+    show_reset_link: true
     reset_text: 'Show all'
-    hide_reset_when_no_selection: false
+    hide_reset_when_no_selection: true
     soft_limit_settings:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
@@ -48,6 +48,12 @@ processor_configs:
     settings:
       minimum_items: 1
       maximum_items: null
+  count_widget_order:
+    processor_id: count_widget_order
+    weights:
+      sort: 30
+    settings:
+      sort: DESC
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:

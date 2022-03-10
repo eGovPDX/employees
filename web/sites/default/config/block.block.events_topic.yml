@@ -1,28 +1,29 @@
-uuid: a0375244-1e91-44a3-b2d4-a52ba0ecaaf4
+uuid: e0a6d5ed-09d7-4caa-8d94-159e2ff26ae5
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.type
+    - facets.facet.events_topic
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: type
+id: events_topic
 theme: cloudy2
 region: side
-weight: -2
+weight: 5
 provider: null
-plugin: 'facet_block:type'
+plugin: 'facet_block:events_topic'
 settings:
-  id: 'facet_block:type'
-  label: 'Filter by Type'
+  id: 'facet_block:events_topic'
+  label: 'Filter by Topic'
   label_display: '0'
   provider: facets
-  block_id: type
+  context_mapping: {  }
+  block_id: events_topic
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /search
+    pages: /events
