@@ -4,15 +4,15 @@ status: true
 dependencies:
   config:
     - search_api.index.full_index
-    - views.view.search_index
+    - views.view.technology_catalog
   module:
     - search_api
 id: business_capability
-name: 'Filter by business capability'
+name: 'Business capability'
 weight: -2
 min_count: 1
 url_alias: business_capability
-facet_source_id: 'search_api:views_page__search_index__page_bts_catalog'
+facet_source_id: 'search_api:views_page__technology_catalog__page_bts_catalog'
 field_identifier: field_business_capability
 query_operator: and
 hard_limit: 0
