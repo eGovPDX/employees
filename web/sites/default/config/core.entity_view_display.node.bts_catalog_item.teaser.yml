@@ -13,12 +13,16 @@ dependencies:
     - field.field.node.bts_catalog_item.field_cloud_service_type
     - field.field.node.bts_catalog_item.field_description
     - field.field.node.bts_catalog_item.field_display_in_group
+    - field.field.node.bts_catalog_item.field_executive_sponsor
     - field.field.node.bts_catalog_item.field_hosting_environment
     - field.field.node.bts_catalog_item.field_link_example_application
+    - field.field.node.bts_catalog_item.field_process_owner
+    - field.field.node.bts_catalog_item.field_product_owner
+    - field.field.node.bts_catalog_item.field_program_manager
+    - field.field.node.bts_catalog_item.field_project_manager
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service
-    - field.field.node.bts_catalog_item.field_service_owner
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
@@ -38,53 +42,29 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_bureaus:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_business_capability:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_business_priority:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_vendor:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 5
-    region: content
 hidden:
   content_moderation_control: true
   field_bts_application_exception: true
+  field_bureaus: true
+  field_business_capability: true
   field_business_owner: true
+  field_business_priority: true
   field_cloud_service_type: true
   field_description: true
   field_display_in_group: true
+  field_executive_sponsor: true
   field_hosting_environment: true
   field_link_example_application: true
+  field_process_owner: true
+  field_product_owner: true
+  field_program_manager: true
+  field_project_manager: true
   field_related_content: true
   field_reviewer: true
   field_service: true
-  field_service_owner: true
   field_support_model: true
   field_support_owner: true
+  field_vendor: true
   langcode: true
   links: true
   search_api_excerpt: true
