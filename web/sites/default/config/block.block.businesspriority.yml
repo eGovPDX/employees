@@ -1,0 +1,29 @@
+uuid: 4ecb107c-f4a8-4e2d-818b-8b12294f46ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.bts_business_priority
+  module:
+    - facets
+    - system
+  theme:
+    - cloudy2
+id: businesspriority
+theme: cloudy2
+region: side
+weight: 14
+provider: null
+plugin: 'facet_block:bts_business_priority'
+settings:
+  id: 'facet_block:bts_business_priority'
+  label: 'BTS Filter by Business priority'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: businesspriority
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /technology/catalog

@@ -1,0 +1,83 @@
+uuid: ccde8872-164d-43ac-b8d3-7e88b6b6466a
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.support_model
+    - views.view.content_per_term
+    - views.view.taxonomy_list
+  module:
+    - layout_builder
+    - layout_discovery
+    - layout_library
+    - text
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          4185228a-0631-4253-90b0-0e77bb780508:
+            uuid: 4185228a-0631-4253-90b0-0e77bb780508
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:support_model:description'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          52e4f302-5ab6-4cb1-a14a-7ba1d78fea94:
+            uuid: 52e4f302-5ab6-4cb1-a14a-7ba1d78fea94
+            region: content
+            configuration:
+              id: 'views_block:taxonomy_list-block_grid_child_terms'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          9efd20da-a168-4f9e-8aba-b4e6aaf60e76:
+            uuid: 9efd20da-a168-4f9e-8aba-b4e6aaf60e76
+            region: content
+            configuration:
+              id: 'views_block:content_per_term-block_catalog_items_per_term'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+id: taxonomy_term.support_model.default
+targetEntityType: taxonomy_term
+bundle: support_model
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

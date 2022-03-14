@@ -1,0 +1,32 @@
+uuid: fd3f05ae-1b8c-4652-acb9-709ec05485ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - field.field.taxonomy_term.topics.field_homepage
+    - taxonomy.vocabulary.topics
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.topics.full
+targetEntityType: taxonomy_term
+bundle: topics
+mode: full
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_by_topic_entity_view_1: true
+  field_homepage: true
+  langcode: true
+  search_api_excerpt: true

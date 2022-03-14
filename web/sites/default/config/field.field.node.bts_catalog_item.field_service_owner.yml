@@ -1,0 +1,25 @@
+uuid: c54ab39c-3ef3-49fc-81a7-6031992142fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_owner
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_service_owner
+field_name: field_service_owner
+entity_type: node
+bundle: bts_catalog_item
+label: 'Service Owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
+field_type: entity_reference

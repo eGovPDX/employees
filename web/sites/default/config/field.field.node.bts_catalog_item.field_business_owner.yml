@@ -1,0 +1,25 @@
+uuid: 24ef5d16-a55e-43e4-983a-63e129fe5180
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_business_owner
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_business_owner
+field_name: field_business_owner
+entity_type: node
+bundle: bts_catalog_item
+label: 'Business Owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
+field_type: entity_reference

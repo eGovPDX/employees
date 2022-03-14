@@ -3,15 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_group_description
-    - field.storage.media.field_display_in_group
-    - field.storage.media.field_description
-    - field.storage.media.field_tags
-    - field.storage.node.field_category
     - field.storage.node.body
-    - field.storage.node.field_display_in_group
-    - field.storage.node.field_date_range
+    - field.storage.node.field_description
+    - field.storage.user.field_address
+    - field.storage.node.field_bts_catalog_type
+    - field.storage.node.field_bureaus
+    - field.storage.node.field_business_capability
+    - field.storage.node.field_business_priority
+    - field.storage.node.field_category
+    - field.storage.node.field_cloud_service_type
     - field.storage.node.field_contract_number
+    - field.storage.node.field_date_range
+    - field.storage.node.field_display_in_group
     - field.storage.group.field_org_type
     - field.storage.node.field_mandated_purchases
     - field.storage.node.field_p_card_allowed
@@ -20,23 +23,31 @@ dependencies:
     - field.storage.node.field_when
     - field.storage.user.field_division_name
     - field.storage.user.field_first_name
+    - field.storage.node.field_hosting_environment
     - field.storage.user.field_is_contact_only
     - field.storage.user.field_last_name
-    - field.storage.user.field_address
+    - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_p_card_allowed
     - field.storage.user.field_phone
     - field.storage.user.field_primary_groups
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
+    - field.storage.node.field_support_model
+    - field.storage.media.field_tags
     - field.storage.user.field_title
+    - field.storage.node.field_type
     - field.storage.user.field_workspace
+    - field.storage.group.field_group_description
+    - field.storage.media.field_description
+    - field.storage.media.field_display_in_group
     - search_api.server.searchstax
     - core.entity_view_mode.user.compact
   module:
     - search_api_solr
-    - group
-    - media
     - node
+    - group
     - user
+    - media
     - search_api
 third_party_settings:
   search_api_solr:
@@ -100,6 +111,14 @@ field_settings:
     dependencies:
       module:
         - node
+  content_field_description:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description
   content_group_type:
     label: 'Displayed in » Group » Type'
     datasource_id: 'entity:node'
@@ -154,6 +173,38 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_address
+  field_bts_catalog_type:
+    label: 'BTS catalog type'
+    datasource_id: 'entity:node'
+    property_path: field_bts_catalog_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_bts_catalog_type
+  field_bureaus:
+    label: Bureaus
+    datasource_id: 'entity:node'
+    property_path: field_bureaus
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_bureaus
+  field_business_capability:
+    label: 'Business capability'
+    datasource_id: 'entity:node'
+    property_path: field_business_capability
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_business_capability
+  field_business_priority:
+    label: 'Business priority'
+    datasource_id: 'entity:node'
+    property_path: field_business_priority
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_business_priority
   field_category:
     label: Category
     datasource_id: 'entity:node'
@@ -162,6 +213,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_category
+  field_cloud_service_type:
+    label: 'Cloud service type'
+    datasource_id: 'entity:node'
+    property_path: field_cloud_service_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_cloud_service_type
   field_contract_number:
     label: 'Contract Number'
     datasource_id: 'entity:node'
@@ -219,6 +278,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_first_name
+  field_hosting_environment:
+    label: 'Hosting environment'
+    datasource_id: 'entity:node'
+    property_path: field_hosting_environment
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_hosting_environment
   field_is_contact_only:
     label: 'Is contact only'
     datasource_id: 'entity:user'
@@ -292,6 +359,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_section
+  field_support_model:
+    label: 'Support model'
+    datasource_id: 'entity:node'
+    property_path: field_support_model
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_support_model
   field_tags:
     label: Tags
     datasource_id: 'entity:media'
@@ -509,6 +584,15 @@ processor_settings:
       preprocess_query: -30
   entity_status: {  }
   entity_type: {  }
+  hierarchy:
+    weights:
+      preprocess_index: -45
+    fields:
+      field_bureaus: taxonomy_term-parent
+      field_business_capability: taxonomy_term-parent
+      field_business_priority: taxonomy_term-parent
+      field_tags: taxonomy_term-parent
+      field_type: taxonomy_term-parent
   html_filter:
     weights:
       preprocess_index: -15
@@ -561,11 +645,25 @@ processor_settings:
       preprocess_index: 0
     boosts:
       'entity:group':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
+        bundle_boosts:
+          employee: !!float 0
+          private: !!float 0
+      'entity:media':
+        datasource_boost: !!float 0
+        bundle_boosts:
+          document: !!float 0
       'entity:node':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
+        bundle_boosts:
+          bts_catalog_item: !!float 0
+          contract: !!float 0
+          event: !!float 0
+          news: !!float 0
+          page: !!float 0
+          resource: !!float 0
       'entity:user':
-        datasource_boost: !!float 1
+        datasource_boost: !!float 0
 tracker_settings:
   default:
     indexing_order: fifo

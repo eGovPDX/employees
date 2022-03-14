@@ -52,15 +52,23 @@ display:
       exposed_form:
         type: input_required
         options:
-          submit_button: Search
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: basic_html
+          view_modes:
+            'entity:group':
+              employee: search_result
+              private: search_result
+            'entity:media':
+              document: search_result
+            'entity:node':
+              contract: teaser
+              event: search_result
+              news: search_result
+              page: search_result
+              resource: search_result
+            'entity:user':
+              user: contact_details
+      cache:
+        type: search_api_tag
+        options: {  }
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -242,6 +250,11 @@ display:
           plugin_id: result
           empty: false
           content: 'Displaying @start - @end of @total'
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -271,7 +284,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       empty: {  }
       sorts:
         search_api_relevance:
@@ -1120,7 +1134,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       sorts:
         search_api_relevance:
           id: search_api_relevance
@@ -1677,7 +1692,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       sorts:
         field_when:
           id: field_when
@@ -2195,7 +2211,8 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       sorts:
         field_when:
           id: field_when
@@ -2566,7 +2583,8 @@ display:
     display_options:
       title: Search
       cache:
-        type: none
+        type: search_api_tag
+        options: {  }
       defaults:
         cache: false
         title: false

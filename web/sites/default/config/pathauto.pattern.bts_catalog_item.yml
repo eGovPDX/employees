@@ -1,0 +1,22 @@
+uuid: 3ea9a016-6efa-4ab0-9d78-e621bdaaebd5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: bts_catalog_item
+label: 'BTS catalog item'
+type: 'canonical_entities:node'
+pattern: 'technology/catalog/[node:field_service:entity:title]/[node:title]'
+selection_criteria:
+  4cd8223a-bd29-4ea8-a9ca-666476004cda:
+    id: node_type
+    negate: false
+    uuid: 4cd8223a-bd29-4ea8-a9ca-666476004cda
+    context_mapping:
+      node: node
+    bundles:
+      bts_catalog_item: bts_catalog_item
+selection_logic: and
+weight: -7
+relationships: {  }

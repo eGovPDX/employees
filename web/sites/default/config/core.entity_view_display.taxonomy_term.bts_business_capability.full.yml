@@ -1,0 +1,94 @@
+uuid: f4b71146-af71-4c86-96b0-d1e1c4f5c7ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - taxonomy.vocabulary.bts_business_capability
+    - views.view.content_per_term
+    - views.view.taxonomy_list
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
+    - text
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          ecc4a519-ffb2-416d-9bf7-5c1ff52a8e52:
+            uuid: ecc4a519-ffb2-416d-9bf7-5c1ff52a8e52
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:bts_business_capability:description'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          9fa1e2ad-1cb4-4b6b-8c1b-41649b0dc994:
+            uuid: 9fa1e2ad-1cb4-4b6b-8c1b-41649b0dc994
+            region: content
+            configuration:
+              id: 'views_block:taxonomy_list-block_grid_child_terms'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          17937442-9ace-4e54-a9e6-981187a86da7:
+            uuid: 17937442-9ace-4e54-a9e6-981187a86da7
+            region: content
+            configuration:
+              id: 'views_block:content_per_term-block_catalog_items_per_term'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
+      restricted_categories: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+id: taxonomy_term.bts_business_capability.full
+targetEntityType: taxonomy_term
+bundle: bts_business_capability
+mode: full
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

@@ -1,0 +1,25 @@
+uuid: 8f06617b-9566-4f07-9062-08ad9ce80943
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reviewer
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_reviewer
+field_name: field_reviewer
+entity_type: node
+bundle: bts_catalog_item
+label: 'Notify reviewers'
+description: 'Assigned reviewers will be notified by email, with a revision log message, any time a change to this content is in review, published, or unpublished moderation states.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: notifiy_reviewer
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

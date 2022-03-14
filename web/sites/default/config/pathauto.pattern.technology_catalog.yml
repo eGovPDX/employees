@@ -1,0 +1,28 @@
+uuid: 36e3e2b0-33dd-4511-b607-59723ceacde3
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: technology_catalog
+label: 'Techology Catalog'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'technology/catalog/[term:vocabulary]/[term:parent]/[term:name]'
+selection_criteria:
+  3cf5497d-1e4c-48f9-bbad-a1caa58b30e1:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 3cf5497d-1e4c-48f9-bbad-a1caa58b30e1
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      bts_application_exception: bts_application_exception
+      bts_business_capability: bts_business_capability
+      bts_business_priority: bts_business_priority
+      bureaus: bureaus
+      cloud_service_type: cloud_service_type
+      hosting_environment: hosting_environment
+      support_model: support_model
+selection_logic: and
+weight: -5
+relationships: {  }

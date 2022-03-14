@@ -1,0 +1,70 @@
+uuid: 8a35f442-752f-457f-8bd6-72ad368e3578
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - taxonomy.vocabulary.bureaus
+    - views.view.content_per_term
+  module:
+    - layout_builder
+    - layout_discovery
+    - layout_library
+    - text
+    - views
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          cb5aec1d-984a-49a4-a7ed-b34b04a02c48:
+            uuid: cb5aec1d-984a-49a4-a7ed-b34b04a02c48
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:bureaus:description'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ba2805c6-c7e4-4bee-b7cf-e66340bdf45e:
+            uuid: ba2805c6-c7e4-4bee-b7cf-e66340bdf45e
+            region: content
+            configuration:
+              id: 'views_block:content_per_term-block_catalog_items_per_term'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+id: taxonomy_term.bureaus.full
+targetEntityType: taxonomy_term
+bundle: bureaus
+mode: full
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

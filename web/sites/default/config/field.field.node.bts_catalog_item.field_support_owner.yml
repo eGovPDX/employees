@@ -1,0 +1,25 @@
+uuid: c3f0071a-e096-49be-866a-901cb5a82cf0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_support_owner
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_support_owner
+field_name: field_support_owner
+entity_type: node
+bundle: bts_catalog_item
+label: 'Support Owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
+field_type: entity_reference

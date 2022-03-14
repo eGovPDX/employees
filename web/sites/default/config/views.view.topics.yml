@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.taxonomy_term.term_teaser
+    - core.entity_view_mode.taxonomy_term.teaser
     - taxonomy.vocabulary.topics
   module:
     - taxonomy
@@ -202,7 +202,7 @@ display:
         type: 'entity:taxonomy_term'
         options:
           relationship: none
-          view_mode: term_teaser
+          view_mode: teaser
       query:
         type: views_query
         options:
