@@ -1,0 +1,25 @@
+uuid: 1243c0f0-244b-434b-a80b-5c59ad465456
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program_manager
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_program_manager
+field_name: field_program_manager
+entity_type: node
+bundle: bts_catalog_item
+label: 'Program Owner/Manager'
+description: 'Manages a group of related projects, subprograms, and program activities which are managed in a coordinated way to obtain benefits not available from managing them individually'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
+field_type: entity_reference

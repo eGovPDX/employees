@@ -1,0 +1,25 @@
+uuid: 708e521f-c73b-40c4-a5e8-440718bae70d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product_owner
+    - node.type.bts_catalog_item
+id: node.bts_catalog_item.field_product_owner
+field_name: field_product_owner
+entity_type: node
+bundle: bts_catalog_item
+label: 'Product Owner'
+description: 'The primary role of the Product Owner is to create the service lifecycle roadmap so that it aligns with the vision created by the Business Owner. The roadmap defines the activities of the service from launch through service improvement and finally service sunset. This role is both strategic and tactical.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: people_list
+      display_name: ref_users
+      arguments: {  }
+field_type: entity_reference

@@ -1,16 +1,16 @@
-uuid: c54ab39c-3ef3-49fc-81a7-6031992142fa
+uuid: 67d2d729-146c-4c8c-b614-6d8cace86881
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_service_owner
+    - field.storage.node.field_process_owner
     - node.type.bts_catalog_item
-id: node.bts_catalog_item.field_service_owner
-field_name: field_service_owner
+id: node.bts_catalog_item.field_process_owner
+field_name: field_process_owner
 entity_type: node
 bundle: bts_catalog_item
-label: 'Service Owner'
-description: ''
+label: 'Process Owner'
+description: 'Responsible for ensuring that a process is fit for purpose.'
 required: false
 translatable: false
 default_value: {  }

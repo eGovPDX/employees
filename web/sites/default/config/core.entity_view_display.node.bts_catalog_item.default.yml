@@ -12,12 +12,16 @@ dependencies:
     - field.field.node.bts_catalog_item.field_cloud_service_type
     - field.field.node.bts_catalog_item.field_description
     - field.field.node.bts_catalog_item.field_display_in_group
+    - field.field.node.bts_catalog_item.field_executive_sponsor
     - field.field.node.bts_catalog_item.field_hosting_environment
     - field.field.node.bts_catalog_item.field_link_example_application
+    - field.field.node.bts_catalog_item.field_process_owner
+    - field.field.node.bts_catalog_item.field_product_owner
+    - field.field.node.bts_catalog_item.field_program_manager
+    - field.field.node.bts_catalog_item.field_project_manager
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service
-    - field.field.node.bts_catalog_item.field_service_owner
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
@@ -297,23 +301,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 14
-            additional: {  }
-          6a1a2cd0-39c4-4183-afa7-a43ad3b30db7:
-            uuid: 6a1a2cd0-39c4-4183-afa7-a43ad3b30db7
-            region: second
-            configuration:
-              id: 'field_block:node:bts_catalog_item:field_service_owner'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: inline
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 0
+            weight: 15
             additional: {  }
           74b95617-5d77-4471-8cb4-938e993bdf4c:
             uuid: 74b95617-5d77-4471-8cb4-938e993bdf4c
@@ -567,22 +555,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 15
             additional: {  }
-          a78980e4-6340-43df-ac7a-4bbe9dc94061:
-            uuid: a78980e4-6340-43df-ac7a-4bbe9dc94061
-            region: content
-            configuration:
-              id: 'field_block:node:bts_catalog_item:field_service_owner'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: entity_reference_label
-                label: inline
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 16
-            additional: {  }
           d21e9a1e-0e1e-4632-8207-80f6398f8d45:
             uuid: d21e9a1e-0e1e-4632-8207-80f6398f8d45
             region: first
@@ -597,6 +569,101 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          7955d163-6e94-40e6-a796-577bca0889cd:
+            uuid: 7955d163-6e94-40e6-a796-577bca0889cd
+            region: second
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_program_manager'
+              label: 'Program Owner/Manager'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 18
+            additional: {  }
+          6b11285d-898e-4707-9545-193f377a10fa:
+            uuid: 6b11285d-898e-4707-9545-193f377a10fa
+            region: second
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_process_owner'
+              label: 'Process Owner'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 20
+            additional: {  }
+          8ef74172-0337-4f42-b458-81e30ca4c7e6:
+            uuid: 8ef74172-0337-4f42-b458-81e30ca4c7e6
+            region: second
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_product_owner'
+              label: 'Product Owner'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 14
+            additional: {  }
+          1fcffba1-6627-4d89-96d6-f7b378acbf6a:
+            uuid: 1fcffba1-6627-4d89-96d6-f7b378acbf6a
+            region: second
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_executive_sponsor'
+              label: 'Executive Sponsor'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 16
+            additional: {  }
+          5c81086e-c6e0-4304-8961-dbd5fd7b6efd:
+            uuid: 5c81086e-c6e0-4304-8961-dbd5fd7b6efd
+            region: second
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_project_manager'
+              label: 'Project Owner/Manager'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 19
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -682,6 +749,14 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
+  field_executive_sponsor:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 18
+    region: first
   field_hosting_environment:
     type: entity_reference_label
     label: inline
@@ -702,6 +777,38 @@ content:
     third_party_settings: {  }
     weight: 13
     region: content
+  field_process_owner:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 21
+    region: first
+  field_product_owner:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 17
+    region: first
+  field_program_manager:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 19
+    region: first
+  field_project_manager:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 20
+    region: first
   field_related_content:
     type: entity_reference_label
     label: inline
@@ -717,14 +824,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 11
-    region: content
-  field_service_owner:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 16
     region: content
   field_support_model:
     type: entity_reference_label
