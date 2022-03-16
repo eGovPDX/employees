@@ -7,6 +7,8 @@ dependencies:
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
     - node.type.bts_catalog_item
+    - system.menu.bts-catalog
+    - user.role.administrator
     - user.role.bts_catalog
   module:
     - content_moderation
@@ -642,6 +644,7 @@ display:
         options:
           role:
             bts_catalog: bts_catalog
+            administrator: administrator
       cache:
         type: tag
         options: {  }
@@ -840,13 +843,22 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             title: title
-            type: type
-            name: name
+            field_bts_catalog_type: field_bts_catalog_type
+            field_business_capability: field_business_capability
+            field_business_priority: field_business_priority
             moderation_state: moderation_state
+            revision_uid: revision_uid
             changed: changed
-          default: changed
+            operations: operations
+          default: title
           info:
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
               sortable: true
               default_sort_order: asc
@@ -854,15 +866,20 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            type:
+            field_bts_catalog_type:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            name:
-              sortable: false
+            field_business_capability:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_business_priority:
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -875,9 +892,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            revision_uid:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             changed:
               sortable: true
               default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
               align: ''
               separator: ''
               empty_column: false
@@ -947,6 +976,15 @@ display:
       display_description: ''
       display_extenders: {  }
       path: technology/catalog/manage
+      menu:
+        type: normal
+        title: 'Manage items'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: bts-catalog
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: 0
       contexts:
