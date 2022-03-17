@@ -967,8 +967,8 @@ display:
         - 'config:field.storage.node.field_business_capability'
         - 'config:field.storage.node.field_business_priority'
         - 'config:workflow_list'
-  moderated_content:
-    id: moderated_content
+  page:
+    id: page
     display_title: 'Catalog Items'
     display_plugin: page
     position: 1
@@ -981,10 +981,12 @@ display:
         title: 'Manage items'
         description: ''
         weight: 0
+        enabled: true
         expanded: false
         menu_name: bts-catalog
         parent: ''
         context: '0'
+      use_admin_theme: true
     cache_metadata:
       max-age: 0
       contexts:
