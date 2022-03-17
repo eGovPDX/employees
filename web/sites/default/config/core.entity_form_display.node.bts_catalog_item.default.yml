@@ -12,12 +12,16 @@ dependencies:
     - field.field.node.bts_catalog_item.field_cloud_service_type
     - field.field.node.bts_catalog_item.field_description
     - field.field.node.bts_catalog_item.field_display_in_group
+    - field.field.node.bts_catalog_item.field_executive_sponsor
     - field.field.node.bts_catalog_item.field_hosting_environment
     - field.field.node.bts_catalog_item.field_link_example_application
+    - field.field.node.bts_catalog_item.field_process_owner
+    - field.field.node.bts_catalog_item.field_product_owner
+    - field.field.node.bts_catalog_item.field_program_manager
+    - field.field.node.bts_catalog_item.field_project_manager
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service
-    - field.field.node.bts_catalog_item.field_service_owner
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
     - field.field.node.bts_catalog_item.field_vendor
@@ -25,6 +29,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - field_states_ui
     - link
     - path
@@ -32,6 +37,29 @@ dependencies:
     - scheduler_content_moderation_integration
     - select2
     - text
+third_party_settings:
+  field_group:
+    group_owner_details:
+      children:
+        - field_business_owner
+        - field_product_owner
+        - field_support_owner
+        - field_executive_sponsor
+        - field_program_manager
+        - field_project_manager
+        - field_process_owner
+      label: 'Owner Details'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: true
+        id: ''
+        open: true
+        description: ''
+        required_fields: false
 id: node.bts_catalog_item.default
 targetEntityType: node
 bundle: bts_catalog_item
@@ -113,7 +141,7 @@ content:
     third_party_settings: {  }
   field_business_owner:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 30
     region: content
     settings:
       match_operator: CONTAINS
@@ -168,6 +196,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_executive_sponsor:
+    type: entity_reference_autocomplete
+    weight: 33
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_hosting_environment:
     type: options_select
     weight: 10
@@ -200,6 +238,46 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_process_owner:
+    type: entity_reference_autocomplete
+    weight: 36
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_product_owner:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_program_manager:
+    type: entity_reference_autocomplete
+    weight: 34
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_project_manager:
+    type: entity_reference_autocomplete
+    weight: 35
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_related_content:
     type: entity_reference_autocomplete
     weight: 11
@@ -230,21 +308,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_service_owner:
-    type: entity_reference_autocomplete
-    weight: 14
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings:
-      field_states_ui:
-        form:
-          type: ''
-          list: ''
-          add: Add
   field_support_model:
     type: options_select
     weight: 8
@@ -271,7 +334,7 @@ content:
               submit: 'Add Cancel'
   field_support_owner:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 32
     region: content
     settings:
       match_operator: CONTAINS
