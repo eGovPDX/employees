@@ -7,7 +7,6 @@ dependencies:
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
     - node.type.bts_catalog_item
-    - system.menu.bts-catalog
     - user.role.administrator
     - user.role.bts_catalog
   module:
@@ -977,11 +976,10 @@ display:
       display_extenders: {  }
       path: technology/catalog/manage
       menu:
-        type: normal
+        type: none
         title: 'Manage items'
         description: ''
         weight: 0
-        enabled: true
         expanded: false
         menu_name: bts-catalog
         parent: ''
