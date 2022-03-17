@@ -7,12 +7,8 @@ dependencies:
     - user.role.anonymous
     - user.role.authenticated
   content:
-    - 'taxonomy_term:org_type:1106f9aa-8bb3-47db-a265-52d211d6311d'
     - 'taxonomy_term:org_type:2975d081-7bb6-4288-9a8e-f7df0078a81d'
     - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
-    - 'taxonomy_term:org_type:359a3a49-a544-46ab-ae51-c3eac0ef3db3'
-    - 'taxonomy_term:org_type:c3b9dc79-97e4-4307-8077-efce99a6fca6'
-    - 'taxonomy_term:org_type:c88b87ed-e73c-438e-9301-1a7b2ce1809c'
   module:
     - group
     - taxonomy
@@ -351,7 +347,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Assigned'
+      title: Assigned
       empty:
         area:
           id: area
@@ -375,13 +371,9 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          operator: or
+          operator: not
           value:
-            1: 1
-            427: 427
-            5: 5
-            3: 3
-            4: 4
+            47: 47
           group: 1
           exposed: false
           expose:
@@ -602,7 +594,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Followed'
+      title: Following
       empty:
         area:
           id: area
@@ -629,7 +621,6 @@ display:
           operator: not
           value:
             47: 47
-            1: 1
           group: 1
           exposed: false
           expose:
@@ -731,7 +722,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Managed'
+      title: Manage
       empty:
         area:
           id: area
@@ -747,56 +738,6 @@ display:
             format: full_html
           tokenize: false
       filters:
-        field_org_type_target_id:
-          id: field_org_type_target_id
-          table: group__field_org_type
-          field: field_org_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            1: 1
-            427: 427
-            5: 5
-            3: 3
-            4: 4
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: org_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
         group_roles_target_id_2:
           id: group_roles_target_id_2
           table: group_content__group_roles
@@ -986,7 +927,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Assigned'
+      title: Assigned
       empty:
         title:
           id: title
@@ -1201,13 +1142,9 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
-          operator: or
+          operator: not
           value:
-            1: 1
-            427: 427
-            5: 5
-            3: 3
-            4: 4
+            47: 47
           group: 2
           exposed: false
           expose:
@@ -1273,7 +1210,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Followed'
+      title: Following
       empty: {  }
       arguments:
         uid:
@@ -1325,7 +1262,6 @@ display:
           operator: not
           value:
             47: 47
-            1: 1
           group: 1
           exposed: false
           expose:
@@ -1429,7 +1365,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: 'Groups Managed'
+      title: Manage
       empty:
         title:
           id: title
@@ -1636,56 +1572,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_org_type_target_id:
-          id: field_org_type_target_id
-          table: group__field_org_type
-          field: field_org_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            1: 1
-            427: 427
-            5: 5
-            3: 3
-            4: 4
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: org_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
       filter_groups:
         operator: AND
         groups:
@@ -1707,6 +1593,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - user
         - user.roles
       tags: {  }
