@@ -1227,6 +1227,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -1248,6 +1249,7 @@ display:
           min_length: null
           fields:
             - content_title
+            - field_category_name
             - field_contract_number
         field_mandated_purchases:
           id: field_mandated_purchases

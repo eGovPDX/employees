@@ -1,0 +1,22 @@
+{# 
+  Set a custom link title by overriding `items.0.content["#title"]` and add help text
+  for logging into Trim.
+#}
+
+{% set items = [ 
+  {
+    'content' : [
+      {
+        '#type' : items.0.content["#type"],
+        '#title' : 'Contract document',
+        '#url': items.0.content["#url"]
+      }
+    ]
+  }
+] %}
+
+{% embed 'field.html.twig' %}
+  {% block content_footer %}
+    <p class="small">(Use your Rose username and password when prompted to log in to Trim.)</p>
+  {% endblock %}
+{% endembed %}

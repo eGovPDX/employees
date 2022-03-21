@@ -1,23 +1,22 @@
-uuid: 4a7d2754-f804-4ba6-868b-946aac0eb8fb
+uuid: 88040376-c412-4164-9325-49d6a580bed1
 langcode: en
 status: true
 dependencies:
   module:
     - field_permissions
-    - media
+    - link
     - node
 third_party_settings:
   field_permissions:
     permission_type: public
-id: node.field_document
-field_name: field_document
+id: node.field_efiles_link
+field_name: field_efiles_link
 entity_type: node
-type: entity_reference
-settings:
-  target_type: media
-module: core
+type: link
+settings: {  }
+module: link
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

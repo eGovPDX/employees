@@ -1,0 +1,61 @@
+id: citywide_contracts
+label: 'Citywide Contracts'
+migration_group: citywide_contracts
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/citywide_contracts.csv
+  header_row_count: 1
+  ids:
+    - 'Purchasing Document'
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  title: 'Vendor Name'
+  field_type:
+    -
+      plugin: default_value
+      default_value: 'Price Agreement'
+    -
+      plugin: text_to_taxonomy
+      vocabulary: contract_type
+  field_category:
+    source: Category
+    plugin: text_to_taxonomy
+    vocabulary: contract_category
+  field_contract_number: 'Purchasing Document'
+  field_date_range/value: 
+    plugin: format_date
+    source: 'Start Date'
+    from_format: 'm/d/Y'
+    to_format: 'Y-m-d'
+  field_date_range/end_value:
+    plugin: format_date
+    source: 'End Date'
+    from_format: 'm/d/Y'
+    to_format: 'Y-m-d'
+  field_efiles_link/uri: 'Trim URL'
+  field_mandated_purchases: 
+    plugin: static_map
+    map:
+      'Yes': 1
+      'No': 0
+    source: 'Mandated Use'
+  field_p_card_allowed:
+    plugin: static_map
+    map:
+      'Yes': 1
+      'No': 0
+    source: 'P-card'
+  field_vendor_contact_info: 'Vendor Contact'
+  body/value: Notes
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  field_display_in_group:
+      plugin: default_value
+      default_value: 42
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: contract
