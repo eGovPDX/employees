@@ -263,7 +263,7 @@ function _process_users($response_data, $access_token)
       ]);
       $user->set('field_managers', _create_or_find_manager($user_data));
 
-      $user_profile = _get_user_profile_by_principal_name($access_token, $user_data['name']);
+      $user_profile = _get_user_profile_by_principal_name($access_token, $user_data['userPrincipalName']);
       // If the profile is empty, assume the user is not with the City
       if (!empty($user_profile)) {
         $user->set('mail', $user_profile['mail']);
