@@ -5,6 +5,7 @@ namespace Drupal\portland_openid_connect\Util;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
+use Drupal\user\Entity\User;
 
 /**
  * A helper class provides static function to allow both cron jobs
