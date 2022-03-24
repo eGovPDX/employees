@@ -3,24 +3,24 @@ langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.contacts_filter_by_bureaus
+    - facets.facet.contacts_filter_by_group_member
   module:
     - facets
     - system
   theme:
     - cloudy2
-id: contactsfilterbybureaus
+id: contactsfilterbygroupmember
 theme: cloudy2
 region: side
-weight: -7
+weight: -6
 provider: null
-plugin: 'facet_block:contacts_filter_by_bureaus'
+plugin: 'facet_block:contacts_filter_by_group_member'
 settings:
-  id: 'facet_block:contacts_filter_by_bureaus'
-  label: 'Contacts: Filter by Bureaus'
+  id: 'facet_block:contacts_filter_by_group_member'
+  label: 'Contacts: Filter by Group Membership'
   label_display: '0'
   provider: facets
-  block_id: contactsfilterbybureaus
+  block_id: contactsfilterbygroupmember
 visibility:
   request_path:
     id: request_path
