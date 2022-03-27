@@ -140,14 +140,14 @@ content:
       match_limit: 10
     third_party_settings: {  }
   field_business_owner:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 30
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 20
     third_party_settings:
       field_states_ui:
         form:
@@ -197,15 +197,20 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_executive_sponsor:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 33
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_hosting_environment:
     type: options_select
     weight: 10
@@ -239,45 +244,65 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_process_owner:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 36
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_product_owner:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 31
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_program_manager:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 34
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_project_manager:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 35
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_related_content:
     type: entity_reference_autocomplete
     weight: 11
@@ -289,15 +314,20 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_reviewer:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 19
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   field_service:
     type: entity_reference_autocomplete
     weight: 12
@@ -333,14 +363,14 @@ content:
               value: Application
               submit: 'Add Cancel'
   field_support_owner:
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     weight: 32
     region: content
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 20
     third_party_settings:
       field_states_ui:
         form:
