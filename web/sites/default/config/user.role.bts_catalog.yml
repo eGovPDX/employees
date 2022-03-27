@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
     - node.type.bts_catalog_item
     - taxonomy.vocabulary.bts_application_exception
     - taxonomy.vocabulary.bts_business_capability
@@ -12,6 +15,7 @@ dependencies:
     - taxonomy.vocabulary.hosting_environment
     - taxonomy.vocabulary.support_model
   module:
+    - media
     - moderation_sidebar
     - node
     - quick_node_clone
@@ -26,6 +30,10 @@ permissions:
   - 'access taxonomy overview'
   - 'clone bts_catalog_item content'
   - 'create bts_catalog_item content'
+  - 'create document media'
+  - 'create image media'
+  - 'create media'
+  - 'create remote_video media'
   - 'create terms in bts_application_exception'
   - 'create terms in bts_business_capability'
   - 'create terms in bts_business_priority'
@@ -34,9 +42,16 @@ permissions:
   - 'create terms in hosting_environment'
   - 'create terms in support_model'
   - 'delete bts_catalog_item revisions'
+  - 'delete media'
   - 'delete own bts_catalog_item content'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own remote_video media'
   - 'edit any bts_catalog_item content'
   - 'edit own bts_catalog_item content'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own remote_video media'
   - 'edit terms in bts_application_exception'
   - 'edit terms in bts_business_capability'
   - 'edit terms in bts_business_priority'
@@ -46,7 +61,10 @@ permissions:
   - 'edit terms in support_model'
   - 'revert bts_catalog_item revisions'
   - 'schedule publishing of nodes'
+  - 'update media'
   - 'use moderation sidebar'
+  - 'view all media revisions'
   - 'view all revisions'
   - 'view bts_catalog in toolbar'
+  - 'view bts_catalog_item revisions'
   - 'view own unpublished content'
