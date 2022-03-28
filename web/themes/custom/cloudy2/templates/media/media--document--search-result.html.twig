@@ -12,6 +12,7 @@
  * @ingroup themeable
  */
 #}
+
 {% set mime_map = {
   'application/pdf': 'PDF',
   'application/msword': 'DOC',
@@ -20,6 +21,8 @@
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'XLSX',
   'application/vnd.ms-powerpoint': 'PPT',
   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PPTX',
+  'image/png': 'PNG',
+  'image/svg+xml': 'SVG',
 } %}
 
 {% set mime_type = mime_map[content.field_mime_type.0['#context']['value']] ?? 'File' %}
@@ -31,7 +34,6 @@
 %}
 
 <div{{attributes.addClass(classes)}} aria-describedby="{{ name|clean_class }}">
-
   {% if content.field_efiles_link['#object'] %}
     <a href="{{ content.field_efiles_link.0['#title'] }}">{{ name }}</a></h2>
   {% elseif content.field_media_document %}
@@ -52,3 +54,4 @@
   {% endif %}
 </div>
 
+console.log(mime_type)

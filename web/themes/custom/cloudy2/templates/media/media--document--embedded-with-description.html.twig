@@ -20,6 +20,8 @@
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'XLSX',
   'application/vnd.ms-powerpoint': 'PPT',
   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PPTX',
+  'image/png': 'PNG',
+  'image/svg+xml': 'SVG',
 } %}
 
 {% set mime_type = mime_map[content.field_mime_type.0['#context']['value']] ?? 'File' %}
