@@ -7,6 +7,7 @@ dependencies:
   module:
     - facets
     - system
+    - user
   theme:
     - cloudy2
 id: contactsfilterbygroupmember
@@ -20,9 +21,17 @@ settings:
   label: 'Contacts: Filter by Group Membership'
   label_display: '0'
   provider: facets
+  context_mapping: {  }
   block_id: contactsfilterbygroupmember
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /contacts
+    pages: /directory
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator
