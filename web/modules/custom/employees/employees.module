@@ -23,6 +23,23 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   if ($form_id === "media_document_add_form" || $form_id === "media_document_edit_form") {
     $form['#validate'][] = '_validate_document';
   }
+  else if( $form_id === "group_content_employee-group_membership_add_form" ||
+  $form_id === "group_content_employee-group_membership_edit_form" ||
+  $form_id === "group_content_private-group_membership_add_form" ||
+  $form_id === "group_content_private-group_membership_edit_form") {
+    // Don't modify role checkboxes for site admins
+    $current_user_roles = \Drupal::currentUser()->getRoles();
+    if( in_array("administrator", $current_user_roles) ) return;
+    $form['#attached']['library'][] = 'employees/employees';
+
+    $form["group_roles"]["widget"]["#required"] = true;
+  }
+  else if ( $form_id === "group_content_employee-group_membership_group-join_form" ) {
+    $form['actions']['submit']['#value'] = t('Follow group');
+  }
+  // else if ( $form_id === "group_content_employee-group_membership_group-leave_form" ) {
+  //   $form['actions']['submit']['#value'] = t('Unfollow group');
+  // }
 }
 
 /**
@@ -196,7 +213,7 @@ function _notify_reviewer($entity, $entity_event_type)
   $moderation_state_message = [
     'review' => 'In review',
     'draft' => 'Draft',
-    'archived' => 'Unpublished/Archived',
+    'unpublished' => 'Unpublished/Archived',
     'published' => 'Published',
   ];
 
