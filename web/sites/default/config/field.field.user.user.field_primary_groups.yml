@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.user.field_primary_groups
     - group.type.employee
+    - group.type.private
   module:
     - user
 id: user.user.field_primary_groups
@@ -22,9 +23,10 @@ settings:
   handler_settings:
     target_bundles:
       employee: employee
+      private: private
     sort:
       field: label
       direction: ASC
     auto_create: false
-    auto_create_bundle: ''
+    auto_create_bundle: employee
 field_type: entity_reference

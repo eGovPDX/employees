@@ -12,9 +12,10 @@ class PortlandOpenIdConnectUtil
   private static $client;
 
   /**
-   * Helper function to remove a user from a group
+   * Helper function to remove a user's Employee role from a group.
+   * Only the Employee role is automatically added or removed.
    */
-  public static function removeUserFromGroup($account, $group_id)
+  public static function removeEmployeeRoleOnUserFromGroup($account, $group_id)
   {
     // Automated removal should only remove the "Employee" role
     $group = \Drupal\group\Entity\Group::load($group_id);
@@ -26,26 +27,31 @@ class PortlandOpenIdConnectUtil
     $group_content = $membership->getGroupContent();
     $group_content->group_roles = [];
     foreach ($roles as $role) {
-      if ($role->id() === 'employee-employee') {
+      if ($role->id() === 'employee-employee' || $role->id() === 'private-employee') {
         $has_employee_role = true;
         continue;
       }
       // Remove the "member" role
-      else if ($role->id() === 'employee-member') {
-        $has_employee_role = true;
-        continue;
-      }
+      // else if ($role->id() === 'employee-member') {
+      //   $has_employee_role = true;
+      //   continue;
+      // }
       $group_content->group_roles->appendItem(['target_id' => $role->id()]);
     }
+
+    // // Hotfix: comment out to avoid removal of membership
     // If the user has no role in the group, remove the user completely
-      $group = \Drupal\group\Entity\Group::load($group_id);
-    if($group_content->group_roles->count() === 0) {
-      // Hotfix: comment out to avoid removal of membership
-      // $group->removeMember($account);
-      // $group->save();
-    }
-    // Else only remove the Employee roles. Keep roles like Following
-    else {
+    // $group = \Drupal\group\Entity\Group::load($group_id);
+    // if($group_content->group_roles->count() === 0) {
+    //   $group->removeMember($account);
+    //   $group->save();
+    // }
+    // // Else only remove the Employee roles. Keep roles like Following
+    // else {
+    //   $group_content->save();
+    // }
+
+    if($has_employee_role) {
       $group_content->save();
     }
   }
@@ -53,9 +59,10 @@ class PortlandOpenIdConnectUtil
   /**
    * Helper function to add a user to a group as roles
    */
-  public static function addUserToGroupWithRoles($account, $group_id, $role_id_array)
+  public static function addUserToGroupWithEmployeeRole($account, $group_id)
   {
     $group = \Drupal\group\Entity\Group::load($group_id);
+    $role_id_array = [$group->getGroupType()->id() . '-employee'];
     $membership = $group->getMember($account);
     // The user is NOT in the group
     if (empty($membership)) {
@@ -81,7 +88,7 @@ class PortlandOpenIdConnectUtil
   }
 
   /**
-   * Helper function to remove a user from a group.
+   * Helper function to keep a user's group membership in-sync with the AD primary group name.
    * Will be called by User post-save hooks and this view bulk operation.
    */
   public static function updatePrimaryGroupsForUser($account)
@@ -100,17 +107,17 @@ class PortlandOpenIdConnectUtil
     if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {
-        PortlandOpenIdConnectUtil::removeUserFromGroup($account, $current_primary_group_id);
+        PortlandOpenIdConnectUtil::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     } else if (empty($current_primary_group_ids)) {
-      // Remove user from all current groups
+      // Add the Employee role to user in all new groups
       foreach ($new_primary_group_ids as $new_primary_group_id) {
-        PortlandOpenIdConnectUtil::addUserToGroupWithRoles($account, $new_primary_group_id, ['employee-employee']);
+        PortlandOpenIdConnectUtil::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
       }
     } else {
       // For any added group, add membership
       foreach ($new_primary_group_ids as $new_primary_group_id) {
-        PortlandOpenIdConnectUtil::addUserToGroupWithRoles($account, $new_primary_group_id, ['employee-employee']);
+        PortlandOpenIdConnectUtil::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
       }
 
       // Check if any current group is not in the new group list
@@ -118,7 +125,7 @@ class PortlandOpenIdConnectUtil
         if (in_array($current_primary_group_id, $new_primary_group_ids))
           continue;
         // Remove user from the new group
-        PortlandOpenIdConnectUtil::removeUserFromGroup($account, $current_primary_group_id);
+        PortlandOpenIdConnectUtil::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     }
   }
