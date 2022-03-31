@@ -1,0 +1,57 @@
+# BTS catalog menu placed via toolbar menu
+# This first view could have been creatd by the view ui menu widget, but to keep
+# everything together, it is placed via route here.
+employees.bts_manage_catalog:
+  title: 'Manage items'
+  description: 'Manage techonology catalog items'
+  route_name: view.manage_technology_catalog_items.page
+  weight: 1
+  menu_name: bts-catalog
+employees.bts_capabilities:
+  title: 'Capability'
+  description: 'Manage business capabilities for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'bts_business_capability'
+  weight: 2
+  menu_name: bts-catalog
+employees.bts_priority:
+  title: 'Priority'
+  description: 'Manage business priorities for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'bts_business_priority'
+  weight: 3
+  menu_name: bts-catalog
+employees.bts_bureau:
+  title: 'Bureaus'
+  description: 'Manage bureaus for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'bureaus'
+  weight: 4
+  menu_name: bts-catalog
+employees.bts_cloud_service_type:
+  title: 'Cloud service'
+  description: 'Manage cloud service types for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'cloud_service_type'
+  weight: 5
+  menu_name: bts-catalog
+employees.bts_hosting_environment:
+  title: 'Hosting'
+  description: 'Manage hosting environment types for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'hosting_environment'
+  weight: 6
+  menu_name: bts-catalog
+employees.bts_support_model:
+  title: 'Support model'
+  description: 'Manage support models for BTS catalog'
+  route_name: entity.taxonomy_vocabulary.overview_form
+  route_parameters:
+    taxonomy_vocabulary: 'support_model'
+  weight: 7
+  menu_name: bts-catalog
