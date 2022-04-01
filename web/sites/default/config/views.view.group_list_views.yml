@@ -9,6 +9,8 @@ dependencies:
     - group.type.employee
     - system.menu.main
     - taxonomy.vocabulary.org_type
+  content:
+    - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - group
     - group_views_join_link
@@ -945,7 +947,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -1728,7 +1730,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.permissions
       tags: {  }
   page_public_groups:
     id: page_public_groups
