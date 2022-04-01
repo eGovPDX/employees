@@ -7,7 +7,6 @@ dependencies:
     - user.role.anonymous
     - user.role.authenticated
   content:
-    - 'taxonomy_term:org_type:2975d081-7bb6-4288-9a8e-f7df0078a81d'
     - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - group
@@ -166,7 +165,6 @@ display:
         type: role
         options:
           role:
-            anonymous: anonymous
             authenticated: authenticated
       cache:
         type: tag
@@ -235,8 +233,7 @@ display:
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
-          value:
-            1: 1
+          value: {  }
           group: 1
           exposed: false
           expose:
@@ -373,7 +370,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: not
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -620,7 +617,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: not
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -928,6 +925,12 @@ display:
     position: 1
     display_options:
       title: Assigned
+      access:
+        type: role
+        options:
+          role:
+            anonymous: anonymous
+            authenticated: authenticated
       empty:
         title:
           id: title
@@ -1144,7 +1147,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: not
           value:
-            47: 47
+            649: 649
           group: 2
           exposed: false
           expose:
@@ -1187,6 +1190,7 @@ display:
           2: AND
       defaults:
         empty: false
+        access: false
         title: false
         arguments: false
         filters: false
@@ -1261,7 +1265,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: not
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
