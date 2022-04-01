@@ -7,6 +7,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Update the Member role to Assigned or Following
@@ -58,6 +59,6 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
    * {@inheritdoc}
    */
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
-    return TRUE;
+    return ($return_as_object ? AccessResult::allowed() : true );
   }
 }

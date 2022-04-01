@@ -7,6 +7,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Some description.
@@ -53,7 +54,7 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
 
     // Other entity types may have different
     // access methods and properties.
-    return TRUE;
+    return ($return_as_object ? AccessResult::allowed() : true );
   }
 
   /**
