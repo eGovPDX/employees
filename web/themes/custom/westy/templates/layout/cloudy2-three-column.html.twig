@@ -20,17 +20,17 @@
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
     {% if content.main %}
-      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'order-md-2', 'order-sm-1') }}>
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col-xl-6', 'col-lg-8', 'col-sm-12', 'order-lg-2', 'order-sm-1') }}>
         {{ content.main }}
       </div>
     {% endif %}
     {% if content.side %}
-      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-md-3', 'col-sm-12', 'order-md-3', 'order-sm-2', 'border-left') }}>
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col-xl-3', 'col-lg-4', 'col-sm-12', 'order-xl-3', 'order-sm-2', 'border-left') }}>
         {{ content.side }}
       </div>
     {% endif %}
     {% if content.menu %}
-      <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-md-3', 'col-sm-12', 'order-md-1', 'order-sm-3', 'border-right') }}>
+      <div {{ region_attributes.menu.addClass('layout__region', 'layout__region--menu', 'col-xl-3', 'col-sm-12', 'order-xl-1', 'order-sm-3', 'border-right') }}>
         {{ content.menu }}
       </div>
     {% endif %}
