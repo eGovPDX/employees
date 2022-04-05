@@ -5,37 +5,29 @@
   .embed-document {
     margin: 0;
   }
-
-  // External links
-  span.ext {
-    &:after {
-      padding-left: ($spacer * 0.5);
-    }
-  }
-
-  span.mailto::before {
-    background: none;
-  }
-
-  /* Hide the extra spans when printing. */
-  @media print {
-    span.ext,
-    span.mailto {
-      display: none;
-      padding: 0;
-    }
-  }
 }
 
-.shown-md {
-  @include media-breakpoint-up(md) {
+// External links
+svg.ext {
+  margin-left: ($spacer * 0.5);
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+
+a.ext {
+  display: flex;
+  vertical-align: middle;
+}
+
+svg.mailto::before {
+  background: none;
+}
+
+/* Hide the extra spans when printing. */
+@media print {
+  svg.ext,
+  svg.mailto {
     display: none;
-  }
-}
-
-.hidden-md {
-  display: none;
-  @include media-breakpoint-up(md) {
-    display: initial;
+    padding: 0;
   }
 }

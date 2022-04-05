@@ -11214,40 +11214,34 @@ textarea.form-control-lg {
 /* put a little padding in styled CKEditor body */
 .cke_editable {
   margin: 10px;
-  /* Hide the extra spans when printing. */
 }
 .cke_editable .embed-document {
   margin: 0;
 }
-.cke_editable span.ext:after {
-  padding-left: 0.5rem;
+
+svg.ext {
+  margin-left: 0.5rem;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
 }
-.cke_editable span.mailto::before {
+
+a.ext {
+  display: flex;
+  vertical-align: middle;
+}
+
+svg.mailto::before {
   background: none;
 }
+
+/* Hide the extra spans when printing. */
 @media print {
-  .cke_editable span.ext,
-.cke_editable span.mailto {
+  svg.ext,
+svg.mailto {
     display: none;
     padding: 0;
   }
 }
-
-@media (min-width: 768px) {
-  .shown-md {
-    display: none;
-  }
-}
-
-.hidden-md {
-  display: none;
-}
-@media (min-width: 768px) {
-  .hidden-md {
-    display: initial;
-  }
-}
-
 a:hover {
   text-decoration: underline;
 }
