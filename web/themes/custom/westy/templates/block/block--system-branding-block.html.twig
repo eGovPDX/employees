@@ -13,9 +13,11 @@
   {% block content %}
     {% set branding = 'City of Portland Employees'| t %}
     {% set url = '/' %}
-      <a class="navbar-brand stretched-link" href="{{ url }}" aria-label="{{ branding }}" tabindex="-1">
+    <div class="my-3">
+      <a class="navbar-brand" href="{{ url }}" aria-label="{{ branding }}" tabindex="-1">
         {{ 'Portland Employees'| t }}
       </a>
+    </div>
   {% endblock %}
 
 {% endembed %}
