@@ -63,6 +63,9 @@ elements: |-
       'TRUE': 'TRUE'
       'FALSE': 'FALSE'
     '#default_value': 'FALSE'
+  report_location:
+    '#type': portland_location_picker
+    '#title': 'Report Location'
 css: ''
 javascript: ''
 settings:
@@ -200,13 +203,11 @@ settings:
 access:
   create:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
   view_any:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
@@ -227,19 +228,16 @@ access:
     permissions: {  }
   view_own:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
   update_own:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
   delete_own:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
@@ -250,7 +248,6 @@ access:
     permissions: {  }
   test:
     roles:
-      - support_agent
       - administrator
     users: {  }
     permissions: {  }
@@ -275,14 +272,14 @@ handlers:
       requester_name: contact_name
       requester_email: '[webform_submission:values:contact_email]'
       subject: '[webform_submission:values:test_subject]'
-      comment: '[webform_submission:values]'
+      comment: '[webform_submission:values:html]'
       tags: 'drupal webform'
       priority: normal
       status: new
       assignee_id: ''
       type: incident
       collaborators: ''
-      custom_fields: ''
+      custom_fields: '1500013095781: ''[webform_submission:uuid]'''
       ticket_id_field: '[webform_submission:values:ticket_id]'
       group_id: '4549352062487'
   zendesk_update_ticket:
@@ -308,4 +305,16 @@ handlers:
       custom_fields: ''
       ticket_id_field: ticket_id
       assignee_id: ''
+  zendesk_ticket_validator:
+    id: ticket_validation
+    handler_id: zendesk_ticket_validator
+    label: 'Zendesk ticket validator'
+    notes: 'Used when updating a ticket through the API. Validates that the correct ticket is being updated by checking the webform submission UUID that''s stored in Zendesk when the ticket is initially created.'
+    status: true
+    conditions:
+      enabled:
+        ':input[name="ticket_id"]':
+          filled: true
+    weight: 0
+    settings: {  }
 variants: {  }
