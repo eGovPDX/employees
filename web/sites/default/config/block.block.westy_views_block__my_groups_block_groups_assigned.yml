@@ -1,0 +1,30 @@
+uuid: a34c9cba-dcc6-4942-a4cb-09c31f09def0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.my_groups
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: westy_views_block__my_groups_block_groups_assigned
+theme: westy
+region: menu
+weight: -13
+provider: null
+plugin: 'views_block:my_groups-block_groups_assigned'
+settings:
+  id: 'views_block:my_groups-block_groups_assigned'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "<front>\r\n/bureaus\r\n/groups\r\n/news*\r\n/events*"

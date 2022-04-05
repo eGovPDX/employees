@@ -1,0 +1,23 @@
+{#
+/**
+  * @file
+  * Template for the branding block.
+  *
+  * @see themes/contrib/radix/templates/block/block--system-branding-block.html.twig
+  */
+#}
+{% embed '@radix/block/block.twig' with {
+  html_tag: 'div',
+} %}
+
+  {% block content %}
+    {% set branding = 'City of Portland Employees'| t %}
+    {% set url = '/' %}
+    <div class="h3 my-4 text-start">
+      <a class="stretched-link" href="{{ url }}" aria-label="{{ branding }}" tabindex="-1">
+        {{ 'Portland Employees'| t }}
+      </a>
+    </div>
+  {% endblock %}
+
+{% endembed %}

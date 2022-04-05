@@ -1,0 +1,28 @@
+uuid: d7afb3c4-dd3e-403f-9515-c9ea1235b4c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.bts_catalog_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_btscatalogtype
+theme: westy
+region: side
+weight: 10
+provider: null
+plugin: 'facet_block:bts_catalog_type'
+settings:
+  id: 'facet_block:bts_catalog_type'
+  label: 'BTS Catalog by Type'
+  label_display: '0'
+  provider: facets
+  block_id: btscatalogtype
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /technology/catalog

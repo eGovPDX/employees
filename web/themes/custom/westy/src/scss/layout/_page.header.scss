@@ -1,0 +1,120 @@
+/**
+ * @file Styles for site navigation and headers.
+ */
+// Page: Header; with site branding, navigation and a search modal.
+// -----------------------------------------------------------------------------
+header.page__header {
+  @extend .border-bottom, .border-dark, .border-4;
+  border-bottom-color: map_get($theme-colors, "dark") !important;
+
+  // The logo & branding section.
+  .block--westy-site-branding, .block--sitebranding-2 {
+    position: relative;
+    z-index: 2;
+    h3 {
+      @include media-breakpoint-up(xl) {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // Main site navigation.
+
+  .navbar {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .navbar-collapse {
+    @extend .justify-content-end;
+
+    .me-auto {
+      margin-right: initial !important;
+    }
+
+    // Top-level menu links.
+    a.nav-link, span.nav-link {
+      font-size: $h4-font-size;
+      font-weight: 600;
+      padding: 1rem;
+      margin-left: 1rem;
+
+      @include media-breakpoint-up(lg) {
+        padding: 1.5rem 1rem;
+        color: map_get($theme-colors, "dark");
+      }
+
+      &:hover,
+      &:active {
+        text-decoration: none;
+      }
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+
+      &.show {
+        background-color: map_get($theme-colors, "light");
+      }
+    }
+
+    // Menu flyouts.
+    .dropdown-menu {
+      @extend .border-0, .rounded-0, .p-3, .mb-2, .bg-dark, .text-white;
+      min-width: 400px;
+      padding: 1rem !important;
+
+      @include media-breakpoint-up(lg) {
+        background-color: map_get($theme-colors, "dark") !important;
+      }
+
+      &.show {
+        display: grid;
+        grid-template-rows: repeat(10, min-content);
+        grid-auto-flow: column;
+      }
+
+      a {
+        color: white;
+        background-color: transparent;
+        &:hover,
+        &:focus {
+          color: white;
+          background-color: transparent;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    // Search menu flyout.
+    .form-wrapper {
+      margin: 0;
+    }
+
+    .form-search {
+      font-style: italic;
+    }
+
+    .form-actions {
+      display: inline-block;
+      margin-left: 0.5rem;
+
+      .form-submit {
+        color: $dark;
+        background-color: $light;
+      }
+    }
+  }
+}
+
+// Main: Header; with site Drupal and messages.
+// -----------------------------------------------------------------------------
+main header.page__sub_header {
+  &.b-border {
+    border-bottom: 2px solid map_get($theme-colors, "light");
+  }
+}
+
+.bg-info .img-bg {
+  min-height: 400px;
+}

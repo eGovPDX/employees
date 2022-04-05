@@ -1,0 +1,53 @@
+// Specific view styling
+
+// Acquia Search Solr
+.view-acquia-search, .view-acquia-search-solr-media {
+  .view-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    .button {
+      background-color: #ced4da;
+      border: 1px solid #999999;
+    }
+  }
+  .views-row {
+    border-top: 1px solid #d9d9d9;
+    padding: $spacer 0;
+    margin-bottom: calc($spacer / 2);
+  }
+
+  .views-field-title {
+    font-weight: normal;
+    // Eliminate floating boldface words in title (matching search terms)
+    strong {
+      font-weight: normal;
+    }
+  }
+
+  .views-field-field-summary {
+    margin-bottom: $spacer;
+  }
+
+// Media catalog
+.view-media-catalog {
+  table {
+    box-sizing: none !important;
+  }
+  .cshs-term-group {
+    display: none;
+  }
+  table caption {
+    caption-side: initial;
+    color: map_get($theme-colors, "dark");
+    font-weight: bold;
+  }
+  .views-field-field-fy {
+    width: 12%;
+  }
+}
+}

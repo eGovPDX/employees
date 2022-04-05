@@ -1,0 +1,81 @@
+// Typography base variables.
+// -----------------------------------------------------------------------------
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+
+
+$h1-font-size:                2.813rem; // 45px
+$h1-mobile-font-size:         2.25rem; // 36px
+$h2-font-size:                1.875rem; // 30px
+$h3-font-size:                1.563rem; // 25px
+$h4-font-size:                1.25rem; // 20px
+$h5-font-size:                1.25rem; // 20px
+$h6-font-size:                $font-size-base;
+
+// Typography elements.
+// -----------------------------------------------------------------------------
+body, html{
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  a, a:hover {
+    text-decoration: none;
+  }
+}
+
+h1, h1.page-title {
+  font-size: $h1-mobile-font-size;
+  font-weight: 800;
+  @include media-breakpoint-up(sm) {
+    font-size: $h1-font-size;
+  }
+}
+
+h2 {
+  font-size: $h2-font-size;
+  font-weight: 700;
+}
+
+h3, h3 strong {
+  font-size: $h3-font-size;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: $h4-font-size;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: $h5-font-size;
+  font-weight: 700;
+}
+
+h6 {
+  font-size: $h6-font-size;
+  font-weight: 700;
+}
+
+Headings in regions other than main content
+-----------------------------------------------------------------------------
+.layout__region--menu,
+.layout__region--side,
+.page__side,
+.page__menu {
+  h2 {
+    font-size: $h4-font-size;
+  }
+}
+
+.layout__region--menu,
+.layout__region--side,
+.page__side,
+.page__menu {
+
+  h3 {
+    font-size: $font-size-base;
+    margin-bottom: $spacer;
+  }
+}

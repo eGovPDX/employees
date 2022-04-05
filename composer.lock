@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b859e169b906d8dc54eedd9a397e4ef",
+    "content-hash": "bc3d0063667767771a058c5e1f2bda8c",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6346,30 +6346,33 @@
         },
         {
             "name": "drupal/radix",
-            "version": "4.10.0",
+            "version": "5.0.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/radix.git",
-                "reference": "8.x-4.10"
+                "reference": "5.0.0-rc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/radix-8.x-4.10.zip",
-                "reference": "8.x-4.10",
-                "shasum": "b9fd9c0f12be58fc39c06318d3fe081550f5cbf7"
+                "url": "https://ftp.drupal.org/files/projects/radix-5.0.0-rc5.zip",
+                "reference": "5.0.0-rc5",
+                "shasum": "95a19db728d22ba57ae79cfb3e32a71c7f66fb33"
             },
             "require": {
-                "drupal/components": "~2.0@beta",
                 "drupal/core": "^8.7.7 || ^9.0"
+            },
+            "require-dev": {
+                "consolidation/robo": "^1.1.4 || ^2",
+                "drush/drush": "^10.6"
             },
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-4.10",
-                    "datestamp": "1601449009",
+                    "version": "5.0.0-rc5",
+                    "datestamp": "1645698166",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
@@ -6385,7 +6388,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -6395,12 +6398,16 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "doxigo",
-                    "homepage": "https://www.drupal.org/user/1331334"
+                    "name": "Ng Chin Kiong",
+                    "homepage": "https://www.o8.agency",
+                    "email": "ck@o8.agency",
+                    "role": "Maintainer"
                 },
                 {
-                    "name": "shadcn",
-                    "homepage": "https://www.drupal.org/user/571032"
+                    "name": "Sohail Lajevardi",
+                    "homepage": "https://www.drupal.org/user/571032",
+                    "email": "doxigo@gmail.com",
+                    "role": "Maintainer"
                 }
             ],
             "description": "Radix is a base theme for Drupal. It has Bootstrap, Sass, BrowserSync and Font Awesome built-in.",

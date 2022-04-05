@@ -1,0 +1,22 @@
+uuid: d55b00a6-fb95-48b0-bc82-f54bf85009d0
+langcode: en
+status: true
+dependencies:
+  theme:
+    - westy
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: westy_local_tasks
+theme: westy
+region: preheader
+weight: -22
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

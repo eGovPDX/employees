@@ -1,0 +1,37 @@
+uuid: 804520a0-d4e6-4a30-b7d1-0fa12e3a7555
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contacts_filter_by_ad_group
+  module:
+    - facets
+    - system
+    - user
+  theme:
+    - westy
+id: westy_contactsfilterbybureau
+theme: westy
+region: side
+weight: -7
+provider: null
+plugin: 'facet_block:contacts_filter_by_ad_group'
+settings:
+  id: 'facet_block:contacts_filter_by_ad_group'
+  label: 'Contacts: Filter by Bureau'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: contactsfilterbybureau
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /directory
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

@@ -1,0 +1,255 @@
+// Helpers for embedded media
+// -----------------------------------------------------------------------------
+
+figure.caption,
+figure.figure {
+  display: block;
+}
+
+figure.caption figcaption {
+  display: inline-block;
+}
+
+// This doesn't really do anything at sm and down
+// Center half-width and narrow at md and up
+.align-center {
+  width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// At the sm breakpoint and up alignment will max width 50%
+@include media-breakpoint-up(sm) {
+  figure.align-left,
+  .align-left {
+    margin-right: $spacer !important;
+    margin-left: 0;
+    max-width: 325px;
+    float: left;
+  }
+
+  figure.align-right,
+  .align-right {
+    margin-left: $spacer !important;
+    margin-right: 0;
+    max-width: 325px;
+    float: right;
+  }
+}
+
+// At the md breakpoint and up alignment will max width to 400px
+@include media-breakpoint-up(md) {
+  figure.align-left,
+  .align-left {
+    margin-right: $spacer !important;
+    margin-left: 0;
+    max-width: 400px;
+    float: left;
+  }
+
+  figure.align-right,
+  .align-right {
+    margin-left: $spacer !important;
+    margin-right: 0;
+    max-width: 400px;
+    float: right;
+  }
+}
+
+// At the xl breakpoint and up alignment will max width to 483
+@include media-breakpoint-up(xl) {
+  figure.align-left,
+  .align-left {
+    margin-right: $spacer !important;
+    margin-left: 0;
+    max-width: 483px;
+    float: left;
+  }
+
+  figure.align-right,
+  .align-right {
+    margin-left: $spacer !important;
+    margin-right: 0;
+    max-width: 483px;
+    float: right;
+  }
+}
+
+// sm and down is no alignment
+@include media-breakpoint-down(sm) {
+  figure.align-left,
+  .align-left {
+    margin-right: 0;
+    max-width: 100%;
+    float: none;
+  }
+  figure.align-right,
+  .align-right {
+    margin-left: 0;
+    max-width: 100%;
+    float: none;
+  }
+}
+
+// Helpers for drupal-media element in CKeditor
+// -----------------------------------------------------------------------------
+@include media-breakpoint-up(md) {
+  drupal-media[data-view-mode=half_width] {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px
+  }
+}
+
+drupal-media[data-view-mode=narrow] {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 325px;
+}
+
+drupal-media[data-view-mode=full_width] {
+  width: 100%;
+  padding-top: 0;
+}
+
+drupal-media[data-view-mode=half_width] {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px
+}
+
+@include media-breakpoint-up(md) {
+  drupal-media[data-view-mode=half_width] {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px
+  }
+}
+
+drupal-media[data-view-mode=narrow] {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 325px;
+}
+
+drupal-media[data-align=right] {
+  float: right;
+  clear: right;
+}
+
+drupal-media[data-align=left] {
+  float: left;
+  clear: left;
+}
+
+
+// Embedded Images
+// -----------------------------------------------------------------------------
+
+.media--view-mode-full-width {
+  width: 100%;
+  display: block !important;
+  clear: both;
+}
+
+// Constrain narrow and half-width at medium and up
+@include media-breakpoint-up(md) {
+  .media--view-mode-narrow,
+  .media--view-mode-narrow + figcaption {
+    max-width: 325px;
+  }
+
+  .media--view-mode-half-width {
+    max-width: 400px;
+  }
+}
+
+// Constrain half-width at xl and up
+@include media-breakpoint-up(xl) {
+  .media--view-mode-half-width {
+    max-width: 483px;
+  }
+}
+
+// When narrow is used at sm and down, center the image
+@include media-breakpoint-down(sm) {
+  .media--view-mode-narrow {
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+  }
+
+  .media--view-mode-narrow,
+  .media--view-mode-half-width {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Add margin bottom for embedded media not in a figure
+.media--view-mode-narrow,
+.media--view-mode-half-width,
+.media--view-mode-full-width {
+  margin-bottom: $spacer;
+}
+
+figure {
+  .media--view-mode-narrow,
+  .media--view-mode-half-width,
+  .media--view-mode-full-width {
+    margin-bottom: 0;
+  }
+}
+
+// Embedded videos
+// -----------------------------------------------------------------------------
+
+figure.caption .embed-video {
+  margin-bottom: 0 !important;
+}
+
+.field .embed-video.embedded-full .field {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.field .embed-video.embedded-full .field__item,
+.embed-video.embedded-full iframe {
+  height: 100%;
+  width: 100%;
+}
+
+.field .embed-video.embedded-full,
+.field .embed-video.embedded-medium,
+figure .embed-video.embedded-full,
+figure .embed-video.embedded-medium {
+  position: relative;
+}
+
+.field .embed-video.embedded-full,
+figure .embed-video.embedded-full {
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+// Embedded Documents
+// -----------------------------------------------------------------------------
+
+.field--name-field-body {
+  .embed-document {
+    margin-bottom: $spacer;
+  }
+
+  li .embed-document {
+    margin-bottom: 0;
+  }
+}
+
+.embed-document .caption {
+  font-size: 90%;
+}

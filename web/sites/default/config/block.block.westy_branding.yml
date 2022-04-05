@@ -1,0 +1,25 @@
+uuid: 116507ce-892d-4e80-9561-c2954481ce87
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - westy
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: westy_branding
+theme: westy
+region: navbar_branding
+weight: -22
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

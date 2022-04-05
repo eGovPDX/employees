@@ -1,0 +1,67 @@
+main {
+  .page__content {
+    .block {
+      // margin-bottom: $spacer * 2;
+    }
+  }
+  .block.block--westy-page-title {
+    margin-bottom: $spacer !important;
+  }
+}
+
+// Facets mobile jump link target
+.block--facetsregionstart {
+  margin: 0;
+}
+
+// Notifications
+.views-field.views-field-field-notification-body {
+  border: 2px solid map_get($theme-colors, "light");
+  border-left-color: map_get($theme-colors, "red");
+  border-left-width: 5px;
+  border-radius: 3px;
+  color: #152e3a;
+  padding: $spacer;
+  margin-bottom: ($spacer * 3);
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Translation
+.translation-menu-block {
+  margin-bottom: 1.5rem;
+}
+
+// Sidebar nav
+// .nav-group {
+//   padding-left: 0;
+// }
+
+// Parent link
+.block--return-to-parent {
+  position: relative;
+  top: $spacer;
+  padding-bottom: 2rem;
+}
+.block--return-to-parent .breadcrumb-item {
+  display: none;
+}
+.block--return-to-parent .breadcrumb-item:nth-last-child(2) {
+  display: list-item;
+  padding-left: 0;
+  font-weight: bold;
+}
+.block--return-to-parent .breadcrumb-item:nth-last-child(2):before {
+  content: var(--bs-breadcrumb-divider, "< Return to");
+}
+.block--return-to-parent a {
+  position: relative;
+  left: -0.25rem;
+}
+
+// Facets miscellaneous
+.facet-item__count {
+  color: #666;
+}

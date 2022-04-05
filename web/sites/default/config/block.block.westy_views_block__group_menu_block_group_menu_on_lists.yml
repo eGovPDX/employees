@@ -1,0 +1,34 @@
+uuid: b755f781-6b63-4acc-8bd1-666c4a2b7183
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.group_menu
+  module:
+    - node
+    - views
+  theme:
+    - westy
+id: westy_views_block__group_menu_block_group_menu_on_lists
+theme: westy
+region: menu
+weight: -10
+provider: null
+plugin: 'views_block:group_menu-block_group_menu_on_lists'
+settings:
+  id: 'views_block:group_menu-block_group_menu_on_lists'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      event: event
+      news: news

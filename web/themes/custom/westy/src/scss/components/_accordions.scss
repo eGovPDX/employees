@@ -1,0 +1,40 @@
+// Article: Accordions
+// -----------------------------------------------------------------------------
+
+.accordion .accordion-item {
+  margin-bottom: 0 !important;
+}
+
+button.accordion-button {
+  border-top: 1px solid #dfdfdf;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.accordion-item{
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.accordion button.accordion-button {
+  border-top: initial;
+  border-top-left-radius: initial;
+  border-top-right-radius: initial;
+}
+
+.accordion .accordion-item{
+  border-top-left-radius: initial;
+  border-top-right-radius: initial;
+}
+
+.accordion .accordion-item:first-of-type {
+  border-top-left-radius: calc(0.25rem - 1px) !important;
+  border-top-right-radius: calc(0.25rem - 1px) !important;
+}
+
+.accordion .accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: calc(0.25rem - 1px) !important;
+  border-top-right-radius: calc(0.25rem - 1px) !important;
+}
+
+

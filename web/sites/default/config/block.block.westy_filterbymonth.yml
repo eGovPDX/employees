@@ -1,0 +1,28 @@
+uuid: d1b6e5c7-9877-424d-ad40-c09ce68d3515
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.changed_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_filterbymonth
+theme: westy
+region: side
+weight: -12
+provider: null
+plugin: 'facet_block:changed_month'
+settings:
+  id: 'facet_block:changed_month'
+  label: 'Filter by Month'
+  label_display: '0'
+  provider: facets
+  block_id: filterbymonth
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/documents'

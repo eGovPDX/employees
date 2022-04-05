@@ -1,0 +1,101 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and
+// $modal-content-box-shadow-xs.
+
+// To customize
+// - Copy paste the variable from node_modules/bootstrap/scss/_variables.scss.
+// - Change the value and remove the !default flag.
+//
+// e.g.
+// $body-bg: #000;
+// $body-color: $gray-100;
+
+$navbar-padding-x:            1rem;
+
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+
+
+$h1-font-size:                2.813rem; // 45px
+$h1-mobile-font-size:         2.25rem; // 36px
+$h2-font-size:                1.875rem; // 30px
+$h3-font-size:                1.563rem; // 25px
+$h4-font-size:                1.25rem; // 20px
+$h5-font-size:                $font-size-base; // 16px
+$h6-font-size:                $font-size-base; // 16px
+
+
+// Theme colors
+// -----------------------------------------------------------------------------
+
+// scss-docs-start color-variables
+$blue:    #0073A4;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #d63384;
+$red:     #dc3545;
+$orange:  #fd7e14;
+$yellow:  #ffc107;
+$green:   #198754;
+$teal:    #20c997;
+$cyan:    #0dcaf0;
+$gray:    #DEE2E6;
+$white:   #FFFFFF;
+// scss-docs-end color-variables
+
+// scss-docs-start theme-color-variables
+$primary:       $blue;
+$secondary:     $gray;
+$success:       $green;
+$info:          $gray;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $gray;
+$dark:          #6C757D;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+// scss-docs-end theme-colors-map
+
+// Merge the maps
+// $theme-colors: map-merge($theme-colors, $custom-colors);
+
+$link-color:                 $primary;
+$link-hover-color:           #000000;
+
+// scss-docs-start nav-variables
+$nav-pills-border-radius:           0;
+$nav-pills-link-active-color:       $white;
+$nav-pills-link-active-bg:          $primary;
+
+$nav-link-color:                    $primary;
+
+// scss-docs-end nav-variables
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1460px,
+) !default;
+// scss-docs-end container-max-widths
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");

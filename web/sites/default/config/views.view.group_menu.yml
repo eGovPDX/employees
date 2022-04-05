@@ -565,7 +565,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -680,8 +680,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<h3 class="mb-3"><span class="visually-hidden">Menu for</span> {{ arguments.id }}</h3>'
             make_link: false
             path: ''
             absolute: false
@@ -873,8 +873,8 @@ display:
           row_class: nav-item
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: ''
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -1672,7 +1672,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1974,7 +1974,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status_1 == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2039,7 +2039,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_menu_url_text_1 }}{{ status_1 }}'
+            text: '<h2 class="h3"><span class="visually-hidden">Menu for</span> {{ field_menu_url_text_1 }}{{ status_1 }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -2071,7 +2071,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -2296,7 +2296,7 @@ display:
           default_row_class: false
           type: ul
           wrapper_class: ''
-          class: 'nav flex-column'
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -2541,7 +2541,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2724,7 +2724,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status_1 == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2789,7 +2789,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<span class="sr-only">Menu for </span> {{ field_menu_url_text_1 }}{{ status_1 }}'
+            text: '<h2 class="h3"><span class="sr-only">Menu for </span> {{ field_menu_url_text_1 }}{{ status_1 }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -2821,7 +2821,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -3003,7 +3003,7 @@ display:
           default_row_class: false
           type: ul
           wrapper_class: ''
-          class: 'nav flex-column'
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
