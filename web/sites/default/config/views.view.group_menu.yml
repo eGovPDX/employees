@@ -3158,7 +3158,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ field_display_in_group }}/node/{{ raw_arguments.nid }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ field_display_in_group }}/node/{{ raw_arguments.nid }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3323,7 +3323,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ id }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ id }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3498,7 +3498,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ field_display_in_group }}/node/{{ nid }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ field_display_in_group }}/node/{{ nid }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false
