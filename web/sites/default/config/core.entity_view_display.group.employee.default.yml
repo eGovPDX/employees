@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_has_contracts
+    - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
@@ -20,6 +21,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - options
     - text
     - views
   theme:
@@ -168,6 +170,21 @@ third_party_settings:
               items_per_page: none
             weight: 1
             additional: {  }
+          99fe1497-b949-4749-8a37-05f59dd3d48c:
+            uuid: 99fe1497-b949-4749-8a37-05f59dd3d48c
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_migration_status'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -216,6 +233,13 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 0
+    region: main
+  field_migration_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: main
   field_org_type:
     type: entity_reference_label
