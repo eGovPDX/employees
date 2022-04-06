@@ -1,5 +1,5 @@
 const proxy = 'http://appserver';
-const domain = 'county-drupal-bs.lndo.site';
+const domain = 'portlandor.lndo.site';
 const port = 80;
 
 module.exports = {
