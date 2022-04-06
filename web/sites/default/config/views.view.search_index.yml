@@ -225,13 +225,14 @@ display:
             'entity:media':
               document: search_result
             'entity:node':
-              contract: teaser
+              bts_catalog_item: search_result
+              contract: search_result
               event: search_result
               news: search_result
               page: search_result
               resource: search_result
             'entity:user':
-              user: contact_details
+              user: search_result
       query:
         type: views_query
         options:
