@@ -1,4 +1,14 @@
 {
+  "name": "visual-regression",
+  "version": "1.0.0",
+  "description": "Visual regression test suite for Portland.gov",
+  "scripts": {
+    "jest-full": "jest --config ./jest.full-regression.config.js",
+    "jest-test": "jest --config ./jest.config.js",
+    "single-test": "percy exec -- jest --config ./jest.config.js",
+    "single-test:watch": "percy exec -- jest --config ./jest.config.js --watch",
+    "all-tests": "percy exec -- jest --runInBand --config ./jest.config.js"
+  },
   "dependencies": {
     "@percy/cli": "^1.0.5",
     "@percy/puppeteer": "^2.0.1",
@@ -7,5 +17,10 @@
     "jest": "^27.5.1",
     "puppeteer": "^13.5.2",
     "ws": "^8.5.0"
+  },
+  "resolutions": {
+    "browserslist": "^4.16.5",
+    "set-value": "^4.0.1",
+    "ansi-regex": "^5.0.1"
   }
 }

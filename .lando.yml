@@ -67,9 +67,9 @@ tooling:
       - appserver: drush uli --mail marty.member@portlandoregon.gov > marty_uli.log
       - node: npm run jest-full
   yarn-rebuild:
-    description: CUSTOM Install Cloudy dependencies, rebuild Cloudy theme including pattern labs files
+    description: CUSTOM Install Cloudy 2 dependencies, rebuild Cloudy 2 theme including pattern labs files
     service: node
-    cmd: "cd /app/web/themes/custom/cloudy && yarn install --ignore-engines --frozen-lockfile && yarn run build"
+    cmd: "cd /app/web/themes/custom/cloudy2 && yarn install --ignore-engines --frozen-lockfile && yarn run build"
   npm:
     description: Run npm commands
     service: node
