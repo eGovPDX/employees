@@ -907,9 +907,9 @@ display:
       tags:
         - 'config:field.storage.node.field_menu_url_text'
         - 'config:field.storage.node.field_resource_link'
-  block_group_menu_on_lists:
-    id: block_group_menu_on_lists
-    display_title: 'Block: Group Menu on Lists'
+  block_group_menu_by_path:
+    id: block_group_menu_by_path
+    display_title: 'Block: Group Menu by Path'
     display_plugin: block
     position: 9
     display_options:
@@ -1573,7 +1573,8 @@ display:
           required: true
       display_description: ''
       display_extenders: {  }
-      block_description: 'Group Menu on List Views'
+      block_description: 'Group Menu by Path'
+      block_category: Menus
       block_hide_empty: true
       allow:
         items_per_page: false
