@@ -302,13 +302,17 @@ run_tests: &run_tests
         destination: /
 visual_regression: &visual_regression
   docker:
-    - image: kxwang/visual-regression:latest
+    - image: cimg/php:7.4-browsers
+      auth:
+        username: egovpdx
+        password: $DOCKERHUB_PASSWORD
   # environment:
   #   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
   parallelism: 4
   working_directory: /home/circleci/app
   steps:
     - checkout
+
     - restore_cache:
         name: Restore Terminus cache
         keys:
@@ -324,33 +328,55 @@ visual_regression: &visual_regression
         key: terminus_-{{ checksum "composer.lock" }}
         paths:
           - "/tmp/vendor"
+
+    - restore_cache:
+        name: Restore Jest and Percy dependencies cache
+        keys:
+          - jest-{{ checksum "tests/percy/yarn.lock" }}-v2
     - run:
+        name: Install Jest and Percy dependencies
+        command: |
+          cd /home/circleci/app/tests/percy
+          export PERCY_POSTINSTALL_BROWSER=true
+          yarn install --frozen-lockfile
+          # npm install --prefer-offline --no-audit
+    - save_cache:
+        name: Save Jest and Percy dependencies cache
+        key: jest-{{ checksum "tests/percy/yarn.lock" }}-v2
+        paths:
+          - "tests/percy/node_modules"
+    - run:
+        name: Run Percy tests
         command: |
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
-          
           # Log in via terminus first. Required for tests that require user login.
           terminus auth:login --quiet --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
-          
           # Prepare environment variables to be used by Percy
           if [[ $CIRCLE_BRANCH = "master" ]]; then
             echo 'export SITE_NAME="dev"' > $BASH_ENV && source $BASH_ENV
           else
             echo 'export SITE_NAME=${CIRCLE_BRANCH}' > $BASH_ENV && source $BASH_ENV
           fi
-
+          mkdir /home/circleci/artifacts
           cd /home/circleci/app/tests/percy
-          npm install --quiet
-
           # Start Percy tests
-          TESTFILES=$(circleci tests glob "snapshots-*.js" | circleci tests split)
+          TESTFILES=$(circleci tests glob "test/*.js" | circleci tests split)
           for TESTFILE in $TESTFILES
           do
-
-          if [[ ${TESTFILE} == *"admin"* ]]; then
+            # Generate one time login link for tests
+            if [[ ${TESTFILE} == *"admin-group"* ]]; then
+              echo 'export KEVIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --mail xinju.wang@portlandoregon.gov)' > $BASH_ENV && source $BASH_ENV
+              npm run jest-test -- ${TESTFILE}
+            elif [[ ${TESTFILE} == *"admin"* ]]; then
               echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+              npm run jest-test -- ${TESTFILE}
+            elif [[ ${TESTFILE} == *"anonymous"* ]]; then
+              npm run single-test -- ${TESTFILE}
             fi
-            npm run ${TESTFILE}
-            done
+          done
+    - store_artifacts:
+        path: /home/circleci/artifacts
+        destination: /
 
 
 # Declare all of the jobs we should run.
