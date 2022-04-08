@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
     - node.type.news
+    - views.view.group_menu
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -22,6 +23,7 @@ dependencies:
     - smart_date
     - text
     - user
+    - views
   theme:
     - cloudy2
 third_party_settings:
@@ -275,6 +277,19 @@ third_party_settings:
                 settings:
                   view_mode: group_contact
                 third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          941f60f3-93d2-45eb-9837-a89a8718438c:
+            uuid: 941f60f3-93d2-45eb-9837-a89a8718438c
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_menu_on_lists'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
             weight: 0
             additional: {  }
         third_party_settings: {  }

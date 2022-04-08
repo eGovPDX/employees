@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.event.field_type
     - field.field.node.event.field_when
     - node.type.event
+    - views.view.group_menu
     - views.view.related_content
   module:
     - layout_builder
@@ -322,6 +323,19 @@ third_party_settings:
                 settings:
                   view_mode: group_contact
                 third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          0b40012c-ba1b-428c-8ba4-75dcc7e165fd:
+            uuid: 0b40012c-ba1b-428c-8ba4-75dcc7e165fd
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_menu_on_lists'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
             weight: 0
             additional: {  }
         third_party_settings: {  }

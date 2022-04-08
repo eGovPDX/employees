@@ -6,6 +6,7 @@ dependencies:
     - views.view.group_menu
   module:
     - node
+    - system
     - views
   theme:
     - westy
@@ -24,11 +25,14 @@ settings:
   views_label: ''
   items_per_page: none
 visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "*/news/*\r\n*/events/*"
   'entity_bundle:node':
     id: 'entity_bundle:node'
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
     bundles:
-      event: event
-      news: news
+      resource: resource
