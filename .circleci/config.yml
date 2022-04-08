@@ -307,28 +307,32 @@ visual_regression: &visual_regression
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
   # environment:
+  #   PERCY_PARALLEL_TOTAL: -1
   #   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
-  parallelism: 4
+  parallelism: 5
   working_directory: /home/circleci/app
   steps:
-    - checkout
-
     - restore_cache:
-        name: Restore Terminus cache
+        name: Retore Git cache before checkout
         keys:
-          - terminus_-{{ checksum "composer.lock" }}
+          - jest-source-v1-{{ .Branch }}-{{ .Revision }}
+          - jest-source-v1-{{ .Branch }}-
+          - jest-source-v1-
+    - checkout
+    - run: git gc
+    - save_cache:
+        name: Save Git cache after checkout
+        key: jest-source-v1-{{ .Branch }}-{{ .Revision }}
+        paths:
+          - ".git"
     - run:
         name: Install Terminus
         command: |
           if [ ! -f "/tmp/vendor/pantheon-systems/terminus/bin/terminus" ]; then
-          cd /tmp && composer require pantheon-systems/terminus:^2.0.0
+            cd /tmp && composer require pantheon-systems/terminus:^3
+            # Temporary workaround to https://github.com/pantheon-systems/terminus/issues/2336
+            cd /tmp && composer require league/container:3.4.1
           fi
-    - save_cache:
-        name: Save Terminus cache
-        key: terminus_-{{ checksum "composer.lock" }}
-        paths:
-          - "/tmp/vendor"
-
     - restore_cache:
         name: Restore Jest and Percy dependencies cache
         keys:
@@ -339,7 +343,6 @@ visual_regression: &visual_regression
           cd /home/circleci/app/tests/percy
           export PERCY_POSTINSTALL_BROWSER=true
           yarn install --frozen-lockfile
-          # npm install --prefer-offline --no-audit
     - save_cache:
         name: Save Jest and Percy dependencies cache
         key: jest-{{ checksum "tests/percy/yarn.lock" }}-v2
@@ -349,26 +352,27 @@ visual_regression: &visual_regression
         name: Run Percy tests
         command: |
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
+
           # Log in via terminus first. Required for tests that require user login.
           terminus auth:login --quiet --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
+
           # Prepare environment variables to be used by Percy
           if [[ $CIRCLE_BRANCH = "master" ]]; then
             echo 'export SITE_NAME="dev"' > $BASH_ENV && source $BASH_ENV
           else
             echo 'export SITE_NAME=${CIRCLE_BRANCH}' > $BASH_ENV && source $BASH_ENV
           fi
+
           mkdir /home/circleci/artifacts
           cd /home/circleci/app/tests/percy
-          # Start Percy tests
-          TESTFILES=$(circleci tests glob "test/*.js" | circleci tests split)
+
+          # Start Percy tests excluding full regression tests
+          TESTFILES=$(circleci tests glob "__tests__/*.js" | circleci tests split)
           for TESTFILE in $TESTFILES
           do
             # Generate one time login link for tests
-            if [[ ${TESTFILE} == *"admin-group"* ]]; then
-              echo 'export KEVIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --mail xinju.wang@portlandoregon.gov)' > $BASH_ENV && source $BASH_ENV
-              npm run jest-test -- ${TESTFILE}
-            elif [[ ${TESTFILE} == *"admin"* ]]; then
-              echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+            if [[ ${TESTFILE} == *"admin"* ]]; then
+              echo 'export SUPERADMIN_LOGIN=$(terminus drush portlandor.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
               npm run jest-test -- ${TESTFILE}
             elif [[ ${TESTFILE} == *"anonymous"* ]]; then
               npm run single-test -- ${TESTFILE}
