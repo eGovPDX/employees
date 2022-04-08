@@ -12,3 +12,5 @@ Use this to see what Gherkin commands you can use with Mink by default.
 ### [Behat documentation](http://docs.behat.org/en/latest/)
 Careful with Google, it loves the 2.5 documentation which is not accurate for the 3.x version we currently use.
  
+
+ ## Visual Regression
