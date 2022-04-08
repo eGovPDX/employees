@@ -1,0 +1,28 @@
+uuid: e4a6c682-03bf-4b4a-bd6d-fb8dd516bd22
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.tags
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_tags
+theme: westy
+region: side
+weight: -14
+provider: null
+plugin: 'facet_block:tags'
+settings:
+  id: 'facet_block:tags'
+  label: 'Filter by Tags'
+  label_display: '0'
+  provider: facets
+  block_id: tags
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/documents'

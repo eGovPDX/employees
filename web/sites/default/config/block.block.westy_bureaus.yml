@@ -1,0 +1,28 @@
+uuid: c29426ca-1e7d-478b-886c-409c2fe3aa4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.bureaus
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_bureaus
+theme: westy
+region: side
+weight: 12
+provider: null
+plugin: 'facet_block:bureaus'
+settings:
+  id: 'facet_block:bureaus'
+  label: 'BTS Catalog by Bureau'
+  label_display: '0'
+  provider: facets
+  block_id: bureaus
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /technology/catalog

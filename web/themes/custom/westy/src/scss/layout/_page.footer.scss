@@ -1,0 +1,77 @@
+// Page: Footer
+// -----------------------------------------------------------------------------
+.page__footer {
+
+  .field__item {
+    margin-bottom: 0;
+  }
+
+  .nav-link {
+    padding: 0 1rem 0 0;
+  }
+
+  .page__footer__blocks h3:last-child {
+    margin-bottom: 0;
+  }
+  .page__footer__navigation,
+  .page__footer__social,
+  .page__footer__service {
+    @extend .mb-5;
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0.5rem !important; // .mb-2;
+    }
+    a, a:hover {
+      @extend .text-white;
+      text-decoration: none;
+    }
+  }
+
+  .page__footer__navigation {
+    ul li {
+      @extend .col-md-6, .col-12;
+      a {
+        padding: 0 1rem 1.4rem 0;
+        font-size: $h4-font-size;
+      }
+    }
+    .shown-md.logo {
+      float: right;
+    }
+  }
+
+  .page__footer__social {
+    ul li {
+      @extend .col-6;
+      a {
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+
+        svg {
+          width: 15px;
+          background: #fff;
+          border-radius: 50%;
+          box-shadow: 1px 1px 0 0 rgb(15 28 63 / 13%);
+          height: 15px;
+          padding: 5px;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+  }
+
+  .page__footer__service {
+    ul li {
+      @extend .col-md-auto, .col-12;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .page__footer__logo,
+    .page__footer__powered_by {
+      text-align: right;
+      img {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

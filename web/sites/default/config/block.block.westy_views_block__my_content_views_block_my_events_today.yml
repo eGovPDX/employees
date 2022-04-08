@@ -1,0 +1,31 @@
+uuid: 63f7b6f1-24b0-4343-8c33-4c93cb014f2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.my_content_views
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: westy_views_block__my_content_views_block_my_events_today
+theme: westy
+region: side
+weight: -17
+provider: null
+plugin: 'views_block:my_content_views-block_my_events_today'
+settings:
+  id: 'views_block:my_content_views-block_my_events_today'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

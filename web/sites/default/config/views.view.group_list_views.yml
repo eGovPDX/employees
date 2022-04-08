@@ -842,7 +842,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1819,7 +1819,7 @@ display:
           expose:
             operator_id: label_op
             label: 'Name contains'
-            description: 'Search for groups by name'
+            description: ''
             use_operator: false
             operator: label_op
             operator_limit_selection: false
@@ -1832,6 +1832,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             placeholder: ''

@@ -1,0 +1,120 @@
+{#
+/**
+  * @file
+  * Template for the main page.
+  */
+#}
+
+{%
+  set header_classes = [
+  'container-fluid',
+]
+%}
+
+
+<div class="page">
+
+  <header class="page__header">
+    {% block alerts %}
+      {% if page.alerts %}
+        {{ page.alerts }}
+      {% endif %}
+    {% endblock %}
+
+    <div class="container-fluid bg-dark">
+      {% embed '@westy/navbar/navbar.twig' with {
+        placement: 'sticky-top',
+        container: 'fluid',
+        color: 'dark',
+      } %}
+
+        {% block branding %}
+          {% if page.navbar_branding %}
+            {{ page.navbar_branding }}
+          {% endif %}
+        {% endblock %}
+
+        {% block left %}
+          {% if page.navbar_left %}
+            <div class="me-auto">
+              {{ page.navbar_left }}
+            </div>
+          {% endif %}
+        {% endblock %}
+
+        {% block right %}
+          {% if page.navbar_right %}
+            {{ page.navbar_right }}
+            <form accept-charset="UTF-8" action="/search" class="form-inline d-flex align-items-center" id="search-block-form" method="get">
+              <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label form-group">
+                <input class="form-search form-control" data-drupal-selector="edit-keys" id="edit-keys" maxlength="128" name="search" placeholder="Search" size="20" title="Enter the terms you wish to search for." type="search" value="" />
+              </div>
+              <div class="form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions">
+                <input class="button js-form-submit form-submit btn btn-primary visually-hidden" data-drupal-selector="edit-submit" id="edit-submit" type="submit" value="Search" />
+              </div>
+            </form>
+          {% endif %}
+        {% endblock %}
+      {% endembed %}
+    </div>
+  </header>
+  {{ page.preheader }}
+  <main>
+    {% if nid %}
+      {% set featured_image = drupal_field('field_featured_image', 'node', nid, 'default') %}
+    {% endif %}
+    {% if page.header|render|striptags|trim is not empty %}
+    <div {{ attributes.addClass(header_classes) }}>
+        <div class="container">
+            <div class="row align-items-center">
+              <div class="col py-4">
+                <header class="page__sub_header">
+                  {{ page.header }}
+                </header>
+              </div>
+              {% if featured_image|render %}
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+                  {{ featured_image }}
+                </div>
+              {% endif %}
+            </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+        {% if page.content %}
+          <div class="page__content col order-md-2 order-sm-1">
+              {{ page.content }}
+          </div>
+        {% endif %}
+        {% if page.side %}
+          <div class="page__side col-lg-3 col-md-7 col-sm-12 order-md-3 order-sm-2 border-left">
+              {{ page.side }}
+          </div>
+        {% endif %}
+        {% if page.menu %}
+          <div class="page__menu col-lg-3 col-md-5 col-sm-12 order-lg-1 order-md-2 order-sm-3 border-right">
+            {{ page.menu }}
+          </div>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if page.content_bottom|render|striptags|trim is not empty %}
+
+      <div class="page__content_bottom col">
+        {{ page.content_bottom }}
+      </div>
+
+    {% endif %}
+
+  </main>
+
+    <footer class="page__footer">
+      {% include '@westy/page/page.footer.html.twig' %}
+    </footer>
+</div>

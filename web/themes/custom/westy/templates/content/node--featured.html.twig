@@ -1,0 +1,11 @@
+<div class="col">
+  <div class="card border-2 rounded-0 h-100">
+    <a href="{{ url }}">{{ content.field_featured_image }}</a>
+    <div class="card-body">
+      <h3 class="card-title h5 text-primary"><a href="{{ url }}">{{ content.field_short_title.0 }}</a></h3>
+      <p class="card-text">
+        {{ content|without('field_short_title','field_featured_image') }}
+      </p>
+    </div>
+  </div>
+</div>

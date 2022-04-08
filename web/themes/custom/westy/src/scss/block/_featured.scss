@@ -1,0 +1,35 @@
+.featured-group {
+
+  margin: 0 0.1rem;
+
+  .featured-item {
+    display: table;
+
+    .icon {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 30px;
+
+      .icon-circle {
+        background: $light;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        color: $dark;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .text {
+      display: table-cell;
+      vertical-align: middle;
+
+      h4, p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
