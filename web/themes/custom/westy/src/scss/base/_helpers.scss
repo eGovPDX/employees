@@ -1,0 +1,33 @@
+/* put a little padding in styled CKEditor body */
+.cke_editable {
+  margin: 10px;
+
+  .embed-document {
+    margin: 0;
+  }
+}
+
+// External links
+svg.ext {
+  margin-left: ($spacer * 0.25);
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  vertical-align: middle;
+}
+
+a.ext {
+  display: inline-flex;
+}
+
+svg.mailto::before {
+  background: none;
+}
+
+/* Hide the extra spans when printing. */
+@media print {
+  svg.ext,
+  svg.mailto {
+    display: none;
+    padding: 0;
+  }
+}

@@ -7,6 +7,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Some description.
@@ -46,15 +47,14 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
    * {@inheritdoc}
    */
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
-    if ($object->getEntityType() === 'node') {
-      $access = $object->access('update', $account, TRUE)
-        ->andIf($object->status->access('edit', $account, TRUE));
+    if ($object->getEntityTypeId() === 'node') {
+      $access = $object->access('update', $account, TRUE);
       return $return_as_object ? $access : $access->isAllowed();
     }
 
     // Other entity types may have different
     // access methods and properties.
-    return TRUE;
+    return ($return_as_object ? AccessResult::allowed() : true );
   }
 
   /**

@@ -7,6 +7,6 @@ Feature: Basic site operation and navigation
   Background:
     Given I am using a 1440x900 browser window
 
-  Scenario: Visit the homepage as authenticated user
+  Scenario: Visit the homepage as anonymous user
     When I visit "/"
-    Then I should see "Portland Employees"
+    Then I should see "Directory"

@@ -565,7 +565,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -680,8 +680,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<h2 class="visually-hidden">Menu for {{ arguments.id }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -873,8 +873,8 @@ display:
           row_class: nav-item
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: ''
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -907,9 +907,9 @@ display:
       tags:
         - 'config:field.storage.node.field_menu_url_text'
         - 'config:field.storage.node.field_resource_link'
-  block_group_menu_on_lists:
-    id: block_group_menu_on_lists
-    display_title: 'Block: Group Menu on Lists'
+  block_group_menu_by_path:
+    id: block_group_menu_by_path
+    display_title: 'Block: Group Menu by Path'
     display_plugin: block
     position: 9
     display_options:
@@ -1226,8 +1226,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<h2 class="h3"><span class="visually-hidden">Menu for</span> {{ label }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -1523,8 +1523,8 @@ display:
           row_class: nav-item
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: ''
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -1573,7 +1573,8 @@ display:
           required: true
       display_description: ''
       display_extenders: {  }
-      block_description: 'Group Menu on List Views'
+      block_description: 'Group Menu by Path'
+      block_category: Menus
       block_hide_empty: true
       allow:
         items_per_page: false
@@ -1672,7 +1673,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1974,7 +1975,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status_1 == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2039,7 +2040,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_menu_url_text_1 }}{{ status_1 }}'
+            text: '<h2 class="h3"><span class="visually-hidden">Menu for</span> {{ field_menu_url_text_1 }}{{ status_1 }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -2071,7 +2072,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -2296,7 +2297,7 @@ display:
           default_row_class: false
           type: ul
           wrapper_class: ''
-          class: 'nav flex-column'
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -2541,7 +2542,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2724,7 +2725,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status_1 == "No" %}<span class="text-danger ml-1">Unpublished</span>{% endif %}'
+            text: '{% if status_1 == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -2789,7 +2790,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '<span class="sr-only">Menu for </span> {{ field_menu_url_text_1 }}{{ status_1 }}'
+            text: '<h2 class="h3"><span class="sr-only">Menu for </span> {{ field_menu_url_text_1 }}{{ status_1 }}</h2>'
             make_link: false
             path: ''
             absolute: false
@@ -2821,7 +2822,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -3003,7 +3004,7 @@ display:
           default_row_class: false
           type: ul
           wrapper_class: ''
-          class: 'nav flex-column'
+          class: 'nav nav-vertical flex-column'
       row:
         type: fields
         options:
@@ -3158,7 +3159,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ field_display_in_group }}/node/{{ raw_arguments.nid }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ field_display_in_group }}/node/{{ raw_arguments.nid }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3323,7 +3324,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ id }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ id }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false
@@ -3498,7 +3499,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<hr>\r\n<a href=\"/group/{{ field_display_in_group }}/node/{{ nid }}/manage-menu\" class=\"btn btn-primary\">Manage Menu</a>"
+            text: '<br><a href="/group/{{ field_display_in_group }}/node/{{ nid }}/manage-menu" class="btn btn-primary">Manage Menu</a>'
             make_link: false
             path: ''
             absolute: false

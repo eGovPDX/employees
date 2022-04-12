@@ -1,0 +1,158 @@
+// PDF
+.gg-file-pdf {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 14px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-right: 0;
+  border-top: 0;
+  box-shadow: 0 0 0 2px;
+  border-radius: 1px;
+  display: inline-block;
+  margin-right: 10px;
+  top: 2px;
+  left: 3px;
+  border-top-right-radius: 4px;
+  overflow: hidden
+}
+.gg-file-pdf::after,
+.gg-file-pdf::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+}
+.gg-file-pdf::before {
+  background: currentColor;
+  box-shadow:
+    0 4px 0,
+    -6px -4px 0;
+  left: 0;
+  width: 10px;
+  height: 2px;
+  top: 8px
+}
+.gg-file-pdf::after {
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  right: -1px;
+  top: -1px
+}
+
+// Right Arrow
+.gg-arrow-right {
+  box-sizing: border-box;
+  position: relative;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  top: 6px;
+}
+.gg-arrow-right::after,
+.gg-arrow-right::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  right: 3px
+}
+.gg-arrow-right::after {
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(45deg);
+  bottom: 7px
+}
+.gg-arrow-right::before {
+  width: 16px;
+  height: 2px;
+  bottom: 10px;
+  background: currentColor
+}
+
+// Search
+.gg-search {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 16px;
+  border: 3px solid;
+  border-radius: 100%;
+  margin-left: 4px;
+  margin-top: -4px;
+}
+
+.gg-search::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 3px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 12px;
+}
+
+// Chevron Right
+.gg-chevron-right {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px
+}
+.gg-chevron-right::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(-45deg);
+  right: 6px;
+  top: 4px
+}
+
+// Close
+.gg-close {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+}
+.gg-close::after,
+.gg-close::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  background: #fff;
+  transform: rotate(45deg);
+  border-radius: 0;
+  top: 11px;
+  left: 0px
+}
+.gg-close::after {
+  transform: rotate(-45deg)
+}

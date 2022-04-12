@@ -1,0 +1,28 @@
+uuid: 07788371-494b-47b6-998d-85f68b727170
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_contract_category
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_filterbycategory_2
+theme: westy
+region: side
+weight: -8
+provider: null
+plugin: 'facet_block:group_contract_category'
+settings:
+  id: 'facet_block:group_contract_category'
+  label: 'Group Contracts Filter by Category'
+  label_display: '0'
+  provider: facets
+  block_id: filterbycategory_2
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/contracts'

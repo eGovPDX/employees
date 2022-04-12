@@ -9,6 +9,8 @@ dependencies:
     - group.type.employee
     - system.menu.main
     - taxonomy.vocabulary.org_type
+  content:
+    - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - group
     - group_views_join_link
@@ -840,7 +842,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -945,7 +947,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -1728,7 +1730,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.permissions
       tags: {  }
   page_public_groups:
     id: page_public_groups
@@ -1818,7 +1819,7 @@ display:
           expose:
             operator_id: label_op
             label: 'Name contains'
-            description: 'Search for groups by name'
+            description: ''
             use_operator: false
             operator: label_op
             operator_limit_selection: false
@@ -1831,6 +1832,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             placeholder: ''

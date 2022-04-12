@@ -1,0 +1,40 @@
+// Page: Content
+// -----------------------------------------------------------------------------
+.page__content {
+
+}
+
+article {
+
+  // Lists
+  ol,
+  ul,
+  dl {
+    padding: 0;
+    margin-left: 3em;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ol ol, ol ol ol ol ol {
+    list-style: lower-alpha;
+    // margin-left: .8em;
+  }
+  ol ol ol, ol ol ol ol ol ol {
+    list-style: lower-roman;
+    // margin-left: .8em;
+  }
+  ol ol ol ol {
+    list-style: decimal;
+  }
+  li {
+    // padding-left: .5em;
+  }
+  li * li {
+    // margin-left: .8em;
+  }
+}
+
+.homepage-grid .views-row .views-col:first-child {
+  padding-left: 0;
+}

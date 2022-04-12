@@ -1,0 +1,28 @@
+uuid: 2ffb2d08-d26d-426c-91b1-f34ca9ce0cbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.business_capability
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_businesscapability
+theme: westy
+region: side
+weight: 11
+provider: null
+plugin: 'facet_block:business_capability'
+settings:
+  id: 'facet_block:business_capability'
+  label: 'BTS Catalog by Business Capability'
+  label_display: '0'
+  provider: facets
+  block_id: businesscapability
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /technology/catalog

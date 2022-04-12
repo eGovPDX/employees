@@ -1,0 +1,28 @@
+uuid: a53be8f5-59ff-4681-be1a-71a2d0b570a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contract_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_filterbycontracttype
+theme: westy
+region: side
+weight: -9
+provider: null
+plugin: 'facet_block:contract_type'
+settings:
+  id: 'facet_block:contract_type'
+  label: 'Filter by Contract Type'
+  label_display: '0'
+  provider: facets
+  block_id: filterbycontracttype
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /contracts
