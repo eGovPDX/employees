@@ -1,9 +1,9 @@
-uuid: 2d660d55-25a4-410b-bfe0-7634564ac8b7
+uuid: 53a54879-ff96-4ea5-9d28-fe24a968b317
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.search_result
     - field.field.node.contract.body
     - field.field.node.contract.field_category
     - field.field.node.contract.field_contract_number
@@ -16,12 +16,17 @@ dependencies:
     - field.field.node.contract.field_vendor_contact_info
     - node.type.contract
   module:
+    - layout_builder
     - smart_date
     - user
-id: node.contract.teaser
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.contract.search_result
 targetEntityType: node
 bundle: contract
-mode: teaser
+mode: search_result
 content:
   field_category:
     type: entity_reference_label
@@ -29,7 +34,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_contract_number:
     type: string
@@ -37,7 +42,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_date_range:
     type: smartdate_default
@@ -50,7 +55,15 @@ content:
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_type:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   body: true
@@ -59,7 +72,6 @@ hidden:
   field_efiles_link: true
   field_mandated_purchases: true
   field_p_card_allowed: true
-  field_type: true
   field_vendor_contact_info: true
   langcode: true
   links: true

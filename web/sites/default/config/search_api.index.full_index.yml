@@ -44,6 +44,7 @@ dependencies:
     - search_api_solr
     - group
     - media
+    - taxonomy
     - node
     - user
     - search_api
@@ -52,6 +53,7 @@ third_party_settings:
     finalize: true
     commit_before_finalize: false
     commit_after_finalize: true
+    debug_finalize: false
     highlighter:
       maxAnalyzedChars: 51200
       fragmenter: gap
@@ -211,6 +213,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_category
+  field_category_name:
+    label: 'Category » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_category:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_category
+      module:
+        - taxonomy
   field_cloud_service_type:
     label: 'Cloud service type'
     datasource_id: 'entity:node'
@@ -530,7 +542,11 @@ field_settings:
         'entity:group':
           employee: default
           private: default
+        'entity:media':
+          document: ''
         'entity:node':
+          bts_catalog_item: ''
+          contract: ''
           event: default
           news: default
           page: default
@@ -597,6 +613,7 @@ processor_settings:
       field_bureaus: taxonomy_term-parent
       field_business_capability: taxonomy_term-parent
       field_business_priority: taxonomy_term-parent
+      field_category: taxonomy_term-parent
       field_tags: taxonomy_term-parent
       field_type: taxonomy_term-parent
   html_filter:

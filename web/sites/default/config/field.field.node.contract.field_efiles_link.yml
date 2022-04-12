@@ -1,17 +1,17 @@
-uuid: 238f1870-cba2-438a-aaa0-4b3e9fa03642
+uuid: 49db291a-dc62-4659-aba8-6e19e6bd83b5
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_efiles_link
-    - media.type.document
+    - field.storage.node.field_efiles_link
+    - node.type.contract
   module:
     - link
-id: media.document.field_efiles_link
+id: node.contract.field_efiles_link
 field_name: field_efiles_link
-entity_type: media
-bundle: document
-label: 'eFiles link'
+entity_type: node
+bundle: contract
+label: 'Contract Document'
 description: ''
 required: false
 translatable: false
