@@ -900,7 +900,9 @@ display:
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             label: label
+            field_parent_group: field_parent_group
             type: type
+            field_migration_status: field_migration_status
             field_org_type: field_org_type
             changed: changed
             status: status
@@ -919,7 +921,19 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            field_parent_group:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_migration_status:
               sortable: true
               default_sort_order: asc
               align: ''
