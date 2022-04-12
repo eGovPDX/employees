@@ -8,6 +8,7 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_hire_date
     - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
     - field.field.user.user.field_keep_mobile_phone_private
@@ -20,11 +21,13 @@ dependencies:
     - field.field.user.user.field_publisher_role_changed
     - field.field.user.user.field_search_keywords
     - field.field.user.user.field_section
+    - field.field.user.user.field_separation_date
     - field.field.user.user.field_title
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
+    - datetime
     - image
     - masquerade_field
     - telephone
@@ -67,6 +70,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 8
+    region: content
+  field_hire_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 15
     region: content
   field_job_description:
     type: string
@@ -115,6 +127,15 @@ content:
       link: true
     third_party_settings: {  }
     weight: 9
+    region: content
+  field_separation_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 16
     region: content
   field_title:
     type: string

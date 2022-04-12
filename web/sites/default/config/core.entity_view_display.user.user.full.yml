@@ -9,6 +9,7 @@ dependencies:
     - field.field.user.user.field_division_name
     - field.field.user.user.field_first_name
     - field.field.user.user.field_group_names
+    - field.field.user.user.field_hire_date
     - field.field.user.user.field_is_contact_only
     - field.field.user.user.field_job_description
     - field.field.user.user.field_keep_mobile_phone_private
@@ -21,6 +22,7 @@ dependencies:
     - field.field.user.user.field_publisher_role_changed
     - field.field.user.user.field_search_keywords
     - field.field.user.user.field_section
+    - field.field.user.user.field_separation_date
     - field.field.user.user.field_title
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
@@ -286,6 +288,46 @@ third_party_settings:
               items_per_page: none
             weight: 17
             additional: {  }
+          211ef99f-2ebf-4707-a3d4-52bb8dd76e09:
+            uuid: 211ef99f-2ebf-4707-a3d4-52bb8dd76e09
+            region: content
+            configuration:
+              id: 'field_block:user:user:field_hire_date'
+              label: 'Hire date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: '@user.current_user_context:current_user'
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: inline
+                settings:
+                  timezone_override: ''
+                  format_type: medium_date
+                third_party_settings: {  }
+            weight: 18
+            additional: {  }
+          7b0474cf-a3c2-4875-9f32-856f3a75c4fb:
+            uuid: 7b0474cf-a3c2-4875-9f32-856f3a75c4fb
+            region: content
+            configuration:
+              id: 'field_block:user:user:field_separation_date'
+              label: 'Separation date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: '@user.current_user_context:current_user'
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: inline
+                settings:
+                  timezone_override: ''
+                  format_type: medium_date
+                third_party_settings: {  }
+            weight: 19
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -382,6 +424,7 @@ content:
 hidden:
   field_active_directory_id: true
   field_first_name: true
+  field_hire_date: true
   field_is_contact_only: true
   field_job_description: true
   field_keep_mobile_phone_private: true
@@ -391,6 +434,7 @@ hidden:
   field_publisher_role_changed: true
   field_search_keywords: true
   field_section: true
+  field_separation_date: true
   field_workspace: true
   langcode: true
   mail: true
