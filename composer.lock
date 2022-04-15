@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd13bc80203213cbf2b5d5321a7e339",
+    "content-hash": "e120da20a88bafe7c74e3e8cc2064b17",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5475,6 +5475,50 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/masquerade_field",
                 "issues": "https://www.drupal.org/project/issues/masquerade_field"
+            }
+        },
+        {
+            "name": "drupal/media_remote",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/media_remote.git",
+                "reference": "1.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/media_remote-1.2.0.zip",
+                "reference": "1.2.0",
+                "shasum": "aa7c8247b807f0c47e47107feec92ba1c537ce89"
+            },
+            "require": {
+                "drupal/core": "^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.2.0",
+                    "datestamp": "1645868376",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "marcoscano",
+                    "homepage": "https://www.drupal.org/user/1288796"
+                }
+            ],
+            "description": "Provides Media integration for remote content (non-OEmbed).",
+            "homepage": "https://www.drupal.org/project/media_remote",
+            "support": {
+                "source": "https://git.drupalcode.org/project/media_remote"
             }
         },
         {
@@ -16355,5 +16399,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

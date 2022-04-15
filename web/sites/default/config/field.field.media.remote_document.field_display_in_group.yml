@@ -1,0 +1,31 @@
+uuid: 8aa530bf-4b75-477b-885b-de8a86f16f59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_display_in_group
+    - group.type.employee
+    - group.type.private
+    - media.type.remote_document
+id: media.remote_document.field_display_in_group
+field_name: field_display_in_group
+entity_type: media
+bundle: remote_document
+label: 'Belongs to'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+      private: private
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: employee
+field_type: entity_reference
