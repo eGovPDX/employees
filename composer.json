@@ -6,6 +6,7 @@
     "homepage": "https://www.drupal.org/project/drupal",
     "require": {
         "bower-asset/cropper": "^4.1",
+        "bower-asset/fontawesome": "^6.1",
         "bower-asset/toc": "^0.3.2",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.0",
@@ -40,6 +41,7 @@
         "drupal/field_permissions": "^1.1",
         "drupal/field_states_ui": "^2.0",
         "drupal/fixed_block_content": "^1.0",
+        "drupal/fontawesome": "^2.22",
         "drupal/google_tag": "^1.4",
         "drupal/group": "^1.2",
         "drupal/group_notifications": "^1.0@beta",
@@ -104,7 +106,8 @@
         "oomphinc/composer-installers-extender": "^2.0",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
-        "wikimedia/composer-merge-plugin": "^2.0"
+        "wikimedia/composer-merge-plugin": "^2.0",
+        "zendesk/zendesk_api_client_php": "^2.2"
     },
     "require-dev": {
         "drupal-composer/drupal-security-advisories": "8.x-dev",
@@ -205,6 +208,9 @@
             },
             "drupal/structure_sync": {
                 "3180878 - D9 - getVocabularyId (undefined method)": "https://www.drupal.org/files/issues/2020-11-05/3180878-undefined-method-getVocabularyId-1.patch"
+            },
+            "drupal/field_states_ui": {
+                "3263814 - Error: Call to undefined method getFormDisplay()": "https://www.drupal.org/files/issues/2022-04-12/3263814-1.patch"
             }
         }
     },

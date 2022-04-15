@@ -3,12 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.group.field_migration_status
     - field.storage.group.field_org_type
     - field.storage.group.field_parent_group
     - taxonomy.vocabulary.org_type
     - user.role.administrator
   module:
     - group
+    - options
     - taxonomy
     - user
     - views_bulk_operations
@@ -85,15 +87,20 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
-            2:
+            5:
+              action_id: views_bulk_edit
+              preconfiguration:
+                add_confirmation: false
+                get_bundles_from_results: true
+            7:
               action_id: 'entity:publish_action:group'
               preconfiguration:
                 add_confirmation: false
-            3:
+            8:
               action_id: 'entity:save_action:group'
               preconfiguration:
                 add_confirmation: false
-            4:
+            9:
               action_id: 'entity:unpublish_action:group'
               preconfiguration:
                 add_confirmation: false
@@ -281,6 +288,68 @@ display:
           settings:
             link: true
           group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_migration_status:
+          id: field_migration_status
+          table: group__field_migration_status
+          field: field_migration_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Migration status'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -764,6 +833,60 @@ display:
           hierarchy: false
           limit: true
           error_message: true
+        field_migration_status_value:
+          id: field_migration_status_value
+          table: group__field_migration_status
+          field: field_migration_status_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_migration_status_value_op
+            label: 'Migration status (field_migration_status)'
+            description: null
+            use_operator: false
+            operator: field_migration_status_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_migration_status_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: true
+          group_info:
+            label: 'Migration status'
+            description: ''
+            identifier: field_migration_status_value
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Complete
+                operator: or
+                value:
+                  Complete: Complete
+              2:
+                title: 'In Progress'
+                operator: or
+                value:
+                  'In Progress': 'In Progress'
+              3:
+                title: ''
+                operator: or
+                value: {  }
+          reduce_duplicates: false
       filter_groups:
         operator: AND
         groups:
@@ -777,7 +900,9 @@ display:
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             label: label
+            field_parent_group: field_parent_group
             type: type
+            field_migration_status: field_migration_status
             field_org_type: field_org_type
             changed: changed
             status: status
@@ -796,7 +921,19 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            field_parent_group:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_migration_status:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -869,6 +1006,7 @@ display:
         - user
         - user.roles
       tags:
+        - 'config:field.storage.group.field_migration_status'
         - 'config:field.storage.group.field_org_type'
         - 'config:field.storage.group.field_parent_group'
   page_manage_groups:
@@ -898,5 +1036,6 @@ display:
         - user
         - user.roles
       tags:
+        - 'config:field.storage.group.field_migration_status'
         - 'config:field.storage.group.field_org_type'
         - 'config:field.storage.group.field_parent_group'

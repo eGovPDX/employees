@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_has_contracts
+    - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
@@ -20,6 +21,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - options
     - text
     - views
   theme:
@@ -216,6 +218,13 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 0
+    region: main
+  field_migration_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: main
   field_org_type:
     type: entity_reference_label

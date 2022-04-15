@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_has_contracts
+    - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
@@ -105,6 +106,12 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_migration_status:
+    type: options_select
+    weight: 26
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_org_type:
     type: options_select
