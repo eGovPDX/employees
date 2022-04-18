@@ -12,7 +12,6 @@ dependencies:
     - field.field.media.remote_document.field_tags
     - media.type.remote_document
   module:
-    - employees
     - layout_builder
 third_party_settings:
   layout_builder:
@@ -33,10 +32,10 @@ content:
     weight: 2
     region: content
   field_media_media_remote:
-    type: media_remote_document
+    type: string
     label: hidden
     settings:
-      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaRemoteDocumentFormatter
+      link_to_entity: false
     third_party_settings: {  }
     weight: 1
     region: content
