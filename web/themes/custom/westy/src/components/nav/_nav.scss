@@ -27,7 +27,20 @@ ul.nav-vertical {
 
 ul.nav-vertical ul.nav-vertical {
   border: 0;
-  .nav-link{
+  border-top: 2px solid $gray;
+  .nav-link {
     padding-left: $spacer * 2;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical {
+  .nav-link {
+    padding-left: $spacer * 4;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical ul.nav-vertical{
+  .nav-link {
+    padding-left: $spacer * 8;
   }
 }
