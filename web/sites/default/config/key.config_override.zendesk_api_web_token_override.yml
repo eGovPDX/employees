@@ -1,0 +1,14 @@
+uuid: ba27d883-6e03-447b-89e6-8439f8b93f2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - key.key.zendesk_api_web_token
+    - portland_zendesk.adminsettings
+id: zendesk_api_web_token_override
+label: 'Zendesk API Web Token Override'
+config_type: system.simple
+config_prefix: ''
+config_name: portland_zendesk.adminsettings
+config_item: web_token
+key_id: zendesk_api_web_token
