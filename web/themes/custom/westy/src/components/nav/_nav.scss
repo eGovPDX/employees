@@ -6,16 +6,8 @@ ul.nav-vertical {
   .nav-item {
     border-bottom: 2px solid $gray;
   }
-  .nav-item.menu-item--active-trail {
-    border: 2px solid $primary;
-    margin: -2px -2px 0 -2px;
-  }
   .nav-item:last-of-type {
     border-bottom: 0;
-  }
-  .nav-item.menu-item--active-trail:last-of-type {
-    border-bottom: 2px solid $primary;
-    margin: -2px;
   }
   .nav-link {
     text-decoration: none !important;
@@ -23,11 +15,27 @@ ul.nav-vertical {
       background-color: $gray;
     }
   }
+  .nav-link.active {
+    font-weight: $font-weight-bold;
+  }
 }
 
 ul.nav-vertical ul.nav-vertical {
   border: 0;
-  .nav-link{
+  border-top: 2px solid $gray;
+  .nav-link {
     padding-left: $spacer * 2;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical {
+  .nav-link {
+    padding-left: $spacer * 4;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical ul.nav-vertical{
+  .nav-link {
+    padding-left: $spacer * 8;
   }
 }

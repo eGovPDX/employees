@@ -1,9 +1,9 @@
-uuid: 9fd7e793-e604-47d5-bf9b-e621ab89d341
+uuid: 895e79cd-a68d-4b13-a364-2dec5b30ae48
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.search_result
+    - core.entity_view_mode.node.nested
     - field.field.node.page.body
     - field.field.node.page.field_contact
     - field.field.node.page.field_display_in_group
@@ -22,7 +22,6 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
-    - smart_trim
     - user
 third_party_settings:
   layout_builder:
@@ -40,45 +39,45 @@ third_party_settings:
       allowed_layouts: {  }
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
-id: node.page.search_result
+id: node.page.nested
 targetEntityType: node
 bundle: page
-mode: search_result
+mode: nested
 content:
-  body:
-    type: smart_trim
+  field_menu_url_text:
+    type: string
     label: hidden
     settings:
-      trim_length: 50
-      trim_type: words
-      trim_suffix: ''
-      wrap_output: true
-      wrap_class: trimmed
-      more_link: false
-      more_class: more-link
-      more_text: More
-      summary_handler: full
-      trim_options:
-        text: true
-        trim_zero: true
+      link_to_entity: false
     third_party_settings: {  }
     weight: 0
     region: content
+  field_parent:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  group_menu_eva_nested_menu:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
+  body: true
   content_moderation_control: true
   field_contact: true
   field_display_in_group: true
   field_feature: true
   field_feature_until: true
-  field_menu_url_text: true
-  field_parent: true
   field_related_content: true
   field_reviewer: true
   field_show_in_menu: true
   field_sort_weight: true
   field_tags: true
   field_topics: true
-  group_menu_eva_nested_menu: true
   langcode: true
   links: true
   search_api_excerpt: true
