@@ -20,15 +20,6 @@ function portland_groups_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-
-
-
-
-
-
-
-
-
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -44,6 +35,27 @@ function portland_groups_inline_entity_form_entity_form_alter(&$entity_form, &$f
 function _portland_groups_populate_field_display_groups(&$form, &$form_state) {
   // get the group id and store it in session in case it's needed in an inline entity
   // form in a CKEditor iframe. if new page, prepopulate field_display_in_group with parent group.
+
+  $node = $form_state->getFormObject()->getEntity();
+  if ($node->isNew()) {
+    if (array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != null) {
+        $group_id = $form_state->getStorage()['group']->id();
+        if (array_key_exists('group_content', $form) && $group_id != null) {
+            \Drupal::request()->getSession()->set('parent_group_id', $group_id);
+        }
+    }
+  }
+  // Set the default group in "field_display_in_group" in entity browser form
+  // When editing a node, get the node's parent group
+  else {
+    $group_ids = getGroupIdsByEntity($node);
+    if(count($group_ids) > 0) {
+      // Assume each node only belongs to one group.
+      // When there are multiple parent groups, use the first one.
+      \Drupal::request()->getSession()->set('parent_group_id', $group_ids[0]);
+    }
+  }
+
   if(array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != NULL) {
     $group = $form_state->getStorage()['group'];
     $group_id = $group->id();
