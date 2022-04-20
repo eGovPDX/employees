@@ -40,10 +40,6 @@ class MediaRemoteDocumentFormatter extends MediaRemoteFormatterBase {
    */
   public static function deriveMediaDefaultNameFromUrl($url) {
     $matches = [];
-    // DocumentCloud URLs can either contain only Document ID, or
-    // have a text-string suffix. If there is a suffix, we'll use that
-    // as the name. Otherwise, we'll return a generic name with the
-    // document ID.
     $pattern = static::getUrlRegexPattern();
     preg_match($pattern, $url, $matches);
     if (!empty($matches[1])) {
@@ -71,7 +67,7 @@ class MediaRemoteDocumentFormatter extends MediaRemoteFormatterBase {
       $document_id = $matches[1];
       $elements[$delta] = [
         '#theme' => 'media_remote_document',
-        '#document_id' => $document_id,
+        // '#document_id' => $document_id,
         // '#slug' => $matches[2][0] ?? '',
       ];
     }

@@ -3,10 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - crop
     - media_remote
+third_party_settings:
+  crop:
+    image_field: null
 id: remote_document
 label: 'Remote document'
-description: ''
+description: 'A remote file stored at eFiles.portlandoregon.gov.'
 source: media_remote
 queue_thumbnail_downloads: false
 new_revision: false
