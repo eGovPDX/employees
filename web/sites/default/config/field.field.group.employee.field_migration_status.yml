@@ -1,0 +1,23 @@
+uuid: c70ca40d-f152-4292-bf10-c03b2c179f5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_migration_status
+    - group.type.employee
+  module:
+    - options
+id: group.employee.field_migration_status
+field_name: field_migration_status
+entity_type: group
+bundle: employee
+label: 'Migration status'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'In Progress'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

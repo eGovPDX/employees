@@ -1,0 +1,30 @@
+uuid: 537a949f-7d35-400e-a5d1-b9870d311b4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.featured_events
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: westy_views_block__featured_events_block_upcoming_sitewide_events
+theme: westy
+region: side
+weight: -16
+provider: null
+plugin: 'views_block:featured_events-block_upcoming_sitewide_events'
+settings:
+  id: 'views_block:featured_events-block_upcoming_sitewide_events'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

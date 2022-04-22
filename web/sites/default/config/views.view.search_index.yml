@@ -225,13 +225,14 @@ display:
             'entity:media':
               document: search_result
             'entity:node':
-              contract: teaser
+              bts_catalog_item: search_result
+              contract: search_result
               event: search_result
               news: search_result
               page: search_result
               resource: search_result
             'entity:user':
-              user: contact_details
+              user: search_result
       query:
         type: views_query
         options:
@@ -249,7 +250,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<p>Displaying @start - @end of @total</p>'
         area:
           id: area
           table: views
@@ -1274,6 +1275,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -1295,6 +1297,7 @@ display:
           min_length: null
           fields:
             - content_title
+            - field_category_name
             - field_contract_number
         field_mandated_purchases:
           id: field_mandated_purchases
@@ -2033,7 +2036,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<p>Displaying @start - @end of @total</p>'
       exposed_block: false
       display_extenders: {  }
       path: events
@@ -2552,7 +2555,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: '<p>Displaying @start - @end of @total</p>'
       exposed_block: false
       display_extenders: {  }
       path: events/past

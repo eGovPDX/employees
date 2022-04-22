@@ -1,0 +1,28 @@
+uuid: 61f589e6-643d-4c80-8d67-cadac7284610
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contract_category
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_filterbycategory
+theme: westy
+region: side
+weight: -10
+provider: null
+plugin: 'facet_block:contract_category'
+settings:
+  id: 'facet_block:contract_category'
+  label: 'Filter by Category'
+  label_display: '0'
+  provider: facets
+  block_id: filterbycategory
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /contracts

@@ -1,0 +1,78 @@
+uuid: 53a54879-ff96-4ea5-9d28-fe24a968b317
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.search_result
+    - field.field.node.contract.body
+    - field.field.node.contract.field_category
+    - field.field.node.contract.field_contract_number
+    - field.field.node.contract.field_date_range
+    - field.field.node.contract.field_display_in_group
+    - field.field.node.contract.field_efiles_link
+    - field.field.node.contract.field_mandated_purchases
+    - field.field.node.contract.field_p_card_allowed
+    - field.field.node.contract.field_type
+    - field.field.node.contract.field_vendor_contact_info
+    - node.type.contract
+  module:
+    - layout_builder
+    - smart_date
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.contract.search_result
+targetEntityType: node
+bundle: contract
+mode: search_result
+content:
+  field_category:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_contract_number:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_date_range:
+    type: smartdate_default
+    label: inline
+    settings:
+      timezone_override: UTC
+      format_type: medium
+      format: compact_date_only
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_type:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_display_in_group: true
+  field_efiles_link: true
+  field_mandated_purchases: true
+  field_p_card_allowed: true
+  field_vendor_contact_info: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

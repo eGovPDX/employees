@@ -1,0 +1,33 @@
+name: Westy
+description: A theme based on Radix.
+screenshot: screenshot.png
+logo: 'assets/images/logo.png'
+core_version_requirement: ^8.7.7 || ^9.0
+# version: VERSION
+engine: twig
+type: theme
+base theme: radix
+
+regions:
+  alerts: Alerts
+  navbar_branding:  Navbar branding
+  navbar_left:  Navbar left
+  navbar_right: Navbar right
+  preheader: Preheader
+  header: Header
+  content: Content
+  content_bottom: Content bottom
+  side: Side
+  menu: Menu
+  page_bottom: Page bottom
+  footer: Footer
+
+libraries:
+  - westy/style
+
+ckeditor_stylesheets:
+  - assets/css/westy.style.css
+
+components:
+  namespaces:
+    westy: src/components

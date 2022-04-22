@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body { background-color: #cbd2d6 }
+
+      .icon { width: 20px; height: 20px }
+
+      .icon .foreground, .icon .background { transition: fill .2s ease-in }
+
+
+      /* .colors-on-hover */
+      .colors-on-hover .icon-twitter .foreground { fill: grey }
+      .colors-on-hover .icon-twitter:hover .foreground { fill: #2aa9e0 }
+
+      .colors-on-hover .icon-facebook .background { fill: grey }
+      .colors-on-hover .icon-facebook .foreground { fill: transparent }
+      .colors-on-hover .icon-facebook:hover .background { fill: #3b5999 }
+      .colors-on-hover .icon-facebook:hover .foreground { fill: white }
+
+      .colors-on-hover .icon-googleplus .background { fill: grey }
+      .colors-on-hover .icon-googleplus .foreground { fill: transparent }
+      .colors-on-hover .icon-googleplus:hover .background { fill: #dd4b39 }
+      .colors-on-hover .icon-googleplus:hover .foreground { fill: white }
+
+      .colors-on-hover .icon-linkedin .background { fill: grey }
+      .colors-on-hover .icon-linkedin .foreground { fill: transparent }
+      .colors-on-hover .icon-linkedin:hover .background { fill: #0077b5 }
+      .colors-on-hover .icon-linkedin:hover .foreground { fill: white }
+
+      .colors-on-hover .icon-rss .background { fill: grey }
+      .colors-on-hover .icon-rss .foreground { fill: transparent }
+      .colors-on-hover .icon-rss:hover .background { fill: #f28c36 }
+      .colors-on-hover .icon-rss:hover .foreground { fill: white }
+
+      .colors-on-hover .icon-envelope:hover .foreground { fill: #fdf5e8 }
+
+      /* .shapes-only */
+      .shapes-only .icon .background { fill: transparent }
+      .shapes-only .icon .foreground { fill: black }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <img src="twitter.svg">
+      <img src="facebook.svg">
+      <img src="googleplus.svg">
+      <img src="linkedin.svg">
+      <img src="rss.svg">
+      <img src="envelope.svg">
+    </div>
+
+    <div class="colors-on-hover">
+      <img src="twitter.svg">
+      <img src="facebook.svg">
+      <img src="googleplus.svg">
+      <img src="linkedin.svg">
+      <img src="rss.svg">
+      <img src="envelope.svg">
+    </div>
+
+    <div class="shapes-only">
+      <img src="twitter.svg">
+      <img src="facebook.svg">
+      <img src="googleplus.svg">
+      <img src="linkedin.svg">
+      <img src="rss.svg">
+      <img src="envelope.svg">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      // See How to change color of SVG image using CSS (jQuery SVG image replacement) http://stackoverflow.com/questions/11978995
+      // See Replace all SVG images with inline SVG https://snippetlib.com/jquery/replace_all_svg_images_with_inline_svg
+      $('img').each(function() {
+        var $img = $(this);
+        var imgURL = $img.attr('src');
+
+        $.get(imgURL, function(data) {
+          // Get the SVG tag, ignore the rest
+          var $svg = $(data).find('svg');
+          // Replace image with new SVG
+          $img.replaceWith($svg);
+        });
+      });
+    </script>
+  </body>
+</html>

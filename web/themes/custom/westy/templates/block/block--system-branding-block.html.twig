@@ -1,0 +1,23 @@
+{#
+/**
+  * @file
+  * Template for the branding block.
+  *
+  * @see themes/contrib/radix/templates/block/block--system-branding-block.html.twig
+  */
+#}
+{% embed '@radix/block/block.twig' with {
+  html_tag: 'div',
+} %}
+
+  {% block content %}
+    {% set branding = 'City of Portland Employees'| t %}
+    {% set url = '/' %}
+    <div class="my-2">
+      <a class="navbar-brand" href="{{ url }}" aria-label="{{ branding }}" tabindex="-1">
+        <img src="/themes/custom/westy/assets/images/logo.png" alt="Portland Employees">
+      </a>
+    </div>
+  {% endblock %}
+
+{% endembed %}

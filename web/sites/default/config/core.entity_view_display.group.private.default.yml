@@ -6,6 +6,7 @@ dependencies:
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
+    - field.field.group.private.field_migration_status
     - field.field.group.private.field_org_type
     - field.field.group.private.field_parent_group
     - group.type.private
@@ -18,6 +19,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - options
     - text
     - views
   theme:
@@ -185,6 +187,13 @@ content:
     third_party_settings: {  }
     weight: -4
     region: content
+  field_migration_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: main
   field_org_type:
     type: entity_reference_label
     label: above

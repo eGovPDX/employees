@@ -1,0 +1,37 @@
+uuid: c923eb1f-cfa7-4418-94fa-1334960e3bd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.contacts_filter_by_group_member
+  module:
+    - facets
+    - system
+    - user
+  theme:
+    - westy
+id: westy_contactsfilterbygroupmember
+theme: westy
+region: side
+weight: -6
+provider: null
+plugin: 'facet_block:contacts_filter_by_group_member'
+settings:
+  id: 'facet_block:contacts_filter_by_group_member'
+  label: 'Contacts: Filter by Group Membership'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: contactsfilterbygroupmember
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /directory
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

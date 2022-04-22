@@ -1,0 +1,31 @@
+@media (min-width: 992px) {
+  #facets-jump-link {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #facets-jump-link {
+    display: inherit;
+  }
+}
+
+
+// Facets
+.facet-active, .facet-inactive {
+  margin-bottom: 1.25rem;
+
+  .facets-widget-checkbox {
+    background-color: $light;
+    border: 0;
+  }
+  h2 {
+    background-color: $dark;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.125rem;
+    padding: 0.5rem 1.25rem;
+    margin-bottom: 0;
+  }
+}

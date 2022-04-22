@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Theme functions.
+ */
+
+use Drupal\Core\Render\Markup;
+
+// Include all files from the includes directory.
+$includes_path = dirname(__FILE__) . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once dirname(__FILE__) . '/includes/' . basename($filename);
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function westy_preprocess_page(array &$variables, $hook)
+{
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    // Grab nid of referenced entity items.
+    $variables['nid'] = $node->id();
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function westy_preprocess_field(array &$variables, $hook) {
+
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    // Grab nid of referenced entity items.
+    $variables['nid'] = $node->id();
+  }
+  $variables['fid'] = $variables['element']['#object']->id();
+
+}
+
+/**
+ * Implements template_preprocess_HOOK() for table.
+ */
+function westy_preprocess_table(&$variables) {
+  // Adding table sort indicator CSS class for inactive sort link.
+  if (!empty($variables['header'])) {
+    foreach ($variables['header'] as &$header_cell) {
+      if ($header_cell['content'] instanceof Link) {
+        $query = $header_cell['content']->getUrl()->getOption('query') ?: [];
+
+        if (isset($query['order']) && isset($query['sort'])) {
+          $header_cell['attributes']->addClass('sortable-heading');
+        }
+      }
+    }
+  }
+}

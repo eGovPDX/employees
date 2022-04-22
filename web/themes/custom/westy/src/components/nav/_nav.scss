@@ -1,0 +1,41 @@
+// Custom style for the nav components.
+// -----------------------------------------------------------------------------
+ul.nav-vertical {
+  border: 2px solid $gray;
+  border-radius: 2px;
+  .nav-item {
+    border-bottom: 2px solid $gray;
+  }
+  .nav-item:last-of-type {
+    border-bottom: 0;
+  }
+  .nav-link {
+    text-decoration: none !important;
+    &:hover {
+      background-color: $gray;
+    }
+  }
+  .nav-link.active {
+    font-weight: $font-weight-bold;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical {
+  border: 0;
+  border-top: 2px solid $gray;
+  .nav-link {
+    padding-left: $spacer * 2;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical {
+  .nav-link {
+    padding-left: $spacer * 4;
+  }
+}
+
+ul.nav-vertical ul.nav-vertical ul.nav-vertical ul.nav-vertical{
+  .nav-link {
+    padding-left: $spacer * 8;
+  }
+}

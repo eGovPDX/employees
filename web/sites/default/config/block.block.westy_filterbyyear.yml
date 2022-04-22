@@ -1,0 +1,28 @@
+uuid: 996c5f00-9f99-4462-acad-304bb9e8bae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.changed_year
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_filterbyyear
+theme: westy
+region: side
+weight: -13
+provider: null
+plugin: 'facet_block:changed_year'
+settings:
+  id: 'facet_block:changed_year'
+  label: 'Filter by Year'
+  label_display: '0'
+  provider: facets
+  block_id: filterbyyear
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/documents'

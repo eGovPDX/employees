@@ -1,0 +1,29 @@
+uuid: 5b19c007-7114-4854-91bc-444dc1167ad9
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.events_group_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_events_group_type
+theme: westy
+region: side
+weight: 3
+provider: null
+plugin: 'facet_block:events_group_type'
+settings:
+  id: 'facet_block:events_group_type'
+  label: 'Filter by Group Type'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: events_group_type
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /events
