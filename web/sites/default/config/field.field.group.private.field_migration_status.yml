@@ -1,0 +1,23 @@
+uuid: 931a0906-ed65-4aad-a56a-c5c97452fcb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_migration_status
+    - group.type.private
+  module:
+    - options
+id: group.private.field_migration_status
+field_name: field_migration_status
+entity_type: group
+bundle: private
+label: 'Migration status'
+description: 'Let the Portland.gov team know the status of the migration of this group off of PortlandOregon.gov (POG). This will help direct resources to helping you finish your migration.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 'In Progress'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

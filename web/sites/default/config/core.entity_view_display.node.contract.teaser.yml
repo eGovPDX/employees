@@ -9,47 +9,58 @@ dependencies:
     - field.field.node.contract.field_contract_number
     - field.field.node.contract.field_date_range
     - field.field.node.contract.field_display_in_group
-    - field.field.node.contract.field_document
+    - field.field.node.contract.field_efiles_link
     - field.field.node.contract.field_mandated_purchases
     - field.field.node.contract.field_p_card_allowed
     - field.field.node.contract.field_type
     - field.field.node.contract.field_vendor_contact_info
     - node.type.contract
   module:
-    - text
+    - smart_date
     - user
 id: node.contract.teaser
 targetEntityType: node
 bundle: contract
 mode: teaser
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
+  field_category:
+    type: entity_reference_label
+    label: inline
     settings:
-      trim_length: 600
+      link: false
     third_party_settings: {  }
-    weight: 101
+    weight: 0
     region: content
-  content_moderation_control:
-    settings: {  }
+  field_contract_number:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: -20
+    weight: 1
     region: content
-  links:
-    settings: {  }
+  field_date_range:
+    type: smartdate_default
+    label: inline
+    settings:
+      timezone_override: UTC
+      format_type: medium
+      format: compact_date_only
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
     third_party_settings: {  }
-    weight: 100
+    weight: 2
     region: content
 hidden:
-  field_category: true
-  field_contract_number: true
-  field_date_range: true
+  body: true
+  content_moderation_control: true
   field_display_in_group: true
-  field_document: true
+  field_efiles_link: true
   field_mandated_purchases: true
   field_p_card_allowed: true
   field_type: true
   field_vendor_contact_info: true
   langcode: true
+  links: true
   search_api_excerpt: true

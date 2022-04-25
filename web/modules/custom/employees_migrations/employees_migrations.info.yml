@@ -1,0 +1,10 @@
+name: Employees Migrations
+type: module
+description: Custom migrations for employees.portland.gov
+core_version_requirement: ^9.0
+package: Migration
+dependencies:
+  - drupal:migrate
+  - group:group
+  - migrate_plus:migrate_plus
+  - migrate_source_csv:migrate_source_csv

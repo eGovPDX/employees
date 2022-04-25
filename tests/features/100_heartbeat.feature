@@ -1,7 +1,7 @@
 @api @javascript @multidev @dev @100
 Feature: Basic site operation and navigation
   In order to use the intranet
-  As an authenticated user
+  As an anonymous user
   I need to be able to navigate from the homepage
 
   Background:

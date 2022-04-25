@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Cloudy2 Theme Override for Field.
+ * Westy Theme Override for Field.
  *
  * Attempts to duplicate Classy's BEM-like structure and
  * and reusability.
@@ -71,6 +71,8 @@
       {% if multiple %}
         </div>
       {% endif %}
+      {% block content_footer %}
+      {% endblock %}
     {% endblock %}
   </div>
   {% endblock %}

@@ -17,13 +17,13 @@ field_identifier: field_category
 query_operator: and
 hard_limit: 0
 exclude: false
-use_hierarchy: false
+use_hierarchy: true
 keep_hierarchy_parents_active: false
 hierarchy:
   type: taxonomy
   config: {  }
-expand_hierarchy: false
-enable_parent_when_child_gets_disabled: true
+expand_hierarchy: true
+enable_parent_when_child_gets_disabled: false
 widget:
   type: checkbox
   config:
@@ -52,6 +52,11 @@ processor_configs:
     processor_id: hide_non_narrowing_result_processor
     weights:
       build: 40
+    settings: {  }
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
     settings: {  }
   term_weight_widget_order:
     processor_id: term_weight_widget_order

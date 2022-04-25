@@ -1,0 +1,84 @@
+uuid: 718e8de8-ac42-4156-9b93-c3db634afe17
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.nested
+    - field.field.node.resource.field_display_in_group
+    - field.field.node.resource.field_feature
+    - field.field.node.resource.field_feature_until
+    - field.field.node.resource.field_menu_url_text
+    - field.field.node.resource.field_parent
+    - field.field.node.resource.field_resource_description
+    - field.field.node.resource.field_resource_link
+    - field.field.node.resource.field_reviewer
+    - field.field.node.resource.field_show_in_menu
+    - field.field.node.resource.field_sort_weight
+    - field.field.node.resource.field_tags
+    - field.field.node.resource.field_topics
+    - node.type.resource
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - link
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+id: node.resource.nested
+targetEntityType: node
+bundle: resource
+mode: nested
+content:
+  field_menu_url_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_resource_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  group_menu_eva_nested_menu:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  content_moderation_control: true
+  field_display_in_group: true
+  field_feature: true
+  field_feature_until: true
+  field_parent: true
+  field_resource_description: true
+  field_reviewer: true
+  field_show_in_menu: true
+  field_sort_weight: true
+  field_tags: true
+  field_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

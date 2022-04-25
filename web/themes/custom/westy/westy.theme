@@ -36,3 +36,21 @@ function westy_preprocess_field(array &$variables, $hook) {
   $variables['fid'] = $variables['element']['#object']->id();
 
 }
+
+/**
+ * Implements template_preprocess_HOOK() for table.
+ */
+function westy_preprocess_table(&$variables) {
+  // Adding table sort indicator CSS class for inactive sort link.
+  if (!empty($variables['header'])) {
+    foreach ($variables['header'] as &$header_cell) {
+      if ($header_cell['content'] instanceof Link) {
+        $query = $header_cell['content']->getUrl()->getOption('query') ?: [];
+
+        if (isset($query['order']) && isset($query['sort'])) {
+          $header_cell['attributes']->addClass('sortable-heading');
+        }
+      }
+    }
+  }
+}

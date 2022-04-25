@@ -8,13 +8,14 @@ dependencies:
     - field.field.node.contract.field_contract_number
     - field.field.node.contract.field_date_range
     - field.field.node.contract.field_display_in_group
-    - field.field.node.contract.field_document
+    - field.field.node.contract.field_efiles_link
     - field.field.node.contract.field_mandated_purchases
     - field.field.node.contract.field_p_card_allowed
     - field.field.node.contract.field_type
     - field.field.node.contract.field_vendor_contact_info
     - node.type.contract
   module:
+    - link
     - smart_date
     - text
     - user
@@ -28,7 +29,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 8
     region: content
   field_category:
     type: entity_reference_label
@@ -59,12 +60,15 @@ content:
     third_party_settings: {  }
     weight: 6
     region: content
-  field_document:
-    type: entity_reference_entity_view
+  field_efiles_link:
+    type: link
     label: above
     settings:
-      view_mode: embedded
-      link: false
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
     weight: 3
     region: content
@@ -101,7 +105,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 9
+    weight: 7
     region: content
 hidden:
   content_moderation_control: true
