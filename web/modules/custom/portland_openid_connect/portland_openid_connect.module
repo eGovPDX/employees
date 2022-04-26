@@ -439,7 +439,7 @@ function _get_all_users($access_token)
 
     // If there is a resume link, use it. Otherwise start fresh
     $request_url = (empty($resume_url)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resume_url;
-    $request_limit = 3;
+    $request_limit = 0;
     $request_count = 0;
     $response_data = null;
     while (strlen($request_url) > 0 && $request_count < $request_limit) {
