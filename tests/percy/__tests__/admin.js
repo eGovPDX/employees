@@ -2,9 +2,10 @@ const percySnapshot = require("@percy/puppeteer");
 const puppeteer = require("puppeteer");
 
 const SITE_NAME = process.env.SITE_NAME;
+const PROJECT_NAME = process.env.CIRCLE_PROJECT_REPONAME
 const HOME_PAGE = SITE_NAME
-    ? `https://${SITE_NAME}-portlandor.pantheonsite.io`
-    : "https://portlandor.lndo.site";
+    ? `https://${SITE_NAME}-${PROJECT_NAME}.pantheonsite.io`
+    : "https://employees.lndo.site";
 
 let BROWSER_OPTION = {
     ignoreHTTPSErrors: true,
