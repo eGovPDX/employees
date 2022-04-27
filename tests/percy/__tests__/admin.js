@@ -26,7 +26,7 @@ describe('Visual Regression Testing', () => {
     })
 
     it('Home Page', async function () {
-        page.goto(HOME_PAGE)
+        await page.goto(HOME_PAGE)
         await percySnapshot(page, "Authenticated - Home Page")
     })
 })

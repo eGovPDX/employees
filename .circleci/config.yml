@@ -300,9 +300,10 @@ run_tests: &run_tests
     - store_artifacts:
         path: /var/www/html/artifacts
         destination: /
+
 visual_regression: &visual_regression
   docker:
-    - image: cimg/php:7.4-browsers
+    - image: cimg/php:8.0-browsers
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
@@ -366,7 +367,7 @@ visual_regression: &visual_regression
 
           # Start Percy tests excluding full regression tests
           echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
-          npm run jest-test -- admin.js
+          npm run jest-test -- admin
     - store_artifacts:
         path: /home/circleci/artifacts
         destination: /
