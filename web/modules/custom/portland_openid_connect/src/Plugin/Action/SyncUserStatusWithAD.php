@@ -7,33 +7,33 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 /**
- * Update the user's primary groups to match the AD group names.
+ * Disalbe a user if the account is disabled in AD.
  *
  * @Action(
- *   id = "retrieve_user_info_from_ad",
- *   label = @Translation("Retrieve user information from Azure AD"),
+ *   id = "sync_user_status_with_ad",
+ *   label = @Translation("Sync user status with Azure AD"),
  *   type = "user"
  * )
  */
-class RetrieveUserInfoFromAD extends ActionBase
+class SyncUserStatusWithAD extends ActionBase
 {
   /**
    * {@inheritdoc}
    */
   public function execute($account = NULL)
   {
-    if (empty($account)) return;
+    if (empty($account)) return $this->t('User skipped');
 
     // Skip if cannot find a Drupal user with the email
     $users = \Drupal::entityTypeManager()->getStorage('user')
             ->loadByProperties(['mail' => $account->getEmail()]);
-    if( empty($users) ) return;
+    if( empty($users) ) return $this->t('User skipped');
     $user = array_values($users)[0];
     // If the user is not active, skip
     // If the user is Contact Only, skip
     // If there is no Azure AD ID, skip
     $azure_ad_id = $user->field_active_directory_id->value;
-    if ( ! $user->status->value || $user->field_is_contact_only->value || empty($azure_ad_id) ) return;
+    if ( ! $user->status->value || $user->field_is_contact_only->value || empty($azure_ad_id) ) return $this->t('User skipped');
 
     // Skip these users
     $skip_emails = [
@@ -46,17 +46,17 @@ class RetrieveUserInfoFromAD extends ActionBase
       // 'WBUDFTeam@portlandoregon.gov',  // Outlook distribution list
       // 'council140@portlandoregon.gov',  // Actual AD group
     ];
-    if (in_array(strtolower($account->getEmail()), array_map('strtolower', $skip_emails))) return;
+    if (in_array(strtolower($account->getEmail()), array_map('strtolower', $skip_emails))) return $this->t('User skipped');
 
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken();
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
-      return;
     }
 
-    PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-    // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+    $user_is_enabled = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+    if(!$user_is_enabled) {
+      PortlandOpenIdConnectUtil::DisableUser($account);
+    }
   }
 
   /**
