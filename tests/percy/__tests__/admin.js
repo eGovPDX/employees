@@ -6,6 +6,7 @@ const PROJECT_NAME = process.env.CIRCLE_PROJECT_REPONAME
 const HOME_PAGE = SITE_NAME
     ? `https://${SITE_NAME}-${PROJECT_NAME}.pantheonsite.io`
     : "https://employees.lndo.site";
+const ARTIFACTS_FOLDER = (SITE_NAME) ? `/home/circleci/artifacts/` : `./`;
 
 let BROWSER_OPTION = {
     ignoreHTTPSErrors: true,
@@ -19,6 +20,18 @@ describe('Visual Regression Testing', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
+
+        if (process.env.CIRCLECI) {
+            // On CI, the CI script will call terminus to retrieve login URL
+            login_url = process.env.SUPERADMIN_LOGIN;
+            await page.goto(login_url);
+        }
+        else {
+            var drush_uli_result = fs.readFileSync("superAdmin_uli.log").toString();
+            login_url = drush_uli_result.replace('http://default', 'https://portlandor.lndo.site');
+            // Log in once for all tests to save time
+            await page.goto(login_url);
+        }
     })
 
     afterAll(async () => {
@@ -26,8 +39,18 @@ describe('Visual Regression Testing', () => {
     })
 
     it('Home Page', async function () {
-        await page.goto(HOME_PAGE)
-        await percySnapshot(page, "Authenticated - Home Page")
+        try {
+            await page.goto(HOME_PAGE)
+            await percySnapshot(page, "Authenticated - Home Page")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}config-import-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
     })
 })
 // Take snapshot
