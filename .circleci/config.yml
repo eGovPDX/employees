@@ -306,10 +306,8 @@ visual_regression: &visual_regression
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
-  # environment:
-  #   PERCY_PARALLEL_TOTAL: -1
-  #   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
-  parallelism: 5
+  # run test in parallel
+  # parallelism: 1
   working_directory: /home/circleci/app
   steps:
     - restore_cache:
@@ -367,17 +365,8 @@ visual_regression: &visual_regression
           cd /home/circleci/app/tests/percy
 
           # Start Percy tests excluding full regression tests
-          TESTFILES=$(circleci tests glob "__tests__/*.js" | circleci tests split)
-          for TESTFILE in $TESTFILES
-          do
-            # Generate one time login link for tests
-            if [[ ${TESTFILE} == *"admin"* ]]; then
-              echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
-              npm run jest-test -- ${TESTFILE}
-            elif [[ ${TESTFILE} == *"anonymous"* ]]; then
-              npm run single-test -- ${TESTFILE}
-            fi
-          done
+          echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+          npm run jest-test -- ${TESTFILE}
     - store_artifacts:
         path: /home/circleci/artifacts
         destination: /
