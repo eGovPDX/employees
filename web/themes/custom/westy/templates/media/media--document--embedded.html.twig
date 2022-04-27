@@ -39,20 +39,21 @@
 ] %}
 
 <div{{ attributes.addClass(classes) }} {{ with_description ? 'aria-describedby="{{ name|clean_class }}"' : '' }}>
-  {% if content.field_efiles_link['#object'] %}
-    <a href="{{ content.field_efiles_link.0['#title'] }}">{{ name }}</a> ({{ mime_type_friendly }} {{ file_size_friendly }})
+  {% if content.field_media_media_remote['#object'] %}
+    <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a> ({{ mime_type_friendly }} {{ file_size_friendly }})
   {% elseif content.field_media_document %}
     <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a> ({{ mime_type_friendly }} {{ file_size_friendly }})
   {% endif %}
   {% if with_description %}
+    {% if content.field_description %}
+      <div id="{{ name|clean_class }}" class="description">{{ content.field_description.0 }}</div>
+    {% endif %}
     {{ content|without(
     'field_description',
     'field_media_document',
     'field_file_size',
-    'field_mime_type'
+    'field_mime_type',
+    'field_media_media_remote'
     ) }}
-    {% if content.field_description %}
-      <div id="{{ name|clean_class }}" class="description">{{ content.field_description.0 }}</div>
-    {% endif %}
   {% endif %}
 </div>

@@ -60,14 +60,14 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: '0'
           element_class: ''
-          element_label_type: ''
+          element_label_type: '0'
           element_label_class: ''
           element_label_colon: false
-          element_wrapper_type: ''
+          element_wrapper_type: '0'
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -193,6 +193,7 @@ display:
       entity_type: media
       bundles:
         - document
+        - remote_document
     cache_metadata:
       max-age: -1
       contexts:

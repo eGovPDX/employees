@@ -1,8 +1,9 @@
-uuid: 473d6f13-92eb-464b-b466-9f86b7990d8b
+uuid: 81e99884-2ebb-49bb-8e56-0ee4f029d5b9
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.embedded_with_description
     - field.field.media.remote_document.field_description
     - field.field.media.remote_document.field_display_in_group
     - field.field.media.remote_document.field_file_size
@@ -11,26 +12,22 @@ dependencies:
     - field.field.media.remote_document.field_tags
     - media.type.remote_document
   module:
-    - employees
-id: media.remote_document.default
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.remote_document.embedded_with_description
 targetEntityType: media
 bundle: remote_document
-mode: default
+mode: embedded_with_description
 content:
   field_description:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
-    region: content
-  field_display_in_group:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   field_file_size:
     type: number_integer
@@ -39,13 +36,13 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_media_media_remote:
-    type: media_remote_document
+    type: string
     label: visually_hidden
     settings:
-      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaRemoteDocumentFormatter
+      link_to_entity: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -55,23 +52,17 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
+    weight: 1
     region: content
   media_last_updated_media_changed_date:
     settings: {  }
     third_party_settings: {  }
-    weight: 6
+    weight: 4
     region: content
 hidden:
   created: true
+  field_display_in_group: true
+  field_tags: true
   langcode: true
   name: true
   search_api_excerpt: true
