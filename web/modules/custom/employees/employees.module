@@ -37,9 +37,73 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   else if ( $form_id === "group_content_employee-group_membership_group-join_form" ) {
     $form['actions']['submit']['#value'] = t('Follow group');
   }
+  else if ( $form_id === "group_content_employee-group_membership_group-leave_form" ) {
+    $form['actions']['submit']['#value'] = t('Unfollow group');
+  }
+  else if ( $form_id === "media_library_add_form_media_remote" ) {
+    // Add remote document validater to the start of array
+    array_unshift($form['#validate'], '_validate_remote_document');
+  }
   // else if ( $form_id === "group_content_employee-group_membership_group-leave_form" ) {
   //   $form['actions']['submit']['#value'] = t('Unfollow group');
   // }
+}
+
+/**
+ * A helper function to validate document.
+ */
+function _validate_remote_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+  // DO NOT validate when the user clicks on the remove document button.
+  // ONLY validate when the entire form is submitted.
+  if ($form_state->getTriggeringElement()["#name"] === "media-0-remove-button") return;
+
+  $current_media_type = $form_state->getStorage("media_library_state")['media_library_state']->getSelectedTypeId();
+  if( $current_media_type == 'remote_document' ) {
+    // $remote_document_url = $form_state->getUserInput()['url'];
+    $remote_document_url = $form_state->getValue('media')[0]['fields']['field_media_media_remote'][0]['value'];
+    // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
+    if (
+      strpos($remote_document_url, 'https://efiles.portlandoregon.gov/') === 0 &&
+      !(substr_compare($remote_document_url, "/file/document", -strlen("/file/document")) === 0)
+    ) {
+      $remote_document_url .= "/file/document";
+    }
+
+    // Get eFiles file size and MIME type
+    try {
+      $headers = get_headers($remote_document_url, 1);
+    } catch (Exception $e) {
+      $form_state->setErrorByName('field_media_media_remote', 'Cannot retrieve file size and mimetype from this link.');
+      return;
+    }
+
+    if (
+      !empty($headers) &&
+      (substr_compare($headers[0], "200 OK", -strlen("200 OK")) === 0) &&
+      array_key_exists('Content-Type', $headers) &&
+      array_key_exists('Content-Length', $headers)
+    ) {
+      $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
+      if ($file_size === 0) {
+        $form_state->setErrorByName('field_media_media_remote', t('The linked file is empty.'));
+        return;
+      }
+      // Content-Type header can be "text/html; charset=utf-8"
+      $content_type_array = explode(';', $headers['Content-Type']);
+      // If content type is text/HTML, it's not a file
+      if (empty($content_type_array) || $content_type_array[0] === "text/html") {
+        // Commented this line out to support existing documents that are linked to an eFiles folder
+        // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+        return;
+      }
+
+      $form_state->getValue('media')[0]['fields']['field_file_size'] = [["value" => $file_size]];
+      $form_state->getValue('media')[0]['fields']['field_mime_type'] = [["value" => $content_type_array[0]]];
+      // $form_state->setValue('field_file_size', [["value" => $file_size]]);
+      // $form_state->setValue('field_mime_type', [["value" => $content_type_array[0]]]);
+    }
+  }
 }
 
 /**
