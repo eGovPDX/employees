@@ -45,7 +45,7 @@ describe('Visual Regression Testing', () => {
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
-                path: `${ARTIFACTS_FOLDER}config-import-error.jpg`,
+                path: `${ARTIFACTS_FOLDER}home-page-error.jpg`,
                 type: "jpeg",
                 fullPage: true
             });
