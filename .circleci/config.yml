@@ -367,7 +367,7 @@ visual_regression: &visual_regression
 
           # Start Percy tests excluding full regression tests
           echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
-          npm run all-tests
+          npm run single-test -- admin
     - store_artifacts:
         path: /home/circleci/artifacts
         destination: /
