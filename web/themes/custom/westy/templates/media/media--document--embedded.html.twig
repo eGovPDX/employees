@@ -29,20 +29,33 @@
   'image/png': 'PNG',
   'image/svg+xml': 'SVG',
 } %}
-
-{% set mime_type = content.field_mime_type.0['#context']['value'] %}
-{% set mime_type_friendly = mime_map[mime_type] ?? 'File' %}
-{% set file_size_friendly = content.field_file_size.0|render|striptags|format_size %}
+{% if content.field_mime_type.0['#context']['value'] %}
+  {% set mime_type = content.field_mime_type.0['#context']['value'] %}
+  {% set mime_type_friendly = mime_map[mime_type] ?? 'File' %}
+{% else %}
+  {% set mime_type_friendly = 'eFiles Record' %}
+{% endif %}
+{% if content.field_file_size.0 > 0 %}
+  {% set file_size_friendly = content.field_file_size.0|render|striptags|format_size %}
+{% endif %}
 
 {% set classes = [
   'embed-document'
 ] %}
-
-<div{{ attributes.addClass(classes) }} {{ with_description ? 'aria-describedby="{{ name|clean_class }}"' : '' }}>
+<div{{ attributes.addClass(classes) }} {% if with_description %}aria-describedby="{{ name|clean_class }}:"{% endif %}>
+  {% if content.field_mime_type.0|length > 0 %}
+    {{- content.field_mime_type -}}<span class="visually-hidden">{{ mime_type_friendly }}</span>
+  {% endif %}
   {% if content.field_media_media_remote['#object'] %}
-    <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a> ({{ mime_type_friendly }} {{ file_size_friendly }})
+    <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a> 
   {% elseif content.field_media_document %}
-    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a> ({{ mime_type_friendly }} {{ file_size_friendly }})
+    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a> 
+  {% endif -%}
+  {% if content.field_mime_type.0|length == 0 %}
+    ({{- mime_type_friendly -}})
+  {% endif -%}
+  {% if file_size_friendly %} 
+    ({{- file_size_friendly -}})
   {% endif %}
   {% if with_description %}
     {% if content.field_description %}
