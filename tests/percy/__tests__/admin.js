@@ -41,7 +41,7 @@ describe('Visual Regression Testing', () => {
     it('Home Page', async function () {
         try {
             await page.goto(HOME_PAGE)
-            await percySnapshot(page, "Authenticated - Home Page")
+            await percySnapshot(page, "SuperAdmin - Home Page")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -52,19 +52,19 @@ describe('Visual Regression Testing', () => {
             throw e;
         }
     })
+    // 
+    it('Group Home Page', async function () {
+        try {
+            await page.goto(`${HOME_PAGE}/web-support`)
+            await percySnapshot(page, "SuperAdmin - City Web Editors")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}group-page-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
 })
-// Take snapshot
-
-// Go to City Web Editors Group page
-// Take snapshot
-
-//Go to news
-// Take snapshot
-//Go to events
-// Take snapshot
-//Go to technology catalogue
-// Take snapshot
-//Go to contacts
-// Take snapshot
-//Go to group list view
-// Take snapshot
