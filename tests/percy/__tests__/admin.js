@@ -81,4 +81,49 @@ describe('Visual Regression Testing', () => {
             throw e;
         }
     })
+    // News Search View
+    it('News Search View', async function () {
+        try {
+            await page.goto(`${HOME_PAGE}/news?title=powr&group=&org_type=All`)
+            await percySnapshot(page, "SuperAdmin - News search term: POWR")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}powr-news-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
+    // Events Search View
+    it('Events Search View', async function () {
+        try {
+            await page.goto(`${HOME_PAGE}/events?search=powr`)
+            await percySnapshot(page, "SuperAdmin - Events search term: POWR")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}powr-events-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
+    // Groups Search View
+    it('Groups', async function () {
+        try {
+            await page.goto(`${HOME_PAGE}/groups`)
+            await percySnapshot(page, "SuperAdmin - Groups")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}groups-page-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
 })
