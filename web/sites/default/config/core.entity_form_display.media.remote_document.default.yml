@@ -1,34 +1,31 @@
-uuid: e9ac1d30-4b63-4648-9761-bd6c979afcb6
+uuid: 43cfa6cd-4716-45bf-adad-aa1b6bd734e8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.document.field_description
-    - field.field.media.document.field_display_in_group
-    - field.field.media.document.field_file_size
-    - field.field.media.document.field_media_document
-    - field.field.media.document.field_mime_type
-    - field.field.media.document.field_tags
-    - media.type.document
+    - field.field.media.remote_document.field_description
+    - field.field.media.remote_document.field_display_in_group
+    - field.field.media.remote_document.field_file_size
+    - field.field.media.remote_document.field_media_media_remote
+    - field.field.media.remote_document.field_mime_type
+    - field.field.media.remote_document.field_tags
+    - media.type.remote_document
   module:
-    - file
     - path
-_core:
-  default_config_hash: gtZlAQdQqZgVWvvZ6v-hfmACkfEimqn_GPDbQZqNAbw
-id: media.document.default
+id: media.remote_document.default
 targetEntityType: media
-bundle: document
+bundle: remote_document
 mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_description:
     type: string_textarea
-    weight: 4
+    weight: 3
     region: content
     settings:
       rows: 5
@@ -36,7 +33,7 @@ content:
     third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -44,16 +41,32 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_media_document:
-    type: file_generic
+  field_file_size:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_media_media_remote:
+    type: string_textfield
     weight: 1
     region: content
     settings:
-      progress_indicator: throbber
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_mime_type:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_tags:
-    type: entity_reference_autocomplete_tags
-    weight: 6
+    type: entity_reference_autocomplete
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -63,7 +76,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       include_locked: true
@@ -78,20 +91,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 8
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -99,6 +112,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_file_size: true
-  field_mime_type: true
+hidden: {  }

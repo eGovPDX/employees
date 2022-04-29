@@ -1,28 +1,25 @@
-uuid: 84fd8845-2577-4b3b-83f0-db508da4bba5
+uuid: 81e99884-2ebb-49bb-8e56-0ee4f029d5b9
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded_with_description
-    - field.field.media.document.field_description
-    - field.field.media.document.field_display_in_group
-    - field.field.media.document.field_file_size
-    - field.field.media.document.field_media_document
-    - field.field.media.document.field_mime_type
-    - field.field.media.document.field_tags
-    - media.type.document
+    - field.field.media.remote_document.field_description
+    - field.field.media.remote_document.field_display_in_group
+    - field.field.media.remote_document.field_file_size
+    - field.field.media.remote_document.field_media_media_remote
+    - field.field.media.remote_document.field_mime_type
+    - field.field.media.remote_document.field_tags
+    - media.type.remote_document
   module:
-    - file
     - layout_builder
 third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
-id: media.document.embedded_with_description
+id: media.remote_document.embedded_with_description
 targetEntityType: media
-bundle: document
+bundle: remote_document
 mode: embedded_with_description
 content:
   field_description:
@@ -30,7 +27,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_file_size:
     type: number_integer
@@ -39,12 +36,13 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
-  field_media_document:
-    type: file_url_plain
-    label: hidden
-    settings: {  }
+  field_media_media_remote:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -54,12 +52,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   media_last_updated_media_changed_date:
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
 hidden:
   created: true

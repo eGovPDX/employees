@@ -1,28 +1,25 @@
-uuid: 46bcf8ea-31ad-4757-a6d9-7d2e18fc8657
+uuid: 41454a1b-02f5-4bd3-9a54-d9351719d639
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
-    - field.field.media.document.field_description
-    - field.field.media.document.field_display_in_group
-    - field.field.media.document.field_file_size
-    - field.field.media.document.field_media_document
-    - field.field.media.document.field_mime_type
-    - field.field.media.document.field_tags
-    - media.type.document
+    - field.field.media.remote_document.field_description
+    - field.field.media.remote_document.field_display_in_group
+    - field.field.media.remote_document.field_file_size
+    - field.field.media.remote_document.field_media_media_remote
+    - field.field.media.remote_document.field_mime_type
+    - field.field.media.remote_document.field_tags
+    - media.type.remote_document
   module:
-    - file
     - layout_builder
 third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: DXitcriWmE5QHvGvk2OzWouaSnXD5uipkRdAG6_pnkg
-id: media.document.embedded
+id: media.remote_document.embedded
 targetEntityType: media
-bundle: document
+bundle: remote_document
 mode: embedded
 content:
   field_file_size:
@@ -32,14 +29,15 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
-  field_media_document:
-    type: file_url_plain
+  field_media_media_remote:
+    type: string
     label: hidden
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_mime_type:
     type: string
@@ -47,7 +45,15 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true
@@ -56,7 +62,6 @@ hidden:
   field_tags: true
   langcode: true
   media_last_updated_media_changed_date: true
-  name: true
   search_api_excerpt: true
   thumbnail: true
   uid: true

@@ -1,24 +1,22 @@
-uuid: b50785af-cbd3-432a-8c7b-78face295e05
+uuid: 10e0923c-285c-43df-a663-670d226939f1
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
-    - field.field.media.document.field_description
-    - field.field.media.document.field_display_in_group
-    - field.field.media.document.field_file_size
-    - field.field.media.document.field_media_document
-    - field.field.media.document.field_mime_type
-    - field.field.media.document.field_tags
-    - image.style.thumbnail
-    - media.type.document
+    - field.field.media.remote_document.field_description
+    - field.field.media.remote_document.field_display_in_group
+    - field.field.media.remote_document.field_file_size
+    - field.field.media.remote_document.field_media_media_remote
+    - field.field.media.remote_document.field_mime_type
+    - field.field.media.remote_document.field_tags
+    - image.style.medium
+    - media.type.remote_document
   module:
     - image
-_core:
-  default_config_hash: WA5PBCSll9OeXbS16GbGz8jNgz7vkUAmC_72nn0yyBo
-id: media.document.media_library
+id: media.remote_document.media_library
 targetEntityType: media
-bundle: document
+bundle: remote_document
 mode: media_library
 content:
   thumbnail:
@@ -26,7 +24,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: thumbnail
+      image_style: medium
     third_party_settings: {  }
     weight: 0
     region: content
@@ -35,7 +33,7 @@ hidden:
   field_description: true
   field_display_in_group: true
   field_file_size: true
-  field_media_document: true
+  field_media_media_remote: true
   field_mime_type: true
   field_tags: true
   langcode: true
