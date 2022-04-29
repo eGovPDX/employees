@@ -14,7 +14,6 @@ let BROWSER_OPTION = {
     defaultViewport: null,
 };
 
-// Go to home page
 describe('Visual Regression Testing', () => {
     let browser, page;
     beforeAll(async () => {
@@ -37,7 +36,7 @@ describe('Visual Regression Testing', () => {
     afterAll(async () => {
         await browser.close();
     })
-
+    // Home Page
     it('Home Page', async function () {
         try {
             await page.goto(HOME_PAGE)
@@ -52,7 +51,7 @@ describe('Visual Regression Testing', () => {
             throw e;
         }
     })
-    // 
+    // Group Home Page
     it('Group Home Page', async function () {
         try {
             await page.goto(`${HOME_PAGE}/web-support`)
@@ -61,6 +60,21 @@ describe('Visual Regression Testing', () => {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
                 path: `${ARTIFACTS_FOLDER}group-page-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
+    // Directory Search View
+    it('Directory Search View', async function () {
+        try {
+            await page.goto(`${HOME_PAGE}/directory`)
+            await percySnapshot(page, "SuperAdmin - Directory")
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}directory-page-error.jpg`,
                 type: "jpeg",
                 fullPage: true
             });
