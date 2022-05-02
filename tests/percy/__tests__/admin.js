@@ -84,8 +84,8 @@ describe('Visual Regression Testing', () => {
     // News Search View
     it('News Search View', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/news?title=powr&group=&org_type=All`)
-            await percySnapshot(page, "SuperAdmin - News search term: POWR")
+            await page.goto(`${HOME_PAGE}/news`)
+            await percySnapshot(page, "SuperAdmin - News")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -99,8 +99,8 @@ describe('Visual Regression Testing', () => {
     // Events Search View
     it('Events Search View', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/events?search=powr`)
-            await percySnapshot(page, "SuperAdmin - Events search term: POWR")
+            await page.goto(`${HOME_PAGE}/events`)
+            await percySnapshot(page, "SuperAdmin - Events")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
