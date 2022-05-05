@@ -12,15 +12,16 @@ dependencies:
 id: westy_type
 theme: westy
 region: side
-weight: -11
+weight: -14
 provider: null
 plugin: 'facet_block:type'
 settings:
   id: 'facet_block:type'
-  label: 'Filter by Type'
+  label: 'Search: Filter by Type'
   label_display: '0'
   provider: facets
-  block_id: type
+  context_mapping: {  }
+  block_id: westy_type
 visibility:
   request_path:
     id: request_path

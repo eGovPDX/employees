@@ -13,16 +13,16 @@ dependencies:
 id: westy_contactsfilterbygroupmember
 theme: westy
 region: side
-weight: -6
+weight: -10
 provider: null
 plugin: 'facet_block:contacts_filter_by_group_member'
 settings:
   id: 'facet_block:contacts_filter_by_group_member'
-  label: 'Contacts: Filter by Group Membership'
+  label: 'Directory: Filter by Group Membership'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: contactsfilterbygroupmember
+  block_id: westy_contactsfilterbygroupmember
 visibility:
   request_path:
     id: request_path

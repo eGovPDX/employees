@@ -12,16 +12,16 @@ dependencies:
 id: westy_events_topic
 theme: westy
 region: side
-weight: 5
+weight: -3
 provider: null
 plugin: 'facet_block:events_topic'
 settings:
   id: 'facet_block:events_topic'
-  label: 'Filter by Topic'
+  label: 'Events: Filter by Topic'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: events_topic
+  block_id: westy_events_topic
 visibility:
   request_path:
     id: request_path

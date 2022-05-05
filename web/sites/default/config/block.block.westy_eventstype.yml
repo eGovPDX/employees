@@ -12,16 +12,16 @@ dependencies:
 id: westy_eventstype
 theme: westy
 region: side
-weight: 4
+weight: -5
 provider: null
 plugin: 'facet_block:events_type'
 settings:
   id: 'facet_block:events_type'
-  label: 'Filter by Event Type'
+  label: 'Events: Filter by Event Type'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: eventstype
+  block_id: westy_eventstype
 visibility:
   request_path:
     id: request_path

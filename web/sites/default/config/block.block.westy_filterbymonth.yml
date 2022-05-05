@@ -12,15 +12,16 @@ dependencies:
 id: westy_filterbymonth
 theme: westy
 region: side
-weight: -12
+weight: -16
 provider: null
 plugin: 'facet_block:changed_month'
 settings:
   id: 'facet_block:changed_month'
-  label: 'Filter by Month'
+  label: 'Group Documents: Filter by Month'
   label_display: '0'
   provider: facets
-  block_id: filterbymonth
+  context_mapping: {  }
+  block_id: westy_filterbymonth
 visibility:
   request_path:
     id: request_path

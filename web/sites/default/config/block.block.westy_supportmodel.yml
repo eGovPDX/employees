@@ -12,15 +12,16 @@ dependencies:
 id: westy_supportmodel
 theme: westy
 region: side
-weight: 13
+weight: 2
 provider: null
 plugin: 'facet_block:support_model'
 settings:
   id: 'facet_block:support_model'
-  label: 'BTS Catalog by Support Model'
+  label: 'BTS Catalog: Filter by Support Model'
   label_display: '0'
   provider: facets
-  block_id: supportmodel
+  context_mapping: {  }
+  block_id: westy_supportmodel
 visibility:
   request_path:
     id: request_path
