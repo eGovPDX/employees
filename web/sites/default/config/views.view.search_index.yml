@@ -344,6 +344,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -365,15 +366,15 @@ display:
           min_length: null
           fields:
             - field_address
-            - field_first_name
             - field_first_name_1
-            - field_last_name
             - field_last_name_1
             - field_phone
             - field_search_keywords
             - field_section
             - field_title
             - field_workspace
+            - mail_fulltext_edge
+            - mail_fulltext_unstemmed
         search_api_datasource:
           id: search_api_datasource
           table: search_api_index_full_index
