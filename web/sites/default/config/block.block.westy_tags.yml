@@ -12,15 +12,16 @@ dependencies:
 id: westy_tags
 theme: westy
 region: side
-weight: -14
+weight: -18
 provider: null
 plugin: 'facet_block:tags'
 settings:
   id: 'facet_block:tags'
-  label: 'Filter by Tags'
+  label: 'Group Documents: Filter by Tags'
   label_display: '0'
   provider: facets
-  block_id: tags
+  context_mapping: {  }
+  block_id: westy_tags
 visibility:
   request_path:
     id: request_path

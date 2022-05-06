@@ -12,15 +12,16 @@ dependencies:
 id: westy_bureaus
 theme: westy
 region: side
-weight: 12
+weight: 1
 provider: null
 plugin: 'facet_block:bureaus'
 settings:
   id: 'facet_block:bureaus'
-  label: 'BTS Catalog by Bureau'
+  label: 'BTS Catalog: Filter by Bureau'
   label_display: '0'
   provider: facets
-  block_id: bureaus
+  context_mapping: {  }
+  block_id: westy_bureaus
 visibility:
   request_path:
     id: request_path

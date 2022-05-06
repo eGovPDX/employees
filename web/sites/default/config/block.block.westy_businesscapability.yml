@@ -12,15 +12,16 @@ dependencies:
 id: westy_businesscapability
 theme: westy
 region: side
-weight: 11
+weight: 0
 provider: null
 plugin: 'facet_block:business_capability'
 settings:
   id: 'facet_block:business_capability'
-  label: 'BTS Catalog by Business Capability'
+  label: 'BTS Catalog: Filter by Business Capability'
   label_display: '0'
   provider: facets
-  block_id: businesscapability
+  context_mapping: {  }
+  block_id: westy_businesscapability
 visibility:
   request_path:
     id: request_path
