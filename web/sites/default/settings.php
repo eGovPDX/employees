@@ -136,3 +136,25 @@ if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
 
 // Set the configuration sync directory
 $settings['config_sync_directory'] = 'sites/default/config';
+
+
+// Configure Redis
+if (isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] !== 'lando') {
+  // Include the Redis services.yml file. Adjust the path if you installed to a contrib or other subdirectory.
+  $settings['container_yamls'][] = 'modules/contrib/redis/example.services.yml';
+
+  //phpredis is built into the Pantheon application container.
+  $settings['redis.connection']['interface'] = 'PhpRedis';
+  // These are dynamic variables handled by Pantheon.
+  $settings['redis.connection']['host']      = $_ENV['CACHE_HOST'];
+  $settings['redis.connection']['port']      = $_ENV['CACHE_PORT'];
+  $settings['redis.connection']['password']  = $_ENV['CACHE_PASSWORD'];
+
+  $settings['redis_compress_length'] = 100;
+  $settings['redis_compress_level'] = 1;
+  
+  $settings['cache']['default'] = 'cache.backend.redis'; // Use Redis as the default cache.
+  $settings['cache_prefix']['default'] = 'pantheon-redis';
+
+  $settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms
+}
