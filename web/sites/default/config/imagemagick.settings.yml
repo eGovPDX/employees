@@ -1,0 +1,35 @@
+_core:
+  default_config_hash: do7QLcSY6lDV82NBI3jy5FNsUwWFjjJzXmHPTGsSvIQ
+quality: 75
+binaries: imagemagick
+path_to_binaries: ''
+prepend: ''
+log_warnings: true
+debug: false
+locale: en_US.UTF-8
+image_formats:
+  PNG:
+    mime_type: image/png
+  JPEG:
+    mime_type: image/jpeg
+  JPG:
+    mime_type: image/jpeg
+    weight: 10
+    enabled: false
+  GIF:
+    mime_type: image/gif
+  GIF87:
+    mime_type: image/gif
+    weight: 10
+    enabled: false
+  SVG:
+    mime_type: image/svg+xml
+    enabled: false
+  WEBP:
+    mime_type: image/webp
+    enabled: false
+advanced:
+  density: 0
+  colorspace: '0'
+  profile: ''
+  coalesce: false

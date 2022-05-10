@@ -12,15 +12,16 @@ dependencies:
 id: westy_filterbycategory
 theme: westy
 region: side
-weight: -10
+weight: -13
 provider: null
 plugin: 'facet_block:contract_category'
 settings:
   id: 'facet_block:contract_category'
-  label: 'Filter by Category'
+  label: 'Contracts: Filter by Category'
   label_display: '0'
   provider: facets
-  block_id: filterbycategory
+  context_mapping: {  }
+  block_id: westy_filterbycategory
 visibility:
   request_path:
     id: request_path
