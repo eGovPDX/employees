@@ -280,7 +280,7 @@ function _process_users($response_data, $access_token)
     else {
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Deactivate this user
-      $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+      $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $user->getEmail(), $azure_ad_id);
       $user_is_disalbed = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
       if ($user_is_disalbed) {
         $user->status = 0;
