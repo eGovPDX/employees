@@ -315,6 +315,19 @@ display:
             label: ''
             field_identifier: field_last_name
           exposed: false
+        field_first_name:
+          id: field_first_name
+          table: search_api_index_full_index
+          field: field_first_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         search_api_fulltext:
           id: search_api_fulltext
