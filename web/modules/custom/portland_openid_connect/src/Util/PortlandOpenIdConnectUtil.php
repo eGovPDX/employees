@@ -7,6 +7,10 @@ use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
 
+/**
+ * A helper class provides static function to allow both cron jobs
+ * and views bulk operations to share common logic.
+ */
 class PortlandOpenIdConnectUtil
 {
   /* @var \GuzzleHttp\ClientInterface $client */
@@ -133,6 +137,7 @@ class PortlandOpenIdConnectUtil
 
   /**
    * Convert a comma separated string of group names into group IDs
+   * using taxonomy "Group AD name list"
    */
   private static function buildGroupIDlistFromGroupNames($group_names)
   {
@@ -224,9 +229,9 @@ class PortlandOpenIdConnectUtil
    * Look up the AD principal name by email.
    * A user's principal name never changes. But the email may get modified after legal name change.
    */
-  public static function GetUserProfile($access_token, $email, $azure_ad_id)
+  public static function GetUserProfile($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
@@ -254,6 +259,7 @@ class PortlandOpenIdConnectUtil
         !empty($response_data["positions"]) &&
         array_key_exists('detail', $response_data["positions"][0])
       ) {
+        $user_info['mail'] = $response_data["emails"][0]["address"];
         $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
         $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];
         $user_info['officeLocation'] = $response_data["positions"][0]["detail"]["company"]["officeLocation"];
@@ -276,12 +282,13 @@ class PortlandOpenIdConnectUtil
         }
       }
 
-      // Load the Drupal user with email
+      // Load the Drupal user with principal name
       $users = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['mail' => $email]);
+        ->loadByProperties(['name' => $userPrincipalName]);
 
       if (count($users) != 0) {
         $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+        $user->mail = $user_info['mail'];
         $user->field_title = $user_info['title'];
         $user->field_division_name = $user_info['division'];
         $user->field_office_location = $user_info['officeLocation'];
@@ -293,9 +300,9 @@ class PortlandOpenIdConnectUtil
     } catch (RequestException $e) {
       // Do not log 404 errors since some users don't have profile
       if ($e->getCode() == 404) {
-        // Load the Drupal user with email
+        // Load the Drupal user with principal name
         $users = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['mail' => $email]);
+        ->loadByProperties(['name' => $userPrincipalName]);
         if (count($users) != 0) {
           $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
           PortlandOpenIdConnectUtil::DisableUser($user);
@@ -303,7 +310,7 @@ class PortlandOpenIdConnectUtil
       }
       else {
         $variables = [
-          '@message' => 'Could not retrieve user information for email ' . $email,
+          '@message' => 'Could not retrieve user information for principal name ' . $userPrincipalName,
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
@@ -315,9 +322,9 @@ class PortlandOpenIdConnectUtil
    * Look up the user's manager.
    * A user's principal name never changes. But the email may get modified after legal name change.
    */
-  public static function GetUserManager($access_token, $email, $azure_ad_id)
+  public static function GetUserManager($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
@@ -390,7 +397,7 @@ class PortlandOpenIdConnectUtil
       }
     } catch (RequestException $e) {
       $variables = [
-        '@message' => 'Could not retrieve user\'s manager information for email ' . $email,
+        '@message' => 'Could not retrieve user\'s manager information for principal name ' . $userPrincipalName,
         '@error_message' => $e->getMessage(),
       ];
       \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
@@ -400,9 +407,9 @@ class PortlandOpenIdConnectUtil
   /**
    * Get a user's photo.
    */
-  public static function GetUserPhoto($access_token, $email, $azure_ad_id)
+  public static function GetUserPhoto($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
@@ -421,7 +428,7 @@ class PortlandOpenIdConnectUtil
         'https://graph.microsoft.com/v1.0/users/' . $azure_ad_id . '/photo/$value',
         $options
       );
-      $file_name = str_replace('@', '_', $email);
+      $file_name = str_replace('@', '_', $userPrincipalName);
       $file_name = str_replace('.', '_', $file_name);
       $user_photo_folder_name = "public://user-photo";
       \Drupal::service('file_system')->prepareDirectory(
@@ -436,7 +443,7 @@ class PortlandOpenIdConnectUtil
 
       // Load the Drupal user with email
       $users = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['mail' => $email]);
+        ->loadByProperties(['name' => $userPrincipalName]);
       if (count($users) != 0) {
         $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
         $user_display_name = $user->field_first_name->value . ' ' . $user->field_last_name->value;
@@ -453,7 +460,7 @@ class PortlandOpenIdConnectUtil
       // Do not log 404 errors since some users don't have pictures
       if ($e->getCode() != 404) {
         $variables = [
-          '@message' => 'Could not retrieve user picture for email ' . $email,
+          '@message' => 'Could not retrieve user picture for principal name ' . $userPrincipalName,
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);

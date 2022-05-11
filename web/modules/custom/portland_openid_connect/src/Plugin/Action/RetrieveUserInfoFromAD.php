@@ -24,9 +24,11 @@ class RetrieveUserInfoFromAD extends ActionBase
   {
     if (empty($account)) return;
 
+    $account_name = $account->getAccountName();
+
     // Skip if cannot find a Drupal user with the email
     $users = \Drupal::entityTypeManager()->getStorage('user')
-            ->loadByProperties(['mail' => $account->getEmail()]);
+            ->loadByProperties(['name' => $account_name]);
     if( empty($users) ) return;
     $user = array_values($users)[0];
     // If the user is not active, skip
@@ -46,7 +48,7 @@ class RetrieveUserInfoFromAD extends ActionBase
       // 'WBUDFTeam@portlandoregon.gov',  // Outlook distribution list
       // 'council140@portlandoregon.gov',  // Actual AD group
     ];
-    if (in_array(strtolower($account->getEmail()), array_map('strtolower', $skip_emails))) return;
+    if (in_array(strtolower($account_name), array_map('strtolower', $skip_emails))) return;
 
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken();
     if (empty($tokens) || empty($tokens['access_token'])) {
@@ -54,9 +56,9 @@ class RetrieveUserInfoFromAD extends ActionBase
       return;
     }
 
-    PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-    // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+    PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account_name, $azure_ad_id);
+    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account_name, $azure_ad_id);
+    // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account_name, $azure_ad_id);
   }
 
   /**

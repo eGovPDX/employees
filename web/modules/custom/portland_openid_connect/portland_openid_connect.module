@@ -13,13 +13,13 @@ use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 function portland_openid_connect_user_login(UserInterface $account) {
   if (empty($account)) return;
 
-  // If cannot find a Drupal user with the email, skip
+  // If cannot find a Drupal user with the principal name, skip
   $users = \Drupal::entityTypeManager()->getStorage('user')
-          ->loadByProperties(['mail' => $account->getEmail()]);
+          ->loadByProperties(['name' => $account->getAccountName()]);
   if( empty($users) ) return;
   $user = array_values($users)[0];
   // If the user is not active, skip
-  // If the user is "Contact Only", do not sync from AD
+  // If the user is "Contact Only", skip
   if ( ! $user->status->value || $user->field_is_contact_only->value == "1") return;
   $azure_ad_id = $user->field_active_directory_id->value;
   // If the user doesn't have an Azure AD ID, skip
@@ -40,10 +40,10 @@ function portland_openid_connect_user_login(UserInterface $account) {
     return;
   }
 
-  PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+  PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
+  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
-  // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getEmail(), $azure_ad_id);
+  // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
 }
 
 /**
@@ -72,7 +72,7 @@ function portland_openid_connect_user_update($account)
  */
 function portland_openid_connect_user_presave($account)
 {
-  // If a user is being blocked, remove all sidewide roles
+  // If a user is being blocked, remove all sitewide roles
   if( $account->status->value == false ) {
     $roles = $account->getRoles();
     foreach($roles as $role) {
@@ -221,11 +221,11 @@ function _process_users($response_data, $access_token)
       continue;
 
     // Some users are added into the system before the batch import. We must 
-    // look up using email first.
+    // look up using principal name first.
     $users = \Drupal::entityTypeManager()->getStorage('user')
-      ->loadByProperties(['mail' => $user_data['mail']]);
+      ->loadByProperties(['name' => $user_data['userPrincipalName']]);
 
-    // If found no user with email, use AD ID to look up again.
+    // If found no user with principal name, use AD ID to look up again.
     // These are stub users created for managers
     if (count($users) == 0) {
       $users = \Drupal::entityTypeManager()->getStorage('user')
@@ -252,8 +252,8 @@ function _process_users($response_data, $access_token)
 
       // Create a new user
       $user = User::create([
-        // Some users have the same first and last name. But email is always unique.
-        'name' => $user_data['mail'],
+        // Some users have the same first and last name. But principal name is always unique.
+        'name' => $user_data['userPrincipalName'],
         'mail' => $user_data['mail'],
         'pass' => user_password(), // Create a temp password
         'status' => 1,
@@ -263,9 +263,10 @@ function _process_users($response_data, $access_token)
       ]);
       $user->set('field_managers', _create_or_find_manager($user_data));
 
-      $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
+      $user_profile = _get_user_profile_by_principal_name($access_token, $user_data['userPrincipalName']);
       // If the profile is empty, assume the user is not with the City
       if (!empty($user_profile)) {
+        $user->set('mail', $user_profile['mail']);
         $user->set('field_phone', $user_profile['phone'] ?? '');
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
@@ -297,7 +298,7 @@ function _process_users($response_data, $access_token)
         $user->set('field_first_name', $user_data['givenName']);
         $user->set('field_last_name', $user_data['surname']);
         $user->set('field_active_directory_id', $user_data['id']);
-        $user->setUsername($user_data['mail']); // Update account username
+        $user->setUsername($user_data['userPrincipalName']); // Update account username
 
         $manager_user_ids = _create_or_find_manager($user_data);
         $managers_orig = $user->get('field_managers');
@@ -309,8 +310,9 @@ function _process_users($response_data, $access_token)
         }
         $user->set('field_managers', array_unique(array_merge($managers_orig_ids, $manager_user_ids)));
 
-        $user_profile = _get_user_profile_by_email($access_token, $user_data['mail']);
+        $user_profile = _get_user_profile_by_principal_name($access_token, $user_data['userPrincipalName']);
         if (!empty($user_profile)) {
+          $user->set('mail', $user_profile['mail'] ?? '');
           $user->set('field_phone', $user_profile['phone'] ?? '');
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
@@ -343,9 +345,9 @@ function _process_users($response_data, $access_token)
 /**
  * Use the access token to get user profile
  */
-function _get_user_profile_by_email($access_token, $user_email)
+function _get_user_profile_by_principal_name($access_token, $userPrincipalName)
 {
-  if (strlen($access_token) === 0 || strlen($user_email) === 0) return [];
+  if (strlen($access_token) === 0 || strlen($userPrincipalName) === 0) return [];
 
   /* @var \GuzzleHttp\ClientInterface $client */
   $client = new \GuzzleHttp\Client();
@@ -361,14 +363,14 @@ function _get_user_profile_by_email($access_token, $user_email)
   try {
     // If there is a resume link, use it. Otherwise start fresh
     // Try it on https://developer.microsoft.com/en-us/graph/graph-explorer
-    $request_url = "https://graph.microsoft.com/beta/users/$user_email/profile";
+    $request_url = "https://graph.microsoft.com/beta/users/$userPrincipalName/profile";
     $response = $client->get($request_url, $options);
     $response_data = json_decode((string) $response->getBody(), TRUE);
     if ($response_data == null) return false;
-    return _process_user_profile($response_data, $user_email);
+    return _process_user_profile($response_data, $userPrincipalName);
   } catch (RequestException $e) {
     $variables = [
-      '@message' => 'Could not retrieve user profile for ' . $user_email,
+      '@message' => 'Could not retrieve user profile for principal name ' . $userPrincipalName,
       '@error_message' => $e->getMessage(),
     ];
     \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
@@ -406,6 +408,7 @@ function _process_user_profile($response_data)
   $user_bureau_string = implode(',', array_unique($user_bureau_array));
 
   return [
+    'mail' => $response_data['emails'][0]['address'],
     'phone' => $user_phone,
     'group_names' => $user_bureau_string
   ];
