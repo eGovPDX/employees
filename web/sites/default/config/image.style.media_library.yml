@@ -2,6 +2,8 @@ uuid: d9d19404-8397-4722-b8ca-9731a7cce258
 langcode: en
 status: true
 dependencies:
+  module:
+    - image_effects
   enforced:
     module:
       - media_library
@@ -18,3 +20,12 @@ effects:
       width: 220
       height: 220
       upscale: false
+  76929322-b3c6-437c-bc28-3f8b6c214f25:
+    uuid: 76929322-b3c6-437c-bc28-3f8b6c214f25
+    id: image_effects_imagemagick_arguments
+    weight: 2
+    data:
+      command_line: "-filter Triangle\r\n-define filter:support=2\r\n-unsharp 0.25x0.25+8+0.065\r\n-dither None\r\n-posterize 136\r\n-define jpeg:fancy-upsampling=off\r\n-define png:compression-filter=5\r\n-define png:compression-level=9\r\n-define png:compression-strategy=1\r\n-define png:exclude-chunk=all\r\n-interlace none\r\n-colorspace sRGB\r\n-strip"
+      dimensions_method: keep
+      width: ''
+      height: ''

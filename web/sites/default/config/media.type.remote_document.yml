@@ -1,0 +1,19 @@
+uuid: 4619dd60-77b3-4f2a-947e-ee1789a9fa61
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_remote
+third_party_settings:
+  crop:
+    image_field: null
+id: remote_document
+label: 'Remote document'
+description: 'A remote file stored at eFiles.portlandoregon.gov.'
+source: media_remote
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_media_remote
+field_map: {  }

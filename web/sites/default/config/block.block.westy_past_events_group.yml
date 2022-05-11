@@ -12,16 +12,16 @@ dependencies:
 id: westy_past_events_group
 theme: westy
 region: side
-weight: 2
+weight: -8
 provider: null
 plugin: 'facet_block:past_events_group'
 settings:
   id: 'facet_block:past_events_group'
-  label: 'Filter by Group'
+  label: 'Events Past: Filter by Group'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: past_events_group
+  block_id: westy_past_events_group
 visibility:
   request_path:
     id: request_path

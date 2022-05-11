@@ -103,30 +103,34 @@ display:
               preconfiguration:
                 add_confirmation: false
             6:
-              action_id: user_update_user_primary_groups
+              action_id: sync_user_status_with_ad
               preconfiguration:
                 add_confirmation: false
             7:
-              action_id: user_add_role_action
+              action_id: user_update_user_primary_groups
               preconfiguration:
                 add_confirmation: false
             8:
-              action_id: user_block_user_action
+              action_id: user_add_role_action
               preconfiguration:
                 add_confirmation: false
             9:
-              action_id: user_remove_role_action
+              action_id: user_block_user_action
               preconfiguration:
                 add_confirmation: false
             10:
+              action_id: user_remove_role_action
+              preconfiguration:
+                add_confirmation: false
+            11:
               action_id: user_unblock_user_action
               preconfiguration:
                 add_confirmation: false
-            12:
+            13:
               action_id: vbo_cancel_user_action
               preconfiguration:
                 add_confirmation: false
-            14:
+            15:
               action_id: 'entity:save_action:user'
               preconfiguration:
                 add_confirmation: false

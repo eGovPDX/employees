@@ -1,0 +1,23 @@
+uuid: 579704f8-b125-408b-8012-cf699a77bbbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_file_size
+    - media.type.remote_document
+id: media.remote_document.field_file_size
+field_name: field_file_size
+entity_type: media
+bundle: remote_document
+label: 'File Size'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
