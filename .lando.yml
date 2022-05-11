@@ -35,7 +35,7 @@ services:
       - /bin/sh -c "chmod -R 775 /var/www"
     build:
       - echo "Installing Node.js dependencies..."
-      - npm -C /app/web/themes/custom/cloudy2 install
+      - npm -C /app/web/themes/custom/westy install
 tooling:
   drush:
     description: Run drush commands
@@ -44,7 +44,7 @@ tooling:
   yarn:
     description: CUSTOM Run yarn commands
     service: node
-    cmd: yarn --cwd /app/web/themes/custom/cloudy
+    cmd: yarn --cwd /app/web/themes/custom/westy
   yarn-percy:
     description: CUSTOM Run yarn commands
     service: node
@@ -67,13 +67,13 @@ tooling:
       - appserver: drush uli --mail marty.member@portlandoregon.gov > marty_uli.log
       - node: npm run jest-full
   yarn-rebuild:
-    description: CUSTOM Install Cloudy 2 dependencies, rebuild Cloudy 2 theme including pattern labs files
+    description: CUSTOM Install Westy dependencies, rebuild Westy theme including pattern labs files
     service: node
-    cmd: "cd /app/web/themes/custom/cloudy2 && yarn install --ignore-engines --frozen-lockfile && yarn run build"
+    cmd: "cd /app/web/themes/custom/westy && yarn install --ignore-engines --frozen-lockfile && yarn run build"
   npm:
     description: Run npm commands
     service: node
-    cmd: npm -C /app/web/themes/custom/cloudy2
+    cmd: npm -C /app/web/themes/custom/westy
   node:
     description: Run node commands
     service: node
