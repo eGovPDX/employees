@@ -136,7 +136,7 @@ build_and_deploy: &build_and_deploy
               fi
               # Create a new multidev with files and database from site corresponding to PR's base branch.
               echo "Creating new multidev site cloned from $BASE. Please wait."
-              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV
+              terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV >/dev/null
             fi
             rm -rf ./env_list.txt
           fi
@@ -301,6 +301,78 @@ run_tests: &run_tests
         path: /var/www/html/artifacts
         destination: /
 
+visual_regression: &visual_regression
+  docker:
+    - image: cimg/php:8.0-browsers
+      auth:
+        username: egovpdx
+        password: $DOCKERHUB_PASSWORD
+  # run test in parallel
+  # parallelism: 1
+  working_directory: /home/circleci/app
+  steps:
+    - restore_cache:
+        name: Retore Git cache before checkout
+        keys:
+          - jest-source-v1-{{ .Branch }}-{{ .Revision }}
+          - jest-source-v1-{{ .Branch }}-
+          - jest-source-v1-
+    - checkout
+    - run: git gc
+    - save_cache:
+        name: Save Git cache after checkout
+        key: jest-source-v1-{{ .Branch }}-{{ .Revision }}
+        paths:
+          - ".git"
+    - run:
+        name: Install Terminus
+        command: |
+          if [ ! -f "/tmp/vendor/pantheon-systems/terminus/bin/terminus" ]; then
+            cd /tmp && composer require pantheon-systems/terminus:^3
+            # Temporary workaround to https://github.com/pantheon-systems/terminus/issues/2336
+            cd /tmp && composer require league/container:3.4.1
+          fi
+    - restore_cache:
+        name: Restore Jest and Percy dependencies cache
+        keys:
+          - jest-{{ checksum "tests/percy/yarn.lock" }}-v2
+    - run:
+        name: Install Jest and Percy dependencies
+        command: |
+          cd /home/circleci/app/tests/percy
+          export PERCY_POSTINSTALL_BROWSER=true
+          yarn install --frozen-lockfile
+    - save_cache:
+        name: Save Jest and Percy dependencies cache
+        key: jest-{{ checksum "tests/percy/yarn.lock" }}-v2
+        paths:
+          - "tests/percy/node_modules"
+    - run:
+        name: Run Percy tests
+        command: |
+          export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
+
+          # Log in via terminus first. Required for tests that require user login.
+          terminus auth:login --quiet --machine-token="$eGov_Terminus" --email="$eGov_Email" && terminus aliases
+
+          # Prepare environment variables to be used by Percy
+          if [[ $CIRCLE_BRANCH = "master" ]]; then
+            echo 'export SITE_NAME="dev"' > $BASH_ENV && source $BASH_ENV
+          else
+            echo 'export SITE_NAME=${CIRCLE_BRANCH}' > $BASH_ENV && source $BASH_ENV
+          fi
+
+          mkdir /home/circleci/artifacts
+          cd /home/circleci/app/tests/percy
+
+          # Start Percy tests excluding full regression tests
+          echo 'export SUPERADMIN_LOGIN=$(terminus drush employees.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+          npm run single-test -- admin
+    - store_artifacts:
+        path: /home/circleci/artifacts
+        destination: /
+
+
 # Declare all of the jobs we should run.
 version: 2.1
 jobs:
@@ -308,6 +380,11 @@ jobs:
      <<: *build_and_deploy
   test:
      <<: *run_tests
+  visual_regression:
+    <<: *visual_regression
+
+orbs:
+  percy: percy/agent@0.1.2
 
 # Declare a workflow that runs all of our jobs in parallel.
 workflows:
@@ -318,3 +395,9 @@ workflows:
       - test:
           requires:
             - deploy
+      - visual_regression:
+          requires:
+            - deploy
+      # - percy/finalize_all:
+      #     requires:
+      #       - visual_regression
