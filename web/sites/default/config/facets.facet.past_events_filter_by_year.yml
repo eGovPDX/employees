@@ -1,19 +1,19 @@
-uuid: 905419e2-a329-4894-9055-4440be7c9463
+uuid: e8560007-0b8d-427d-b60c-dfe1f1d57774
 langcode: en
 status: true
 dependencies:
   config:
     - search_api.index.full_index
-    - views.view.group_search_index
+    - views.view.search_index
   module:
     - search_api
-id: changed_month
-name: 'Filter by Month'
+id: past_events_filter_by_year
+name: 'Filter by Year'
 weight: 0
 min_count: 1
-url_alias: month
-facet_source_id: 'search_api:views_page__group_search_index__page_documents'
-field_identifier: media_changed
+url_alias: year
+facet_source_id: 'search_api:views_page__search_index__page_past_events'
+field_identifier: field_when
 query_operator: and
 hard_limit: 0
 exclude: false
@@ -28,7 +28,7 @@ widget:
   type: checkbox
   config:
     show_numbers: true
-    soft_limit: 0
+    soft_limit: 3
     show_reset_link: true
     reset_text: 'Show all'
     hide_reset_when_no_selection: true
@@ -47,40 +47,20 @@ processor_configs:
       build: 35
     settings:
       date_display: actual_date
-      granularity: 5
-      date_format: F
+      granularity: 6
+      date_format: 'Y'
       hierarchy: false
-  dependent_processor:
-    processor_id: dependent_processor
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      build: 5
+      sort: 40
     settings:
-      changed_year:
-        enable: true
-        condition: not_empty
-        values: ''
-        negate: false
-      tags:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
-  hide_non_narrowing_result_processor:
-    processor_id: hide_non_narrowing_result_processor
-    weights:
-      build: 40
-    settings: {  }
+      sort: DESC
   hierarchy_processor:
     processor_id: hierarchy_processor
     weights:
       build: 100
     settings: {  }
-  raw_value_widget_order:
-    processor_id: raw_value_widget_order
-    weights:
-      sort: 50
-    settings:
-      sort: ASC
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

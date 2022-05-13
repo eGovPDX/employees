@@ -1,27 +1,27 @@
-uuid: c7b43dff-d1ed-49ff-bdca-f5af88828f6d
+uuid: 9cfd47c5-47e2-4547-823b-5ca5cc468dcd
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.events_topic
+    - facets.facet.events_filter_by_year
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_events_topic
+id: events_filter_by_year
 theme: westy
 region: side
-weight: 6
+weight: 1
 provider: null
-plugin: 'facet_block:events_topic'
+plugin: 'facet_block:events_filter_by_year'
 settings:
-  id: 'facet_block:events_topic'
-  label: 'Events: Filter by Topic'
+  id: 'facet_block:events_filter_by_year'
+  label: 'Events: Filter by Year'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_events_topic
+  block_id: events_filter_by_year
 visibility:
   request_path:
     id: request_path

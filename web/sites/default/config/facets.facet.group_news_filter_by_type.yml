@@ -1,4 +1,4 @@
-uuid: 905419e2-a329-4894-9055-4440be7c9463
+uuid: b3fa2031-4723-443a-ba7b-60e7cba6bca9
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.group_search_index
   module:
     - search_api
-id: changed_month
-name: 'Filter by Month'
+id: group_news_filter_by_type
+name: 'Filter by News Type'
 weight: 0
 min_count: 1
-url_alias: month
-facet_source_id: 'search_api:views_page__group_search_index__page_documents'
-field_identifier: media_changed
+url_alias: type
+facet_source_id: 'search_api:views_page__group_search_index__page_group_news'
+field_identifier: field_type
 query_operator: and
 hard_limit: 0
 exclude: false
@@ -41,30 +41,12 @@ only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: true
 processor_configs:
-  date_item:
-    processor_id: date_item
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      build: 35
+      sort: 40
     settings:
-      date_display: actual_date
-      granularity: 5
-      date_format: F
-      hierarchy: false
-  dependent_processor:
-    processor_id: dependent_processor
-    weights:
-      build: 5
-    settings:
-      changed_year:
-        enable: true
-        condition: not_empty
-        values: ''
-        negate: false
-      tags:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
+      sort: ASC
   hide_non_narrowing_result_processor:
     processor_id: hide_non_narrowing_result_processor
     weights:
@@ -75,12 +57,11 @@ processor_configs:
     weights:
       build: 100
     settings: {  }
-  raw_value_widget_order:
-    processor_id: raw_value_widget_order
+  translate_entity:
+    processor_id: translate_entity
     weights:
-      sort: 50
-    settings:
-      sort: ASC
+      build: 5
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
