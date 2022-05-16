@@ -27,6 +27,7 @@ dependencies:
     - field.storage.user.field_phone
     - field.storage.user.field_primary_groups
     - field.storage.node.field_published_on
+    - field.storage.user.field_search_boost
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
     - field.storage.node.field_support_model
@@ -370,6 +371,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_published_on
+  field_search_boost:
+    label: 'Search boost'
+    datasource_id: 'entity:user'
+    property_path: field_search_boost
+    type: decimal
+    dependencies:
+      config:
+        - field.storage.user.field_search_boost
   field_search_keywords:
     label: 'Search keywords'
     datasource_id: 'entity:user'
