@@ -14,7 +14,7 @@ use Drupal\Core\Access\AccessResult;
  * @Action(
  *   id = "employees_set_search_boost_as_one_action",
  *   label = @Translation("Set search boost as 1 (custom action)"),
- *   type = "user",
+ *   type = "",
  *   confirm = FALSE,
  * )
  */
