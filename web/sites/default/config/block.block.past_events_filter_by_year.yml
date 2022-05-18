@@ -1,27 +1,27 @@
-uuid: 7844c1f1-e035-4128-afd5-09ee0f3dcfe9
+uuid: c4072086-2449-4da1-94de-f1d24c58d0f8
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.past_events_topics
+    - facets.facet.past_events_filter_by_year
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_past_events_topics
+id: past_events_filter_by_year
 theme: westy
 region: side
-weight: -2
+weight: 1
 provider: null
-plugin: 'facet_block:past_events_topics'
+plugin: 'facet_block:past_events_filter_by_year'
 settings:
-  id: 'facet_block:past_events_topics'
-  label: 'Events Past: Filter by Topic'
+  id: 'facet_block:past_events_filter_by_year'
+  label: 'Events Past: Filter by Year'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_past_events_topics
+  block_id: past_events_filter_by_year
 visibility:
   request_path:
     id: request_path

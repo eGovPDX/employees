@@ -1,29 +1,29 @@
-uuid: c29426ca-1e7d-478b-886c-409c2fe3aa4c
+uuid: e2300c09-7c2c-4541-9568-3e685bd67113
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.bureaus
+    - facets.facet.news_filter_by_type
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_bureaus
+id: news_filter_by_type
 theme: westy
 region: side
-weight: 12
+weight: 5
 provider: null
-plugin: 'facet_block:bureaus'
+plugin: 'facet_block:news_filter_by_type'
 settings:
-  id: 'facet_block:bureaus'
-  label: 'BTS Catalog: Filter by Bureau'
+  id: 'facet_block:news_filter_by_type'
+  label: 'News: Filter by Type'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_bureaus
+  block_id: news_filter_by_type
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /technology/catalog
+    pages: /news

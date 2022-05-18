@@ -1,4 +1,4 @@
-uuid: 905419e2-a329-4894-9055-4440be7c9463
+uuid: 70eb06fa-658e-439c-be14-f167b097bb11
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.group_search_index
   module:
     - search_api
-id: changed_month
+id: group_events_filter_by_month
 name: 'Filter by Month'
 weight: 0
 min_count: 1
 url_alias: month
-facet_source_id: 'search_api:views_page__group_search_index__page_documents'
-field_identifier: media_changed
+facet_source_id: 'search_api:views_page__group_search_index__page_group_events'
+field_identifier: field_when
 query_operator: and
 hard_limit: 0
 exclude: false
@@ -55,14 +55,19 @@ processor_configs:
     weights:
       build: 5
     settings:
-      changed_year:
-        enable: true
-        condition: not_empty
-        values: ''
-        negate: false
-      tags:
+      group_events_filter_by_topic:
         enable: false
         condition: null
+        values: ''
+        negate: false
+      group_events_filter_by_type:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      group_events_filter_by_year:
+        enable: true
+        condition: not_empty
         values: ''
         negate: false
   hide_non_narrowing_result_processor:
