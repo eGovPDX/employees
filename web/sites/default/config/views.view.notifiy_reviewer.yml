@@ -104,7 +104,33 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        field_last_name_value:
+          id: field_last_name_value
+          table: user__field_last_name
+          field: field_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_first_name_value:
+          id: field_first_name_value
+          table: user__field_first_name
+          field: field_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         status:
@@ -460,8 +486,8 @@ display:
           label: ''
           exclude: true
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '{{ field_first_name }} {{ field_last_name }}'
             make_link: false
             path: ''
             absolute: false
@@ -525,8 +551,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: true
-            text: '{{ mail }} ({{ uid }})'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -566,7 +592,7 @@ display:
           click_sort_column: value
           type: user_name
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -587,10 +613,10 @@ display:
         options:
           search_fields:
             mail: mail
-            field_first_name: field_first_name
-            field_last_name: field_last_name
             name: name
             uid: '0'
+            field_first_name: '0'
+            field_last_name: '0'
       row:
         type: entity_reference
         options:

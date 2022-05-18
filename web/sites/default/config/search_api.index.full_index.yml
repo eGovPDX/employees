@@ -272,19 +272,19 @@ field_settings:
       config:
         - field.storage.user.field_division_name
   field_first_name:
-    label: 'First name (Phonetic)'
-    datasource_id: 'entity:user'
-    property_path: field_first_name
-    type: 'solr_text_custom_omit_norms:phonetic'
-    dependencies:
-      config:
-        - field.storage.user.field_first_name
-  field_first_name_1:
     label: 'First name'
     datasource_id: 'entity:user'
     property_path: field_first_name
     type: 'solr_text_custom_omit_norms:edgestring'
     boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_first_name_phonetic:
+    label: 'First name (Phonetic)'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:phonetic'
     dependencies:
       config:
         - field.storage.user.field_first_name
@@ -313,19 +313,19 @@ field_settings:
       config:
         - field.storage.user.field_is_contact_only
   field_last_name:
-    label: 'Last name (Phonetic)'
-    datasource_id: 'entity:user'
-    property_path: field_last_name
-    type: 'solr_text_custom_omit_norms:phonetic'
-    dependencies:
-      config:
-        - field.storage.user.field_last_name
-  field_last_name_1:
     label: 'Last name'
     datasource_id: 'entity:user'
     property_path: field_last_name
     type: 'solr_text_custom_omit_norms:edgestring'
     boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+  field_last_name_phonetic:
+    label: 'Last name (Phonetic)'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:phonetic'
     dependencies:
       config:
         - field.storage.user.field_last_name
@@ -474,11 +474,21 @@ field_settings:
     dependencies:
       module:
         - group
-  mail:
+  mail_fulltext_edge:
     label: Email
     datasource_id: 'entity:user'
     property_path: mail
-    type: string
+    type: 'solr_text_custom_omit_norms:edge'
+    boost: !!float 3
+    dependencies:
+      module:
+        - user
+  mail_fulltext_unstemmed:
+    label: Email
+    datasource_id: 'entity:user'
+    property_path: mail
+    type: solr_text_unstemmed
+    boost: !!float 3
     dependencies:
       module:
         - user

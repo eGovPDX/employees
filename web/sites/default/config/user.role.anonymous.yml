@@ -5,6 +5,7 @@ dependencies:
   module:
     - field_permissions
     - media
+    - search_api_autocomplete
     - system
 _core:
   default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
@@ -15,6 +16,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access user profiles'
+  - 'use search_api_autocomplete for search_index'
   - 'view field_group_path'
   - 'view field_org_type'
   - 'view media'
