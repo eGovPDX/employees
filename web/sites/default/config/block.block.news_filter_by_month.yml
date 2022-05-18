@@ -1,0 +1,29 @@
+uuid: 6a5c432d-7e78-4347-87f8-83969884b555
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.news_filter_by_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: news_filter_by_month
+theme: westy
+region: side
+weight: 2
+provider: null
+plugin: 'facet_block:news_filter_by_month'
+settings:
+  id: 'facet_block:news_filter_by_month'
+  label: 'News: Filter by Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: news_filter_by_month
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /news

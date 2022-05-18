@@ -1,0 +1,29 @@
+uuid: 3b59c0e8-e2c5-46bd-b251-b9741d3d631d
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.events_filter_by_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: events_filter_by_month
+theme: westy
+region: side
+weight: 2
+provider: null
+plugin: 'facet_block:events_filter_by_month'
+settings:
+  id: 'facet_block:events_filter_by_month'
+  label: 'Events: Filter by Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: events_filter_by_month
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /events

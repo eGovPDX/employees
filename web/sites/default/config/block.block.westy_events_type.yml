@@ -1,0 +1,29 @@
+uuid: c188df23-4f96-4a55-99ac-7b2476663d0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.events_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_events_type
+theme: westy
+region: side
+weight: 5
+provider: null
+plugin: 'facet_block:events_type'
+settings:
+  id: 'facet_block:events_type'
+  label: 'Events: Filter by Event Type'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: events_type
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /events

@@ -5,6 +5,7 @@ dependencies:
   module:
     - field_permissions
     - media
+    - search_api_autocomplete
     - system
 _core:
   default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
@@ -19,6 +20,7 @@ permissions:
   - 'view field_division_name'
   - 'view field_first_name'
   - 'view field_group_names'
+  - 'use search_api_autocomplete for search_index'
   - 'view field_group_path'
   - 'view field_last_name'
   - 'view field_managers'

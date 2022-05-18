@@ -1,0 +1,29 @@
+uuid: 565461ac-b424-453c-9e63-c01e771a3dc0
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_past_events_filter_by_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_past_events_filter_by_month
+theme: westy
+region: side
+weight: 2
+provider: null
+plugin: 'facet_block:group_past_events_filter_by_month'
+settings:
+  id: 'facet_block:group_past_events_filter_by_month'
+  label: 'Group Events Past: Filter by Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_past_events_filter_by_month
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/events/past\r\n!/group/*/nodes/events"

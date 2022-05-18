@@ -386,6 +386,7 @@ display:
     display_plugin: block
     position: 4
     display_options:
+      enabled: false
       title: 'Upcoming Events'
       fields:
         title:
@@ -611,6 +612,8 @@ display:
         use_more: false
         use_more_always: false
         use_more_text: false
+        link_display: true
+        link_url: true
         style: false
         row: false
         fields: false
@@ -618,7 +621,7 @@ display:
         filters: false
         filter_groups: false
       display_description: ''
-      use_more: true
+      use_more: false
       use_more_always: true
       use_more_text: 'All Events'
       display_extenders: {  }
@@ -1042,6 +1045,8 @@ display:
         use_more: false
         use_more_always: false
         use_more_text: false
+        link_display: false
+        link_url: false
         style: false
         row: false
         fields: false
@@ -1052,6 +1057,9 @@ display:
       use_more: true
       use_more_always: false
       use_more_text: 'More Events'
+      link_display: custom_url
+      link_url: 'group/{{ raw_arguments.gid }}/events'
+      display_comment: 'This block is used in conjunction with the Group: Search index events page because the block can''t be converted to a search API view due to a contextual filter bug.'
       display_extenders: {  }
       block_description: 'Group Today''s Events'
       block_hide_empty: true
@@ -1071,6 +1079,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      enabled: false
       title: Events
       fields:
         rendered_entity:
@@ -1270,7 +1279,11 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.bts_catalog_item.default'
+        - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
+        - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
         - 'config:core.entity_view_display.node.contract.default'
+        - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
         - 'config:core.entity_view_display.node.event.default'
         - 'config:core.entity_view_display.node.event.featured'
@@ -1280,9 +1293,11 @@ display:
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
         - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.nested'
         - 'config:core.entity_view_display.node.page.search_result'
         - 'config:core.entity_view_display.node.page.teaser'
         - 'config:core.entity_view_display.node.resource.default'
+        - 'config:core.entity_view_display.node.resource.nested'
         - 'config:core.entity_view_display.node.resource.search_result'
         - 'config:core.entity_view_display.node.resource.teaser'
   page_group_past_events:
@@ -1291,6 +1306,7 @@ display:
     display_plugin: page
     position: 2
     display_options:
+      enabled: false
       title: 'Past Events'
       fields:
         rendered_entity:
@@ -1697,7 +1713,11 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.bts_catalog_item.default'
+        - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
+        - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
         - 'config:core.entity_view_display.node.contract.default'
+        - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
         - 'config:core.entity_view_display.node.event.default'
         - 'config:core.entity_view_display.node.event.featured'
@@ -1707,8 +1727,10 @@ display:
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
         - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.nested'
         - 'config:core.entity_view_display.node.page.search_result'
         - 'config:core.entity_view_display.node.page.teaser'
         - 'config:core.entity_view_display.node.resource.default'
+        - 'config:core.entity_view_display.node.resource.nested'
         - 'config:core.entity_view_display.node.resource.search_result'
         - 'config:core.entity_view_display.node.resource.teaser'

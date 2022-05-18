@@ -1,0 +1,29 @@
+uuid: 82f972bf-c6d2-4a53-a80f-64948904cfff
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_events_filter_by_topic
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_events_filter_by_topic
+theme: westy
+region: side
+weight: 6
+provider: null
+plugin: 'facet_block:group_events_filter_by_topic'
+settings:
+  id: 'facet_block:group_events_filter_by_topic'
+  label: 'Group Events: Filter by Topic'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_events_filter_by_topic
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/events\r\n!/group/*/nodes/events"
