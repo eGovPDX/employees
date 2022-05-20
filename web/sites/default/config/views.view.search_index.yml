@@ -771,7 +771,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge badge-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
+            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge bg-warning rounded-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
             make_link: false
             path: ''
             absolute: false
