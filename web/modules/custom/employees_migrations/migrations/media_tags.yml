@@ -1,0 +1,27 @@
+id: media_tags
+label: 'Media Tags'
+migration_group: taxonomy_import
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/media_tags.csv
+  header_row_count: 1
+  ids:
+    - ID 
+    - 'Term ID'
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  mid: ID
+  field_tags:
+    source: Name
+    plugin: text_to_taxonomy
+    vocabulary: tags
+    multivalued_append: true
+    multivalued_unique: true
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: document
+  overwrite_properties:
+    - field_tags
