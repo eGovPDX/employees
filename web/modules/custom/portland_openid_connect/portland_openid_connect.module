@@ -73,12 +73,12 @@ function portland_openid_connect_user_update($account)
 function portland_openid_connect_user_presave($account)
 {
   // If a user is being blocked, remove all sitewide roles
-  if( $account->status->value == false ) {
-    $roles = $account->getRoles();
-    foreach($roles as $role) {
-      $account->removeRole($role);
-    }
-  }
+  // if( $account->status->value == false ) {
+  //   $roles = $account->getRoles();
+  //   foreach($roles as $role) {
+  //     $account->removeRole($role);
+  //   }
+  // }
 
   if (!empty($account->field_group_names->value)) {
     // Remove the duplicated group names
@@ -291,7 +291,7 @@ function _process_users($response_data, $access_token)
         $user->set('field_group_names', '');
         $user->save();
         // Find all group this user belongs to and remove the Employee role
-        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+        // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
         $count_user_deleted++;
         \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
