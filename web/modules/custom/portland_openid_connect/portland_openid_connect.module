@@ -72,6 +72,7 @@ function portland_openid_connect_user_update($account)
  */
 function portland_openid_connect_user_presave($account)
 {
+  // DO NOT remove roles. Very difficult to restore
   // If a user is being blocked, remove all sitewide roles
   // if( $account->status->value == false ) {
   //   $roles = $account->getRoles();
@@ -288,7 +289,8 @@ function _process_users($response_data, $access_token)
       $user_is_disalbed = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
       if ($user_is_disalbed) {
         $user->status = 0;
-        $user->set('field_group_names', '');
+        // Avoid wipe out group names. Very difficult to restore.
+        // $user->set('field_group_names', '');
         $user->save();
         // Find all group this user belongs to and remove the Employee role
         // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);

@@ -474,7 +474,8 @@ class PortlandOpenIdConnectUtil
    */
   public static function IsUserEnabled($access_token, $email, $azure_ad_id)
   {
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+    // Avoid disabling user accidentally
+    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return true;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
