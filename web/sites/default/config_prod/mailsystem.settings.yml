@@ -2,12 +2,12 @@ _core:
   default_config_hash: IhwTepsVwtbtbcT5GzQKhCXDCRvbk3MNkWqPiuiZ10s
 theme: cloudy2
 defaults:
-  sender: sendgrid_integration
+  sender: test_mail_collector
   formatter: mime_mail
 modules:
   sendgrid_integration:
     none:
-      sender: sendgrid_integration
+      sender: test_mail_collector
       formatter: sendgrid_integration
   employees:
     none:
