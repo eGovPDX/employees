@@ -1,0 +1,27 @@
+id: content_topics
+label: 'Content Topics'
+migration_group: taxonomy_import
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/content_topics.csv
+  header_row_count: 1
+  ids:
+    - ID 
+    - 'Term ID'
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  nid: ID
+  field_topics:
+    source: Name
+    plugin: text_to_taxonomy
+    vocabulary: topics
+    multivalued_append: true
+    multivalued_unique: true
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: news
+  overwrite_properties:
+    - field_topics
