@@ -124,6 +124,9 @@ function portland_openid_connect_user_presave($account)
  */
 function portland_openid_connect_cron()
 {
+  // POWR-4268 Temporarily turn off user sync while working on the Azure AD user blocking issue.
+  return;
+
   // When Cron got into a locked state, you will see the log "Attempting to re-run cron while it is already running.".
   // Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
@@ -281,7 +284,7 @@ function _process_users($response_data, $access_token)
     else {
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Deactivate this user
-      $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $user->getEmail(), $azure_ad_id);
+      $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user->getEmail(), $user->field_active_directory_id->value);
       $user_is_disalbed = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
       if ($user_is_disalbed) {
         $user->status = 0;
