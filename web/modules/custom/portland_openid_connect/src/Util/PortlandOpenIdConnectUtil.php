@@ -102,6 +102,9 @@ class PortlandOpenIdConnectUtil
 
     $new_primary_group_ids = PortlandOpenIdConnectUtil::buildGroupIDlistFromGroupNames($account->field_group_names->value);
 
+    // Some AD group name does not have a matching Drupal group ID
+    if(!empty($account->field_group_names->value) && empty($new_primary_group_ids)) return;
+
     if ($account->isNew()) {
       $current_primary_group_ids = [];
     } else {
