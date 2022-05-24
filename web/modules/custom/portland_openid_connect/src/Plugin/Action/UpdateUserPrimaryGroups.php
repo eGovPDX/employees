@@ -22,6 +22,7 @@ class UpdateUserPrimaryGroups extends ActionBase
    */
   public function execute($account = NULL)
   {
+    // Add a try catch block to help log any exception
     try {
       PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
     } catch (Exception $e) {

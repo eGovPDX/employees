@@ -233,8 +233,8 @@ function _process_users($response_data, $access_token)
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       // Deactivate this user
       $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user->getEmail(), $user->field_active_directory_id->value);
-      $user_is_disalbed = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
-      if ($user_is_disalbed) {
+      $user_is_disabled = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
+      if ($user_is_disabled) {
         $user->status = 0;
         // Avoid wipe out group names. Very difficult to restore.
         // $user->set('field_group_names', '');
