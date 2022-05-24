@@ -68,59 +68,6 @@ function portland_openid_connect_user_update($account)
 }
 
 /**
- * Implement hook_user_presave()
- */
-function portland_openid_connect_user_presave($account)
-{
-  // DO NOT remove roles. Very difficult to restore
-  // If a user is being blocked, remove all sitewide roles
-  // if( $account->status->value == false ) {
-  //   $roles = $account->getRoles();
-  //   foreach($roles as $role) {
-  //     $account->removeRole($role);
-  //   }
-  // }
-
-  if (!empty($account->field_group_names->value)) {
-    // Remove the duplicated group names
-    $primary_group_names = array_unique(
-      array_map(
-        'trim',
-        explode(',', $account->field_group_names->value)
-      )
-    );
-
-    // Update the group_names field
-    $account->field_group_names->value = implode(',', $primary_group_names);
-
-    // Build new primary group ID array with AD group names
-    $group_ad_name_list = \Drupal::entityTypeManager()
-      ->getStorage('taxonomy_term')
-      ->loadTree('group_ad_name_list', 0, 1, true);
-    $new_primary_group_ids = [];
-    foreach ($group_ad_name_list as $group_ad_name) {
-      if (in_array($group_ad_name->name->value, $primary_group_names)) {
-        $drupal_groups = $group_ad_name->field_employee_groups->getValue();
-        foreach ($drupal_groups as $drupal_group) {
-          $new_primary_group_ids[] = $drupal_group['target_id'];
-        }
-      }
-    }
-    // Remove duplicates
-    $new_primary_group_ids = array_unique($new_primary_group_ids);
-
-    // Update the user's primary_groups field
-    $new_primary_groups = [];
-    foreach ($new_primary_group_ids as $new_primary_group_id) {
-      $new_primary_groups[] = ['target_id' => $new_primary_group_id];
-    }
-    $account->field_primary_groups = $new_primary_groups;
-  } else {
-    $account->field_primary_groups = [];
-  }
-}
-
-/**
  * Implement hook_cron()
  */
 function portland_openid_connect_cron()
