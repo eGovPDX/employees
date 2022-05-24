@@ -261,6 +261,7 @@ class PortlandOpenIdConnectUtil
       ) {
         $user_info['mail'] = $response_data["emails"][0]["address"];
         $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
+        $user_info['group'] = $response_data["positions"][0]["detail"]["company"]["displayName"];
         $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];
         $user_info['officeLocation'] = $response_data["positions"][0]["detail"]["company"]["officeLocation"];
         $address = $response_data["positions"][0]["detail"]["company"]["address"];
@@ -294,6 +295,7 @@ class PortlandOpenIdConnectUtil
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
         $user->field_phone = $user_info['phone'];
+        $user->field_group_names = $user_info['group'];
         $user->save();
         // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
       }
