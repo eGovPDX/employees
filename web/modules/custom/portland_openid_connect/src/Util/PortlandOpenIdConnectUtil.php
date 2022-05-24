@@ -110,6 +110,7 @@ class PortlandOpenIdConnectUtil
     } else {
       $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     }
+    if (empty($new_primary_group_ids) && empty($current_primary_group_ids)) return;
 
     // If the primary group is empty, remove all group memberships
     if (empty($new_primary_group_ids)) {
