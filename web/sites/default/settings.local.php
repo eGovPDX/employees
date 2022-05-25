@@ -164,14 +164,8 @@ $settings['trusted_host_patterns'] = array(
 
 $settings['file_temp_path'] = '/tmp';
 
-$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
-if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
-  $config['search_api.server.pantheon']['backend_config']['connector_config']['core'] = "dev";
-}
-else {
-  // SOLR on Pantheon defines the scheme as an environment variable.
-  // We define this just so that the module doesn't break.
-  // This is only needed for Lando environments.
-  putenv('PANTHEON_INDEX_SCHEME=https');
-  putenv('PANTHEON_INDEX_PORT=449');
-}
+// SOLR on Pantheon defines the scheme as an environment variable.
+// We define this just so that the module doesn't break.
+// This is only needed for Lando environments.
+putenv('PANTHEON_INDEX_SCHEME=https');
+putenv('PANTHEON_INDEX_PORT=449');
