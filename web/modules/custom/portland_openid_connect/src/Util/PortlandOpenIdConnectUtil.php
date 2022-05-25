@@ -102,11 +102,15 @@ class PortlandOpenIdConnectUtil
 
     $new_primary_group_ids = PortlandOpenIdConnectUtil::buildGroupIDlistFromGroupNames($account->field_group_names->value);
 
+    // Some AD group name does not have a matching Drupal group ID
+    if(!empty($account->field_group_names->value) && empty($new_primary_group_ids)) return;
+
     if ($account->isNew()) {
       $current_primary_group_ids = [];
     } else {
       $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     }
+    if (empty($new_primary_group_ids) && empty($current_primary_group_ids)) return;
 
     // If the primary group is empty, remove all group memberships
     if (empty($new_primary_group_ids)) {
@@ -261,6 +265,7 @@ class PortlandOpenIdConnectUtil
       ) {
         $user_info['mail'] = $response_data["emails"][0]["address"];
         $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
+        $user_info['group'] = $response_data["positions"][0]["detail"]["company"]["displayName"];
         $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];
         $user_info['officeLocation'] = $response_data["positions"][0]["detail"]["company"]["officeLocation"];
         $address = $response_data["positions"][0]["detail"]["company"]["address"];
@@ -294,6 +299,7 @@ class PortlandOpenIdConnectUtil
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
         $user->field_phone = $user_info['phone'];
+        $user->field_group_names = $user_info['group'];
         $user->save();
         // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
       }
@@ -474,7 +480,8 @@ class PortlandOpenIdConnectUtil
    */
   public static function IsUserEnabled($access_token, $email, $azure_ad_id)
   {
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return;
+    // Avoid disabling user accidentally
+    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return true;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
