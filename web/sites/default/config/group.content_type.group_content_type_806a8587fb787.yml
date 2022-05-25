@@ -1,0 +1,19 @@
+uuid: d4d8de3d-5af0-43ce-9cec-5b8334975fb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - media.type.remote_document
+  module:
+    - groupmedia
+    - media
+id: group_content_type_806a8587fb787
+label: 'Restricted Group: Group media (Remote document)'
+description: 'Adds <em class="placeholder">Remote document</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_media:remote_document'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

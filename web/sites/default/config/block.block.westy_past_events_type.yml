@@ -12,16 +12,16 @@ dependencies:
 id: westy_past_events_type
 theme: westy
 region: side
-weight: 4
+weight: 5
 provider: null
 plugin: 'facet_block:past_events_type'
 settings:
   id: 'facet_block:past_events_type'
-  label: 'Filter by Event Type'
+  label: 'Events Past: Filter by Event Type'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: past_events_type
+  block_id: westy_past_events_type
 visibility:
   request_path:
     id: request_path

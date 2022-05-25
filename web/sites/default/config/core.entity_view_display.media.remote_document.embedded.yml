@@ -1,0 +1,67 @@
+uuid: 41454a1b-02f5-4bd3-9a54-d9351719d639
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.embedded
+    - field.field.media.remote_document.field_description
+    - field.field.media.remote_document.field_display_in_group
+    - field.field.media.remote_document.field_file_size
+    - field.field.media.remote_document.field_media_media_remote
+    - field.field.media.remote_document.field_mime_type
+    - field.field.media.remote_document.field_tags
+    - media.type.remote_document
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.remote_document.embedded
+targetEntityType: media
+bundle: remote_document
+mode: embedded
+content:
+  field_file_size:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_media_media_remote:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_mime_type:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_description: true
+  field_display_in_group: true
+  field_tags: true
+  langcode: true
+  media_last_updated_media_changed_date: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

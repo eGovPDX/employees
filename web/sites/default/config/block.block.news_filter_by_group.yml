@@ -1,29 +1,29 @@
-uuid: 7844c1f1-e035-4128-afd5-09ee0f3dcfe9
+uuid: da7a1b67-2e64-4344-b6c0-426267e62de9
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.past_events_topics
+    - facets.facet.news_filter_by_group
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_past_events_topics
+id: news_filter_by_group
 theme: westy
 region: side
-weight: 5
+weight: 3
 provider: null
-plugin: 'facet_block:past_events_topics'
+plugin: 'facet_block:news_filter_by_group'
 settings:
-  id: 'facet_block:past_events_topics'
-  label: 'Filter by Topic'
+  id: 'facet_block:news_filter_by_group'
+  label: 'News: Filter by Group'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: past_events_topics
+  block_id: news_filter_by_group
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /events/past
+    pages: /news

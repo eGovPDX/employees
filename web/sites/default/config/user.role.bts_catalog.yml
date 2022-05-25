@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
     - media.type.document
     - media.type.image
     - media.type.remote_video
@@ -15,6 +16,7 @@ dependencies:
     - taxonomy.vocabulary.hosting_environment
     - taxonomy.vocabulary.support_model
   module:
+    - filter
     - media
     - moderation_sidebar
     - node
@@ -63,6 +65,7 @@ permissions:
   - 'schedule publishing of nodes'
   - 'update media'
   - 'use moderation sidebar'
+  - 'use text format basic_html'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view bts_catalog in toolbar'

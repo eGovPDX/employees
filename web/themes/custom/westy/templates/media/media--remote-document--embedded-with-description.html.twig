@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override to display an embedded remote document media item along with its description.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{% include 'media--document--embedded.html.twig' with { 'with_description': true } %}

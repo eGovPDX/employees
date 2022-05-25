@@ -22,7 +22,12 @@ class UpdateUserPrimaryGroups extends ActionBase
    */
   public function execute($account = NULL)
   {
-    PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+    // Add a try catch block to help log any exception
+    try {
+      PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+    } catch (Exception $e) {
+      \Drupal::logger('portland OpenID')->notice('Exception during UpdateUserPrimaryGroups: ' . $e->getMessage() . '. ' . $account->getAccountName());
+    }
   }
 
   /**

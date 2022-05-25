@@ -13,7 +13,6 @@ dependencies:
     - views.view.group_events
     - views.view.group_list_views
     - views.view.group_menu
-    - views.view.group_news
     - views.view.group_search_index
   module:
     - layout_builder
@@ -56,7 +55,7 @@ third_party_settings:
             uuid: 8905fb38-1023-47fb-9752-02c5035b67ef
             region: main
             configuration:
-              id: 'views_block:group_news-block_group_news'
+              id: 'views_block:group_search_index-block_group_news'
               label: ''
               label_display: visible
               provider: views
@@ -88,14 +87,14 @@ third_party_settings:
             uuid: 44767b00-6c08-4869-bb2b-5148c65febfb
             region: side
             configuration:
-              id: 'views_block:group_events-block_group_events'
+              id: 'views_block:group_search_index-block_group_events'
               label: ''
               label_display: visible
               provider: views
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 4
             additional: {  }
           25200171-e124-4ca7-8084-a08b85933dbc:
             uuid: 25200171-e124-4ca7-8084-a08b85933dbc
@@ -108,26 +107,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 4
-            additional: {  }
-          e17e4de9-033f-456b-8e92-70cd95158815:
-            uuid: e17e4de9-033f-456b-8e92-70cd95158815
-            region: side
-            configuration:
-              id: 'field_block:group:private:field_group_contact'
-              label: 'Group contact'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: group_contact
-                third_party_settings: {  }
-            weight: 2
+            weight: 5
             additional: {  }
           f8d34865-d40e-47dd-b9e6-8ad65baa30c7:
             uuid: f8d34865-d40e-47dd-b9e6-8ad65baa30c7
@@ -154,6 +134,38 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 1
+            additional: {  }
+          4757db4b-fed4-4b7a-addc-7b1f967f11fd:
+            uuid: 4757db4b-fed4-4b7a-addc-7b1f967f11fd
+            region: side
+            configuration:
+              id: 'views_block:group_events-block_group_todays_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 3
+            additional: {  }
+          e17e4de9-033f-456b-8e92-70cd95158815:
+            uuid: e17e4de9-033f-456b-8e92-70cd95158815
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_group_contact'
+              label: 'Group contact'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+            weight: 2
             additional: {  }
         third_party_settings: {  }
   layout_library:

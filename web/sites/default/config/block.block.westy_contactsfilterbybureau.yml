@@ -13,16 +13,16 @@ dependencies:
 id: westy_contactsfilterbybureau
 theme: westy
 region: side
-weight: -7
+weight: -11
 provider: null
 plugin: 'facet_block:contacts_filter_by_ad_group'
 settings:
   id: 'facet_block:contacts_filter_by_ad_group'
-  label: 'Contacts: Filter by Bureau'
+  label: 'Directory: Filter by Bureau'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: contactsfilterbybureau
+  block_id: westy_contactsfilterbybureau
 visibility:
   request_path:
     id: request_path

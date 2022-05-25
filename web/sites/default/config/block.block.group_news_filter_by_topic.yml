@@ -1,0 +1,29 @@
+uuid: 9eec7618-837b-4395-b6a2-9042deecd938
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_news_filter_by_topic
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_news_filter_by_topic
+theme: westy
+region: side
+weight: 6
+provider: null
+plugin: 'facet_block:group_news_filter_by_topic'
+settings:
+  id: 'facet_block:group_news_filter_by_topic'
+  label: 'Group News: Filter by Topic'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_news_filter_by_topic
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/news\r\n!/group/*/nodes/news"

@@ -168,4 +168,33 @@ class BatchCommands extends DrushCommands
       fclose($handle);
     }
   }
+
+
+  /**
+   * Drush command to restore publisher role.
+   *
+   * @command employees:restore_publisher_role
+   * @usage employees:restore_publisher_role
+   */
+  public function restore_publisher_role()
+  {
+    // The current work folder is the document root "/app/web"
+    if (($file = fopen('./modules/custom/portland_openid_connect/publisher-list.txt', "r")) !== FALSE) {
+
+      $user_storage = $this->entityTypeManager->getStorage('user');
+      while(!feof($file)) {
+        $username = trim(fgets($file));
+        $users = $user_storage->loadByProperties(['mail' => $username]);
+        if (empty($users)) {
+          $this->output()->writeln("Cannot find user $username");
+        } else {
+          $user = array_values($users)[0];
+          $user->status = 1;
+          $user->addRole('publisher');
+          $user->save();
+        }
+      }
+      fclose($file);
+    }
+  }
 }

@@ -1,29 +1,29 @@
-uuid: c188df23-4f96-4a55-99ac-7b2476663d0a
+uuid: 36dcfab1-d9ca-420f-8bec-df90232969fc
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.events_type
+    - facets.facet.news_filter_by_year
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_eventstype
+id: news_filter_by_year
 theme: westy
 region: side
-weight: 4
+weight: 1
 provider: null
-plugin: 'facet_block:events_type'
+plugin: 'facet_block:news_filter_by_year'
 settings:
-  id: 'facet_block:events_type'
-  label: 'Filter by Event Type'
+  id: 'facet_block:news_filter_by_year'
+  label: 'News: Filter by Year'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: eventstype
+  block_id: news_filter_by_year
 visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /events
+    pages: /news

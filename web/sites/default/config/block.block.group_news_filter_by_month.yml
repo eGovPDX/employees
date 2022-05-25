@@ -1,0 +1,29 @@
+uuid: 216207fd-958b-4567-abf8-51c0383f9436
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_news_filter_by_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_news_filter_by_month
+theme: westy
+region: side
+weight: 2
+provider: null
+plugin: 'facet_block:group_news_filter_by_month'
+settings:
+  id: 'facet_block:group_news_filter_by_month'
+  label: 'Group News: Filter by Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_news_filter_by_month
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/news\r\n!/group/*/nodes/news"

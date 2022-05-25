@@ -1,0 +1,29 @@
+uuid: 854db829-e854-434a-8e08-93b87d40f534
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_past_events_filter_by_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: groups_past_events_filter_by_type
+theme: westy
+region: side
+weight: 5
+provider: null
+plugin: 'facet_block:group_past_events_filter_by_type'
+settings:
+  id: 'facet_block:group_past_events_filter_by_type'
+  label: 'Group Events Past: Filter by Event Type'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: groups_past_events_filter_by_type
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/events/past\r\n!/group/*/nodes/events"

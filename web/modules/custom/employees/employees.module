@@ -19,27 +19,169 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   // TOOD: remove this once something similar is included in core, or the Drupal community
   // decides how it wants to handle accessible and usable validation.
 
-  // Validate the file field in Document
-  if ($form_id === "media_document_add_form" || $form_id === "media_document_edit_form") {
-    $form['#validate'][] = '_validate_document';
+  switch($form_id) {
+    case "media_document_add_form":
+    case "media_document_edit_form":
+      // Validate the file field in Document
+      $form['#validate'][] = '_validate_document';
+      break;
+    case "group_content_employee-group_membership_add_form":
+    case "group_content_employee-group_membership_edit_form":
+    case "group_content_private-group_membership_add_form":
+    case "group_content_private-group_membership_edit_form":
+      //  Don't modify role checkboxes for site admins
+      $current_user_roles = \Drupal::currentUser()->getRoles();
+      if( in_array("administrator", $current_user_roles) )
+      return;
+      $form['#attached']['library'][] = 'employees/employees';
+      $form["group_roles"]["widget"]["#required"] = true;
+      break;
+    case "group_content_employee-group_membership_group-join_form":
+      $form['actions']['submit']['#value'] = t('Follow group');
+      break;
+    case "group_content_employee-group_membership_group-leave_form":
+      $form['actions']['submit']['#value'] = t('Unfollow group');
+      break;
+    case "media_library_add_form_media_remote":
+      // Add remote document validater to the start of array
+      array_unshift($form['#validate'], '_validate_remote_document_in_media_library');
+      // Intentionally avoid using "break" here. Not a bug.
+    case "media_library_add_form_upload":
+    case "media_library_add_form_oembed":
+      if( array_key_exists('media', $form) ) {
+        $form["media"][0]["fields"]["name"]["widget"][0]["value"]["#default_value"] = '';
+        $form["media"][0]["fields"]["field_display_in_group"]["widget"][0]['target_id']['#required'] = true;
+        unset($form["media"][0]["fields"]["field_file_size"]);
+        unset($form["media"][0]["fields"]["field_mime_type"]);
+        $group_id = \Drupal::request()->getSession()->get('parent_group_id');
+        if($group_id) {
+          $form["media"][0]["fields"]['field_display_in_group']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+          // $group_id = \Drupal::request()->getSession()->remove('parent_group_id');
+        }
+      }
+      break;
+    case "media_remote_document_edit_form":
+    case "media_remote_document_add_form":
+      // Add remote document validater to the start of array
+      array_unshift($form['#validate'], '_validate_remote_document');
+      if( array_key_exists('media', $form) ) {
+        $form["name"]["widget"][0]["value"]["#default_value"] = '';
+        $form["field_display_in_group"]["widget"][0]['target_id']['#required'] = true;
+        unset($form["field_file_size"]);
+        unset($form["field_mime_type"]);
+        // Only set default group for new item
+        if($form_id === "media_remote_document_add_form") {
+          $group_id = \Drupal::request()->getSession()->get('parent_group_id');
+          if($group_id) {
+            $form['field_display_in_group']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+            // $group_id = \Drupal::request()->getSession()->remove('parent_group_id');
+          }
+        }
+      }
+      break;
   }
-  else if( $form_id === "group_content_employee-group_membership_add_form" ||
-  $form_id === "group_content_employee-group_membership_edit_form" ||
-  $form_id === "group_content_private-group_membership_add_form" ||
-  $form_id === "group_content_private-group_membership_edit_form") {
-    // Don't modify role checkboxes for site admins
-    $current_user_roles = \Drupal::currentUser()->getRoles();
-    if( in_array("administrator", $current_user_roles) ) return;
-    $form['#attached']['library'][] = 'employees/employees';
+}
 
-    $form["group_roles"]["widget"]["#required"] = true;
+/**
+ * A helper function to validate document.
+ */
+function _validate_remote_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+  $remote_document_url = $form_state->getValue("field_media_media_remote")[0]['value'];
+  // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
+  if (
+    strpos($remote_document_url, 'https://efiles.portlandoregon.gov/') === 0 &&
+    !(substr_compare($remote_document_url, "/file/document", -strlen("/file/document")) === 0)
+  ) {
+    $remote_document_url .= "/file/document";
   }
-  else if ( $form_id === "group_content_employee-group_membership_group-join_form" ) {
-    $form['actions']['submit']['#value'] = t('Follow group');
+
+  // Get eFiles file size and MIME type
+  try {
+    $headers = get_headers($remote_document_url, 1);
+  } catch (Exception $e) {
+    $form_state->setErrorByName('field_media_media_remote', 'Cannot retrieve file size and mimetype from this link.');
+    return;
   }
-  // else if ( $form_id === "group_content_employee-group_membership_group-leave_form" ) {
-  //   $form['actions']['submit']['#value'] = t('Unfollow group');
-  // }
+
+  if (
+    !empty($headers) &&
+    (substr_compare($headers[0], "200 OK", -strlen("200 OK")) === 0) &&
+    array_key_exists('Content-Type', $headers) &&
+    array_key_exists('Content-Length', $headers)
+  ) {
+    $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
+    if ($file_size === 0) {
+      $form_state->setErrorByName('field_media_media_remote', t('The linked file is empty.'));
+      return;
+    }
+    // Content-Type header can be "text/html; charset=utf-8"
+    $content_type_array = explode(';', $headers['Content-Type']);
+    // If content type is text/HTML, it's not a file
+    if (empty($content_type_array) || $content_type_array[0] === "text/html") {
+      // Commented this line out to support existing documents that are linked to an eFiles folder
+      // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+      return;
+    }
+
+    $form_state->setValue('field_file_size', [["value" => $file_size]]);
+    $form_state->setValue('field_mime_type', [["value" => $content_type_array[0]]]);
+  }
+}
+
+/**
+ * A helper function to validate remote document in media library dialog.
+ */
+function _validate_remote_document_in_media_library(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+  // DO NOT validate when the user clicks on the remove document button.
+  // ONLY validate when the entire form is submitted.
+  if ($form_state->getTriggeringElement()["#name"] === "media-0-remove-button") return;
+
+  $current_media_type = $form_state->getStorage("media_library_state")['media_library_state']->getSelectedTypeId();
+  if( $current_media_type == 'remote_document' ) {
+    // $remote_document_url = $form_state->getUserInput()['url'];
+    $remote_document_url = $form_state->getValue('media')[0]['fields']['field_media_media_remote'][0]['value'];
+    // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
+    if (
+      strpos($remote_document_url, 'https://efiles.portlandoregon.gov/') === 0 &&
+      !(substr_compare($remote_document_url, "/file/document", -strlen("/file/document")) === 0)
+    ) {
+      $remote_document_url .= "/file/document";
+    }
+
+    // Get eFiles file size and MIME type
+    try {
+      $headers = get_headers($remote_document_url, 1);
+    } catch (Exception $e) {
+      $form_state->setErrorByName('field_media_media_remote', 'Cannot retrieve file size and mimetype from this link.');
+      return;
+    }
+
+    if (
+      !empty($headers) &&
+      (substr_compare($headers[0], "200 OK", -strlen("200 OK")) === 0) &&
+      array_key_exists('Content-Type', $headers) &&
+      array_key_exists('Content-Length', $headers)
+    ) {
+      $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
+      if ($file_size === 0) {
+        $form_state->setErrorByName('field_media_media_remote', t('The linked file is empty.'));
+        return;
+      }
+      // Content-Type header can be "text/html; charset=utf-8"
+      $content_type_array = explode(';', $headers['Content-Type']);
+      // If content type is text/HTML, it's not a file
+      if (empty($content_type_array) || $content_type_array[0] === "text/html") {
+        // Commented this line out to support existing documents that are linked to an eFiles folder
+        // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+        return;
+      }
+
+      $form_state->getValue('media')[0]['fields']['field_file_size'] = [["value" => $file_size]];
+      $form_state->getValue('media')[0]['fields']['field_mime_type'] = [["value" => $content_type_array[0]]];
+    }
+  }
 }
 
 /**
@@ -65,22 +207,6 @@ function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\Alte
         $query->conditions()[$key]['value'] = substr_replace($value_orig, '.', $pos, strlen(' '));
       }
     }
-  }
-}
-
-/**
- * Implements hook_user_format_name_alter().
- */
-function employees_user_format_name_alter(&$name, $account)
-{
-  // Load the full user account.
-  $user = User::load($account->id());
-  // When the account is deleted, $user could be null.
-  if ($user == null) return;
-  $full_name = $user->get('field_first_name')->value . ' ' . $user->get('field_last_name')->value;
-  // Fall back to account name if first name and last name are empty
-  if ($full_name !== ' ') {
-    $name = $full_name;
   }
 }
 
