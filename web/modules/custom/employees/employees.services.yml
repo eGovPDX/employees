@@ -14,8 +14,3 @@ services:
     class: Drupal\employees\FileIconExtension
     tags:
       - { name: twig.extension }
-
-  solr_events_subscriber:
-    class: \Drupal\employees\EventSubscriber\SolrEventsSubscriber
-    tags:
-      - { name: 'event_subscriber' }

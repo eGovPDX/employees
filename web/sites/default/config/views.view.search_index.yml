@@ -286,6 +286,19 @@ display:
           sort_desc_label: Desc
       empty: {  }
       sorts:
+        field_search_boost:
+          id: field_search_boost
+          table: search_api_index_full_index
+          field: field_search_boost
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         search_api_relevance:
           id: search_api_relevance
           table: search_api_index_full_index
