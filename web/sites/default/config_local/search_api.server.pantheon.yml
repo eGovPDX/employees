@@ -27,12 +27,6 @@ dependencies:
     - search_api_solr.solr_request_handler.request_handler_tvrh_default_7_0_0
   module:
     - search_api_solr
-    - node
-    - group
-    - taxonomy
-    - user
-    - media
-    - search_api
 _core:
   default_config_hash: hOaNP_V6A13_xW6_NFX0BavSryQpDTQ9-TAueHIamWU
 id: pantheon
@@ -57,13 +51,13 @@ backend_config:
     index_timeout: 5
     optimize_timeout: 10
     finalize_timeout: 30
+    skip_schema_check: false
     solr_version: '8'
     http_method: AUTO
     commit_within: 1000
     jmx: false
     jts: false
     solr_install_dir: ''
-    skip_schema_check: false
   optimize: false
   fallback_multiple: false
   disabled_field_types: {  }

@@ -1,0 +1,716 @@
+uuid: 5c7dd420-b47a-490e-9ad0-9b2a4f31bd9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_description
+    - field.storage.group.field_org_type
+    - field.storage.node.field_display_in_group
+    - field.storage.user.field_address
+    - field.storage.node.field_bts_catalog_type
+    - field.storage.node.field_bureaus
+    - field.storage.node.field_business_capability
+    - field.storage.node.field_business_priority
+    - field.storage.node.field_category
+    - field.storage.node.field_cloud_service_type
+    - field.storage.node.field_contract_number
+    - field.storage.node.field_date_range
+    - field.storage.user.field_division_name
+    - field.storage.user.field_first_name
+    - field.storage.user.field_group_names
+    - field.storage.node.field_hosting_environment
+    - field.storage.user.field_is_contact_only
+    - field.storage.user.field_last_name
+    - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_p_card_allowed
+    - field.storage.user.field_phone
+    - field.storage.user.field_primary_groups
+    - field.storage.node.field_published_on
+    - field.storage.user.field_search_keywords
+    - field.storage.user.field_section
+    - field.storage.node.field_support_model
+    - field.storage.media.field_tags
+    - field.storage.user.field_title
+    - field.storage.node.field_topics
+    - field.storage.node.field_type
+    - field.storage.node.field_when
+    - field.storage.user.field_workspace
+    - field.storage.group.field_group_description
+    - field.storage.media.field_description
+    - field.storage.media.field_display_in_group
+    - search_api.server.pantheon
+    - core.entity_view_mode.user.compact
+  module:
+    - search_api_solr
+    - node
+    - group
+    - taxonomy
+    - user
+    - media
+    - search_api
+third_party_settings:
+  search_api_solr:
+    finalize: true
+    commit_before_finalize: false
+    commit_after_finalize: true
+    debug_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+id: full_index
+name: 'Full index'
+description: 'Full index of all content and group entities on employees.portland.gov'
+read_only: false
+field_settings:
+  content_body:
+    label: 'Content Body'
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  content_changed:
+    label: 'Content Changed'
+    datasource_id: 'entity:node'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - node
+  content_field_description:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description
+  content_group_type:
+    label: 'Displayed in » Group » Type'
+    datasource_id: 'entity:node'
+    property_path: 'field_display_in_group:entity:field_org_type'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.group.field_org_type
+        - field.storage.node.field_display_in_group
+      module:
+        - group
+  content_id:
+    label: 'Content ID'
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
+  content_status:
+    label: 'Content Published'
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  content_title:
+    label: 'Content Title'
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 5
+    dependencies:
+      module:
+        - node
+  content_type:
+    label: 'Content Type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  field_address:
+    label: 'Office location'
+    datasource_id: 'entity:user'
+    property_path: field_address
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_address
+  field_bts_catalog_type:
+    label: 'BTS catalog type'
+    datasource_id: 'entity:node'
+    property_path: field_bts_catalog_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_bts_catalog_type
+  field_bureaus:
+    label: Bureaus
+    datasource_id: 'entity:node'
+    property_path: field_bureaus
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_bureaus
+  field_business_capability:
+    label: 'Business capability'
+    datasource_id: 'entity:node'
+    property_path: field_business_capability
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_business_capability
+  field_business_priority:
+    label: 'Business priority'
+    datasource_id: 'entity:node'
+    property_path: field_business_priority
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_business_priority
+  field_category:
+    label: Category
+    datasource_id: 'entity:node'
+    property_path: field_category
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_category
+  field_category_name:
+    label: 'Category » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_category:entity:name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_category
+      module:
+        - taxonomy
+  field_cloud_service_type:
+    label: 'Cloud service type'
+    datasource_id: 'entity:node'
+    property_path: field_cloud_service_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_cloud_service_type
+  field_contract_number:
+    label: 'Contract Number'
+    datasource_id: 'entity:node'
+    property_path: field_contract_number
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_contract_number
+  field_date_range:
+    label: 'Contract Date'
+    datasource_id: 'entity:node'
+    property_path: field_date_range
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_date_range
+  field_date_range_end_value:
+    label: 'Contract Date » End date'
+    datasource_id: 'entity:node'
+    property_path: 'field_date_range:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_date_range
+  field_display_in_group:
+    label: 'Content Displayed in'
+    datasource_id: 'entity:node'
+    property_path: field_display_in_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_display_in_group
+  field_division_name:
+    label: 'Division name'
+    datasource_id: 'entity:user'
+    property_path: field_division_name
+    type: string
+    dependencies:
+      config:
+        - field.storage.user.field_division_name
+  field_first_name:
+    label: 'First name'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_first_name_phonetic:
+    label: 'First name (Phonetic)'
+    datasource_id: 'entity:user'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_first_name
+  field_group_names:
+    label: 'Group names'
+    datasource_id: 'entity:user'
+    property_path: field_group_names
+    type: string
+    dependencies:
+      config:
+        - field.storage.user.field_group_names
+  field_hosting_environment:
+    label: 'Hosting environment'
+    datasource_id: 'entity:node'
+    property_path: field_hosting_environment
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_hosting_environment
+  field_is_contact_only:
+    label: 'Is contact only'
+    datasource_id: 'entity:user'
+    property_path: field_is_contact_only
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.user.field_is_contact_only
+  field_last_name:
+    label: 'Last name'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+  field_last_name_phonetic:
+    label: 'Last name (Phonetic)'
+    datasource_id: 'entity:user'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.user.field_last_name
+  field_mandated_purchases:
+    label: 'Mandated Purchases'
+    datasource_id: 'entity:node'
+    property_path: field_mandated_purchases
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_mandated_purchases
+  field_p_card_allowed:
+    label: 'P-Card Allowed'
+    datasource_id: 'entity:node'
+    property_path: field_p_card_allowed
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_p_card_allowed
+  field_phone:
+    label: Phone
+    datasource_id: 'entity:user'
+    property_path: field_phone
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_phone
+  field_primary_groups:
+    label: 'Primary groups'
+    datasource_id: 'entity:user'
+    property_path: field_primary_groups
+    type: integer
+    dependencies:
+      config:
+        - field.storage.user.field_primary_groups
+  field_published_on:
+    label: 'Published on'
+    datasource_id: 'entity:node'
+    property_path: field_published_on
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_published_on
+  field_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:user'
+    property_path: field_search_keywords
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_search_keywords
+  field_section:
+    label: Section
+    datasource_id: 'entity:user'
+    property_path: field_section
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_section
+  field_support_model:
+    label: 'Support model'
+    datasource_id: 'entity:node'
+    property_path: field_support_model
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_support_model
+  field_tags:
+    label: Tags
+    datasource_id: 'entity:media'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_tags
+  field_title:
+    label: Title
+    datasource_id: 'entity:user'
+    property_path: field_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_title
+  field_topics:
+    label: Topics
+    datasource_id: 'entity:node'
+    property_path: field_topics
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_topics
+  field_type:
+    label: Type
+    datasource_id: 'entity:node'
+    property_path: field_type
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_type
+  field_when:
+    label: When
+    datasource_id: 'entity:node'
+    property_path: field_when
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_when
+  field_when_end_value:
+    label: 'When » End date'
+    datasource_id: 'entity:node'
+    property_path: 'field_when:end_value'
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_when
+  field_workspace:
+    label: Workspace
+    datasource_id: 'entity:user'
+    property_path: field_workspace
+    type: text
+    dependencies:
+      config:
+        - field.storage.user.field_workspace
+  group_id:
+    label: 'Group ID'
+    datasource_id: 'entity:group'
+    property_path: id
+    type: integer
+    dependencies:
+      module:
+        - group
+  group_summary:
+    label: 'Group Summary'
+    datasource_id: 'entity:group'
+    property_path: 'field_group_description:summary'
+    type: text
+    dependencies:
+      config:
+        - field.storage.group.field_group_description
+  group_title:
+    label: 'Group Title'
+    datasource_id: 'entity:group'
+    property_path: label
+    type: text
+    boost: !!float 5
+    dependencies:
+      module:
+        - group
+  group_type:
+    label: 'Group Type'
+    datasource_id: 'entity:group'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - group
+  mail_fulltext_edge:
+    label: Email
+    datasource_id: 'entity:user'
+    property_path: mail
+    type: 'solr_text_custom_omit_norms:edge'
+    boost: !!float 3
+    dependencies:
+      module:
+        - user
+  mail_fulltext_unstemmed:
+    label: Email
+    datasource_id: 'entity:user'
+    property_path: mail
+    type: solr_text_unstemmed
+    boost: !!float 3
+    dependencies:
+      module:
+        - user
+  media_bundle:
+    label: 'Media type'
+    datasource_id: 'entity:media'
+    property_path: bundle
+    type: string
+    dependencies:
+      module:
+        - media
+  media_changed:
+    label: Changed
+    datasource_id: 'entity:media'
+    property_path: changed
+    type: date
+    dependencies:
+      module:
+        - media
+  media_field_description:
+    label: Description
+    datasource_id: 'entity:media'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_description
+  media_field_display_in_group:
+    label: 'Belongs to'
+    datasource_id: 'entity:media'
+    property_path: field_display_in_group
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_display_in_group
+  media_name:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
+    boost: !!float 5
+    dependencies:
+      module:
+        - media
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    boost: 0.8
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:group':
+          employee: default
+          private: default
+        'entity:media':
+          document: ''
+        'entity:node':
+          bts_catalog_item: ''
+          contract: ''
+          event: default
+          news: default
+          page: default
+          resource: default
+        'entity:user':
+          user: compact
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  user_status:
+    label: 'User status'
+    datasource_id: 'entity:user'
+    property_path: status
+    type: boolean
+    dependencies:
+      module:
+        - user
+datasource_settings:
+  'entity:group':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:media':
+    bundles:
+      default: false
+      selected:
+        - document
+    languages:
+      default: true
+      selected: {  }
+  'entity:node':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
+  'entity:user':
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  entity_type: {  }
+  hierarchy:
+    weights:
+      preprocess_index: -45
+    fields:
+      field_bureaus: taxonomy_term-parent
+      field_business_capability: taxonomy_term-parent
+      field_business_priority: taxonomy_term-parent
+      field_category: taxonomy_term-parent
+      field_tags: taxonomy_term-parent
+      field_type: taxonomy_term-parent
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: false
+    fields:
+      - content_body
+      - content_title
+      - content_type
+      - group_summary
+      - group_title
+      - group_type
+      - rendered_item
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignore_character:
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+    all_fields: false
+    fields:
+      - content_body
+      - content_title
+      - content_type
+      - group_summary
+      - group_title
+      - group_type
+      - rendered_item
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+  language_with_fallback: {  }
+  rendered_item: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      'entity:group':
+        datasource_boost: !!float 0
+        bundle_boosts:
+          employee: !!float 0
+          private: !!float 0
+      'entity:media':
+        datasource_boost: !!float 0
+        bundle_boosts:
+          document: !!float 0
+      'entity:node':
+        datasource_boost: !!float 0
+        bundle_boosts:
+          bts_catalog_item: !!float 0
+          contract: !!float 0
+          event: !!float 0
+          news: !!float 0
+          page: !!float 0
+          resource: !!float 0
+      'entity:user':
+        datasource_boost: !!float 0
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: false
+server: pantheon
