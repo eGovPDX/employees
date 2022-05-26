@@ -6,6 +6,7 @@ dependencies:
     - 'block_content:basic:29c58e51-adf5-4358-a9c1-b902dc9477c3'
   module:
     - block_content
+    - system
     - user
   theme:
     - westy
@@ -31,3 +32,7 @@ visibility:
       user: '@user.current_user_context:current_user'
     roles:
       anonymous: anonymous
+  request_path:
+    id: request_path
+    negate: true
+    pages: /user/login
