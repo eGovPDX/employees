@@ -810,3 +810,30 @@ taxonomies:
       weight: '2'
       parent: '1176'
       uuid: 9b4cb768-afde-453e-ad7e-4e834fa1128b
+blocks:
+  -
+    info: 'Prompt anonymous user to log in'
+    langcode: en
+    uuid: 29c58e51-adf5-4358-a9c1-b902dc9477c3
+    bundle: basic
+    revision_id: null
+    rev_id_current: null
+    fields:
+      body:
+        -
+          value: "<p>&lt;p&gt;You are currently visiting the site as an anonymous user. Log in to view additional content.&lt;/p&gt;<br />\r\n&lt;ul class=\"nav flex-column\"&gt;<br />\r\n&nbsp; &lt;li class=\"nav-item\"&gt;&lt;a class=\"nav-link\" href=\"/user/login\"&gt;Log in&lt;/a&gt;&lt;/li&gt;<br />\r\n&lt;/ul&gt;</p>\r\n"
+          summary: ''
+          format: basic_html
+  -
+    info: 'Feedback link'
+    langcode: en
+    uuid: d397a46d-b25c-4254-bc22-26d5860b8280
+    bundle: basic
+    revision_id: null
+    rev_id_current: null
+    fields:
+      body:
+        -
+          value: "<p>See something we could improve on&nbsp;this page?&nbsp;<a href=\"/feedback\">Give website feedback</a>.</p>\r\n"
+          summary: ''
+          format: basic_html
