@@ -30,7 +30,11 @@ class CopyChangedToUpdated extends ViewsBulkOperationsActionBase {
     if(! $entity->hasField('field_updated_on')) return $this->t('Bulk operation: the entity does not have an Updated On field');
 
     $entity->field_updated_on->value = \Drupal::service('date.formatter')->format($entity->changed->value, 'local_datetime', '', 'UTC');
+    try{
     $entity->save();
+    } catch (Exception $e) {
+      \Drupal::logger('php')->error('Error saving entity ' . $entity->id() . ": " . $e->getTraceAsString());
+    }
     sleep(1); // Add a delay between saves
 
     // Don't return anything for a default completion message, otherwise return translatable markup.
