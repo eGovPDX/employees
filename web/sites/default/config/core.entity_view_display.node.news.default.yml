@@ -14,9 +14,11 @@ dependencies:
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
+    - field.field.node.news.field_updated_on
     - node.type.news
     - views.view.group_menu
   module:
+    - datetime
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -112,7 +114,7 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           272cf86f-6112-4157-ab51-576ac7a265e1:
             uuid: 272cf86f-6112-4157-ab51-576ac7a265e1
@@ -188,7 +190,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 3
+            weight: 4
             additional: {  }
           d3b66a9f-8c67-448b-bb03-7e7562a7ec47:
             uuid: d3b66a9f-8c67-448b-bb03-7e7562a7ec47
@@ -242,7 +244,7 @@ third_party_settings:
                 settings:
                   link: false
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           9647c753-6807-4f86-b1d2-cd53fcc851bb:
             uuid: 9647c753-6807-4f86-b1d2-cd53fcc851bb
@@ -258,7 +260,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 6
+            weight: 7
             additional: {  }
           b663fe87-0b1c-4c9a-b194-666afda15e10:
             uuid: b663fe87-0b1c-4c9a-b194-666afda15e10
@@ -292,6 +294,16 @@ third_party_settings:
               items_per_page: none
             weight: 0
             additional: {  }
+          2e84b237-ac8f-43ff-b282-208e57a4f13d:
+            uuid: 2e84b237-ac8f-43ff-b282-208e57a4f13d
+            region: main
+            configuration:
+              id: 'extra_field_block:node:news:content_dates_entity_view_1'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -316,6 +328,11 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  content_dates_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: main
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
@@ -372,6 +389,15 @@ content:
       link: true
     third_party_settings: {  }
     weight: 6
+    region: main
+  field_updated_on:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 8
     region: main
 hidden:
   field_display_in_group: true
