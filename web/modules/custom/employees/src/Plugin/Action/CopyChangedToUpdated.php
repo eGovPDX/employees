@@ -31,6 +31,7 @@ class CopyChangedToUpdated extends ViewsBulkOperationsActionBase {
 
     $entity->field_updated_on->value = \Drupal::service('date.formatter')->format($entity->changed->value, 'local_datetime', '', 'UTC');
     $entity->save();
+    sleep(1); // Add a delay between saves
 
     // Don't return anything for a default completion message, otherwise return translatable markup.
     return $this->t('Bulk operation: copied date from Changed to Updated On field');
