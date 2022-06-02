@@ -75,27 +75,6 @@ third_party_settings:
                   timezone_override: ''
                   format_type: medium
                 third_party_settings: {  }
-            weight: 2
-            additional: {  }
-          c7a62cf3-e6b6-4b55-babb-abc364b8eb4a:
-            uuid: c7a62cf3-e6b6-4b55-babb-abc364b8eb4a
-            region: side
-            configuration:
-              id: 'field_block:node:news:changed'
-              label: Changed
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: hidden
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                third_party_settings: {  }
             weight: 3
             additional: {  }
           e4481ea8-507e-48d5-8ed0-72a3c151c2f8:
@@ -209,7 +188,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           70ea1de5-78f9-486c-931b-1f3ef4358523:
             uuid: 70ea1de5-78f9-486c-931b-1f3ef4358523
@@ -225,7 +204,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           a85083db-ef0d-47f6-b5ac-315492fa527f:
             uuid: a85083db-ef0d-47f6-b5ac-315492fa527f
@@ -303,6 +282,26 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             weight: 3
+            additional: {  }
+          ea9d5703-93c2-42ab-836c-0da67e6148e6:
+            uuid: ea9d5703-93c2-42ab-836c-0da67e6148e6
+            region: side
+            configuration:
+              id: 'field_block:node:news:field_updated_on'
+              label: 'Updated on'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: datetime_default
+                label: above
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                third_party_settings: {  }
+            weight: 4
             additional: {  }
         third_party_settings: {  }
   layout_library:

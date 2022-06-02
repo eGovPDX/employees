@@ -9,16 +9,16 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * Copy Changed date to Updated On.
+ * Copy Created date to Updated On.
  *
  * @Action(
- *   id = "employees_copy_change_to_updated",
- *   label = @Translation("Copy Changed date to Updated On date (custom action)"),
+ *   id = "employees_copy_created_to_updated",
+ *   label = @Translation("Copy Created date to Updated On date (custom action)"),
  *   type = "",
  *   confirm = FALSE,
  * )
  */
-class CopyChangedToUpdated extends ViewsBulkOperationsActionBase {
+class CopyCreatedToUpdated extends ViewsBulkOperationsActionBase {
 
   use StringTranslationTrait;
 
@@ -28,12 +28,12 @@ class CopyChangedToUpdated extends ViewsBulkOperationsActionBase {
   public function execute($entity = NULL) {
     // Only process entity that has "field_updated_on"
     if(! $entity->hasField('field_updated_on')) return $this->t('Bulk operation: the entity does not have an Updated On field');
-
-    $entity->field_updated_on->value = \Drupal::service('date.formatter')->format($entity->changed->value, 'local_datetime', '', 'UTC');
+    
+    $entity->field_updated_on->value = \Drupal::service('date.formatter')->format($entity->created->value, 'local_datetime', '', 'UTC');
     $entity->save();
 
     // Don't return anything for a default completion message, otherwise return translatable markup.
-    return $this->t('Bulk operation: copied date from Changed to Updated On field');
+    return $this->t('Bulk operation: copied date from Created to Updated On field');
   }
 
   /**
