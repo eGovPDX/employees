@@ -1,0 +1,38 @@
+uuid: 3ca1f0f3-0072-4ac8-aee3-b386d881179e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:29c58e51-adf5-4358-a9c1-b902dc9477c3'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - westy
+id: promptanonymoususertologin
+theme: westy
+region: menu
+weight: -32
+provider: null
+plugin: 'block_content:29c58e51-adf5-4358-a9c1-b902dc9477c3'
+settings:
+  id: 'block_content:29c58e51-adf5-4358-a9c1-b902dc9477c3'
+  label: 'Prompt anonymous user to log in'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+  request_path:
+    id: request_path
+    negate: true
+    pages: /user/login

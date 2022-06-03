@@ -345,20 +345,7 @@ display:
     position: 1
     display_options:
       title: Assigned
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>"
-            format: full_html
-          tokenize: false
+      empty: {  }
       filters:
         field_org_type_target_id:
           id: field_org_type_target_id
@@ -575,7 +562,7 @@ display:
       display_description: ''
       display_extenders: {  }
       block_description: 'Groups Assigned'
-      block_hide_empty: false
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -931,17 +918,7 @@ display:
           role:
             anonymous: anonymous
             authenticated: authenticated
-      empty:
-        title:
-          id: title
-          table: views
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: title
-          empty: true
-          title: 'No groups assigned'
+      empty: {  }
       arguments:
         uid:
           id: uid
@@ -1198,7 +1175,7 @@ display:
       display_description: 'Profile Assigned Groups'
       display_extenders: {  }
       block_description: 'Groups Assigned'
-      block_hide_empty: false
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
