@@ -115,6 +115,15 @@ lando drush migrate:import citywide_contracts
 ```
 ##### On Pantheon
 ```
-lando terminus drush employees.powr-[ID] -- migrate:import citywide_contracts
+lando terminus drush employees.[env] -- migrate:import citywide_contracts
 ```
 
+#### Taxonomy Import of Missing Topics and Tags
+##### Local
+```
+lando drush migrate:import --group=taxonomy_import
+```
+##### On Pantheon
+```
+lando terminus drush employees.[env] -- migrate:import --group=taxonomy_import
+```
