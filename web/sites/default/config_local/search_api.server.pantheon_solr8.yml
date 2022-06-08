@@ -1,6 +1,6 @@
-uuid: 74bed1a1-9825-4640-b145-3d3e5d646bc8
+uuid: 84918f76-e26b-4e57-be7f-04279bf8326f
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - search_api_solr.solr_cache.cache_document_default_7_0_0
@@ -8,16 +8,17 @@ dependencies:
     - search_api_solr.solr_cache.cache_filter_default_7_0_0
     - search_api_solr.solr_cache.cache_persegfilter_default_7_0_0
     - search_api_solr.solr_cache.cache_queryresult_default_7_0_0
-    - search_api_solr.solr_field_type.text_edge_und_6_0_0
+    - search_api_solr.solr_field_type.text_edge_und_7_0_0
     - search_api_solr.solr_field_type.text_edgestring_und_6_0_0
-    - search_api_solr.solr_field_type.text_en_6_0_0
-    - search_api_solr.solr_field_type.text_ngram_und_6_0_0
+    - search_api_solr.solr_field_type.text_en_7_0_0
+    - search_api_solr.solr_field_type.text_ngram_und_7_0_0
     - search_api_solr.solr_field_type.text_ngramstring_und_6_0_0
     - search_api_solr.solr_field_type.text_phonetic_en_7_0_0
     - search_api_solr.solr_field_type.text_phonetic_und_7_0_0
-    - search_api_solr.solr_field_type.text_und_6_0_0
-    - search_api_solr.solr_request_dispatcher.request_dispatcher_httpcachingnever_default_7_0_0
+    - search_api_solr.solr_field_type.text_und_7_0_0
+    - search_api_solr.solr_request_dispatcher.request_dispatcher_httpcaching_default_7_0_0
     - search_api_solr.solr_request_handler.request_handler_autocomplete_default_7_0_0
+    - search_api_solr.solr_request_handler.request_handler_elevate_default_7_0_0
     - search_api_solr.solr_request_handler.request_handler_extract_default_7_0_0
     - search_api_solr.solr_request_handler.request_handler_mlt_default_7_0_0
     - search_api_solr.solr_request_handler.request_handler_select_default_7_0_0
@@ -26,44 +27,47 @@ dependencies:
     - search_api_solr.solr_request_handler.request_handler_tvrh_default_7_0_0
   module:
     - search_api_solr
-id: searchstax
-name: SearchStax
-description: 'Solr server hosted by SearchStax.com. The key module sets the Solr host, Solr core, and HTTP auth parameters from secret .key files.'
+_core:
+  default_config_hash: hOaNP_V6A13_xW6_NFX0BavSryQpDTQ9-TAueHIamWU
+id: pantheon_solr8
+name: 'Pantheon Solr8'
+description: 'Currently configured with a local Solr server on a Lando environment.'
 backend: search_api_solr
 backend_config:
-  retrieve_data: true
+  retrieve_data: false
   highlight_data: false
   site_hash: false
   server_prefix: ''
   domain: generic
   environment: default
-  connector: basic_auth
+  connector: standard
   connector_config:
-    scheme: https
-    host: 'null'
-    port: 443
+    scheme: http
+    host: solr
+    port: 8983
     path: /
-    core: 'null'
+    core: lando
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10
     finalize_timeout: 30
-    solr_version: ''
+    skip_schema_check: false
+    solr_version: '8'
     http_method: AUTO
     commit_within: 1000
     jmx: false
+    jts: false
     solr_install_dir: ''
-    username: 'null'
-    password: ''
   optimize: false
+  fallback_multiple: false
   disabled_field_types: {  }
   disabled_caches: {  }
   disabled_request_handlers:
-    - request_handler_elevate_default_7_0_0
-    - request_handler_replicationmaster_default_7_0_0
     - request_handler_replicationslave_default_7_0_0
+    - request_handler_replicationmaster_default_7_0_0
   disabled_request_dispatchers:
-    - request_dispatcher_httpcaching_default_7_0_0
+    - request_dispatcher_httpcachingnever_default_7_0_0
   rows: 10
   index_single_documents_fallback_count: 10
-  skip_schema_check: false
+  index_empty_text_fields: false
+  suppress_missing_languages: false

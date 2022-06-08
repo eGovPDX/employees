@@ -163,3 +163,9 @@ $settings['trusted_host_patterns'] = array(
 );
 
 $settings['file_temp_path'] = '/tmp';
+
+// SOLR on Pantheon defines the scheme as an environment variable.
+// We define this just so that the module doesn't break.
+// This is only needed for Lando environments.
+putenv('PANTHEON_INDEX_SCHEME=https');
+putenv('PANTHEON_INDEX_PORT=449');
