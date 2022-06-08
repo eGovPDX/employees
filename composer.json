@@ -85,6 +85,7 @@
         "drupal/search_api_autocomplete": "^1.6",
         "drupal/search_api_location": "^1.0@alpha",
         "drupal/search_api_page": "^1.0@beta",
+        "drupal/search_api_pantheon": "^8",
         "drupal/search_api_solr": "^4.2",
         "drupal/seckit": "^2.0",
         "drupal/select2": "^1.12",
@@ -116,9 +117,9 @@
         "zendesk/zendesk_api_client_php": "^2.2"
     },
     "require-dev": {
-        "drupal-composer/drupal-security-advisories": "8.x-dev",
+        "drupal-composer/drupal-security-advisories": "9.x-dev",
         "drupal/devel": "^4.1",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-latest"
     },
     "repositories": [
         {
@@ -218,6 +219,9 @@
             },
             "drupal/structure_sync": {
                 "3180878 - D9 - getVocabularyId (undefined method)": "https://www.drupal.org/files/issues/2020-11-05/3180878-undefined-method-getVocabularyId-1.patch"
+            },
+            "drupal/search_api_pantheon": {
+                "3261858 - The path of a URI with an authority must start with a slash '/' or be empty. Automagically fixing the URI": "https://www.drupal.org/files/issues/2022-02-01/3261858.patch"
             },
             "drupal/field_states_ui": {
                 "3263814 - Error: Call to undefined method getFormDisplay()": "https://www.drupal.org/files/issues/2022-04-12/3263814-1.patch"
