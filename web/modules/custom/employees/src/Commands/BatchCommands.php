@@ -197,21 +197,4 @@ class BatchCommands extends DrushCommands
       fclose($file);
     }
   }
-
-  /**
-   * Drush command to copy Created date to Updated On date for News.
-   *
-   * @command employees:copy_created_to_updated
-   * @usage employees:copy_created_to_updated
-   */
-  public function copy_created_to_updated() {
-    $news = \Drupal::entityTypeManager()->getStorage('node')
-      ->loadByProperties(['type' => 'news']);
-    foreach($news as $news_item) {
-      $news_item->field_updated_on->value = \Drupal::service('date.formatter')
-        ->format($news_item->created->value, 'local_datetime', '', 'UTC');
-      $news_item->save();
-    }
-    echo count($news) . " news items are updated.\n";
-  }
 }
