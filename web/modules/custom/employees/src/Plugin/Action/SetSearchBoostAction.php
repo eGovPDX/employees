@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * Some description.
+ * Set search boost
  *
  * @Action(
  *   id = "employees_set_search_boost_action",

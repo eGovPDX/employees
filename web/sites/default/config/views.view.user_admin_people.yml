@@ -98,44 +98,45 @@ display:
               action_id: add_assigned_and_following
               preconfiguration:
                 add_confirmation: false
-            2:
+                label_override: 'Convert Member to Assigned or Following'
+            4:
               action_id: employees_set_search_boost_action
               preconfiguration:
                 add_confirmation: false
-                search_boost: '1'
+                label_override: 'Set search boost'
             6:
-              action_id: sync_user_status_with_ad
-              preconfiguration:
-                add_confirmation: false
-            7:
               action_id: retrieve_user_info_from_ad
               preconfiguration:
                 add_confirmation: false
-            8:
+            7:
               action_id: user_update_user_primary_groups
               preconfiguration:
                 add_confirmation: false
-            9:
-              action_id: user_unblock_user_action
+            8:
+              action_id: sync_user_status_with_ad
               preconfiguration:
                 add_confirmation: false
             10:
-              action_id: user_block_user_action
-              preconfiguration:
-                add_confirmation: false
-            11:
-              action_id: user_remove_role_action
-              preconfiguration:
-                add_confirmation: false
-            12:
               action_id: user_add_role_action
               preconfiguration:
                 add_confirmation: false
-            14:
-              action_id: vbo_cancel_user_action
+            11:
+              action_id: user_unblock_user_action
+              preconfiguration:
+                add_confirmation: false
+            12:
+              action_id: user_remove_role_action
+              preconfiguration:
+                add_confirmation: false
+            13:
+              action_id: user_block_user_action
               preconfiguration:
                 add_confirmation: false
             16:
+              action_id: vbo_cancel_user_action
+              preconfiguration:
+                add_confirmation: false
+            17:
               action_id: 'entity:save_action:user'
               preconfiguration:
                 add_confirmation: false
