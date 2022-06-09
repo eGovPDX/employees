@@ -527,7 +527,7 @@ display:
           id: rendered_entity
           table: node
           field: rendered_entity
-          relationship: field_related_content
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -584,7 +584,7 @@ display:
           id: field_when_value
           table: node__field_when
           field: field_when_value
-          relationship: field_related_content
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: datetime
@@ -599,7 +599,7 @@ display:
           id: status
           table: node_field_data
           field: status
-          relationship: field_related_content
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -639,7 +639,7 @@ display:
           id: type
           table: node_field_data
           field: type
-          relationship: field_related_content
+          relationship: none
           group_type: group
           admin_label: ''
           entity_type: node
@@ -681,7 +681,7 @@ display:
           id: field_when_value
           table: node__field_when
           field: field_when_value
-          relationship: field_related_content
+          relationship: none
           group_type: group
           admin_label: ''
           plugin_id: datetime
@@ -738,10 +738,22 @@ display:
         use_more_text: false
         link_display: false
         link_url: false
+        relationships: false
         fields: false
         sorts: false
         filters: false
         filter_groups: false
+      relationships:
+        reverse__node__field_related_content:
+          id: reverse__node__field_related_content
+          table: node_field_data
+          field: reverse__node__field_related_content
+          relationship: none
+          group_type: group
+          admin_label: field_related_content
+          entity_type: node
+          plugin_id: entity_reverse
+          required: true
       display_description: ''
       use_more: false
       use_more_always: false
@@ -793,7 +805,7 @@ display:
           id: title
           table: node_field_data
           field: title
-          relationship: field_related_content
+          relationship: reverse__node__field_related_content
           group_type: group
           admin_label: ''
           entity_type: node
@@ -859,52 +871,13 @@ display:
         options:
           offset: 0
           items_per_page: 5
+      sorts: {  }
       filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          relationship: field_related_content
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          relationship: field_related_content
+          relationship: reverse__node__field_related_content
           group_type: group
           admin_label: ''
           entity_type: node
@@ -942,57 +915,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: field_related_content
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          operator: '>='
-          value:
-            min: ''
-            max: ''
-            value: '-2 months'
-            type: offset
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       filter_groups:
         operator: AND
-        groups:
-          1: AND
+        groups: {  }
       defaults:
         title: false
         pager: false
@@ -1001,9 +926,22 @@ display:
         use_more_text: false
         link_display: false
         link_url: false
+        relationships: false
         fields: false
+        sorts: false
         filters: false
         filter_groups: false
+      relationships:
+        reverse__node__field_related_content:
+          id: reverse__node__field_related_content
+          table: node_field_data
+          field: reverse__node__field_related_content
+          relationship: none
+          group_type: group
+          admin_label: field_related_content
+          entity_type: node
+          plugin_id: entity_reverse
+          required: true
       display_description: ''
       use_more: false
       use_more_always: false
