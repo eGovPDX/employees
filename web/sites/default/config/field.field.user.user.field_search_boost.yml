@@ -1,0 +1,26 @@
+uuid: 39d39278-bec5-4574-b0e9-8780ce2ed79d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_search_boost
+  module:
+    - user
+id: user.user.field_search_boost
+field_name: field_search_boost
+entity_type: user
+bundle: user
+label: 'Search boost'
+description: 'A positive float number (0 to 100) that will be used to boost search result at query time. Default to 1. If the value is less than 1, the user will be moved toward the end of the search result list, and vice versa.'
+required: false
+translatable: false
+default_value:
+  -
+    value: !!float 1
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: !!float 100
+  prefix: ''
+  suffix: ''
+field_type: float

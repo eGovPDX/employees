@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * Some description.
+ * Publish content
  *
  * @Action(
  *   id = "employees_publish_action",
