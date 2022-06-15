@@ -200,8 +200,21 @@
                 "2329253 - Allow the ChangedItem to skip updating the entity's \"changed\" timestamp when synchronizing (f.e. when migrating)": "https://www.drupal.org/files/issues/2021-09-29/2329253-drupal-allow-changeditem-skipping-78-9.3.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/powr-4255-retry-starting-transaction.patch"
             },
+            "drupal/bulk_user_registration": {
+                "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch",
+                "Batch error with php version 8": "https://www.drupal.org/files/issues/2022-01-19/batch-error-with-php-version-8-3259418-2.patch"
+            },
+            "drupal/datalayer": {
+                "3171896 - Exception page because of incorrect path.alias_manager service name": "https://www.drupal.org/files/issues/2020-09-18/3171896-path_alias-manager.patch"
+            },
             "drupal/datetime_range": {
                 "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch"
+            },
+            "drupal/facets": {
+                "2939710 - Add support for 'Search API (tags based)' caching in Views": "https://git.drupalcode.org/project/facets/-/merge_requests/54.patch"
+            },
+            "drupal/field_states_ui": {
+                "3263814 - Error: Call to undefined method getFormDisplay()": "https://www.drupal.org/files/issues/2022-04-12/3263814-1.patch"
             },
             "drupal/group": {
                 "2842630 - Empty page when trying to create group node": "https://www.drupal.org/files/issues/2019-01-04/2842630-20.patch",
@@ -211,21 +224,14 @@
             "drupal/openid_connect_windows_aad": {
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
             },
-            "drupal/bulk_user_registration": {
-                "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch",
-                "Batch error with php version 8": "https://www.drupal.org/files/issues/2022-01-19/batch-error-with-php-version-8-3259418-2.patch"
-            },
-            "drupal/datalayer": {
-                "3171896 - Exception page because of incorrect path.alias_manager service name": "https://www.drupal.org/files/issues/2020-09-18/3171896-path_alias-manager.patch"
-            },
-            "drupal/structure_sync": {
-                "3180878 - D9 - getVocabularyId (undefined method)": "https://www.drupal.org/files/issues/2020-11-05/3180878-undefined-method-getVocabularyId-1.patch"
+            "drupal/search_api": {
+                "3258375 - Out of memory error when used with views, metatag and memcache modules": "https://www.drupal.org/files/issues/2022-03-18/3258375-19--problems_with_serialized_views_results.patch"
             },
             "drupal/search_api_pantheon": {
                 "3261858 - The path of a URI with an authority must start with a slash '/' or be empty. Automagically fixing the URI": "https://www.drupal.org/files/issues/2022-02-01/3261858.patch"
             },
-            "drupal/field_states_ui": {
-                "3263814 - Error: Call to undefined method getFormDisplay()": "https://www.drupal.org/files/issues/2022-04-12/3263814-1.patch"
+            "drupal/structure_sync": {
+                "3180878 - D9 - getVocabularyId (undefined method)": "https://www.drupal.org/files/issues/2020-11-05/3180878-undefined-method-getVocabularyId-1.patch"
             }
         }
     },
