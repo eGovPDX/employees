@@ -10,7 +10,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * Some description.
+ * Mark content for review
  *
  * @Action(
  *   id = "mark_for_review_action",
