@@ -286,6 +286,19 @@ display:
           sort_desc_label: Desc
       empty: {  }
       sorts:
+        field_search_boost:
+          id: field_search_boost
+          table: search_api_index_full_index
+          field: field_search_boost
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         search_api_relevance:
           id: search_api_relevance
           table: search_api_index_full_index
@@ -376,8 +389,10 @@ display:
           min_length: null
           fields:
             - field_address
-            - field_first_name_1
-            - field_last_name_1
+            - field_first_name
+            - field_first_name_phonetic
+            - field_last_name
+            - field_last_name_phonetic
             - field_phone
             - field_search_keywords
             - field_section
@@ -477,6 +492,50 @@ display:
             min: ''
             max: ''
             value: ''
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_search_boost:
+          id: field_search_boost
+          table: search_api_index_full_index
+          field: field_search_boost
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_numeric
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: '0'
           group: 1
           exposed: false
           expose:
