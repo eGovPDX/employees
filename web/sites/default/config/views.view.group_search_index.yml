@@ -724,6 +724,19 @@ display:
           offset: 0
           items_per_page: 5
       sorts:
+        field_updated_on:
+          id: field_updated_on
+          table: search_api_index_full_index
+          field: field_updated_on
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         field_published_on:
           id: field_published_on
           table: search_api_index_full_index
@@ -3343,6 +3356,19 @@ display:
             multi_type: separator
             multi_separator: ', '
       sorts:
+        field_updated_on:
+          id: field_updated_on
+          table: search_api_index_full_index
+          field: field_updated_on
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         field_published_on:
           id: field_published_on
           table: search_api_index_full_index
