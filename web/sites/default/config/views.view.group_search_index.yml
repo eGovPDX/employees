@@ -200,6 +200,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_documents:
     id: block_documents
@@ -374,9 +375,11 @@ display:
         - 'languages:language_interface'
         - route
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_events:
     id: block_group_events
@@ -642,9 +645,11 @@ display:
         - 'languages:language_interface'
         - route
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_news:
     id: block_group_news
@@ -862,9 +867,11 @@ display:
         - 'languages:language_interface'
         - route
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_todays_events:
     id: block_group_todays_events
@@ -1263,9 +1270,11 @@ display:
         - 'languages:language_interface'
         - route
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_contracts:
     id: page_contracts
@@ -2000,6 +2009,9 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
+      cache:
+        type: none
+        options: {  }
       empty:
         area:
           id: area
@@ -2204,6 +2216,7 @@ display:
           parse_mode: terms
           min_length: null
           fields:
+            - content_body
             - content_title
             - field_category_name
             - field_contract_number
@@ -2391,7 +2404,7 @@ display:
           hide_empty: false
       defaults:
         empty: false
-        cache: true
+        cache: false
         title: false
         style: false
         row: false
@@ -2452,6 +2465,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:field.storage.group.field_contract_search_text'
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_contract_number'
@@ -2674,6 +2688,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_group_events:
     id: page_group_events
@@ -3560,6 +3575,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_group_past_events:
     id: page_group_past_events
