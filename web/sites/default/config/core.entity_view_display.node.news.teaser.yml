@@ -15,9 +15,9 @@ dependencies:
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
+    - field.field.node.news.field_updated_on
     - node.type.news
   module:
-    - smart_date
     - smart_trim
     - user
 id: node.news.teaser
@@ -44,17 +44,15 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_published_on:
-    type: smartdate_default
-    label: inline
-    settings:
-      timezone_override: ''
-      format_type: medium
-      format: date_only
-      force_chronological: false
-      add_classes: false
+  content_dates_entity_view_1:
+    settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  featured_content_dates_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
     region: content
 hidden:
   content_moderation_control: true
@@ -62,11 +60,13 @@ hidden:
   field_display_in_group: true
   field_feature: true
   field_feature_until: true
+  field_published_on: true
   field_related_content: true
   field_reviewer: true
   field_tags: true
   field_topics: true
   field_type: true
+  field_updated_on: true
   langcode: true
   links: true
   search_api_excerpt: true

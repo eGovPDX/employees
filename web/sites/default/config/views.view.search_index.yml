@@ -2279,10 +2279,23 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       sorts:
-        content_changed:
-          id: content_changed
+        field_updated_on:
+          id: field_updated_on
           table: search_api_index_full_index
-          field: content_changed
+          field: field_updated_on
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_published_on:
+          id: field_published_on
+          table: search_api_index_full_index
+          field: field_published_on
           relationship: none
           group_type: group
           admin_label: ''
