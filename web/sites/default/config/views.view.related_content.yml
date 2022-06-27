@@ -614,11 +614,11 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          operator: '>'
+          operator: '>='
           value:
             min: ''
             max: ''
-            value: '-1 day'
+            value: '1 day'
             type: offset
           group: 1
           exposed: false
@@ -1005,9 +1005,101 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_updated_on_value:
+          id: field_updated_on_value
+          table: node__field_updated_on
+          field: field_updated_on_value
+          relationship: reverse__node__field_related_content
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: '1 year'
+            type: offset
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_published_on_value:
+          id: field_published_on_value
+          table: node__field_published_on
+          field: field_published_on_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: datetime
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: '1 year'
+            type: date
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
-        groups: {  }
+        groups:
+          1: AND
+          2: OR
       defaults:
         title: false
         pager: false
