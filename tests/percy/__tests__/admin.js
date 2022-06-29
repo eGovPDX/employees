@@ -17,6 +17,7 @@ let BROWSER_OPTION = {
 describe('Visual Regression Testing', () => {
     let browser, page;
     beforeAll(async () => {
+        // Remove dev identicator
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
 
