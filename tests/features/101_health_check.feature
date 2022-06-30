@@ -18,4 +18,3 @@ Feature: Site health check
     When I visit "/admin/config/development/configuration"
     Then I wait for the page to be loaded
     And I should see "The staged configuration is identical to the active configuration."
-    
