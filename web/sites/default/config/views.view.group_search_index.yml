@@ -129,7 +129,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       empty: {  }
       sorts: {  }
@@ -200,7 +200,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_documents:
     id: block_documents
@@ -375,11 +374,9 @@ display:
         - 'languages:language_interface'
         - route
         - url
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_events:
     id: block_group_events
@@ -645,11 +642,9 @@ display:
         - 'languages:language_interface'
         - route
         - url
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_news:
     id: block_group_news
@@ -867,11 +862,9 @@ display:
         - 'languages:language_interface'
         - route
         - url
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   block_group_todays_events:
     id: block_group_todays_events
@@ -1270,11 +1263,9 @@ display:
         - 'languages:language_interface'
         - route
         - url
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_contracts:
     id: page_contracts
@@ -2465,7 +2456,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:field.storage.group.field_contract_search_text'
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_contract_number'
@@ -2688,7 +2678,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_group_events:
     id: page_group_events
@@ -3575,7 +3564,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:facets.facet.group_contract_category'
         - 'config:search_api.index.full_index'
   page_group_past_events:
     id: page_group_past_events
