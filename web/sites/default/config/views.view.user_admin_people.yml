@@ -11,6 +11,7 @@ dependencies:
     - field.storage.user.field_managers
     - field.storage.user.field_office_location
     - field.storage.user.field_phone
+    - field.storage.user.field_search_boost
     - field.storage.user.field_title
     - field.storage.user.user_picture
     - responsive_image.styles.medium
@@ -1152,6 +1153,72 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_search_boost:
+          id: field_search_boost
+          table: user__field_search_boost
+          field: field_search_boost
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Search boost'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         operations:
           id: operations
           table: users
@@ -1749,6 +1816,55 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_search_boost_value:
+          id: field_search_boost_value
+          table: user__field_search_boost
+          field: field_search_boost_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_search_boost_value_op
+            label: 'Search boost greater than or equal to'
+            description: ''
+            use_operator: false
+            operator: field_search_boost_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_search_boost_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              content_lead: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: table
         options:
@@ -1773,6 +1889,7 @@ display:
             field_last_name: field_last_name
             field_office_location: field_office_location
             field_address: field_address
+            field_search_boost: field_search_boost
             operations: operations
           default: created
           info:
@@ -1891,6 +2008,13 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            field_search_boost:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             operations:
               align: ''
               separator: ''
@@ -1952,6 +2076,7 @@ display:
         - 'config:field.storage.user.field_managers'
         - 'config:field.storage.user.field_office_location'
         - 'config:field.storage.user.field_phone'
+        - 'config:field.storage.user.field_search_boost'
         - 'config:field.storage.user.field_title'
         - 'config:field.storage.user.user_picture'
   page_admin_people:
@@ -1996,5 +2121,6 @@ display:
         - 'config:field.storage.user.field_managers'
         - 'config:field.storage.user.field_office_location'
         - 'config:field.storage.user.field_phone'
+        - 'config:field.storage.user.field_search_boost'
         - 'config:field.storage.user.field_title'
         - 'config:field.storage.user.user_picture'
