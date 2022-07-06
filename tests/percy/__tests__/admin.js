@@ -1,5 +1,6 @@
 const percySnapshot = require("@percy/puppeteer");
 const puppeteer = require("puppeteer");
+const util = require('../lib/util');
 
 const SITE_NAME = process.env.SITE_NAME;
 const PROJECT_NAME = process.env.CIRCLE_PROJECT_REPONAME
@@ -17,7 +18,6 @@ let BROWSER_OPTION = {
 describe('Visual Regression Testing', () => {
     let browser, page;
     beforeAll(async () => {
-        // Remove dev identicator
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
 
@@ -41,6 +41,7 @@ describe('Visual Regression Testing', () => {
     it('Home Page', async function () {
         try {
             await page.goto(HOME_PAGE)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - Home Page")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
@@ -56,6 +57,7 @@ describe('Visual Regression Testing', () => {
     it('Group Home Page', async function () {
         try {
             await page.goto(`${HOME_PAGE}/web-support`)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - City Web Editors")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
@@ -71,6 +73,7 @@ describe('Visual Regression Testing', () => {
     it('Directory Search View', async function () {
         try {
             await page.goto(`${HOME_PAGE}/directory`)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - Directory")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
@@ -86,6 +89,7 @@ describe('Visual Regression Testing', () => {
     it('News Search View', async function () {
         try {
             await page.goto(`${HOME_PAGE}/news`)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - News")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
@@ -101,6 +105,7 @@ describe('Visual Regression Testing', () => {
     it('Events Search View', async function () {
         try {
             await page.goto(`${HOME_PAGE}/events`)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - Events")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
@@ -116,6 +121,7 @@ describe('Visual Regression Testing', () => {
     it('Groups', async function () {
         try {
             await page.goto(`${HOME_PAGE}/groups`)
+            await util.removeEnvironmentIndicator(page)
             await percySnapshot(page, "SuperAdmin - Groups")
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
