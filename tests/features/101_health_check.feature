@@ -17,4 +17,5 @@ Feature: Site health check
     Then I should not see "The following changes were detected in the entity type and field definitions."
     When I visit "/admin/config/development/configuration"
     Then I wait for the page to be loaded
-    And I should see "There are no configuration changes to import."
+    And I should see "The staged configuration is identical to the active configuration."
+    
