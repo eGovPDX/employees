@@ -102,25 +102,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          7f9d0bef-711b-4394-a89a-1f96ea3904d6:
-            uuid: 7f9d0bef-711b-4394-a89a-1f96ea3904d6
-            region: side
-            configuration:
-              id: 'field_block:node:page:uid'
-              label: 'Authored by'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: hidden
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
           a6cbe979-ec4e-43e2-828c-7b8940b71515:
             uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
             region: main
@@ -292,7 +273,7 @@ third_party_settings:
             configuration:
               id: 'extra_field_block:node:page:content_dates_eva_created_content'
               label: Created
-              label_display: visible
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
@@ -307,7 +288,7 @@ third_party_settings:
             configuration:
               id: 'extra_field_block:node:page:content_dates_eva_updated_content'
               label: Updated
-              label_display: visible
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity

@@ -437,11 +437,11 @@ display:
           entity_type: node
           entity_field: created
           plugin_id: field
-          label: ''
+          label: Created
           exclude: false
           alter:
             alter_text: false
-            text: ''
+            text: 'Created F d, Y g:i a'
             make_link: false
             path: ''
             absolute: false
@@ -455,7 +455,7 @@ display:
             prefix: ''
             suffix: ''
             target: ''
-            nl2br: false
+            nl2br: true
             max_length: 0
             word_boundary: true
             ellipsis: true
@@ -481,8 +481,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'F d, Y g:i a'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -504,7 +504,7 @@ display:
           entity_type: node
           entity_field: uid
           plugin_id: field
-          label: ''
+          label: by
           exclude: false
           alter:
             alter_text: false
@@ -644,10 +644,12 @@ display:
         groups:
           1: AND
       defaults:
+        css_class: false
         fields: false
         arguments: false
         filters: false
         filter_groups: false
+      css_class: mb-3
       display_description: ''
       display_extenders: {  }
       entity_type: node
@@ -681,7 +683,7 @@ display:
           entity_type: node
           entity_field: changed
           plugin_id: field
-          label: ''
+          label: Updated
           exclude: false
           alter:
             alter_text: false
@@ -725,8 +727,8 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
-            custom_date_format: ''
+            date_format: custom
+            custom_date_format: 'F d, Y g:i a'
             timezone: ''
           group_column: value
           group_columns: {  }
@@ -748,7 +750,7 @@ display:
           entity_type: node
           entity_field: revision_uid
           plugin_id: field
-          label: ''
+          label: by
           exclude: false
           alter:
             alter_text: false
@@ -766,7 +768,7 @@ display:
             prefix: ''
             suffix: ''
             target: ''
-            nl2br: false
+            nl2br: true
             max_length: 0
             word_boundary: true
             ellipsis: true
@@ -888,10 +890,12 @@ display:
         groups:
           1: AND
       defaults:
+        css_class: false
         fields: false
         arguments: false
         filters: false
         filter_groups: false
+      css_class: mb-3
       display_description: ''
       display_extenders: {  }
       entity_type: node
