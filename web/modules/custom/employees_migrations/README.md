@@ -127,3 +127,13 @@ lando drush migrate:import --group=taxonomy_import
 ```
 lando terminus drush employees.[env] -- migrate:import --group=taxonomy_import
 ```
+
+#### BTS Technology Catalog
+##### Local
+```
+lando drush migrate:import --group=tech_catalog
+```
+##### On Pantheon
+```
+lando terminus drush employees.[env] -- migrate:import --group=tech_catalog
+```
