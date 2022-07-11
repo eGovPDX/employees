@@ -1906,18 +1906,46 @@ display:
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Search boost'
             description: ''
-            identifier: ''
+            identifier: field_search_boost_value
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: 'Greater than 1'
+                operator: '>'
+                value:
+                  min: ''
+                  max: ''
+                  value: '1'
+              2:
+                title: 'Equal to 1'
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: '1'
+              3:
+                title: 'Less than 1'
+                operator: between
+                value:
+                  min: '1'
+                  max: '0'
+                  value: ''
+              4:
+                title: 'Equal to 0'
+                operator: '='
+                value:
+                  min: ''
+                  max: ''
+                  value: '0'
       style:
         type: table
         options:
