@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.event.field_when
     - node.type.event
     - views.view.group_menu
-    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -196,45 +195,6 @@ third_party_settings:
                   link: true
                 third_party_settings: {  }
             weight: 3
-            additional: {  }
-          31c19617-ed6c-44bd-b148-6d1521b1ad65:
-            uuid: 31c19617-ed6c-44bd-b148-6d1521b1ad65
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_news'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 5
-            additional: {  }
-          faba8873-ee93-4308-a4d0-25125cdefc2b:
-            uuid: faba8873-ee93-4308-a4d0-25125cdefc2b
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_events'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 6
-            additional: {  }
-          f60d0278-23ae-411d-9711-eaf25be7aac0:
-            uuid: f60d0278-23ae-411d-9711-eaf25be7aac0
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_static'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 4
             additional: {  }
           ba9ea941-e908-42b4-8dd7-cfd3b0ea14ba:
             uuid: ba9ea941-e908-42b4-8dd7-cfd3b0ea14ba
