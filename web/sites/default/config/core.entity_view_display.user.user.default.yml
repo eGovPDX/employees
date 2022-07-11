@@ -24,10 +24,10 @@ dependencies:
     - field.field.user.user.field_title
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
-    - image.style.thumbnail
+    - responsive_image.styles.narrow
   module:
-    - image
     - masquerade_field
+    - responsive_image
     - telephone
     - user
 _core:
@@ -144,13 +144,11 @@ content:
     weight: 2
     region: content
   user_picture:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
+      responsive_image_style: narrow
       image_link: content
-      image_style: thumbnail
-      image_loading:
-        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
