@@ -1,11 +1,19 @@
-<div class="col">
-  <div class="card border-2 rounded-0 h-100">
-    <a href="{{ url }}">{{ content.field_featured_image }}</a>
-    <div class="card-body">
-      <h3 class="card-title h5 text-primary"><a href="{{ url }}">{{ content.field_short_title.0 }}</a></h3>
-      <p class="card-text">
-        {{ content|without('field_short_title','field_featured_image') }}
-      </p>
-    </div>
+{% if content.field_menu_url_text %}
+  {% set title = content.field_menu_url_text %}
+{% else %}
+  {% set title = label %}
+{% endif %}
+
+{% if content.field_resource_link %}
+  {% set link = content.field_resource_link.0 %}
+{% else %}
+  {% set link = url %}
+{% endif %}
+
+<div class="card border-2 rounded-0 h-100 position-relative">
+  {{ content.field_featured_image }}
+  <div class="card-body">
+    <h3 class="card-title h5"><a href="{{ link }}" class="text-primary stretched-link">{{ title }}</a></h3>
+    {{ content|without('field_short_title','field_featured_image','field_resource_link') }}
   </div>
 </div>

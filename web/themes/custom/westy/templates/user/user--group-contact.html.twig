@@ -13,7 +13,11 @@
 
 <div{{ attributes.addClass(classes) }}>
   {% block content %}
-    <h3><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h3>
-    {{ content|without('field_first_name','field_last_name') }}
+    <h3 class="h6 mb-1"><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h3>
+    <p>
+      {{ user.field_title.value }}<br>
+      {{ user.field_phone.value }}<br>
+      {{ user.mail.value }}
+    </p>
   {% endblock %}
 </div>

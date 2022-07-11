@@ -230,7 +230,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if field_updated_on_1 > field_published_on_1 %}\r\n <strong>Updated</strong> {{ field_updated_on }}<p/>\r\n{% else %}\r\n{{ field_published_on }}<p/>\r\n{% endif %}"
+            text: "{% if field_updated_on_1 > field_published_on_1 %}\r\n <strong>Updated</strong> {{ field_updated_on }}\r\n{% else %}\r\n{{ field_published_on }}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false

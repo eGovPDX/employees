@@ -1,0 +1,93 @@
+uuid: 6a18ff62-6a15-4077-8cc0-94f8dd6c36be
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.page.body
+    - field.field.node.page.field_contact
+    - field.field.node.page.field_display_in_group
+    - field.field.node.page.field_feature
+    - field.field.node.page.field_feature_until
+    - field.field.node.page.field_menu_url_text
+    - field.field.node.page.field_parent
+    - field.field.node.page.field_related_content
+    - field.field.node.page.field_reviewer
+    - field.field.node.page.field_show_in_menu
+    - field.field.node.page.field_sort_weight
+    - field.field.node.page.field_tags
+    - field.field.node.page.field_topics
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - smart_trim
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
+      restricted_categories: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.featured
+targetEntityType: node
+bundle: page
+mode: featured
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 300
+      trim_type: chars
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: trim
+      trim_options:
+        text: true
+        trim_zero: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_display_in_group:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  field_contact: true
+  field_feature: true
+  field_feature_until: true
+  field_menu_url_text: true
+  field_parent: true
+  field_related_content: true
+  field_reviewer: true
+  field_show_in_menu: true
+  field_sort_weight: true
+  field_tags: true
+  field_topics: true
+  group_menu_eva_nested_menu: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  toc_js: true

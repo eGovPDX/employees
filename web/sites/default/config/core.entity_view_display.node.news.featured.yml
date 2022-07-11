@@ -1,0 +1,75 @@
+uuid: 0cd872fa-eded-4593-a362-b57c549e1ff6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.news.body
+    - field.field.node.news.field_contact
+    - field.field.node.news.field_display_in_group
+    - field.field.node.news.field_feature
+    - field.field.node.news.field_feature_until
+    - field.field.node.news.field_published_on
+    - field.field.node.news.field_related_content
+    - field.field.node.news.field_reviewer
+    - field.field.node.news.field_tags
+    - field.field.node.news.field_topics
+    - field.field.node.news.field_type
+    - field.field.node.news.field_updated_on
+    - node.type.news
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
+      restricted_categories: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+id: node.news.featured
+targetEntityType: node
+bundle: news
+mode: featured
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  content_dates_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_contact: true
+  field_display_in_group: true
+  field_feature: true
+  field_feature_until: true
+  field_published_on: true
+  field_related_content: true
+  field_reviewer: true
+  field_tags: true
+  field_topics: true
+  field_type: true
+  field_updated_on: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
+  toc_js: true

@@ -9,38 +9,36 @@
   'user',
   'overflow-auto',
   view_mode|clean_class,
+  'mb-4',
+  'border-bottom',
+  'row',
 ]
 %}
 
 <div{{ attributes.addClass(classes) }}>
   {% block content %}
+  <div class="col-lg-9 col-md-12">
+    <h2 class="h4 mb-2"><a href="/user/{{ user.id }}">{{ user.field_last_name.value }}, {{ user.field_first_name.value }}</a></h2>
+    <div class="col mb-2">
+      <strong>{{ content.field_title }}</strong>
+      {{ content.field_section }}
+      {{ content.field_division_name }}
+      {{ content.field_primary_groups }}
+    </div>
+    <div class="col align-left mb-2">
+      {{ content.field_phone }}
+      {{ content.field_mobile_phone }}
+      {% if user.field_keep_mobile_phone_private.value %} Keep mobile phone private {% endif %}
+      {% if not ('no.email' in user.mail.value) %}
+      {{ content.mail }}
+      {% endif %}
+      {{ content.field_workspace }}
+    </div>
+  </div>
   {% if content.user_picture|render|striptags %}
-  <div class="float-left align-left field__item">
+  <div class="col-lg-3 col-md-12">
     {{ content.user_picture }}
   </div>
   {% endif %}
-  <div class="float-left align-left field__item">
-    <div>
-      <h2><a href="/user/{{ user.id }}">{{ user.field_last_name.value }}, {{ user.field_first_name.value }}</a></h2>
-      <div class="float-left align-left field__item">
-        <strong>{{ content.field_title }}</strong>
-        {{ content.field_section }}
-        {{ content.field_division_name }}
-        {{ content.field_primary_groups }}
-      </div>
-      <div class="float-left align-left field__item">
-        {{ content.field_phone }}
-        {{ content.field_mobile_phone }}
-        {% if user.field_keep_mobile_phone_private.value %} Keep mobile phone private {% endif %}
-        {% if not ('no.email' in user.mail.value) %}
-        {{ content.mail }}
-        {% endif %}
-        {{ content.field_workspace }}
-      </div>
-      {# <div class="float-left align-left field__item">
-        {{ content.field_search_keywords }}
-      </div> #}
-    </div>
-  </div>
   {% endblock %}
 </div>
