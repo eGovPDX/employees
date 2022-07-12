@@ -2,8 +2,8 @@
   <a href="{{ url }}">{{ content.field_featured_image }}</a>
   <div class="card-body">
     <h3 class="card-title h5"><a href="{{ url }}" class="text-primary stretched-link">{{ name }}</a></h3>
-    <p class="card-text">
+    <div class="card-text">
       {{ content|without('field_featured_image') }}
-    </p>
+    </div>
   </div>
 </div>

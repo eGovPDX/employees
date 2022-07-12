@@ -19,9 +19,9 @@
 <div{{ attributes.addClass(classes) }}>
   {% block content %}
     <div class="col-lg-10 col-md-12 mb-4">
-      <h2 class="h4 mb-2"><a href="/user/{{ user.id }}">{{ user.field_last_name.value }}, {{ user.field_first_name.value }}</a></h2>
+      <h2 class="h4"><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h2>
       {% if not ('no.email' in user.mail.value) %}
-        {{ content.mail }}
+        <div class="mb-2 text-break"><a href="mailto:{{ user.mail.value }}">{{ user.mail.value }}</a></div>
       {% endif %}
       <div class="row">
         <div class="col-lg-6 col-sm-12">
@@ -31,10 +31,17 @@
           {{ content.field_primary_groups }}
         </div>
         <div class="col-lg-6 col-sm-12">
-          {{ content.field_phone }}
-          {{ content.field_mobile_phone }}
-          {% if user.field_keep_mobile_phone_private.value %} Keep mobile phone private {% endif %}
+          {% if user.field_phone.value %}
+            <div class="mb-2"><a href="tel:{{ user.field_phone.value }}">{{ user.field_phone.value }}</a></div>
+          {% endif %}
+          {% if user.field_mobile_phone.value %}
+            <div class="mb-2"><a href="tel:{{ user.field_mobile_phone.value }}">{{ user.field_mobile_phone.value }}</a> (mobile)</div>
+          {% endif %}
+          {% if user.field_keep_mobile_phone_private.value == 1 %}
+            <p class="mb-2 small">Keep mobile phone private</p>
+          {% endif %}
           {{ content.field_workspace }}
+          {{ content.field_office_location }}
         </div>
       </div>
     </div>

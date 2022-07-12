@@ -7,7 +7,6 @@ dependencies:
   module:
     - facets
     - system
-    - user
   theme:
     - westy
 id: westy_contactsfilterbybureau
@@ -28,10 +27,3 @@ visibility:
     id: request_path
     negate: false
     pages: /directory
-  user_role:
-    id: user_role
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
-    roles:
-      administrator: administrator

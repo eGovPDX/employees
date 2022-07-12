@@ -322,9 +322,9 @@ display:
           plugin_id: search_api
           order: ASC
           expose:
-            label: ''
+            label: 'Last name'
             field_identifier: field_last_name
-          exposed: false
+          exposed: true
         field_first_name:
           id: field_first_name
           table: search_api_index_full_index
@@ -335,9 +335,9 @@ display:
           plugin_id: search_api
           order: ASC
           expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
+            label: 'First name'
+            field_identifier: field_first_name
+          exposed: true
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -599,6 +599,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
