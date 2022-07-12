@@ -6,8 +6,6 @@ dependencies:
     - field.field.node.news.body
     - field.field.node.news.field_contact
     - field.field.node.news.field_display_in_group
-    - field.field.node.news.field_feature
-    - field.field.node.news.field_feature_until
     - field.field.node.news.field_published_on
     - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
@@ -115,19 +113,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_feature:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_feature_until:
-    type: datetime_default
-    weight: 3
-    region: content
-    settings: {  }
     third_party_settings: {  }
   field_published_on:
     type: datetime_default

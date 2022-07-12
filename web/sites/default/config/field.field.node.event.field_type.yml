@@ -6,15 +6,19 @@ dependencies:
     - field.storage.node.field_type
     - node.type.event
     - taxonomy.vocabulary.event_type
+  content:
+    - 'taxonomy_term:event_type:22f5f901-0b81-4155-ad38-4c292d1c4bdb'
 id: node.event.field_type
 field_name: field_type
 entity_type: node
 bundle: event
 label: Type
-description: 'Type of event'
-required: false
+description: 'Type is used for search facets and appears as a label on the event. Request new types from <a href="mailto:website@portlandoregon.gov">website@portlandoregon.gov</a>.'
+required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: 22f5f901-0b81-4155-ad38-4c292d1c4bdb
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
