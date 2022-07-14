@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_contact
     - field.field.node.event.field_display_in_group
-    - field.field.node.event.field_feature
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_tags
@@ -17,6 +16,7 @@ dependencies:
     - node.type.event
   module:
     - smart_date
+    - smart_trim
     - user
 _core:
   default_config_hash: GE8vxA9J85JTlqiqDwrBsmkZq8HXuJ5QEESclO3u8N8
@@ -25,6 +25,25 @@ targetEntityType: node
 bundle: event
 mode: teaser
 content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: false
+        trim_zero: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_when:
     type: smartdate_default
     label: hidden
@@ -39,11 +58,9 @@ content:
     weight: 0
     region: content
 hidden:
-  body: true
   content_moderation_control: true
   field_contact: true
   field_display_in_group: true
-  field_feature: true
   field_related_content: true
   field_reviewer: true
   field_tags: true

@@ -8,7 +8,7 @@ dependencies:
   module:
     - search_api
 id: contacts_filter_by_ad_group
-name: 'Filter by Bureau'
+name: 'Filter by Active Directory Group'
 weight: 0
 min_count: 1
 url_alias: ad_group
@@ -28,7 +28,7 @@ widget:
   type: checkbox
   config:
     show_numbers: true
-    soft_limit: 0
+    soft_limit: 10
     show_reset_link: true
     reset_text: 'Show all'
     hide_reset_when_no_selection: true
@@ -48,12 +48,23 @@ processor_configs:
     settings:
       minimum_items: 1
       maximum_items: null
+  count_widget_order:
+    processor_id: count_widget_order
+    weights:
+      sort: -9
+    settings:
+      sort: DESC
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
-      sort: 40
+      sort: -8
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
