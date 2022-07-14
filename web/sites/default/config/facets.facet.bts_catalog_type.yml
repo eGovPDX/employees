@@ -8,12 +8,12 @@ dependencies:
   module:
     - search_api
 id: bts_catalog_type
-name: 'BTS catalog type'
+name: 'Filter by Type'
 weight: -3
 min_count: 1
 url_alias: bts_catalog_type
 facet_source_id: 'search_api:views_page__technology_catalog__page_bts_catalog'
-field_identifier: field_bts_catalog_type
+field_identifier: field_type
 query_operator: and
 hard_limit: 0
 exclude: false
@@ -54,8 +54,18 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   list_item:
     processor_id: list_item
+    weights:
+      build: 5
+    settings: {  }
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }
