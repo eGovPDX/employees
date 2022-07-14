@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.page.field_topics
     - node.type.page
     - views.view.group_menu
+    - views.view.related_content
   module:
     - datetime
     - layout_builder
@@ -248,6 +249,45 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          9b0c1234-0d33-4087-afdb-a35a08f967e0:
+            uuid: 9b0c1234-0d33-4087-afdb-a35a08f967e0
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_news'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 11
+            additional: {  }
+          0274f7ce-0a38-41a5-807e-08bee51e2c71:
+            uuid: 0274f7ce-0a38-41a5-807e-08bee51e2c71
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 12
+            additional: {  }
+          eaf188f5-4f27-4741-b759-e48ca9cc5d8f:
+            uuid: eaf188f5-4f27-4741-b759-e48ca9cc5d8f
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_static'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 10
             additional: {  }
         third_party_settings: {  }
   layout_library:
