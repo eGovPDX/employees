@@ -24,6 +24,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
+    - field.field.node.bts_catalog_item.field_type
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
@@ -78,7 +79,7 @@ third_party_settings:
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           3b910aa3-b224-4d47-a8b8-a8946326ddfc:
             uuid: 3b910aa3-b224-4d47-a8b8-a8946326ddfc
@@ -167,7 +168,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 7
+            weight: 6
             additional: {  }
           8e5d6a39-a97a-4eba-8b71-92b8ebfbbd25:
             uuid: 8e5d6a39-a97a-4eba-8b71-92b8ebfbbd25
@@ -183,7 +184,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 8
+            weight: 7
             additional: {  }
           460acfba-78bc-4ae4-970e-d3422b2435f8:
             uuid: 460acfba-78bc-4ae4-970e-d3422b2435f8
@@ -199,7 +200,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 9
+            weight: 8
             additional: {  }
           f8899320-2aaf-4196-92c2-9a59ac53b2d3:
             uuid: f8899320-2aaf-4196-92c2-9a59ac53b2d3
@@ -215,7 +216,7 @@ third_party_settings:
                 settings:
                   link: false
                 third_party_settings: {  }
-            weight: 10
+            weight: 9
             additional: {  }
           9c7a31e6-2f72-4ef2-973d-ff47392a4602:
             uuid: 9c7a31e6-2f72-4ef2-973d-ff47392a4602
@@ -234,22 +235,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 12
-            additional: {  }
-          a3f17c8b-0acf-4c38-872e-20885f7908cc:
-            uuid: a3f17c8b-0acf-4c38-872e-20885f7908cc
-            region: side
-            configuration:
-              id: 'field_block:node:bts_catalog_item:field_bts_catalog_type'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: list_default
-                label: inline
-                settings: {  }
-                third_party_settings: {  }
-            weight: 0
+            weight: 10
             additional: {  }
           eb8062e9-f856-4dc2-bf97-435fdb6ad76d:
             uuid: eb8062e9-f856-4dc2-bf97-435fdb6ad76d
@@ -265,7 +251,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 21
+            weight: 19
             additional: {  }
           728d7662-3ee0-4506-acfc-75593d71d597:
             uuid: 728d7662-3ee0-4506-acfc-75593d71d597
@@ -285,7 +271,7 @@ third_party_settings:
                   rel: ''
                   target: ''
                 third_party_settings: {  }
-            weight: 13
+            weight: 11
             additional: {  }
           c833468f-26b5-4b7e-96a4-42501f73e0f1:
             uuid: c833468f-26b5-4b7e-96a4-42501f73e0f1
@@ -301,7 +287,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 14
+            weight: 12
             additional: {  }
           8ef74172-0337-4f42-b458-81e30ca4c7e6:
             uuid: 8ef74172-0337-4f42-b458-81e30ca4c7e6
@@ -320,7 +306,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 15
+            weight: 13
             additional: {  }
           e1ea05b4-769f-42ec-8ea6-d1c7f443866c:
             uuid: e1ea05b4-769f-42ec-8ea6-d1c7f443866c
@@ -336,7 +322,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 16
+            weight: 14
             additional: {  }
           1fcffba1-6627-4d89-96d6-f7b378acbf6a:
             uuid: 1fcffba1-6627-4d89-96d6-f7b378acbf6a
@@ -355,7 +341,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 17
+            weight: 15
             additional: {  }
           7955d163-6e94-40e6-a796-577bca0889cd:
             uuid: 7955d163-6e94-40e6-a796-577bca0889cd
@@ -374,7 +360,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 18
+            weight: 16
             additional: {  }
           5c81086e-c6e0-4304-8961-dbd5fd7b6efd:
             uuid: 5c81086e-c6e0-4304-8961-dbd5fd7b6efd
@@ -393,7 +379,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 19
+            weight: 17
             additional: {  }
           6b11285d-898e-4707-9545-193f377a10fa:
             uuid: 6b11285d-898e-4707-9545-193f377a10fa
@@ -412,7 +398,26 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 20
+            weight: 18
+            additional: {  }
+          f9492c65-d603-442c-9e21-cb4ccd8fa668:
+            uuid: f9492c65-d603-442c-9e21-cb4ccd8fa668
+            region: main
+            configuration:
+              id: 'field_block:node:bts_catalog_item:field_type'
+              label: Type
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -590,6 +595,14 @@ content:
     third_party_settings: {  }
     weight: 15
     region: content
+  field_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 22
+    region: main
   field_vendor:
     type: string
     label: inline
