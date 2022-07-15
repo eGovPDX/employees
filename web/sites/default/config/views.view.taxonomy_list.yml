@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.taxonomy_term.teaser
+    - core.entity_view_mode.taxonomy_term.featured
     - taxonomy.vocabulary.bts_business_capability
     - taxonomy.vocabulary.bureaus
   module:
@@ -214,18 +214,18 @@ display:
         type: grid
         options:
           uses_fields: false
-          columns: 4
+          columns: 50
           automatic_width: false
           alignment: horizontal
-          row_class_custom: row
+          row_class_custom: 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3 mb-3'
           row_class_default: false
-          col_class_custom: 'col-lg-3 col-sm-12'
+          col_class_custom: col
           col_class_default: false
       row:
         type: 'entity:taxonomy_term'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: featured
       query:
         type: views_query
         options:

@@ -445,7 +445,7 @@ display:
             'entity:node':
               bts_catalog_item: default
               contract: default
-              event: teaser
+              event: featured
               news: search_result
               page: search_result
               resource: search_result
@@ -705,19 +705,19 @@ display:
           hide_alter_empty: true
           view_modes:
             'entity:group':
-              employee: search_result
-              private: search_result
+              employee: default
+              private: default
             'entity:media':
-              document: embedded_with_description
+              document: default
             'entity:node':
               bts_catalog_item: default
               contract: default
-              event: search_result
-              news: teaser
-              page: search_result
-              resource: search_result
+              event: default
+              news: featured
+              page: default
+              resource: default
             'entity:user':
-              user: search_result
+              user: default
       pager:
         type: some
         options:

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.featured
     - node.type.event
     - taxonomy.vocabulary.org_type
   content:
@@ -302,7 +302,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -348,7 +348,8 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          relationship: none
+          view_mode: featured
       query:
         type: views_query
         options:
@@ -518,7 +519,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:
@@ -564,7 +565,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 2
           exposed: false
           expose:
@@ -930,7 +931,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            47: 47
+            649: 649
           group: 1
           exposed: false
           expose:

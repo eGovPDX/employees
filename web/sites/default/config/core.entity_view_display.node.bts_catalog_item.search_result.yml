@@ -25,11 +25,11 @@ dependencies:
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
+    - field.field.node.bts_catalog_item.field_type
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
     - layout_builder
-    - options
     - user
 third_party_settings:
   layout_builder:
@@ -40,16 +40,23 @@ targetEntityType: node
 bundle: bts_catalog_item
 mode: search_result
 content:
-  field_bts_catalog_type:
-    type: list_default
-    label: inline
-    settings: {  }
+  field_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   content_moderation_control: true
   field_bts_application_exception: true
+  field_bts_catalog_type: true
   field_bureaus: true
   field_business_capability: true
   field_business_owner: true
@@ -72,4 +79,3 @@ hidden:
   field_vendor: true
   langcode: true
   links: true
-  search_api_excerpt: true

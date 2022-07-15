@@ -8,7 +8,7 @@ dependencies:
   module:
     - search_api
 id: contacts_filter_by_group_member
-name: 'Filter by Group Membership'
+name: 'Filter by Assigned Employee Group'
 weight: 0
 min_count: 1
 url_alias: contacts_filter_by_group_member
@@ -28,7 +28,7 @@ widget:
   type: checkbox
   config:
     show_numbers: true
-    soft_limit: 0
+    soft_limit: 10
     show_reset_link: true
     reset_text: 'Show all'
     hide_reset_when_no_selection: true
@@ -60,6 +60,11 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   translate_entity:
     processor_id: translate_entity
     weights:
