@@ -91,10 +91,10 @@ content:
             uuid: c9b0eb34-b9b1-4de3-99ae-fa74df6cf357
             id: visible
             data:
-              target: field_bts_catalog_type
+              target: field_type
               comparison: value
-              value: Application
-              submit: 'Add Cancel'
+              value: '1715'
+              submit: 'Update State Cancel'
   field_bureaus:
     type: select2_entity_reference
     weight: 4
@@ -119,10 +119,10 @@ content:
             uuid: 6798c2d7-ea05-4e03-8ecc-83ea5a04bda3
             id: visible
             data:
-              target: field_bts_catalog_type
+              target: field_type
               comparison: value
-              value: Application
-              submit: 'Add Cancel'
+              value: '1715'
+              submit: 'Update State Cancel'
   field_business_capability:
     type: select2_entity_reference
     weight: 5
@@ -161,17 +161,23 @@ content:
     settings: {  }
     third_party_settings:
       field_states_ui:
+        form:
+          type: ''
+          list:
+            2cf1bb86-9d6c-4afc-9d36-03b61c39d536:
+              operations:
+                edit: Edit
+                delete: Delete
+          add: Add
         field_states:
           2cf1bb86-9d6c-4afc-9d36-03b61c39d536:
             uuid: 2cf1bb86-9d6c-4afc-9d36-03b61c39d536
             id: visible
             data:
-              target: field_bts_catalog_type
+              target: field_type
               comparison: value
-              value: Application
-              submit:
-                save: Add
-                cancel: Cancel
+              value: '1715'
+              submit: 'Update State Cancel'
   field_description:
     type: text_textarea
     weight: 8
@@ -225,10 +231,10 @@ content:
             uuid: ee1ad42b-eb22-43f0-9a58-38a1d60e9017
             id: visible
             data:
-              target: field_bts_catalog_type
+              target: field_type
               comparison: value
-              value: Application
-              submit: 'Add Cancel'
+              value: '1715'
+              submit: 'Update State Cancel'
   field_link_example_application:
     type: link_default
     weight: 14
@@ -352,10 +358,10 @@ content:
             uuid: a1e4f760-9fc8-4835-a561-53f5f53fc90f
             id: visible
             data:
-              target: field_bts_catalog_type
+              target: field_type
               comparison: value
-              value: Application
-              submit: 'Add Cancel'
+              value: '1715'
+              submit: 'Update State Cancel'
   field_support_owner:
     type: select2_entity_reference
     weight: 33
@@ -399,10 +405,10 @@ content:
             uuid: 1ba54797-37ee-4a4a-b5eb-a448ad690dc4
             id: visible
             data:
-              target: field_cloud_service_type
+              target: field_type
               comparison: value
-              value: Application
-              submit: 'Add Cancel'
+              value: '1715'
+              submit: 'Update State Cancel'
   moderation_state:
     type: moderation_state_default
     weight: 17
