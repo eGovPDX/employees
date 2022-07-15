@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.bts_catalog_item.field_bts_application_exception
-    - field.field.node.bts_catalog_item.field_bts_catalog_type
     - field.field.node.bts_catalog_item.field_bureaus
     - field.field.node.bts_catalog_item.field_business_capability
     - field.field.node.bts_catalog_item.field_business_owner
@@ -96,12 +95,6 @@ content:
               comparison: value
               value: Application
               submit: 'Add Cancel'
-  field_bts_catalog_type:
-    type: options_select
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_bureaus:
     type: select2_entity_reference
     weight: 4
