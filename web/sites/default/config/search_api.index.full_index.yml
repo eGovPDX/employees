@@ -8,7 +8,6 @@ dependencies:
     - field.storage.group.field_org_type
     - field.storage.node.field_display_in_group
     - field.storage.user.field_address
-    - field.storage.node.field_bts_catalog_type
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
@@ -176,14 +175,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_address
-  field_bts_catalog_type:
-    label: 'BTS catalog type'
-    datasource_id: 'entity:node'
-    property_path: field_bts_catalog_type
-    type: string
-    dependencies:
-      config:
-        - field.storage.node.field_bts_catalog_type
   field_bureaus:
     label: Bureaus
     datasource_id: 'entity:node'

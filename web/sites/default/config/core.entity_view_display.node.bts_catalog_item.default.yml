@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.bts_catalog_item.field_bts_application_exception
-    - field.field.node.bts_catalog_item.field_bts_catalog_type
     - field.field.node.bts_catalog_item.field_bureaus
     - field.field.node.bts_catalog_item.field_business_capability
     - field.field.node.bts_catalog_item.field_business_owner
@@ -32,7 +31,6 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - link
-    - options
     - text
     - user
   theme:
@@ -448,13 +446,6 @@ content:
       link: false
     third_party_settings: {  }
     weight: 2
-    region: content
-  field_bts_catalog_type:
-    type: list_default
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
     region: content
   field_bureaus:
     type: entity_reference_label
