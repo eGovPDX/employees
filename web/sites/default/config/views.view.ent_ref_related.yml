@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_display_in_group
-    - node.type.event
-    - node.type.news
     - node.type.page
     - node.type.resource
   module:
@@ -405,7 +403,8 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            event: event
+            page: page
+            resource: resource
           group: 1
           exposed: false
           expose:
@@ -535,8 +534,6 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            event: event
-            news: news
             page: page
             resource: resource
           group: 1
