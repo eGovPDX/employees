@@ -1,0 +1,16 @@
+{% if content.field_menu_url_text %}
+  {% set title = content.field_menu_url_text %}
+{% else %}
+  {% set title = label %}
+{% endif %}
+
+{% if content.field_resource_link %}
+  {% set link = content.field_resource_link.0 %}
+{% else %}
+  {% set link = url %}
+{% endif %}
+
+<div class="mb-3 related position-relative">
+  <h3><a href="{{ link }}" class="text-primary stretched-link">{{ title }}</a></h3>
+  {{ content|without('field_short_title','field_resource_link') }}
+</div>
