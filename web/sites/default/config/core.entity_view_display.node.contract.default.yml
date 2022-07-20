@@ -15,10 +15,209 @@ dependencies:
     - field.field.node.contract.field_vendor_contact_info
     - node.type.contract
   module:
+    - layout_builder
+    - layout_library
     - link
     - smart_date
     - text
     - user
+  theme:
+    - westy
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: westy_two_column
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          7189bc18-4152-46d9-be1f-34b96d974114:
+            uuid: 7189bc18-4152-46d9-be1f-34b96d974114
+            region: main
+            configuration:
+              id: 'field_block:node:contract:field_type'
+              label: 'Contract Type'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          8987d038-631f-4311-908a-947520d4f40e:
+            uuid: 8987d038-631f-4311-908a-947520d4f40e
+            region: main
+            configuration:
+              id: 'field_block:node:contract:field_category'
+              label: Category
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          d114cf9b-3acd-4cff-8bae-ac9893aa981f:
+            uuid: d114cf9b-3acd-4cff-8bae-ac9893aa981f
+            region: main
+            configuration:
+              id: 'field_block:node:contract:field_contract_number'
+              label: 'Contract Number'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: inline
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          fa420ee2-4251-4104-9168-1e98884a23e6:
+            uuid: fa420ee2-4251-4104-9168-1e98884a23e6
+            region: main
+            configuration:
+              id: 'field_block:node:contract:field_efiles_link'
+              label: 'Contract Document'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link
+                label: inline
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          0990d169-8bf1-4c48-bb15-f4175521047c:
+            uuid: 0990d169-8bf1-4c48-bb15-f4175521047c
+            region: side
+            configuration:
+              id: 'field_block:node:contract:field_mandated_purchases'
+              label: 'Mandated Purchases'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: boolean
+                label: inline
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          c04a4023-d88f-4199-91e6-da83e2db55eb:
+            uuid: c04a4023-d88f-4199-91e6-da83e2db55eb
+            region: side
+            configuration:
+              id: 'field_block:node:contract:field_p_card_allowed'
+              label: 'P-Card Allowed'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: boolean
+                label: inline
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          aaadaca4-4f66-4497-9fb3-f0960700d04c:
+            uuid: aaadaca4-4f66-4497-9fb3-f0960700d04c
+            region: side
+            configuration:
+              id: 'field_block:node:contract:field_date_range'
+              label: 'Contract Date'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: smartdate_default
+                label: inline
+                settings:
+                  timezone_override: America/Los_Angeles
+                  format: compact_date_only
+                  force_chronological: false
+                  add_classes: false
+                  time_wrapper: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          3c06105b-aa0b-435f-be0d-f69a8060c192:
+            uuid: 3c06105b-aa0b-435f-be0d-f69a8060c192
+            region: side
+            configuration:
+              id: 'field_block:node:contract:field_vendor_contact_info'
+              label: 'Vendor Contact Information'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          48ec26e8-228b-4246-b435-a3cd4854fb71:
+            uuid: 48ec26e8-228b-4246-b435-a3cd4854fb71
+            region: main
+            configuration:
+              id: 'field_block:node:contract:body'
+              label: Notes
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: inline
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.contract.default
 targetEntityType: node
 bundle: contract

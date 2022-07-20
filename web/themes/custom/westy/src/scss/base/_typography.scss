@@ -19,7 +19,6 @@ body, html{
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-bottom: 1rem;
   a, a:hover {
     text-decoration: none;
   }
@@ -28,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 h1, h1.page-title {
   font-size: $h1-mobile-font-size;
   font-weight: 600;
+  margin-bottom: 0 !important;
   @include media-breakpoint-up(sm) {
     font-size: $h1-font-size;
   }
@@ -58,8 +58,8 @@ h6 {
   font-weight: 600;
 }
 
-Headings in regions other than main content
------------------------------------------------------------------------------
+// Headings in regions other than main content
+// -----------------------------------------------------------------------------
 .layout__region--menu,
 .layout__region--side,
 .page__side,
@@ -76,6 +76,5 @@ Headings in regions other than main content
 
   h3 {
     font-size: $font-size-base;
-    margin-bottom: $spacer;
   }
 }

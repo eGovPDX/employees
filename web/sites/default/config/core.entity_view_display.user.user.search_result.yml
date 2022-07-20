@@ -25,8 +25,10 @@ dependencies:
     - field.field.user.user.field_title
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
+    - responsive_image.styles.narrow
   module:
     - layout_builder
+    - responsive_image
     - telephone
     - user
 third_party_settings:
@@ -40,6 +42,14 @@ targetEntityType: user
 bundle: user
 mode: search_result
 content:
+  field_division_name:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
   field_first_name:
     type: string
     label: hidden
@@ -54,7 +64,17 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_keep_mobile_phone_private:
+    type: boolean
+    label: hidden
+    settings:
+      format: on-off
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 12
     region: content
   field_last_name:
     type: string
@@ -64,36 +84,91 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_mobile_phone:
+    type: telephone_link
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_office_location:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
   field_phone:
     type: telephone_link
     label: visually_hidden
     settings:
       title: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 5
+    region: content
+  field_primary_groups:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_section:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_workspace:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  mail:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  user_picture:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: narrow
+      image_link: content
+    third_party_settings: {  }
+    weight: 13
     region: content
 hidden:
   field_active_directory_id: true
   field_address: true
-  field_division_name: true
   field_is_contact_only: true
   field_job_description: true
-  field_keep_mobile_phone_private: true
   field_managers: true
-  field_mobile_phone: true
-  field_office_location: true
-  field_primary_groups: true
   field_publisher_role_changed: true
   field_search_boost: true
   field_search_keywords: true
-  field_section: true
-  field_title: true
-  field_workspace: true
   langcode: true
-  mail: true
   masquerade: true
   masquerade_as: true
   member_for: true
   realname: true
   search_api_excerpt: true
-  user_picture: true
+  user_status_eva_user_status: true

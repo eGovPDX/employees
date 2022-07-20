@@ -38,7 +38,8 @@
 {%
   set title_classes = title_classes|default([
     'field__label',
-    label_display == 'visually_hidden' ? 'visually-hidden'
+    label_display == 'visually_hidden' ? 'visually-hidden',
+    label_display == 'above' ? 'mb-2'
   ])
 %}
 
@@ -71,9 +72,9 @@
       {% if multiple %}
         </div>
       {% endif %}
-      {% block content_footer %}
-      {% endblock %}
     {% endblock %}
   </div>
+  {% block content_footer %}
+  {% endblock %}
   {% endblock %}
 {% endapply %}

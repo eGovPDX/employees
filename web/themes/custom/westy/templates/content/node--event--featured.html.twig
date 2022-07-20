@@ -1,0 +1,4 @@
+<div class="mb-4 h-100 position-relative">
+    <h3 class="h5"><a href="{{ url }}" class="text-primary stretched-link">{{ label }}</a></h3>
+    {{ content|without('field_short_title','field_featured_image','field_resource_link') }}
+</div>

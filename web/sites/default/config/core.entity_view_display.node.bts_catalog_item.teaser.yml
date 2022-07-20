@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.bts_catalog_item.field_bts_application_exception
-    - field.field.node.bts_catalog_item.field_bts_catalog_type
     - field.field.node.bts_catalog_item.field_bureaus
     - field.field.node.bts_catalog_item.field_business_capability
     - field.field.node.bts_catalog_item.field_business_owner
@@ -25,20 +24,41 @@ dependencies:
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
+    - field.field.node.bts_catalog_item.field_type
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
-    - options
+    - smart_trim
     - user
 id: node.bts_catalog_item.teaser
 targetEntityType: node
 bundle: bts_catalog_item
 mode: teaser
 content:
-  field_bts_catalog_type:
-    type: list_default
-    label: inline
-    settings: {  }
+  field_description:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 100
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_type:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
     third_party_settings: {  }
     weight: 0
     region: content
@@ -50,7 +70,6 @@ hidden:
   field_business_owner: true
   field_business_priority: true
   field_cloud_service_type: true
-  field_description: true
   field_display_in_group: true
   field_executive_sponsor: true
   field_hosting_environment: true
