@@ -1,24 +1,24 @@
-uuid: 00c63477-a07d-4d26-a03c-9021a48795c0
+uuid: aea7b105-23cc-4976-ba5f-0bbfba233996
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.related
-    - field.field.node.news.body
-    - field.field.node.news.field_contact
-    - field.field.node.news.field_display_in_group
-    - field.field.node.news.field_published_on
-    - field.field.node.news.field_related_content
-    - field.field.node.news.field_reviewer
-    - field.field.node.news.field_tags
-    - field.field.node.news.field_topics
-    - field.field.node.news.field_type
-    - field.field.node.news.field_updated_on
-    - node.type.news
+    - field.field.node.event.body
+    - field.field.node.event.field_contact
+    - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_related_content
+    - field.field.node.event.field_reviewer
+    - field.field.node.event.field_tags
+    - field.field.node.event.field_topics
+    - field.field.node.event.field_type
+    - field.field.node.event.field_when
+    - node.type.event
   module:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - smart_date
     - user
 third_party_settings:
   layout_builder:
@@ -35,13 +35,23 @@ third_party_settings:
       restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
-id: node.news.related
+_core:
+  default_config_hash: XfXOESXjfDxqVoacpjrjq_1BNXO5tYsp7ocnbGrNuak
+id: node.event.related
 targetEntityType: node
-bundle: news
+bundle: event
 mode: related
 content:
-  content_dates_entity_view_1:
-    settings: {  }
+  field_when:
+    type: smartdate_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: compact
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
     third_party_settings: {  }
     weight: 0
     region: content
@@ -50,14 +60,11 @@ hidden:
   content_moderation_control: true
   field_contact: true
   field_display_in_group: true
-  field_published_on: true
   field_related_content: true
   field_reviewer: true
   field_tags: true
   field_topics: true
   field_type: true
-  field_updated_on: true
   langcode: true
   links: true
   search_api_excerpt: true
-  toc_js: true
