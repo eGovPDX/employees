@@ -33,9 +33,9 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
+      restricted_categories: {  }
       blacklisted_blocks: {  }
       whitelisted_blocks: {  }
-      restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
 _core:
@@ -44,7 +44,17 @@ id: node.page.related
 targetEntityType: node
 bundle: page
 mode: related
-content: {  }
+content:
+  content_dates_eva_created_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  content_dates_eva_updated_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
 hidden:
   body: true
   content_moderation_control: true
