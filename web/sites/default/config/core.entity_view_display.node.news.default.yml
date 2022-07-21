@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.news.field_updated_on
     - node.type.news
     - views.view.group_menu
+    - views.view.related_content
   module:
     - datetime
     - layout_builder
@@ -169,25 +170,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 5
             additional: {  }
-          d3b66a9f-8c67-448b-bb03-7e7562a7ec47:
-            uuid: d3b66a9f-8c67-448b-bb03-7e7562a7ec47
-            region: side
-            configuration:
-              id: 'field_block:node:news:field_related_content'
-              label: Related
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
           70ea1de5-78f9-486c-931b-1f3ef4358523:
             uuid: 70ea1de5-78f9-486c-931b-1f3ef4358523
             region: side
@@ -202,7 +184,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 6
+            weight: 7
             additional: {  }
           9647c753-6807-4f86-b1d2-cd53fcc851bb:
             uuid: 9647c753-6807-4f86-b1d2-cd53fcc851bb
@@ -300,6 +282,19 @@ third_party_settings:
                   link: false
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          9e34ef9c-8fef-424a-8661-272d44a1cf05:
+            uuid: 9e34ef9c-8fef-424a-8661-272d44a1cf05
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_static'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 6
             additional: {  }
         third_party_settings: {  }
   layout_library:
