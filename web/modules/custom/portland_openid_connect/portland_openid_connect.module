@@ -224,6 +224,7 @@ function _process_users($response_data, $access_token)
       if (!empty($user_profile)) {
         $user->set('mail', $user_profile['mail']);
         $user->set('field_phone', $user_profile['phone'] ?? '');
+        $user->set('field_mobile_phone', $user_profile['mobile_phone'] ?? '');
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
 
@@ -272,6 +273,7 @@ function _process_users($response_data, $access_token)
         if (!empty($user_profile)) {
           $user->set('mail', $user_profile['mail'] ?? '');
           $user->set('field_phone', $user_profile['phone'] ?? '');
+          $user->set('field_mobile_phone', $user_profile['mobile_phone'] ?? '');
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
 
@@ -351,6 +353,9 @@ function _process_user_profile($response_data)
     if ($phone_type == 'business') {
       $user_phone = $phone['number'] ?? '';
     }
+    else if ($phone_type == 'mobile') {
+      $user_mobile_phone = $phone['number'] ?? '';
+    }
   }
   $positions = $response_data['positions'] ?? [];
   $user_bureau_array = [];
@@ -369,6 +374,7 @@ function _process_user_profile($response_data)
   return [
     'mail' => $response_data['emails'][0]['address'],
     'phone' => $user_phone,
+    'mobile_phone' => $user_mobile_phone,
     'group_names' => $user_bureau_string
   ];
 }
