@@ -230,6 +230,7 @@ function _process_users($response_data, $access_token)
         // Add the user to primary groups as Employee
         PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
+        \Drupal::logger('portland OpenID')->notice("User created: " . $user->getAccountName());
         $count_user_created++;
       }
     }
@@ -246,8 +247,8 @@ function _process_users($response_data, $access_token)
         $user->save();
         // Find all group this user belongs to and remove the Employee role
         // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+        \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->getAccountName());
         $count_user_deleted++;
-        \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
       // Update this user
       else {
@@ -277,7 +278,7 @@ function _process_users($response_data, $access_token)
           // Update the user's primary group membership to match the AD group names
           PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
-          \Drupal::logger('portland OpenID')->notice("Updated user account: " . $user->getAccountName());
+          \Drupal::logger('portland OpenID')->notice("User updated: " . $user->getAccountName());
           $count_user_updated++;
         }
       }
