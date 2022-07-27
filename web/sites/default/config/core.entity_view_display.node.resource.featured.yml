@@ -34,11 +34,13 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      blacklisted_blocks: {  }
-      whitelisted_blocks: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
       restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
+      allowlisted_blocks: null
+      denylisted_blocks: null
 id: node.resource.featured
 targetEntityType: node
 bundle: resource
@@ -48,7 +50,7 @@ content:
     type: entity_reference_label
     label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     weight: 2
     region: content

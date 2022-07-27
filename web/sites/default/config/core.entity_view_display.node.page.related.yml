@@ -1,9 +1,9 @@
-uuid: 895e79cd-a68d-4b13-a364-2dec5b30ae48
+uuid: 4f0074e8-f883-4bd6-a572-b83ec649e1cc
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.nested
+    - core.entity_view_mode.node.related
     - field.field.node.page.body
     - field.field.node.page.field_contact
     - field.field.node.page.field_display_in_group
@@ -33,55 +33,44 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      denylisted_blocks: {  }
-      allowlisted_blocks: {  }
+      restricted_categories: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
-      allowlisted_blocks: null
-      denylisted_blocks: null
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
-id: node.page.nested
+id: node.page.related
 targetEntityType: node
 bundle: page
-mode: nested
+mode: related
 content:
-  field_menu_url_text:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 0
-    region: content
-  field_parent:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  group_menu_eva_nested_menu:
+  content_dates_eva_created_content:
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 10
+    region: content
+  content_dates_eva_updated_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
     region: content
 hidden:
   body: true
-  content_dates_eva_created_content: true
-  content_dates_eva_updated_content: true
   content_moderation_control: true
   field_contact: true
   field_display_in_group: true
   field_feature: true
   field_feature_until: true
+  field_menu_url_text: true
+  field_parent: true
   field_related_content: true
   field_reviewer: true
   field_show_in_menu: true
   field_sort_weight: true
   field_tags: true
   field_topics: true
+  group_menu_eva_nested_menu: true
   langcode: true
   links: true
   search_api_excerpt: true
