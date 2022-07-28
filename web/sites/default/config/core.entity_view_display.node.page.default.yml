@@ -102,67 +102,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 0
             additional: {  }
-          7f9d0bef-711b-4394-a89a-1f96ea3904d6:
-            uuid: 7f9d0bef-711b-4394-a89a-1f96ea3904d6
-            region: side
-            configuration:
-              id: 'field_block:node:page:uid'
-              label: 'Authored by'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_label
-                label: hidden
-                settings:
-                  link: true
-                third_party_settings: {  }
-            weight: 4
-            additional: {  }
-          5636030a-99dd-40dd-96f3-73d91a546d86:
-            uuid: 5636030a-99dd-40dd-96f3-73d91a546d86
-            region: side
-            configuration:
-              id: 'field_block:node:page:created'
-              label: 'Authored on'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: hidden
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
-          7b72e03c-a9ea-4618-939d-d74b9449b597:
-            uuid: 7b72e03c-a9ea-4618-939d-d74b9449b597
-            region: side
-            configuration:
-              id: 'field_block:node:page:changed'
-              label: Changed
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: timestamp
-                label: hidden
-                settings:
-                  date_format: medium
-                  custom_date_format: ''
-                  timezone: ''
-                third_party_settings: {  }
-            weight: 6
-            additional: {  }
           a6cbe979-ec4e-43e2-828c-7b8940b71515:
             uuid: a6cbe979-ec4e-43e2-828c-7b8940b71515
             region: main
@@ -233,7 +172,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 7
+            weight: 9
             additional: {  }
           c85d9999-ebe8-4112-a56f-fa7cb4290703:
             uuid: c85d9999-ebe8-4112-a56f-fa7cb4290703
@@ -250,44 +189,35 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 3
             additional: {  }
-          9b0c1234-0d33-4087-afdb-a35a08f967e0:
-            uuid: 9b0c1234-0d33-4087-afdb-a35a08f967e0
+          fd239501-8119-4f26-9d7e-c9325a5f5da1:
+            uuid: fd239501-8119-4f26-9d7e-c9325a5f5da1
             region: side
             configuration:
-              id: 'views_block:related_content-block_related_news'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 11
+              id: 'extra_field_block:node:page:content_dates_eva_created_content'
+              label: Created
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 5
             additional: {  }
-          0274f7ce-0a38-41a5-807e-08bee51e2c71:
-            uuid: 0274f7ce-0a38-41a5-807e-08bee51e2c71
+          add91cfc-e885-4758-a34b-b5a47efb3840:
+            uuid: add91cfc-e885-4758-a34b-b5a47efb3840
             region: side
             configuration:
-              id: 'views_block:related_content-block_related_events'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 12
-            additional: {  }
-          eaf188f5-4f27-4741-b759-e48ca9cc5d8f:
-            uuid: eaf188f5-4f27-4741-b759-e48ca9cc5d8f
-            region: side
-            configuration:
-              id: 'views_block:related_content-block_related_static'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 10
+              id: 'extra_field_block:node:page:content_dates_eva_updated_content'
+              label: Updated
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 7
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -296,11 +226,13 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      blacklisted_blocks: {  }
-      whitelisted_blocks: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
       restricted_categories: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
+      allowlisted_blocks: null
+      denylisted_blocks: null
 _core:
   default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
 id: node.page.default
@@ -315,6 +247,16 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  content_dates_eva_created_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: main
+  content_dates_eva_updated_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: main
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
