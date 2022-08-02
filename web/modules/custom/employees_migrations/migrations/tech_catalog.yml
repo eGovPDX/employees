@@ -1,0 +1,122 @@
+id: tech_catalog
+label: 'BTS Technology Catalog'
+migration_group: tech_catalog
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/tech_catalog.csv
+  header_row_count: 1
+  ids:
+    - Title
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  title: Title
+  field_type:
+    source: Type
+    plugin: text_to_taxonomy
+    vocabulary: bts_catalog_item_type
+  field_bts_application_exception: 
+    source: 'App Exception'
+    plugin: text_to_taxonomy
+    vocabulary: bts_application_exception
+  field_bureaus: 
+    - 
+      source: Bureaus
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: explode
+      delimiter: ','
+    -
+      plugin: text_to_taxonomy
+      vocabulary: bureaus
+  field_business_capability: 
+    - 
+      source: 'Bus Capability'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: bts_business_capability
+  field_business_priority: 
+    - 
+      source: 'Bus Priority'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: bts_business_priority
+  field_description/value: 'Description (Derived HTML)'
+  field_description/format:
+    plugin: default_value
+    default_value: basic_html
+  field_support_model: 
+    - 
+      source: 'App Support Model'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: support_model
+  field_cloud_service_type: 
+    - 
+      source: 'Cloud Service type'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: cloud_service_type
+  field_hosting_environment: 
+    - 
+      source: 'App hosting environment'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: hosting_environment
+  field_business_owner: 
+    - 
+      source: 'Business Owner'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: entity_lookup
+      entity_type: user
+      value_key: mail
+      ignore_case: true
+  field_product_owner: 
+    - 
+      source: 'Product Owner'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: entity_lookup
+      entity_type: user
+      value_key: mail
+      ignore_case: true
+  field_support_owner: 
+    - 
+      plugin: skip_on_empty
+      method: process
+      source: 'Support Owner'
+    -
+      plugin: entity_lookup
+      entity_type: user
+      value_key: mail
+      ignore_case: true
+  field_public: 
+    source: Public
+    plugin: static_map
+    map:
+      'Yes': 1
+      'No': 0
+  field_display_in_group:
+    source: 'Displayed In'
+    plugin: entity_lookup
+    entity_type: group
+    value_key: label
+  
+destination:
+  plugin: 'entity:node'
+  default_bundle: bts_catalog_item
