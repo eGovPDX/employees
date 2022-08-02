@@ -1,27 +1,27 @@
-uuid: c29426ca-1e7d-478b-886c-409c2fe3aa4c
+uuid: 74d2fcd6-4e31-446a-9c72-eefef363e6c6
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.bureaus
+    - facets.facet.bts_application_exception
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_bureaus
+id: applicationexception
 theme: westy
 region: side
-weight: 13
+weight: 11
 provider: null
-plugin: 'facet_block:bureaus'
+plugin: 'facet_block:bts_application_exception'
 settings:
-  id: 'facet_block:bureaus'
-  label: 'BTS Catalog: Filter by Bureau'
+  id: 'facet_block:bts_application_exception'
+  label: 'Application exception'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_bureaus
+  block_id: applicationexception
 visibility:
   request_path:
     id: request_path
