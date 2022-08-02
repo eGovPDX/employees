@@ -1,0 +1,32 @@
+id: tech_catalog_related_app
+label: 'BTS Technology Catalog Related Apps'
+migration_group: tech_catalog
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/tech_catalog.csv
+  header_row_count: 1
+  ids:
+    - Title
+process:
+  temp_nid:
+    plugin: migration_lookup
+    source: Title
+    migration: tech_catalog
+  nid: "@temp_nid"
+  field_related_content: 
+    - 
+      source: 'Related App'
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: explode
+      delimiter: ','
+    -
+      plugin: migration_lookup
+      migration: tech_catalog
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: bts_catalog_item
+  overwrite_properties:
+    - field_related_content

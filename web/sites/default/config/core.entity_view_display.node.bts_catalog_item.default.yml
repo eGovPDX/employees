@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_product_owner
     - field.field.node.bts_catalog_item.field_program_manager
     - field.field.node.bts_catalog_item.field_project_manager
+    - field.field.node.bts_catalog_item.field_public
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service
@@ -556,6 +557,16 @@ content:
     third_party_settings: {  }
     weight: 20
     region: first
+  field_public:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 23
+    region: main
   field_related_content:
     type: entity_reference_label
     label: inline
