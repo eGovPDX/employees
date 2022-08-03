@@ -407,7 +407,7 @@ function _load_latest_revision($node)
  * 
  * Implements hook_preprocess_menu__account().
  */
-function westy_preprocess_menu__account(array &$variables)
+function cloudy2_preprocess_menu__account(array &$variables)
 {
   $variables['#cache']['max-age'] = 0;
   $destination = \Drupal::request()->getRequestUri();
