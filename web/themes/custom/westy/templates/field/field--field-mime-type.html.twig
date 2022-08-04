@@ -2,6 +2,7 @@
   'application/pdf': 'fa-file-pdf',
   'application/msword': 'fa-file-word',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'fa-file-word',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.template': 'fa-file-word',
   'application/vnd.ms-excel': 'fa-file-excel',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'fa-file-excel',
   'application/vnd.ms-powerpoint': 'fa-file-powerpoint',
@@ -11,7 +12,7 @@
 {% set item_classes = [
       'fas',
       'me-2',
-  ] 
+  ]
 %}
 {%- apply spaceless -%}
   {%- for item in items if item.content|render|striptags|trim is not empty -%}

@@ -22,6 +22,7 @@
   'application/pdf': 'PDF',
   'application/msword': 'DOC',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.template': 'DOTX',
   'application/vnd.ms-excel': 'XLS',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'XLSX',
   'application/vnd.ms-powerpoint': 'PPT',
@@ -48,14 +49,14 @@
     {{- content.field_mime_type -}}<span class="visually-hidden">{{ mime_type_friendly }}</span>
   {% endif %}
   {% if content.field_media_media_remote['#object'] %}
-    <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a> 
+    <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a>
   {% elseif content.field_media_document %}
-    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a> 
+    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a>
   {% endif -%}
   {% if content.field_mime_type.0|length == 0 %}
     ({{- mime_type_friendly -}})
   {% endif -%}
-  {% if file_size_friendly %} 
+  {% if file_size_friendly %}
     ({{- file_size_friendly -}})
   {% endif %}
   {% if with_description %}
