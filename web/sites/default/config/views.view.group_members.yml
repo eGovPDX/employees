@@ -9,6 +9,7 @@ dependencies:
   module:
     - group
     - user
+    - views_bulk_operations
 _core:
   default_config_hash: zIcnLmbW8inPRIQdPSVbKPuG2o5G5wHGJED4Jlgb2SY
 id: group_members
@@ -877,6 +878,121 @@ display:
                 title: Inactive
                 operator: '='
                 value: '0'
+        group_roles_target_id:
+          id: group_roles_target_id
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: group_roles_target_id_op
+            label: 'Group Roles'
+            description: ''
+            use_operator: false
+            operator: group_roles_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: group_roles_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: true
+          group_info:
+            label: 'Group role'
+            description: ''
+            identifier: group_roles_target_id
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Assigned
+                operator: '='
+                value: employee-assigned
+              2:
+                title: Admin
+                operator: '='
+                value: employee-admin
+              3:
+                title: Editor
+                operator: '='
+                value: employee-editor
+              4:
+                title: Employee
+                operator: '='
+                value: employee-employee
+              5:
+                title: Following
+                operator: '='
+                value: employee-following
+        roles_target_id:
+          id: roles_target_id
+          table: user__roles
+          field: roles_target_id
+          relationship: gc__user
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: roles
+          plugin_id: user_roles
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: roles_target_id_op
+            label: 'Sitewide role'
+            description: ''
+            use_operator: false
+            operator: roles_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: roles_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              content_lead: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: table
         options:
@@ -884,18 +1000,42 @@ display:
           row_class: ''
           default_row_class: true
           columns:
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             name: name
+            status: status
+            roles_target_id: roles_target_id
             group_roles: group_roles
             changed: changed
             created: created
             view_group_content: view_group_content
             edit_group_content: edit_group_content
             delete_group_content: delete_group_content
-            dropbutton: dropbutton
+            mail: mail
+            field_first_name: field_first_name
+            field_last_name: field_last_name
           default: '-1'
           info:
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             name:
               sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            roles_target_id:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -941,7 +1081,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            dropbutton:
+            mail:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_first_name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_last_name:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -1015,6 +1169,67 @@ display:
     position: 1
     display_options:
       fields:
+        views_bulk_operations_bulk_form:
+          id: views_bulk_operations_bulk_form
+          table: views
+          field: views_bulk_operations_bulk_form
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: views_bulk_operations_bulk_form
+          label: 'Views bulk operations'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          batch: true
+          batch_size: 10
+          form_step: true
+          buttons: false
+          action_title: Action
+          clear_on_exposed: true
+          force_selection_info: false
+          selected_actions:
+            6:
+              action_id: employees_email
+              preconfiguration:
+                add_confirmation: false
         name:
           id: name
           table: users_field_data
@@ -1762,7 +1977,7 @@ display:
         context: '0'
       use_admin_theme: true
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
