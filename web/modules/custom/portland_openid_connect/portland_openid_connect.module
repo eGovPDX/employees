@@ -348,6 +348,7 @@ function _process_user_profile($response_data)
 
   $phones = $response_data['phones'] ?? [];
   $user_phone = '';
+  $user_mobile_phone = '';
   foreach ($phones as $phone) {
     $phone_type = $phone['type'] ?? '';
     if ($phone_type == 'business') {
