@@ -2,9 +2,13 @@ uuid: 84830ebf-214e-4c76-9703-e18de9151789
 langcode: en
 status: true
 dependencies:
+  config:
+    - taxonomy.vocabulary.bts_catalog_item_type
+  content:
+    - 'taxonomy_term:bts_catalog_item_type:ba488e54-b7e5-4ee8-8a90-bd0564fa1b84'
   module:
     - node
-    - options
+    - taxonomy
     - user
 id: content_list
 label: 'Content List'
@@ -177,17 +181,17 @@ display:
     position: 1
     display_options:
       filters:
-        field_bts_catalog_type_value:
-          id: field_bts_catalog_type_value
-          table: node__field_bts_catalog_type
-          field: field_bts_catalog_type_value
+        field_type_target_id:
+          id: field_type_target_id
+          table: node__field_type
+          field: field_type_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: list_field
+          plugin_id: taxonomy_index_tid
           operator: or
           value:
-            Service: Service
+            1716: 1716
           group: 1
           exposed: false
           expose:
@@ -218,6 +222,11 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
+          vid: bts_catalog_item_type
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       filter_groups:
         operator: AND
         groups:
@@ -237,6 +246,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

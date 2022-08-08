@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.bts_catalog_item.field_bts_application_exception
-    - field.field.node.bts_catalog_item.field_bts_catalog_type
     - field.field.node.bts_catalog_item.field_bureaus
     - field.field.node.bts_catalog_item.field_business_capability
     - field.field.node.bts_catalog_item.field_business_owner
@@ -20,6 +19,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_product_owner
     - field.field.node.bts_catalog_item.field_program_manager
     - field.field.node.bts_catalog_item.field_project_manager
+    - field.field.node.bts_catalog_item.field_public
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_service
@@ -66,7 +66,6 @@ content:
 hidden:
   content_moderation_control: true
   field_bts_application_exception: true
-  field_bts_catalog_type: true
   field_bureaus: true
   field_business_capability: true
   field_business_owner: true
@@ -80,6 +79,7 @@ hidden:
   field_product_owner: true
   field_program_manager: true
   field_project_manager: true
+  field_public: true
   field_related_content: true
   field_reviewer: true
   field_service: true

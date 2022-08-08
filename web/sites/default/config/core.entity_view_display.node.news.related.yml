@@ -1,9 +1,9 @@
-uuid: 0cd872fa-eded-4593-a362-b57c549e1ff6
+uuid: 00c63477-a07d-4d26-a03c-9021a48795c0
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.featured
+    - core.entity_view_mode.node.related
     - field.field.node.news.body
     - field.field.node.news.field_contact
     - field.field.node.news.field_display_in_group
@@ -19,7 +19,6 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
-    - text
     - user
 third_party_settings:
   layout_builder:
@@ -38,25 +37,18 @@ third_party_settings:
       allowed_layouts: {  }
       allowlisted_blocks: null
       denylisted_blocks: null
-id: node.news.featured
+id: node.news.related
 targetEntityType: node
 bundle: news
-mode: featured
+mode: related
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 300
-    third_party_settings: {  }
-    weight: 1
-    region: content
   content_dates_entity_view_1:
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  body: true
   content_moderation_control: true
   field_contact: true
   field_display_in_group: true

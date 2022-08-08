@@ -1,9 +1,9 @@
-uuid: 718e8de8-ac42-4156-9b93-c3db634afe17
+uuid: c7e9a094-bc55-47c5-accc-f9145cfc2631
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.nested
+    - core.entity_view_mode.node.related
     - field.field.node.resource.field_display_in_group
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
@@ -33,47 +33,34 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      denylisted_blocks: {  }
-      allowlisted_blocks: {  }
+      restricted_categories: {  }
+      blacklisted_blocks: {  }
+      whitelisted_blocks: {  }
     entity_view_mode_restriction_by_region:
       allowed_layouts: {  }
-      allowlisted_blocks: null
-      denylisted_blocks: null
-id: node.resource.nested
+id: node.resource.related
 targetEntityType: node
 bundle: resource
-mode: nested
+mode: related
 content:
-  field_menu_url_text:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_resource_link:
     type: link
     label: hidden
     settings:
       trim_length: null
-      url_only: false
-      url_plain: false
+      url_only: true
+      url_plain: true
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 1
-    region: content
-  group_menu_eva_nested_menu:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
+    weight: 0
     region: content
 hidden:
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
   field_feature_until: true
+  field_menu_url_text: true
   field_parent: true
   field_resource_description: true
   field_reviewer: true
@@ -81,6 +68,7 @@ hidden:
   field_sort_weight: true
   field_tags: true
   field_topics: true
+  group_menu_eva_nested_menu: true
   langcode: true
   links: true
   search_api_excerpt: true
