@@ -282,7 +282,9 @@ class PortlandOpenIdConnectUtil
         foreach($phones as $phone) {
           if($phone['type'] == 'business') {
             $user_info['phone'] = $phone['number'];
-            break;
+          }
+          else if($phone['type'] == 'mobile') {
+            $user_info['mobile_phone'] = $phone['number'];
           }
         }
       }
@@ -299,6 +301,7 @@ class PortlandOpenIdConnectUtil
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
         $user->field_phone = $user_info['phone'];
+        $user->field_mobile_phone = $user_info['mobile_phone'];
         $user->field_group_names = $user_info['group'];
         $user->save();
         // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
@@ -534,6 +537,7 @@ class PortlandOpenIdConnectUtil
     $user->field_office_location = "";
     $user->field_address = "";
     $user->field_phone = "";
+    $user->field_mobile_phone = "";
     $user->set('field_managers', []);
     $user->save();
     \Drupal::logger('portland OpenID')->notice('User ' . $user->getAccountName() . ' has been disabled.');
