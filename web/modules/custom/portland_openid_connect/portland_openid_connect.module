@@ -72,8 +72,13 @@ function portland_openid_connect_user_update($account)
  */
 function portland_openid_connect_cron()
 {
-  // POWR-4268 Temporarily turn off user sync while working on the Azure AD user blocking issue.
-  return;
+  // To manually stop user sync.
+  // drush state:set portland.stop_user_sync true
+  $stop_user_sync = \Drupal::state()->get('portland.stop_user_sync');
+  if (!empty($stop_user_sync) && strtolower($stop_user_sync) === "true") {
+    \Drupal::logger('portland OpenID')->error("portland.stop_user_sync set to TRUE. Skip user sync.");
+    return;
+  }
 
   // When Cron got into a locked state, you will see the log "Attempting to re-run cron while it is already running.".
   // Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
@@ -219,12 +224,14 @@ function _process_users($response_data, $access_token)
       if (!empty($user_profile)) {
         $user->set('mail', $user_profile['mail']);
         $user->set('field_phone', $user_profile['phone'] ?? '');
+        $user->set('field_mobile_phone', $user_profile['mobile_phone'] ?? '');
         $user->set('field_group_names', $user_profile['group_names'] ?? '');
         $user->save();
 
         // Add the user to primary groups as Employee
         PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
+        \Drupal::logger('portland OpenID')->notice("User created: " . $user->getAccountName());
         $count_user_created++;
       }
     }
@@ -241,8 +248,8 @@ function _process_users($response_data, $access_token)
         $user->save();
         // Find all group this user belongs to and remove the Employee role
         // PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+        \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->getAccountName());
         $count_user_deleted++;
-        \Drupal::logger('portland OpenID')->notice('User deactivated: ' . $user->mail->value);
       }
       // Update this user
       else {
@@ -266,12 +273,14 @@ function _process_users($response_data, $access_token)
         if (!empty($user_profile)) {
           $user->set('mail', $user_profile['mail'] ?? '');
           $user->set('field_phone', $user_profile['phone'] ?? '');
+          $user->set('field_mobile_phone', $user_profile['mobile_phone'] ?? '');
           $user->set('field_group_names', $user_profile['group_names'] ?? '');
           $user->save();
 
           // Update the user's primary group membership to match the AD group names
           PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
 
+          \Drupal::logger('portland OpenID')->notice("User updated: " . $user->getAccountName());
           $count_user_updated++;
         }
       }
@@ -339,10 +348,14 @@ function _process_user_profile($response_data)
 
   $phones = $response_data['phones'] ?? [];
   $user_phone = '';
+  $user_mobile_phone = '';
   foreach ($phones as $phone) {
     $phone_type = $phone['type'] ?? '';
     if ($phone_type == 'business') {
       $user_phone = $phone['number'] ?? '';
+    }
+    else if ($phone_type == 'mobile') {
+      $user_mobile_phone = $phone['number'] ?? '';
     }
   }
   $positions = $response_data['positions'] ?? [];
@@ -362,6 +375,7 @@ function _process_user_profile($response_data)
   return [
     'mail' => $response_data['emails'][0]['address'],
     'phone' => $user_phone,
+    'mobile_phone' => $user_mobile_phone,
     'group_names' => $user_bureau_string
   ];
 }
