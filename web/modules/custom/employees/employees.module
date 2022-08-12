@@ -277,6 +277,26 @@ function employees_mail($key, &$message, $params)
       $message['body'][] = $params['message'];
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
       break;
+    case 'employees_group_admin_email':
+      $user = \Drupal::currentUser()->getAccount();
+      $user_name = $user->name;
+      $user_email = $user->getEmail();
+
+      if (array_key_exists('group', $params)) {
+        $group = $params['group'];
+        $group_path = $params['group_path'];
+
+        $body_metadata = "<p><em>Message sent by $user_name via group <a href=\"$group_path\">$group</a></em></p>";
+      } else {
+        $body_metadata = "<p><em>Message sent by $user_name</em></p>";
+      }
+
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('@subject', array('@subject' => $params['subject']), $options);
+      $message['body'][] = $body_metadata . $params['message'];
+      $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      break;
   }
 }
 
@@ -404,7 +424,7 @@ function _load_latest_revision($node)
 
 /**
  * Add destination parameter to log in/out URLs.
- * 
+ *
  * Implements hook_preprocess_menu__account().
  */
 function westy_preprocess_menu__account(array &$variables)
@@ -626,7 +646,7 @@ function employees_cron()
 }
 
 /**
- * Helper function to notify group admin when editor/admin outside the group added the content 
+ * Helper function to notify group admin when editor/admin outside the group added the content
  * into this group.
  *
  * @param $entity
@@ -678,7 +698,7 @@ function _notify_group_admin_for_group_change($entity)
   // Rare but possible: there could be duplicated groups
   $latest_parent_groups = array_unique($latest_parent_groups, SORT_REGULAR);
 
-  // For each group in field_display_in_group, check if the revision author is an 
+  // For each group in field_display_in_group, check if the revision author is an
   // admin/editor in that group. If NOT, send a email to the group's admin
   $groups_to_notify = [];
   foreach($latest_parent_groups as $entity_parent_group) {
@@ -693,7 +713,7 @@ function _notify_group_admin_for_group_change($entity)
       if( in_array("employee-editor", array_keys($roles)) ||
           in_array("employee-admin", array_keys($roles))
         ) continue;
-      
+
       // If the user is neither Admin nor Editor, the group should be notified
       $groups_to_notify []= $entity_parent_group;
     }
@@ -730,18 +750,18 @@ function _notify_group_admin_for_group_change($entity)
 }
 
 /**
- * Implement hook_preprocess_HOOK(&$variables) 
+ * Implement hook_preprocess_HOOK(&$variables)
  */
 function employees_preprocess_fieldset(&$variables) {
-  // If the fieldset ID matches certain string and the Description is not empty, move 
+  // If the fieldset ID matches certain string and the Description is not empty, move
   // description into prefix so it will be displayed right below the fieldset title.
   // See web/core/themes/claro/templates/fieldset.html.twig
-  if( 
+  if(
     // Find your fieldset ID in the <fieldset id="ID_HERE" ...> tag.
     // Comment out this line below if you want to target all Fieldsets
     array_key_exists('id', $variables["attributes"]) &&
     $variables["attributes"]["id"] == "group-user-profile" &&
-    !empty($variables['description']) && 
+    !empty($variables['description']) &&
     !empty($variables['description']["content"])
   ) {
     $variables['prefix'] = $variables['description']["content"];
@@ -751,7 +771,7 @@ function employees_preprocess_fieldset(&$variables) {
 
 
 /**
- * Implement hook_preprocess_HOOK(&$variables) 
+ * Implement hook_preprocess_HOOK(&$variables)
  * Hide user email field if email starts with "no.email"
  */
 function employees_preprocess_block(&$variables) {

@@ -92,33 +92,34 @@ display:
                 add_confirmation: false
                 label_override: 'Mark for review'
             2:
-              action_id: employees_copy_created_to_updated
+              action_id: employees_copy_shortname
               preconfiguration:
-                add_confirmation: false
+                label_override: 'Copy shortname into group_path'
             3:
               action_id: employees_unpublish_action
               preconfiguration:
                 add_confirmation: false
                 label_override: Unpublish
-            4:
+            5:
               action_id: employees_publish_action
               preconfiguration:
                 add_confirmation: false
                 label_override: Publish
-            5:
-              action_id: employees_copy_shortname
+            6:
+              action_id: employees_copy_created_to_updated
               preconfiguration:
-                label_override: 'Copy shortname into group_path'
-            12:
+                add_confirmation: false
+                label_override: 'Copy Created date to Updated On date'
+            14:
               action_id: views_bulk_edit
               preconfiguration:
                 add_confirmation: false
                 get_bundles_from_results: true
-            13:
+            15:
               action_id: views_bulk_operations_delete_entity
               preconfiguration:
                 label_override: Delete
-            14:
+            16:
               action_id: 'entity:save_action:node'
               preconfiguration:
                 add_confirmation: false
