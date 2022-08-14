@@ -16,6 +16,7 @@ dependencies:
     - taxonomy.vocabulary.hosting_environment
     - taxonomy.vocabulary.support_model
   module:
+    - content_moderation
     - filter
     - media
     - moderation_sidebar
@@ -68,6 +69,7 @@ permissions:
   - 'use text format basic_html'
   - 'view all media revisions'
   - 'view all revisions'
+  - 'view any unpublished content'
   - 'view bts_catalog in toolbar'
   - 'view bts_catalog_item revisions'
   - 'view own unpublished content'
