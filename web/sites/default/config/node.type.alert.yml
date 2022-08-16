@@ -1,0 +1,51 @@
+uuid: f6c7d843-bdaa-4703-998e-5be0c4a81fe3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - scheduler
+    - toc_js
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+  toc_js:
+    toc_js_active: 0
+    title: 'Table of contents'
+    selectors: 'h2, h3'
+    selectors_minimum: '0'
+    container: .node
+    prefix: toc
+    list_type: ul
+    classes: ''
+    back_to_top: 0
+    back_to_top_label: 'Back to top'
+    smooth_scrolling: 1
+    scroll_to_offset: '0'
+    highlight_on_scroll: 1
+    highlight_offset: '100'
+    sticky: 0
+    sticky_offset: '0'
+    sticky_stop: ''
+    sticky_stop_padding: '0'
+name: Alert
+type: alert
+description: 'An alert can be used to convey important information that all site users need to read. Sitewide alerts should appear prominently in a banner across the top of all sites until such time as the alerts are unpublished via manual or scheduled interaction. A user''s may dismiss an alert.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
