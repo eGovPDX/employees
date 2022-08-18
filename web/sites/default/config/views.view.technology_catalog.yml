@@ -354,7 +354,7 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       cache:
-        type: none
+        type: search_api_tag
         options: {  }
       sorts:
         field_type:
@@ -559,8 +559,8 @@ display:
       query:
         type: search_api_query
         options:
-          skip_access: 0
-          bypass_access: 0
+          bypass_access: false
+          skip_access: false
           preserve_facet_query_args: false
       relationships: {  }
       header:
@@ -1546,9 +1546,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.bts_application_exception'
+        - 'config:facets.facet.bts_business_priority'
+        - 'config:facets.facet.bts_catalog_type'
+        - 'config:facets.facet.bureaus'
+        - 'config:facets.facet.business_capability'
+        - 'config:facets.facet.support_model'
         - 'config:field.storage.node.field_bts_application_exception'
         - 'config:field.storage.node.field_bureaus'
         - 'config:field.storage.node.field_business_capability'
         - 'config:field.storage.node.field_support_model'
         - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
+        - taxonomy_term_list

@@ -129,7 +129,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: none
+        type: search_api_tag
         options: {  }
       empty: {  }
       sorts: {  }
@@ -2443,6 +2443,7 @@ display:
           plugin_id: result
           empty: false
           content: '<p>Displaying @start - @end of @total</p>'
+      display_comment: 'Caching is disabled because facets with ''use hierarchy'' disappear after page refresh.'
       display_extenders: {  }
       path: group/%group/contracts
     cache_metadata:
@@ -2667,7 +2668,7 @@ display:
       display_extenders: {  }
       path: group/%group/documents
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_interface'
         - route
@@ -2678,7 +2679,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.changed_month'
+        - 'config:facets.facet.changed_year'
+        - 'config:facets.facet.tags'
         - 'config:search_api.index.full_index'
+        - 'config:views.view.group_search_index'
+        - 'search_api_list:full_index'
   page_group_events:
     id: page_group_events
     display_title: 'Page: Events'
@@ -2893,8 +2899,6 @@ display:
             display_methods:
               node_type:
                 display_method: label
-      cache:
-        type: none
       empty:
         area:
           id: area
@@ -3158,7 +3162,7 @@ display:
           2: OR
       defaults:
         empty: false
-        cache: false
+        cache: true
         title: false
         css_class: false
         relationships: false
@@ -3207,7 +3211,7 @@ display:
       display_extenders: {  }
       path: group/%/events
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -3217,7 +3221,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_events_filter_by_month'
+        - 'config:facets.facet.group_events_filter_by_topic'
+        - 'config:facets.facet.group_events_filter_by_type'
+        - 'config:facets.facet.group_events_filter_by_year'
         - 'config:search_api.index.full_index'
+        - 'config:views.view.group_search_index'
   page_group_news:
     id: page_group_news
     display_title: 'Page: News'
@@ -3554,7 +3563,7 @@ display:
       display_extenders: {  }
       path: group/%/news
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -3564,7 +3573,13 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_news_filter_by_month'
+        - 'config:facets.facet.group_news_filter_by_topic'
+        - 'config:facets.facet.group_news_filter_by_type'
+        - 'config:facets.facet.group_news_filter_by_year'
         - 'config:search_api.index.full_index'
+        - 'config:views.view.group_search_index'
+        - 'search_api_list:full_index'
   page_group_past_events:
     id: page_group_past_events
     display_title: 'Page: Past Events'
@@ -3779,8 +3794,6 @@ display:
             display_methods:
               node_type:
                 display_method: label
-      cache:
-        type: none
       empty:
         area:
           id: area
@@ -4044,7 +4057,7 @@ display:
           2: OR
       defaults:
         empty: false
-        cache: false
+        cache: true
         title: false
         css_class: false
         relationships: false
@@ -4093,7 +4106,7 @@ display:
       display_extenders: {  }
       path: group/%/events/past
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -4103,4 +4116,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_past_events_filter_by_month'
+        - 'config:facets.facet.group_past_events_filter_by_topic'
+        - 'config:facets.facet.group_past_events_filter_by_type'
+        - 'config:facets.facet.group_past_events_filter_by_year'
         - 'config:search_api.index.full_index'
+        - 'config:views.view.group_search_index'
