@@ -12,8 +12,8 @@ dependencies:
     - field.field.media.document.field_tags
     - media.type.document
   module:
-    - file
     - layout_builder
+    - media_entity_download
 third_party_settings:
   layout_builder:
     enabled: false
@@ -42,9 +42,15 @@ content:
     weight: 3
     region: content
   field_media_document:
-    type: file_url_plain
+    type: media_entity_download_download_link
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+      disposition: attachment
     third_party_settings: {  }
     weight: 0
     region: content
