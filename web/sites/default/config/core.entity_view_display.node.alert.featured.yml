@@ -10,6 +10,7 @@ dependencies:
     - node.type.alert
   module:
     - layout_builder
+    - options
     - text
     - user
 third_party_settings:
@@ -23,14 +24,20 @@ mode: featured
 content:
   field_alert_text:
     type: text_default
-    label: above
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_severity:
+    type: list_default
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   field_action_link: true
-  field_severity: true
   langcode: true
   links: true
   search_api_excerpt: true

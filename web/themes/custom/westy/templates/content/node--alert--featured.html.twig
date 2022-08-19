@@ -1,0 +1,31 @@
+{# DEFAULTS #}
+{# {{ drupal_break() }} #}
+{% if node.field_severity.value == 10 %}
+  {% set alertType = 'warning' %}{# ToDo: remove this when the field options are removed from Drupal #}
+{% elseif node.field_severity.value == 20 %}
+  {% set alertType = 'warning' %}
+{% else %}
+  {% set alertType = 'info' %}
+{% endif %}
+{# {% set id = id|default('pl-demo-alert') %} #}
+
+{# CLASSES #}
+{% set classes= [
+	  'bg-' ~ alertType,
+     'text-light'
+   
+]%}
+
+{# TWIG #}
+<div class="{{ classes|join(' ')|trim }}"
+      data-nid="{{ id }}"
+   {% if changed %}
+      data-changed="{{ changed }}"
+   {% endif %}
+   >
+
+<div class="container">
+        <div>{{ label }}</div>
+        <div>{{ content }}</div>
+</div>
+</div>
