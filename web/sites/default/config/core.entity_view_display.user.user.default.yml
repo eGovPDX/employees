@@ -26,8 +26,10 @@ dependencies:
     - field.field.user.user.user_picture
     - responsive_image.styles.narrow
   module:
-    - masquerade_field
+    - datetime
     - responsive_image
+    - show_email
+    - simple_gmap
     - telephone
     - user
 _core:
@@ -37,15 +39,27 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
-  field_address:
-    type: string
+  field_active_directory_id:
+    type: simple_gmap
     label: above
     settings:
-      link_to_entity: false
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      iframe_title: ''
+      static_scale: 1
+      zoom_level: 14
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+      apikey: ''
     third_party_settings: {  }
-    weight: 13
+    weight: 15
     region: content
-  field_division_name:
+  field_address:
     type: string
     label: above
     settings:
@@ -53,13 +67,21 @@ content:
     third_party_settings: {  }
     weight: 11
     region: content
+  field_division_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
   field_first_name:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   field_group_names:
     type: string
@@ -67,7 +89,17 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 6
+    region: content
+  field_is_contact_only:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 16
     region: content
   field_job_description:
     type: string
@@ -75,7 +107,17 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 14
+    weight: 12
+    region: content
+  field_keep_mobile_phone_private:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 18
     region: content
   field_last_name:
     type: string
@@ -83,7 +125,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 3
     region: content
   field_managers:
     type: entity_reference_label
@@ -91,7 +133,15 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 4
+    region: content
+  field_mobile_phone:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 19
     region: content
   field_office_location:
     type: string
@@ -99,7 +149,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 12
+    weight: 10
     region: content
   field_phone:
     type: telephone_link
@@ -107,7 +157,7 @@ content:
     settings:
       title: ''
     third_party_settings: {  }
-    weight: 7
+    weight: 5
     region: content
   field_primary_groups:
     type: entity_reference_label
@@ -115,7 +165,66 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 7
+    region: content
+  field_publisher_role_changed:
+    type: datetime_plain
+    label: above
+    settings:
+      timezone_override: ''
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  field_search_boost:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  field_search_keywords:
+    type: simple_gmap
+    label: above
+    settings:
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      iframe_title: ''
+      static_scale: 1
+      zoom_level: 14
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+      apikey: ''
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  field_section:
+    type: simple_gmap
+    label: above
+    settings:
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      iframe_title: ''
+      static_scale: 1
+      zoom_level: 14
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+      apikey: ''
+    third_party_settings: {  }
+    weight: 23
     region: content
   field_title:
     type: string
@@ -123,12 +232,46 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 8
     region: content
-  masquerade:
-    settings: {  }
+  field_workspace:
+    type: simple_gmap
+    label: above
+    settings:
+      include_map: true
+      include_static_map: false
+      include_link: false
+      include_text: false
+      iframe_height: '200'
+      iframe_width: '200'
+      iframe_title: ''
+      static_scale: 1
+      zoom_level: 14
+      link_text: 'View larger map'
+      map_type: m
+      langcode: en
+      apikey: ''
     third_party_settings: {  }
-    weight: 1
+    weight: 24
+    region: content
+  langcode:
+    type: language
+    label: above
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  mail:
+    type: show_email_address
+    label: above
+    settings:
+      hide_user_one: 1
+      email_mailto: 0
+      hide_per_role: {  }
+    third_party_settings: {  }
+    weight: 14
     region: content
   masquerade_as:
     type: masquerade_field_default
@@ -141,7 +284,7 @@ content:
   member_for:
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   user_picture:
     type: responsive_image
@@ -152,18 +295,12 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  user_status_eva_user_status:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 25
+    region: content
 hidden:
-  field_active_directory_id: true
-  field_is_contact_only: true
-  field_keep_mobile_phone_private: true
-  field_mobile_phone: true
-  field_publisher_role_changed: true
-  field_search_boost: true
-  field_search_keywords: true
-  field_section: true
-  field_workspace: true
-  langcode: true
-  mail: true
+  masquerade: true
   realname: true
   search_api_excerpt: true
-  user_status_eva_user_status: true

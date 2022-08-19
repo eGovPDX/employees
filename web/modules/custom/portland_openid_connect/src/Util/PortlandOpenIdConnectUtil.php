@@ -301,7 +301,7 @@ class PortlandOpenIdConnectUtil
         $user->field_office_location = $user_info['officeLocation'];
         $user->field_address = $user_info['address'];
         $user->field_phone = $user_info['phone'];
-        $user->field_mobile_phone = $user_info['mobile_phone'];
+        $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
         $user->field_group_names = $user_info['group'];
         $user->save();
         // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
