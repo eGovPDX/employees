@@ -3,3 +3,13 @@
   position: static;
   padding: ($spacer / 2) $spacer;
 }
+
+// PE-368: Fix Bootstrap vs Drupal core placeholder class conflict
+em.placeholder {
+  background-color: unset;
+  cursor: unset;
+  display: unset;
+  min-height: unset;
+  opacity: unset;
+  vertical-align: unset;
+}
