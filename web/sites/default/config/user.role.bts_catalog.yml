@@ -6,6 +6,7 @@ dependencies:
     - filter.format.basic_html
     - media.type.document
     - media.type.image
+    - media.type.remote_document
     - media.type.remote_video
     - node.type.bts_catalog_item
     - taxonomy.vocabulary.bts_application_exception
@@ -36,6 +37,7 @@ permissions:
   - 'create document media'
   - 'create image media'
   - 'create media'
+  - 'create remote_document media'
   - 'create remote_video media'
   - 'create terms in bts_application_exception'
   - 'create terms in bts_business_capability'
@@ -49,11 +51,13 @@ permissions:
   - 'delete own bts_catalog_item content'
   - 'delete own document media'
   - 'delete own image media'
+  - 'delete own remote_document media'
   - 'delete own remote_video media'
   - 'edit any bts_catalog_item content'
   - 'edit own bts_catalog_item content'
   - 'edit own document media'
   - 'edit own image media'
+  - 'edit own remote_document media'
   - 'edit own remote_video media'
   - 'edit terms in bts_application_exception'
   - 'edit terms in bts_business_capability'

@@ -5,6 +5,7 @@ dependencies:
   module:
     - field_permissions
     - media
+    - media_entity_download
     - search_api_autocomplete
     - system
 _core:
@@ -16,6 +17,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access user profiles'
+  - 'download media'
   - 'use search_api_autocomplete for search_index'
   - 'view field_address'
   - 'view field_division_name'
