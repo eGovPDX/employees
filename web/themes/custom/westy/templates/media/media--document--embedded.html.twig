@@ -51,7 +51,7 @@
   {% if content.field_media_media_remote['#object'] %}
     <a href="{{ content.field_media_media_remote.0 }}">{{ name }}</a>
   {% elseif content.field_media_document %}
-    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0 }}">{{ name }}</a>
+    <a {{ mime_type in mimes_to_download ? 'download target="_blank"' : ''}} href="{{ content.field_media_document.0['#url'] }}">{{ name }}</a>
   {% endif -%}
   {% if content.field_mime_type.0|length == 0 %}
     ({{- mime_type_friendly -}})
