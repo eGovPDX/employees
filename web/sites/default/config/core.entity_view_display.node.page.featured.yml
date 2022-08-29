@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
     - field.field.node.page.field_topics
+    - field.field.node.page.field_type
     - node.type.page
   module:
     - layout_builder
@@ -67,27 +68,12 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  content_dates_eva_created_content:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  content_dates_eva_updated_content:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_display_in_group:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
+  content_dates_eva_created_content: true
+  content_dates_eva_updated_content: true
   content_moderation_control: true
   field_contact: true
+  field_display_in_group: true
   field_feature: true
   field_feature_until: true
   field_menu_url_text: true
@@ -98,6 +84,7 @@ hidden:
   field_sort_weight: true
   field_tags: true
   field_topics: true
+  field_type: true
   group_menu_eva_nested_menu: true
   langcode: true
   links: true
