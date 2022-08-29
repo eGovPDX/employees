@@ -1,0 +1,35 @@
+uuid: d95547c2-ea07-4c76-a08e-ac84c73fe9d5
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.media.embedded
+    - field.field.media.iframe.field_media_media_remote
+    - media.type.iframe
+  module:
+    - employees
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.iframe.embedded
+targetEntityType: media
+bundle: iframe
+mode: embedded
+content:
+  field_media_media_remote:
+    type: media_iframe
+    label: visually_hidden
+    settings:
+      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaRemoteMapOrChartFormatter
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
