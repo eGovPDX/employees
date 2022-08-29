@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a media entity download link.
+ *
+ * Available variables:
+ * - media_entity: Full media entity object.
+ * - link: The default full link render array.
+ * - url: The link URL.
+ * - title: The link title.
+ * - filetype: The file type extension (eg. PDF).
+ * - filesize: The formatted file size (eg. 12.3KB).
+ * - options: The link options.
+ *
+ * @see DownloadLinkFieldFormatter.php
+ *
+ * @ingroup themeable
+ */
+#}
+{% block media_entity_download_link %}
+  {{ link }} ({{filesize}})
+{% endblock media_entity_download_link %}

@@ -6,6 +6,7 @@ dependencies:
     - filter.format.basic_html
     - media.type.document
     - media.type.image
+    - media.type.remote_document
     - media.type.remote_video
     - node.type.contract
     - node.type.event
@@ -40,6 +41,7 @@ permissions:
   - 'create media'
   - 'create news content'
   - 'create page content'
+  - 'create remote_document media'
   - 'create remote_video media'
   - 'create resource content'
   - 'delete media'
@@ -49,6 +51,7 @@ permissions:
   - 'delete own image media'
   - 'delete own news content'
   - 'delete own page content'
+  - 'delete own remote_document media'
   - 'delete own remote_video media'
   - 'edit any contract content'
   - 'edit any event content'
@@ -59,6 +62,7 @@ permissions:
   - 'edit own image media'
   - 'edit own news content'
   - 'edit own page content'
+  - 'edit own remote_document media'
   - 'edit own remote_video media'
   - 'edit own resource content'
   - 'revert contract revisions'
