@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Display an iframe with alterable components.
+ */
+#}
+{{ devel_breakpoint() }}
+<div class="{{attributes.parent_class}}">
+<iframe{{ attributes | without('parent_class') }}{% if url is not empty %} src="{{ url }}{% if query is not empty %}?{{ query | url_encode }}{% endif %}{% if fragment is not empty %}#{{ fragment }}{% endif %}"{% endif %}></iframe>
+</div>

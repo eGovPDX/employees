@@ -809,3 +809,44 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
     }
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function employees_theme() {
+  return array(
+    // By convention, the template file will be media-embed-iframe.html.twig
+    'media_embed_iframe' => array(
+      'variables' => array(
+        'url' => NULL,
+        'attributes' => NULL,
+      ),
+    ),
+  );
+}
+
+// /**
+//  * Implements hook_form_FORM_ID_alter().
+//  */
+// function employees_form_editor_media_dialog_alter(array &$form, FormStateInterface $form_state) {
+//   if (isset($form_state->getUserInput()['editor_object'])) {
+//     $editor_object = $form_state->getUserInput()['editor_object'];
+//     $media_embed_element = $editor_object['attributes'];
+//   } else {
+//     // Retrieve the user input from form state.
+//     $media_embed_element = $form_state->get('media_embed_element');
+//   }
+
+//   $form['data-aspect-ratio'] = [
+//     '#title' => t('Aspect ratio'),
+//     '#type' => 'radios',
+//     '#options' => [
+//       'ratio ratio-16x9' => t('16x9'),
+//       'ratio ratio-4x3' => t('4x3'),
+//       'ratio ratio-1x1' => t('1x1'),
+//     ],
+//     '#step' => '1',
+//     '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? '' : $media_embed_element['data-aspect-ratio'],
+//     '#parents' => ['attributes', 'data-aspect-ratio'],
+//   ];
+// }
