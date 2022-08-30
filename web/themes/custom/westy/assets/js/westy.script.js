@@ -3359,6 +3359,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/back-to-top.js":
+/*!*******************************!*\
+  !*** ./src/js/back-to-top.js ***!
+  \*******************************/
+/***/ (() => {
+
+(function ($, Drupal) {
+  Drupal.behaviors.westyBackToTop = {
+    attach: function attach(context, settings) {
+      var viewHeight = $(window).height();
+      var showHeight = viewHeight * .75;
+      var isAttached = false;
+      $(window).once('backToTopShowButtonHandler').on('scroll', function () {
+        var scrollPos = $(document).scrollTop();
+
+        if (scrollPos > showHeight && !isAttached) {
+          var buttonText = Drupal.t('Back to top');
+          $('.layout__region--main', context).append("<div id=\"back-to-top\" class=\"btn btn-lg btn-dark\"><a class=\"link-light text-decoration-none\" href=\"#header\">".concat(buttonText, "</a></div>"));
+          isAttached = true;
+        } else if (scrollPos <= showHeight && isAttached) {
+          $('#back-to-top').remove();
+          isAttached = false;
+        }
+      });
+    }
+  };
+})(jQuery, Drupal);
+
+/***/ }),
+
 /***/ "./src/js/fontawesome.js":
 /*!*******************************!*\
   !*** ./src/js/fontawesome.js ***!
@@ -6641,14 +6671,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _light_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_light_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _fontawesome_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fontawesome.js */ "./src/js/fontawesome.js");
 /* harmony import */ var _fontawesome_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_fontawesome_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/alerts/_alerts */ "./src/components/alerts/_alerts.js");
-/* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_alerts_alerts__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
-/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _back_to_top_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./back-to-top.js */ "./src/js/back-to-top.js");
+/* harmony import */ var _back_to_top_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_back_to_top_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/alerts/_alerts */ "./src/components/alerts/_alerts.js");
+/* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
+/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * @file Global helper JS for the theme.
  */
 // Import site-wide libraries.
+
 
 
  // Import components
@@ -6657,18 +6690,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (function ($, Drupal) {
-  'use strict'; // // Enable Bootstrap Popover sitewide.
-  // // Popovers are opt-in for performance reasons.
-  // Drupal.behaviors.bsPopover = {
-  //   attach: function (context) {
-  //     $('[data-bs-toggle="popover"]').popover();
-  //   }
-  // };
-  // // Enable Bootstrap Toast sitewide.
-  // // Toasts are opt-in for performance reasons.
-  // Drupal.behaviors.bsToast = {
-  //   attach: function (context) {
-  //     $('.toast').toast('show');
+  'use strict'; // Drupal.behaviors.westyBackToTop = {
+  //   attach: function (context, settings) {
+  //     var viewHeight = $(window).height();
+  //     var showHeight = viewHeight * 1.5;
+  //     var isAttached = false;
+  //     $(window).once('backToTopShowButtonHandler').on('scroll', function () {
+  //       var scrollPos = $(document).scrollTop();
+  //       if (scrollPos > showHeight && !isAttached) {
+  //         var buttonText = Drupal.t('Back to top');
+  //         $('.block--westy-content', context).append(`<div id="back-to-top" class="btn btn-dark position-fixed zindex-fixed bottom-5 right-5"><a href=".page__content">${buttonText}</a></div>`);
+  //         isAttached = true;
+  //       } else if (scrollPos <= showHeight && isAttached) {
+  //         $('#back-to-top').remove();
+  //         isAttached = false;
+  //       }
+  //     });
+  //     $('#back-to-top', context).once('backToTopClickHandler').on('click', function () {
+  //       $(this).remove();
+  //       isAttached = false;
+  //     });
   //   }
   // };
 })(jQuery, Drupal);

@@ -1,18 +1,18 @@
 {# DEFAULTS #}
 {# {{ drupal_break() }} #}
-{% if node.field_severity.value == 10 %}
-  {% set alertType = 'warning' %}{# ToDo: remove this when the field options are removed from Drupal #}
-{% elseif node.field_severity.value == 20 %}
+{% if node.field_severity.value == 20 %}
   {% set alertType = 'warning' %}
 {% else %}
-  {% set alertType = 'info' %}
+{# bg-alert is currently in use for our success messages #}
+  {% set alertType = 'blue' %}
 {% endif %}
 {# {% set id = id|default('pl-demo-alert') %} #}
 
 {# CLASSES #}
 {% set classes= [
 	  'bg-' ~ alertType,
-     'text-light'
+     'text-light',
+     'p-3'
    
 ]%}
 
@@ -25,7 +25,7 @@
    >
 
 <div class="container">
-        <div>{{ label }}</div>
+        <div class="fw-bold">{{ label }}</div>
         <div>{{ content }}</div>
 </div>
 </div>
