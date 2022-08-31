@@ -58,6 +58,7 @@
         "drupal/libraries": "^3.0@beta",
         "drupal/masquerade": "^2.0",
         "drupal/masquerade_field": "^1.0@alpha",
+        "drupal/media_entity_download": "^2.1",
         "drupal/media_remote": "^1.2",
         "drupal/menu_breadcrumb": "^1.12",
         "drupal/metatag": "^1.11",
@@ -208,9 +209,6 @@
             "drupal/datetime_range": {
                 "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch"
             },
-            "drupal/facets": {
-                "2939710 - Add support for 'Search API (tags based)' caching in Views": "https://git.drupalcode.org/project/facets/-/merge_requests/54.patch"
-            },
             "drupal/field_states_ui": {
                 "3263814 - Error: Call to undefined method getFormDisplay()": "https://www.drupal.org/files/issues/2022-04-12/3263814-1.patch"
             },
@@ -220,6 +218,9 @@
                 "3256998 - Access to Revisions of Group Content is Broken": "https://www.drupal.org/files/issues/2022-02-09/group-fix-group-revisions-3256998-22_0.patch",
                 "3210808 - uasort deprecation in PHP 8": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
             },
+            "drupal/media_entity_download": {
+                "3059830 - Make link title editable / add token support / more options - feature/WCOR-1199": "https://www.drupal.org/files/issues/2022-03-25/3059830-make-link-title-15.patch"
+            },
             "drupal/openid_connect_windows_aad": {
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
             },
@@ -227,7 +228,7 @@
                 "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-334)": "https://git.drupalcode.org/project/scheduler_content_moderation_integration/-/merge_requests/19.patch"
             },
             "drupal/search_api": {
-                "3258375 - Out of memory error when used with views, metatag and memcache modules": "https://www.drupal.org/files/issues/2022-03-18/3258375-19--problems_with_serialized_views_results.patch"
+                "3262507 - Unable to render EntityFields in views with search_api_opensearch": "https://www.drupal.org/files/issues/2022-07-08/3262507-16.patch"
             },
             "drupal/search_api_pantheon": {
                 "3261858 - The path of a URI with an authority must start with a slash '/' or be empty. Automagically fixing the URI": "https://www.drupal.org/files/issues/2022-02-01/3261858.patch"
