@@ -1,7 +1,7 @@
 {# DEFAULTS #}
 {# {{ drupal_break() }} #}
 {% if node.field_severity.value == 20 %}
-  {% set alertType = 'warning' %}
+  {% set alertType = 'orange' %}
 {% else %}
 {# bg-alert is currently in use for our success messages #}
   {% set alertType = 'blue' %}
