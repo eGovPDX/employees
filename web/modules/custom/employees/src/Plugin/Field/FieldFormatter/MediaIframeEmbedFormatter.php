@@ -45,7 +45,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['Currently only support URLs from Arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau.'];
+    return ['URLs from arcg.is, arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
     // return [
     //   'https://arcg.is/DbHjf0',
     //   'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22361.96181366453!2d-122.67747803387468!3d45.52527053380518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1661813786487!5m2!1sen!2sus',
@@ -83,7 +83,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
         '#url' =>  $item->value,
         '#attributes' => [
           'width' => '100%',
-          // 'height' => '480px',
+          'height' => '100%',
           'frameborder' => '0',
           'allowfullscreen' => 'true',
           'parent_class' => 'ratio ratio-16x9',
