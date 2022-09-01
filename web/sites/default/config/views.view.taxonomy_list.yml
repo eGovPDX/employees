@@ -689,6 +689,19 @@ display:
         header: false
       display_description: ''
       header:
+        area_1:
+          id: area_1
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<p>A business capability is a business activity/function or set of activities/functions that an organization needs to meet its objectives, deliver its services, and/or achieve its desired outcomes.  For the purpose of the technology catalog, applications and services are mapped to business capabilities; thus, indicating the business capabilities each application or service provides or helps to enable.</p>'
+            format: basic_html
+          tokenize: false
         area:
           id: area
           table: views

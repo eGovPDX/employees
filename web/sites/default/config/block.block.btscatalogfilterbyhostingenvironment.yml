@@ -1,0 +1,29 @@
+uuid: 997b5a85-3597-449e-b224-2ec33674b771
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.bts_catalog_hosting_environment
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: btscatalogfilterbyhostingenvironment
+theme: westy
+region: side
+weight: 13
+provider: null
+plugin: 'facet_block:bts_catalog_hosting_environment'
+settings:
+  id: 'facet_block:bts_catalog_hosting_environment'
+  label: 'BTS Catalog: Filter by hosting environment'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: btscatalogfilterbyhostingenvironment
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /technology/catalog
