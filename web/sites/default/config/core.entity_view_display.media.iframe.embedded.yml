@@ -1,10 +1,13 @@
 uuid: d95547c2-ea07-4c76-a08e-ac84c73fe9d5
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
+    - field.field.media.iframe.field_display_in_group
     - field.field.media.iframe.field_media_media_remote
+    - field.field.media.iframe.field_preview_image
+    - field.field.media.iframe.field_summary
     - media.type.iframe
   module:
     - employees
@@ -19,15 +22,18 @@ bundle: iframe
 mode: embedded
 content:
   field_media_media_remote:
-    type: media_iframe
+    type: media_iframe_embed
     label: visually_hidden
     settings:
-      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaRemoteMapOrChartFormatter
+      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaIframeEmbedFormatter
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   created: true
+  field_display_in_group: true
+  field_preview_image: true
+  field_summary: true
   langcode: true
   name: true
   search_api_excerpt: true

@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
+    - field.field.media.iframe.field_display_in_group
     - field.field.media.iframe.field_media_media_remote
+    - field.field.media.iframe.field_preview_image
+    - field.field.media.iframe.field_summary
     - image.style.medium
     - media.type.iframe
   module:
@@ -27,7 +30,10 @@ content:
     region: content
 hidden:
   created: true
+  field_display_in_group: true
   field_media_media_remote: true
+  field_preview_image: true
+  field_summary: true
   langcode: true
   name: true
   search_api_excerpt: true

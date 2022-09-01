@@ -6,17 +6,17 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\media_remote\Plugin\Field\FieldFormatter\MediaRemoteFormatterBase;
 
 /**
- * Plugin implementation of the 'media_iframe' formatter.
+ * Plugin implementation of the 'media_iframe_embed' formatter.
  *
  * @FieldFormatter(
- *   id = "media_iframe",
- *   label = @Translation("Remote Media - Iframe"),
+ *   id = "media_iframe_embed",
+ *   label = @Translation("Remote Media - Iframe Embed"),
  *   field_types = {
  *     "string"
  *   }
  * )
  */
-class MediaRemoteMapOrChartFormatter extends MediaRemoteFormatterBase {
+class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
 
   /**
    * {@inheritdoc}

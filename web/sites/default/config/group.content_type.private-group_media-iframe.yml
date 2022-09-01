@@ -1,0 +1,19 @@
+uuid: 3d5dcc8c-3e1d-4280-a604-1d39c69fd60b
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - media.type.iframe
+  module:
+    - groupmedia
+    - media
+id: private-group_media-iframe
+label: 'Restricted Group: Group media (Iframe Embed)'
+description: 'Adds <em class="placeholder">Iframe Embed</em> content to groups both publicly and privately.'
+group_type: private
+content_plugin: 'group_media:iframe'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false
