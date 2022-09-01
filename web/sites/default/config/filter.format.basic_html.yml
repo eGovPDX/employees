@@ -10,6 +10,7 @@ dependencies:
     - core.entity_view_mode.media.narrow
   module:
     - editor
+    - linkit
     - media
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
@@ -23,7 +24,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <span lang class=""> <ul type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <hr> <sup> <sub> <s> <div class=""> <ol type start> <br> <table summary class=""> <th scope colspan rowspan> <tr class=""> <td scope colspan rowspan class=""> <thead class=""> <tbody class=""> <tfoot class=""> <abbr title> <caption class=""> <u> <pre> <i class=""> <a href hreflang data-entity-type data-entity-uuid accesskey id rel target title class="btn btn-primary"> <drupal-entity data-* title alt data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title>'
+      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <span lang class=""> <ul type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <hr> <sup> <sub> <s> <div class=""> <ol type start> <br> <table summary class=""> <th scope colspan rowspan> <tr class=""> <td scope colspan rowspan class=""> <thead class=""> <tbody class=""> <tfoot class=""> <abbr title> <caption class=""> <u> <pre> <i class=""> <drupal-entity data-* title alt data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <a href hreflang data-entity-type data-entity-uuid accesskey id rel target title href data-entity-substitution data-entity-type data-entity-uuid title class="btn btn-primary">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_align:
@@ -71,3 +72,10 @@ filters:
     weight: 0
     settings:
       filter_url_length: 32
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 0
+    settings:
+      title: true
