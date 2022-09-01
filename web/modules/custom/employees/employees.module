@@ -238,6 +238,16 @@ function employees_entity_update($entity)
 }
 
 /**
+ * Implements hook_media_presave()
+ */
+function employees_media_presave($media) {
+  // Copy Preview Image file into Thumbnail
+  if($media->hasField('field_preview_image') && ! empty($media->field_preview_image->target_id)) {
+    $media->thumbnail->target_id = $media->field_preview_image->target_id;
+  }
+}
+
+/**
  * Implements hook_ENTITY_TYPE_presave().
  */
 function employees_user_presave($entity)

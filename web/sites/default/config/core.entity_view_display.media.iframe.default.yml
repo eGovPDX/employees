@@ -7,11 +7,9 @@ dependencies:
     - field.field.media.iframe.field_media_media_remote
     - field.field.media.iframe.field_preview_image
     - field.field.media.iframe.field_summary
-    - image.style.medium
     - media.type.iframe
   module:
     - employees
-    - image
 id: media.iframe.default
 targetEntityType: media
 bundle: iframe
@@ -33,17 +31,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_preview_image:
-    type: image
-    label: inline
-    settings:
-      image_link: ''
-      image_style: medium
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_summary:
     type: string
     label: inline
@@ -54,6 +41,7 @@ content:
     region: content
 hidden:
   created: true
+  field_preview_image: true
   langcode: true
   name: true
   search_api_excerpt: true
