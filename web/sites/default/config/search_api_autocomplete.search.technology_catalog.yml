@@ -1,0 +1,28 @@
+uuid: 694d015f-b361-4bee-b5d6-af2d9a9e594d
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.full_index
+    - views.view.technology_catalog
+  module:
+    - views
+    - search_api_autocomplete
+id: technology_catalog
+label: 'Technology Catalog'
+index_id: full_index
+suggester_settings:
+  live_results:
+    fields: {  }
+    highlight:
+      enabled: false
+      field: ''
+    view_modes: {  }
+suggester_weights: {  }
+suggester_limits: {  }
+search_settings:
+  'views:technology_catalog':
+    displays:
+      default: true
+      selected: {  }
+options: {  }
