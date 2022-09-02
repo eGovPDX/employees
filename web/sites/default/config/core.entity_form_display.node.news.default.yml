@@ -23,7 +23,6 @@ dependencies:
     - path
     - scheduler
     - scheduler_content_moderation_integration
-    - select2
     - text
 third_party_settings:
   field_group:
@@ -153,14 +152,10 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_type:
-    type: select2_entity_reference
+    type: options_select
     weight: 1
     region: content
-    settings:
-      width: 100%
-      autocomplete: false
-      match_operator: CONTAINS
-      match_limit: 10
+    settings: {  }
     third_party_settings: {  }
   field_updated_on:
     type: datetime_default

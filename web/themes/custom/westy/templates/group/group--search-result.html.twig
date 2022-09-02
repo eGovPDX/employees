@@ -1,0 +1,35 @@
+{%
+  set classes = [
+  'group',
+  view_mode|clean_class,
+  'mb-4',
+  'pb-4',
+  'border-bottom',
+  'position-relative',
+]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <header>
+    {{ title_prefix }}
+    {% if label and not page %}
+      <div class="node__top-wrapper">
+        {{ content.field_image }}
+        <h2 class="h4">
+          <a href="{{ url }}" class="stretched-link" rel="bookmark">{{ label }}</a>
+        </h2>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    {% if display_submitted %}
+      <div class="node__meta">
+        <span{{ author_attributes }}>
+          {{ 'By'|t }} {% apply spaceless %}<span class="node__author">{{ author_name }}</span>{% endapply %}, {{ date }}
+        </span>
+        {{ metadata }}
+      </div>
+    {% endif %}
+  </header>
+  <div{{ content_attributes.addClass('node__content') }}>
+    {{ content|without('field_image', 'links') }}
+  </div>
+</article>

@@ -418,6 +418,26 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          70961621-73ea-4300-a997-8d358510013c:
+            uuid: 70961621-73ea-4300-a997-8d358510013c
+            region: main
+            configuration:
+              id: 'extra_field_block:node:bts_catalog_item:content_dates_eva_created_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 3
+            additional: {  }
+          d8b9dd34-5502-4323-b98b-c2d6026879b2:
+            uuid: d8b9dd34-5502-4323-b98b-c2d6026879b2
+            region: main
+            configuration:
+              id: 'extra_field_block:node:bts_catalog_item:content_dates_eva_updated_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 4
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -437,6 +457,16 @@ targetEntityType: node
 bundle: bts_catalog_item
 mode: default
 content:
+  content_dates_eva_created_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: main
+  content_dates_eva_updated_content:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: main
   content_moderation_control:
     settings: {  }
     third_party_settings: {  }
