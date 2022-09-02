@@ -15,14 +15,6 @@ targetEntityType: media
 bundle: iframe
 mode: default
 content:
-  field_display_in_group:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
   field_media_media_remote:
     type: media_iframe_embed
     label: visually_hidden
@@ -41,6 +33,7 @@ content:
     region: content
 hidden:
   created: true
+  field_display_in_group: true
   field_preview_image: true
   langcode: true
   name: true
