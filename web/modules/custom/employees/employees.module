@@ -861,5 +861,7 @@ function employees_form_editor_media_dialog_alter(array &$form, FormStateInterfa
     '#step' => '1',
     '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? 'ratio ratio-16x9' : $media_embed_element['data-aspect-ratio'],
     '#parents' => ['attributes', 'data-aspect-ratio'],
+    // Make radio buttons inline
+    '#attributes' => ['class' => ['container-inline']],
   ];
 }
