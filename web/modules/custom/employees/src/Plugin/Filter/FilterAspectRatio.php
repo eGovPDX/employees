@@ -23,6 +23,8 @@ class FilterAspectRatio extends FilterBase {
    */
   public function process($text, $langcode) {
     $result = new FilterProcessResult($text);
+    // Do not process CKEditor preview
+    if( str_ends_with(\Drupal::service('path.current')->getPath(), '/preview') ) return $result;
 
     if (stristr($text, 'data-entity-uuid') !== FALSE) {
       $dom = Html::load($text);
