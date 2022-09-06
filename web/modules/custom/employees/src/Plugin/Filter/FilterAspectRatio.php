@@ -24,19 +24,31 @@ class FilterAspectRatio extends FilterBase {
   public function process($text, $langcode) {
     $result = new FilterProcessResult($text);
 
-    if (stristr($text, 'data-aspect-ratio') !== FALSE) {
+    if (stristr($text, 'data-entity-uuid') !== FALSE) {
       $dom = Html::load($text);
       $xpath = new \DOMXPath($dom);
-      foreach ($xpath->query('//*[@data-aspect-ratio]') as $node) {
+      foreach ($xpath->query('//*[@data-entity-uuid]') as $node) {
+        // Check if it's an iframe
+        $uuid = $node->getAttribute('data-entity-uuid');
+        if(empty($uuid)) continue;
+
+        $entity_loaded_by_uuid = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $uuid]);
+        $entity_loaded_by_uuid = reset($entity_loaded_by_uuid);
+        if($entity_loaded_by_uuid->bundle() != 'iframe') continue;
+
         // Read the data-aspect-ratio attribute's value, then delete it.
         $aspect_ratio = $node->getAttribute('data-aspect-ratio');
         $node->removeAttribute('data-aspect-ratio');
 
         // If one of the allowed aspect ratios, set the attribute.
-        if (in_array($aspect_ratio, ['ratio ratio-16x9', 'ratio ratio-4x3', 'ratio ratio-1x1'])) {
+        if( empty($aspect_ratio)) {
+          $node->setAttribute('class', 'ratio ratio-16x9');
+        }
+        else if (in_array($aspect_ratio, ['ratio ratio-16x9', 'ratio ratio-4x3', 'ratio ratio-1x1'])) {
           $node->setAttribute('class', $node->getAttribute('class') . $aspect_ratio);
         }
       }
+
       $result->setProcessedText(Html::serialize($dom));
     }
 
