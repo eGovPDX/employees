@@ -49,6 +49,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_display_in_group:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_when:
     type: smartdate_default
     label: inline
@@ -58,13 +66,15 @@ content:
       format: compact
       force_chronological: false
       add_classes: false
+      time_wrapper: true
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  content_dates_eva_created_content: true
+  content_dates_eva_updated_content: true
   content_moderation_control: true
   field_contact: true
-  field_display_in_group: true
   field_related_content: true
   field_reviewer: true
   field_tags: true

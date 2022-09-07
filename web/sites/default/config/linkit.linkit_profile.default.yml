@@ -1,0 +1,36 @@
+uuid: 57af7dbd-b032-4fc0-a974-7358a8a149bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: Tt8DtxZ3Nooo0PoWPpJvszA3R_5d8MmpUW7LM_R-BzY
+label: Employees
+id: default
+description: 'Link suggestions from content and groups.'
+matchers:
+  556010a3-e317-48b3-b4ed-854c10f4b950:
+    id: 'entity:node'
+    uuid: 556010a3-e317-48b3-b4ed-854c10f4b950
+    settings:
+      metadata: '[node:url:relative] ([node:content-type])'
+      bundles:
+        event: event
+        news: news
+        page: page
+      group_by_bundle: false
+      substitution_type: canonical
+      limit: 100
+      include_unpublished: true
+    weight: 0
+  3b84245c-237c-4f35-bb8c-fab14d74df3f:
+    id: 'entity:group'
+    uuid: 3b84245c-237c-4f35-bb8c-fab14d74df3f
+    settings:
+      metadata: '[group:url] ([group:type-name])'
+      bundles: {  }
+      group_by_bundle: false
+      substitution_type: canonical
+      limit: 100
+    weight: 0
