@@ -21,25 +21,25 @@ filters:
   filter_align:
     id: filter_align
     provider: filter
-    status: true
+    status: false
     weight: -49
     settings: {  }
   filter_caption:
     id: filter_caption
     provider: filter
-    status: true
+    status: false
     weight: -48
     settings: {  }
   filter_htmlcorrector:
     id: filter_htmlcorrector
     provider: filter
-    status: true
+    status: false
     weight: -47
     settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
-    status: true
+    status: false
     weight: -46
     settings: {  }
   filter_html:
@@ -68,18 +68,6 @@ filters:
         document: document
         image: image
         remote_video: remote_video
-  filter_html_image_secure:
-    id: filter_html_image_secure
-    provider: filter
-    status: false
-    weight: -40
-    settings: {  }
-  filter_html_escape:
-    id: filter_html_escape
-    provider: filter
-    status: false
-    weight: -43
-    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
@@ -87,6 +75,18 @@ filters:
     weight: -41
     settings:
       filter_url_length: 72
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: false
+    weight: -43
+    settings: {  }
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: false
+    weight: -40
+    settings: {  }
   filter_autop:
     id: filter_autop
     provider: filter
@@ -96,7 +96,7 @@ filters:
   linkit:
     id: linkit
     provider: linkit
-    status: true
+    status: false
     weight: -50
     settings:
       title: true
