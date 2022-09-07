@@ -19,7 +19,16 @@ header.page__header {
   }
 }
 
-//Site Wide Alerts
-.sitewide--alert {
-  color: $white;
+.alert-wrapper {
+  display: flex;
+  color: $light;
+
+  a {
+    color: $light;
+    text-decoration: underline;
+  }
+  .img {
+    width: 16px;
+  }
 }
+

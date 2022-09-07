@@ -1,12 +1,18 @@
-{# DEFAULTS #}
-{# {{ drupal_break() }} #}
+{# Set Alert Type #}
 {% if node.field_severity.value == 20 %}
-  {% set alertType = 'orange' %}
+	{% set alertType = 'warning' %}
+	{% set TypeName = 'warning' %}
 {% else %}
-{# bg-alert is currently in use for our success messages #}
-  {% set alertType = 'blue' %}
+	{% set alertType = 'info' %}
+	{% set TypeName = 'information' %}
 {% endif %}
-{# {% set id = id|default('pl-demo-alert') %} #}
+
+{% set alertIcon %}
+{% include "@westy/icon/icon.twig" with {
+    name: TypeName,
+    size: 'lg',
+  } only %}
+{% endset %}
 
 {# CLASSES #}
 {% set classes= [
@@ -17,15 +23,12 @@
 ]%}
 
 {# TWIG #}
-<div class="{{ classes|join(' ')|trim }}"
-      data-nid="{{ id }}"
-   {% if changed %}
-      data-changed="{{ changed }}"
-   {% endif %}
-   >
-
-<div class="container">
-        <div class="fw-bold">{{ label }}</div>
-        <div>{{ content }}</div>
-</div>
-</div>
+<div class="{{ classes|join(' ')|trim }}" data-nid="{{ id }}" {% if changed %} data-changed="{{ changed }}" {% endif %}>
+	<div class="container">
+		<div class="alert-wrapper">
+			{{ alertIcon }}
+			<div class="alert_wrapper-inner">
+				<div class="fw-bold">{{ label }}</div>
+				<div>{{ content }}</div>
+			</div>
+		</div>

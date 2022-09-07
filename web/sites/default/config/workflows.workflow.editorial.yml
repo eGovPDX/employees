@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - node.type.alert
     - node.type.bts_catalog_item
     - node.type.contract
     - node.type.event
@@ -77,6 +78,7 @@ type_settings:
       weight: 1
   entity_types:
     node:
+      - alert
       - bts_catalog_item
       - contract
       - event
