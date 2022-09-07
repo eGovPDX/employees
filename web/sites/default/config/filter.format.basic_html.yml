@@ -10,6 +10,7 @@ dependencies:
     - core.entity_view_mode.media.narrow
   module:
     - editor
+    - linkit
     - employees
     - media
 _core:
@@ -78,3 +79,10 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 0
+    settings:
+      title: true

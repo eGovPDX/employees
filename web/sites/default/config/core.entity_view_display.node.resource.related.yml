@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
     - field.field.node.resource.field_topics
+    - field.field.node.resource.field_type
     - node.type.resource
   module:
     - layout_builder
@@ -56,6 +57,8 @@ content:
     weight: 0
     region: content
 hidden:
+  content_dates_eva_created_content: true
+  content_dates_eva_updated_content: true
   content_moderation_control: true
   field_display_in_group: true
   field_feature: true
@@ -68,6 +71,7 @@ hidden:
   field_sort_weight: true
   field_tags: true
   field_topics: true
+  field_type: true
   group_menu_eva_nested_menu: true
   langcode: true
   links: true

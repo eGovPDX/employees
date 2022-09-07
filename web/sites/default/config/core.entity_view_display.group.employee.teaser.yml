@@ -58,6 +58,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_org_type:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   changed: true
   created: true
@@ -66,7 +74,6 @@ hidden:
   field_group_path: true
   field_has_contracts: true
   field_migration_status: true
-  field_org_type: true
   field_parent_group: true
   label: true
   langcode: true

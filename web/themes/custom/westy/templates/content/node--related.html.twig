@@ -10,7 +10,7 @@
   {% set link = url %}
 {% endif %}
 
-<div class="mb-3 related position-relative">
-  <h3><a href="{{ link }}" class="text-primary stretched-link">{{ title }}</a></h3>
+<div class="mb-4 related position-relative">
+  <h3 class="fw-normal mb-1"><a href="{{ link }}" class="stretched-link">{{ title }}</a></h3>
   {{ content|without('field_short_title','field_resource_link') }}
 </div>

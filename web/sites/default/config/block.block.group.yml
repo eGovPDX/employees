@@ -1,27 +1,27 @@
-uuid: f2b8d21a-b72f-475d-be4b-57db9999d7cf
+uuid: a49c677c-c5f1-4cd1-bc9a-3cbbc98e0126
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.type
+    - facets.facet.content_displayed_in
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_type
+id: group
 theme: westy
 region: side
-weight: -14
+weight: -13
 provider: null
-plugin: 'facet_block:type'
+plugin: 'facet_block:content_displayed_in'
 settings:
-  id: 'facet_block:type'
-  label: 'Search: Filter by Type'
+  id: 'facet_block:content_displayed_in'
+  label: 'Search: Filter by Group'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_type
+  block_id: group
 visibility:
   request_path:
     id: request_path
