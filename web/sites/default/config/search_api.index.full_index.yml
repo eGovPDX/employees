@@ -155,7 +155,7 @@ field_settings:
     label: 'Content Title'
     datasource_id: 'entity:node'
     property_path: title
-    type: text
+    type: 'solr_text_custom_omit_norms:edgestring'
     boost: !!float 5
     dependencies:
       module:
@@ -555,7 +555,7 @@ field_settings:
     label: Name
     datasource_id: 'entity:media'
     property_path: name
-    type: text
+    type: 'solr_text_custom_omit_norms:edgestring'
     boost: !!float 5
     dependencies:
       module:
