@@ -46,13 +46,6 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    */
   public static function getValidUrlExampleStrings(): array {
     return ['URLs from arcg.is, arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
-    // return [
-    //   'https://arcg.is/DbHjf0',
-    //   'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22361.96181366453!2d-122.67747803387468!3d45.52527053380518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1661813786487!5m2!1sen!2sus',
-    //   'https://www.portlandmaps.com/bps/scg/charts/?theme=fleet&chart=1',
-    //   'https://nff.maps.arcgis.com/apps/Embed/index.html?webmap=3d7060912fff43c0a151c097ba328f18&extent=-120.8593,37.9925,-90.6909,51.0109&zoom=true&previewImage=false&scale=true&legend=true&disable_scroll=true&theme=light',
-    //   'https://public.tableau.com/views/ReportedBiasCrimes/BiasCrime?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:embed_code_version=3&:tabs=yes&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:loadOrderID=0&:increment_view_count=no&width=660&height=1800',
-    // ];
   }
 
   /**
