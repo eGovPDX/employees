@@ -1,0 +1,30 @@
+uuid: d801e91b-b94f-4af2-8575-6184d4003e43
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.notifications
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: views_block__notifications_block_group_notifications
+theme: westy
+region: header
+weight: 0
+provider: null
+plugin: 'views_block:notifications-block_group_notifications'
+settings:
+  id: 'views_block:notifications-block_group_notifications'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*\r\n/group/*/*"
