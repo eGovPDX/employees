@@ -1,27 +1,27 @@
-uuid: 48817d92-e48c-4d04-9031-538a19604a52
+uuid: 6e10d4ec-fe07-40b0-abc3-3eba1efef6cf
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.support_model
+    - facets.facet.cloud_service_type
   module:
     - facets
     - system
   theme:
     - westy
-id: westy_supportmodel
+id: btscatalogfilterbycloudservicetype
 theme: westy
 region: side
-weight: 11
+weight: 14
 provider: null
-plugin: 'facet_block:support_model'
+plugin: 'facet_block:cloud_service_type'
 settings:
-  id: 'facet_block:support_model'
-  label: 'BTS Catalog: Filter by Support Model'
+  id: 'facet_block:cloud_service_type'
+  label: 'BTS Catalog: Filter by cloud service type'
   label_display: '0'
   provider: facets
   context_mapping: {  }
-  block_id: westy_supportmodel
+  block_id: btscatalogfilterbycloudservicetype
 visibility:
   request_path:
     id: request_path
