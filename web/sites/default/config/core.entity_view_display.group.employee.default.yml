@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_has_contracts
+    - field.field.group.employee.field_logo
     - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
@@ -17,6 +18,7 @@ dependencies:
     - views.view.group_menu
     - views.view.group_search_index
   module:
+    - file
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -169,6 +171,22 @@ third_party_settings:
               items_per_page: none
             weight: 1
             additional: {  }
+          40e6b85a-7697-4450-913e-45f43f818dcd:
+            uuid: 40e6b85a-7697-4450-913e-45f43f818dcd
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_logo'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: file_default
+                label: above
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -219,6 +237,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 0
+    region: main
+  field_logo:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 3
     region: main
   field_migration_status:
     type: list_default
