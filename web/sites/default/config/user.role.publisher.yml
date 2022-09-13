@@ -11,6 +11,7 @@ dependencies:
     - node.type.contract
     - node.type.event
     - node.type.news
+    - node.type.notification
     - node.type.page
     - node.type.resource
     - workflows.workflow.editorial
@@ -61,6 +62,7 @@ permissions:
   - 'edit own event content'
   - 'edit own image media'
   - 'edit own news content'
+  - 'edit own notification content'
   - 'edit own page content'
   - 'edit own remote_document media'
   - 'edit own remote_video media'
@@ -68,6 +70,7 @@ permissions:
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
+  - 'revert notification revisions'
   - 'revert page revisions'
   - 'revert resource revisions'
   - 'schedule publishing of media'
@@ -82,5 +85,6 @@ permissions:
   - 'view all media revisions'
   - 'view any unpublished content'
   - 'view latest version'
+  - 'view notification revisions'
   - 'view own unpublished content'
   - 'view own unpublished media'
