@@ -1,0 +1,24 @@
+{%- apply spaceless %}
+{# Icon Size #}
+{% set size = size|default('lg') %}
+
+{# Set Icon Type #}
+{% if name == 'warning' %}
+	{% set iconType = 'triangle-exclamation' %}
+{% else %}
+	{% set iconType = 'circle-info' %}
+{% endif %}
+
+{# Classes #}
+{% set classes = classes|default([
+  'fa-' ~ iconType,
+  'fa-' ~ size,
+  'fas',
+  'me-4',
+  'mt-3',
+]) %}
+
+{# TWIG #}
+<span class="{{ classes|join(' ') }}"></span>
+
+{% endapply -%}
