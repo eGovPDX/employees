@@ -3309,6 +3309,33 @@ function withinMaxClamp(min, value, max) {
 
 /***/ }),
 
+/***/ "./src/components/notification/_notification.js":
+/*!******************************************************!*\
+  !*** ./src/components/notification/_notification.js ***!
+  \******************************************************/
+/***/ (() => {
+
+(function ($, Drupal) {
+  'use strict';
+
+  Drupal.behaviors.notificatin_handler = {
+    /**
+     * @param {HTMLElement} context
+     * @param settings
+     */
+    attach: function attach(context, settings) {
+      var closeButton = document.getElementsByClassName('westy-notification__close');
+      var alertElement = document.getElementsByClassName('westy-notification');
+      closeButton[0].addEventListener('click', function (event) {
+        event.preventDefault();
+        alertElement[0].classList.remove('westy-notification--dismissible');
+      });
+    }
+  };
+})(jQuery, Drupal);
+
+/***/ }),
+
 /***/ "./src/js/_bootstrap.js":
 /*!******************************!*\
   !*** ./src/js/_bootstrap.js ***!
@@ -6675,8 +6702,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _back_to_top_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_back_to_top_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/alerts/_alerts */ "./src/components/alerts/_alerts.js");
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
-/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/notification/_notification */ "./src/components/notification/_notification.js");
+/* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_notification_notification__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
+/* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_6__);
 /**
  * @file Global helper JS for the theme.
  */
@@ -6689,28 +6718,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(function ($, Drupal) {
-  'use strict'; // Drupal.behaviors.westyBackToTop = {
-  //   attach: function (context, settings) {
-  //     var viewHeight = $(window).height();
-  //     var showHeight = viewHeight * 1.5;
-  //     var isAttached = false;
-  //     $(window).once('backToTopShowButtonHandler').on('scroll', function () {
-  //       var scrollPos = $(document).scrollTop();
-  //       if (scrollPos > showHeight && !isAttached) {
-  //         var buttonText = Drupal.t('Back to top');
-  //         $('.block--westy-content', context).append(`<div id="back-to-top" class="btn btn-dark position-fixed zindex-fixed bottom-5 right-5"><a href=".page__content">${buttonText}</a></div>`);
-  //         isAttached = true;
-  //       } else if (scrollPos <= showHeight && isAttached) {
-  //         $('#back-to-top').remove();
-  //         isAttached = false;
-  //       }
-  //     });
-  //     $('#back-to-top', context).once('backToTopClickHandler').on('click', function () {
-  //       $(this).remove();
-  //       isAttached = false;
-  //     });
-  //   }
+
+(function ($, Drupal) {// 'use strict';
+  // Drupal.behaviors.notificatin_handler = {
+  //   /**
+  //    * @param {HTMLElement} context
+  //    * @param settings
+  //    */
+  // attach(context, settings) {
+  //   let closeButton = document.getElementsByClassName('westy-notification__close')
+  //   let alertElement = document.getElementsByClassName('westy-notification')
+  //   closeButton[0].addEventListener('click', (event) => {
+  //     event.preventDefault()
+  //     alertElement[0].classList.remove('westy-notification--dismissible')
+  //   })
+  // }
   // };
 })(jQuery, Drupal);
 

@@ -1,18 +1,13 @@
 {# Set Notification Type #}
 {% if node.field_notification_serverity.value == 20 %}
-
-	{% set notiType = 'warning' %}
 	{% set Typename = 'warning' %}
-
 {% else %}
-
-	{% set notiType = 'info' %}
 	{% set Typename = 'information' %}
 {% endif %}
 
+{# Defaults #}
 {% set isDismissible = isDismissible|default(TRUE) %}
 {% set is_draft = is_draft|default(FALSE) %}
-{% set notiType = notiType|default('warning') %}
 
 {% set alertIcon %}
 {% include '@westy/icon/icon.twig' with{
@@ -20,29 +15,35 @@
 	size: 'lg',
 } only %}
 {% endset %}
+
 {# CLASSES #}
 {% set classes= [
-  'text-light',
+  'westy-notification',
+  'text-dark',
   'p-3',
+  'mt-3',
   'container',
-  'bg-' ~ notiType,
-  isDismissible ? 'cloudy-notification--dismissible',
-  is_draft ? 'cloudy-notification--is_draft',
+  'bg-secondary',
+  isDismissible ? 'westy-notification--dismissible',
+  is_draft ? 'westy-notification--is_draft',
 ]%}
 {# TWIG #}
 <div class="{{ classes|join(' ')|trim }}" data-nid="{{ id }}" {% if changed %} data-changed="{{ changed }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}>
-	<div class="d-flex">
+	<div class="d-flex flex-row westy-notification__inner-wrapper">
 		{{alertIcon}}
-		<div class="alert-wrapper">
-			<div class="fw-bold">
+		<div class="westy-notification__inner">
+			<div class="fw-bold westy-notification__title">
 				{{label}}</div>
-			<div>{{ content }}</div>
+			<div class="westy-notification__content">{{ content }}</div>
 		</div>
-		<div class="position-absolute end-0 top-0 m-2">
-			<button type="button" class="top-0 end-0" data-dismiss="alert" aria-label="Dismiss notification">
-				<i class="fa fa-times" aria-hidden="true"></i>
-				<span class="sr-only">Dismiss</span>
-			</button>
+		{% if isDismissible %}
+			<div class="position-absolute end-0 mt-3 me-5">
+				<button type="button" class="border-0 bg-secondary westy-notification__close" data-dismiss="alert" aria-label="Dismiss notification">
+					<span aria-hidden="true" class="alert__close-contents">
+						<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+						<span class="sr-only">Dismiss</span>
+					</button>
+				</div>
+			{% endif %}
 		</div>
 	</div>
-</div>

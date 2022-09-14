@@ -10,34 +10,25 @@ import './back-to-top.js';
 
 // Import components
 import '../components/alerts/_alerts';
+import '../components/notification/_notification';
 import '../components/nav/_nav';
 
 (function ($, Drupal) {
 
-  'use strict';
-  // Drupal.behaviors.westyBackToTop = {
-  //   attach: function (context, settings) {
-  //     var viewHeight = $(window).height();
-  //     var showHeight = viewHeight * 1.5;
-  //     var isAttached = false;
-
-  //     $(window).once('backToTopShowButtonHandler').on('scroll', function () {
-  //       var scrollPos = $(document).scrollTop();
-  //       if (scrollPos > showHeight && !isAttached) {
-  //         var buttonText = Drupal.t('Back to top');
-  //         $('.block--westy-content', context).append(`<div id="back-to-top" class="btn btn-dark position-fixed zindex-fixed bottom-5 right-5"><a href=".page__content">${buttonText}</a></div>`);
-  //         isAttached = true;
-  //       } else if (scrollPos <= showHeight && isAttached) {
-  //         $('#back-to-top').remove();
-  //         isAttached = false;
-  //       }
-  //     });
-
-  //     $('#back-to-top', context).once('backToTopClickHandler').on('click', function () {
-  //       $(this).remove();
-  //       isAttached = false;
-  //     });
-  //   }
+  // 'use strict';
+  // Drupal.behaviors.notificatin_handler = {
+  //   /**
+  //    * @param {HTMLElement} context
+  //    * @param settings
+  //    */
+    // attach(context, settings) {
+    //   let closeButton = document.getElementsByClassName('westy-notification__close')
+    //   let alertElement = document.getElementsByClassName('westy-notification')
+    //   closeButton[0].addEventListener('click', (event) => {
+    //     event.preventDefault()
+    //     alertElement[0].classList.remove('westy-notification--dismissible')
+    //   })
+    // }
   // };
 
 })(jQuery, Drupal);
