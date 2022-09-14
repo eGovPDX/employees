@@ -3324,12 +3324,18 @@ function withinMaxClamp(min, value, max) {
      * @param settings
      */
     attach: function attach(context, settings) {
-      var closeButton = document.getElementsByClassName('westy-notification__close');
+      //set an alert cookie
       var alertElement = document.getElementsByClassName('westy-notification');
+      console.log(alertElement); // When close button is clicked remove the westy-notification class
+
+      var closeButton = document.getElementsByClassName('westy-notification__close');
       closeButton[0].addEventListener('click', function (event) {
         event.preventDefault();
         alertElement[0].classList.remove('westy-notification--dismissible');
       });
+      var nid = alertElement[0]['dataset']['nid'];
+      var lastChangedTimestamp = alertElement[0]['dataset'];
+      console.log(alertElement[0]);
     }
   };
 })(jQuery, Drupal);
