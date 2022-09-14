@@ -3318,6 +3318,7 @@ function withinMaxClamp(min, value, max) {
 (function ($, Drupal) {
   'use strict';
 
+  var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
   Drupal.behaviors.notificatin_handler = {
     /**
      * @param {HTMLElement} context
@@ -3325,17 +3326,24 @@ function withinMaxClamp(min, value, max) {
      */
     attach: function attach(context, settings) {
       //set an alert cookie
-      var alertElement = document.getElementsByClassName('westy-notification');
-      console.log(alertElement); // When close button is clicked remove the westy-notification class
+      var alertElement = document.getElementsByClassName('westy-notification'); // When close button is clicked remove the westy-notification class
 
       var closeButton = document.getElementsByClassName('westy-notification__close');
       closeButton[0].addEventListener('click', function (event) {
         event.preventDefault();
         alertElement[0].classList.remove('westy-notification--dismissible');
-      });
-      var nid = alertElement[0]['dataset']['nid'];
-      var lastChangedTimestamp = alertElement[0]['dataset'];
-      console.log(alertElement[0]);
+      }); // Set cookie value after close
+      // const nid = alertElement[0]['dataset']['nid']
+      // const cookeChangedTimestamp = document.cookie(COOKIE_PREFIX + nid)
+      // const lastChangedTimestamp = alertElement[0]['dataset']['changed']
+      // const path = (drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl) || '/';
+      // alertElement.cookie(
+      //   COOKIE_PREFIX + nid,
+      //   lastChangedTimestamp,
+      //   {
+      //     path,
+      //   }
+      // )
     }
   };
 })(jQuery, Drupal);
