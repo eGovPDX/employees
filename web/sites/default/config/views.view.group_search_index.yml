@@ -187,7 +187,28 @@ display:
       relationships: {  }
       link_display: page_documents
       link_url: ''
-      header: {  }
+      header:
+        view:
+          id: view
+          table: views
+          field: view
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: view
+          empty: true
+          view_to_insert: 'group_list_views:block_search_menu'
+          inherit_arguments: true
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -361,11 +382,13 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       relationships: {  }
       display_description: ''
       use_more: true
       use_more_always: true
       use_more_text: 'All Documents'
+      header: {  }
       display_extenders: {  }
       block_hide_empty: true
     cache_metadata:
@@ -3171,7 +3194,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        header: false
+        header: true
       relationships:
         field_display_in_group:
           id: field_display_in_group
@@ -3186,28 +3209,6 @@ display:
           skip_access: false
       css_class: mb-3
       display_description: ''
-      header:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: true
-          view_to_insert: 'group_list_views:block_group_events_menu'
-          inherit_arguments: true
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: result
-          empty: false
-          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       path: group/%/events
     cache_metadata:
@@ -3535,7 +3536,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        header: false
+        header: true
       relationships:
         field_display_in_group:
           id: field_display_in_group
@@ -3550,17 +3551,6 @@ display:
           skip_access: false
       css_class: mb-3
       display_description: ''
-      header:
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: result
-          empty: false
-          content: 'Displaying @start - @end of @total'
       display_extenders: {  }
       path: group/%/news
     cache_metadata:
@@ -4067,7 +4057,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        header: false
+        header: true
       relationships:
         field_display_in_group:
           id: field_display_in_group
@@ -4082,28 +4072,6 @@ display:
           skip_access: false
       css_class: mb-3
       display_description: ''
-      header:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: true
-          view_to_insert: 'group_list_views:block_group_events_menu'
-          inherit_arguments: true
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: result
-          empty: false
-          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       path: group/%/events/past
     cache_metadata:
@@ -4418,7 +4386,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        header: false
+        header: true
       relationships:
         field_display_in_group:
           id: field_display_in_group
@@ -4433,17 +4401,6 @@ display:
           skip_access: false
       css_class: mb-3
       display_description: ''
-      header:
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: result
-          empty: false
-          content: 'Displaying @start - @end of @total'
       exposed_block: false
       display_extenders: {  }
       path: group/%/search
