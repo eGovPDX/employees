@@ -1,0 +1,29 @@
+uuid: e61b768d-d74e-4ee5-a877-c4d57e7d514e
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_search_last_updated_year
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: groupsearchlastupdatedyear
+theme: westy
+region: side
+weight: 17
+provider: null
+plugin: 'facet_block:group_search_last_updated_year'
+settings:
+  id: 'facet_block:group_search_last_updated_year'
+  label: 'Group Search: Last Updated Year'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: groupsearchlastupdatedyear
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/search'
