@@ -45,11 +45,23 @@ class RemoveGroupEditorForAdmins extends ViewsBulkOperationsActionBase {
         ( in_array('employee-editor', $role_ids) && in_array('employee-admin', $role_ids) ) ||
         ( in_array('private-editor', $role_ids) && in_array('private-admin', $role_ids) )
       );
-      if($has_both_editor_and_admin_role) {
+
+      // Remove the member role if it's not the only role
+      $should_remove_member_role = (
+        count($roles) > 1 &&
+        ( in_array('employee-member', $role_ids) || in_array('private-member', $role_ids) )
+      );
+
+      if($has_both_editor_and_admin_role || $should_remove_member_role) {
         // Filter out the Editor role
         $group_content->group_roles = [];
         foreach ($roles as $role) {
-          if ($role->id() === 'employee-editor' || $role->id() === 'private-editor') {
+          if (
+            $role->id() === 'employee-editor' || 
+            $role->id() === 'private-editor' || 
+            $role->id() === 'employee-member' || 
+            $role->id() === 'private-member'
+            ) {
             continue;
           }
           $group_content->group_roles->appendItem(['target_id' => $role->id()]);
