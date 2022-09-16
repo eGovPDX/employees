@@ -2493,7 +2493,7 @@ display:
     display_plugin: page
     position: 2
     display_options:
-      title: 'Documents and Forms'
+      title: '{{ label }} Documents and Forms'
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -2693,6 +2693,7 @@ display:
     cache_metadata:
       max-age: 0
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - route
         - url
@@ -3577,7 +3578,7 @@ display:
     display_plugin: page
     position: 7
     display_options:
-      title: '{{ label }} Events'
+      title: '{{ label }} Past Events'
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
