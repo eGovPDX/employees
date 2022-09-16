@@ -29,10 +29,38 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "group_content_employee-group_membership_edit_form":
     case "group_content_private-group_membership_add_form":
     case "group_content_private-group_membership_edit_form":
+      $options = &$form["group_roles"]["widget"]["#options"];
+      if( array_key_exists("employee-admin", $options) ) {
+        $options["employee-admin"] = 'Admin: choose either Admin or Editor for collaborators';
+      }
+      if( array_key_exists("employee-assigned", $options) ) {
+        $options["employee-assigned"] = 'Assigned: can view group content';
+      }
+      if( array_key_exists("employee-editor", $options) ) {
+        $options["employee-editor"] = 'Editor: choose either Admin or Editor for collaborators';
+      }
+      if( array_key_exists("employee-employee", $options) ) {
+        $options["employee-employee"] = 'Employee: assigned automativally by AD sync';
+      }
+      if( array_key_exists("private-admin", $options) ) {
+        $options["private-admin"] = 'Admin: choose either Admin or Editor for collaborators';
+      }
+      if( array_key_exists("private-assigned", $options) ) {
+        $options["private-assigned"] = 'Assigned: can view group content';
+      }
+      if( array_key_exists("private-editor", $options) ) {
+        $options["private-editor"] = 'Editor: choose either Admin or Editor for collaborators';
+      }
+
       //  Don't modify role checkboxes for site admins
       $current_user_roles = \Drupal::currentUser()->getRoles();
-      if( in_array("administrator", $current_user_roles) )
-      return;
+      if( in_array("administrator", $current_user_roles) ) {
+        $form['#attached']['drupalSettings']['isAdmin'] = true;
+      }
+      else {
+        $form['#attached']['drupalSettings']['isAdmin'] = false;
+      }
+
       $form['#attached']['library'][] = 'employees/employees';
       $form["group_roles"]["widget"]["#required"] = true;
       break;
