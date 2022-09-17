@@ -16,6 +16,8 @@
 } only %}
 {% endset %}
 
+{# remove the padding from last paragraph. align dismiss and icon with heading #}
+
 {# CLASSES #}
 {% set classes= [
   'westy-notification',
@@ -24,12 +26,10 @@
   'mt-3',
   'container',
   'bg-secondary',
-  isDismissible ? 'westy-notification--dismissible',
   is_draft ? 'westy-notification--is_draft',
 ]%}
 {# TWIG #}
-<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}>
-	<div class="d-flex flex-row westy-notification__inner-wrapper">
+	<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}> <div class="d-flex flex-row westy-notification__inner-wrapper">
 		{{alertIcon}}
 		<div class="westy-notification__inner">
 			<div class="fw-bold westy-notification__title">

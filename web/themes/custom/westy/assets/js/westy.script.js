@@ -3313,40 +3313,67 @@ function withinMaxClamp(min, value, max) {
 /*!******************************************************!*\
   !*** ./src/components/notification/_notification.js ***!
   \******************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-(function ($, Drupal) {
-  'use strict';
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
-  var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
-  Drupal.behaviors.notificatin_handler = {
-    /**
-     * @param {HTMLElement} context
-     * @param settings
-     */
-    attach: function attach(context, settings) {
-      //set an alert cookie
-      var alertElement = document.getElementsByClassName('westy-notification'); // When close button is clicked remove the westy-notification class
+'use strict';
 
-      var closeButton = document.getElementsByClassName('westy-notification__close');
-      closeButton[0].addEventListener('click', function (event) {
-        event.preventDefault();
-        alertElement[0].classList.remove('westy-notification--dismissible');
-      }); // Set cookie value after close
-      // const nid = alertElement[0]['dataset']['nid']
-      // const cookeChangedTimestamp = document.cookie(COOKIE_PREFIX + nid)
-      // const lastChangedTimestamp = alertElement[0]['dataset']['changed']
-      // const path = (drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl) || '/';
-      // alertElement.cookie(
-      //   COOKIE_PREFIX + nid,
-      //   lastChangedTimestamp,
-      //   {
-      //     path,
-      //   }
-      // )
-    }
-  };
-})(jQuery, Drupal);
+var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
+Drupal.behaviors.notificatin_handler = {
+  /**
+   * @param {HTMLElement} context
+   * @param settings
+   */
+  //   attach(context, settings) {
+  //     $('westy-notification').click(function (event) {
+  //       event.preventDefault()
+  //       const alertElement = $(this).closest('westy-notification')
+  //       alertElement.removeClass('westy-notification--dismissible')
+  //     })
+  //   }
+  // }
+  attach: function attach(context, settings) {
+    //set an alert cookie
+    var alertElement = document.getElementsByClassName('westy-notification');
+    console.log(alertElement);
+    console.log;
+    var path = drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl || '/';
+    var current_nid = alertElement[0]['dataset']['nid'];
+    var changed = alertElement[0]['dataset']['changed'];
+    var currentCookieTimestamp = COOKIE_PREFIX + current_nid + changed; // find stored cookie
+
+    var docCookies = document.cookie.split(';');
+
+    var currentCookie = function currentCookie(list) {
+      for (var i = 0; 1 < list.length; ++i) {
+        if (list[i].includes(COOKIE_PREFIX)) {
+          return docCookies[i];
+        }
+      }
+    };
+
+    var findCookie = currentCookie(docCookies); // make notification viewable if current cookie does not match with the stored cookie
+
+    if (' ' + currentCookieTimestamp != findCookie) {
+      alertElement[0].classList.add('westy-notification--dismissible');
+    } // When close button is clicked remove the westy-notification class
+
+
+    var closeButton = document.getElementsByClassName('westy-notification__close');
+    closeButton[0].addEventListener('click', function (event) {
+      event.preventDefault();
+      alertElement[0].classList.remove('westy-notification--dismissible'); // Set cookie value after close
+
+      var nid = alertElement[0]['dataset']['nid'];
+      var lastChangedTimestamp = alertElement[0]['dataset']['changed'];
+      document.cookie = encodeURIComponent(COOKIE_PREFIX + nid + lastChangedTimestamp);
+    });
+  }
+};
 
 /***/ }),
 
@@ -6717,7 +6744,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/alerts/_alerts */ "./src/components/alerts/_alerts.js");
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/notification/_notification */ "./src/components/notification/_notification.js");
-/* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_notification_notification__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
 /* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_6__);
 /**
@@ -12762,6 +12788,17 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = jQuery;
 
 /***/ })
 
