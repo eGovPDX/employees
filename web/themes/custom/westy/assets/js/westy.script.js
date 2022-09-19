@@ -3313,14 +3313,7 @@ function withinMaxClamp(min, value, max) {
 /*!******************************************************!*\
   !*** ./src/components/notification/_notification.js ***!
   \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-
-'use strict';
+/***/ (() => {
 
 var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
 Drupal.behaviors.notificatin_handler = {
@@ -3328,20 +3321,9 @@ Drupal.behaviors.notificatin_handler = {
    * @param {HTMLElement} context
    * @param settings
    */
-  //   attach(context, settings) {
-  //     $('westy-notification').click(function (event) {
-  //       event.preventDefault()
-  //       const alertElement = $(this).closest('westy-notification')
-  //       alertElement.removeClass('westy-notification--dismissible')
-  //     })
-  //   }
-  // }
   attach: function attach(context, settings) {
     //set an alert cookie
     var alertElement = document.getElementsByClassName('westy-notification');
-    console.log(alertElement);
-    console.log;
-    var path = drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl || '/';
     var current_nid = alertElement[0]['dataset']['nid'];
     var changed = alertElement[0]['dataset']['changed'];
     var currentCookieTimestamp = COOKIE_PREFIX + current_nid + changed; // find stored cookie
@@ -6744,6 +6726,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/alerts/_alerts */ "./src/components/alerts/_alerts.js");
 /* harmony import */ var _components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_alerts_alerts__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/notification/_notification */ "./src/components/notification/_notification.js");
+/* harmony import */ var _components_notification_notification__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_notification_notification__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/nav/_nav */ "./src/components/nav/_nav.js");
 /* harmony import */ var _components_nav_nav__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_nav_nav__WEBPACK_IMPORTED_MODULE_6__);
 /**
@@ -12788,17 +12771,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
-
-/***/ }),
-
-/***/ "jquery":
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = jQuery;
 
 /***/ })
 

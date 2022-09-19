@@ -22,28 +22,27 @@
 {% set classes= [
   'westy-notification',
   'text-dark',
-  'p-3',
-  'mt-3',
-  'container',
   'bg-secondary',
+  'my-3',
   is_draft ? 'westy-notification--is_draft',
 ]%}
 {# TWIG #}
 	<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}> <div class="d-flex flex-row westy-notification__inner-wrapper">
-		{{alertIcon}}
-		<div class="westy-notification__inner">
-			<div class="fw-bold westy-notification__title">
-				{{label}}</div>
-			<div class="westy-notification__content">{{ content }}</div>
-		</div>
-		{% if isDismissible %}
-			<div class="position-absolute end-0 mt-3 me-5">
-				<button type="button" class="border-0 bg-secondary westy-notification__close" data-dismiss="alert" aria-label="Dismiss notification">
-					<span aria-hidden="true" class="alert__close-contents">
-						<i class="fa fa-times fa-lg" aria-hidden="true"></i>
-						<span class="sr-only">Dismiss</span>
-					</button>
-				</div>
-			{% endif %}
+		<div class="p-2 start-0 container d-flex">
+			{{alertIcon}}
+			<div class="ps-3">
+				<div class="fw-bold">{{label}}</div>
+				<div>{{ content }}</div>
+			</div>
+			{% if isDismissible %}
+				<div class="position-absolute end-0">
+					<button type="button" class="border-0 bg-secondary westy-notification__close" data-dismiss="alert" aria-label="Dismiss notification">
+						<span aria-hidden="true" class="alert__close-contents">
+							<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+							<span class="sr-only">Dismiss</span>
+						</button>
+					</div>
+				{% endif %}
+			</div>
 		</div>
 	</div>
