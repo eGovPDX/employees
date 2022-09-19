@@ -25,13 +25,12 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
     $patterns = [
       // ArcGIS
       '^https?:\/\/arcg.is\/\w+$',
-      '^https?:\/\/\w+\.maps\.arcgis\.com\/apps\/Embed\/index.html\?webmap=.+$',
       // Google Maps
       "^https?:\/\/www\.google\.com\/maps\/embed\?pb=(.+)$",
       "^https?:\/\/www\.google\.com\/maps\/d\/embed\?mid=(\w+)$",
       // PortlandMaps map or chart
-      "^https?:\/\/www\.portlandmaps\.com\/(detail|apps)\/(\w+)$",
-      "^https:\/\/www\.portlandmaps\.com([-_\/[:alnum:]]*\/charts\/.*)$",
+      "^https?:\/\/(.*)\.portlandmaps\.com(.*)$",
+      "^https?:\/\/pdx\.maps\.arcgis\.com(.*)$",
       // POG
       '^https?:\/\/www\.portlandoregon\.gov\/bes\/bigpipe\/\w+\.cfm$',
       // Tableau
