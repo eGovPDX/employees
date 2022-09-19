@@ -17,7 +17,7 @@ process:
     plugin: text_to_taxonomy
     vocabulary: bts_catalog_item_type
   field_bts_application_exception: 
-    source: 'App Exception'
+    source: 'Standard Classification'
     plugin: text_to_taxonomy
     vocabulary: bts_application_exception
   field_bureaus: 
@@ -25,6 +25,10 @@ process:
       source: Bureaus
       plugin: skip_on_empty
       method: process
+    -
+      plugin: str_replace
+      search: ', '
+      replace: ','
     -
       plugin: explode
       delimiter: ','
@@ -36,6 +40,13 @@ process:
       source: 'Bus Capability'
       plugin: skip_on_empty
       method: process
+    -
+      plugin: str_replace
+      search: ', '
+      replace: ','
+    -
+      plugin: explode
+      delimiter: ','
     -
       plugin: text_to_taxonomy
       vocabulary: bts_business_capability
@@ -100,6 +111,16 @@ process:
       plugin: skip_on_empty
       method: process
       source: 'Support Owner'
+    -
+      plugin: entity_lookup
+      entity_type: user
+      value_key: mail
+      ignore_case: true
+  field_process_owner: 
+    - 
+      plugin: skip_on_empty
+      method: process
+      source: 'Process Owner'
     -
       plugin: entity_lookup
       entity_type: user
