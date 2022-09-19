@@ -9,6 +9,7 @@ dependencies:
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
     - field.field.group.employee.field_has_contracts
+    - field.field.group.employee.field_logo
     - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
@@ -59,14 +60,6 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_org_type:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
 hidden:
   changed: true
   created: true
@@ -74,7 +67,9 @@ hidden:
   field_group_contact: true
   field_group_path: true
   field_has_contracts: true
+  field_logo: true
   field_migration_status: true
+  field_org_type: true
   field_parent_group: true
   label: true
   langcode: true
