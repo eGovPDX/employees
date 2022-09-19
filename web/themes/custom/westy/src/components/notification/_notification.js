@@ -19,6 +19,9 @@ Drupal.behaviors.notificatin_handler = {
         if (list[i].includes(COOKIE_PREFIX)) {
           return docCookies[i]
         }
+        else {
+          return ''
+        }
       }
     }
     const findCookie = currentCookie(docCookies)
