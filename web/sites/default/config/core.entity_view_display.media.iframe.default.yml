@@ -1,0 +1,42 @@
+uuid: 37f03ae5-c5c3-46f0-9aec-2eebf3fe4d61
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.iframe.field_display_in_group
+    - field.field.media.iframe.field_media_media_remote
+    - field.field.media.iframe.field_preview_image
+    - field.field.media.iframe.field_summary
+    - media.type.iframe
+  module:
+    - employees
+id: media.iframe.default
+targetEntityType: media
+bundle: iframe
+mode: default
+content:
+  field_media_media_remote:
+    type: media_iframe_embed
+    label: visually_hidden
+    settings:
+      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaIframeEmbedFormatter
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_summary:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_display_in_group: true
+  field_preview_image: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true
