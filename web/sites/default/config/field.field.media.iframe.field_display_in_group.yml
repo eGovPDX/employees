@@ -1,0 +1,31 @@
+uuid: fd3e9e50-11ef-4b2e-ba2e-cecfd488a7a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_display_in_group
+    - group.type.employee
+    - group.type.private
+    - media.type.iframe
+id: media.iframe.field_display_in_group
+field_name: field_display_in_group
+entity_type: media
+bundle: iframe
+label: 'Belongs to'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+      private: private
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: employee
+field_type: entity_reference

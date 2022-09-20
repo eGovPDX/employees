@@ -238,6 +238,18 @@ function employees_entity_update($entity)
 }
 
 /**
+ * Implements hook_media_presave()
+ */
+function employees_media_presave($media) {
+  // Copy Preview Image file into Thumbnail. Do nothing if Preview Image is empty.
+  if($media->hasField('field_preview_image') &&
+      $media->hasField('thumbnail') && 
+      ! empty($media->field_preview_image->target_id)) {
+    $media->thumbnail->target_id = $media->field_preview_image->target_id;
+  }
+}
+
+/**
  * Implements hook_ENTITY_TYPE_presave().
  */
 function employees_user_presave($entity)
@@ -807,5 +819,56 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
     if( empty($last_name) ) {
       $alias = rtrim($alias, '.');
     }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function employees_theme() {
+  return array(
+    // By convention, the template file will be media-embed-iframe.html.twig
+    'media_embed_iframe' => array(
+      'variables' => array(
+        'url' => NULL,
+        'attributes' => NULL,
+      ),
+      'template' => 'media-embed-iframe',
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function employees_form_editor_media_dialog_alter(array &$form, FormStateInterface $form_state) {
+  if (isset($form_state->getUserInput()['editor_object'])) {
+    $editor_object = $form_state->getUserInput()['editor_object'];
+    $media_embed_element = $editor_object['attributes'];
+  } else {
+    // Retrieve the user input from form state.
+    $media_embed_element = $form_state->get('media_embed_element');
+  }
+  if( empty($media_embed_element) ) return;
+
+  $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $media_embed_element['data-entity-uuid']);
+  if( empty($media) ) return;
+
+  // Only add aspect ratio when the Media is Iframe Embed
+  if($media->bundle() == 'iframe') {
+    $form['data-aspect-ratio'] = [
+      '#title' => t('Aspect ratio'),
+      '#type' => 'radios',
+      '#options' => [
+        'ratio ratio-16x9' => t('16x9'),
+        'ratio ratio-4x3' => t('4x3'),
+        'ratio ratio-1x1' => t('1x1'),
+      ],
+      '#step' => '1',
+      '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? 'ratio ratio-16x9' : $media_embed_element['data-aspect-ratio'],
+      '#parents' => ['attributes', 'data-aspect-ratio'],
+      // Make radio buttons inline
+      '#attributes' => ['class' => ['container-inline']],
+    ];
   }
 }
