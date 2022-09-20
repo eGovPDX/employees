@@ -9,13 +9,6 @@
 {% set isDismissible = isDismissible|default(TRUE) %}
 {% set is_draft = is_draft|default(FALSE) %}
 
-{% set alertIcon %}
-{% include '@westy/icon/icon.twig' with{
-	name: Typename,
-	size: 'lg',
-} only %}
-{% endset %}
-
 {# remove the padding from last paragraph. align dismiss and icon with heading #}
 
 {# CLASSES #}
@@ -28,8 +21,7 @@
 ]%}
 {# TWIG #}
 	<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}> <div class="d-flex flex-row westy-notification__inner-wrapper">
-		<div class="p-2 start-0 container d-flex">
-			{{alertIcon}}
+		<div class="p-3 start-0 container d-flex">
 			<div class="ps-3">
 				<div class="fw-bold">{{label}}</div>
 				<div>{{ content }}</div>
