@@ -3339,7 +3339,7 @@ Drupal.behaviors.notificatin_handler = {
 
         for (var i = 0; i < all_cookies.length; i++) {
           if (all_cookies[i].includes(COOKIE_PREFIX)) {
-            find_notifications.push(cookies[i]);
+            find_notifications.push(all_cookies[i]);
           }
         }
 
