@@ -3337,9 +3337,9 @@ Drupal.behaviors.notificatin_handler = {
         var all_cookies = document.cookie.split(';');
         var find_notifications = [];
 
-        for (var i = 0; i < all_cookies.length; i++) {
-          if (all_cookies[i].includes(COOKIE_PREFIX)) {
-            find_notifications.push(all_cookies[i]);
+        for (var cookie = 0; cookie < all_cookies.length; ++cookie) {
+          if (all_cookies[cookie].includes(COOKIE_PREFIX)) {
+            find_notifications.push(all_cookies[cookie]);
           }
         }
 
@@ -3348,7 +3348,7 @@ Drupal.behaviors.notificatin_handler = {
 
       var notificationCookies = currentCookie();
 
-      for (var k = 0; k < notificationCookies.length; ++k) {
+      for (var item = 0; item < notificationCookies.length; ++item) {
         // if any of the list equals a value in cached list remove dismissible
         if (!notificationCookies.includes(' ' + currentCookieTimestamp)) {
           notification.classList.add('westy-notification--dismissible');
