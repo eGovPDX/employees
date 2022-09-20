@@ -1,3 +1,5 @@
+'use strict';
+
 const COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
 
 Drupal.behaviors.notificatin_handler = {
@@ -6,42 +8,45 @@ Drupal.behaviors.notificatin_handler = {
    * @param settings
    */
   attach(context, settings) {
-    //set an alert cookie
-    let alertElement = document.getElementsByClassName('westy-notification')
-    const current_nid = alertElement[0]['dataset']['nid']
-    const changed = alertElement[0]['dataset']['changed']
-    const currentCookieTimestamp = COOKIE_PREFIX + current_nid + changed
+    //Find the notification element
+    let alertElement = document.querySelectorAll('.westy-notification')
 
-    // find stored cookie
-    const docCookies = document.cookie.split(';')
-    const currentCookie = (list) => {
-      for (let i = 0; 1 < list.length; ++i) {
-        if (list[i].includes(COOKIE_PREFIX)) {
-          return docCookies[i]
+    alertElement.forEach(function (notification) {
+      // current cookie
+      const current_nid = notification['dataset']['nid']
+      const changed = notification['dataset']['changed']
+      const currentCookieTimestamp = COOKIE_PREFIX + current_nid + '=' + changed
+
+      // find stored cookie
+      let currentCookie = (list) => {
+        const all_cookies = document.cookie.split(';')
+        let find_notifications = []
+        for (let i = 0; i < all_cookies.length; i++) {
+          if (all_cookies[i].includes(COOKIE_PREFIX)) {
+            find_notifications.push(cookies[i])
+          }
         }
-        else {
-          return ''
+        return find_notifications
+      }
+      let notificationCookies = currentCookie()
+      for (let k = 0; k < notificationCookies.length; ++k) {
+        // if any of the list equals a value in cached list remove dismissible
+        if (!notificationCookies.includes(' ' + currentCookieTimestamp)) {
+          notification.classList.add('westy-notification--dismissible')
         }
       }
-    }
-    const findCookie = currentCookie(docCookies)
 
-    // make notification viewable if current cookie does not match with the stored cookie
-    if (' ' + currentCookieTimestamp != findCookie) {
-      alertElement[0].classList.add('westy-notification--dismissible')
-    }
+      // When close button is clicked remove the westy-notification class
+      let closeButton = notification.querySelector('.westy-notification__close')
+      closeButton.addEventListener('click', (event) => {
+        event.preventDefault()
+        notification.classList.remove('westy-notification--dismissible')
 
-    // When close button is clicked remove the westy-notification class
-    let closeButton = document.getElementsByClassName('westy-notification__close')
-    closeButton[0].addEventListener('click', (event) => {
-      event.preventDefault()
-      alertElement[0].classList.remove('westy-notification--dismissible')
-
-      // Set cookie value after close
-      const nid = alertElement[0]['dataset']['nid']
-      const lastChangedTimestamp = alertElement[0]['dataset']['changed']
-      document.cookie = encodeURIComponent(COOKIE_PREFIX + nid + lastChangedTimestamp)
+        // Set cookie value after close
+        const nid = notification['dataset']['nid']
+        const lastChangedTimestamp = notification['dataset']['changed']
+        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp
+      })
     })
-
   }
 };

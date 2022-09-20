@@ -3315,6 +3315,9 @@ function withinMaxClamp(min, value, max) {
   \******************************************************/
 /***/ (() => {
 
+"use strict";
+
+
 var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
 Drupal.behaviors.notificatin_handler = {
   /**
@@ -3322,37 +3325,46 @@ Drupal.behaviors.notificatin_handler = {
    * @param settings
    */
   attach: function attach(context, settings) {
-    //set an alert cookie
-    var alertElement = document.getElementsByClassName('westy-notification');
-    var current_nid = alertElement[0]['dataset']['nid'];
-    var changed = alertElement[0]['dataset']['changed'];
-    var currentCookieTimestamp = COOKIE_PREFIX + current_nid + changed; // find stored cookie
+    //Find the notification element
+    var alertElement = document.querySelectorAll('.westy-notification');
+    alertElement.forEach(function (notification) {
+      // current cookie
+      var current_nid = notification['dataset']['nid'];
+      var changed = notification['dataset']['changed'];
+      var currentCookieTimestamp = COOKIE_PREFIX + current_nid + '=' + changed; // find stored cookie
 
-    var docCookies = document.cookie.split(';');
+      var currentCookie = function currentCookie(list) {
+        var all_cookies = document.cookie.split(';');
+        var find_notifications = [];
 
-    var currentCookie = function currentCookie(list) {
-      for (var i = 0; 1 < list.length; ++i) {
-        if (list[i].includes(COOKIE_PREFIX)) {
-          return docCookies[i];
+        for (var i = 0; i < all_cookies.length; i++) {
+          if (all_cookies[i].includes(COOKIE_PREFIX)) {
+            find_notifications.push(cookies[i]);
+          }
         }
-      }
-    };
 
-    var findCookie = currentCookie(docCookies); // make notification viewable if current cookie does not match with the stored cookie
+        return find_notifications;
+      };
 
-    if (' ' + currentCookieTimestamp != findCookie) {
-      alertElement[0].classList.add('westy-notification--dismissible');
-    } // When close button is clicked remove the westy-notification class
+      var notificationCookies = currentCookie();
+
+      for (var k = 0; k < notificationCookies.length; ++k) {
+        // if any of the list equals a value in cached list remove dismissible
+        if (!notificationCookies.includes(' ' + currentCookieTimestamp)) {
+          notification.classList.add('westy-notification--dismissible');
+        }
+      } // When close button is clicked remove the westy-notification class
 
 
-    var closeButton = document.getElementsByClassName('westy-notification__close');
-    closeButton[0].addEventListener('click', function (event) {
-      event.preventDefault();
-      alertElement[0].classList.remove('westy-notification--dismissible'); // Set cookie value after close
+      var closeButton = notification.querySelector('.westy-notification__close');
+      closeButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        notification.classList.remove('westy-notification--dismissible'); // Set cookie value after close
 
-      var nid = alertElement[0]['dataset']['nid'];
-      var lastChangedTimestamp = alertElement[0]['dataset']['changed'];
-      document.cookie = encodeURIComponent(COOKIE_PREFIX + nid + lastChangedTimestamp);
+        var nid = notification['dataset']['nid'];
+        var lastChangedTimestamp = notification['dataset']['changed'];
+        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp;
+      });
     });
   }
 };
