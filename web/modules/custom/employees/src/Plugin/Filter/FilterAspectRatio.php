@@ -35,6 +35,7 @@ class FilterAspectRatio extends FilterBase {
         if(empty($uuid)) continue;
 
         $entity_loaded_by_uuid = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $uuid]);
+        if(count($entity_loaded_by_uuid) == 0) continue;
         $entity_loaded_by_uuid = reset($entity_loaded_by_uuid);
         if($entity_loaded_by_uuid->bundle() != 'iframe') continue;
 
