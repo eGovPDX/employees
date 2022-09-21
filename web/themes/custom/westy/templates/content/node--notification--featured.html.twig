@@ -9,8 +9,6 @@
 {% set isDismissible = isDismissible|default(TRUE) %}
 {% set is_draft = is_draft|default(FALSE) %}
 
-{# remove the padding from last paragraph. align dismiss and icon with heading #}
-
 {# CLASSES #}
 {% set classes= [
   'westy-notification',
@@ -20,14 +18,15 @@
   is_draft ? 'westy-notification--is_draft',
 ]%}
 {# TWIG #}
-	<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}> <div class="d-flex flex-row westy-notification__inner-wrapper">
-		<div class="p-3 start-0 container d-flex">
-			<div class="ps-3">
+<div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}>
+	<div class="d-flex flex-row westy-notification__inner-wrapper">
+		<div class="d-flex flex-row w-100 p-3 start-0 ">
+			<div class="w-100 ps-3">
 				<div class="fw-bold">{{label}}</div>
 				<div>{{ content }}</div>
 			</div>
 			{% if isDismissible %}
-				<div class="position-absolute end-0 pe-3">
+				<div class="float-end top-0">
 					<button type="button" class="border-0 bg-secondary westy-notification__close" data-dismiss="alert" aria-label="Dismiss notification">
 						<span aria-hidden="true" class="alert__close-contents">
 							<i class="fa fa-times fa-lg" aria-hidden="true"></i>
