@@ -1,0 +1,29 @@
+uuid: 38ae9125-ecd0-499e-abac-b42fe4a866b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_search_type
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: groupsearchtype
+theme: westy
+region: side
+weight: 16
+provider: null
+plugin: 'facet_block:group_search_type'
+settings:
+  id: 'facet_block:group_search_type'
+  label: 'Group Search: Type'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: groupsearchtype
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/search'

@@ -1,0 +1,62 @@
+uuid: a3573a6a-1349-4d14-aa71-0ef520968a4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.iframe.field_display_in_group
+    - field.field.media.iframe.field_media_media_remote
+    - field.field.media.iframe.field_preview_image
+    - field.field.media.iframe.field_summary
+    - image.style.thumbnail
+    - media.type.iframe
+  module:
+    - image
+id: media.iframe.media_library
+targetEntityType: media
+bundle: iframe
+mode: media_library
+content:
+  field_display_in_group:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_preview_image:
+    type: image_image
+    weight: 3
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_summary:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_media_media_remote: true
+  langcode: true
+  path: true
+  publish_on: true
+  status: true
+  uid: true
+  unpublish_on: true
