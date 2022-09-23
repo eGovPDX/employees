@@ -2,12 +2,12 @@
 
 const COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
 
-Drupal.behaviors.notificatin_handler = {
+Drupal.behaviors.notification_handler = {
   /**
    * @param {HTMLElement} context
    * @param settings
    */
-  attach(context, settings) {
+  attach: function (context) {
     //Find the notification element
     let alertElement = document.querySelectorAll('.westy-notification')
 
@@ -45,7 +45,8 @@ Drupal.behaviors.notificatin_handler = {
         // Set cookie value after close
         const nid = notification['dataset']['nid']
         const lastChangedTimestamp = notification['dataset']['changed']
-        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp
+        const path = (drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl) || '/';
+        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp + path
       })
     })
   }

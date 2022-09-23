@@ -3319,12 +3319,12 @@ function withinMaxClamp(min, value, max) {
 
 
 var COOKIE_PREFIX = 'Drupal.visitor.westy_notification_dismissed.';
-Drupal.behaviors.notificatin_handler = {
+Drupal.behaviors.notification_handler = {
   /**
    * @param {HTMLElement} context
    * @param settings
    */
-  attach: function attach(context, settings) {
+  attach: function attach(context) {
     //Find the notification element
     var alertElement = document.querySelectorAll('.westy-notification');
     alertElement.forEach(function (notification) {
@@ -3363,7 +3363,8 @@ Drupal.behaviors.notificatin_handler = {
 
         var nid = notification['dataset']['nid'];
         var lastChangedTimestamp = notification['dataset']['changed'];
-        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp;
+        var path = drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl || '/';
+        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp + path;
       });
     });
   }
