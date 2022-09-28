@@ -19,6 +19,10 @@ process:
       plugin: skip_on_empty
       method: process
     -
+      plugin: str_replace
+      search: ', '
+      replace: ','
+    -
       plugin: explode
       delimiter: ','
     -

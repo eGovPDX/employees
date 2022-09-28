@@ -1,7 +1,7 @@
 <div class="card border-2 rounded-0 h-100">
-  <a href="{{ url }}">{{ content.field_featured_image }}</a>
+  {{ content.field_featured_image }}
   <div class="card-body">
-    <h3 class="card-title h5 mb-1">{{ name }}</h3>
+    <h3 class="card-title h5 mb-1"><a href="{{ url }}" class="stretched-link">{{ name }}</a></h3>
     <div class="card-text">
       {{ content|without('field_featured_image') }}
     </div>

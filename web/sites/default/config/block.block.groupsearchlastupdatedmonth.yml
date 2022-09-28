@@ -1,0 +1,29 @@
+uuid: 932aed5d-89d7-4571-b35b-1c4b96cf471b
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_search_last_updated_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: groupsearchlastupdatedmonth
+theme: westy
+region: side
+weight: 18
+provider: null
+plugin: 'facet_block:group_search_last_updated_month'
+settings:
+  id: 'facet_block:group_search_last_updated_month'
+  label: 'Group Search: Last Updated Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: groupsearchlastupdatedmonth
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/search'
