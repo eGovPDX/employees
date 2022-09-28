@@ -172,22 +172,7 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts:
-        label:
-          id: label
-          table: groups_field_data
-          field: label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: group
-          entity_field: label
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: Title
-            field_identifier: label
-          exposed: true
+      sorts: {  }
       arguments:
         uid:
           id: uid
@@ -337,8 +322,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -573,8 +556,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -703,8 +684,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -910,8 +889,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -1330,8 +1307,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -1625,8 +1600,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user
         - user.roles
       tags: {  }
@@ -2002,8 +1975,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
         - user.roles
       tags: {  }
   page_my_groups:
@@ -2394,22 +2365,7 @@ display:
             value: '<p>You are not assigned to any groups as an editor or admin. If you need to be added to a groups to edit content, contact your bureau''s intranet website lead or the eGov team at <a href="mailto:website@portlandoregon.gov">website@portlandoregon.gov</a>.</p>'
             format: basic_html
           tokenize: false
-      sorts:
-        label:
-          id: label
-          table: groups_field_data
-          field: label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: group
-          entity_field: label
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: Title
-            field_identifier: label
-          exposed: false
+      sorts: {  }
       filters:
         group_roles_target_id_2:
           id: group_roles_target_id_2
