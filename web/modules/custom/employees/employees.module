@@ -809,3 +809,14 @@ function employees_pathauto_alias_alter(&$alias, array &$context) {
     }
   }
 }
+
+/**
+ * Implements hook_toolbar_alter().
+ * Hide "Manage" toolbar menu element for non-admins.
+ */
+function employees_toolbar_alter(&$items) {
+  $account = Drupal::currentUser();
+  if (!in_array('administrator', $account->getRoles())) {
+    unset($items['administration']);
+  }
+}
