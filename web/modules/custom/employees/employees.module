@@ -271,7 +271,7 @@ function employees_entity_update($entity)
 function employees_media_presave($media) {
   // Copy Preview Image file into Thumbnail. Do nothing if Preview Image is empty.
   if($media->hasField('field_preview_image') &&
-      $media->hasField('thumbnail') && 
+      $media->hasField('thumbnail') &&
       ! empty($media->field_preview_image->target_id)) {
     $media->thumbnail->target_id = $media->field_preview_image->target_id;
   }
@@ -898,5 +898,16 @@ function employees_form_editor_media_dialog_alter(array &$form, FormStateInterfa
       // Make radio buttons inline
       '#attributes' => ['class' => ['container-inline']],
     ];
+  }
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ * Hide "Manage" toolbar menu element for non-admins.
+ */
+function employees_toolbar_alter(&$items) {
+  $account = Drupal::currentUser();
+  if (!in_array('administrator', $account->getRoles())) {
+    unset($items['administration']);
   }
 }
