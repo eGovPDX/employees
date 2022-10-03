@@ -62,7 +62,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * development, you may want to disable it.
  *
  * This setting disables the render cache by using the Null cache back-end
- * defined by the development.services.yml file above.
+ * defined by the local.services.yml file above.
  *
  * Only use this setting once the site has been installed.
  */
@@ -84,7 +84,7 @@ $settings['cache']['bins']['render'] = 'cache.backend.null';
  * development, you may want to disable it.
  *
  * This setting disables the page cache by using the Null cache back-end
- * defined by the development.services.yml file above.
+ * defined by the local.services.yml file above.
  *
  * Only use this setting once the site has been installed.
  */
