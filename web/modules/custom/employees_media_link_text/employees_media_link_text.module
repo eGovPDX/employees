@@ -1,49 +1,31 @@
+<?php
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_form_FORM_ID_alter() for media dialog in ckeditor.
- *
- * Add an optional link text field to use as file link.
+ * Implements hook_form_FORM_ID_alter().
  */
-function mymodule_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+function employees_media_link_text_form_editor_media_dialog_alter(array &$form, FormStateInterface $form_state) {
   if (isset($form_state->getUserInput()['editor_object'])) {
-    $media_embed_element = $form_state->getUserInput()['editor_object'];
-    $form_state->set('media_embed_element', $media_embed_element);
-    $form_state->setCached(TRUE);
-  }
-  else {
-    // Retrieve the media_embed_element from form state.
-    $media_embed_element = $form_state->get('media_embed_element') ?: [];
+    $editor_object = $form_state->getUserInput()['editor_object'];
+    $media_embed_element = $editor_object['attributes'];
+  } else {
+    // Retrieve the user input from form state.
+    $media_embed_element = $form_state->get('media_embed_element');
   }
 
-    // Add link text for media entities.
-  if ($media_embed_element['attributes']['data-entity-uuid']) {
-    $media_object = \Drupal::service('entity.repository')->loadEntityByUuid('media', $media_embed_element['attributes']['data-entity-uuid']);
-    if (!empty($media_object)) {
-      $form['attributes']['data-link-text'] = [
+  // Add link text for media entities.
+  $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $media_embed_element['data-entity-uuid']);
+  if( empty($media) ) return;
+  // Only add aspect ratio when the Media is Iframe Embed
+  if($media->bundle() == 'document') {
+      $form['data-alt-link-text'] = [
         '#type' => 'textfield',
         '#title' => t('Link Text'),
         '#description' => t('Overrides link text if the display mode includes a link to the file.'),
-        '#default_value' => $media_embed_element['attributes']['data-link-text'] ?? '',
+        '#default_value' => $media_embed_element['data-alt-link-text'] ?? '',
         '#maxlength' => 512,
         '#weight' => 1,
+        '#parents' => ['attributes', 'data-alt-link-text'],
       ];
-    }
-  }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for media.
- *
- * Apply the link-text attribute to the file link description.
- */
-function mymodule_preprocess_media(&$variables) {
-  if (!empty($variables['attributes']['data-link-text'])) {
-    foreach ($variables['content'] as &$content_array) {
-      if (isset($content_array[0]['#theme']) && $content_array[0]['#theme'] == 'file_link') {
-        $content_array[0]['#description'] = $variables['attributes']['data-link-text'];
-        unset($variables['attributes']['data-link-text']);
-      }
-    }
   }
 }
