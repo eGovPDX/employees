@@ -24,8 +24,8 @@ if (!defined("PANTHEON_VERSION")) {
 /**
  * Determine whether this is a preproduction or production environment, and
  * then load the pantheon services.yml file.  This file should be named either
- * 'pantheon-production-services.yml' (for 'live' or 'test' environments)
- * 'pantheon-preproduction-services.yml' (for 'dev' or multidev environments).
+ * 'services.pantheon.production.yml' (for 'live' or 'test' environments) or
+ * 'services.pantheon.preproduction.yml' (for 'dev' or multidev environments).
  */
 $pantheon_services_file = __DIR__ . '/services.pantheon.preproduction.yml';
 if (
