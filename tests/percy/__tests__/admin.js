@@ -85,6 +85,32 @@ describe('Visual Regression Testing', () => {
             throw e;
         }
     })
+    // Site health check
+    it('Site health check', async function () {
+        try {
+            // Verify the site status
+            await page.goto(`${HOME_PAGE}/admin/reports/status`)
+            await page.waitForSelector('.system-status-report');
+            let text_content = await page.evaluate(() => document.querySelector('.system-status-report').textContent);
+            // Negative test
+            expect(text_content).toEqual(expect.not.stringContaining('Errors found'));
+            expect(text_content).toEqual(expect.not.stringContaining('The following changes were detected in the entity type and field definitions.'));
+
+            // Verify all configs are imported
+            await page.goto(`${HOME_PAGE}/admin/config/development/configuration`);
+            await page.waitForSelector('.region-content');
+            text_content = await page.evaluate(() => document.querySelector('.region-content').textContent);
+            expect(text_content).toEqual(expect.stringContaining('The staged configuration is identical to the active configuration.'));
+        } catch (e) {
+            // Capture the screenshot when test fails and re-throw the exception
+            await page.screenshot({
+                path: `${ARTIFACTS_FOLDER}site-status-error.jpg`,
+                type: "jpeg",
+                fullPage: true
+            });
+            throw e;
+        }
+    })
     // News Search View
     it('News Search View', async function () {
         try {
