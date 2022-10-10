@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.news.field_published_on
     - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
+    - field.field.node.news.field_search_keywords
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
@@ -360,6 +361,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 5
+    region: main
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
     region: main
   field_tags:
     type: entity_reference_label

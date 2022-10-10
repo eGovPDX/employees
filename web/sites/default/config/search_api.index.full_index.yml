@@ -3,53 +3,55 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_group_description
-    - field.storage.media.field_display_in_group
-    - field.storage.media.field_description
-    - field.storage.media.field_tags
+    - field.storage.node.body
+    - field.storage.node.field_description
+    - field.storage.group.field_org_type
+    - field.storage.node.field_display_in_group
+    - field.storage.node.field_search_keywords
+    - field.storage.user.field_address
     - field.storage.node.field_bts_application_exception
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
-    - field.storage.node.body
-    - field.storage.node.field_display_in_group
-    - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
-    - field.storage.node.field_description
-    - field.storage.group.field_org_type
+    - field.storage.node.field_date_range
+    - field.storage.user.field_division_name
+    - field.storage.user.field_first_name
+    - field.storage.user.field_group_names
     - field.storage.node.field_hosting_environment
+    - field.storage.user.field_is_contact_only
+    - field.storage.user.field_last_name
     - field.storage.node.field_mandated_purchases
     - field.storage.node.field_p_card_allowed
+    - field.storage.user.field_phone
+    - field.storage.user.field_primary_groups
     - field.storage.node.field_published_on
+    - field.storage.user.field_search_boost
+    - field.storage.user.field_section
     - field.storage.node.field_support_model
+    - field.storage.media.field_tags
+    - field.storage.user.field_title
     - field.storage.node.field_topics
     - field.storage.node.field_type
     - field.storage.node.field_updated_on
     - field.storage.node.field_when
-    - field.storage.user.field_division_name
-    - field.storage.user.field_first_name
-    - field.storage.user.field_group_names
-    - field.storage.user.field_is_contact_only
-    - field.storage.user.field_last_name
-    - field.storage.user.field_address
-    - field.storage.user.field_phone
-    - field.storage.user.field_primary_groups
-    - field.storage.user.field_search_boost
-    - field.storage.user.field_search_keywords
-    - field.storage.user.field_section
-    - field.storage.user.field_title
     - field.storage.user.field_workspace
+    - field.storage.group.field_search_keywords
+    - field.storage.group.field_group_description
+    - field.storage.media.field_description
+    - field.storage.media.field_display_in_group
+    - field.storage.user.field_search_keywords
     - search_api.server.pantheon_solr8
     - core.entity_view_mode.user.compact
   module:
     - search_api_solr
-    - group
-    - media
-    - taxonomy
     - node
+    - group
+    - taxonomy
     - user
+    - media
     - search_api
 third_party_settings:
   search_api_solr:
@@ -141,6 +143,15 @@ field_settings:
     dependencies:
       module:
         - node
+  content_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:node'
+    property_path: field_search_keywords
+    type: 'solr_text_custom_omit_norms:ngram'
+    boost: !!float 21
+    dependencies:
+      config:
+        - field.storage.node.field_search_keywords
   content_status:
     label: 'Content Published'
     datasource_id: 'entity:node'
@@ -380,14 +391,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_search_boost
-  field_search_keywords:
-    label: 'Search keywords'
-    datasource_id: 'entity:user'
-    property_path: field_search_keywords
-    type: text
-    dependencies:
-      config:
-        - field.storage.user.field_search_keywords
   field_section:
     label: Section
     datasource_id: 'entity:user'
@@ -476,6 +479,15 @@ field_settings:
     dependencies:
       module:
         - group
+  group_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:group'
+    property_path: field_search_keywords
+    type: 'solr_text_custom_omit_norms:ngram'
+    boost: !!float 21
+    dependencies:
+      config:
+        - field.storage.group.field_search_keywords
   group_summary:
     label: 'Group Summary'
     datasource_id: 'entity:group'
@@ -600,6 +612,15 @@ field_settings:
     dependencies:
       module:
         - node
+  user_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:user'
+    property_path: field_search_keywords
+    type: 'solr_text_custom_omit_norms:ngram'
+    boost: !!float 21
+    dependencies:
+      config:
+        - field.storage.user.field_search_keywords
   user_status:
     label: 'User status'
     datasource_id: 'entity:user'
@@ -706,25 +727,25 @@ processor_settings:
       preprocess_index: 0
     boosts:
       'entity:group':
-        datasource_boost: !!float 0
+        datasource_boost: !!float 1
         bundle_boosts:
-          employee: !!float 0
-          private: !!float 0
+          employee: !!float 1
+          private: !!float 1
       'entity:media':
-        datasource_boost: !!float 0
+        datasource_boost: !!float 1
         bundle_boosts:
-          document: !!float 0
+          document: !!float 1
       'entity:node':
-        datasource_boost: !!float 0
+        datasource_boost: !!float 1
         bundle_boosts:
-          bts_catalog_item: !!float 0
-          contract: !!float 0
-          event: !!float 0
-          news: !!float 0
-          page: !!float 0
-          resource: !!float 0
+          bts_catalog_item: !!float 1
+          contract: !!float 1
+          event: !!float 1
+          news: !!float 1
+          page: !!float 1
+          resource: !!float 1
       'entity:user':
-        datasource_boost: !!float 0
+        datasource_boost: !!float 1
 tracker_settings:
   default:
     indexing_order: fifo

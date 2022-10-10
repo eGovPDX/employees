@@ -98,6 +98,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -119,11 +120,11 @@ display:
           min_length: null
           fields:
             - content_body
+            - content_search_keywords
             - content_title
             - field_first_name
-            - field_first_name_1
             - field_last_name
-            - field_last_name_1
+            - group_search_keywords
             - group_summary
             - group_title
             - media_field_description
@@ -3092,9 +3093,24 @@ display:
     position: 1
     display_options:
       title: Search
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       defaults:
         cache: true
         title: false
+        sorts: false
       display_description: ''
       exposed_block: false
       display_extenders: {  }
