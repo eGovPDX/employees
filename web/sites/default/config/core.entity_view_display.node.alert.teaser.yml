@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.alert.field_action_link
     - field.field.node.alert.field_alert_text
     - field.field.node.alert.field_severity
     - node.type.alert
@@ -16,6 +15,11 @@ targetEntityType: node
 bundle: alert
 mode: teaser
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_alert_text:
     type: text_default
     label: above
@@ -24,7 +28,6 @@ content:
     weight: 0
     region: content
 hidden:
-  field_action_link: true
   field_severity: true
   langcode: true
   links: true
