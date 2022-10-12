@@ -917,6 +917,5 @@ function employees_toolbar_alter(&$items) {
  */
 function employees_entity_type_alter(array &$entity_types)
 {
-  $node = $entity_types['node'];
-  $node->addConstraint('ResourceUrl', []);
+  $entity_types['node']->addConstraint('ResourceUrl', []);
 }

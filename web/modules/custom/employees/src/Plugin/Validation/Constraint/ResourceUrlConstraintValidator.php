@@ -15,7 +15,7 @@ class ResourceUrlConstraintValidator extends ConstraintValidator {
    */
   public function validate($entity, Constraint $constraint) {
     if (!isset($entity) || 
-      $entity->bundle() != 'external_resource' || 
+      $entity->bundle() != 'resource' || 
       empty($entity->field_resource_link)) {
       return;
     }
@@ -24,6 +24,11 @@ class ResourceUrlConstraintValidator extends ConstraintValidator {
     $resources = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
       'field_resource_link' => $entity->field_resource_link[0]->getValue()['uri'],
     ]);
+
+    // For existing Resource, remove itself from the query result array
+    if( !$entity->isNew() ) {
+      unset($resources[$entity->id()]);
+    }
 
     // Found duplicates
     if( count($resources) > 0) {

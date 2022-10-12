@@ -2,7 +2,7 @@
 
 namespace Drupal\employees\Plugin\Validation\Constraint;
 
-use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Make sure resource URL has not been added before.
@@ -13,7 +13,7 @@ use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
  *   type = "entity:node"
  * )
  */
-class ResourceUrlConstraint extends CompositeConstraintBase {
+class ResourceUrlConstraint extends Constraint {
 
   /**
    * Message shown when the resource URL already exists.
@@ -25,7 +25,7 @@ class ResourceUrlConstraint extends CompositeConstraintBase {
   /**
    * {@inheritdoc}
    */
-  public function coversFields() {
-    return ['field_resource_link'];
-  }
+  // public function coversFields() {
+  //   return ['field_resource_link'];
+  // }
 }
