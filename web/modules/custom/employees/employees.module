@@ -911,3 +911,12 @@ function employees_toolbar_alter(&$items) {
     unset($items['administration']);
   }
 }
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function employees_entity_type_alter(array &$entity_types)
+{
+  $node = $entity_types['node'];
+  $node->addConstraint('ResourceUrl', []);
+}
