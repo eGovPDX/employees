@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "050995576a919b9ae93113513f565080",
+    "content-hash": "eb129d6233cd866a972eff68b25db9c3",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -177,7 +177,7 @@
             "version": "1.12.4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "5e89585e0121e72ff47de177c5ef604f3089a53d"
             },
             "dist": {
@@ -2088,6 +2088,98 @@
             }
         },
         {
+            "name": "drupal/ckeditor",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor-1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": "d3dd8bfb2301b749599ba48cf76208becdf0eeb3"
+            },
+            "require": {
+                "drupal/core": "^9.4 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.1",
+                    "datestamp": "1662977541",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dczepierga",
+                    "homepage": "https://www.drupal.org/user/911466"
+                },
+                {
+                    "name": "hass",
+                    "homepage": "https://www.drupal.org/user/85918"
+                },
+                {
+                    "name": "jcisio",
+                    "homepage": "https://www.drupal.org/user/210762"
+                },
+                {
+                    "name": "Jorrit",
+                    "homepage": "https://www.drupal.org/user/161217"
+                },
+                {
+                    "name": "lauriii",
+                    "homepage": "https://www.drupal.org/user/1078742"
+                },
+                {
+                    "name": "Magnus",
+                    "homepage": "https://www.drupal.org/user/73919"
+                },
+                {
+                    "name": "mkesicki",
+                    "homepage": "https://www.drupal.org/user/922884"
+                },
+                {
+                    "name": "nod_",
+                    "homepage": "https://www.drupal.org/user/598310"
+                },
+                {
+                    "name": "p.wiaderny",
+                    "homepage": "https://www.drupal.org/user/2956619"
+                },
+                {
+                    "name": "vokiel",
+                    "homepage": "https://www.drupal.org/user/2793801"
+                },
+                {
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
+                },
+                {
+                    "name": "wwalc",
+                    "homepage": "https://www.drupal.org/user/184556"
+                },
+                {
+                    "name": "xjm",
+                    "homepage": "https://www.drupal.org/user/65776"
+                }
+            ],
+            "description": "WYSIWYG editing for rich text fields using CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor"
+            }
+        },
+        {
             "name": "drupal/ckeditor_acr",
             "version": "1.0.1",
             "source": {
@@ -2102,6 +2194,7 @@
                 "shasum": "99ed4e6d95b7576b5201a78d7eca5a20c9e1ead8"
             },
             "require": {
+                "drupal/ckeditor": "*",
                 "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
@@ -3409,20 +3502,20 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "RenatoG",
-                    "homepage": "https://www.drupal.org/user/3326031"
-                },
-                {
-                    "name": "diamondsea",
-                    "homepage": "https://www.drupal.org/user/430714"
-                },
-                {
                     "name": "hmartens",
                     "homepage": "https://www.drupal.org/user/622826"
                 },
                 {
                     "name": "loopduplicate",
                     "homepage": "https://www.drupal.org/user/717290"
+                },
+                {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
+                    "name": "RenatoG",
+                    "homepage": "https://www.drupal.org/user/3326031"
                 },
                 {
                     "name": "sonemonu",
@@ -3705,6 +3798,10 @@
             ],
             "authors": [
                 {
+                    "name": "cs_shadow",
+                    "homepage": "https://www.drupal.org/user/2828287"
+                },
+                {
                     "name": "Dave Reid",
                     "homepage": "https://www.drupal.org/user/53892"
                 },
@@ -3717,14 +3814,6 @@
                     "homepage": "https://www.drupal.org/user/3260690"
                 },
                 {
-                    "name": "Wim Leers",
-                    "homepage": "https://www.drupal.org/user/99777"
-                },
-                {
-                    "name": "cs_shadow",
-                    "homepage": "https://www.drupal.org/user/2828287"
-                },
-                {
                     "name": "oknate",
                     "homepage": "https://www.drupal.org/user/471638"
                 },
@@ -3735,6 +3824,10 @@
                 {
                     "name": "slashrsm",
                     "homepage": "https://www.drupal.org/user/744628"
+                },
+                {
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
                 }
             ],
             "description": "Allows any entity to be embedded within a text area using a WYSIWYG editor.",
@@ -3853,10 +3946,6 @@
                 {
                     "name": "mrfelton",
                     "homepage": "https://www.drupal.org/user/305669"
-                },
-                {
-                    "name": "pratik_kamble",
-                    "homepage": "https://www.drupal.org/user/3204909"
                 }
             ],
             "description": "Adds a color indicator for the different environments.",
@@ -4103,16 +4192,16 @@
                     "homepage": "https://www.drupal.org/user/647364"
                 },
                 {
-                    "name": "Stalski",
-                    "homepage": "https://www.drupal.org/user/322618"
-                },
-                {
                     "name": "jyve",
                     "homepage": "https://www.drupal.org/user/591438"
                 },
                 {
                     "name": "nils.destoop",
                     "homepage": "https://www.drupal.org/user/361625"
+                },
+                {
+                    "name": "Stalski",
+                    "homepage": "https://www.drupal.org/user/322618"
                 },
                 {
                     "name": "swentel",
@@ -4372,7 +4461,8 @@
                 "shasum": "567351ee7a1f40b43ff81ede9afc085f78752d20"
             },
             "require": {
-                "drupal/core": "~8.7 || ^9"
+                "drupal/core": "~8.7 || ^9",
+                "drupal/hal": "*"
             },
             "type": "drupal-module",
             "extra": {
@@ -4650,6 +4740,10 @@
                     "name": "Artem Dmitriiev",
                     "homepage": "https://www.drupal.org/u/admitriiev",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "LOBsTerr",
+                    "homepage": "https://www.drupal.org/user/645020"
                 }
             ],
             "description": "This module allows you to integrate media entity into group functionality",
@@ -4657,6 +4751,54 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/groupmedia",
                 "issues": "https://drupal.org/project/issues/groupmedia"
+            }
+        },
+        {
+            "name": "drupal/hal",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/hal.git",
+                "reference": "1.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/hal-1.0.3.zip",
+                "reference": "1.0.3",
+                "shasum": "8e81b3b453ff63a281c1c470ff722f4af6206426"
+            },
+            "require": {
+                "drupal/core": "^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.3",
+                    "datestamp": "1664412481",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bbrala",
+                    "homepage": "https://www.drupal.org/user/3366066"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                }
+            ],
+            "description": "Hypermedia Application Language (HAL)",
+            "homepage": "https://www.drupal.org/project/hal",
+            "support": {
+                "source": "https://git.drupalcode.org/project/hal"
             }
         },
         {
@@ -6507,12 +6649,12 @@
                     "homepage": "https://www.drupal.org/node/74958/committers"
                 },
                 {
-                    "name": "japerry",
-                    "homepage": "https://www.drupal.org/user/45640"
-                },
-                {
                     "name": "joelpittet",
                     "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "Letharion",
+                    "homepage": "https://www.drupal.org/user/373603"
                 },
                 {
                     "name": "merlinofchaos",
@@ -6529,10 +6671,6 @@
                 {
                     "name": "samuel.mortenson",
                     "homepage": "https://www.drupal.org/user/2582268"
-                },
-                {
-                    "name": "tim.plunkett",
-                    "homepage": "https://www.drupal.org/user/241634"
                 }
             ],
             "description": "Core Panels display functions; provides no external UI, at least one other Panels module should be enabled.",
@@ -7207,15 +7345,15 @@
                 "reference": "1bcefc6d91cb7208d57d19fe65f0308de34e9251"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^8 || ^9 || ^10"
             },
             "require-dev": {
                 "drupal/commerce": "^2.0",
-                "drupal/devel_generate": "^4.0",
+                "drupal/devel_generate": ">=4",
                 "drupal/rules": "^3",
-                "drupal/workbench_moderation": "^1.0",
-                "drupal/workbench_moderation_actions": "^1.0",
-                "drush/drush": "^9.0 || ^10"
+                "drupal/workbench_moderation": "*",
+                "drupal/workbench_moderation_actions": "*",
+                "drush/drush": ">=9"
             },
             "type": "drupal-module",
             "extra": {
@@ -7223,8 +7361,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "2.x-dev",
-                    "datestamp": "1655796113",
+                    "version": "2.0.0-rc5+8-dev",
+                    "datestamp": "1665589170",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7501,16 +7639,16 @@
                     "homepage": "https://www.drupal.org/u/mollux"
                 },
                 {
-                    "name": "borisson_",
-                    "homepage": "https://www.drupal.org/user/2393360"
-                },
-                {
                     "name": "drunken monkey",
                     "homepage": "https://www.drupal.org/user/205582"
                 },
                 {
                     "name": "mollux",
                     "homepage": "https://www.drupal.org/user/785804"
+                },
+                {
+                    "name": "Nick_vh",
+                    "homepage": "https://www.drupal.org/user/122682"
                 },
                 {
                     "name": "ygerasimov",
@@ -7569,6 +7707,10 @@
                 {
                     "name": "drunken monkey",
                     "homepage": "https://www.drupal.org/user/205582"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
                 },
                 {
                     "name": "swentel",
@@ -7960,6 +8102,10 @@
                     "name": "Brady Owens (perignon)",
                     "homepage": "https://www.drupal.org/u/perignon",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "exlin",
+                    "homepage": "https://www.drupal.org/user/695136"
                 },
                 {
                     "name": "Perignon",
@@ -8823,6 +8969,7 @@
                 "drupal/core": "^8.8 || ^9"
             },
             "require-dev": {
+                "drupal/ckeditor": "*",
                 "drupal/colorbox": "^1.0",
                 "drupal/video_embed_media": "*"
             },
@@ -8843,16 +8990,16 @@
             ],
             "authors": [
                 {
-                    "name": "Sam152",
-                    "homepage": "https://www.drupal.org/user/1485048"
-                },
-                {
                     "name": "jec006",
                     "homepage": "https://www.drupal.org/user/855980"
                 },
                 {
                     "name": "plopesc",
                     "homepage": "https://www.drupal.org/user/282415"
+                },
+                {
+                    "name": "Sam152",
+                    "homepage": "https://www.drupal.org/user/1485048"
                 }
             ],
             "description": "A pluggable field type for storing videos from external video hosts such as Vimeo and YouTube.",
@@ -8905,8 +9052,8 @@
                     "homepage": "https://www.drupal.org/u/graber"
                 },
                 {
-                    "name": "benjy",
-                    "homepage": "https://www.drupal.org/user/1852732"
+                    "name": "Graber",
+                    "homepage": "https://www.drupal.org/user/1599440"
                 }
             ],
             "description": "Allows bulk edition of entity field values.",
@@ -16939,7 +17086,7 @@
                 "drupal/config_perms": "1.0|1.1|>=1,<1.1|>=1,<1.2",
                 "drupal/config_terms": "1.0|1.1|1.2|1.3|1.4|1.5|>=1,<1.6",
                 "drupal/config_update": "1.0|1.1|1.2|1.3|1.4|>=1,<1.5",
-                "drupal/core": "8.0-alpha2|8.0-alpha3|8.0-alpha4|8.0-alpha5|8.0-alpha6|8.0-alpha7|8.0-alpha8|8.0-alpha9|8.0-alpha10|8.0-alpha11|8.0-alpha12|8.0-alpha13|8.0.0|8.0.0-alpha14|8.0.0-alpha15|8.0.0-beta1|8.0.0-beta2|8.0.0-beta3|8.0.0-beta4|8.0.0-beta6|8.0.0-beta7|8.0.0-beta9|8.0.0-beta10|8.0.0-beta11|8.0.0-beta12|8.0.0-beta13|8.0.0-beta14|8.0.0-beta15|8.0.0-beta16|8.0.0-rc1|8.0.0-rc2|8.0.0-rc3|8.0.0-rc4|8.0.1|8.0.2|8.0.3|8.0.4|8.0.5|8.0.6|8.1.0|8.1.0-beta1|8.1.0-beta2|8.1.0-rc1|8.1.1|8.1.2|8.1.3|8.1.4|8.1.5|8.1.6|8.1.7|8.1.8|8.1.9|8.1.10|8.2.0|8.2.0-beta1|8.2.0-beta2|8.2.0-beta3|8.2.0-rc1|8.2.0-rc2|8.2.1|8.2.2|8.2.3|8.2.4|8.2.5|8.2.6|8.2.7|8.2.8|8.3.0|8.3.0-alpha1|8.3.0-beta1|8.3.0-rc1|8.3.0-rc2|8.3.1|8.3.2|8.3.3|8.3.4|8.3.5|8.3.6|8.3.7|8.3.8|8.3.9|8.4.0|8.4.0-alpha1|8.4.0-beta1|8.4.0-rc1|8.4.0-rc2|8.4.1|8.4.2|8.4.3|8.4.4|8.4.5|8.4.6|8.4.7|8.4.8|8.5.0|8.5.0-alpha1|8.5.0-beta1|8.5.0-rc1|8.5.1|8.5.2|8.5.3|8.5.4|8.5.5|8.5.6|8.5.7|8.5.8|8.5.9|8.5.10|8.5.11|8.5.12|8.5.13|8.5.14|8.5.15|8.6.0|8.6.0-alpha1|8.6.0-beta1|8.6.0-beta2|8.6.0-rc1|8.6.1|8.6.2|8.6.3|8.6.4|8.6.5|8.6.6|8.6.7|8.6.8|8.6.9|8.6.10|8.6.11|8.6.12|8.6.13|8.6.14|8.6.15|8.6.16|8.6.17|8.6.18|8.7.0|8.7.0-alpha1|8.7.0-alpha2|8.7.0-beta1|8.7.0-beta2|8.7.0-rc1|8.7.1|8.7.2|8.7.3|8.7.4|8.7.5|8.7.6|8.7.7|8.7.8|8.7.9|8.7.10|8.7.11|8.7.12|8.7.13|8.7.14|8.8.0|8.8.0-alpha1|8.8.0-beta1|8.8.0-rc1|8.8.1|8.8.2|8.8.3|8.8.4|8.8.5|8.8.6|8.8.7|8.8.8|8.8.9|8.8.10|8.8.11|8.8.12|8.9.0|8.9.0-beta1|8.9.0-beta2|8.9.0-beta3|8.9.0-rc1|8.9.1|8.9.2|8.9.3|8.9.4|8.9.5|8.9.6|8.9.7|8.9.8|8.9.9|8.9.10|8.9.11|8.9.12|8.9.13|8.9.14|8.9.15|8.9.16|8.9.17|8.9.18|8.9.19|9.0.0|9.0.0-alpha1|9.0.0-alpha2|9.0.0-beta1|9.0.0-beta2|9.0.0-beta3|9.0.0-rc1|9.0.1|9.0.2|9.0.3|9.0.4|9.0.5|9.0.6|9.0.7|9.0.8|9.0.9|9.0.10|9.0.11|9.0.12|9.0.13|9.0.14|9.1.0|9.1.0-alpha1|9.1.0-beta1|9.1.0-rc1|9.1.0-rc2|9.1.0-rc3|9.1.1|9.1.2|9.1.3|9.1.4|9.1.5|9.1.6|9.1.7|9.1.8|9.1.9|9.1.10|9.1.11|9.1.12|9.1.13|9.1.14|9.1.15|9.2.0|9.2.0-alpha1|9.2.0-beta1|9.2.0-beta2|9.2.0-beta3|9.2.0-rc1|9.2.1|9.2.2|9.2.3|9.2.4|9.2.5|9.2.6|9.2.7|9.2.8|9.2.9|9.2.10|9.2.11|9.2.12|9.2.13|9.2.14|9.2.15|9.2.16|9.2.17|9.2.18|9.2.19|9.2.20|9.2.21|9.3.0|9.3.0-alpha1|9.3.0-beta1|9.3.0-beta2|9.3.0-beta3|9.3.0-rc1|9.3.1|9.3.2|9.3.3|9.3.4|9.3.5|9.3.6|9.3.7|9.3.8|9.3.9|9.3.10|9.3.11|9.3.12|9.3.13|9.3.14|9.3.15|9.3.16|9.3.17|9.3.18|9.4.0|9.4.0-alpha1|9.4.0-beta1|9.4.0-rc1|9.4.0-rc2|9.4.1|9.4.2|10.0.0-alpha1|10.0.0-alpha2|10.0.0-alpha3|10.0.0-alpha4|10.0.0-alpha5|10.0.0-alpha6|>=8.0,<8.0.0-beta2|>=8.0,<8.0.4|>=8.1,<8.1.3|>=8.1,<8.1.7|>=8.1,<8.1.10|>=8.2,<8.2.3|>=8.2,<8.2.7|>=8.2,<8.2.8|>=8.3,<8.3.1|>=8.3,<8.3.4|>=8.3,<8.3.7|>=8.3,<8.3.8|>=8.3,<8.3.9|>=8.4,<8.4.5|>=8.4,<8.4.6|>=8.4,<8.4.7|>=8.4,<8.4.8|>=8.5,<8.5.0-rc1|>=8.5,<8.5.1|>=8.5,<8.5.2|>=8.5,<8.5.3|>=8.5,<8.5.6|>=8.5,<8.5.8|>=8.5,<8.5.9|>=8.5,<8.5.11|>=8.5,<8.5.14|>=8.5,<8.5.15|>=8.6,<8.6.2|>=8.6,<8.6.6|>=8.6,<8.6.10|>=8.6,<8.6.13|>=8.6,<8.6.15|>=8.6,<8.6.16|>=8.7,<8.7.0-rc1|>=8.7,<8.7.1|>=8.7,<8.7.5|>=8.7,<8.7.11|>=8.7,<8.7.12|>=8.7,<8.7.14|>=8.8,<8.8.1|>=8.8,<8.8.4|>=8.8,<8.8.6|>=8.8,<8.8.8|>=8.8,<8.8.10|>=8.8,<8.8.11|>=8.8,<8.8.12|>=8.9,<8.9.1|>=8.9,<8.9.6|>=8.9,<8.9.9|>=8.9,<8.9.10|>=8.9,<8.9.13|>=8.9,<8.9.14|>=8.9,<8.9.16|>=8.9,<8.9.17|>=8.9,<8.9.18|>=8.9,<8.9.19|>=8.9,<8.9.20|>=9.0,<9.0.0-beta2|>=9.0,<9.0.1|>=9.0,<9.0.6|>=9.0,<9.0.8|>=9.0,<9.0.9|>=9.0,<9.0.11|>=9.0,<9.0.12|>=9.0,<9.0.14|>=9.1,<9.1.0-rc1|>=9.1,<9.1.0-rc3|>=9.1,<9.1.3|>=9.1,<9.1.7|>=9.1,<9.1.9|>=9.1,<9.1.11|>=9.1,<9.1.12|>=9.1,<9.1.13|>=9.1,<9.1.14|>=9.2,<9.2.0-beta2|>=9.2,<9.2.2|>=9.2,<9.2.4|>=9.2,<9.2.6|>=9.2,<9.2.9|>=9.2,<9.2.11|>=9.2,<9.2.13|>=9.2,<9.2.15|>=9.2,<9.2.16|>=9.2,<9.2.18|>=9.2,<9.2.20|>=9.2,<9.2.21|>=9.3,<9.3.3|>=9.3,<9.3.6|>=9.3,<9.3.8|>=9.3,<9.3.9|>=9.3,<9.3.12|>=9.3,<9.3.14|>=9.3,<9.3.16|>=9.3,<9.3.19|>=9.4,<9.4.0-rc2|>=9.4,<9.4.3",
+                "drupal/core": "8.0-alpha2|8.0-alpha3|8.0-alpha4|8.0-alpha5|8.0-alpha6|8.0-alpha7|8.0-alpha8|8.0-alpha9|8.0-alpha10|8.0-alpha11|8.0-alpha12|8.0-alpha13|8.0.0|8.0.0-alpha14|8.0.0-alpha15|8.0.0-beta1|8.0.0-beta2|8.0.0-beta3|8.0.0-beta4|8.0.0-beta6|8.0.0-beta7|8.0.0-beta9|8.0.0-beta10|8.0.0-beta11|8.0.0-beta12|8.0.0-beta13|8.0.0-beta14|8.0.0-beta15|8.0.0-beta16|8.0.0-rc1|8.0.0-rc2|8.0.0-rc3|8.0.0-rc4|8.0.1|8.0.2|8.0.3|8.0.4|8.0.5|8.0.6|8.1.0|8.1.0-beta1|8.1.0-beta2|8.1.0-rc1|8.1.1|8.1.2|8.1.3|8.1.4|8.1.5|8.1.6|8.1.7|8.1.8|8.1.9|8.1.10|8.2.0|8.2.0-beta1|8.2.0-beta2|8.2.0-beta3|8.2.0-rc1|8.2.0-rc2|8.2.1|8.2.2|8.2.3|8.2.4|8.2.5|8.2.6|8.2.7|8.2.8|8.3.0|8.3.0-alpha1|8.3.0-beta1|8.3.0-rc1|8.3.0-rc2|8.3.1|8.3.2|8.3.3|8.3.4|8.3.5|8.3.6|8.3.7|8.3.8|8.3.9|8.4.0|8.4.0-alpha1|8.4.0-beta1|8.4.0-rc1|8.4.0-rc2|8.4.1|8.4.2|8.4.3|8.4.4|8.4.5|8.4.6|8.4.7|8.4.8|8.5.0|8.5.0-alpha1|8.5.0-beta1|8.5.0-rc1|8.5.1|8.5.2|8.5.3|8.5.4|8.5.5|8.5.6|8.5.7|8.5.8|8.5.9|8.5.10|8.5.11|8.5.12|8.5.13|8.5.14|8.5.15|8.6.0|8.6.0-alpha1|8.6.0-beta1|8.6.0-beta2|8.6.0-rc1|8.6.1|8.6.2|8.6.3|8.6.4|8.6.5|8.6.6|8.6.7|8.6.8|8.6.9|8.6.10|8.6.11|8.6.12|8.6.13|8.6.14|8.6.15|8.6.16|8.6.17|8.6.18|8.7.0|8.7.0-alpha1|8.7.0-alpha2|8.7.0-beta1|8.7.0-beta2|8.7.0-rc1|8.7.1|8.7.2|8.7.3|8.7.4|8.7.5|8.7.6|8.7.7|8.7.8|8.7.9|8.7.10|8.7.11|8.7.12|8.7.13|8.7.14|8.8.0|8.8.0-alpha1|8.8.0-beta1|8.8.0-rc1|8.8.1|8.8.2|8.8.3|8.8.4|8.8.5|8.8.6|8.8.7|8.8.8|8.8.9|8.8.10|8.8.11|8.8.12|8.9.0|8.9.0-beta1|8.9.0-beta2|8.9.0-beta3|8.9.0-rc1|8.9.1|8.9.2|8.9.3|8.9.4|8.9.5|8.9.6|8.9.7|8.9.8|8.9.9|8.9.10|8.9.11|8.9.12|8.9.13|8.9.14|8.9.15|8.9.16|8.9.17|8.9.18|8.9.19|9.0.0|9.0.0-alpha1|9.0.0-alpha2|9.0.0-beta1|9.0.0-beta2|9.0.0-beta3|9.0.0-rc1|9.0.1|9.0.2|9.0.3|9.0.4|9.0.5|9.0.6|9.0.7|9.0.8|9.0.9|9.0.10|9.0.11|9.0.12|9.0.13|9.0.14|9.1.0|9.1.0-alpha1|9.1.0-beta1|9.1.0-rc1|9.1.0-rc2|9.1.0-rc3|9.1.1|9.1.2|9.1.3|9.1.4|9.1.5|9.1.6|9.1.7|9.1.8|9.1.9|9.1.10|9.1.11|9.1.12|9.1.13|9.1.14|9.1.15|9.2.0|9.2.0-alpha1|9.2.0-beta1|9.2.0-beta2|9.2.0-beta3|9.2.0-rc1|9.2.1|9.2.2|9.2.3|9.2.4|9.2.5|9.2.6|9.2.7|9.2.8|9.2.9|9.2.10|9.2.11|9.2.12|9.2.13|9.2.14|9.2.15|9.2.16|9.2.17|9.2.18|9.2.19|9.2.20|9.2.21|9.3.0|9.3.0-alpha1|9.3.0-beta1|9.3.0-beta2|9.3.0-beta3|9.3.0-rc1|9.3.1|9.3.2|9.3.3|9.3.4|9.3.5|9.3.6|9.3.7|9.3.8|9.3.9|9.3.10|9.3.11|9.3.12|9.3.13|9.3.14|9.3.15|9.3.16|9.3.17|9.3.18|9.3.19|9.3.20|9.3.21|9.4.0|9.4.0-alpha1|9.4.0-beta1|9.4.0-rc1|9.4.0-rc2|9.4.1|9.4.2|9.4.3|9.4.4|9.4.5|9.4.6|10.0.0-alpha1|10.0.0-alpha2|10.0.0-alpha3|10.0.0-alpha4|10.0.0-alpha5|10.0.0-alpha6|>=8.0,<8.0.0-beta2|>=8.0,<8.0.4|>=8.1,<8.1.3|>=8.1,<8.1.7|>=8.1,<8.1.10|>=8.2,<8.2.3|>=8.2,<8.2.7|>=8.2,<8.2.8|>=8.3,<8.3.1|>=8.3,<8.3.4|>=8.3,<8.3.7|>=8.3,<8.3.8|>=8.3,<8.3.9|>=8.4,<8.4.5|>=8.4,<8.4.6|>=8.4,<8.4.7|>=8.4,<8.4.8|>=8.5,<8.5.0-rc1|>=8.5,<8.5.1|>=8.5,<8.5.2|>=8.5,<8.5.3|>=8.5,<8.5.6|>=8.5,<8.5.8|>=8.5,<8.5.9|>=8.5,<8.5.11|>=8.5,<8.5.14|>=8.5,<8.5.15|>=8.6,<8.6.2|>=8.6,<8.6.6|>=8.6,<8.6.10|>=8.6,<8.6.13|>=8.6,<8.6.15|>=8.6,<8.6.16|>=8.7,<8.7.0-rc1|>=8.7,<8.7.1|>=8.7,<8.7.5|>=8.7,<8.7.11|>=8.7,<8.7.12|>=8.7,<8.7.14|>=8.8,<8.8.1|>=8.8,<8.8.4|>=8.8,<8.8.6|>=8.8,<8.8.8|>=8.8,<8.8.10|>=8.8,<8.8.11|>=8.8,<8.8.12|>=8.9,<8.9.1|>=8.9,<8.9.6|>=8.9,<8.9.9|>=8.9,<8.9.10|>=8.9,<8.9.13|>=8.9,<8.9.14|>=8.9,<8.9.16|>=8.9,<8.9.17|>=8.9,<8.9.18|>=8.9,<8.9.19|>=8.9,<8.9.20|>=9.0,<9.0.0-beta2|>=9.0,<9.0.1|>=9.0,<9.0.6|>=9.0,<9.0.8|>=9.0,<9.0.9|>=9.0,<9.0.11|>=9.0,<9.0.12|>=9.0,<9.0.14|>=9.1,<9.1.0-rc1|>=9.1,<9.1.0-rc3|>=9.1,<9.1.3|>=9.1,<9.1.7|>=9.1,<9.1.9|>=9.1,<9.1.11|>=9.1,<9.1.12|>=9.1,<9.1.13|>=9.1,<9.1.14|>=9.2,<9.2.0-beta2|>=9.2,<9.2.2|>=9.2,<9.2.4|>=9.2,<9.2.6|>=9.2,<9.2.9|>=9.2,<9.2.11|>=9.2,<9.2.13|>=9.2,<9.2.15|>=9.2,<9.2.16|>=9.2,<9.2.18|>=9.2,<9.2.20|>=9.2,<9.2.21|>=9.3,<9.3.3|>=9.3,<9.3.6|>=9.3,<9.3.8|>=9.3,<9.3.9|>=9.3,<9.3.12|>=9.3,<9.3.14|>=9.3,<9.3.16|>=9.3,<9.3.19|>=9.3,<9.3.22|>=9.4,<9.4.0-rc2|>=9.4,<9.4.3|>=9.4,<9.4.7",
                 "drupal/create_user_permission": "1.0|1.1|>=1,<1.2",
                 "drupal/cshs": "1.0-beta1|3.0|3.1|3.3|3.4|>=1,<1.0-beta2|>=3,<3.5",
                 "drupal/ctools": "3.0|3.0-alpha17|3.0-alpha18|3.0-alpha19|3.0-alpha20|3.0-alpha21|3.0-alpha22|3.0-alpha23|3.0-alpha24|3.0-alpha25|3.0-alpha26|3.0-alpha27|3.0-beta1|3.0-beta2|3.1|3.2|3.3|3.4|3.5|3.6|>=3,<3.6|>=3,<3.7",
@@ -16950,7 +17097,7 @@
                 "drupal/domain_group": "1.0|1.0-alpha1|1.0-beta1|1.0-beta2|1.0-beta3|1.0-beta4|1.0-rc1|1.01|1.02|1.03|2.0.0|>=1,<1.04|>=2.0,<2.0.1",
                 "drupal/drd": "3.0|3.0-alpha1|3.0-alpha3|3.0-alpha4|3.0-alpha5|3.0-beta1|3.0-beta2|3.0-beta3|3.0-rc1|3.0-rc2|3.0-rc3|3.0-rc4|3.1|3.2|3.3|3.4|3.5|3.6|3.7|3.8|3.9|3.10|3.11|3.12|3.13|>=3,<3.2|>=3,<3.14",
                 "drupal/drd_agent": "3.0|3.0-beta2|3.0-beta3|3.0-rc1|3.0-rc2|3.0-rc3|3.0-rc4|3.1|3.2|3.3|3.4|3.5|3.6|>=3,<3.1|>=3,<3.7",
-                "drupal/drupal": "8.0-alpha2|8.0-alpha3|8.0-alpha4|8.0-alpha5|8.0-alpha6|8.0-alpha7|8.0-alpha8|8.0-alpha9|8.0-alpha10|8.0-alpha11|8.0-alpha12|8.0-alpha13|8.0.0|8.0.0-alpha14|8.0.0-alpha15|8.0.0-beta1|8.0.0-beta2|8.0.0-beta3|8.0.0-beta4|8.0.0-beta6|8.0.0-beta7|8.0.0-beta9|8.0.0-beta10|8.0.0-beta11|8.0.0-beta12|8.0.0-beta13|8.0.0-beta14|8.0.0-beta15|8.0.0-beta16|8.0.0-rc1|8.0.0-rc2|8.0.0-rc3|8.0.0-rc4|8.0.1|8.0.2|8.0.3|8.0.4|8.0.5|8.0.6|8.1.0|8.1.0-beta1|8.1.0-beta2|8.1.0-rc1|8.1.1|8.1.2|8.1.3|8.1.4|8.1.5|8.1.6|8.1.7|8.1.8|8.1.9|8.1.10|8.2.0|8.2.0-beta1|8.2.0-beta2|8.2.0-beta3|8.2.0-rc1|8.2.0-rc2|8.2.1|8.2.2|8.2.3|8.2.4|8.2.5|8.2.6|8.2.7|8.2.8|8.3.0|8.3.0-alpha1|8.3.0-beta1|8.3.0-rc1|8.3.0-rc2|8.3.1|8.3.2|8.3.3|8.3.4|8.3.5|8.3.6|8.3.7|8.3.8|8.3.9|8.4.0|8.4.0-alpha1|8.4.0-beta1|8.4.0-rc1|8.4.0-rc2|8.4.1|8.4.2|8.4.3|8.4.4|8.4.5|8.4.6|8.4.7|8.4.8|8.5.0|8.5.0-alpha1|8.5.0-beta1|8.5.0-rc1|8.5.1|8.5.2|8.5.3|8.5.4|8.5.5|8.5.6|8.5.7|8.5.8|8.5.9|8.5.10|8.5.11|8.5.12|8.5.13|8.5.14|8.5.15|8.6.0|8.6.0-alpha1|8.6.0-beta1|8.6.0-beta2|8.6.0-rc1|8.6.1|8.6.2|8.6.3|8.6.4|8.6.5|8.6.6|8.6.7|8.6.8|8.6.9|8.6.10|8.6.11|8.6.12|8.6.13|8.6.14|8.6.15|8.6.16|8.6.17|8.6.18|8.7.0|8.7.0-alpha1|8.7.0-alpha2|8.7.0-beta1|8.7.0-beta2|8.7.0-rc1|8.7.1|8.7.2|8.7.3|8.7.4|8.7.5|8.7.6|8.7.7|8.7.8|8.7.9|8.7.10|8.7.11|8.7.12|8.7.13|8.7.14|8.8.0|8.8.0-alpha1|8.8.0-beta1|8.8.0-rc1|8.8.1|8.8.2|8.8.3|8.8.4|8.8.5|8.8.6|8.8.7|8.8.8|8.8.9|8.8.10|8.8.11|8.8.12|8.9.0|8.9.0-beta1|8.9.0-beta2|8.9.0-beta3|8.9.0-rc1|8.9.1|8.9.2|8.9.3|8.9.4|8.9.5|8.9.6|8.9.7|8.9.8|8.9.9|8.9.10|8.9.11|8.9.12|8.9.13|8.9.14|8.9.15|8.9.16|8.9.17|8.9.18|8.9.19|9.0.0|9.0.0-alpha1|9.0.0-alpha2|9.0.0-beta1|9.0.0-beta2|9.0.0-beta3|9.0.0-rc1|9.0.1|9.0.2|9.0.3|9.0.4|9.0.5|9.0.6|9.0.7|9.0.8|9.0.9|9.0.10|9.0.11|9.0.12|9.0.13|9.0.14|9.1.0|9.1.0-alpha1|9.1.0-beta1|9.1.0-rc1|9.1.0-rc2|9.1.0-rc3|9.1.1|9.1.2|9.1.3|9.1.4|9.1.5|9.1.6|9.1.7|9.1.8|9.1.9|9.1.10|9.1.11|9.1.12|9.1.13|9.1.14|9.1.15|9.2.0|9.2.0-alpha1|9.2.0-beta1|9.2.0-beta2|9.2.0-beta3|9.2.0-rc1|9.2.1|9.2.2|9.2.3|9.2.4|9.2.5|9.2.6|9.2.7|9.2.8|9.2.9|9.2.10|9.2.11|9.2.12|9.2.13|9.2.14|9.2.15|9.2.16|9.2.17|9.2.18|9.2.19|9.2.20|9.2.21|9.3.0|9.3.0-alpha1|9.3.0-beta1|9.3.0-beta2|9.3.0-beta3|9.3.0-rc1|9.3.1|9.3.2|9.3.3|9.3.4|9.3.5|9.3.6|9.3.7|9.3.8|9.3.9|9.3.10|9.3.11|9.3.12|9.3.13|9.3.14|9.3.15|9.3.16|9.3.17|9.3.18|9.4.0|9.4.0-alpha1|9.4.0-beta1|9.4.0-rc1|9.4.0-rc2|9.4.1|9.4.2|10.0.0-alpha1|10.0.0-alpha2|10.0.0-alpha3|10.0.0-alpha4|10.0.0-alpha5|10.0.0-alpha6|>=8.0,<8.0.0-beta2|>=8.0,<8.0.4|>=8.1,<8.1.3|>=8.1,<8.1.7|>=8.1,<8.1.10|>=8.2,<8.2.3|>=8.2,<8.2.7|>=8.2,<8.2.8|>=8.3,<8.3.1|>=8.3,<8.3.4|>=8.3,<8.3.7|>=8.3,<8.3.8|>=8.3,<8.3.9|>=8.4,<8.4.5|>=8.4,<8.4.6|>=8.4,<8.4.7|>=8.4,<8.4.8|>=8.5,<8.5.0-rc1|>=8.5,<8.5.1|>=8.5,<8.5.2|>=8.5,<8.5.3|>=8.5,<8.5.6|>=8.5,<8.5.8|>=8.5,<8.5.9|>=8.5,<8.5.11|>=8.5,<8.5.14|>=8.5,<8.5.15|>=8.6,<8.6.2|>=8.6,<8.6.6|>=8.6,<8.6.10|>=8.6,<8.6.13|>=8.6,<8.6.15|>=8.6,<8.6.16|>=8.7,<8.7.0-rc1|>=8.7,<8.7.1|>=8.7,<8.7.5|>=8.7,<8.7.11|>=8.7,<8.7.12|>=8.7,<8.7.14|>=8.8,<8.8.1|>=8.8,<8.8.4|>=8.8,<8.8.6|>=8.8,<8.8.8|>=8.8,<8.8.10|>=8.8,<8.8.11|>=8.8,<8.8.12|>=8.9,<8.9.1|>=8.9,<8.9.6|>=8.9,<8.9.9|>=8.9,<8.9.10|>=8.9,<8.9.13|>=8.9,<8.9.14|>=8.9,<8.9.16|>=8.9,<8.9.17|>=8.9,<8.9.18|>=8.9,<8.9.19|>=8.9,<8.9.20|>=9.0,<9.0.0-beta2|>=9.0,<9.0.1|>=9.0,<9.0.6|>=9.0,<9.0.8|>=9.0,<9.0.9|>=9.0,<9.0.11|>=9.0,<9.0.12|>=9.0,<9.0.14|>=9.1,<9.1.0-rc1|>=9.1,<9.1.0-rc3|>=9.1,<9.1.3|>=9.1,<9.1.7|>=9.1,<9.1.9|>=9.1,<9.1.11|>=9.1,<9.1.12|>=9.1,<9.1.13|>=9.1,<9.1.14|>=9.2,<9.2.0-beta2|>=9.2,<9.2.2|>=9.2,<9.2.4|>=9.2,<9.2.6|>=9.2,<9.2.9|>=9.2,<9.2.11|>=9.2,<9.2.13|>=9.2,<9.2.15|>=9.2,<9.2.16|>=9.2,<9.2.18|>=9.2,<9.2.20|>=9.2,<9.2.21|>=9.3,<9.3.3|>=9.3,<9.3.6|>=9.3,<9.3.8|>=9.3,<9.3.9|>=9.3,<9.3.12|>=9.3,<9.3.14|>=9.3,<9.3.16|>=9.3,<9.3.19|>=9.4,<9.4.0-rc2|>=9.4,<9.4.3",
+                "drupal/drupal": "8.0-alpha2|8.0-alpha3|8.0-alpha4|8.0-alpha5|8.0-alpha6|8.0-alpha7|8.0-alpha8|8.0-alpha9|8.0-alpha10|8.0-alpha11|8.0-alpha12|8.0-alpha13|8.0.0|8.0.0-alpha14|8.0.0-alpha15|8.0.0-beta1|8.0.0-beta2|8.0.0-beta3|8.0.0-beta4|8.0.0-beta6|8.0.0-beta7|8.0.0-beta9|8.0.0-beta10|8.0.0-beta11|8.0.0-beta12|8.0.0-beta13|8.0.0-beta14|8.0.0-beta15|8.0.0-beta16|8.0.0-rc1|8.0.0-rc2|8.0.0-rc3|8.0.0-rc4|8.0.1|8.0.2|8.0.3|8.0.4|8.0.5|8.0.6|8.1.0|8.1.0-beta1|8.1.0-beta2|8.1.0-rc1|8.1.1|8.1.2|8.1.3|8.1.4|8.1.5|8.1.6|8.1.7|8.1.8|8.1.9|8.1.10|8.2.0|8.2.0-beta1|8.2.0-beta2|8.2.0-beta3|8.2.0-rc1|8.2.0-rc2|8.2.1|8.2.2|8.2.3|8.2.4|8.2.5|8.2.6|8.2.7|8.2.8|8.3.0|8.3.0-alpha1|8.3.0-beta1|8.3.0-rc1|8.3.0-rc2|8.3.1|8.3.2|8.3.3|8.3.4|8.3.5|8.3.6|8.3.7|8.3.8|8.3.9|8.4.0|8.4.0-alpha1|8.4.0-beta1|8.4.0-rc1|8.4.0-rc2|8.4.1|8.4.2|8.4.3|8.4.4|8.4.5|8.4.6|8.4.7|8.4.8|8.5.0|8.5.0-alpha1|8.5.0-beta1|8.5.0-rc1|8.5.1|8.5.2|8.5.3|8.5.4|8.5.5|8.5.6|8.5.7|8.5.8|8.5.9|8.5.10|8.5.11|8.5.12|8.5.13|8.5.14|8.5.15|8.6.0|8.6.0-alpha1|8.6.0-beta1|8.6.0-beta2|8.6.0-rc1|8.6.1|8.6.2|8.6.3|8.6.4|8.6.5|8.6.6|8.6.7|8.6.8|8.6.9|8.6.10|8.6.11|8.6.12|8.6.13|8.6.14|8.6.15|8.6.16|8.6.17|8.6.18|8.7.0|8.7.0-alpha1|8.7.0-alpha2|8.7.0-beta1|8.7.0-beta2|8.7.0-rc1|8.7.1|8.7.2|8.7.3|8.7.4|8.7.5|8.7.6|8.7.7|8.7.8|8.7.9|8.7.10|8.7.11|8.7.12|8.7.13|8.7.14|8.8.0|8.8.0-alpha1|8.8.0-beta1|8.8.0-rc1|8.8.1|8.8.2|8.8.3|8.8.4|8.8.5|8.8.6|8.8.7|8.8.8|8.8.9|8.8.10|8.8.11|8.8.12|8.9.0|8.9.0-beta1|8.9.0-beta2|8.9.0-beta3|8.9.0-rc1|8.9.1|8.9.2|8.9.3|8.9.4|8.9.5|8.9.6|8.9.7|8.9.8|8.9.9|8.9.10|8.9.11|8.9.12|8.9.13|8.9.14|8.9.15|8.9.16|8.9.17|8.9.18|8.9.19|9.0.0|9.0.0-alpha1|9.0.0-alpha2|9.0.0-beta1|9.0.0-beta2|9.0.0-beta3|9.0.0-rc1|9.0.1|9.0.2|9.0.3|9.0.4|9.0.5|9.0.6|9.0.7|9.0.8|9.0.9|9.0.10|9.0.11|9.0.12|9.0.13|9.0.14|9.1.0|9.1.0-alpha1|9.1.0-beta1|9.1.0-rc1|9.1.0-rc2|9.1.0-rc3|9.1.1|9.1.2|9.1.3|9.1.4|9.1.5|9.1.6|9.1.7|9.1.8|9.1.9|9.1.10|9.1.11|9.1.12|9.1.13|9.1.14|9.1.15|9.2.0|9.2.0-alpha1|9.2.0-beta1|9.2.0-beta2|9.2.0-beta3|9.2.0-rc1|9.2.1|9.2.2|9.2.3|9.2.4|9.2.5|9.2.6|9.2.7|9.2.8|9.2.9|9.2.10|9.2.11|9.2.12|9.2.13|9.2.14|9.2.15|9.2.16|9.2.17|9.2.18|9.2.19|9.2.20|9.2.21|9.3.0|9.3.0-alpha1|9.3.0-beta1|9.3.0-beta2|9.3.0-beta3|9.3.0-rc1|9.3.1|9.3.2|9.3.3|9.3.4|9.3.5|9.3.6|9.3.7|9.3.8|9.3.9|9.3.10|9.3.11|9.3.12|9.3.13|9.3.14|9.3.15|9.3.16|9.3.17|9.3.18|9.3.19|9.3.20|9.3.21|9.4.0|9.4.0-alpha1|9.4.0-beta1|9.4.0-rc1|9.4.0-rc2|9.4.1|9.4.2|9.4.3|9.4.4|9.4.5|9.4.6|10.0.0-alpha1|10.0.0-alpha2|10.0.0-alpha3|10.0.0-alpha4|10.0.0-alpha5|10.0.0-alpha6|>=8.0,<8.0.0-beta2|>=8.0,<8.0.4|>=8.1,<8.1.3|>=8.1,<8.1.7|>=8.1,<8.1.10|>=8.2,<8.2.3|>=8.2,<8.2.7|>=8.2,<8.2.8|>=8.3,<8.3.1|>=8.3,<8.3.4|>=8.3,<8.3.7|>=8.3,<8.3.8|>=8.3,<8.3.9|>=8.4,<8.4.5|>=8.4,<8.4.6|>=8.4,<8.4.7|>=8.4,<8.4.8|>=8.5,<8.5.0-rc1|>=8.5,<8.5.1|>=8.5,<8.5.2|>=8.5,<8.5.3|>=8.5,<8.5.6|>=8.5,<8.5.8|>=8.5,<8.5.9|>=8.5,<8.5.11|>=8.5,<8.5.14|>=8.5,<8.5.15|>=8.6,<8.6.2|>=8.6,<8.6.6|>=8.6,<8.6.10|>=8.6,<8.6.13|>=8.6,<8.6.15|>=8.6,<8.6.16|>=8.7,<8.7.0-rc1|>=8.7,<8.7.1|>=8.7,<8.7.5|>=8.7,<8.7.11|>=8.7,<8.7.12|>=8.7,<8.7.14|>=8.8,<8.8.1|>=8.8,<8.8.4|>=8.8,<8.8.6|>=8.8,<8.8.8|>=8.8,<8.8.10|>=8.8,<8.8.11|>=8.8,<8.8.12|>=8.9,<8.9.1|>=8.9,<8.9.6|>=8.9,<8.9.9|>=8.9,<8.9.10|>=8.9,<8.9.13|>=8.9,<8.9.14|>=8.9,<8.9.16|>=8.9,<8.9.17|>=8.9,<8.9.18|>=8.9,<8.9.19|>=8.9,<8.9.20|>=9.0,<9.0.0-beta2|>=9.0,<9.0.1|>=9.0,<9.0.6|>=9.0,<9.0.8|>=9.0,<9.0.9|>=9.0,<9.0.11|>=9.0,<9.0.12|>=9.0,<9.0.14|>=9.1,<9.1.0-rc1|>=9.1,<9.1.0-rc3|>=9.1,<9.1.3|>=9.1,<9.1.7|>=9.1,<9.1.9|>=9.1,<9.1.11|>=9.1,<9.1.12|>=9.1,<9.1.13|>=9.1,<9.1.14|>=9.2,<9.2.0-beta2|>=9.2,<9.2.2|>=9.2,<9.2.4|>=9.2,<9.2.6|>=9.2,<9.2.9|>=9.2,<9.2.11|>=9.2,<9.2.13|>=9.2,<9.2.15|>=9.2,<9.2.16|>=9.2,<9.2.18|>=9.2,<9.2.20|>=9.2,<9.2.21|>=9.3,<9.3.3|>=9.3,<9.3.6|>=9.3,<9.3.8|>=9.3,<9.3.9|>=9.3,<9.3.12|>=9.3,<9.3.14|>=9.3,<9.3.16|>=9.3,<9.3.19|>=9.3,<9.3.22|>=9.4,<9.4.0-rc2|>=9.4,<9.4.3|>=9.4,<9.4.7",
                 "drupal/ds": "2.0|2.0-alpha4|2.0-alpha9|2.0-alpha10|2.0-alpha11|2.0-rc1|2.1|2.2|2.3|2.4|2.5|2.6|3.0-alpha1|3.0-alpha2|3.0-beta1|3.0-beta2|3.0-beta3|3.0-beta4|3.0-rc1|>=2,<2.7|>=3,<3.0",
                 "drupal/dynamic_banner": "1.0-beta1",
                 "drupal/dynamic_entity_reference": "1.0-alpha1|1.0-alpha2|1.0-beta1|>=1,<1.0-beta2",
@@ -17198,6 +17345,7 @@
                 "appwrite/server-ce": "<0.11.1|>=0.12,<0.12.2",
                 "area17/twill": "<1.2.5|>=2,<2.5.3",
                 "asymmetricrypt/asymmetricrypt": ">=0,<9.9.99",
+                "awesome-support/awesome-support": "<=6.0.7",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "bagisto/bagisto": "<0.1.5",
                 "barrelstrength/sprout-base-email": "<1.2.7",
@@ -17223,11 +17371,11 @@
                 "cart2quote/module-quotation": ">=4.1.6,<=4.4.5|>=5,<5.4.4",
                 "cartalyst/sentry": "<=2.1.6",
                 "catfan/medoo": "<1.7.5",
-                "centreon/centreon": "<20.10.7",
+                "centreon/centreon": "<21.4.16|>=21.10,<21.10.8|>=22,<22.4.1",
                 "cesnet/simplesamlphp-module-proxystatistics": "<3.1",
                 "codeception/codeception": "<3.1.3|>=4,<4.1.22",
                 "codeigniter/framework": "<=3.0.6",
-                "codeigniter4/framework": "<4.1.9",
+                "codeigniter4/framework": "<4.2.7",
                 "codeigniter4/shield": "= 1.0.0-beta",
                 "codiad/codiad": "<=2.8.4",
                 "composer/composer": "<1.10.26|>=2-alpha.1,<2.2.12|>=2.3,<2.3.5",
@@ -17239,7 +17387,7 @@
                 "contao/core-bundle": "<4.9.18|>=4.10,<4.11.7|>=4.13,<4.13.3|= 4.10.0",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "contao/managed-edition": "<=1.5",
-                "craftcms/cms": "<3.7.36",
+                "craftcms/cms": "<3.7.55.2|>= 4.0.0-RC1, < 4.2.1",
                 "croogo/croogo": "<3.0.7",
                 "cuyz/valinor": "<0.12",
                 "czproject/git-php": "<4.0.3",
@@ -17258,7 +17406,7 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1|>=2.8.3,<2.8.4",
                 "dolibarr/dolibarr": "<16|= 12.0.5|>= 3.3.beta1, < 13.0.2",
-                "dompdf/dompdf": "<2",
+                "dompdf/dompdf": "<2.0.1",
                 "drupal/core": ">=7,<7.91|>=8,<9.3.19|>=9.4,<9.4.3",
                 "drupal/drupal": ">=7,<7.80|>=8,<8.9.16|>=9,<9.1.12|>=9.2,<9.2.4",
                 "dweeves/magmi": "<=0.7.24",
@@ -17270,6 +17418,8 @@
                 "enshrined/svg-sanitize": "<0.15",
                 "erusev/parsedown": "<1.7.2",
                 "ether/logs": "<3.0.4",
+                "exceedone/exment": "<4.4.3|>=5,<5.0.3",
+                "exceedone/laravel-admin": "= 3.0.0|<2.2.3",
                 "ezsystems/demobundle": ">=5.4,<5.4.6.1",
                 "ezsystems/ez-support-tools": ">=2.2,<2.2.3",
                 "ezsystems/ezdemo-ls-extension": ">=5.4,<5.4.2.1",
@@ -17289,7 +17439,7 @@
                 "facade/ignition": "<1.16.15|>=2,<2.4.2|>=2.5,<2.5.2",
                 "facturascripts/facturascripts": "<=2022.8",
                 "feehi/cms": "<=2.1.1",
-                "feehi/feehicms": "<=0.1.3",
+                "feehi/feehicms": "<=2.0.1.1",
                 "fenom/fenom": "<=2.12.1",
                 "filegator/filegator": "<7.8",
                 "firebase/php-jwt": "<2",
@@ -17302,13 +17452,13 @@
                 "fooman/tcpdf": "<6.2.22",
                 "forkcms/forkcms": "<5.11.1",
                 "fossar/tcpdf-parser": "<6.2.22",
-                "francoisjacquet/rosariosis": "<9.1",
+                "francoisjacquet/rosariosis": "<10.1",
                 "friendsofsymfony/oauth2-php": "<1.3",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
                 "friendsoftypo3/mediace": ">=7.6.2,<7.6.5",
                 "froala/wysiwyg-editor": "<3.2.7",
-                "froxlor/froxlor": "<=0.10.22",
+                "froxlor/froxlor": "<0.10.38",
                 "fuel/core": "<1.8.1",
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
@@ -17373,7 +17523,7 @@
                 "league/commonmark": "<0.18.3",
                 "league/flysystem": "<1.1.4|>=2,<2.1.1",
                 "lexik/jwt-authentication-bundle": "<2.10.7|>=2.11,<2.11.3",
-                "librenms/librenms": "<22.4",
+                "librenms/librenms": "<=22.8",
                 "limesurvey/limesurvey": "<3.27.19",
                 "livehelperchat/livehelperchat": "<=3.91",
                 "livewire/livewire": ">2.2.4,<2.2.6",
@@ -17388,8 +17538,11 @@
                 "matyhtf/framework": "<3.0.6",
                 "mautic/core": "<4.3|= 2.13.1",
                 "mediawiki/core": ">=1.27,<1.27.6|>=1.29,<1.29.3|>=1.30,<1.30.2|>=1.31,<1.31.9|>=1.32,<1.32.6|>=1.32.99,<1.33.3|>=1.33.99,<1.34.3|>=1.34.99,<1.35",
+                "melisplatform/melis-asset-manager": "<5.0.1",
+                "melisplatform/melis-cms": "<5.0.1",
+                "melisplatform/melis-front": "<5.0.1",
                 "mezzio/mezzio-swoole": "<3.7|>=4,<4.3",
-                "microweber/microweber": "<1.3.1",
+                "microweber/microweber": "<=1.3.1",
                 "miniorange/miniorange-saml": "<1.4.3",
                 "mittwald/typo3_forum": "<1.2.1",
                 "modx/revolution": "<= 2.8.3-pl|<2.8",
@@ -17452,13 +17605,13 @@
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
                 "pimcore/data-hub": "<1.2.4",
-                "pimcore/pimcore": "<10.4.4",
+                "pimcore/pimcore": "<=10.5.6",
                 "pocketmine/bedrock-protocol": "<8.0.2",
                 "pocketmine/pocketmine-mp": "<4.7.2|>= 4.0.0-BETA5, < 4.4.2",
                 "pressbooks/pressbooks": "<5.18",
                 "prestashop/autoupgrade": ">=4,<4.10.1",
                 "prestashop/blockwishlist": ">=2,<2.1.1",
-                "prestashop/contactform": ">1.0.1,<4.3",
+                "prestashop/contactform": ">=1.0.1,<4.3",
                 "prestashop/gamification": "<2.3.2",
                 "prestashop/prestashop": ">=1.6.0.10,<1.7.8.7",
                 "prestashop/productcomments": "<5.0.2",
@@ -17473,6 +17626,8 @@
                 "pusher/pusher-php-server": "<2.2.1",
                 "pwweb/laravel-core": "<=0.3.6-beta",
                 "rainlab/debugbar-plugin": "<3.1",
+                "rankmath/seo-by-rank-math": "<=1.0.95",
+                "react/http": ">=0.7,<1.7",
                 "remdex/livehelperchat": "<3.99",
                 "rmccue/requests": ">=1.6,<1.8",
                 "robrichards/xmlseclibs": "<3.0.4",
@@ -17487,7 +17642,7 @@
                 "shopware/core": "<=6.4.9",
                 "shopware/platform": "<=6.4.9",
                 "shopware/production": "<=6.3.5.2",
-                "shopware/shopware": "<=5.7.13",
+                "shopware/shopware": "<=5.7.14",
                 "shopware/storefront": "<=6.4.8.1",
                 "shopxo/shopxo": "<2.2.6",
                 "showdoc/showdoc": "<2.10.4",
@@ -17511,8 +17666,8 @@
                 "simplesamlphp/simplesamlphp-module-infocard": "<1.0.1",
                 "simplito/elliptic-php": "<1.0.6",
                 "slim/slim": "<2.6",
-                "smarty/smarty": "<3.1.45|>=4,<4.1.1",
-                "snipe/snipe-it": "<6.0.10|>= 6.0.0-RC-1, <= 6.0.0-RC-5",
+                "smarty/smarty": "<3.1.47|>=4,<4.2.1",
+                "snipe/snipe-it": "<6.0.11|>= 6.0.0-RC-1, <= 6.0.0-RC-5",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spipu/html2pdf": "<5.2.4",
@@ -17574,23 +17729,24 @@
                 "thinkcmf/thinkcmf": "<=5.1.7",
                 "tinymce/tinymce": "<5.10",
                 "titon/framework": ">=0,<9.9.99",
-                "topthink/framework": "<=6.0.12",
+                "topthink/framework": "<=6.0.13",
                 "topthink/think": "<=6.0.9",
                 "topthink/thinkphp": "<=3.2.3",
                 "tribalsystems/zenario": "<9.2.55826",
                 "truckersmp/phpwhois": "<=4.3.1",
-                "twig/twig": "<1.38|>=2,<2.14.11|>=3,<3.3.8",
-                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.38|>=9,<9.5.29|>=10,<10.4.29|>=11,<11.5.11",
+                "twig/twig": "<1.44.7|>=2,<2.15.3|>=3,<3.4.3",
+                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.38|>=9,<9.5.29|>=10,<10.4.32|>=11,<11.5.16",
                 "typo3/cms-backend": ">=7,<=7.6.50|>=8,<=8.7.39|>=9,<=9.5.24|>=10,<=10.4.13|>=11,<=11.1",
-                "typo3/cms-core": ">=6.2,<=6.2.56|>=7,<7.6.57|>=8,<8.7.47|>=9,<9.5.35|>=10,<10.4.29|>=11,<11.5.11",
+                "typo3/cms-core": ">=6.2,<=6.2.56|>=7,<7.6.58|>=8,<8.7.48|>=9,<9.5.37|>=10,<10.4.32|>=11,<11.5.16",
                 "typo3/cms-form": ">=8,<=8.7.39|>=9,<=9.5.24|>=10,<=10.4.13|>=11,<=11.1",
                 "typo3/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.12|>=3.1,<3.1.10|>=3.2,<3.2.13|>=3.3,<3.3.13|>=4,<4.0.6",
+                "typo3/html-sanitizer": ">=1,<1.0.7|>=2,<2.0.16",
                 "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4|>=2.3,<2.3.99|>=3,<3.0.20|>=3.1,<3.1.18|>=3.2,<3.2.14|>=3.3,<3.3.23|>=4,<4.0.17|>=4.1,<4.1.16|>=4.2,<4.2.12|>=4.3,<4.3.3",
                 "typo3/phar-stream-wrapper": ">=1,<2.1.1|>=3,<3.1.1",
                 "typo3/swiftmailer": ">=4.1,<4.1.99|>=5.4,<5.4.5",
                 "typo3fluid/fluid": ">=2,<2.0.8|>=2.1,<2.1.7|>=2.2,<2.2.4|>=2.3,<2.3.7|>=2.4,<2.4.4|>=2.5,<2.5.11|>=2.6,<2.6.10",
                 "ua-parser/uap-php": "<3.8",
-                "unisharp/laravel-filemanager": "<=2.3",
+                "unisharp/laravel-filemanager": "<=2.5.1",
                 "userfrosting/userfrosting": ">=0.3.1,<4.6.3",
                 "usmanhalalit/pixie": "<1.0.3|>=2,<2.0.2",
                 "vanilla/safecurl": "<0.9.2",
@@ -17609,7 +17765,7 @@
                 "wpanel/wpanel4-cms": "<=4.3.1",
                 "wwbn/avideo": "<=11.6",
                 "yeswiki/yeswiki": "<4.1",
-                "yetiforce/yetiforce-crm": "<6.4",
+                "yetiforce/yetiforce-crm": "<=6.4",
                 "yidashi/yii2cmf": "<=2",
                 "yii2mod/yii2-cms": "<1.9.2",
                 "yiisoft/yii": ">=1.1.14,<1.1.15",
