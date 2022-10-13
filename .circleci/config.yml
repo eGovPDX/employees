@@ -148,7 +148,7 @@ build_and_deploy: &build_and_deploy
           git push -f pantheon $CIRCLE_BRANCH:$CIRCLE_BRANCH
 
           echo "Waiting for the workflow: Sync code on $PANTHEON_ENV..."
-          terminus build:workflow:wait $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV "Sync code on \"$PANTHEON_ENV\""
+          terminus build:workflow:wait $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV "Sync code on $PANTHEON_ENV"
 
           # Run the equivalent of a drush deploy
 
