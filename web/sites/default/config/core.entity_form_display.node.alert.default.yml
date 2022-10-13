@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.alert.field_action_link
     - field.field.node.alert.field_alert_text
     - field.field.node.alert.field_severity
     - node.type.alert
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - field_states_ui
@@ -92,7 +92,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_action_link: true
   promote: true
   publish_on: true
   publish_state: true
