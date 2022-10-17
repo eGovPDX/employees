@@ -3350,9 +3350,14 @@ Drupal.behaviors.notification_handler = {
 
       for (var item = 0; item < notificationCookies.length; ++item) {
         // if any of the list equals a value in cached list remove dismissible
-        if (!notificationCookies.includes(' ' + currentCookieTimestamp)) {
+        if (!notificationCookies.includes(' ' + currentCookieTimestamp + '/')) {
           notification.classList.add('westy-notification--dismissible');
         }
+      } // if there isn't cookie for the notification generate one
+
+
+      if (notificationCookies.length == 0 && currentCookieTimestamp) {
+        document.cookie = currentCookieTimestamp;
       } // When close button is clicked remove the westy-notification class
 
 
@@ -3365,6 +3370,7 @@ Drupal.behaviors.notification_handler = {
         var lastChangedTimestamp = notification['dataset']['changed'];
         var path = drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl || '/';
         document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp + path;
+        console.log(document.cookies);
       });
     });
   }
