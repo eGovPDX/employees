@@ -13,6 +13,9 @@ dependencies:
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
+    - views.view.group_list_views
+    - views.view.group_menu
+    - views.view.group_search_index
   module:
     - file
     - layout_builder
@@ -20,16 +23,167 @@ dependencies:
     - layout_library
     - options
     - text
+    - views
+  theme:
+    - westy
 third_party_settings:
   layout_builder:
     enabled: true
     allow_custom: false
     sections:
       -
-        layout_id: layout_builder_blank
+        layout_id: westy_three_column
         layout_settings:
           label: ''
-        components: {  }
+          context_mapping: {  }
+        components:
+          132c836c-cb61-4e0b-8a6c-2a51893e824d:
+            uuid: 132c836c-cb61-4e0b-8a6c-2a51893e824d
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          7be5c372-5751-498b-89a0-b2c923df4be5:
+            uuid: 7be5c372-5751-498b-89a0-b2c923df4be5
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_subgroups_for_group'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          794c9f41-5654-4379-a243-cca12912eb5a:
+            uuid: 794c9f41-5654-4379-a243-cca12912eb5a
+            region: main
+            configuration:
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          159de26f-d2e1-40ad-9f96-9221dc4fbd57:
+            uuid: 159de26f-d2e1-40ad-9f96-9221dc4fbd57
+            region: main
+            configuration:
+              id: 'views_block:group_search_index-block_group_news'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+          48205b6b-a3b3-42a4-abb0-0a7fe2ba5e79:
+            uuid: 48205b6b-a3b3-42a4-abb0-0a7fe2ba5e79
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_parent_group'
+              label: Parent
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: inline
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd:
+            uuid: 8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_group_contact'
+              label: 'Group Contact'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          c09d4f1d-5c79-46c3-821f-6f949245f224:
+            uuid: c09d4f1d-5c79-46c3-821f-6f949245f224
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_group_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 3
+            additional: {  }
+          17ce1005-a469-45b8-9fd9-7e248c1369da:
+            uuid: 17ce1005-a469-45b8-9fd9-7e248c1369da
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_group_todays_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+          fc7e500e-667e-4d73-b243-5c20dad3cd5f:
+            uuid: fc7e500e-667e-4d73-b243-5c20dad3cd5f
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_documents'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 4
+            additional: {  }
+          ee173e63-a8f1-43a4-b370-ee592b581597:
+            uuid: ee173e63-a8f1-43a4-b370-ee592b581597
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_group_description'
+              label: 'Group Description'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false

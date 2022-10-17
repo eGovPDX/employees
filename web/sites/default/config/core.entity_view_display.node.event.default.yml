@@ -13,6 +13,8 @@ dependencies:
     - field.field.node.event.field_type
     - field.field.node.event.field_when
     - node.type.event
+    - views.view.group_menu
+    - views.view.related_content
   module:
     - layout_builder
     - layout_builder_restrictions
@@ -20,16 +22,232 @@ dependencies:
     - smart_date
     - text
     - user
+    - views
+  theme:
+    - westy
 third_party_settings:
   layout_builder:
     enabled: true
     allow_custom: false
     sections:
       -
-        layout_id: layout_builder_blank
+        layout_id: westy_three_column
         layout_settings:
           label: ''
-        components: {  }
+          context_mapping: {  }
+        components:
+          fb36a62b-f874-4c94-9345-6111c1bcccc6:
+            uuid: fb36a62b-f874-4c94-9345-6111c1bcccc6
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_menu_by_path'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          46ffcc21-3bce-4851-9ed5-50712bad4374:
+            uuid: 46ffcc21-3bce-4851-9ed5-50712bad4374
+            region: main
+            configuration:
+              id: 'extra_field_block:node:event:content_moderation_control'
+              label: 'Moderation control'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          1d2906ce-534f-40e4-af95-8e77cbca161d:
+            uuid: 1d2906ce-534f-40e4-af95-8e77cbca161d
+            region: main
+            configuration:
+              id: 'field_block:node:event:field_type'
+              label: Type
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: visually_hidden
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          6c8c596c-3d42-4283-ae49-c2e854a2e8ba:
+            uuid: 6c8c596c-3d42-4283-ae49-c2e854a2e8ba
+            region: main
+            configuration:
+              id: 'field_block:node:event:field_when'
+              label: When
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: daterange_default
+                label: inline
+                settings:
+                  timezone_override: ''
+                  format_type: medium
+                  separator: '-'
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          f52ff274-7990-48a0-ad0b-acd8699b3909:
+            uuid: f52ff274-7990-48a0-ad0b-acd8699b3909
+            region: main
+            configuration:
+              id: 'field_block:node:event:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          da509b05-ba11-442a-b9bc-0e296dbe6c6d:
+            uuid: da509b05-ba11-442a-b9bc-0e296dbe6c6d
+            region: side
+            configuration:
+              id: 'field_block:node:event:field_contact'
+              label: Contact
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ba20dbd3-456f-4587-805b-759a9ca9231d:
+            uuid: ba20dbd3-456f-4587-805b-759a9ca9231d
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_static'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          4379673b-2998-4ea4-b004-66e6987a4dde:
+            uuid: 4379673b-2998-4ea4-b004-66e6987a4dde
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 2
+            additional: {  }
+          7c80755d-4fd3-4b61-880e-52758cb53bc2:
+            uuid: 7c80755d-4fd3-4b61-880e-52758cb53bc2
+            region: side
+            configuration:
+              id: 'views_block:related_content-block_related_news'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 3
+            additional: {  }
+          8e0fdb59-5496-42d8-a800-22760ab5ba76:
+            uuid: 8e0fdb59-5496-42d8-a800-22760ab5ba76
+            region: side
+            configuration:
+              id: 'field_block:node:event:field_topics'
+              label: Topics
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          889449d0-d0dc-42fe-af7a-9014d517bbc3:
+            uuid: 889449d0-d0dc-42fe-af7a-9014d517bbc3
+            region: side
+            configuration:
+              id: 'field_block:node:event:field_tags'
+              label: Tags
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          546feb32-6c62-4c09-bceb-1d9c17e00f26:
+            uuid: 546feb32-6c62-4c09-bceb-1d9c17e00f26
+            region: side
+            configuration:
+              id: 'extra_field_block:node:event:content_dates_eva_created_content'
+              label: 'EVA: Content Dates - EVA: Created'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          e52e815c-429d-4368-9390-566d3878c2d6:
+            uuid: e52e815c-429d-4368-9390-566d3878c2d6
+            region: side
+            configuration:
+              id: 'extra_field_block:node:event:content_dates_eva_updated_content'
+              label: 'EVA: Content Dates - EVA: Updated'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                settings: {  }
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
