@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_public
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
+    - field.field.node.bts_catalog_item.field_search_keywords
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
@@ -336,6 +337,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_search_keywords:
+    type: string_textfield
+    weight: 37
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_service:
     type: entity_reference_autocomplete
     weight: 12
