@@ -11,6 +11,8 @@ dependencies:
     - content_moderation
     - field_states_ui
     - path
+    - scheduler
+    - scheduler_content_moderation_integration
     - text
 id: node.alert.default
 targetEntityType: node
@@ -61,6 +63,23 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 8
@@ -86,6 +105,18 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   url_redirects:
     weight: 7
     region: content
@@ -93,8 +124,4 @@ content:
     third_party_settings: {  }
 hidden:
   promote: true
-  publish_on: true
-  publish_state: true
   sticky: true
-  unpublish_on: true
-  unpublish_state: true
