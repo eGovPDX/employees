@@ -17,7 +17,6 @@ Drupal.behaviors.notification_handler = {
       const changed = notification['dataset']['changed']
       const currentCookieTimestamp = COOKIE_PREFIX + current_nid + '=' + changed
 
-
       // find stored cookie
       let currentCookie = (list) => {
         const all_cookies = document.cookie.split(';')
@@ -38,12 +37,13 @@ Drupal.behaviors.notification_handler = {
           notification.classList.add('westy-notification--dismissible')
         }
       }
-      // if there isn't cookie for the notification generate one
+
+      // if there isn't a cookie for the notification generate one
       if (notificationCookies.length == 0 && currentCookieTimestamp) {
         document.cookie = currentCookieTimestamp
       }
 
-      // When close button is clicked remove the westy-notification class
+      // When close button is clicked remove the westy-notification--dismissible class
       let closeButton = notification.querySelector('.westy-notification__close')
       closeButton.addEventListener('click', (event) => {
         event.preventDefault()
@@ -53,8 +53,7 @@ Drupal.behaviors.notification_handler = {
         const nid = notification['dataset']['nid']
         const lastChangedTimestamp = notification['dataset']['changed']
         const path = (drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl) || '/';
-        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp + path
-        console.log(document.cookies)
+        document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp
       })
     })
   }
