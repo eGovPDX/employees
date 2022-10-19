@@ -23,19 +23,19 @@ Drupal.behaviors.notification_handler = {
         let find_notifications = []
         for (let cookie = 0; cookie < all_cookies.length; ++cookie) {
           if (all_cookies[cookie].includes(COOKIE_PREFIX)) {
-            find_notifications.push(all_cookies[cookie])
+            find_notifications.push(all_cookies[cookie].replace(/\s/g, ''))
           }
         }
         return find_notifications
       }
 
       let notificationCookies = currentCookie()
-
-      for (let item = 0; item < notificationCookies.length; ++item) {
-        // if any of the list equals a value in cached list remove dismissible
-        if (!notificationCookies.includes(' ' + currentCookieTimestamp + '/')) {
-          notification.classList.add('westy-notification--dismissible')
-        }
+      console.log(notificationCookies)
+      console.log(currentCookieTimestamp)
+      // if notification timestamp changes, make notificaition dissmissible
+      if (!notificationCookies.includes(currentCookieTimestamp)) {
+        notification.classList.add('westy-notification--dismissible')
+        console.log('doesnt match')
       }
 
       // if there isn't a cookie for the notification generate one
@@ -52,7 +52,6 @@ Drupal.behaviors.notification_handler = {
         // Set cookie value after close
         const nid = notification['dataset']['nid']
         const lastChangedTimestamp = notification['dataset']['changed']
-        const path = (drupalSettings && drupalSettings.path && drupalSettings.path.baseUrl) || '/';
         document.cookie = COOKIE_PREFIX + nid + "=" + lastChangedTimestamp
       })
     })
