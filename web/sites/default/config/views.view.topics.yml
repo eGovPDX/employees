@@ -159,7 +159,22 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        weight:
+          id: weight
+          table: taxonomy_term_field_data
+          field: weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: taxonomy_term
+          entity_field: weight
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         status:
@@ -194,7 +209,7 @@ display:
           columns: 20
           automatic_width: false
           alignment: horizontal
-          row_class_custom: 'row row-cols-md-1 row-cols-lg-2 g-2 mt-3 mb-3'
+          row_class_custom: 'row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3 mb-3'
           row_class_default: false
           col_class_custom: col
           col_class_default: false
