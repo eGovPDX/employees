@@ -149,7 +149,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 21
+    boost: !!float 42
     dependencies:
       config:
         - field.storage.node.field_search_keywords
@@ -392,12 +392,12 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_search_boost
-  field_search_keywords:
+  media_search_keywords:
     label: 'Search keywords'
     datasource_id: 'entity:media'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 21
+    boost: !!float 42
     dependencies:
       config:
         - field.storage.media.field_search_keywords
@@ -494,7 +494,7 @@ field_settings:
     datasource_id: 'entity:group'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 21
+    boost: !!float 42
     dependencies:
       config:
         - field.storage.group.field_search_keywords
@@ -627,7 +627,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 21
+    boost: !!float 42
     dependencies:
       config:
         - field.storage.user.field_search_keywords
