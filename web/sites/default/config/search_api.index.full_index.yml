@@ -392,15 +392,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_search_boost
-  media_search_keywords:
-    label: 'Search keywords'
-    datasource_id: 'entity:media'
-    property_path: field_search_keywords
-    type: 'solr_text_custom:ngram'
-    boost: !!float 42
-    dependencies:
-      config:
-        - field.storage.media.field_search_keywords
   field_section:
     label: Section
     datasource_id: 'entity:user'
@@ -582,6 +573,15 @@ field_settings:
     dependencies:
       module:
         - media
+  media_search_keywords:
+    label: 'Search keywords'
+    datasource_id: 'entity:media'
+    property_path: field_search_keywords
+    type: 'solr_text_custom:ngram'
+    boost: !!float 42
+    dependencies:
+      config:
+        - field.storage.media.field_search_keywords
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
