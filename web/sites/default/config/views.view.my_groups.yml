@@ -1729,17 +1729,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-      empty:
-        title:
-          id: title
-          table: views
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: title
-          empty: true
-          title: 'No groups assigned'
+      empty: {  }
       arguments:
         uid:
           id: uid

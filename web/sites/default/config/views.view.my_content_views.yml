@@ -319,7 +319,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
+          content: "<p>Displaying @start - @end of @total</p>\r\n<hr>"
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -984,7 +984,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 5
+          items_per_page: 3
       sorts:
         field_updated_on_value:
           id: field_updated_on_value
@@ -1193,7 +1193,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 5
+          items_per_page: 8
       sorts:
         field_when_value:
           id: field_when_value
@@ -1918,8 +1918,8 @@ display:
         filters: false
         filter_groups: false
       display_description: ''
-      use_more: true
-      use_more_always: true
+      use_more: false
+      use_more_always: false
       use_more_text: 'more news from groups followed'
       link_display: page_my_news
       link_url: ''

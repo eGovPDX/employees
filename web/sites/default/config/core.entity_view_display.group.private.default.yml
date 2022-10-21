@@ -10,7 +10,6 @@ dependencies:
     - field.field.group.private.field_org_type
     - field.field.group.private.field_parent_group
     - group.type.private
-    - views.view.group_events
     - views.view.group_list_views
     - views.view.group_menu
     - views.view.group_search_index
@@ -22,19 +21,46 @@ dependencies:
     - text
     - views
   theme:
-    - cloudy2
+    - westy
 third_party_settings:
   layout_builder:
     enabled: true
     allow_custom: false
     sections:
       -
-        layout_id: cloudy2_three_column
+        layout_id: westy_three_column
         layout_settings:
-          label: 'Main Content'
+          label: ''
+          context_mapping: {  }
         components:
-          8aade6f3-f05d-402d-95e8-a5730c900075:
-            uuid: 8aade6f3-f05d-402d-95e8-a5730c900075
+          3caaae81-378c-4be0-a102-0dbd348288fb:
+            uuid: 3caaae81-378c-4be0-a102-0dbd348288fb
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          9fcdfe53-ec84-4b47-97cc-25e0ea60b961:
+            uuid: 9fcdfe53-ec84-4b47-97cc-25e0ea60b961
+            region: main
+            configuration:
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          6066a5fe-57b8-49ec-9275-538b104f1398:
+            uuid: 6066a5fe-57b8-49ec-9275-538b104f1398
             region: main
             configuration:
               id: 'field_block:group:private:field_group_description'
@@ -46,13 +72,13 @@ third_party_settings:
                 view_mode: view_mode
               formatter:
                 type: text_default
-                label: hidden
+                label: above
                 settings: {  }
                 third_party_settings: {  }
             weight: 1
             additional: {  }
-          8905fb38-1023-47fb-9752-02c5035b67ef:
-            uuid: 8905fb38-1023-47fb-9752-02c5035b67ef
+          1628ebc1-4f3b-4997-845f-02487f873533:
+            uuid: 1628ebc1-4f3b-4997-845f-02487f873533
             region: main
             configuration:
               id: 'views_block:group_search_index-block_group_news'
@@ -64,8 +90,8 @@ third_party_settings:
               items_per_page: none
             weight: 2
             additional: {  }
-          3bab2477-0617-47fd-9bf1-cab585412c59:
-            uuid: 3bab2477-0617-47fd-9bf1-cab585412c59
+          9fe4701c-9055-407a-881a-73a93d5875a7:
+            uuid: 9fe4701c-9055-407a-881a-73a93d5875a7
             region: side
             configuration:
               id: 'field_block:group:private:field_parent_group'
@@ -81,79 +107,14 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 1
-            additional: {  }
-          44767b00-6c08-4869-bb2b-5148c65febfb:
-            uuid: 44767b00-6c08-4869-bb2b-5148c65febfb
-            region: side
-            configuration:
-              id: 'views_block:group_search_index-block_group_events'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 4
-            additional: {  }
-          25200171-e124-4ca7-8084-a08b85933dbc:
-            uuid: 25200171-e124-4ca7-8084-a08b85933dbc
-            region: side
-            configuration:
-              id: 'views_block:group_search_index-block_documents'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 5
-            additional: {  }
-          f8d34865-d40e-47dd-b9e6-8ad65baa30c7:
-            uuid: f8d34865-d40e-47dd-b9e6-8ad65baa30c7
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
             weight: 0
             additional: {  }
-          d0ab284d-659b-4420-8e2a-a44b923ef97e:
-            uuid: d0ab284d-659b-4420-8e2a-a44b923ef97e
-            region: menu
-            configuration:
-              id: 'views_block:group_list_views-block_subgroups_for_group'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 1
-            additional: {  }
-          4757db4b-fed4-4b7a-addc-7b1f967f11fd:
-            uuid: 4757db4b-fed4-4b7a-addc-7b1f967f11fd
-            region: side
-            configuration:
-              id: 'views_block:group_events-block_group_todays_events'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 3
-            additional: {  }
-          e17e4de9-033f-456b-8e92-70cd95158815:
-            uuid: e17e4de9-033f-456b-8e92-70cd95158815
+          832ec829-a4b6-49ac-a325-ef28e8bee707:
+            uuid: 832ec829-a4b6-49ac-a325-ef28e8bee707
             region: side
             configuration:
               id: 'field_block:group:private:field_group_contact'
-              label: 'Group contact'
+              label: 'Group Contact'
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -165,7 +126,59 @@ third_party_settings:
                 settings:
                   view_mode: group_contact
                 third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          1375b01e-c2ff-4eeb-ab7f-890f84f8b13b:
+            uuid: 1375b01e-c2ff-4eeb-ab7f-890f84f8b13b
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_subgroups_for_group'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          aa0e213f-74f5-4ea6-8c7e-b698c8a232d4:
+            uuid: aa0e213f-74f5-4ea6-8c7e-b698c8a232d4
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_group_todays_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
             weight: 2
+            additional: {  }
+          a1bd2647-53f4-46e1-9d54-784a27b69b0e:
+            uuid: a1bd2647-53f4-46e1-9d54-784a27b69b0e
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_group_events'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 3
+            additional: {  }
+          dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc:
+            uuid: dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc
+            region: side
+            configuration:
+              id: 'views_block:group_search_index-block_documents'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 4
             additional: {  }
         third_party_settings: {  }
   layout_library:
