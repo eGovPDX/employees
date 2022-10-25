@@ -17,6 +17,7 @@
   'my-3',
   is_draft ? 'westy-notification--is_draft',
 ]%}
+
 {# TWIG #}
 <div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %} {% if isDismissible is same as(true) %} role="alert" aria-live="polite" {% endif %}>
 	<div class="d-flex flex-row westy-notification__inner-wrapper">
@@ -25,6 +26,7 @@
 				<div class="fw-bold">{{label}}</div>
 				<div>{{ content }}</div>
 			</div>
+
 			{% if isDismissible %}
 				<div class="float-end top-0">
 					<button type="button" class="border-0 bg-secondary westy-notification__close" data-dismiss="alert" aria-label="Dismiss notification">
