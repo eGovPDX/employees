@@ -7,7 +7,6 @@
 
 {# Defaults #}
 {% set isDismissible = isDismissible|default(TRUE) %}
-{% set is_draft = is_draft|default(FALSE) %}
 
 {# CLASSES #}
 {% set classes= [
@@ -15,7 +14,6 @@
   'text-dark',
   'bg-secondary',
   'my-3',
-  is_draft ? 'westy-notification--is_draft',
 ]%}
 
 {# TWIG #}
