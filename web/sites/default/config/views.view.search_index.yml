@@ -67,7 +67,7 @@ display:
             'entity:user':
               user: contact_details
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       filters:
         search_api_fulltext:
@@ -605,8 +605,6 @@ display:
         - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.contacts_filter_by_ad_group'
-        - 'config:facets.facet.contacts_filter_by_group_member'
         - 'config:search_api.index.full_index'
   page_contracts:
     id: page_contracts
@@ -1607,15 +1605,12 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.contract_category'
-        - 'config:facets.facet.contract_type'
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_contract_number'
         - 'config:field.storage.node.field_mandated_purchases'
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
-        - taxonomy_term_list
   page_events:
     id: page_events
     display_title: 'Page: Events'
@@ -2124,7 +2119,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2132,15 +2127,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.events_filter_by_month'
-        - 'config:facets.facet.events_filter_by_year'
-        - 'config:facets.facet.events_group'
-        - 'config:facets.facet.events_group_type'
-        - 'config:facets.facet.events_topic'
-        - 'config:facets.facet.events_type'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_news:
     id: page_news
     display_title: 'Page: News'
@@ -2546,7 +2533,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2554,15 +2541,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.news_filter_by_group'
-        - 'config:facets.facet.news_filter_by_group_type'
-        - 'config:facets.facet.news_filter_by_month'
-        - 'config:facets.facet.news_filter_by_topic'
-        - 'config:facets.facet.news_filter_by_type'
-        - 'config:facets.facet.news_filter_by_year'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_past_events:
     id: page_past_events
     display_title: 'Page: Past Events'
@@ -3071,7 +3050,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -3079,15 +3058,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.past_events_filter_by_month'
-        - 'config:facets.facet.past_events_filter_by_year'
-        - 'config:facets.facet.past_events_group'
-        - 'config:facets.facet.past_events_group_type'
-        - 'config:facets.facet.past_events_topics'
-        - 'config:facets.facet.past_events_type'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_search:
     id: page_search
     display_title: 'Page: Search'
@@ -3125,6 +3096,4 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.content_displayed_in'
-        - 'config:facets.facet.type'
         - 'config:search_api.index.full_index'
