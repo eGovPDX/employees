@@ -974,6 +974,19 @@ display:
     display_options:
       title: 'Content Per Topic'
       sorts:
+        field_popularity_value:
+          id: field_popularity_value
+          table: node__field_popularity
+          field: field_popularity_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         title:
           id: title
           table: node_field_data

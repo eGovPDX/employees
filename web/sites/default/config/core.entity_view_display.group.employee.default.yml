@@ -13,7 +13,6 @@ dependencies:
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
     - group.type.employee
-    - views.view.group_events
     - views.view.group_list_views
     - views.view.group_menu
     - views.view.group_search_index
@@ -26,37 +25,59 @@ dependencies:
     - text
     - views
   theme:
-    - cloudy2
+    - westy
 third_party_settings:
   layout_builder:
     enabled: true
     allow_custom: false
     sections:
       -
-        layout_id: cloudy2_three_column
+        layout_id: westy_three_column
         layout_settings:
-          label: 'Main Content'
+          label: ''
+          context_mapping: {  }
         components:
-          0899606a-1169-4eb8-a553-f505651a52dc:
-            uuid: 0899606a-1169-4eb8-a553-f505651a52dc
+          132c836c-cb61-4e0b-8a6c-2a51893e824d:
+            uuid: 132c836c-cb61-4e0b-8a6c-2a51893e824d
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_homepage_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          7be5c372-5751-498b-89a0-b2c923df4be5:
+            uuid: 7be5c372-5751-498b-89a0-b2c923df4be5
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_subgroups_for_group'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
+            additional: {  }
+          794c9f41-5654-4379-a243-cca12912eb5a:
+            uuid: 794c9f41-5654-4379-a243-cca12912eb5a
             region: main
             configuration:
-              id: 'field_block:group:employee:field_group_description'
-              label: 'Group Description'
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
               label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-            weight: 2
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
             additional: {  }
-          1a03522c-c807-4a52-be35-c6dcf2b1e649:
-            uuid: 1a03522c-c807-4a52-be35-c6dcf2b1e649
+          159de26f-d2e1-40ad-9f96-9221dc4fbd57:
+            uuid: 159de26f-d2e1-40ad-9f96-9221dc4fbd57
             region: main
             configuration:
               id: 'views_block:group_search_index-block_group_news'
@@ -66,10 +87,10 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 3
+            weight: 2
             additional: {  }
-          be73b75b-2f83-4931-918c-813ca43e2315:
-            uuid: be73b75b-2f83-4931-918c-813ca43e2315
+          48205b6b-a3b3-42a4-abb0-0a7fe2ba5e79:
+            uuid: 48205b6b-a3b3-42a4-abb0-0a7fe2ba5e79
             region: side
             configuration:
               id: 'field_block:group:employee:field_parent_group'
@@ -85,10 +106,29 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd:
+            uuid: 8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_group_contact'
+              label: 'Group Contact'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: group_contact
+                third_party_settings: {  }
             weight: 1
             additional: {  }
-          e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c:
-            uuid: e9a7dc8b-7c80-4b78-a421-9cbb44afaa5c
+          c09d4f1d-5c79-46c3-821f-6f949245f224:
+            uuid: c09d4f1d-5c79-46c3-821f-6f949245f224
             region: side
             configuration:
               id: 'views_block:group_search_index-block_group_events'
@@ -98,23 +138,23 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 5
+            weight: 3
             additional: {  }
-          4a3fde4a-f259-43f2-96e4-d05301e98a14:
-            uuid: 4a3fde4a-f259-43f2-96e4-d05301e98a14
+          17ce1005-a469-45b8-9fd9-7e248c1369da:
+            uuid: 17ce1005-a469-45b8-9fd9-7e248c1369da
             region: side
             configuration:
-              id: 'views_block:group_events-block_group_todays_events'
+              id: 'views_block:group_search_index-block_group_todays_events'
               label: ''
               label_display: visible
               provider: views
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 4
+            weight: 2
             additional: {  }
-          0fc807be-4a07-466f-a88b-597417870461:
-            uuid: 0fc807be-4a07-466f-a88b-597417870461
+          fc7e500e-667e-4d73-b243-5c20dad3cd5f:
+            uuid: fc7e500e-667e-4d73-b243-5c20dad3cd5f
             region: side
             configuration:
               id: 'views_block:group_search_index-block_documents'
@@ -124,68 +164,25 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 6
+            weight: 4
             additional: {  }
-          5c497031-9536-4ed2-adc1-46e5b10a041d:
-            uuid: 5c497031-9536-4ed2-adc1-46e5b10a041d
-            region: side
+          ee173e63-a8f1-43a4-b370-ee592b581597:
+            uuid: ee173e63-a8f1-43a4-b370-ee592b581597
+            region: main
             configuration:
-              id: 'field_block:group:employee:field_group_contact'
-              label: 'Group Contact'
-              label_display: visible
+              id: 'field_block:group:employee:field_group_description'
+              label: 'Group Description'
+              label_display: '0'
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: entity_reference_entity_view
-                label: visually_hidden
-                settings:
-                  view_mode: group_contact
+                type: text_default
+                label: hidden
+                settings: {  }
                 third_party_settings: {  }
-            weight: 3
-            additional: {  }
-          5fba8a6d-e0f6-44e4-abd4-b524b1a694fb:
-            uuid: 5fba8a6d-e0f6-44e4-abd4-b524b1a694fb
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 0
-            additional: {  }
-          c4b349a1-2708-4a68-b69d-94e139e9238c:
-            uuid: c4b349a1-2708-4a68-b69d-94e139e9238c
-            region: menu
-            configuration:
-              id: 'views_block:group_list_views-block_subgroups_for_group'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
             weight: 1
-            additional: {  }
-          40e6b85a-7697-4450-913e-45f43f818dcd:
-            uuid: 40e6b85a-7697-4450-913e-45f43f818dcd
-            region: main
-            configuration:
-              id: 'field_block:group:employee:field_logo'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: file_default
-                label: above
-                settings:
-                  use_description_as_link_text: true
-                third_party_settings: {  }
-            weight: 2
             additional: {  }
         third_party_settings: {  }
   layout_library:

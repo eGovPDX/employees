@@ -1,0 +1,21 @@
+uuid: 01036396-6629-4157-983d-d3df31a6614d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_popularity
+    - node.type.resource
+  module:
+    - options
+id: node.resource.field_popularity
+field_name: field_popularity
+entity_type: node
+bundle: resource
+label: Popularity
+description: 'Content leads and site administrators can use the popularity field to determine the sort weight of pages and resources in list views. (For example, on homepage topics.) The higher the popularity value, the higher the content will appear in lists.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

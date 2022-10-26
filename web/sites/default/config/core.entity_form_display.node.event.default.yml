@@ -16,31 +16,13 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
-    - field_group
     - field_states_ui
     - path
     - scheduler
     - scheduler_content_moderation_integration
+    - select2
     - smart_date
     - text
-third_party_settings:
-  field_group:
-    group_topics:
-      children:
-        - field_topics
-      label: Topics
-      region: content
-      parent_name: ''
-      weight: 7
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: false
-        description: ''
-        required_fields: false
-        weight: '0'
 _core:
   default_config_hash: CVAKxLp27yWdjTSep4DYtCnqX23XA8AYXXryfMA0Q3A
 id: node.event.default
@@ -60,7 +42,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -76,7 +58,7 @@ content:
     third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
@@ -96,7 +78,7 @@ content:
     third_party_settings: {  }
   field_reviewer:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -125,10 +107,14 @@ content:
           list: ''
           add: Add
   field_topics:
-    type: options_buttons
-    weight: 9
+    type: select2_entity_reference
+    weight: 7
     region: content
-    settings: {  }
+    settings:
+      width: 100%
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
     third_party_settings: {  }
   field_type:
     type: options_select
@@ -149,39 +135,32 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 9
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 17
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 18
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 16
+    weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 14
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -193,7 +172,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -203,22 +182,23 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 19
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 20
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 15
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   langcode: true
   promote: true
+  status: true
   sticky: true
