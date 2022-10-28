@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
     - field.field.node.resource.field_reviewer
+    - field.field.node.resource.field_search_keywords
     - field.field.node.resource.field_show_in_menu
     - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
@@ -320,6 +321,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 10
+    region: main
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
     region: main
   field_show_in_menu:
     type: boolean

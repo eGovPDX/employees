@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
+    - field.field.node.event.field_search_keywords
     - field.field.node.event.field_tags
     - field.field.node.event.field_topics
     - field.field.node.event.field_type
@@ -306,6 +307,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 5
+    region: main
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
     region: main
   field_tags:
     type: entity_reference_label

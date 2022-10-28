@@ -12,6 +12,7 @@ dependencies:
     - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
     - field.field.group.employee.field_parent_group
+    - field.field.group.employee.field_search_keywords
     - group.type.employee
   module:
     - allowed_formats
@@ -162,6 +163,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_search_keywords:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   label:
     type: string_textfield
     weight: 0
