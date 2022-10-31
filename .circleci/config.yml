@@ -37,16 +37,20 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore theme dependencies cache
         keys:
-          - cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+          - westy_-{{ checksum "web/themes/custom/westy/package.json" }}
     - run:
         name: Install theme dependencies
         command: |
-          cd web/themes/custom/cloudy2 && npm install
+          cd web/themes/custom/westy && npm install
+    - run:
+        name: Build theme
+        command: |
+          cd web/themes/custom/westy && npm run production
     - save_cache:
         name: Save theme dependencies cache
-        key: cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+        key: westy_-{{ checksum "web/themes/custom/westy/package.json" }}
         paths:
-          - "web/themes/custom/cloudy2/node_modules"
+          - "web/themes/custom/westy/node_modules"
     - restore_cache:
         name: Restore Composer Cache
         keys:
@@ -84,7 +88,7 @@ build_and_deploy: &build_and_deploy
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           # Add terminus into path
           export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
 
@@ -108,9 +112,9 @@ build_and_deploy: &build_and_deploy
           cd /var/www/html
           find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
           find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
-          rm -r ./web/themes/custom/cloudy2/node_modules/
+          rm -r ./web/themes/custom/westy/node_modules/
           git add -f /var/www/html
-          
+
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
@@ -275,7 +279,7 @@ visual_regression: &visual_regression
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
 
           # Log in via terminus first. Required for tests that require user login.
@@ -298,12 +302,11 @@ visual_regression: &visual_regression
         path: /home/circleci/artifacts
         destination: /
 
-
 # Declare all of the jobs we should run.
 version: 2.1
 jobs:
   deploy:
-     <<: *build_and_deploy
+    <<: *build_and_deploy
   visual_regression:
     <<: *visual_regression
 
