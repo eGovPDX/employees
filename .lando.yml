@@ -39,6 +39,7 @@ services:
     build:
       - echo "Installing Node.js dependencies..."
       - npm -C /app/web/themes/custom/westy install
+      - npm -C /app/web/themes/custom/westy run production
   solr:
     type: solr:8
     portforward: true
@@ -94,11 +95,11 @@ tooling:
       - appserver: terminus backup:get employees.dev --element=database --to=/app/artifacts/database.tar.gz
       - appserver: echo "Importing database..."
       - database: /helpers/sql-import.sh artifacts/database.tar.gz
-#      - appserver: echo "Sanitizing database..."
-#      - appserver: drush sql-query "drop temporary table if exists to_update; create temporary table to_update select distinct uid, name from users_field_data U left outer join user__roles R on U.uid = R.entity_id where R.roles_target_id is null or 'administrator' not in (select roles_target_id from users_field_data U2 left outer join user__roles R2 on U2.uid = R2.entity_id where U2.name = U.name); update users_field_data U inner join to_update UP on U.uid = UP.uid set U.pass = '', U.mail = concat('user+', UP.uid, '@localhost.localdomain'), U.init = concat('user+', UP.uid, '@localhost.localdomain') where UP.name <> 'Oliver Outsider' and UP.name <> 'Marty Member' and UP.name <> 'Ally Admin'; drop temporary table to_update;"
-#      - appserver: echo "Truncating webforms and logs..."
-#      - appserver: drush sql-query "truncate table webform_submission; truncate table webform_submission_data; truncate table webform_submission_log;"
-#      - appserver: drush sql-query "truncate table watchdog;"
+      #      - appserver: echo "Sanitizing database..."
+      #      - appserver: drush sql-query "drop temporary table if exists to_update; create temporary table to_update select distinct uid, name from users_field_data U left outer join user__roles R on U.uid = R.entity_id where R.roles_target_id is null or 'administrator' not in (select roles_target_id from users_field_data U2 left outer join user__roles R2 on U2.uid = R2.entity_id where U2.name = U.name); update users_field_data U inner join to_update UP on U.uid = UP.uid set U.pass = '', U.mail = concat('user+', UP.uid, '@localhost.localdomain'), U.init = concat('user+', UP.uid, '@localhost.localdomain') where UP.name <> 'Oliver Outsider' and UP.name <> 'Marty Member' and UP.name <> 'Ally Admin'; drop temporary table to_update;"
+      #      - appserver: echo "Truncating webforms and logs..."
+      #      - appserver: drush sql-query "truncate table webform_submission; truncate table webform_submission_data; truncate table webform_submission_log;"
+      #      - appserver: drush sql-query "truncate table watchdog;"
       - appserver: echo "Clearing cache..."
       - appserver: drush cr -y
   refresh:
@@ -157,9 +158,9 @@ tooling:
   reindex:
     description: CUSTOM Reindex the Solr searcher
     service: appserver
-    cmd: 
+    cmd:
       - echo "Reindexing the Solr server... (this might take several minutes; use 'lando reindex &' to run the command in the background)"
-      - drush --root=/app/web search-api:reset-tracker 
+      - drush --root=/app/web search-api:reset-tracker
       - drush --root=/app/web search-api:index > /dev/null 2>&1
       - echo "Done reindexing the Solr server."
   update-core:
