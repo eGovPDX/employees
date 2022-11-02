@@ -1,38 +1,39 @@
 {# Set Alert Type #}
 {% if node.field_severity.value == 20 %}
-	{% set alertType = 'warning' %}
-	{% set TypeName = 'warning' %}
+    {% set alertType = 'warning' %}
+    {% set TypeName = 'warning' %}
 {% else %}
-	{% set alertType = 'info' %}
-	{% set TypeName = 'information' %}
+    {% set alertType = 'info' %}
+    {% set TypeName = 'information' %}
 {% endif %}
 
 {% set alertIcon %}
 {% include "@westy/icon/icon.twig" with {
     name: TypeName,
     size: 'lg',
-  } only %}
+    } only %}
 {% endset %}
 
 {# CLASSES #}
 {% set classes= [
-	  'bg-' ~ alertType,
-     'text-light',
+    'bg-' ~ alertType,
+    'text-light',
 ]%}
 
 {# TWIG #}
 <div class="{{ classes|join(' ')|trim }}" data-nid="{{ node.id }}" {% if node.changed %} data-changed="{{ node.changed.value }}" {% endif %}>
-	<div class="container">
-		<div class="d-flex flex-row p-3">
-			{{ alertIcon }}
-			<div>
-				<div class="fw-bold">{{ label }}</div>
-				<div class="global-alert-content">{{ content }}</div>
-				<span class="small">
-					Last updated:
-					{{ node.changed.value|date('g:i a F j, Y') }}
-				</span>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="d-flex flex-row p-3">
+            {{ alertIcon }}
+            <div>
+                <div class="fw-bold">{{ label }}</div>
+                <div class="global-alert-content">{{ content }}</div>
+                <span class="small">
+                    Last updated:
+                    {{ node.changed.value|date('g:i a F j, Y') }}
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
+
