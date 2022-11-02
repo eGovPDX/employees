@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.news.field_published_on
     - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
+    - field.field.node.news.field_search_keywords
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
@@ -115,6 +116,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_search_keywords:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 5
