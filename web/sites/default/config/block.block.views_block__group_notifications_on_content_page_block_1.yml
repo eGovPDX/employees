@@ -1,22 +1,22 @@
-uuid: d801e91b-b94f-4af2-8575-6184d4003e43
+uuid: bbbbbbd1-93ff-4315-8d16-91a031aa2446
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.notifications
+    - views.view.group_notifications_on_content_page
   module:
     - system
     - views
   theme:
     - westy
-id: views_block__notifications_block_group_notifications
+id: views_block__group_notifications_on_content_page_block_1
 theme: westy
 region: header
-weight: -38
+weight: -37
 provider: null
-plugin: 'views_block:notifications-block_group_notifications'
+plugin: 'views_block:group_notifications_on_content_page-block_1'
 settings:
-  id: 'views_block:notifications-block_group_notifications'
+  id: 'views_block:group_notifications_on_content_page-block_1'
   label: ''
   label_display: '0'
   provider: views
@@ -27,4 +27,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/group/*\r\n/group/*/*"
+    pages: '/node/*'
