@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_popularity
     - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
+    - field.field.node.page.field_search_keywords
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
@@ -182,6 +183,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_search_keywords:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_show_in_menu:
     type: boolean_checkbox
     weight: 5

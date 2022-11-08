@@ -67,7 +67,7 @@ display:
             'entity:user':
               user: contact_details
       cache:
-        type: search_api_tag
+        type: none
         options: {  }
       filters:
         search_api_fulltext:
@@ -98,6 +98,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -119,16 +120,18 @@ display:
           min_length: null
           fields:
             - content_body
+            - content_search_keywords
             - content_title
             - field_first_name
-            - field_first_name_1
             - field_last_name
-            - field_last_name_1
+            - group_search_keywords
             - group_summary
             - group_title
             - media_field_description
             - media_name
+            - media_search_keywords
             - rendered_item
+            - user_search_keywords
         search_api_datasource:
           id: search_api_datasource
           table: search_api_index_full_index
@@ -602,8 +605,6 @@ display:
         - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.contacts_filter_by_ad_group'
-        - 'config:facets.facet.contacts_filter_by_group_member'
         - 'config:search_api.index.full_index'
   page_contracts:
     id: page_contracts
@@ -1604,15 +1605,12 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.contract_category'
-        - 'config:facets.facet.contract_type'
         - 'config:field.storage.node.field_category'
         - 'config:field.storage.node.field_contract_number'
         - 'config:field.storage.node.field_mandated_purchases'
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
-        - taxonomy_term_list
   page_events:
     id: page_events
     display_title: 'Page: Events'
@@ -2121,7 +2119,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2129,15 +2127,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.events_filter_by_month'
-        - 'config:facets.facet.events_filter_by_year'
-        - 'config:facets.facet.events_group'
-        - 'config:facets.facet.events_group_type'
-        - 'config:facets.facet.events_topic'
-        - 'config:facets.facet.events_type'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_news:
     id: page_news
     display_title: 'Page: News'
@@ -2543,7 +2533,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2551,15 +2541,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.news_filter_by_group'
-        - 'config:facets.facet.news_filter_by_group_type'
-        - 'config:facets.facet.news_filter_by_month'
-        - 'config:facets.facet.news_filter_by_topic'
-        - 'config:facets.facet.news_filter_by_type'
-        - 'config:facets.facet.news_filter_by_year'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_past_events:
     id: page_past_events
     display_title: 'Page: Past Events'
@@ -3068,7 +3050,7 @@ display:
         parent: ''
         context: '0'
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -3076,15 +3058,7 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.past_events_filter_by_month'
-        - 'config:facets.facet.past_events_filter_by_year'
-        - 'config:facets.facet.past_events_group'
-        - 'config:facets.facet.past_events_group_type'
-        - 'config:facets.facet.past_events_topics'
-        - 'config:facets.facet.past_events_type'
         - 'config:search_api.index.full_index'
-        - 'config:views.view.search_index'
-        - 'search_api_list:full_index'
   page_search:
     id: page_search
     display_title: 'Page: Search'
@@ -3092,9 +3066,24 @@ display:
     position: 1
     display_options:
       title: Search
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       defaults:
         cache: true
         title: false
+        sorts: false
       display_description: ''
       exposed_block: false
       display_extenders: {  }
@@ -3107,6 +3096,4 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
-        - 'config:facets.facet.content_displayed_in'
-        - 'config:facets.facet.type'
         - 'config:search_api.index.full_index'

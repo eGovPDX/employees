@@ -8,11 +8,13 @@ dependencies:
     - field.field.media.document.field_file_size
     - field.field.media.document.field_media_document
     - field.field.media.document.field_mime_type
+    - field.field.media.document.field_search_keywords
     - field.field.media.document.field_tags
     - media.type.document
   module:
     - file
     - path
+    - scheduler
 _core:
   default_config_hash: gtZlAQdQqZgVWvvZ6v-hfmACkfEimqn_GPDbQZqNAbw
 id: media.document.default
@@ -51,6 +53,14 @@ content:
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
+  field_search_keywords:
+    type: string_textfield
+    weight: 31
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 6
@@ -82,6 +92,17 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 10
@@ -98,6 +119,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_file_size: true

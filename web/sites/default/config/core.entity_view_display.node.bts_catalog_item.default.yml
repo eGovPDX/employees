@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_public
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
+    - field.field.node.bts_catalog_item.field_search_keywords
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
@@ -605,6 +606,14 @@ content:
     third_party_settings: {  }
     weight: 12
     region: content
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 24
+    region: main
   field_service:
     type: entity_reference_label
     label: inline

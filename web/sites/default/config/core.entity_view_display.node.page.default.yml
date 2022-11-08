@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.page.field_popularity
     - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
+    - field.field.node.page.field_search_keywords
     - field.field.node.page.field_show_in_menu
     - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
@@ -374,6 +375,14 @@ content:
     third_party_settings: {  }
     weight: 5
     region: first
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: main
   field_show_in_menu:
     type: boolean
     label: above

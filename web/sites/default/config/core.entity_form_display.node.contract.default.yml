@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.contract.field_efiles_link
     - field.field.node.contract.field_mandated_purchases
     - field.field.node.contract.field_p_card_allowed
+    - field.field.node.contract.field_search_keywords
     - field.field.node.contract.field_type
     - field.field.node.contract.field_vendor_contact_info
     - node.type.contract
@@ -110,6 +111,14 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_search_keywords:
+    type: string_textfield
+    weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_type:
     type: options_select

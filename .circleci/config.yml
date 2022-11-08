@@ -37,16 +37,16 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore theme dependencies cache
         keys:
-          - cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+          - westy_-{{ checksum "web/themes/custom/westy/package.json" }}
     - run:
         name: Install theme dependencies
         command: |
-          cd web/themes/custom/cloudy2 && npm install
+          cd web/themes/custom/westy && npm install
     - save_cache:
         name: Save theme dependencies cache
-        key: cloudy2_-{{ checksum "web/themes/custom/cloudy2/package.json" }}
+        key: westy_-{{ checksum "web/themes/custom/westy/package.json" }}
         paths:
-          - "web/themes/custom/cloudy2/node_modules"
+          - "web/themes/custom/westy/node_modules"
     - restore_cache:
         name: Restore Composer Cache
         keys:
@@ -75,6 +75,10 @@ build_and_deploy: &build_and_deploy
           - ./web/themes/contrib
           - ./web/libraries
     - run:
+        name: Build theme
+        command: |
+          cd web/themes/custom/westy && npm run production
+    - run:
         name: Deploy to Pantheon
         when: on_success
         no_output_timeout: 15m # allow 15 minutes instead of 10 minute default for script to complete
@@ -84,7 +88,7 @@ build_and_deploy: &build_and_deploy
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           # Add terminus into path
           export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
 
@@ -108,9 +112,9 @@ build_and_deploy: &build_and_deploy
           cd /var/www/html
           find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
           find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
-          rm -r ./web/themes/custom/cloudy2/node_modules/
+          rm -r ./web/themes/custom/westy/node_modules/
           git add -f /var/www/html
-          
+
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
@@ -144,7 +148,6 @@ build_and_deploy: &build_and_deploy
               echo "Creating new multidev site cloned from $BASE. Please wait."
               terminus multidev:create $CIRCLE_PROJECT_REPONAME.$BASE $PANTHEON_ENV >/dev/null
             fi
-            rm -rf ./env_list.txt
           fi
 
           # Set the connection type to GIT
@@ -166,6 +169,21 @@ build_and_deploy: &build_and_deploy
           terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cim -y -vvv
           echo "Rebuilding cache..."
           terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- cr
+
+          if [[ $CIRCLE_BRANCH != "master" ]]; then
+            # Begin indexing the Solr server. For new multidevs, indexing will take some time
+            # and will continue running after the CircleCI build finishes.
+            if grep -Fxq "$PANTHEON_ENV" ./env_list.txt; then
+              echo "Multidev already exists, no need to reset index tracker"
+            else
+              echo "Reseting index tracker because index is empty on new multidev"
+              terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- search-api:reset-tracker
+            fi
+            echo "Begin indexing the Solr server"
+            terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- search-api:index full_index &
+            sleep 20
+            rm -rf ./env_list.txt
+          fi
 
           # When commit on a permanent branch or master, delete the multi-dev site with name like "powr-1234a"
           if [[ $PANTHEON_ENV = "dev" ]]; then
@@ -275,7 +293,7 @@ visual_regression: &visual_regression
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
 
           # Log in via terminus first. Required for tests that require user login.
@@ -298,12 +316,11 @@ visual_regression: &visual_regression
         path: /home/circleci/artifacts
         destination: /
 
-
 # Declare all of the jobs we should run.
 version: 2.1
 jobs:
   deploy:
-     <<: *build_and_deploy
+    <<: *build_and_deploy
   visual_regression:
     <<: *visual_regression
 
