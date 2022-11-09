@@ -75,6 +75,10 @@ build_and_deploy: &build_and_deploy
           - ./web/themes/contrib
           - ./web/libraries
     - run:
+        name: Build theme
+        command: |
+          cd web/themes/custom/westy && npm run production
+    - run:
         name: Deploy to Pantheon
         when: on_success
         no_output_timeout: 15m # allow 15 minutes instead of 10 minute default for script to complete
@@ -84,7 +88,7 @@ build_and_deploy: &build_and_deploy
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           # Add terminus into path
           export PATH=/tmp/vendor/bin:/var/www/html/vendor/bin:$PATH && cd /var/www/html
 
@@ -110,7 +114,7 @@ build_and_deploy: &build_and_deploy
           find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
           rm -r ./web/themes/custom/westy/node_modules/
           git add -f /var/www/html
-          
+
           # Pantheon site will use the wrong DB if the local is kept
           git rm --cache  web/sites/default/settings.local.php --ignore-unmatch
           git rm -r --cache web/sites/default/files --ignore-unmatch
@@ -289,7 +293,7 @@ visual_regression: &visual_regression
           echo "Host *.drush.in" > ~/.ssh/config
           echo "    HostkeyAlgorithms +ssh-rsa" >> ~/.ssh/config
           echo "    PubkeyAcceptedAlgorithms +ssh-rsa" >> ~/.ssh/config
-          
+
           export PATH=/var/www/html/tests/vendor/bin:/tmp/vendor/pantheon-systems/terminus/bin:$PATH
 
           # Log in via terminus first. Required for tests that require user login.
@@ -312,12 +316,11 @@ visual_regression: &visual_regression
         path: /home/circleci/artifacts
         destination: /
 
-
 # Declare all of the jobs we should run.
 version: 2.1
 jobs:
   deploy:
-     <<: *build_and_deploy
+    <<: *build_and_deploy
   visual_regression:
     <<: *visual_regression
 
