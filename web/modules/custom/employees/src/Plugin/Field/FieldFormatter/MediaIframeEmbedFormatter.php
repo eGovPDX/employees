@@ -78,8 +78,6 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
           'height' => '100%',
           'frameborder' => '0',
           'allowfullscreen' => 'true',
-          'parent_class' => 'h-100',
-          // 'style' => 'min-height:300px; min-height:200px',
         ],
       ];
     }

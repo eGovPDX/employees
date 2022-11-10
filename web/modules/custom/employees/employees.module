@@ -889,12 +889,12 @@ function employees_form_editor_media_dialog_alter(array &$form, FormStateInterfa
       '#title' => t('Aspect ratio'),
       '#type' => 'radios',
       '#options' => [
-        'ratio ratio-16x9' => t('16x9'),
-        'ratio ratio-4x3' => t('4x3'),
-        'ratio ratio-1x1' => t('1x1'),
+        '16/9' => t('16x9'),
+        '4/3' => t('4x3'),
+        '1/1' => t('1x1'),
       ],
       '#step' => '1',
-      '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? 'ratio ratio-16x9' : $media_embed_element['data-aspect-ratio'],
+      '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? '16/9' : $media_embed_element['data-aspect-ratio'],
       '#parents' => ['attributes', 'data-aspect-ratio'],
       // Make radio buttons inline
       '#attributes' => ['class' => ['container-inline']],
