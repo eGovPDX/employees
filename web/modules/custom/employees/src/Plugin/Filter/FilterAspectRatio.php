@@ -41,12 +41,12 @@ class FilterAspectRatio extends FilterBase {
         $aspect_ratio = $node->getAttribute('data-aspect-ratio');
         $node->removeAttribute('data-aspect-ratio');
 
-        // If one of the allowed aspect ratios, set the attribute.
+        // Default ratio is 16x9
         if( empty($aspect_ratio)) {
           $node->setAttribute('style', 'aspect-ratio: 16/9');
         }
+        // Only allow pre-defined ratios
         else if (in_array($aspect_ratio, ['16/9', '4/3', '1/1', '9/16'])) {
-          // $node->setAttribute('class', $node->getAttribute('class') . $aspect_ratio);
           $node->setAttribute('style', "aspect-ratio: $aspect_ratio");
         }
       }
