@@ -892,6 +892,7 @@ function employees_form_editor_media_dialog_alter(array &$form, FormStateInterfa
         '16/9' => t('16x9'),
         '4/3' => t('4x3'),
         '1/1' => t('1x1'),
+        '9/16' => t('9x16'),
       ],
       '#step' => '1',
       '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? '16/9' : $media_embed_element['data-aspect-ratio'],

@@ -45,7 +45,7 @@ class FilterAspectRatio extends FilterBase {
         if( empty($aspect_ratio)) {
           $node->setAttribute('style', 'aspect-ratio: 16/9');
         }
-        else if (in_array($aspect_ratio, ['16/9', '4/3', '1/1'])) {
+        else if (in_array($aspect_ratio, ['16/9', '4/3', '1/1', '9/16'])) {
           // $node->setAttribute('class', $node->getAttribute('class') . $aspect_ratio);
           $node->setAttribute('style', "aspect-ratio: $aspect_ratio");
         }
