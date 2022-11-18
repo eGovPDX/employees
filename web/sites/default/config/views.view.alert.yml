@@ -165,3 +165,19 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  page_alerts:
+    id: page_alerts
+    display_title: Page
+    display_plugin: page
+    position: 2
+    display_options:
+      display_extenders: {  }
+      path: alerts
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }

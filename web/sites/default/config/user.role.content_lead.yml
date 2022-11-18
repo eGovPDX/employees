@@ -8,6 +8,7 @@ dependencies:
     - media.type.image
     - media.type.remote_document
     - media.type.remote_video
+    - node.type.alert
     - node.type.contract
     - node.type.event
     - node.type.news
@@ -41,11 +42,13 @@ permissions:
   - 'access media overview'
   - 'administer menu'
   - 'administer redirects'
+  - 'clone alert content'
   - 'clone contract content'
   - 'clone event content'
   - 'clone news content'
   - 'clone page content'
   - 'clone resource content'
+  - 'create alert content'
   - 'create contract content'
   - 'create document media'
   - 'create event content'
@@ -63,12 +66,14 @@ permissions:
   - 'create resource content'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete any alert content'
   - 'delete any contract content'
   - 'delete any event content'
   - 'delete any news content'
   - 'delete any page content'
   - 'delete any resource content'
   - 'delete media'
+  - 'delete own alert content'
   - 'delete own contract content'
   - 'delete own document media'
   - 'delete own event content'
@@ -77,6 +82,7 @@ permissions:
   - 'delete own page content'
   - 'delete own remote_document media'
   - 'delete own remote_video media'
+  - 'edit any alert content'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
@@ -89,6 +95,7 @@ permissions:
   - 'edit field_feature_until'
   - 'edit field_homepage'
   - 'edit field_popularity'
+  - 'edit own alert content'
   - 'edit own contract content'
   - 'edit own document media'
   - 'edit own event content'
@@ -103,6 +110,7 @@ permissions:
   - 'edit own remote_video media'
   - 'edit own resource content'
   - 'notify of path changes'
+  - 'revert alert revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
@@ -118,6 +126,7 @@ permissions:
   - 'use editorial transition unpublish'
   - 'use moderation sidebar'
   - 'use text format basic_html'
+  - 'view alert revisions'
   - 'view all media revisions'
   - 'view any unpublished content'
   - 'view editor in toolbar'
