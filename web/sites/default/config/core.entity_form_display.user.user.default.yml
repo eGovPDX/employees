@@ -22,6 +22,7 @@ dependencies:
     - field.field.user.user.field_search_keywords
     - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_type
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - image.style.thumbnail
@@ -224,6 +225,16 @@ content:
     weight: 4
     region: content
     settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_type:
+    type: entity_reference_autocomplete
+    weight: 20
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }

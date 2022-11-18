@@ -229,6 +229,7 @@ display:
               document: search_result
             'entity:node':
               bts_catalog_item: search_result
+              contact: search_result
               contract: search_result
               event: search_result
               news: search_result
@@ -414,7 +415,7 @@ display:
           operator: or
           value:
             'entity:user': 'entity:user'
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -454,7 +455,7 @@ display:
           plugin_id: search_api_boolean
           operator: '='
           value: '1'
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -495,7 +496,7 @@ display:
             min: ''
             max: ''
             value: ''
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -539,7 +540,7 @@ display:
             min: ''
             max: ''
             value: '0'
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -570,10 +571,94 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        search_api_datasource_1:
+          id: search_api_datasource_1
+          table: search_api_index_full_index
+          field: search_api_datasource
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_datasource
+          operator: or
+          value:
+            'entity:node': 'entity:node'
+          group: 3
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        content_type:
+          id: content_type
+          table: search_api_index_full_index
+          field: content_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            contact: contact
+          group: 3
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       filter_groups:
-        operator: AND
+        operator: OR
         groups:
           1: AND
+          2: AND
+          3: AND
       defaults:
         empty: false
         access: true
