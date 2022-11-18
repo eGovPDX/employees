@@ -25,3 +25,101 @@ index e633fda..97e4d5f 100644
 --
 2.34.1
 
+
+From 04cb553971747eb91dcdbf313c78fb4da1f57f31 Mon Sep 17 00:00:00 2001
+From: Oden <hello@odensc.com>
+Date: Fri, 18 Nov 2022 14:39:55 -0800
+Subject: [PATCH] Add entity field update script for 2.x
+
+---
+ ...ler_content_moderation_integration.install | 55 +++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+ create mode 100644 scheduler_content_moderation_integration.install
+
+diff --git a/scheduler_content_moderation_integration.install b/scheduler_content_moderation_integration.install
+new file mode 100644
+index 0000000..4e10085
+--- /dev/null
++++ b/scheduler_content_moderation_integration.install
+@@ -0,0 +1,55 @@
++<?php
++
++/**
++ * @file
++ * Module install file.
++ */
++
++use Drupal\Core\Field\BaseFieldDefinition;
++
++
++function scheduler_content_moderation_integration_update_9201() {
++  $entity_types = Drupal::service('scheduler.manager')->getPluginEntityTypes();
++  foreach ($entity_types as $entity_type) {
++    $publish_state_definition = BaseFieldDefinition::create('list_string')
++      ->setSetting('allowed_values_function', '_scheduler_content_moderation_integration_states_values')
++      ->setLabel(t('Publish state'))
++      ->setDisplayOptions('view', [
++        'label' => 'hidden',
++        'region' => 'hidden',
++        'weight' => -5,
++      ])
++      ->setDisplayOptions('form', [
++        'type' => 'scheduler_moderation',
++        'weight' => 30,
++      ])
++      ->setDisplayConfigurable('form', TRUE)
++      ->setDisplayConfigurable('view', FALSE)
++      ->setTranslatable(TRUE)
++      ->setRevisionable(TRUE)
++      ->addConstraint('SchedulerPublishState')
++      ->addConstraint('SchedulerModerationTransitionAccess');
++
++    $unpublish_state_definition = BaseFieldDefinition::create('list_string')
++      ->setSetting('allowed_values_function', '_scheduler_content_moderation_integration_states_values')
++      ->setLabel(t('Unpublish state'))
++      ->setDisplayOptions('view', [
++        'label' => 'hidden',
++        'region' => 'hidden',
++        'weight' => -5,
++      ])
++      ->setDisplayOptions('form', [
++        'type' => 'scheduler_moderation',
++        'weight' => 30,
++      ])
++      ->setDisplayConfigurable('form', TRUE)
++      ->setDisplayConfigurable('view', FALSE)
++      ->setTranslatable(TRUE)
++      ->setRevisionable(TRUE)
++      ->addConstraint('SchedulerUnPublishState')
++      ->addConstraint('SchedulerModerationTransitionAccess');
++
++    Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('publish_state', $entity_type, 'scheduler_content_moderation_integration', $publish_state_definition);
++    Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('unpublish_state', $entity_type, 'scheduler_content_moderation_integration', $unpublish_state_definition);
++  }
++}
+--
+2.34.1
+
+
+From f7c6c67463a7a0151b4006387f989a4881f2f158 Mon Sep 17 00:00:00 2001
+From: Oden <hello@odensc.com>
+Date: Fri, 18 Nov 2022 14:42:19 -0800
+Subject: [PATCH] Fix version requirement
+
+---
+ scheduler_content_moderation_integration.info.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scheduler_content_moderation_integration.info.yml b/scheduler_content_moderation_integration.info.yml
+index a8b9468..7100734 100644
+--- a/scheduler_content_moderation_integration.info.yml
++++ b/scheduler_content_moderation_integration.info.yml
+@@ -5,4 +5,4 @@ core_version_requirement: ^8.7.7 || ^9 || ^10
+ dependencies:
+   - drupal:options
+   - drupal:content_moderation
+-  - scheduler:scheduler (>= 2.0)
++  - scheduler:scheduler
+--
+2.34.1
+
