@@ -4,14 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.featured
-    - field.storage.node.field_severity
     - node.type.alert
   module:
-    - content_moderation
     - node
-    - options
     - user
-    - views_bulk_operations
 id: alert
 label: Alert
 module: views
@@ -26,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Alert
+      title: Alerts
       fields:
         title:
           id: title
