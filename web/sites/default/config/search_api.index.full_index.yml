@@ -9,20 +9,24 @@ dependencies:
     - field.storage.media.field_description
     - field.storage.media.field_search_keywords
     - field.storage.media.field_tags
+    - field.storage.node.field_311_notes
     - field.storage.node.field_bts_application_exception
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
+    - field.storage.node.field_title
     - field.storage.node.body
     - field.storage.node.field_display_in_group
     - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
     - field.storage.node.field_description
     - field.storage.group.field_org_type
+    - field.storage.node.field_email
     - field.storage.node.field_hosting_environment
     - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_organization
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_published_on
     - field.storage.node.field_search_keywords
@@ -164,12 +168,28 @@ field_settings:
     dependencies:
       module:
         - node
-  content_title:
-    label: 'Content Title'
+  content_title_edge:
+    label: 'Content Title Edgestring'
     datasource_id: 'entity:node'
     property_path: title
     type: 'solr_text_custom_omit_norms:edgestring'
     boost: !!float 5
+    dependencies:
+      module:
+        - node
+  content_title_fulltext:
+    label: 'Content Title Fulltext'
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    dependencies:
+      module:
+        - node
+  content_title_string:
+    label: 'Content title string'
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
     dependencies:
       module:
         - node
@@ -185,6 +205,14 @@ field_settings:
     label: 'Entity type'
     property_path: search_api_entity_type
     type: string
+  field_311_notes:
+    label: 'Contact 311 Notes'
+    datasource_id: 'entity:node'
+    property_path: field_311_notes
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_311_notes
   field_address:
     label: 'Office location'
     datasource_id: 'entity:user'
@@ -251,6 +279,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_cloud_service_type
+  field_contact_title:
+    label: 'Contact Title'
+    datasource_id: 'entity:node'
+    property_path: field_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_title
   field_contract_number:
     label: 'Contract Number'
     datasource_id: 'entity:node'
@@ -291,6 +327,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_division_name
+  field_email:
+    label: Email
+    datasource_id: 'entity:node'
+    property_path: field_email
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_email
   field_first_name:
     label: 'First name'
     datasource_id: 'entity:user'
@@ -357,6 +401,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_mandated_purchases
+  field_organization:
+    label: Organization
+    datasource_id: 'entity:node'
+    property_path: field_organization
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_organization
   field_p_card_allowed:
     label: 'P-Card Allowed'
     datasource_id: 'entity:node'
@@ -705,7 +757,7 @@ processor_settings:
     all_fields: false
     fields:
       - content_body
-      - content_title
+      - content_title_edge
       - content_type
       - group_summary
       - group_title
@@ -726,7 +778,7 @@ processor_settings:
     all_fields: false
     fields:
       - content_body
-      - content_title
+      - content_title_edge
       - content_type
       - group_summary
       - group_title

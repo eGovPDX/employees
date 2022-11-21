@@ -14,15 +14,16 @@ index_id: full_index
 suggester_settings:
   live_results:
     fields:
+      - content_title
       - field_first_name
       - field_last_name
       - field_phone
-      - field_search_keywords
       - mail_fulltext_edge
       - mail_fulltext_unstemmed
     highlight:
       enabled: false
       field: ''
+    suggest_keys: false
     view_modes:
       'entity:group':
         employee: ''
@@ -31,6 +32,7 @@ suggester_settings:
         document: ''
       'entity:node':
         bts_catalog_item: ''
+        contact: ''
         contract: ''
         event: ''
         news: ''

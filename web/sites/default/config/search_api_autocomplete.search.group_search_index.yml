@@ -13,16 +13,45 @@ label: 'Group: Search index'
 index_id: full_index
 suggester_settings:
   live_results:
-    fields: {  }
+    fields:
+      - content_title
+      - field_first_name
+      - field_last_name
     highlight:
       enabled: false
       field: ''
-    view_modes: {  }
-suggester_weights: {  }
+    suggest_keys: false
+    view_modes:
+      'entity:group':
+        employee: ''
+        private: ''
+      'entity:media':
+        document: ''
+      'entity:node':
+        bts_catalog_item: ''
+        contact: ''
+        contract: ''
+        event: ''
+        news: ''
+        page: ''
+        resource: ''
+      'entity:user':
+        user: ''
+  server:
+    fields: {  }
+suggester_weights:
+  live_results: 0
+  server: 0
 suggester_limits: {  }
 search_settings:
   'views:group_search_index':
     displays:
       default: true
       selected: {  }
-options: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

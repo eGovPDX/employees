@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.contact.field_311_notes
+    - field.field.node.contact.field_display_in_group
     - field.field.node.contact.field_email
     - field.field.node.contact.field_fax
     - field.field.node.contact.field_mail_stop
@@ -16,6 +17,7 @@ dependencies:
     - field.field.node.contact.field_type
     - node.type.contact
   module:
+    - telephone
     - user
 id: node.contact.teaser
 targetEntityType: node
@@ -23,7 +25,7 @@ bundle: contact
 mode: teaser
 content:
   field_email:
-    type: basic_string
+    type: email_mailto
     label: inline
     settings: {  }
     third_party_settings: {  }
@@ -36,6 +38,22 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_phone:
+    type: telephone_link
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_phone_extension:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_title:
     type: string
@@ -55,11 +73,10 @@ content:
     region: content
 hidden:
   field_311_notes: true
+  field_display_in_group: true
   field_fax: true
   field_mail_stop: true
   field_multco_id: true
-  field_phone: true
-  field_phone_extension: true
   langcode: true
   links: true
   search_api_excerpt: true

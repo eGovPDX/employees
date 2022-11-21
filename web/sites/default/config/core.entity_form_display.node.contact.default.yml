@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.contact.field_311_notes
+    - field.field.node.contact.field_display_in_group
     - field.field.node.contact.field_email
     - field.field.node.contact.field_fax
     - field.field.node.contact.field_mail_stop
@@ -38,6 +39,16 @@ content:
     region: content
     settings:
       rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_display_in_group:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_email:

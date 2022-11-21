@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.contact.field_311_notes
+    - field.field.node.contact.field_display_in_group
     - field.field.node.contact.field_email
     - field.field.node.contact.field_fax
     - field.field.node.contact.field_mail_stop
@@ -30,8 +31,16 @@ content:
     third_party_settings: {  }
     weight: 8
     region: content
+  field_display_in_group:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
   field_email:
-    type: basic_string
+    type: email_mailto
     label: inline
     settings: {  }
     third_party_settings: {  }
