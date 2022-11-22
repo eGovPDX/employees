@@ -1,5 +1,5 @@
 id: multco_contact_import
-label: 'Import Contacts from Multnomah County'
+label: 'Contacts from Multnomah County'
 migration_group: multco_contact_import
 source:
   plugin: csv
@@ -31,13 +31,14 @@ process:
   field_type:
     -
       plugin: default_value
-      default_value: 'Multnomah County Employee'
+      default_value: 'Multnomah County'
     -
       plugin: text_to_taxonomy
       vocabulary: contact_type
   field_display_in_group:
     plugin: default_value
     default_value: 87
+  field_migration_date: migration_date
 
 destination:
   plugin: 'entity:node'

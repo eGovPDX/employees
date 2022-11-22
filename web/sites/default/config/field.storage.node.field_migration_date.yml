@@ -1,4 +1,4 @@
-uuid: 06f18d90-00f8-46a9-86d5-72e38f14f0f2
+uuid: 6e4a472b-c24d-407d-87b6-aa8cc89b2c06
 langcode: en
 status: true
 dependencies:
@@ -8,13 +8,14 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: custom
-id: node.field_multco_id
-field_name: field_multco_id
+id: node.field_migration_date
+field_name: field_migration_date
 entity_type: node
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

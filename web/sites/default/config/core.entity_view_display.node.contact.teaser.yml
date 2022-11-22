@@ -5,10 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.contact.field_311_notes
+    - field.field.node.contact.field_311_referral_contact
     - field.field.node.contact.field_display_in_group
     - field.field.node.contact.field_email
     - field.field.node.contact.field_fax
     - field.field.node.contact.field_mail_stop
+    - field.field.node.contact.field_migration_date
     - field.field.node.contact.field_multco_id
     - field.field.node.contact.field_organization
     - field.field.node.contact.field_phone
@@ -73,9 +75,11 @@ content:
     region: content
 hidden:
   field_311_notes: true
+  field_311_referral_contact: true
   field_display_in_group: true
   field_fax: true
   field_mail_stop: true
+  field_migration_date: true
   field_multco_id: true
   langcode: true
   links: true

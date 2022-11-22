@@ -1,0 +1,32 @@
+uuid: 1e327bb0-bf25-4c65-9100-6b6bb99d9879
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.contact
+  module:
+    - field_permissions
+    - migrate_source_ui
+    - node
+id: 311_support_agent
+label: '311 Support Agent'
+weight: -6
+is_admin: null
+permissions:
+  - 'access migrate source ui'
+  - 'create field_311_notes'
+  - 'create field_311_referral_contact'
+  - 'edit any contact content'
+  - 'edit field_311_notes'
+  - 'edit field_311_referral_contact'
+  - 'edit own contact content'
+  - 'edit own field_311_notes'
+  - 'edit own field_311_referral_contact'
+  - 'view field_311_notes'
+  - 'view field_311_referral_contact'
+  - 'view field_migration_date'
+  - 'view field_multco_id'
+  - 'view own field_311_notes'
+  - 'view own field_311_referral_contact'
+  - 'view own field_migration_date'
+  - 'view own field_multco_id'

@@ -596,6 +596,11 @@ display:
         menu_name: main
         parent: ''
         context: '0'
+      tab_options:
+        type: normal
+        title: Directory
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -3129,19 +3134,19 @@ display:
             label: Relevance
             field_identifier: search_api_relevance
           exposed: true
-        content_title:
-          id: content_title
+        content_title_string:
+          id: content_title_string
           table: search_api_index_full_index
-          field: content_title
+          field: content_title_string
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: search_api
           order: ASC
           expose:
-            label: Name
-            field_identifier: content_title
-          exposed: true
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -3192,8 +3197,9 @@ display:
           parse_mode: terms
           min_length: null
           fields:
-            - content_title
+            - content_title_edge
             - content_title_fulltext
+            - field_311_notes
             - field_contact_title
             - field_email
             - field_organization
@@ -3296,9 +3302,9 @@ display:
       display_description: ''
       exposed_block: false
       display_extenders: {  }
-      path: contacts
+      path: directory/contacts
       menu:
-        type: normal
+        type: 'default tab'
         title: Contacts
         description: ''
         weight: -48
@@ -3306,6 +3312,11 @@ display:
         menu_name: main
         parent: ''
         context: '0'
+      tab_options:
+        type: none
+        title: ''
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
