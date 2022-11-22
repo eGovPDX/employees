@@ -1,10 +1,3 @@
-{# Set Notification Type #}
-{% if node.field_notification_serverity.value == 20 %}
-    {% set Typename = 'warning' %}
-{% else %}
-    {% set Typename = 'information' %}
-{% endif %}
-
 {# Defaults #}
 {% set isDismissible = isDismissible|default(TRUE) %}
 
