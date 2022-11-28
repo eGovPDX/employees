@@ -24,10 +24,11 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
   public static function getUrlRegexPattern() {
     $patterns = [
       // ArcGIS
-      '^https?:\/\/arcg.is\/\w+$',
+      '^https?:\/\/arcg\.is(.*)$',
+      '^https?:\/\/www\.arcgis\.com(.*)$',
       // Google Maps
-      "^https?:\/\/www\.google\.com\/maps\/embed\?pb=(.+)$",
-      "^https?:\/\/www\.google\.com\/maps\/d\/embed\?mid=(\w+)$",
+      "^https?:\/\/www\.google\.com\/maps\/embed(.*)$",
+      "^https?:\/\/www\.google\.com\/maps\/d\/embed(.*)$",
       // PortlandMaps map or chart
       "^https?:\/\/(.*)\.portlandmaps\.com(.*)$",
       "^https?:\/\/pdx\.maps\.arcgis\.com(.*)$",
@@ -36,7 +37,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
       // Smartsheet
       "^https?:\/\/app\.smartsheet\.com(.*)$",
       // Tableau
-      '^https?:\/\/(online|public)\.tableau\.com\/([^"]+\?[^"]*:embed=(true|yes|y|1)[^"]*)$',
+      '^https?:\/\/(online|public)\.tableau\.com(.*)$',
     ];
 
     return "/" . join("|", $patterns) . "/";
@@ -46,7 +47,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['URLs from arcg.is, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
+    return ['Only support links from arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
   }
 
   /**
