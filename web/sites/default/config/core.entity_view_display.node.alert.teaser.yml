@@ -1,0 +1,34 @@
+uuid: 5070b9c5-4d1f-4c55-a9d8-d2c730da3613
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.alert.field_alert_text
+    - field.field.node.alert.field_severity
+    - node.type.alert
+  module:
+    - text
+    - user
+id: node.alert.teaser
+targetEntityType: node
+bundle: alert
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_alert_text:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_severity: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

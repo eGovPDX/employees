@@ -1,0 +1,35 @@
+uuid: 33f6ecbf-3188-4211-adf9-74d6388b8e9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.alert.field_alert_text
+    - field.field.node.alert.field_severity
+    - node.type.alert
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.alert.featured
+targetEntityType: node
+bundle: alert
+mode: featured
+content:
+  field_alert_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_severity: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
