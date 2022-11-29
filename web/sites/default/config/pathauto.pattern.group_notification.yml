@@ -1,0 +1,22 @@
+uuid: e34f2fa5-89b7-40e7-8a7b-266b96a2dcdc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: group_notification
+label: 'Group Notification'
+type: 'canonical_entities:node'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/notifications/[node:changed:html_date]/[node:title]'
+selection_criteria:
+  ab68c16b-aa20-4586-a4d9-92bb68ed1a7b:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: ab68c16b-aa20-4586-a4d9-92bb68ed1a7b
+    context_mapping:
+      node: node
+    bundles:
+      notification: notification
+selection_logic: and
+weight: -5
+relationships: {  }

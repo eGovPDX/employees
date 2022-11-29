@@ -5,10 +5,8 @@ dependencies:
   config:
     - field.field.node.notification.field_display_in_group
     - field.field.node.notification.field_notificaition_text
-    - field.field.node.notification.field_notification_serverity
     - node.type.notification
   module:
-    - options
     - text
     - user
 id: node.notification.default
@@ -35,13 +33,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 103
-    region: content
-  field_notification_serverity:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 104
     region: content
   links:
     settings: {  }

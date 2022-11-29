@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.notification.field_display_in_group
     - field.field.node.notification.field_notificaition_text
-    - field.field.node.notification.field_notification_serverity
     - node.type.notification
   module:
     - text
@@ -30,7 +29,6 @@ content:
     region: content
 hidden:
   field_display_in_group: true
-  field_notification_serverity: true
   langcode: true
   links: true
   search_api_excerpt: true
