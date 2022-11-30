@@ -29,6 +29,8 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
       // Google Maps
       "^https?:\/\/www\.google\.com\/maps\/embed(.*)$",
       "^https?:\/\/www\.google\.com\/maps\/d\/embed(.*)$",
+      // Office forms
+      '^https?:\/\/forms\.office\.com(.*)$',
       // PortlandMaps map or chart
       "^https?:\/\/(.*)\.portlandmaps\.com(.*)$",
       "^https?:\/\/pdx\.maps\.arcgis\.com(.*)$",
@@ -47,7 +49,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['Only support links from arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
+    return ['Only support links from arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, forms.office.com, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
   }
 
   /**
