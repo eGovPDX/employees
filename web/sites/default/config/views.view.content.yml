@@ -8,10 +8,10 @@ dependencies:
     - field.storage.node.field_migration_date
     - field.storage.node.field_type
     - node.type.contact
-    - system.menu.editor-toolbar
     - taxonomy.vocabulary.contact_type
     - taxonomy.vocabulary.tags
     - taxonomy.vocabulary.topics
+    - user.role.311_lead
     - user.role.311_support_agent
     - user.role.administrator
   module:
@@ -2063,7 +2063,7 @@ display:
         type: role
         options:
           role:
-            311_support_agent: 311_support_agent
+            311_lead: 311_lead
             administrator: administrator
       filters:
         field_migration_date_value_1:
@@ -2373,7 +2373,7 @@ display:
       display_extenders: {  }
       path: admin/content/contacts/multnomah
       menu:
-        type: normal
+        type: none
         title: 'Multnomah Contacts'
         description: ''
         weight: 0

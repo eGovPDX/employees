@@ -20,18 +20,36 @@ dependencies:
     - node.type.contact
   module:
     - telephone
+    - text
     - user
 id: node.contact.teaser
 targetEntityType: node
 bundle: contact
 mode: teaser
 content:
+  field_311_notes:
+    type: text_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_311_referral_contact:
+    type: boolean
+    label: hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: '311 referral contact'
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_email:
     type: email_mailto
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_organization:
     type: string
@@ -39,7 +57,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_phone:
     type: telephone_link
@@ -47,7 +65,7 @@ content:
     settings:
       title: ''
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
   field_phone_extension:
     type: string
@@ -55,7 +73,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_title:
     type: string
@@ -63,7 +81,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_type:
     type: entity_reference_label
@@ -71,11 +89,9 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
-  field_311_notes: true
-  field_311_referral_contact: true
   field_display_in_group: true
   field_fax: true
   field_mail_stop: true

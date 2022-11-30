@@ -9,13 +9,13 @@ dependencies:
     - field.storage.media.field_description
     - field.storage.media.field_search_keywords
     - field.storage.media.field_tags
-    - field.storage.node.field_311_notes
     - field.storage.node.field_bts_application_exception
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
     - field.storage.node.field_business_priority
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
+    - field.storage.node.field_311_notes
     - field.storage.node.field_title
     - field.storage.node.body
     - field.storage.node.field_display_in_group
@@ -214,7 +214,7 @@ field_settings:
       config:
         - field.storage.node.field_311_notes
   field_address:
-    label: 'Office location'
+    label: 'User office location'
     datasource_id: 'entity:user'
     property_path: field_address
     type: text
@@ -320,7 +320,7 @@ field_settings:
       config:
         - field.storage.node.field_display_in_group
   field_division_name:
-    label: 'Division name'
+    label: 'User division name'
     datasource_id: 'entity:user'
     property_path: field_division_name
     type: string
@@ -418,7 +418,7 @@ field_settings:
       config:
         - field.storage.node.field_p_card_allowed
   field_phone:
-    label: Phone
+    label: 'User phone'
     datasource_id: 'entity:user'
     property_path: field_phone
     type: text
@@ -442,7 +442,7 @@ field_settings:
       config:
         - field.storage.node.field_published_on
   field_search_boost:
-    label: 'Search boost'
+    label: 'User search boost'
     datasource_id: 'entity:user'
     property_path: field_search_boost
     type: decimal
@@ -450,7 +450,7 @@ field_settings:
       config:
         - field.storage.user.field_search_boost
   field_section:
-    label: Section
+    label: 'User section'
     datasource_id: 'entity:user'
     property_path: field_section
     type: text
@@ -474,7 +474,7 @@ field_settings:
       config:
         - field.storage.media.field_tags
   field_title:
-    label: Title
+    label: 'User title'
     datasource_id: 'entity:user'
     property_path: field_title
     type: text
@@ -498,7 +498,7 @@ field_settings:
       config:
         - field.storage.node.field_type
   field_type_user:
-    label: Type
+    label: 'User type'
     datasource_id: 'entity:user'
     property_path: field_type
     type: integer
@@ -530,7 +530,7 @@ field_settings:
       config:
         - field.storage.node.field_when
   field_workspace:
-    label: Workspace
+    label: 'User workspace'
     datasource_id: 'entity:user'
     property_path: field_workspace
     type: text
@@ -580,7 +580,7 @@ field_settings:
       module:
         - group
   mail_fulltext_edge:
-    label: Email
+    label: 'User Email'
     datasource_id: 'entity:user'
     property_path: mail
     type: 'solr_text_custom_omit_norms:edge'
@@ -688,7 +688,7 @@ field_settings:
       module:
         - node
   user_search_keywords:
-    label: 'Search keywords'
+    label: 'User search keywords'
     datasource_id: 'entity:user'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
