@@ -1,0 +1,16 @@
+id: multco_contact_notes_import
+label: 'Contact Notes from Filemaker'
+migration_group: multco_contact_notes_import
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/multco_contact_notes_import.csv
+  header_row_count: 1
+  ids: 
+    - ID
+process:
+  field_multco_id: ID
+  field_311_notes: Notes
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: contact
