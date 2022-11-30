@@ -1,0 +1,31 @@
+uuid: ac6c0fc7-8ca9-4b43-88e8-98217bc314a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_in_group
+    - group.type.employee
+    - group.type.private
+    - node.type.notification
+id: node.notification.field_display_in_group
+field_name: field_display_in_group
+entity_type: node
+bundle: notification
+label: 'Displayed in'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:group'
+  handler_settings:
+    target_bundles:
+      employee: employee
+      private: private
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: employee
+field_type: entity_reference

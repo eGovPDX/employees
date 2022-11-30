@@ -1,0 +1,35 @@
+uuid: ce05b189-c84a-4e1a-b7c5-bffc651b705b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.notification.field_display_in_group
+    - field.field.node.notification.field_notificaition_text
+    - node.type.notification
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.notification.featured
+targetEntityType: node
+bundle: notification
+mode: featured
+content:
+  field_notificaition_text:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_display_in_group: true
+  langcode: true
+  links: true
+  search_api_excerpt: true
