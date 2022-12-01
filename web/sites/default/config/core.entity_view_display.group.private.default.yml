@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.base_field_override.group.private.label
+    - field.field.group.private.field_featured_media
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
@@ -16,6 +18,7 @@ dependencies:
   module:
     - layout_builder
     - layout_builder_restrictions
+    - layout_discovery
     - layout_library
     - options
     - text
@@ -27,6 +30,32 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components:
+          a1f37174-7a4f-4632-b723-fd7c676d6ae2:
+            uuid: a1f37174-7a4f-4632-b723-fd7c676d6ae2
+            region: content
+            configuration:
+              id: 'field_block:group:private:label'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
       -
         layout_id: westy_three_column
         layout_settings:
@@ -57,7 +86,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 0
+            weight: 1
             additional: {  }
           6066a5fe-57b8-49ec-9275-538b104f1398:
             uuid: 6066a5fe-57b8-49ec-9275-538b104f1398
@@ -75,7 +104,7 @@ third_party_settings:
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           1628ebc1-4f3b-4997-845f-02487f873533:
             uuid: 1628ebc1-4f3b-4997-845f-02487f873533
@@ -88,7 +117,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           9fe4701c-9055-407a-881a-73a93d5875a7:
             uuid: 9fe4701c-9055-407a-881a-73a93d5875a7
@@ -180,6 +209,25 @@ third_party_settings:
               items_per_page: none
             weight: 4
             additional: {  }
+          6a39db33-7570-4ac4-8ca6-b8b7e3741e7f:
+            uuid: 6a39db33-7570-4ac4-8ca6-b8b7e3741e7f
+            region: main
+            configuration:
+              id: 'field_block:group:private:field_featured_media'
+              label: 'Featured media'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: full
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -199,6 +247,14 @@ targetEntityType: group
 bundle: private
 mode: default
 content:
+  field_featured_media:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: main
   field_group_description:
     type: text_default
     label: above

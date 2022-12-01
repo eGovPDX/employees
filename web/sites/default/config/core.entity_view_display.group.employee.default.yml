@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_media
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
@@ -185,6 +186,23 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          a361bcd9-2060-40e8-b917-3dac2ac95972:
+            uuid: a361bcd9-2060-40e8-b917-3dac2ac95972
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_featured_media'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -210,6 +228,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: main
+  field_featured_media:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 5
     region: main
   field_group_description:
     type: text_default
