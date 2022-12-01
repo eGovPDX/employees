@@ -24,22 +24,20 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
   public static function getUrlRegexPattern() {
     $patterns = [
       // ArcGIS
-      '^https?:\/\/arcg\.is(.*)$',
-      '^https?:\/\/www\.arcgis\.com(.*)$',
+      '^https?:\/\/arcg\.is\/(.*)$',
+      '^https?:\/\/www\.arcgis\.com\/(.*)$',
       // Google Maps
       "^https?:\/\/www\.google\.com\/maps\/embed(.*)$",
       "^https?:\/\/www\.google\.com\/maps\/d\/embed(.*)$",
-      // Office forms
-      '^https?:\/\/forms\.office\.com(.*)$',
       // PortlandMaps map or chart
-      "^https?:\/\/(.*)\.portlandmaps\.com(.*)$",
-      "^https?:\/\/pdx\.maps\.arcgis\.com(.*)$",
+      "^https?:\/\/(.*)\.portlandmaps\.com\/(.*)$",
+      "^https?:\/\/pdx\.maps\.arcgis\.com\/(.*)$",
       // POG
       '^https?:\/\/www\.portlandoregon\.gov\/bes\/bigpipe\/\w+\.cfm$',
       // Smartsheet
-      "^https?:\/\/app\.smartsheet\.com(.*)$",
+      "^https?:\/\/app\.smartsheet\.com\/(.*)$",
       // Tableau
-      '^https?:\/\/(online|public)\.tableau\.com(.*)$',
+      '^https?:\/\/(online|public)\.tableau\.com\/(.*)$',
     ];
 
     return "/" . join("|", $patterns) . "/";
@@ -49,7 +47,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['Only support links from arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, forms.office.com, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
+    return ['arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, and Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
   }
 
   /**
