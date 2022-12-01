@@ -35,7 +35,7 @@ class RetrieveUserInfoFromAD extends ActionBase
     // If the user is Contact Only, skip
     // If there is no Azure AD ID, skip
     $azure_ad_id = $user->field_active_directory_id->value;
-    if ( ! $user->status->value || $user->field_is_contact_only->value || empty($azure_ad_id) ) return;
+    if ( $user->field_is_contact_only->value || empty($azure_ad_id) ) return;
 
     // Skip these users
     $skip_emails = [
