@@ -50,9 +50,9 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore Composer Cache
         keys:
-          - v3-dependencies-{{ checksum "composer.lock" }}
+          - v2-dependencies-{{ checksum "composer.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v3-dependencies-
+          - v2-dependencies-
     - run:
         name: Composer install
         command: |
@@ -66,7 +66,7 @@ build_and_deploy: &build_and_deploy
           composer install --no-interaction --no-dev
     - save_cache:
         name: Save Composer Cache
-        key: v3-dependencies-{{ checksum "composer.lock" }}
+        key: v2-dependencies-{{ checksum "composer.lock" }}
         paths:
           - ./vendor
           - ./web/core
@@ -273,7 +273,7 @@ visual_regression: &visual_regression
     - restore_cache:
         name: Restore Jest and Percy dependencies cache
         keys:
-          - jest-{{ checksum "tests/percy/yarn.lock" }}-v3
+          - jest-{{ checksum "tests/percy/yarn.lock" }}-v2
     - run:
         name: Install Jest and Percy dependencies
         command: |
@@ -282,7 +282,7 @@ visual_regression: &visual_regression
           yarn install --frozen-lockfile
     - save_cache:
         name: Save Jest and Percy dependencies cache
-        key: jest-{{ checksum "tests/percy/yarn.lock" }}-v3
+        key: jest-{{ checksum "tests/percy/yarn.lock" }}-v2
         paths:
           - "tests/percy/node_modules"
     - run:
