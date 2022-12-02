@@ -1,0 +1,30 @@
+uuid: b78e1e19-d384-4f1b-8c1c-d86d44c71582
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.group_list_views
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: views_block__group_list_views_block_search_menu
+theme: westy
+region: menu
+weight: -35
+provider: null
+plugin: 'views_block:group_list_views-block_search_menu'
+settings:
+  id: 'views_block:group_list_views-block_search_menu'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/search\r\n/group/*/news\r\n/group/*/events\r\n/group/*/events/past\r\n/group/*/documents\r\n/group/*/member-list"

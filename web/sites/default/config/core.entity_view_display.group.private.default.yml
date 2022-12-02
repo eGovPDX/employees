@@ -18,7 +18,6 @@ dependencies:
   module:
     - layout_builder
     - layout_builder_restrictions
-    - layout_discovery
     - layout_library
     - options
     - text
@@ -31,14 +30,15 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_onecol
+        layout_id: layout_twocol_section
         layout_settings:
           label: ''
           context_mapping: {  }
+          column_widths: 50-50
         components:
-          a1f37174-7a4f-4632-b723-fd7c676d6ae2:
-            uuid: a1f37174-7a4f-4632-b723-fd7c676d6ae2
-            region: content
+          feca3cc2-0cd8-4910-9545-8b2fab04f76e:
+            uuid: feca3cc2-0cd8-4910-9545-8b2fab04f76e
+            region: first
             configuration:
               id: 'field_block:group:private:label'
               label: Title
@@ -52,6 +52,25 @@ third_party_settings:
                 label: hidden
                 settings:
                   link_to_entity: false
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          fa02213d-b489-47d7-bc8b-092065b26c6f:
+            uuid: fa02213d-b489-47d7-bc8b-092065b26c6f
+            region: second
+            configuration:
+              id: 'field_block:group:private:field_featured_media'
+              label: 'Featured media'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: medium
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -73,19 +92,6 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 0
-            additional: {  }
-          9fcdfe53-ec84-4b47-97cc-25e0ea60b961:
-            uuid: 9fcdfe53-ec84-4b47-97cc-25e0ea60b961
-            region: main
-            configuration:
-              id: 'views_block:group_list_views-block_search_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
             weight: 1
             additional: {  }
           6066a5fe-57b8-49ec-9275-538b104f1398:
@@ -101,7 +107,7 @@ third_party_settings:
                 view_mode: view_mode
               formatter:
                 type: text_default
-                label: above
+                label: hidden
                 settings: {  }
                 third_party_settings: {  }
             weight: 2
@@ -168,7 +174,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 1
+            weight: 2
             additional: {  }
           aa0e213f-74f5-4ea6-8c7e-b698c8a232d4:
             uuid: aa0e213f-74f5-4ea6-8c7e-b698c8a232d4
@@ -209,23 +215,17 @@ third_party_settings:
               items_per_page: none
             weight: 4
             additional: {  }
-          6a39db33-7570-4ac4-8ca6-b8b7e3741e7f:
-            uuid: 6a39db33-7570-4ac4-8ca6-b8b7e3741e7f
-            region: main
+          9fcdfe53-ec84-4b47-97cc-25e0ea60b961:
+            uuid: 9fcdfe53-ec84-4b47-97cc-25e0ea60b961
+            region: menu
             configuration:
-              id: 'field_block:group:private:field_featured_media'
-              label: 'Featured media'
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
               label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: hidden
-                settings:
-                  view_mode: full
-                third_party_settings: {  }
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
             weight: 0
             additional: {  }
         third_party_settings: {  }
