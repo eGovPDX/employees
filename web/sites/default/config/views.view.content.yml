@@ -2191,6 +2191,102 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_311_referral_contact_value:
+          id: field_311_referral_contact_value
+          table: node__field_311_referral_contact
+          field: field_311_referral_contact_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: '311 Referral'
+            description: ''
+            use_operator: false
+            operator: field_311_referral_contact_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_311_referral_contact_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
+              content_lead: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_311_notes_value:
+          id: field_311_notes_value
+          table: node__field_311_notes
+          field: field_311_notes_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_311_notes_value_op
+            label: '311 Notes (field_311_notes)'
+            description: null
+            use_operator: false
+            operator: field_311_notes_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_311_notes_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: null
+          is_grouped: true
+          group_info:
+            label: '311 Notes'
+            description: ''
+            identifier: field_311_notes_value
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: 'Has notes'
+                operator: 'not empty'
+                value: ''
+              2:
+                title: 'Does not have notes'
+                operator: empty
+                value: ''
+              3:
+                title: ''
+                operator: '='
+                value: ''
         field_type_target_id:
           id: field_type_target_id
           table: node__field_type
