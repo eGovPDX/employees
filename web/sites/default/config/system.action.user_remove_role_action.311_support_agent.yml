@@ -1,0 +1,14 @@
+uuid: 61b25cd6-4e4d-4961-ac4c-7695d776112a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.311_support_agent
+  module:
+    - user
+id: user_remove_role_action.311_support_agent
+label: 'Remove the 311 Support Agent role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: 311_support_agent

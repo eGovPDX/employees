@@ -229,6 +229,7 @@ display:
               document: search_result
             'entity:node':
               bts_catalog_item: search_result
+              contact: search_result
               contract: search_result
               event: search_result
               news: search_result
@@ -397,7 +398,6 @@ display:
             - field_last_name
             - field_last_name_phonetic
             - field_phone
-            - field_search_keywords
             - field_section
             - field_title
             - field_workspace
@@ -571,7 +571,7 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       filter_groups:
-        operator: AND
+        operator: OR
         groups:
           1: AND
       defaults:
@@ -583,7 +583,24 @@ display:
         sorts: false
         filters: false
         filter_groups: false
+        header: false
       display_description: ''
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<p>Displaying @start - @end of @total people and contacts in the City of Portland directory. </p>'
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
       exposed_block: false
       display_extenders: {  }
       path: directory
@@ -596,6 +613,11 @@ display:
         menu_name: main
         parent: ''
         context: '0'
+      tab_options:
+        type: normal
+        title: Directory
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -3094,6 +3116,231 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:search_api.index.full_index'
+  page_search_contacts:
+    id: page_search_contacts
+    display_title: 'Page: Contacts'
+    display_plugin: page
+    position: 2
+    display_options:
+      title: 'Search Contacts'
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      empty: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_full_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: Relevance
+            field_identifier: search_api_relevance
+          exposed: true
+        content_title_string:
+          id: content_title_string
+          table: search_api_index_full_index
+          field: content_title_string
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+      filters:
+        search_api_fulltext:
+          id: search_api_fulltext
+          table: search_api_index_full_index
+          field: search_api_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_fulltext
+          operator: or
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: search_api_fulltext_op
+            label: 'Enter your keywords'
+            description: ''
+            use_operator: false
+            operator: search_api_fulltext_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: search
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              content_lead: '0'
+              administrator: '0'
+            expose_fields: false
+            placeholder: ''
+            searched_fields_id: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - content_title_edge
+            - content_title_fulltext
+            - field_311_notes
+            - field_contact_title
+            - field_email
+            - field_organization
+            - rendered_item
+        search_api_datasource:
+          id: search_api_datasource
+          table: search_api_index_full_index
+          field: search_api_datasource
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_datasource
+          operator: or
+          value:
+            'entity:node': 'entity:node'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        content_type:
+          id: content_type
+          table: search_api_index_full_index
+          field: content_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_options
+          operator: or
+          value:
+            contact: contact
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: OR
+        groups:
+          1: AND
+      defaults:
+        empty: false
+        access: true
+        cache: true
+        title: false
+        exposed_form: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      exposed_block: false
+      display_extenders: {  }
+      path: directory/contacts
+      menu:
+        type: 'default tab'
+        title: Contacts
+        description: ''
+        weight: -48
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
+      tab_options:
+        type: none
+        title: ''
+        description: ''
+        weight: 0
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'url.query_args:sort_by'
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'

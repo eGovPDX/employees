@@ -1,0 +1,26 @@
+uuid: e932eb2f-933b-44b3-a59e-ba6d6daa7d98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_311_notes
+    - node.type.contact
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats:
+      - basic_html
+id: node.contact.field_311_notes
+field_name: field_311_notes
+entity_type: node
+bundle: contact
+label: '311 Notes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

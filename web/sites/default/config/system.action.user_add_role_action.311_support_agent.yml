@@ -1,0 +1,14 @@
+uuid: 9d088f8d-7297-4bf7-ad34-ae51504d4b27
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.311_support_agent
+  module:
+    - user
+id: user_add_role_action.311_support_agent
+label: 'Add the 311 Support Agent role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: 311_support_agent

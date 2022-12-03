@@ -1,0 +1,29 @@
+uuid: a58572f1-c9fe-4416-9d88-c4597d36a64f
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - migrate_source_ui
+    - toolbar_menu
+id: 311_lead
+label: '311 Lead'
+weight: -5
+is_admin: null
+permissions:
+  - 'access migrate source ui'
+  - 'create field_311_notes'
+  - 'create field_311_referral_contact'
+  - 'edit field_311_notes'
+  - 'edit field_311_referral_contact'
+  - 'edit own field_311_notes'
+  - 'edit own field_311_referral_contact'
+  - 'view editor in toolbar'
+  - 'view field_311_notes'
+  - 'view field_311_referral_contact'
+  - 'view field_migration_date'
+  - 'view field_multco_id'
+  - 'view own field_311_notes'
+  - 'view own field_311_referral_contact'
+  - 'view own field_migration_date'
+  - 'view own field_multco_id'
