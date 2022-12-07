@@ -51,11 +51,10 @@ describe('SuperAdmin user test', () => {
           document.querySelector('iframe.cke_wysiwyg_frame').contentDocument.querySelector('body p').textContent =
           'This site is a Monday morning snapshot copy of employees.portland.gov and provides a safe environment for editor training classes, self learning, or experimentation, etc. Changes made here will not affect the live site and cannot be imported into the live site.';
         });
-        let today = new Date();
-        let datestring = ("0"+(today.getMonth()+1)).slice(-2) + "/" + ("0" + today.getDate()).slice(-2) + "/" + today.getFullYear();
-        await page.type('#edit-publish-on-0-value-date', datestring); 
+        // Default publish date and time to authored on date and time
         await page.evaluate(() => {
-          document.querySelector('#edit-publish-on-0-value-time').value = '00:00:00';
+          document.querySelector('#edit-publish-on-0-value-date').value = document.querySelector('#edit-created-0-value-date').value;
+          document.querySelector('#edit-publish-on-0-value-time').value = document.querySelector('#edit-created-0-value-time').value;
         });
         await page.select("#edit-moderation-state-0-state", "published");
         
