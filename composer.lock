@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0ec391c1919e70388ef2e21267fd9cf",
+    "content-hash": "b6276279824bbf06fc7e56ce7b85006a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7594,7 +7594,7 @@
                 "reference": "117b7ea21de16004befc16575b060c329bc1f621"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9",
+                "drupal/core": "^8.7.7 || ^9 || ^10",
                 "drupal/scheduler": "^2"
             },
             "type": "drupal-module",
@@ -7603,8 +7603,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "2.0.0-alpha1+3-dev",
-                    "datestamp": "1665416812",
+                    "version": "2.0.0-alpha1+8-dev",
+                    "datestamp": "1670257763",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7640,7 +7640,8 @@
             "description": "Scheduler sub-module providing content moderation functionality for publishing/unpublishing",
             "homepage": "https://www.drupal.org/project/scheduler_content_moderation_integration",
             "support": {
-                "source": "https://git.drupalcode.org/project/scheduler_content_moderation_integration"
+                "source": "https://git.drupalcode.org/project/scheduler_content_moderation_integration",
+                "error": "Invalid dependency: \"scheduler\", Could not parse version constraint ~: Invalid version string \"~\""
             }
         },
         {
@@ -17911,7 +17912,7 @@
                 "prestashop/blockwishlist": ">=2,<2.1.1",
                 "prestashop/contactform": ">=1.0.1,<4.3",
                 "prestashop/gamification": "<2.3.2",
-                "prestashop/prestashop": ">=1.6.0.10,<1.7.8.7",
+                "prestashop/prestashop": "<1.7.8.8",
                 "prestashop/productcomments": "<5.0.2",
                 "prestashop/ps_emailsubscription": "<2.6.1",
                 "prestashop/ps_facetedsearch": "<3.4.1",
@@ -18174,5 +18175,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
