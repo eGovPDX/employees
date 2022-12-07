@@ -1,0 +1,14 @@
+uuid: 086fea99-d191-45ef-beb4-18af4acdfd85
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.311_lead
+  module:
+    - user
+id: user_add_role_action.311_lead
+label: 'Add the 311 Lead role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: 311_lead

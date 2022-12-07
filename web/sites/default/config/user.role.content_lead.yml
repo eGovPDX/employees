@@ -8,9 +8,11 @@ dependencies:
     - media.type.image
     - media.type.remote_document
     - media.type.remote_video
+    - node.type.alert
     - node.type.contract
     - node.type.event
     - node.type.news
+    - node.type.notification
     - node.type.page
     - node.type.resource
     - taxonomy.vocabulary.tags
@@ -33,7 +35,7 @@ dependencies:
     - toolbar_menu
 id: content_lead
 label: 'Content Lead'
-weight: -6
+weight: -4
 is_admin: null
 permissions:
   - 'access content overview'
@@ -41,11 +43,14 @@ permissions:
   - 'access media overview'
   - 'administer menu'
   - 'administer redirects'
+  - 'clone alert content'
   - 'clone contract content'
   - 'clone event content'
   - 'clone news content'
+  - 'clone notification content'
   - 'clone page content'
   - 'clone resource content'
+  - 'create alert content'
   - 'create contract content'
   - 'create document media'
   - 'create event content'
@@ -56,6 +61,7 @@ permissions:
   - 'create image media'
   - 'create media'
   - 'create news content'
+  - 'create notification content'
   - 'create page content'
   - 'create private group'
   - 'create remote_document media'
@@ -63,25 +69,31 @@ permissions:
   - 'create resource content'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete any alert content'
   - 'delete any contract content'
   - 'delete any event content'
   - 'delete any news content'
+  - 'delete any notification content'
   - 'delete any page content'
   - 'delete any resource content'
   - 'delete media'
+  - 'delete own alert content'
   - 'delete own contract content'
   - 'delete own document media'
   - 'delete own event content'
   - 'delete own image media'
   - 'delete own news content'
+  - 'delete own notification content'
   - 'delete own page content'
   - 'delete own remote_document media'
   - 'delete own remote_video media'
+  - 'edit any alert content'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
   - 'edit any image media'
   - 'edit any news content'
+  - 'edit any notification content'
   - 'edit any page content'
   - 'edit any remote_document media'
   - 'edit any remote_video media'
@@ -89,6 +101,7 @@ permissions:
   - 'edit field_feature_until'
   - 'edit field_homepage'
   - 'edit field_popularity'
+  - 'edit own alert content'
   - 'edit own contract content'
   - 'edit own document media'
   - 'edit own event content'
@@ -98,14 +111,17 @@ permissions:
   - 'edit own field_popularity'
   - 'edit own image media'
   - 'edit own news content'
+  - 'edit own notification content'
   - 'edit own page content'
   - 'edit own remote_document media'
   - 'edit own remote_video media'
   - 'edit own resource content'
   - 'notify of path changes'
+  - 'revert alert revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
+  - 'revert notification revisions'
   - 'revert page revisions'
   - 'revert resource revisions'
   - 'schedule publishing of media'
@@ -118,6 +134,7 @@ permissions:
   - 'use editorial transition unpublish'
   - 'use moderation sidebar'
   - 'use text format basic_html'
+  - 'view alert revisions'
   - 'view all media revisions'
   - 'view any unpublished content'
   - 'view editor in toolbar'
@@ -126,6 +143,7 @@ permissions:
   - 'view field_homepage'
   - 'view field_popularity'
   - 'view latest version'
+  - 'view notification revisions'
   - 'view own field_feature'
   - 'view own field_feature_until'
   - 'view own field_homepage'

@@ -1,0 +1,14 @@
+uuid: 19f01f29-a88a-4433-bc0a-cb9e0bc3ac09
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.311_lead
+  module:
+    - user
+id: user_remove_role_action.311_lead
+label: 'Remove the 311 Lead role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: 311_lead

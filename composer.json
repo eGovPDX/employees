@@ -61,8 +61,9 @@
         "drupal/media_remote": "^1.2",
         "drupal/menu_breadcrumb": "^1.12",
         "drupal/metatag": "^1.11",
-        "drupal/migrate_plus": "^5.2",
+        "drupal/migrate_plus": "^6.0",
         "drupal/migrate_source_csv": "^3.5",
+        "drupal/migrate_source_ui": "^1.0",
         "drupal/migrate_tools": "^6.0",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/moderation_dashboard": "^1.0@beta",
@@ -138,6 +139,7 @@
     "config": {
         "process-timeout": 0,
         "sort-packages": true,
+        "discard-changes": true,
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,

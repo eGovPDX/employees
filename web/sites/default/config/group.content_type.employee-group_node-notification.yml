@@ -1,0 +1,19 @@
+uuid: 4e5abe63-4ef0-4c56-b4a0-00a02db2c73e
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+    - node.type.notification
+  module:
+    - gnode
+    - node
+id: employee-group_node-notification
+label: 'Open Group: Group node (Notification)'
+description: 'Adds <em class="placeholder">Notification</em> content to groups both publicly and privately.'
+group_type: employee
+content_plugin: 'group_node:notification'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

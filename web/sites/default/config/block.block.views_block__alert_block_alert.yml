@@ -1,0 +1,29 @@
+uuid: 88388b3a-594a-4ada-bd15-e4d97dc0510f
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.alert
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: views_block__alert_block_alert
+theme: westy
+region: alerts
+weight: 0
+provider: null
+plugin: 'views_block:alert-block_alert'
+settings:
+  id: 'views_block:alert-block_alert'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /alerts

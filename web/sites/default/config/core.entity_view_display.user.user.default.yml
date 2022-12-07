@@ -22,6 +22,7 @@ dependencies:
     - field.field.user.user.field_search_keywords
     - field.field.user.user.field_section
     - field.field.user.user.field_title
+    - field.field.user.user.field_type
     - field.field.user.user.field_workspace
     - field.field.user.user.user_picture
     - responsive_image.styles.narrow
@@ -233,6 +234,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 8
+    region: content
+  field_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 26
     region: content
   field_workspace:
     type: simple_gmap

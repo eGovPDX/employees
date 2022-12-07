@@ -1,0 +1,21 @@
+uuid: 1a6b0226-93e8-4679-ba99-bc5e15355b6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_severity
+    - node.type.alert
+  module:
+    - options
+id: node.alert.field_severity
+field_name: field_severity
+entity_type: node
+bundle: alert
+label: Severity
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
