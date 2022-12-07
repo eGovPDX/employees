@@ -542,4 +542,16 @@ class PortlandOpenIdConnectUtil
     $user->save();
     \Drupal::logger('portland OpenID')->notice('User ' . $user->getAccountName() . ' has been disabled.');
   }
+
+  /**
+   * Enable a user
+   */
+  public static function EnableUser($user)
+  {
+    if( !$user ) return;
+
+    $user->status->value = true;
+    $user->save();
+    \Drupal::logger('portland OpenID')->notice('User ' . $user->getAccountName() . ' has been enabled.');
+  }
 }
