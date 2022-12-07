@@ -26,8 +26,12 @@ process:
       plugin: explode
       delimiter: ','
     -
-      plugin: migration_lookup
-      migration: tech_catalog
+      plugin: entity_lookup
+      entity_type: node
+      bundle: bts_catalog_item
+      value_key: title
+      access_check: false
+      ignore_case: true
 
 destination:
   plugin: 'entity:node'

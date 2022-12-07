@@ -13,9 +13,13 @@ process:
     default_value: 1
   title: Title
   field_type:
-    source: Type
-    plugin: text_to_taxonomy
-    vocabulary: bts_catalog_item_type
+    - 
+      source: Type
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: text_to_taxonomy
+      vocabulary: bts_catalog_item_type
   field_bts_application_exception: 
     source: 'Standard Classification'
     plugin: text_to_taxonomy
@@ -127,11 +131,17 @@ process:
       value_key: mail
       ignore_case: true
   field_public: 
-    source: Public
-    plugin: static_map
-    map:
-      'Yes': 1
-      'No': 0
+    -
+      source: Public
+      plugin: str_replace
+      case_insensitive: true
+      search: ['yes', 'no']
+      replace: ['Yes', 'No']
+    -
+      plugin: static_map
+      map:
+        'Yes': 1
+        'No': 0
   field_display_in_group:
     source: 'Displayed In'
     plugin: entity_lookup
