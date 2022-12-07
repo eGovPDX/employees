@@ -544,7 +544,7 @@ class PortlandOpenIdConnectUtil
   }
 
   /**
-   * Disable a user and clear certain fields
+   * Enable a user
    */
   public static function EnableUser($user)
   {
