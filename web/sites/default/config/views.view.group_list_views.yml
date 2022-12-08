@@ -1618,7 +1618,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if field_org_type != \"Citywide Portals\" %} {{ group_join_leave_link }}{% endif %}\r\n\r\n"
+            text: "{% if group_join_leave_link != \"Assigned group\" and field_org_type != \"Citywide Portals\" %}<a class=\"btn btn-primary\" {{ group_join_leave_link }} {% elseif group_join_leave_link|render == \"Assigned group\" %} {{ group_join_leave_link }} {% endif %}\r\n\r\n"
             make_link: false
             path: ''
             absolute: false
@@ -1704,11 +1704,7 @@ display:
       style:
         type: html_list
         options:
-          grouping:
-            -
-              field: nothing
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: mb-4
           default_row_class: false
           type: ul
@@ -1732,6 +1728,7 @@ display:
       header: {  }
       display_extenders: {  }
       block_description: 'Block: Join/Leave Link'
+      block_hide_empty: false
     cache_metadata:
       max-age: -1
       contexts:
