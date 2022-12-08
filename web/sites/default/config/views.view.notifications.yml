@@ -171,7 +171,7 @@ display:
       tags: {  }
   block_group_notifications:
     id: block_group_notifications
-    display_title: 'Block: Notifications'
+    display_title: 'Notifications on groups'
     display_plugin: block
     position: 1
     display_options:
@@ -261,7 +261,8 @@ display:
           required: true
       display_description: ''
       display_extenders: {  }
-      block_description: 'Group: Notificaitions'
+      block_description: 'Notifications on groups'
+      block_hide_empty: true
       allow:
         items_per_page: false
     cache_metadata:
@@ -275,11 +276,10 @@ display:
       tags: {  }
   block_notification_group_content:
     id: block_notification_group_content
-    display_title: 'Group: Notifications on content page'
+    display_title: 'Notifications on content'
     display_plugin: block
     position: 2
     display_options:
-      title: 'Notifications on content'
       arguments:
         nid:
           id: nid
@@ -318,7 +318,7 @@ display:
           break_phrase: false
           not: false
       defaults:
-        title: false
+        title: true
         relationships: false
         arguments: false
       relationships:
@@ -376,6 +376,7 @@ display:
       display_description: ''
       display_extenders: {  }
       block_description: 'Notifications on content'
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:

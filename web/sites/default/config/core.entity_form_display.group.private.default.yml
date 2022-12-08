@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.group.private.field_featured_media
+    - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
@@ -41,7 +41,7 @@ targetEntityType: group
 bundle: private
 mode: default
 content:
-  field_featured_media:
+  field_featured_image:
     type: media_library_widget
     weight: 4
     region: content

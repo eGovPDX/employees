@@ -10,8 +10,8 @@ _core:
   default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
 id: westy_breadcrumbs
 theme: westy
-region: preheader
-weight: -22
+region: header
+weight: -39
 provider: null
 plugin: system_breadcrumb_block
 settings:
@@ -19,4 +19,8 @@ settings:
   label: Breadcrumbs
   label_display: '0'
   provider: system
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/group/*\r\n!/group/*/*"
