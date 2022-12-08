@@ -55,3 +55,17 @@ employees.bts_support_model:
     taxonomy_vocabulary: 'support_model'
   weight: 7
   menu_name: bts-catalog
+# 311 Supervisor menu items
+employees.manage_multnomah_contacts:
+  title: 'Multnomah Contacts'
+  description: 'Review Multnomah Contact Imports'
+  route_name: view.content.page_manage_multco_contacts
+  weight: 1
+  menu_name: editor-toolbar
+employees.migrate_ui:
+  title: 'Migrations'
+  description: 'Import migration CSVs.'
+  route_name: migrate_source_ui.form
+  weight: 2
+  menu_name: editor-toolbar
+  

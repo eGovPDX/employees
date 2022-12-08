@@ -1,0 +1,45 @@
+id: multco_contact_import
+label: 'Contacts from Multnomah County'
+migration_group: multco_contact_import
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/multco_contact_import.csv
+  header_row_count: 1
+  ids: 
+    - ID
+process:
+  title: 
+    plugin: concat
+    source:
+      - Name_first
+      - Name_last
+    delimiter: ' '
+  field_multco_id: ID
+  field_title: Title
+  field_email: Email
+  field_mail_stop: 'Mail Stop'
+  field_organization:
+    plugin: concat
+    source: 
+      - Department
+      - Division
+      - Section
+    delimiter: ' > '
+  field_phone: Telephone
+  field_phone_extension: Extension
+  field_fax: Fax
+  field_type:
+    -
+      plugin: default_value
+      default_value: 'Multnomah County'
+    -
+      plugin: text_to_taxonomy
+      vocabulary: contact_type
+  field_display_in_group:
+    plugin: default_value
+    default_value: 87
+  field_migration_date: migration_date
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: contact

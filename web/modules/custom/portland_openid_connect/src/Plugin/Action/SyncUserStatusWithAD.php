@@ -33,7 +33,7 @@ class SyncUserStatusWithAD extends ActionBase
     // If the user is Contact Only, skip
     // If there is no Azure AD ID, skip
     $azure_ad_id = $user->field_active_directory_id->value;
-    if ( ! $user->status->value || $user->field_is_contact_only->value || empty($azure_ad_id) ) return $this->t('User skipped');
+    if ( $user->field_is_contact_only->value || empty($azure_ad_id) ) return $this->t('User skipped');
 
     // Skip these users
     $skip_emails = [
@@ -54,7 +54,10 @@ class SyncUserStatusWithAD extends ActionBase
     }
 
     $user_is_enabled = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $account->getEmail(), $azure_ad_id);
-    if(!$user_is_enabled) {
+    if($user_is_enabled) {
+      PortlandOpenIdConnectUtil::EnableUser($account);
+    }
+    else {
       PortlandOpenIdConnectUtil::DisableUser($account);
     }
   }

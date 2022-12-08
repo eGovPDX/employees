@@ -1,0 +1,23 @@
+uuid: bb16c5b3-893e-4461-a787-a2a29a21f3d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_311_referral_contact
+    - node.type.contact
+id: node.contact.field_311_referral_contact
+field_name: field_311_referral_contact
+entity_type: node
+bundle: contact
+label: '311 Referral Contact'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

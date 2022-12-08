@@ -1,0 +1,23 @@
+uuid: 781bcb4f-7077-4105-8226-df97eccf1152
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_multco_id
+    - node.type.contact
+id: node.contact.field_multco_id
+field_name: field_multco_id
+entity_type: node
+bundle: contact
+label: 'Multco ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
