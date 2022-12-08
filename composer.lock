@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0ec391c1919e70388ef2e21267fd9cf",
+    "content-hash": "b6276279824bbf06fc7e56ce7b85006a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7515,11 +7515,17 @@
         },
         {
             "name": "drupal/scheduler",
-            "version": "dev-2.x",
+            "version": "2.0.0-rc7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/scheduler.git",
-                "reference": "1bcefc6d91cb7208d57d19fe65f0308de34e9251"
+                "reference": "2.0.0-rc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/scheduler-2.0.0-rc7.zip",
+                "reference": "2.0.0-rc7",
+                "shasum": "dea5c2bd62a298cb537add8aaf2a9d2d6db8a323"
             },
             "require": {
                 "drupal/core": "^8 || ^9 || ^10"
@@ -7532,15 +7538,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
-                    "version": "2.0.0-rc8+3-dev",
-                    "datestamp": "1669388008",
+                    "version": "2.0.0-rc7",
+                    "datestamp": "1667225002",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
@@ -7584,30 +7587,27 @@
         },
         {
             "name": "drupal/scheduler_content_moderation_integration",
-            "version": "1.4.0",
+            "version": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/scheduler_content_moderation_integration.git",
-                "reference": "8.x-1.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/scheduler_content_moderation_integration-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "0afb23b9a5e578f2859ae3eabad1d3aadaf70418"
+                "reference": "117b7ea21de16004befc16575b060c329bc1f621"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9",
-                "drupal/scheduler": "^1.1"
+                "drupal/core": "^8.7.7 || ^9 || ^10",
+                "drupal/scheduler": "^2"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-1.4",
-                    "datestamp": "1653735087",
+                    "version": "2.0.0-alpha1+8-dev",
+                    "datestamp": "1670257763",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -7640,7 +7640,8 @@
             "description": "Scheduler sub-module providing content moderation functionality for publishing/unpublishing",
             "homepage": "https://www.drupal.org/project/scheduler_content_moderation_integration",
             "support": {
-                "source": "https://git.drupalcode.org/project/scheduler_content_moderation_integration"
+                "source": "https://git.drupalcode.org/project/scheduler_content_moderation_integration",
+                "error": "Invalid dependency: \"scheduler\", Could not parse version constraint ~: Invalid version string \"~\""
             }
         },
         {
@@ -17911,7 +17912,7 @@
                 "prestashop/blockwishlist": ">=2,<2.1.1",
                 "prestashop/contactform": ">=1.0.1,<4.3",
                 "prestashop/gamification": "<2.3.2",
-                "prestashop/prestashop": ">=1.6.0.10,<1.7.8.7",
+                "prestashop/prestashop": "<1.7.8.8",
                 "prestashop/productcomments": "<5.0.2",
                 "prestashop/ps_emailsubscription": "<2.6.1",
                 "prestashop/ps_facetedsearch": "<3.4.1",
@@ -18146,14 +18147,7 @@
             "time": "2022-04-06T19:03:57+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "drupal/scheduler",
-            "version": "dev-2.x",
-            "alias": "1.4",
-            "alias_normalized": "1.4.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/add_content_by_bundle": 10,
@@ -18171,7 +18165,7 @@
         "drupal/moderation_dashboard": 10,
         "drupal/openid_connect": 10,
         "drupal/rabbit_hole": 10,
-        "drupal/scheduler": 20,
+        "drupal/scheduler_content_moderation_integration": 20,
         "drupal/search_api_location": 15,
         "drupal/search_api_page": 10,
         "drupal-composer/drupal-security-advisories": 20,
