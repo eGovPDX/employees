@@ -121,7 +121,7 @@ display:
           fields:
             - content_body
             - content_search_keywords
-            - content_title
+            - content_title_edge
             - field_first_name
             - field_last_name
             - group_search_keywords
@@ -844,10 +844,10 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-        content_title:
-          id: content_title
+        content_title_edge:
+          id: content_title_edge
           table: search_api_index_full_index
-          field: content_title
+          field: content_title_edge
           relationship: none
           group_type: group
           admin_label: ''
@@ -856,7 +856,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge bg-warning rounded-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
+            text: "<p>{{ content_title_edge }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge bg-warning rounded-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
             make_link: false
             path: ''
             absolute: false
@@ -1244,10 +1244,10 @@ display:
             label: ''
             field_identifier: search_api_relevance
           exposed: false
-        content_title:
-          id: content_title
+        content_title_edge:
+          id: content_title_edge
           table: search_api_index_full_index
-          field: content_title
+          field: content_title_edge
           relationship: none
           group_type: group
           admin_label: ''
@@ -1255,7 +1255,7 @@ display:
           order: ASC
           expose:
             label: ''
-            field_identifier: content_title
+            field_identifier: content_title_edge
           exposed: false
       filters:
         search_api_datasource:
@@ -1389,7 +1389,7 @@ display:
           parse_mode: terms
           min_length: null
           fields:
-            - content_title
+            - content_title_edge
             - field_category_name
             - field_contract_number
         field_mandated_purchases:
@@ -1504,43 +1504,17 @@ display:
           default_row_class: true
           columns:
             field_date_range_end_value_1: field_date_range_end_value_1
-            content_title: content_title
+            field_mandated_purchases: field_mandated_purchases
+            field_p_card_allowed: field_p_card_allowed
+            content_title_edge: content_title_edge
             field_category: field_category
             field_type: field_type
             field_contract_number: field_contract_number
-            field_mandated_purchases: field_mandated_purchases
-            field_p_card_allowed: field_p_card_allowed
             field_date_range_end_value: field_date_range_end_value
           default: '-1'
           info:
             field_date_range_end_value_1:
               sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            content_title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_category:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_type:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_contract_number:
-              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -1555,6 +1529,34 @@ display:
               responsive: ''
             field_p_card_allowed:
               sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            content_title_edge:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_category:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_type:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_contract_number:
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
@@ -1865,7 +1867,7 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_title_edge
             - rendered_item
         search_api_datasource:
           id: search_api_datasource
@@ -2501,7 +2503,7 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_title_edge
             - rendered_item
       filter_groups:
         operator: AND
@@ -2796,7 +2798,7 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_title_edge
             - rendered_item
         search_api_datasource:
           id: search_api_datasource

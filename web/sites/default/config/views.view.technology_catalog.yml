@@ -370,10 +370,10 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
-        content_title:
-          id: content_title
+        content_title_edge:
+          id: content_title_edge
           table: search_api_index_full_index
-          field: content_title
+          field: content_title_edge
           relationship: none
           group_type: group
           admin_label: ''
@@ -413,6 +413,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -435,7 +437,7 @@ display:
           fields:
             - content_body
             - content_field_description
-            - content_title
+            - content_title_edge
         content_type:
           id: content_type
           table: search_api_index_full_index
