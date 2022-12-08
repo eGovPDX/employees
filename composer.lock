@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ab60d88caa33134294b7249c8247d86",
+    "content-hash": "f2574eccda3eac793198ad4358fe6fc2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -439,6 +439,55 @@
             "extra": {
                 "installer-name": "codemirror"
             }
+        },
+        {
+            "name": "components/jquery",
+            "version": "3.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "6cf38ee1fd04b6adf8e7dda161283aa35be818c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/6cf38ee1fd04b6adf8e7dda161283aa35be818c3",
+                "reference": "6cf38ee1fd04b6adf8e7dda161283aa35be818c3",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery.min.map",
+                        "jquery.slim.js",
+                        "jquery.slim.min.js",
+                        "jquery.slim.min.map"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JS Foundation and other contributors"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "support": {
+                "forum": "http://forum.jquery.com",
+                "irc": "irc://irc.freenode.org/jquery",
+                "issues": "https://github.com/jquery/jquery/issues",
+                "source": "https://github.com/jquery/jquery",
+                "wiki": "http://docs.jquery.com/"
+            },
+            "time": "2021-03-20T19:13:42+00:00"
         },
         {
             "name": "composer/installers",
@@ -10016,6 +10065,48 @@
             "time": "2020-11-18T14:59:05+00:00"
         },
         {
+            "name": "fengyuanchen/cropper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Scalar4eg/cropper.git",
+                "reference": "ed5ee3075e5a12fd301b1843d81e12100c791aca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Scalar4eg/cropper/zipball/ed5ee3075e5a12fd301b1843d81e12100c791aca",
+                "reference": "ed5ee3075e5a12fd301b1843d81e12100c791aca",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.9.0"
+            },
+            "default-branch": true,
+            "type": "component",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fengyuanchen",
+                    "homepage": "http://fengyuanchen.github.io"
+                }
+            ],
+            "description": "A simple jQuery image cropping plugin",
+            "homepage": "http://fengyuanchen.github.io/cropper/",
+            "keywords": [
+                "cropper",
+                "image",
+                "jquery"
+            ],
+            "support": {
+                "issues": "https://github.com/fengyuanchen/cropper/issues",
+                "source": "https://github.com/fengyuanchen/cropper"
+            },
+            "time": "2014-12-15T08:28:23+00:00"
+        },
+        {
             "name": "fileeye/mimemap",
             "version": "2.0.0",
             "source": {
@@ -18292,6 +18383,7 @@
         "drupal/scheduler_content_moderation_integration": 20,
         "drupal/search_api_location": 15,
         "drupal/search_api_page": 10,
+        "fengyuanchen/cropper": 20,
         "drupal-composer/drupal-security-advisories": 20,
         "roave/security-advisories": 20
     },

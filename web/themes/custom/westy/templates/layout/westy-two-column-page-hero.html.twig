@@ -19,19 +19,18 @@
     'justify-content-center',
     'position-relative',
     'mb-4',
-    'px-5',
   ]
 %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
     {% if content.main %}
-      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'd-flex', 'flex-column', 'py-5') }}>
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'd-flex', 'flex-column', 'py-4', 'py-lg-0') }}>
         {{ content.main }}
       </div>
     {% endif %}
     <div class="w-100 d-lg-none"></div>
     {% if content.side %}
-      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'justify-content-center') }}>
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'justify-content-lg-center') }}>
         {{ content.side }}
       </div>
     {% endif %}

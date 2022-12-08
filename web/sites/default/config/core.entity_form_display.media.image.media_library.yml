@@ -6,10 +6,11 @@ dependencies:
     - core.entity_form_mode.media.media_library
     - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
-    - image.style.thumbnail
+    - image.style.max_1300x1300
     - media.type.image
   module:
-    - image
+    - field_states_ui
+    - image_widget_crop
 _core:
   default_config_hash: BMLrK4zKp8-FFnMseBdT_6h6YipUsKRfbDf_3WUB5HA
 id: media.image.media_library
@@ -28,13 +29,25 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_media_image:
-    type: image_image
+    type: image_widget_crop
     weight: 1
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
+      preview_image_style: max_1300x1300
+      crop_preview_image_style: max_1300x1300
+      crop_list:
+        - featured_image
+      crop_types_required: {  }
+      warn_multiple_usages: true
+      show_crop_area: false
+      show_default_crop: true
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   name:
     type: string_textfield
     weight: 0
@@ -47,5 +60,10 @@ hidden:
   created: true
   langcode: true
   path: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
   status: true
   uid: true
+  unpublish_on: true
+  unpublish_state: true

@@ -5,10 +5,11 @@ dependencies:
   config:
     - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
-    - image.style.thumbnail
+    - image.style.max_1300x1300
     - media.type.image
   module:
-    - image
+    - field_states_ui
+    - image_widget_crop
     - path
     - scheduler
     - scheduler_content_moderation_integration
@@ -36,13 +37,25 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_media_image:
-    type: image_image
+    type: image_widget_crop
     weight: 1
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
+      preview_image_style: max_1300x1300
+      crop_preview_image_style: max_1300x1300
+      crop_list:
+        - featured_image
+      crop_types_required: {  }
+      warn_multiple_usages: true
+      show_crop_area: false
+      show_default_crop: true
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
   langcode:
     type: language_select
     weight: 2

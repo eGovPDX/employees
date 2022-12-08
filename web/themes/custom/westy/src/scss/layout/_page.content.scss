@@ -40,11 +40,19 @@ article {
 }
 
 // westy_two_column_page_hero
-.layout--westy-two-column-page-hero::before {
-  background: var(--bs-secondary);
-  content: " ";
-  height: 100%;
-  position: absolute;
-  width: calc(100vw - var(--bs-gutter-x) * 0.67);
-  z-index: -1;
+.layout--westy-two-column-page-hero {
+  .block,
+  img {
+    width: 100%;
+  }
+
+  // Full width color band
+  &::before {
+    background: var(--bs-secondary);
+    content: " ";
+    height: 100%;
+    position: absolute;
+    width: calc(100vw - var(--bs-gutter-x) * 0.67);
+    z-index: -1;
+  }
 }
