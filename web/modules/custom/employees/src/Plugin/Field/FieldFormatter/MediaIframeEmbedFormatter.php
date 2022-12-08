@@ -24,17 +24,20 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
   public static function getUrlRegexPattern() {
     $patterns = [
       // ArcGIS
-      '^https?:\/\/arcg.is\/\w+$',
+      '^https?:\/\/arcg\.is\/(.*)$',
+      '^https?:\/\/www\.arcgis\.com\/(.*)$',
       // Google Maps
-      "^https?:\/\/www\.google\.com\/maps\/embed\?pb=(.+)$",
-      "^https?:\/\/www\.google\.com\/maps\/d\/embed\?mid=(\w+)$",
+      "^https?:\/\/www\.google\.com\/maps\/embed(.*)$",
+      "^https?:\/\/www\.google\.com\/maps\/d\/embed(.*)$",
       // PortlandMaps map or chart
-      "^https?:\/\/(.*)\.portlandmaps\.com(.*)$",
-      "^https?:\/\/pdx\.maps\.arcgis\.com(.*)$",
+      "^https?:\/\/(.*)\.portlandmaps\.com\/(.*)$",
+      "^https?:\/\/pdx\.maps\.arcgis\.com\/(.*)$",
       // POG
       '^https?:\/\/www\.portlandoregon\.gov\/bes\/bigpipe\/\w+\.cfm$',
+      // Smartsheet
+      "^https?:\/\/app\.smartsheet\.com\/(.*)$",
       // Tableau
-      '^https?:\/\/(online|public)\.tableau\.com\/([^"]+\?[^"]*:embed=(true|yes|y|1)[^"]*)$',
+      '^https?:\/\/(online|public)\.tableau\.com\/(.*)$',
     ];
 
     return "/" . join("|", $patterns) . "/";
@@ -44,7 +47,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['URLs from arcg.is, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
+    return ['arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, and Smartsheet. If you would like to request a new service, please contact website@portlandoregon.gov for review.'];
   }
 
   /**
@@ -78,8 +81,6 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
           'height' => '100%',
           'frameborder' => '0',
           'allowfullscreen' => 'true',
-          'parent_class' => 'h-100',
-          // 'style' => 'min-height:300px; min-height:200px',
         ],
       ];
     }
