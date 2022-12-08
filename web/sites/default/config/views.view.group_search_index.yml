@@ -1506,10 +1506,10 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-        content_title:
-          id: content_title
+        content_title_edge:
+          id: content_title_edge
           table: search_api_index_full_index
-          field: content_title
+          field: content_title_edge
           relationship: none
           group_type: group
           admin_label: ''
@@ -1518,7 +1518,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<p>{{ content_title }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge bg-warning rounded-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
+            text: "<p>{{ content_title_edge }} {% if field_date_range_end_value_1|date('Y-m-d') < 'now'|date('Y-m-d') %}<span class=\"badge bg-warning rounded-pill\">Expired</span>{% endif %}</p>\r\n<p class=\"nowrap\"><strong>Mandated Purchases:</strong> {{ field_mandated_purchases }}<br />\r\n<strong>P-Card Allowed:</strong> {{ field_p_card_allowed }}</p>"
             make_link: false
             path: ''
             absolute: false
@@ -2340,11 +2340,13 @@ display:
             field_date_range_end_value_1: field_date_range_end_value_1
             field_mandated_purchases: field_mandated_purchases
             field_p_card_allowed: field_p_card_allowed
-            content_title: content_title
+            content_title_edge: content_title_edge
             field_category: field_category
             field_type: field_type
             field_contract_number: field_contract_number
             field_date_range_end_value: field_date_range_end_value
+            field_contract_search_text: field_contract_search_text
+            label: label
           default: '-1'
           info:
             field_date_range_end_value_1:
@@ -2368,7 +2370,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            content_title:
+            content_title_edge:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -2399,6 +2401,16 @@ display:
             field_date_range_end_value:
               sortable: true
               default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_contract_search_text:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            label:
               align: ''
               separator: ''
               empty_column: false
@@ -4667,6 +4679,7 @@ display:
               publisher: '0'
               bts_catalog: '0'
               311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
