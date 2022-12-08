@@ -1,7 +1,5 @@
-# Three column with main, side, and menu
-
 westy_three_column:
-  label: Three column with side and menu
+  label: Three column with main, side, and menu
   category: Westy
   template: templates/layout/westy-three-column
   regions:
@@ -18,6 +16,18 @@ westy_two_column:
   label: Two column with main and side
   category: Westy
   template: templates/layout/westy-two-column
+  regions:
+    main:
+      label: Main
+    side:
+      label: Side
+  icon_map:
+    - [square_one, square_two]
+
+westy_two_column_page_hero:
+  label: Two column layout for page hero with title+summary and featured image
+  category: Westy
+  template: templates/layout/westy-two-column-page-hero
   regions:
     main:
       label: Main

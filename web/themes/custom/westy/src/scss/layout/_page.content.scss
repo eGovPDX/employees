@@ -1,11 +1,9 @@
 // Page: Content
 // -----------------------------------------------------------------------------
 .page__content {
-
 }
 
 article {
-
   // Lists
   ol,
   ul,
@@ -16,11 +14,13 @@ article {
   ol {
     list-style: decimal;
   }
-  ol ol, ol ol ol ol ol {
+  ol ol,
+  ol ol ol ol ol {
     list-style: lower-alpha;
     // margin-left: .8em;
   }
-  ol ol ol, ol ol ol ol ol ol {
+  ol ol ol,
+  ol ol ol ol ol ol {
     list-style: lower-roman;
     // margin-left: .8em;
   }
@@ -37,4 +37,19 @@ article {
 
 .homepage-grid .views-row .views-col:first-child {
   padding-left: 0;
+}
+
+// westy_two_column_page_hero
+.layout--westy-two-column-page-hero {
+  position: relative;
+
+  &::before {
+    background: var(--bs-secondary);
+    content: " ";
+    height: 100%;
+    left: -100vw;
+    position: absolute;
+    width: 200vw;
+    z-index: -1;
+  }
 }
