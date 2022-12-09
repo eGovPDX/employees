@@ -7,6 +7,9 @@
     {% set TypeName = 'information' %}
 {% endif %}
 
+{# Defaults #}
+{% set isDismissible = isDismissible|default(TRUE) %}
+
 {% set alertIcon %}
 {% include "@westy/icon/icon.twig" with {
     name: TypeName,
@@ -18,6 +21,7 @@
 {% set classes= [
     'bg-' ~ alertType,
     'text-light',
+    'westy-dismissible',
 ]%}
 
 {# TWIG #}
@@ -25,7 +29,7 @@
     <div class="container">
         <div class="d-flex flex-row p-3">
             {{ alertIcon }}
-            <div>
+            <div class="w-100">
                 <div class="fw-bold">{{ label }}</div>
                 <div class="global-alert-content">{{ content }}</div>
                 <span class="small">
@@ -33,6 +37,17 @@
                     {{ node.changed.value|date('F j, Y g:i a') }}
                 </span>
             </div>
+
+            {% if isDismissible %}
+            <div class="float-end top-0">
+                <button type="button" class="border-0 bg-{{ alertType }} text-light westy-notification__close" data-dismiss="alert" aria-label="Dismiss alert">
+                    <span aria-hidden="true" class="alert__close-contents">
+                        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                        <span class="sr-only">Dismiss</span>
+                </button>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </div>
