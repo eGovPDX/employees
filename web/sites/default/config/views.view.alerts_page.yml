@@ -1,15 +1,15 @@
-uuid: 9f7d40ed-3c9e-4a6e-8dff-0b3892d3d01f
+uuid: 2cd8ec86-f937-47d6-baf0-9d382888b24a
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.featured
+    - core.entity_view_mode.node.teaser
     - node.type.alert
   module:
     - node
     - user
-id: alert
-label: Alert
+id: alerts_page
+label: 'Alerts Page'
 module: views
 description: ''
 tag: ''
@@ -72,15 +72,28 @@ display:
           separator: ', '
           field_api_classes: false
       pager:
-        type: some
+        type: mini
         options:
           offset: 0
-          items_per_page: 5
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       exposed_form:
         type: basic
         options:
           submit_button: Apply
-          reset_button: true
+          reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -94,7 +107,23 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
@@ -128,7 +157,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: featured
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -146,17 +175,25 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_alert:
-    id: block_alert
-    display_title: Block
-    display_plugin: block
+  page_alerts:
+    id: page_alerts
+    display_title: 'Alerts Page'
+    display_plugin: page
     position: 1
     display_options:
+      pager:
+        type: none
+        options:
+          offset: 0
+      defaults:
+        pager: false
+      display_description: ''
       display_extenders: {  }
-      block_hide_empty: true
+      path: alerts
     cache_metadata:
       max-age: -1
       contexts:
