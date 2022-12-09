@@ -19,6 +19,7 @@
     'justify-content-center',
     'position-relative',
     'mb-4',
+    'px-lg-4',
   ]
 %}
 {% if content %}
@@ -28,8 +29,8 @@
         {{ content.main }}
       </div>
     {% endif %}
-    <div class="w-100 d-lg-none"></div>
-    {% if content.side %}
+    {% if content.side|render %}
+      <div class="w-100 d-lg-none"></div>
       <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'justify-content-lg-center') }}>
         {{ content.side }}
       </div>

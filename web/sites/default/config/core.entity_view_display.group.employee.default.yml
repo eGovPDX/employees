@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.base_field_override.group.employee.label
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
@@ -24,6 +25,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - options
+    - system
     - text
     - views
   theme:
@@ -34,15 +36,14 @@ third_party_settings:
     allow_custom: false
     sections:
       -
-        layout_id: layout_twocol_section
+        layout_id: westy_two_column_page_hero
         layout_settings:
-          label: ''
+          label: Hero
           context_mapping: {  }
-          column_widths: 50-50
         components:
-          4e5fbbe2-b162-498c-b066-e02658f36105:
-            uuid: 4e5fbbe2-b162-498c-b066-e02658f36105
-            region: first
+          2d1d7960-3db5-4c2a-834e-5cd5c4aa7ec7:
+            uuid: 2d1d7960-3db5-4c2a-834e-5cd5c4aa7ec7
+            region: main
             configuration:
               id: 'field_block:group:employee:label'
               label: Title
@@ -56,6 +57,36 @@ third_party_settings:
                 label: hidden
                 settings:
                   link_to_entity: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          0b255f25-9fb4-4cc2-9762-4bbb1aaf108b:
+            uuid: 0b255f25-9fb4-4cc2-9762-4bbb1aaf108b
+            region: main
+            configuration:
+              id: system_breadcrumb_block
+              label: Breadcrumbs
+              label_display: '0'
+              provider: system
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          e29cacc3-e823-45e6-8683-3396a9ef9cf2:
+            uuid: e29cacc3-e823-45e6-8683-3396a9ef9cf2
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_featured_image'
+              label: 'Featured Image'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: banner
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -239,6 +270,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: main
+  field_featured_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: first
   field_group_description:
     type: text_default
     label: above

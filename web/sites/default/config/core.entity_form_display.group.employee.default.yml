@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
@@ -19,6 +20,7 @@ dependencies:
     - field_group
     - field_states_ui
     - file
+    - media_library
     - path
     - text
 third_party_settings:
@@ -90,6 +92,13 @@ content:
       allowed_formats:
         hide_help: '0'
         hide_guidelines: '0'
+  field_featured_image:
+    type: media_library_widget
+    weight: 5
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
   field_group_contact:
     type: entity_reference_autocomplete
     weight: 7
