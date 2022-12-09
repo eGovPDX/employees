@@ -19,7 +19,7 @@ mode: media_library
 content:
   field_display_in_group:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -27,9 +27,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_media_media_remote:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_preview_image:
     type: image_image
-    weight: 3
+    weight: 4
     region: content
     settings:
       progress_indicator: throbber
@@ -51,14 +59,19 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   created: true
-  field_media_media_remote: true
   langcode: true
   path: true
   publish_on: true
   publish_state: true
-  status: true
   uid: true
   unpublish_on: true
   unpublish_state: true
