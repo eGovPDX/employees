@@ -100,7 +100,7 @@ final class JoinLeaveLink extends FieldPluginBase
           'attributes' => [
             'class' => [
               'btn',
-              'btn-outline-success',
+              'btn-outline-primary',
             ]
           ]
         ];
