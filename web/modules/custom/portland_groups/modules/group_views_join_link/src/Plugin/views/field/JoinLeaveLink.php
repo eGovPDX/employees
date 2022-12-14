@@ -84,7 +84,7 @@ final class JoinLeaveLink extends FieldPluginBase
     $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     $membership = $group->getMember($account);
     if (!empty($membership)) {
-      // Do not display join/leave link if the user has Employee or Assigned role
+      // Do not display join/leave link if the user has a role that should not be able to leave
       $roles = $membership->getRoles();
       $roles_to_match = ["employee-employee", "employee-assigned", "private-employee", "private-assigned", "employee-admin", "employee-editor"];
       foreach ($roles as $role) {
