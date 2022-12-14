@@ -23,8 +23,6 @@ class FilterAspectRatio extends FilterBase {
    */
   public function process($text, $langcode) {
     $result = new FilterProcessResult($text);
-    // Do not process CKEditor preview
-    if( str_ends_with(\Drupal::service('path.current')->getPath(), '/preview') ) return $result;
 
     if (stristr($text, 'data-entity-uuid') !== FALSE) {
       $dom = Html::load($text);
@@ -43,12 +41,13 @@ class FilterAspectRatio extends FilterBase {
         $aspect_ratio = $node->getAttribute('data-aspect-ratio');
         $node->removeAttribute('data-aspect-ratio');
 
-        // If one of the allowed aspect ratios, set the attribute.
+        // Default ratio is 16x9
         if( empty($aspect_ratio)) {
-          $node->setAttribute('class', 'ratio ratio-16x9');
+          $node->setAttribute('style', 'aspect-ratio: 16/9');
         }
-        else if (in_array($aspect_ratio, ['ratio ratio-16x9', 'ratio ratio-4x3', 'ratio ratio-1x1'])) {
-          $node->setAttribute('class', $node->getAttribute('class') . $aspect_ratio);
+        // Only allow pre-defined ratios
+        else if (in_array($aspect_ratio, ['16/9', '4/3', '1/1', '9/16'])) {
+          $node->setAttribute('style', "aspect-ratio: $aspect_ratio");
         }
       }
 

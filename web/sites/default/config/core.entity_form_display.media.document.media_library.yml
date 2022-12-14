@@ -14,7 +14,6 @@ dependencies:
     - media.type.document
   module:
     - file
-    - scheduler
 _core:
   default_config_hash: dcpfpqyLXOSGpulacMAJW3H-G34_LeNsjdfxd1_oCfY
 id: media.document.media_library
@@ -22,12 +21,6 @@ targetEntityType: media
 bundle: document
 mode: media_library
 content:
-  created:
-    type: datetime_timestamp
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_description:
     type: string_textarea
     weight: 2
@@ -38,7 +31,7 @@ content:
     third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -55,20 +48,13 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
@@ -78,17 +64,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     weight: 5
@@ -96,20 +71,16 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  uid:
-    type: options_select
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  created: true
   field_file_size: true
   field_mime_type: true
   field_search_keywords: true
+  langcode: true
   path: true
+  publish_on: true
+  publish_state: true
+  scheduler_settings: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true
