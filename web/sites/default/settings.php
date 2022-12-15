@@ -35,6 +35,9 @@ else {
   $_ENV['PANTHEON_ENVIRONMENT'] = 'lando';
 }
 
+// Set the default value to local URL before setting it for each environment
+$primary_domain = 'employees.lndo.site';
+
 if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   // Redirect to https://$primary_domain in the Live environment
   if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
@@ -94,6 +97,9 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
     $settings['trusted_host_patterns'][] = '^'. preg_quote($primary_domain) .'$';
   }
 }
+
+// Override the SP Entity ID value for each environment
+$config['samlauth.authentication']['sp_entity_id'] = $primary_domain;
 
 // Enable/disable config_split configurations based on the current environment
 $config['config_split.config_split.config_multidev']['status'] = FALSE;
