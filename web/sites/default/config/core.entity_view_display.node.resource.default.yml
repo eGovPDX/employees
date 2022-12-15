@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.resource.field_display_in_group
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
+    - field.field.node.resource.field_featured_image
     - field.field.node.resource.field_menu_url_text
     - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
@@ -211,6 +212,22 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          91a2d835-8548-45dc-a355-660aa33c57a0:
+            uuid: 91a2d835-8548-45dc-a355-660aa33c57a0
+            region: main
+            configuration:
+              id: 'field_block:node:resource:field_featured_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -271,6 +288,14 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 10
+    region: main
+  field_featured_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 15
     region: main
   field_menu_url_text:
     type: string

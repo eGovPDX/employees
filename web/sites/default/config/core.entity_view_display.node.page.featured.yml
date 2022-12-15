@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
+    - field.field.node.page.field_featured_image
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
     - field.field.node.page.field_popularity
@@ -25,6 +26,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - media
     - smart_trim
     - user
 third_party_settings:
@@ -63,10 +65,22 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: trim
       trim_options:
         text: true
         trim_zero: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_featured_image:
+    type: media_thumbnail
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content

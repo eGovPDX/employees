@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_contact
     - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_featured_image
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_search_keywords
@@ -249,6 +250,23 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 7
             additional: {  }
+          41e8e2c9-21f4-413d-ac3d-ae775a21186d:
+            uuid: 41e8e2c9-21f4-413d-ac3d-ae775a21186d
+            region: main
+            configuration:
+              id: 'field_block:node:event:field_featured_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: false
+                third_party_settings: {  }
+            weight: -5
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -299,6 +317,15 @@ content:
       link: true
     third_party_settings: {  }
     weight: 7
+    region: main
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 12
     region: main
   field_related_content:
     type: entity_reference_label

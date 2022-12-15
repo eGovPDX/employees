@@ -80,30 +80,38 @@
   'pb-4',
   'border-bottom',
   'position-relative',
+  'row',
 ]
 %}
+
 <article{{ attributes.addClass(classes) }}>
-  <header>
-    {{ title_prefix }}
-    {% if label and not page %}
-      <div class="node__top-wrapper">
-        {{ content.field_image }}
-        <h3 class="h4 mb-1">
-          <a href="{{ url }}" class="stretched-link" rel="bookmark">{{ label }}</a>
-        </h3>
-      </div>
-    {% endif %}
-    {{ title_suffix }}
-    {% if display_submitted %}
-      <div class="node__meta">
-        <span{{ author_attributes }}>
-          {{ 'By'|t }} {% apply spaceless %}<span class="node__author">{{ author_name }}</span>{% endapply %}, {{ date }}
-        </span>
-        {{ metadata }}
-      </div>
-    {% endif %}
-  </header>
-  <div{{ content_attributes.addClass('node__content') }}>
-    {{ content|without('field_image', 'links') }}
+  <div class="col-12 col-md order-2 order-md-1">
+    <header>
+      {{ title_prefix }}
+      {% if label and not page %}
+        <div class="node__top-wrapper">
+          <h3 class="h4 mb-1">
+            <a href="{{ url }}" class="stretched-link" rel="bookmark">{{ label }}</a>
+          </h3>
+        </div>
+      {% endif %}
+      {{ title_suffix }}
+      {% if display_submitted %}
+        <div class="node__meta">
+          <span{{ author_attributes }}>
+            {{ 'By'|t }} {% apply spaceless %}<span class="node__author">{{ author_name }}</span>{% endapply %}, {{ date }}
+          </span>
+          {{ metadata }}
+        </div>
+      {% endif %}
+    </header>
+    <div{{ content_attributes.addClass('node__content') }}>
+      {{ content|without('field_featured_image', 'links') }}
+    </div>
   </div>
+  {% if content.field_featured_image %}
+    <div class="col-12 col-md-5 order-1 order-md-2 mb-4 mb-md-0">
+      {{ content.field_featured_image }}
+    </div>
+  {% endif %}
 </article>

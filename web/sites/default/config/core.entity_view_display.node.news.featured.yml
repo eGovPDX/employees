@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.news.body
     - field.field.node.news.field_contact
     - field.field.node.news.field_display_in_group
+    - field.field.node.news.field_featured_image
     - field.field.node.news.field_published_on
     - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
@@ -20,6 +21,7 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
+    - media
     - text
     - user
 third_party_settings:
@@ -50,10 +52,21 @@ content:
     settings:
       trim_length: 300
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   content_dates_entity_view_1:
     settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_featured_image:
+    type: media_thumbnail
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content

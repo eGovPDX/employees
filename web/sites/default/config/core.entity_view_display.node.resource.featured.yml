@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resource.field_display_in_group
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
+    - field.field.node.resource.field_featured_image
     - field.field.node.resource.field_menu_url_text
     - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
@@ -25,6 +26,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - link
+    - media
     - smart_trim
     - user
 third_party_settings:
@@ -55,7 +57,18 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_featured_image:
+    type: media_thumbnail
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_resource_description:
     type: smart_trim
@@ -69,12 +82,13 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_resource_link:
     type: link
@@ -86,7 +100,7 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   content_dates_eva_created_content: true

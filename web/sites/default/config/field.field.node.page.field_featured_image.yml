@@ -1,17 +1,17 @@
-uuid: 3cb7b457-2057-4706-9c7e-298789dc506d
+uuid: 27a5b6c6-a464-47c5-9873-28359dcb17d8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_featured_image
-    - group.type.employee
+    - field.storage.node.field_featured_image
     - media.type.image
-id: group.employee.field_featured_image
+    - node.type.page
+id: node.page.field_featured_image
 field_name: field_featured_image
-entity_type: group
-bundle: employee
+entity_type: node
+bundle: page
 label: 'Featured Image'
-description: 'Specify an image to appear on this group''s homepage, as well as when featured elsewhere on the website.'
+description: 'Specify an image to appear on this page, as well as when featured elsewhere on the website.'
 required: false
 translatable: true
 default_value: {  }
@@ -23,7 +23,7 @@ settings:
       image: image
     sort:
       field: _none
-      direction: DESC
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
