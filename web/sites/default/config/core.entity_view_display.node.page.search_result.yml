@@ -63,6 +63,7 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
@@ -76,6 +77,15 @@ content:
     settings:
       link: true
     third_party_settings: {  }
+    weight: 2
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
     weight: 1
     region: content
 hidden:
@@ -85,7 +95,6 @@ hidden:
   field_contact: true
   field_feature: true
   field_feature_until: true
-  field_featured_image: true
   field_menu_url_text: true
   field_parent: true
   field_popularity: true

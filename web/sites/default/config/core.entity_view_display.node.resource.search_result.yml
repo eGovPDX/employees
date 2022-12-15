@@ -42,14 +42,23 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 2
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_resource_description:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   content_dates_eva_created_content: true
@@ -57,7 +66,6 @@ hidden:
   content_moderation_control: true
   field_feature: true
   field_feature_until: true
-  field_featured_image: true
   field_menu_url_text: true
   field_parent: true
   field_popularity: true

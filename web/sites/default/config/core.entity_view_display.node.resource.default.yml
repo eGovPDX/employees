@@ -105,7 +105,7 @@ third_party_settings:
                   rel: '0'
                   target: '0'
                 third_party_settings: {  }
-            weight: 2
+            weight: 3
             additional: {  }
           2908747e-43cc-4f26-aa96-c854868a4ceb:
             uuid: 2908747e-43cc-4f26-aa96-c854868a4ceb
@@ -123,7 +123,7 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 3
+            weight: 4
             additional: {  }
           3972a492-fd82-4ffa-b563-1251d1c8acd9:
             uuid: 3972a492-fd82-4ffa-b563-1251d1c8acd9
@@ -210,23 +210,26 @@ third_party_settings:
                 settings:
                   link: false
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           91a2d835-8548-45dc-a355-660aa33c57a0:
             uuid: 91a2d835-8548-45dc-a355-660aa33c57a0
             region: main
             configuration:
               id: 'field_block:node:resource:field_featured_image'
+              label: 'Featured Image'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                type: entity_reference_label
-                label: above
+                type: entity_reference_entity_view
+                label: hidden
                 settings:
-                  link: true
+                  view_mode: banner
                 third_party_settings: {  }
-            weight: 4
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_library:

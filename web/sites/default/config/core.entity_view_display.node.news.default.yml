@@ -81,7 +81,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 3
+            weight: 5
             additional: {  }
           9f7e568a-8e57-4d8b-b28f-5422366c60f5:
             uuid: 9f7e568a-8e57-4d8b-b28f-5422366c60f5
@@ -96,7 +96,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 4
+            weight: 6
             additional: {  }
           6ed54ff5-8a31-4523-845e-96f8e82304bc:
             uuid: 6ed54ff5-8a31-4523-845e-96f8e82304bc
@@ -114,7 +114,7 @@ third_party_settings:
                 label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 5
+            weight: 7
             additional: {  }
           cb65bf1b-3077-4cb2-8001-363abf417a3a:
             uuid: cb65bf1b-3077-4cb2-8001-363abf417a3a
@@ -229,23 +229,26 @@ third_party_settings:
                 settings:
                   link: false
                 third_party_settings: {  }
-            weight: 2
+            weight: 4
             additional: {  }
           d5b62c2c-104b-4748-8f91-2cdc69db3a87:
             uuid: d5b62c2c-104b-4748-8f91-2cdc69db3a87
             region: main
             configuration:
               id: 'field_block:node:news:field_featured_image'
+              label: 'Featured Image'
               label_display: '0'
+              provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
+                view_mode: view_mode
               formatter:
-                type: entity_reference_label
-                label: above
+                type: entity_reference_entity_view
+                label: hidden
                 settings:
-                  link: true
+                  view_mode: banner
                 third_party_settings: {  }
-            weight: 6
+            weight: 3
             additional: {  }
         third_party_settings: {  }
   layout_library:

@@ -21,7 +21,6 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
-    - media
     - text
     - user
 third_party_settings:
@@ -60,13 +59,11 @@ content:
     weight: 1
     region: content
   field_featured_image:
-    type: media_thumbnail
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
+      view_mode: featured
+      link: false
     third_party_settings: {  }
     weight: 0
     region: content

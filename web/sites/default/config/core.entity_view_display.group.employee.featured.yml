@@ -43,6 +43,15 @@ targetEntityType: group
 bundle: employee
 mode: featured
 content:
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_group_description:
     type: smart_trim
     label: hidden
@@ -55,18 +64,18 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   changed: true
   created: true
   field_contract_search_text: true
-  field_featured_image: true
   field_group_contact: true
   field_group_path: true
   field_has_contracts: true
