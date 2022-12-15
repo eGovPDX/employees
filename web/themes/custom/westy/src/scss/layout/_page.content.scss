@@ -41,21 +41,16 @@ article {
 
 // westy_two_column_page_hero
 .layout--westy-two-column-page-hero {
+  // Full width color band
+  background: var(--bs-secondary);
+  box-shadow: 0 0 0 100vw var(--bs-secondary);
+  clip-path: inset(0 -100vw);
+
   min-height: 12rem;
 
   .block,
   img {
     margin-bottom: 0 !important;
     width: 100%;
-  }
-
-  // Full width color band
-  &::before {
-    background: var(--bs-secondary);
-    content: " ";
-    height: 100%;
-    position: absolute;
-    width: calc(100vw - var(--bs-gutter-x) * 0.67);
-    z-index: -1;
   }
 }
