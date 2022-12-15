@@ -46,11 +46,16 @@ article {
   box-shadow: 0 0 0 100vw var(--bs-secondary);
   clip-path: inset(0 -100vw);
 
-  min-height: 12rem;
-
-  .block,
-  img {
+  .block {
     margin-bottom: 0 !important;
     width: 100%;
+  }
+
+  .field--name-field-featured-image img {
+    width: 100%;
+  }
+
+  .field--name-field-logo {
+    max-width: 5rem;
   }
 }

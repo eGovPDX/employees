@@ -16,7 +16,6 @@
     'layout--westy-two-column-page-hero',
     'row',
     'align-items-center',
-    'justify-content-center',
     'position-relative',
     'mb-4',
   ]
@@ -24,13 +23,13 @@
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
     {% if content.main %}
-      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'd-flex', 'flex-column', 'py-4', 'py-lg-0') }}>
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'd-flex', 'flex-column', 'py-3') }}>
         {{ content.main }}
       </div>
     {% endif %}
     {% if content.side|render %}
       <div class="w-100 d-lg-none"></div>
-      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'justify-content-lg-center') }}>
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'pb-3', 'pb-lg-0') }}>
         {{ content.side }}
       </div>
     {% endif %}

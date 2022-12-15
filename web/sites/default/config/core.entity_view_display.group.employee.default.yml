@@ -58,7 +58,7 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           0b255f25-9fb4-4cc2-9762-4bbb1aaf108b:
             uuid: 0b255f25-9fb4-4cc2-9762-4bbb1aaf108b
@@ -89,6 +89,25 @@ third_party_settings:
                   view_mode: banner
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          0944ff15-1deb-4cfa-aeec-88e419ed6b2e:
+            uuid: 0944ff15-1deb-4cfa-aeec-88e419ed6b2e
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_logo'
+              label: Logo
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_default
+                label: hidden
+                settings:
+                  use_description_as_link_text: false
+                third_party_settings: {  }
+            weight: 1
             additional: {  }
         third_party_settings: {  }
       -
