@@ -9,7 +9,7 @@ Drupal.behaviors.notification_handler = {
    */
   attach: function (context) {
     //Find the notification element
-    let alertElement = document.querySelectorAll('.westy-notification')
+    let alertElement = document.querySelectorAll('.westy-dismissible')
 
     alertElement.forEach(function (notification) {
       // current cookie
@@ -30,12 +30,9 @@ Drupal.behaviors.notification_handler = {
       }
 
       let notificationCookies = currentCookie()
-      console.log(notificationCookies)
-      console.log(currentCookieTimestamp)
       // if notification timestamp changes, make notificaition dissmissible
       if (!notificationCookies.includes(currentCookieTimestamp)) {
         notification.classList.add('westy-notification--dismissible')
-        console.log('doesnt match')
       }
 
       // if there isn't a cookie for the notification generate one

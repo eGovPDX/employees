@@ -15,19 +15,15 @@ targetEntityType: node
 bundle: alert
 mode: teaser
 content:
-  content_moderation_control:
-    settings: {  }
-    third_party_settings: {  }
-    weight: -20
-    region: content
   field_alert_text:
     type: text_default
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  content_moderation_control: true
   field_severity: true
   langcode: true
   links: true

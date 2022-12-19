@@ -21,7 +21,6 @@
 {% set classes= [
     'bg-' ~ alertType,
     'text-light',
-    'westy-dismissible',
 ]%}
 
 {# TWIG #}
@@ -37,16 +36,6 @@
                     {{ node.changed.value|date('F j, Y g:i a') }}
                 </span>
             </div>
-
-            {% if isDismissible %}
-            <div class="float-end top-0">
-                <button type="button" class="border-0 bg-{{ alertType }} text-light westy-notification__close" data-dismiss="alert" aria-label="Dismiss alert">
-                    <span aria-hidden="true" class="alert__close-contents">
-                        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
-                        <span class="sr-only">Dismiss</span>
-                </button>
-            </div>
-            {% endif %}
 
         </div>
     </div>
