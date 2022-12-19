@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.featured
+    - core.entity_view_mode.node.teaser
     - node.type.alert
   module:
     - node
@@ -128,7 +129,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: featured
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -155,8 +156,70 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      style:
+        type: default
+        options: {  }
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: featured
+      defaults:
+        style: false
+        row: false
       display_extenders: {  }
       block_hide_empty: true
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_alerts:
+    id: page_alerts
+    display_title: 'Alerts Page'
+    display_plugin: page
+    position: 2
+    display_options:
+      pager:
+        type: none
+        options:
+          offset: 0
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
+      style:
+        type: default
+        options: {  }
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      defaults:
+        pager: false
+        style: false
+        row: false
+        sorts: false
+      display_description: ''
+      display_extenders: {  }
+      path: alerts
     cache_metadata:
       max-age: -1
       contexts:
