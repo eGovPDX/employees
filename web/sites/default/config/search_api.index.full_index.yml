@@ -329,7 +329,7 @@ field_settings:
     label: 'Contact Phone Fulltext'
     datasource_id: 'entity:node'
     property_path: field_phone
-    type: text
+    type: 'solr_text_custom_omit_norms:ngram'
     dependencies:
       config:
         - field.storage.node.field_phone
