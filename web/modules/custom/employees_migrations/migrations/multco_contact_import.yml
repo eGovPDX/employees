@@ -5,24 +5,26 @@ source:
   plugin: csv
   path: modules/custom/employees_migrations/sources/multco_contact_import.csv
   header_row_count: 1
-  ids: 
+  ids:
     - ID
+  constants:
+    today: 'Y-m-d'
 process:
-  title: 
+  title:
     plugin: concat
     source:
       - Name_first
       - Name_last
     delimiter: ' '
   field_first_name: Name_first
-  field_last_name : Name_last
+  field_last_name: Name_last
   field_multco_id: ID
   field_title: Title
   field_email: Email
   field_mail_stop: 'Mail Stop'
   field_organization:
     plugin: concat
-    source: 
+    source:
       - Department
       - Division
       - Section
@@ -40,7 +42,10 @@ process:
   field_display_in_group:
     plugin: default_value
     default_value: 87
-  field_migration_date: migration_date
+  field_migration_date:
+    plugin: callback
+    callable: date
+    source: constants/today
 
 destination:
   plugin: 'entity:node'
