@@ -3175,7 +3175,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_fulltext
-          operator: or
+          operator: and
           value: ''
           group: 1
           exposed: true
@@ -3196,6 +3196,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -3216,13 +3218,16 @@ display:
           parse_mode: terms
           min_length: null
           fields:
-            - content_title_edge
-            - content_title_fulltext
             - field_311_notes
+            - field_contact_first_name_fulltext
+            - field_contact_first_name_phonetic
+            - field_contact_last_name_fulltext
+            - field_contact_last_name_phonetic
+            - field_contact_mail_stop
+            - field_contact_phone
             - field_contact_title
             - field_email
             - field_organization
-            - rendered_item
         search_api_datasource:
           id: search_api_datasource
           table: search_api_index_full_index
