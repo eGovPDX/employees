@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.base_field_override.group.employee.label
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_content
     - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
@@ -289,6 +290,25 @@ third_party_settings:
               items_per_page: none
             weight: 0
             additional: {  }
+          55ba6be4-3908-4743-9e8b-2381b5e27a46:
+            uuid: 55ba6be4-3908-4743-9e8b-2381b5e27a46
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_featured_content'
+              label: 'Featured Content'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: featured
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -314,6 +334,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: main
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
     region: main
   field_featured_image:
     type: entity_reference_label

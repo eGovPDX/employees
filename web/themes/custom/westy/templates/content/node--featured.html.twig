@@ -13,7 +13,7 @@
 <div class="card border-2 rounded-0 h-100 position-relative">
   {{ content.field_featured_image }}
   <div class="card-body">
-    <h3 class="card-title h5"><a href="{{ link }}" class="stretched-link">{{ title }}</a></h3>
+    <h3 class="card-title h5 mb-0"><a href="{{ link }}" class="stretched-link">{{ title }}</a></h3>
     {{ content|without('field_short_title','field_featured_image','field_resource_link') }}
   </div>
 </div>

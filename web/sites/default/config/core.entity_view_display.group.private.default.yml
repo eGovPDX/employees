@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.base_field_override.group.private.label
+    - field.field.group.private.field_featured_content
     - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
@@ -265,6 +266,25 @@ third_party_settings:
               items_per_page: none
             weight: 0
             additional: {  }
+          d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7:
+            uuid: d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7
+            region: main
+            configuration:
+              id: 'field_block:group:private:field_featured_content'
+              label: 'Featured Content'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: featured
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -284,6 +304,14 @@ targetEntityType: group
 bundle: private
 mode: default
 content:
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: main
   field_featured_media:
     type: entity_reference_label
     label: above

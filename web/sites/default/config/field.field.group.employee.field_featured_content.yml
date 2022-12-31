@@ -1,0 +1,25 @@
+uuid: 24f270b3-2904-4a1e-8228-ba585ee1a846
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_featured_content
+    - group.type.employee
+id: group.employee.field_featured_content
+field_name: field_featured_content
+entity_type: group
+bundle: employee
+label: 'Featured Content'
+description: "<p>Content must first be published to be featured. The following content can be featured in the \"Featured\" section of your group landing page:</p>\r\n<ul>\r\n<li><strong>Pages</strong> are static content like information, guides, handbooks, and lists of resources.</li>\r\n<li><strong>Resources</strong> are a title and description that link to either an external web address or a search page on Employees.portland.gov.</li>\r\n</ul>\r\n<p>Date-based content is featured in lists by date:</p>\r\n<ul>\r\n<li>The last 5 <strong>news</strong> items will be automatically be featured on a group landing page.</li>\r\n<li>Upcoming <strong>Events</strong> will automatically be featured on a group landing page.</li>\r\n</ul>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: ent_ref_related
+      display_name: ent_ref_related
+      arguments: {  }
+field_type: entity_reference
