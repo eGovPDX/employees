@@ -13,13 +13,7 @@ label: 'Sitewide: Search index'
 index_id: full_index
 suggester_settings:
   live_results:
-    fields:
-      - content_title
-      - field_first_name
-      - field_last_name
-      - field_phone
-      - mail_fulltext_edge
-      - mail_fulltext_unstemmed
+    fields: {  }
     highlight:
       enabled: false
       field: ''
@@ -31,11 +25,13 @@ suggester_settings:
       'entity:media':
         document: ''
       'entity:node':
+        alert: ''
         bts_catalog_item: ''
         contact: ''
         contract: ''
         event: ''
         news: ''
+        notification: ''
         page: ''
         resource: ''
       'entity:user':
@@ -47,9 +43,8 @@ suggester_limits:
 search_settings:
   'views:search_index':
     displays:
-      default: false
-      selected:
-        - page_contacts
+      default: true
+      selected: {  }
 options:
   limit: 6
   min_length: 1
