@@ -63,13 +63,6 @@ Thumbs.db
 ######################
 *.un~
 
-# SASS #
-##########
-.sass-cache
-web/themes/custom/**/*.map
-web/themes/custom/cloudy/css/*.css
-web/themes/custom/cloudy/js/main.bundle.js
-
 # Things in the core directory that Drupal 8 commits in the repository.
 !web/core/**/*.gz
 
@@ -79,15 +72,16 @@ web/themes/custom/cloudy/js/main.bundle.js
 
 # Generated files
 dist
-*.sass-cache/
+.sass-cache
 .eslintcache
 *unison.*
+
+# Ignore auto-generated empty root package lock from npm
+/package-lock.json
 
 #IDE plugins
 .idea
 atlassian-ide-plugin.xml
-
-web/themes/custom/particle/source/styleguide/css
 
 # Errors
 npm-debug.log
@@ -103,17 +97,20 @@ node_modules/
 app
 app/
 
-# Exclude Sass temp files. #
-########
-.sass-cache/*
-
-# Exclude Mike's docker sutff. #
+# Docker stuff #
 ########
 docker-compose.yml
 site.conf
 log.conf
 php.Dockerfile
 php.ini
+
+# Legacy theme ignores
+web/themes/custom/westy/assets/css
+web/themes/custom/westy/assets/js
+web/themes/custom/westy/config/proxy.js
+
+# Core drupal ignores
 /.csslintrc
 /.eslintignore
 /.eslintrc.json
