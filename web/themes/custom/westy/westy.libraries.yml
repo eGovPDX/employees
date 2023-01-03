@@ -2,9 +2,11 @@ style:
   version: VERSION
   css:
     theme:
-      assets/css/westy.style.css: {}
+      dist/westy.bundle.css:
+        minified: true
   js:
-    assets/js/westy.script.js: {}
+    dist/westy.bundle.js:
+      minified: true
   dependencies:
     - core/drupal
     - core/jquery

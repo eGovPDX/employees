@@ -41,7 +41,7 @@ services:
     build:
       - echo "Installing Node.js dependencies and building theme..."
       - npm -C /app/web/themes/custom/westy install
-      - npm -C /app/web/themes/custom/westy run production
+      - npm -C /app/web/themes/custom/westy run build
   solr:
     type: solr:8
     portforward: true
@@ -83,10 +83,6 @@ tooling:
     cmd:
       - appserver: drush uli > superAdmin_uli.log
       - node: npm run jest-sandbox
-  yarn-rebuild:
-    description: CUSTOM Install Westy dependencies, rebuild Westy theme including pattern labs files
-    service: node
-    cmd: "cd /app/web/themes/custom/westy && yarn install --ignore-engines --frozen-lockfile && yarn run build"
   npm:
     description: Run npm commands
     service: node
@@ -136,7 +132,7 @@ tooling:
       - appserver: date +"%T"
       - node: echo "Building theme asset files..."
       - node: npm -C /app/web/themes/custom/westy install
-      - node: npm -C /app/web/themes/custom/westy run production
+      - node: npm -C /app/web/themes/custom/westy run build
       - node: echo "=====Timestamp===== Theme Rebuild Done"
       - node: date +"%T"
   cupex:
