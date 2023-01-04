@@ -19,7 +19,6 @@
 @import "../components/nav/nav";
 @import "../components/notification/notification";
 @import "components/accordions";
-@import "components/alerts";
 @import "components/back-to-top";
 @import "components/pagination";
 @import "components/tables";
@@ -36,3 +35,9 @@
 @import "view/view";
 @import "cssicons";
 @import "overrides";
+
+// Font Awesome
+// -----------------------------------------------------------------------------
+$fa-font-path: '/themes/custom/westy/dist';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';

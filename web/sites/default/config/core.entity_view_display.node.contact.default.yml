@@ -8,6 +8,8 @@ dependencies:
     - field.field.node.contact.field_display_in_group
     - field.field.node.contact.field_email
     - field.field.node.contact.field_fax
+    - field.field.node.contact.field_first_name
+    - field.field.node.contact.field_last_name
     - field.field.node.contact.field_mail_stop
     - field.field.node.contact.field_migration_date
     - field.field.node.contact.field_multco_id
@@ -123,6 +125,8 @@ content:
     weight: 0
     region: content
 hidden:
+  field_first_name: true
+  field_last_name: true
   field_multco_id: true
   langcode: true
   links: true
