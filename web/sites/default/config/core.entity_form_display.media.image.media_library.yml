@@ -6,7 +6,7 @@ dependencies:
     - core.entity_form_mode.media.media_library
     - field.field.media.image.field_display_in_group
     - field.field.media.image.field_media_image
-    - image.style.max_1300x1300
+    - image.style.max_325x325
     - media.type.image
   module:
     - field_states_ui
@@ -34,7 +34,7 @@ content:
     region: content
     settings:
       progress_indicator: throbber
-      preview_image_style: max_1300x1300
+      preview_image_style: max_325x325
       crop_preview_image_style: max_1300x1300
       crop_list:
         - featured_image
@@ -47,7 +47,6 @@ content:
         form:
           type: ''
           list: ''
-          add: Add
   name:
     type: string_textfield
     weight: 0
