@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.base_field_override.group.private.label
     - field.field.group.private.field_featured_content
+    - field.field.group.private.field_featured_documents
     - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
@@ -272,7 +273,7 @@ third_party_settings:
             configuration:
               id: 'field_block:group:private:field_featured_content'
               label: 'Featured Content'
-              label_display: '0'
+              label_display: visible
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
@@ -284,6 +285,25 @@ third_party_settings:
                   view_mode: featured
                 third_party_settings: {  }
             weight: 4
+            additional: {  }
+          bf2c52f1-eca4-48e0-942b-de4e8669f9e1:
+            uuid: bf2c52f1-eca4-48e0-942b-de4e8669f9e1
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_featured_documents'
+              label: 'Documents and Forms'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: embedded_with_description
+                third_party_settings: {  }
+            weight: 8
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -369,6 +389,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_featured_documents: true
   field_featured_image: true
   field_group_contact: true
   langcode: true

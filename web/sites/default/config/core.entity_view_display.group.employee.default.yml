@@ -296,14 +296,14 @@ third_party_settings:
             configuration:
               id: 'field_block:group:employee:field_featured_content'
               label: 'Featured Content'
-              label_display: '0'
+              label_display: visible
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
                 type: entity_reference_entity_view
-                label: hidden
+                label: above
                 settings:
                   view_mode: featured
                 third_party_settings: {  }
