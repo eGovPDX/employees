@@ -123,7 +123,7 @@ content:
     third_party_settings: {  }
   field_group_contact:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 7
     region: content
     settings:
       match_operator: CONTAINS
@@ -169,7 +169,7 @@ content:
           list: ''
   field_migration_status:
     type: options_select
-    weight: 13
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -212,20 +212,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 12
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 8
     region: content
     settings:
       match_operator: CONTAINS
