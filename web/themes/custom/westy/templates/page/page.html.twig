@@ -53,23 +53,11 @@
   </header>
   {{ page.preheader }}
   <main class="container">
-    {% if nid %}
-      {% set featured_image = drupal_field('field_featured_image', 'node', nid, 'default') %}
-    {% endif %}
     {% if page.header|render|striptags|trim is not empty %}
-      <div {{ attributes.addClass(header_classes) }}>
-        <div class="row align-items-center">
-          <div class="col py-4">
-            <header class="page__sub_header">
-              {{ page.header }}
-            </header>
-          </div>
-          {% if featured_image|render %}
-            <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-              {{ featured_image }}
-            </div>
-          {% endif %}
-        </div>
+      <div class="row align-items-center">
+        <header class="page__sub_header col">
+          {{ page.header }}
+        </header>
       </div>
     {% endif %}
     <div class="row">

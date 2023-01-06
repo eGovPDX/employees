@@ -2,6 +2,8 @@ uuid: 0848edde-cafa-4e42-8479-b8a88e24fedf
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - westy
 _core:
@@ -14,7 +16,11 @@ provider: null
 plugin: page_title_block
 settings:
   id: page_title_block
-  label: 'Page title'
+  label: 'Page title (excluding group homepage)'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/group/*\r\n!/group/*/*"

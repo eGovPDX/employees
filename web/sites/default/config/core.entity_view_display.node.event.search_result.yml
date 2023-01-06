@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_contact
     - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_featured_image
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_search_keywords
@@ -43,12 +44,13 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: true
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_display_in_group:
     type: entity_reference_label
@@ -56,7 +58,16 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_when:
     type: smartdate_default
@@ -69,7 +80,7 @@ content:
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   content_dates_eva_created_content: true

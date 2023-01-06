@@ -10,7 +10,6 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
-    - views.view.group_list_views
   module:
     - group
     - search_api
@@ -188,17 +187,6 @@ display:
       link_display: page_documents
       link_url: ''
       header:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: true
-          view_to_insert: 'group_list_views:block_search_menu'
-          inherit_arguments: true
         result:
           id: result
           table: views

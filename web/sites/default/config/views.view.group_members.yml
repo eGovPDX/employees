@@ -6,7 +6,6 @@ dependencies:
     - field.storage.group_content.group_roles
     - field.storage.user.field_first_name
     - field.storage.user.field_last_name
-    - views.view.group_list_views
   module:
     - group
     - user
@@ -2710,17 +2709,6 @@ display:
         header: false
       display_description: 'Allow people outside the group to view the member list.'
       header:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: true
-          view_to_insert: 'group_list_views:block_search_menu'
-          inherit_arguments: true
         result:
           id: result
           table: views

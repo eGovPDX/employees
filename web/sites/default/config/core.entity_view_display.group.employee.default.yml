@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.base_field_override.group.employee.label
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
@@ -23,6 +25,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - options
+    - system
     - text
     - views
   theme:
@@ -32,6 +35,81 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
+      -
+        layout_id: westy_two_column_page_hero
+        layout_settings:
+          label: Hero
+          context_mapping: {  }
+        components:
+          2d1d7960-3db5-4c2a-834e-5cd5c4aa7ec7:
+            uuid: 2d1d7960-3db5-4c2a-834e-5cd5c4aa7ec7
+            region: main
+            configuration:
+              id: 'field_block:group:employee:label'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          0b255f25-9fb4-4cc2-9762-4bbb1aaf108b:
+            uuid: 0b255f25-9fb4-4cc2-9762-4bbb1aaf108b
+            region: main
+            configuration:
+              id: system_breadcrumb_block
+              label: Breadcrumbs
+              label_display: '0'
+              provider: system
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          e29cacc3-e823-45e6-8683-3396a9ef9cf2:
+            uuid: e29cacc3-e823-45e6-8683-3396a9ef9cf2
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_featured_image'
+              label: 'Featured Image'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: banner
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          0944ff15-1deb-4cfa-aeec-88e419ed6b2e:
+            uuid: 0944ff15-1deb-4cfa-aeec-88e419ed6b2e
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_logo'
+              label: Logo
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_default
+                label: hidden
+                settings:
+                  use_description_as_link_text: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
       -
         layout_id: westy_three_column
         layout_settings:
@@ -49,7 +127,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 0
+            weight: 1
             additional: {  }
           7be5c372-5751-498b-89a0-b2c923df4be5:
             uuid: 7be5c372-5751-498b-89a0-b2c923df4be5
@@ -62,20 +140,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 1
-            additional: {  }
-          794c9f41-5654-4379-a243-cca12912eb5a:
-            uuid: 794c9f41-5654-4379-a243-cca12912eb5a
-            region: main
-            configuration:
-              id: 'views_block:group_list_views-block_search_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 0
+            weight: 2
             additional: {  }
           159de26f-d2e1-40ad-9f96-9221dc4fbd57:
             uuid: 159de26f-d2e1-40ad-9f96-9221dc4fbd57
@@ -211,6 +276,19 @@ third_party_settings:
               items_per_page: none
             weight: 6
             additional: {  }
+          794c9f41-5654-4379-a243-cca12912eb5a:
+            uuid: 794c9f41-5654-4379-a243-cca12912eb5a
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -237,6 +315,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: main
+  field_featured_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: first
   field_group_description:
     type: text_default
     label: above
