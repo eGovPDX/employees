@@ -1,0 +1,31 @@
+uuid: 69036485-f4e3-40f5-bf20-6d349eac9558
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_featured_documents
+    - group.type.employee
+    - media.type.document
+    - media.type.remote_document
+id: group.employee.field_featured_documents
+field_name: field_featured_documents
+entity_type: group
+bundle: employee
+label: 'Featured Documents and Forms'
+description: '<p>These documents will be shown on the group landing page.</p>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+      remote_document: remote_document
+    sort:
+      field: changed
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: document
+field_type: entity_reference

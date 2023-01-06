@@ -6,6 +6,7 @@ dependencies:
     - core.base_field_override.group.employee.label
     - field.field.group.employee.field_contract_search_text
     - field.field.group.employee.field_featured_content
+    - field.field.group.employee.field_featured_documents
     - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
@@ -220,19 +221,6 @@ third_party_settings:
               items_per_page: none
             weight: 8
             additional: {  }
-          fc7e500e-667e-4d73-b243-5c20dad3cd5f:
-            uuid: fc7e500e-667e-4d73-b243-5c20dad3cd5f
-            region: side
-            configuration:
-              id: 'views_block:group_search_index-block_documents'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 10
-            additional: {  }
           ee173e63-a8f1-43a4-b370-ee592b581597:
             uuid: ee173e63-a8f1-43a4-b370-ee592b581597
             region: main
@@ -308,6 +296,25 @@ third_party_settings:
                   view_mode: featured
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          d7937f08-7970-474e-8dea-63a3f352928b:
+            uuid: d7937f08-7970-474e-8dea-63a3f352928b
+            region: side
+            configuration:
+              id: 'field_block:group:employee:field_featured_documents'
+              label: 'Featured Documents and Forms'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: embedded_with_description
+                third_party_settings: {  }
+            weight: 11
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -426,6 +433,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_featured_documents: true
   field_group_contact: true
   langcode: true
   search_api_excerpt: true
