@@ -704,7 +704,7 @@ display:
     display_plugin: block
     position: 8
     display_options:
-      enabled: false
+      enabled: true
       title: Today
       fields:
         search_api_rendered_item:
@@ -763,10 +763,13 @@ display:
             'entity:media':
               document: embedded_with_description
             'entity:node':
+              alert: default
               bts_catalog_item: default
+              contact: default
               contract: default
-              event: teaser
+              event: featured
               news: search_result
+              notification: default
               page: search_result
               resource: search_result
             'entity:user':
