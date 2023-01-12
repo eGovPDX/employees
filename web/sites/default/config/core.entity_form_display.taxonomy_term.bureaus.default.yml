@@ -1,44 +1,36 @@
-uuid: a13769b6-653a-4c3d-b69d-c060c30a234c
+uuid: 1e1b8da9-f88a-47f0-8d19-8af448abb5de
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.topics.field_homepage
-    - taxonomy.vocabulary.topics
+    - taxonomy.vocabulary.bureaus
   module:
     - path
     - scheduler_content_moderation_integration
     - text
-id: taxonomy_term.topics.default
+id: taxonomy_term.bureaus.default
 targetEntityType: taxonomy_term
-bundle: topics
+bundle: bureaus
 mode: default
 content:
   description:
-    type: text_textarea
-    weight: 1
+    type: text_textfield
+    weight: 0
     region: content
     settings:
-      rows: 5
+      size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_homepage:
-    type: boolean_checkbox
-    weight: 2
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: 0
+    weight: -5
     region: content
     settings:
       size: 60
@@ -46,7 +38,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -58,7 +50,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 100
     region: content
     settings:
       display_label: true
