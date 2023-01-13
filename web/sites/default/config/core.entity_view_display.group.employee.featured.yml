@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.group.featured
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_content
+    - field.field.group.employee.field_featured_documents
     - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
@@ -76,6 +78,8 @@ hidden:
   changed: true
   created: true
   field_contract_search_text: true
+  field_featured_content: true
+  field_featured_documents: true
   field_group_contact: true
   field_group_path: true
   field_has_contracts: true

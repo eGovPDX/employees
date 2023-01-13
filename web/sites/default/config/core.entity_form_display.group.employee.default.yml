@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_content
+    - field.field.group.employee.field_featured_documents
     - field.field.group.employee.field_featured_image
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
@@ -49,7 +51,7 @@ third_party_settings:
       label: Logo
       region: content
       parent_name: ''
-      weight: 6
+      weight: 8
       format_type: details
       format_settings:
         classes: ''
@@ -92,6 +94,26 @@ content:
       allowed_formats:
         hide_help: '0'
         hide_guidelines: '0'
+  field_featured_content:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_featured_documents:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_featured_image:
     type: media_library_widget
     weight: 5
@@ -174,7 +196,7 @@ content:
           add: Add
   field_search_keywords:
     type: string_textfield
-    weight: 12
+    weight: 14
     region: content
     settings:
       size: 60

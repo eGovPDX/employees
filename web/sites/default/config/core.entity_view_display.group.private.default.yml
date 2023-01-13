@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - core.base_field_override.group.private.label
+    - field.field.group.private.field_featured_content
+    - field.field.group.private.field_featured_documents
     - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
@@ -213,19 +215,6 @@ third_party_settings:
               items_per_page: none
             weight: 6
             additional: {  }
-          dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc:
-            uuid: dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc
-            region: side
-            configuration:
-              id: 'views_block:group_search_index-block_documents'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 7
-            additional: {  }
           aa9a1b0d-76a5-4bd5-83e7-d92d82cffee5:
             uuid: aa9a1b0d-76a5-4bd5-83e7-d92d82cffee5
             region: side
@@ -265,6 +254,44 @@ third_party_settings:
               items_per_page: none
             weight: 0
             additional: {  }
+          d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7:
+            uuid: d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7
+            region: main
+            configuration:
+              id: 'field_block:group:private:field_featured_content'
+              label: 'Featured Content'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: featured
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          bf2c52f1-eca4-48e0-942b-de4e8669f9e1:
+            uuid: bf2c52f1-eca4-48e0-942b-de4e8669f9e1
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_featured_documents'
+              label: 'Featured Documents and Forms'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: embedded_with_description
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -284,6 +311,14 @@ targetEntityType: group
 bundle: private
 mode: default
 content:
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: main
   field_featured_media:
     type: entity_reference_label
     label: above
@@ -341,6 +376,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_featured_documents: true
   field_featured_image: true
   field_group_contact: true
   langcode: true
