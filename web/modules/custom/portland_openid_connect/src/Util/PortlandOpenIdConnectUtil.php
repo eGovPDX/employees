@@ -322,7 +322,7 @@ class PortlandOpenIdConnectUtil
           '@message' => 'Could not retrieve user information for principal name ' . $userPrincipalName,
           '@error_message' => $e->getMessage(),
         ];
-        \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+        \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
       }
     }
   }
@@ -409,7 +409,7 @@ class PortlandOpenIdConnectUtil
         '@message' => 'Could not retrieve user\'s manager information for principal name ' . $userPrincipalName,
         '@error_message' => $e->getMessage(),
       ];
-      \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+      \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
     }
   }
 
@@ -472,7 +472,7 @@ class PortlandOpenIdConnectUtil
           '@message' => 'Could not retrieve user picture for principal name ' . $userPrincipalName,
           '@error_message' => $e->getMessage(),
         ];
-        \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+        \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
       }
     }
   }
@@ -517,7 +517,7 @@ class PortlandOpenIdConnectUtil
           '@message' => 'Could not retrieve user information for email ' . $email,
           '@error_message' => $e->getMessage(),
         ];
-        \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+        \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
         return false;
       }
     }
