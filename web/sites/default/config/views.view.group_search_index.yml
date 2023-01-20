@@ -460,7 +460,7 @@ display:
       display_description: ''
       use_more: true
       use_more_always: true
-      use_more_text: 'All Events'
+      use_more_text: 'More Events'
       link_display: page_group_events
       link_url: ''
       header: {  }
@@ -704,7 +704,7 @@ display:
     display_plugin: block
     position: 8
     display_options:
-      enabled: false
+      enabled: true
       title: Today
       fields:
         search_api_rendered_item:
@@ -763,10 +763,13 @@ display:
             'entity:media':
               document: embedded_with_description
             'entity:node':
+              alert: default
               bts_catalog_item: default
+              contact: default
               contract: default
-              event: teaser
+              event: featured
               news: search_result
+              notification: default
               page: search_result
               resource: search_result
             'entity:user':
@@ -1079,13 +1082,13 @@ display:
       relationships: {  }
       css_class: mb-3
       display_description: ''
-      use_more: true
-      use_more_always: true
+      use_more: false
+      use_more_always: false
       use_more_text: 'More Events'
       link_display: page_group_events
       link_url: ''
       header: {  }
-      display_comment: "Currently doesn't work because the contextual filter inherits the filter group's 'OR' condition. https://www.drupal.org/project/search_api/issues/3029582 \r\nSo we're still using the Today block in the content-based Group Events view."
+      display_comment: ''
       display_extenders: {  }
       block_description: 'Group Today''s Events'
       block_hide_empty: true
