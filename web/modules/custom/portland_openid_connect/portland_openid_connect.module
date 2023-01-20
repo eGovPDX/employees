@@ -334,7 +334,7 @@ function _get_user_profile_by_principal_name($access_token, $userPrincipalName)
       '@message' => 'Could not retrieve user profile for principal name ' . $userPrincipalName,
       '@error_message' => $e->getMessage(),
     ];
-    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+    \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
     return [];
   }
 }
@@ -438,7 +438,7 @@ function _get_all_users($access_token)
       '@message' => 'Could not retrieve user information',
       '@error_message' => $e->getMessage(),
     ];
-    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+    \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
     return false;
   }
 }
