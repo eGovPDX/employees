@@ -1,0 +1,24 @@
+uuid: 781a6a72-3932-433c-9618-377d9de56936
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - group
+    - media
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: group.field_featured_documents
+field_name: field_featured_documents
+entity_type: group
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
