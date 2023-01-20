@@ -1,0 +1,36 @@
+uuid: 6c4e9c84-8361-4f7e-909a-6f12a36f7481
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.featured_image
+  module:
+    - crop
+    - image_effects
+name: featured_crop_330_x_165
+label: 'Featured Crop 330 x 165'
+effects:
+  8e90a808-426b-470d-9df6-11723f910068:
+    uuid: 8e90a808-426b-470d-9df6-11723f910068
+    id: image_scale_and_crop
+    weight: -9
+    data:
+      width: 330
+      height: 165
+      anchor: center-center
+  c7582fc5-1a0c-43c8-8f9e-3a60b5a6b162:
+    uuid: c7582fc5-1a0c-43c8-8f9e-3a60b5a6b162
+    id: image_effects_imagemagick_arguments
+    weight: -8
+    data:
+      command_line: "-filter Triangle\r\n-define filter:support=2\r\n-unsharp 0.25x0.25+8+0.065\r\n-dither None\r\n-posterize 136\r\n-define jpeg:fancy-upsampling=off\r\n-define png:compression-filter=5\r\n-define png:compression-level=9\r\n-define png:compression-strategy=1\r\n-define png:exclude-chunk=all\r\n-interlace none\r\n-colorspace sRGB\r\n-strip"
+      dimensions_method: keep
+      width: ''
+      height: ''
+  2428508e-a481-43f0-9a0b-295f99d04c61:
+    uuid: 2428508e-a481-43f0-9a0b-295f99d04c61
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: featured_image
+      automatic_crop_provider: null

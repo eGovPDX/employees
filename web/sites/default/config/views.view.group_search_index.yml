@@ -10,7 +10,6 @@ dependencies:
     - field.storage.node.field_p_card_allowed
     - field.storage.node.field_type
     - search_api.index.full_index
-    - views.view.group_list_views
   module:
     - group
     - search_api
@@ -188,17 +187,6 @@ display:
       link_display: page_documents
       link_url: ''
       header:
-        view:
-          id: view
-          table: views
-          field: view
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: view
-          empty: true
-          view_to_insert: 'group_list_views:block_search_menu'
-          inherit_arguments: true
         result:
           id: result
           table: views
@@ -218,185 +206,6 @@ display:
         - route
         - url
         - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:search_api.index.full_index'
-  block_documents:
-    id: block_documents
-    display_title: 'Block: Documents'
-    display_plugin: block
-    position: 3
-    display_options:
-      title: 'Documents and Forms'
-      fields:
-        search_api_rendered_item:
-          id: search_api_rendered_item
-          table: search_api_index_full_index
-          field: search_api_rendered_item
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_rendered_item
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          view_modes:
-            'entity:group':
-              employee: search_result
-              private: search_result
-            'entity:media':
-              document: embedded_with_description
-            'entity:node':
-              event: search_result
-              news: search_result
-              page: search_result
-              resource: search_result
-            'entity:user':
-              user: search_result
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 5
-      sorts:
-        media_changed:
-          id: media_changed
-          table: search_api_index_full_index
-          field: media_changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: DESC
-          expose:
-            label: Changed
-            field_identifier: media_changed
-          exposed: false
-        media_name:
-          id: media_name
-          table: search_api_index_full_index
-          field: media_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: ASC
-          expose:
-            label: Name
-            field_identifier: media_name
-          exposed: false
-      filters:
-        media_bundle:
-          id: media_bundle
-          table: search_api_index_full_index
-          field: media_bundle
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_options
-          operator: or
-          value:
-            document: document
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        cache: true
-        title: false
-        pager: false
-        use_more: false
-        use_more_always: false
-        use_more_text: false
-        relationships: false
-        fields: false
-        sorts: false
-        filters: false
-        filter_groups: false
-        header: false
-      relationships: {  }
-      display_description: ''
-      use_more: true
-      use_more_always: true
-      use_more_text: 'All Documents'
-      header: {  }
-      display_extenders: {  }
-      block_hide_empty: true
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_interface'
-        - route
-        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -651,7 +460,7 @@ display:
       display_description: ''
       use_more: true
       use_more_always: true
-      use_more_text: 'All Events'
+      use_more_text: 'More Events'
       link_display: page_group_events
       link_url: ''
       header: {  }
@@ -895,7 +704,7 @@ display:
     display_plugin: block
     position: 8
     display_options:
-      enabled: false
+      enabled: true
       title: Today
       fields:
         search_api_rendered_item:
@@ -954,10 +763,13 @@ display:
             'entity:media':
               document: embedded_with_description
             'entity:node':
+              alert: default
               bts_catalog_item: default
+              contact: default
               contract: default
-              event: teaser
+              event: featured
               news: search_result
+              notification: default
               page: search_result
               resource: search_result
             'entity:user':
@@ -1270,13 +1082,13 @@ display:
       relationships: {  }
       css_class: mb-3
       display_description: ''
-      use_more: true
-      use_more_always: true
+      use_more: false
+      use_more_always: false
       use_more_text: 'More Events'
       link_display: page_group_events
       link_url: ''
       header: {  }
-      display_comment: "Currently doesn't work because the contextual filter inherits the filter group's 'OR' condition. https://www.drupal.org/project/search_api/issues/3029582 \r\nSo we're still using the Today block in the content-based Group Events view."
+      display_comment: ''
       display_extenders: {  }
       block_description: 'Group Today''s Events'
       block_hide_empty: true

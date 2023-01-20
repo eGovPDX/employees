@@ -37,16 +37,18 @@ build_and_deploy: &build_and_deploy
     - restore_cache:
         name: Restore theme dependencies cache
         keys:
-          - westy_-{{ checksum "web/themes/custom/westy/package.json" }}
+          - westy_-{{ checksum "web/themes/custom/westy/package-lock.json" }}
     - run:
         name: Install theme dependencies
         command: |
-          cd web/themes/custom/westy && npm install
+          cd web/themes/custom/westy
+          [ ! -d node_modules ] && npm ci --cache .npm  || echo package-lock.json unchanged, using cached node_modules
     - save_cache:
         name: Save theme dependencies cache
-        key: westy_-{{ checksum "web/themes/custom/westy/package.json" }}
+        key: westy_-{{ checksum "web/themes/custom/westy/package-lock.json" }}
         paths:
           - "web/themes/custom/westy/node_modules"
+          - "web/themes/custom/westy/.npm"
     - restore_cache:
         name: Restore Composer Cache
         keys:
@@ -77,7 +79,7 @@ build_and_deploy: &build_and_deploy
     - run:
         name: Build theme
         command: |
-          cd web/themes/custom/westy && npm run production
+          cd web/themes/custom/westy && npm run build
     - run:
         name: Deploy to Pantheon
         when: on_success
@@ -109,10 +111,11 @@ build_and_deploy: &build_and_deploy
           git remote add pantheon ssh://codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435@codeserver.dev.7f99fc39-aa02-4ea5-a753-9ea5e2b38435.drush.in:2222/~/repository.git
 
           # Force add all files to include those excluded by .gitignore
+          # Before force-adding, remove large folders we don't need on Pantheon
           cd /var/www/html
           find ./web/modules -name .git -type d -prune -exec rm -rf "{}" \;
           find ./web/themes -name .git -type d -prune -exec rm -rf "{}" \;
-          rm -r ./web/themes/custom/westy/node_modules/
+          rm -rf ./web/themes/custom/westy/node_modules/
           git add -f /var/www/html
 
           # Pantheon site will use the wrong DB if the local is kept

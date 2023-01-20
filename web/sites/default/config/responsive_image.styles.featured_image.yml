@@ -1,0 +1,35 @@
+uuid: dfc216f0-50f3-491c-ae52-e4e1f1d89885
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.featured_crop_1320_x_660
+    - image.style.featured_crop_330_x_165
+    - image.style.featured_crop_660_x_330
+  theme:
+    - westy
+id: featured_image
+label: 'Featured Image'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: featured_crop_660_x_330
+    breakpoint_id: default.md
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: featured_crop_1320_x_660
+    breakpoint_id: default.md
+    multiplier: 2x
+  -
+    image_mapping_type: image_style
+    image_mapping: featured_crop_330_x_165
+    breakpoint_id: default.xs
+    multiplier: 1x
+  -
+    image_mapping_type: image_style
+    image_mapping: featured_crop_660_x_330
+    breakpoint_id: default.xs
+    multiplier: 2x
+breakpoint_group: westy
+fallback_image_style: featured_crop_330_x_165

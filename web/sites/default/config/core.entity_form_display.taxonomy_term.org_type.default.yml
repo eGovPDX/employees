@@ -1,0 +1,66 @@
+uuid: 73bce3ad-e67d-435c-ab07-5c0ed819b596
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.org_type
+  module:
+    - path
+    - scheduler_content_moderation_integration
+    - text
+id: taxonomy_term.org_type.default
+targetEntityType: taxonomy_term
+bundle: org_type
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  publish_on: true
+  unpublish_on: true

@@ -1,0 +1,29 @@
+uuid: 1a78a2e0-114e-4b6a-aaf1-c6acc4577b4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_featured_image
+    - group.type.private
+    - media.type.image
+id: group.private.field_featured_image
+field_name: field_featured_image
+entity_type: group
+bundle: private
+label: 'Featured Image'
+description: 'Specify an image to appear on this group''s homepage, as well as when featured elsewhere on the website.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -3,6 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.base_field_override.group.private.label
+    - field.field.group.private.field_featured_content
+    - field.field.group.private.field_featured_documents
+    - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
@@ -18,6 +22,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_library
     - options
+    - system
     - text
     - views
   theme:
@@ -27,6 +32,62 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
+      -
+        layout_id: westy_two_column_page_hero
+        layout_settings:
+          label: Hero
+          context_mapping: {  }
+        components:
+          a0c2301b-ae0c-4b32-84d6-f2eb8177010c:
+            uuid: a0c2301b-ae0c-4b32-84d6-f2eb8177010c
+            region: main
+            configuration:
+              id: 'field_block:group:private:label'
+              label: Title
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          fc299049-47c3-47a6-85ee-45938ce02e6a:
+            uuid: fc299049-47c3-47a6-85ee-45938ce02e6a
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_featured_image'
+              label: 'Featured Image'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: banner
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          c187e2a8-1997-4f5b-b753-1e9e4fc44a43:
+            uuid: c187e2a8-1997-4f5b-b753-1e9e4fc44a43
+            region: main
+            configuration:
+              id: system_breadcrumb_block
+              label: Breadcrumbs
+              label_display: '0'
+              provider: system
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
       -
         layout_id: westy_three_column
         layout_settings:
@@ -44,20 +105,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 0
-            additional: {  }
-          9fcdfe53-ec84-4b47-97cc-25e0ea60b961:
-            uuid: 9fcdfe53-ec84-4b47-97cc-25e0ea60b961
-            region: main
-            configuration:
-              id: 'views_block:group_list_views-block_search_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 0
+            weight: 1
             additional: {  }
           6066a5fe-57b8-49ec-9275-538b104f1398:
             uuid: 6066a5fe-57b8-49ec-9275-538b104f1398
@@ -72,10 +120,10 @@ third_party_settings:
                 view_mode: view_mode
               formatter:
                 type: text_default
-                label: above
+                label: hidden
                 settings: {  }
                 third_party_settings: {  }
-            weight: 1
+            weight: 2
             additional: {  }
           1628ebc1-4f3b-4997-845f-02487f873533:
             uuid: 1628ebc1-4f3b-4997-845f-02487f873533
@@ -88,7 +136,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           9fe4701c-9055-407a-881a-73a93d5875a7:
             uuid: 9fe4701c-9055-407a-881a-73a93d5875a7
@@ -139,18 +187,18 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 1
+            weight: 2
             additional: {  }
           aa0e213f-74f5-4ea6-8c7e-b698c8a232d4:
             uuid: aa0e213f-74f5-4ea6-8c7e-b698c8a232d4
             region: side
             configuration:
               id: 'views_block:group_search_index-block_group_todays_events'
-              label: ''
+              label: Today
               label_display: visible
               provider: views
               context_mapping: {  }
-              views_label: ''
+              views_label: Today
               items_per_page: none
             weight: 5
             additional: {  }
@@ -166,19 +214,6 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 6
-            additional: {  }
-          dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc:
-            uuid: dde9f5fd-f71d-4b22-9a25-de3f6cbd34bc
-            region: side
-            configuration:
-              id: 'views_block:group_search_index-block_documents'
-              label: ''
-              label_display: visible
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 7
             additional: {  }
           aa9a1b0d-76a5-4bd5-83e7-d92d82cffee5:
             uuid: aa9a1b0d-76a5-4bd5-83e7-d92d82cffee5
@@ -206,6 +241,57 @@ third_party_settings:
               items_per_page: none
             weight: 3
             additional: {  }
+          9fcdfe53-ec84-4b47-97cc-25e0ea60b961:
+            uuid: 9fcdfe53-ec84-4b47-97cc-25e0ea60b961
+            region: menu
+            configuration:
+              id: 'views_block:group_list_views-block_search_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
+          d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7:
+            uuid: d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7
+            region: main
+            configuration:
+              id: 'field_block:group:private:field_featured_content'
+              label: 'Featured Content'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: featured
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          bf2c52f1-eca4-48e0-942b-de4e8669f9e1:
+            uuid: bf2c52f1-eca4-48e0-942b-de4e8669f9e1
+            region: side
+            configuration:
+              id: 'field_block:group:private:field_featured_documents'
+              label: 'Featured Documents and Forms'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: embedded_with_description
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -225,6 +311,22 @@ targetEntityType: group
 bundle: private
 mode: default
 content:
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: main
+  field_featured_media:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: main
   field_group_description:
     type: text_default
     label: above
@@ -274,6 +376,8 @@ content:
 hidden:
   changed: true
   created: true
+  field_featured_documents: true
+  field_featured_image: true
   field_group_contact: true
   langcode: true
   search_api_excerpt: true

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resource.field_display_in_group
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
+    - field.field.node.resource.field_featured_image
     - field.field.node.resource.field_menu_url_text
     - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
@@ -24,8 +25,6 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
-    - link
-    - smart_trim
     - user
 third_party_settings:
   layout_builder:
@@ -49,54 +48,27 @@ targetEntityType: node
 bundle: resource
 mode: featured
 content:
-  field_display_in_group:
-    type: entity_reference_label
-    label: inline
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
     settings:
+      view_mode: featured
       link: false
     third_party_settings: {  }
-    weight: 2
-    region: content
-  field_resource_description:
-    type: smart_trim
-    label: hidden
-    settings:
-      trim_length: 300
-      trim_type: chars
-      trim_suffix: ''
-      wrap_output: true
-      wrap_class: 'trimmed mb-2'
-      more_link: false
-      more_class: more-link
-      more_text: More
-      summary_handler: full
-      trim_options:
-        text: true
-        trim_zero: false
-    third_party_settings: {  }
     weight: 0
-    region: content
-  field_resource_link:
-    type: link
-    label: hidden
-    settings:
-      trim_length: null
-      url_only: true
-      url_plain: true
-      rel: '0'
-      target: '0'
-    third_party_settings: {  }
-    weight: 1
     region: content
 hidden:
   content_dates_eva_created_content: true
   content_dates_eva_updated_content: true
   content_moderation_control: true
+  field_display_in_group: true
   field_feature: true
   field_feature_until: true
   field_menu_url_text: true
   field_parent: true
   field_popularity: true
+  field_resource_description: true
+  field_resource_link: true
   field_reviewer: true
   field_search_keywords: true
   field_show_in_menu: true

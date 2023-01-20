@@ -1,0 +1,7 @@
+{% embed 'field.html.twig' with {
+    classes: ['mt-4', 'mb-2']
+} %}
+  {% block content %}
+    <img alt="Group logo" src="{{ file_url(items.0.content["#file"].uri.0.value) }}" />
+  {% endblock %}
+{% endembed %}
