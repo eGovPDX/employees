@@ -17,6 +17,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - entity_usage
     - filter
     - media
     - moderation_sidebar
@@ -30,6 +31,7 @@ weight: -8
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access entity usage statistics'
   - 'access media overview'
   - 'clone contract content'
   - 'clone event content'
