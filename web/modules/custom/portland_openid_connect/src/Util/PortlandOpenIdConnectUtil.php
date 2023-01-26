@@ -240,7 +240,7 @@ class PortlandOpenIdConnectUtil
     }
 
     if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
-      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
+      \Drupal::logger('portland OpenID')->notice('Skip getting user profile when the principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
 
@@ -345,7 +345,7 @@ class PortlandOpenIdConnectUtil
     }
 
     if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
-      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
+      \Drupal::logger('portland OpenID')->notice('Skip getting manager when the user\'s principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
     
@@ -437,7 +437,7 @@ class PortlandOpenIdConnectUtil
     }
 
     if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
-      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
+      \Drupal::logger('portland OpenID')->notice('Skip getting user photo when the principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
 
