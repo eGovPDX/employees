@@ -235,10 +235,12 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserProfile($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || 
-    empty($userPrincipalName) || 
-    empty($azure_ad_id) ||
-    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id) ) {
+      return;
+    }
+
+    if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
 
@@ -338,10 +340,12 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserManager($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || 
-    empty($userPrincipalName) || 
-    empty($azure_ad_id) ||
-    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id) ) {
+      return;
+    }
+
+    if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
     
@@ -428,10 +432,12 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserPhoto($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || 
-    empty($userPrincipalName) || 
-    empty($azure_ad_id) ||
-    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id) ) {
+      return;
+    }
+
+    if(str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      \Drupal::logger('portland OpenID')->notice('Skip user whose principal name ends with onmicrosoft.com: ' . $userPrincipalName);
       return;
     }
 
