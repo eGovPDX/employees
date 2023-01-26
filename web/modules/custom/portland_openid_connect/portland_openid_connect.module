@@ -167,6 +167,9 @@ function _process_users($response_data, $access_token)
   $count_user_deleted = 0;
 
   foreach ($user_data_array as $user_data) {
+    // Skip users who's principal name ends with "onmicrosoft.com"
+    if( str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') ) continue;
+
     // Skip accounts without first name, last name, or email. These are not people acount.
     if (
       empty($user_data['givenName']) ||
