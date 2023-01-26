@@ -5,7 +5,7 @@ use Drupal\user\UserInterface;
 use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
-
+use Drupal\Core\Site\Settings;
 
 /**
  * Implement hook_user_login()
@@ -84,9 +84,24 @@ function portland_openid_connect_cron()
   // Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
 
   // Call Microsoft Graph API to retrieve user info
-  $tokens = _get_access_token();
+  $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
+  $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
+  $client_id = $windows_aad_config->get('settings.client_id');
+  $client_secret = $windows_aad_config->get('settings.client_secret');
+  $tokens = _get_access_token($tenant_id, $client_id, $client_secret);
   if (empty($tokens['access_token'])) {
     \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
+    return;
+  }
+  _get_all_users($tokens['access_token']);
+
+  // PTLD
+  $tenant_id = 'c365223a-f116-4a03-8077-94c3f5e5ca65';
+  $client_id = Settings::get('azure.ptld_sync_client_id');
+  $client_secret = Settings::get('azure.ptld_sync_client_secret');
+  $tokens = _get_access_token($tenant_id, $client_id, $client_secret);
+  if (empty($tokens['access_token'])) {
+    \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph on PTLD. Make sure the client secret is correct.");
     return;
   }
 
@@ -447,17 +462,13 @@ function _get_all_users($access_token)
  * Call Microsoft Azure AD OAuth API to retrieve the access token.
  * Need a fresh token for each CRON job run.
  */
-function _get_access_token()
+function _get_access_token($tenant_id, $client_id, $client_secret)
 {
-  $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
-  $client_id = $windows_aad_config->get('settings.client_id');
-  $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
-
   $request_options = [
     'form_params' => [
       // 'code' => $authorization_code,
       'client_id' => $client_id,
-      'client_secret' => $windows_aad_config->get('settings.client_secret'),
+      'client_secret' => $client_secret,
       'grant_type' => 'client_credentials',
       'scope' => 'https://graph.microsoft.com/.default',
     ],
