@@ -235,7 +235,12 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserProfile($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
+    if (empty($access_token) || 
+    empty($userPrincipalName) || 
+    empty($azure_ad_id) ||
+    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      return;
+    }
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
@@ -333,8 +338,13 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserManager($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
-
+    if (empty($access_token) || 
+    empty($userPrincipalName) || 
+    empty($azure_ad_id) ||
+    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      return;
+    }
+    
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
     $options = [
@@ -418,7 +428,12 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserPhoto($access_token, $userPrincipalName, $azure_ad_id)
   {
-    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
+    if (empty($access_token) || 
+    empty($userPrincipalName) || 
+    empty($azure_ad_id) ||
+    str_ends_with($userPrincipalName, 'onmicrosoft.com')) {
+      return;
+    }
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
