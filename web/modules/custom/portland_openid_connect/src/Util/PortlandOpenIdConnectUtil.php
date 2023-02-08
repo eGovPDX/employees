@@ -6,6 +6,7 @@ use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
+use Drupal\Core\Site\Settings;
 
 /**
  * A helper class provides static function to allow both cron jobs
@@ -13,6 +14,9 @@ use Drupal\user\Entity\User;
  */
 class PortlandOpenIdConnectUtil
 {
+  public const ROSE_DOMAIN_NAME = "portlandoregon.gov";
+  public const PTLD_DOMAIN_NAME = "police.portlandoregon.gov";
+
   /* @var \GuzzleHttp\ClientInterface $client */
   private static $client;
 
@@ -62,7 +66,7 @@ class PortlandOpenIdConnectUtil
   }
 
   /**
-   * Helper function to add a user to a group as roles
+   * Helper function to add a user to a group with the Employee role
    */
   public static function addUserToGroupWithEmployeeRole($account, $group_id)
   {
@@ -182,43 +186,56 @@ class PortlandOpenIdConnectUtil
    * Call Microsoft Azure AD OAuth API to retrieve the access token.
    * Need a fresh token for each CRON job run.
    */
-  public static function GetAccessToken()
+  public static function GetAccessToken($domain = self::ROSE_DOMAIN_NAME)
   {
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+    $settings = [
+      self::ROSE_DOMAIN_NAME => [
+        "tenant_id" => '636d7808-73c9-41a7-97aa-8c4733642141',
+        "client_id" =>  Settings::get('azure.rose_sync_client_id'),
+        "client_secret" =>  Settings::get('azure.rose_sync_client_secret'),
+      ],
+      self::PTLD_DOMAIN_NAME => [
+        "tenant_id" => 'c365223a-f116-4a03-8077-94c3f5e5ca65',
+        "client_id" =>  Settings::get('azure.ptld_sync_client_id'),
+        "client_secret" =>  Settings::get('azure.ptld_sync_client_secret'),
+      ],
+    ];
 
-    static $token_expire_time = 0;
-    static $tokens = null;
+    static $token_expire_time = [
+      self::ROSE_DOMAIN_NAME => 0,
+      self::PTLD_DOMAIN_NAME => 0,
+    ];
+    static $tokens = [
+      self::ROSE_DOMAIN_NAME => null,
+      self::PTLD_DOMAIN_NAME => null,
+    ];
     // If the token has not expired, return the previous token
-    if (time() < ( $token_expire_time - 300 )) return $tokens;
+    if (time() < ( $token_expire_time[$domain] - 300 )) return $tokens[$domain];
 
-    $windows_aad_config = \Drupal::config('openid_connect.settings.windows_aad');
-    $client_id = $windows_aad_config->get('settings.client_id');
-    $tenant_id = '636d7808-73c9-41a7-97aa-8c4733642141';
-
+    $tenant_id = $settings[$domain]["tenant_id"];
     $request_options = [
       'form_params' => [
-        // 'code' => $authorization_code,
-        'client_id' => $client_id,
-        'client_secret' => $windows_aad_config->get('settings.client_secret'),
+        'client_id' => $settings[$domain]["client_id"],
+        'client_secret' => $settings[$domain]["client_secret"],
         'grant_type' => 'client_credentials',
         'scope' => 'https://graph.microsoft.com/.default',
       ],
     ];
 
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       $response = self::$client->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", $request_options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
 
       // Expected result.
-      $tokens = [
-        // 'id_token' => $response_data['id_token'],
+      $tokens[$domain] = [
         'access_token' => $response_data['access_token'],
       ];
       if (array_key_exists('expires_in', $response_data)) {
-        $tokens['expire'] = \Drupal::time()->getRequestTime() + $response_data['expires_in'];
+        $tokens[$domain]['expire'] = \Drupal::time()->getRequestTime() + $response_data['expires_in'];
       }
-      $token_expire_time = time() + $response_data['expires_in'];
-      return $tokens;
+      $token_expire_time[$domain] = time() + $response_data['expires_in'];
+      return $tokens[$domain];
     } catch (RequestException $e) {
       $variables = [
         '@message' => 'Could not retrieve access token',
@@ -229,41 +246,77 @@ class PortlandOpenIdConnectUtil
     }
   }
 
-  /**
-   * Look up the AD principal name by email.
-   * A user's principal name never changes. But the email may get modified after legal name change.
-   */
-  public static function GetUserProfile($access_token, $userPrincipalName, $azure_ad_id)
-  {
-    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
-
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
-    // Perform the request.
-    $options = [
-      'method' => 'GET',
-      'headers' => [
-        'Content-Type' => 'application/json',
-        'Authorization' => 'Bearer ' . $access_token,
-        'ConsistencyLevel' => 'eventual', // required by Graph search API
-      ],
+  public static function ShouldSkipUser($user) {
+    $email = $user->mail->value;
+    $skip_emails = [
+      'BTS-eGov@portlandoregon.gov',
+      'ally.admin@portlandoregon.gov',
+      'marty.member@portlandoregon.gov',
+      'oliver.outsider@portlandoregon.gov',
     ];
 
+    if( $user->field_is_contact_only->value || // Skip contact only users
+    empty($user->field_active_directory_id->value) || // Skip users without AD ID
+      in_array(strtolower($email), array_map('strtolower', $skip_emails)) || // Skip users with certain email
+    str_ends_with($email, 'onmicrosoft.com') ||  // Skip users with generic email
+    str_contains($email, '_adm@')) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Drupal username is limited to 60 characters. Trim the principal name if it's too long.
+   */
+  public static function TrimUserName($userName)
+  {
+    if(empty($userName) || strlen($userName) <= 60) {
+      return $userName;
+    }
+
+    // Leave 3 characters for a random number to reduce conflict
+    $countOfCharToRemove = strlen($userName) - 60 + 3;
+    if(str_contains($userName, "@")) {
+      $parts = explode("@", $userName);
+      return substr($parts[0], 0, -($countOfCharToRemove)) . rand(100, 999) . "@" . $parts[1];
+    }
+    else {
+      return substr($userName, 0, -($countOfCharToRemove)) . rand(100, 999);
+    }
+  }
+
+  /**
+   * Retrieve user profile and update user's field values. 
+   * Does NOT save user.
+   */
+  public static function GetUserProfile($access_token, $user)
+  {
+    if (empty($access_token) || empty($user)) return false;
+
+    // Some users should be skipped
+    if (self::ShouldSkipUser($user)) return false;
+
+    // Get the HTTP client singleton
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
-      // Example: https://graph.microsoft.com/beta/users/xinju.wang@portlandoregon.gov/profile
       $response = self::$client->get(
-        'https://graph.microsoft.com/beta/users/' . $azure_ad_id . '/profile',
-        $options
+        'https://graph.microsoft.com/beta/users/' . $user->mail->value . '/profile', // User account name is the principal name
+        [
+          'method' => 'GET',
+          'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $access_token,
+          ],
+        ]
       );
       $response_data = json_decode((string) $response->getBody(), TRUE);
-
       $user_info = [];
       if (
         array_key_exists('positions', $response_data) &&
         !empty($response_data["positions"]) &&
         array_key_exists('detail', $response_data["positions"][0])
       ) {
-        $user_info['mail'] = $response_data["emails"][0]["address"];
         $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
         $user_info['group'] = $response_data["positions"][0]["detail"]["company"]["displayName"];
         $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];
@@ -276,7 +329,7 @@ class PortlandOpenIdConnectUtil
         if( !empty($address['postalCode']) ) $address_parts[] = $address['postalCode'];
         $user_info['address'] = implode(', ', $address_parts);
 
-        // Get the user's business phone number
+        // Get phone numbers
         $user_info['phone'] = '';
         $phones = $response_data["phones"];
         foreach($phones as $phone) {
@@ -287,76 +340,62 @@ class PortlandOpenIdConnectUtil
             $user_info['mobile_phone'] = $phone['number'];
           }
         }
+
+        $user_info['principalName'] = $response_data["account"][0]['userPrincipalName'];
       }
 
-      // Load the Drupal user with principal name
-      $users = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['name' => $userPrincipalName]);
+      // Look up Drupal user with email
+      // $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $email]);
+      // $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
 
-      if (count($users) != 0) {
-        $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
-        $user->mail = $user_info['mail'];
-        $user->field_title = $user_info['title'];
-        $user->field_division_name = $user_info['division'];
-        $user->field_office_location = $user_info['officeLocation'];
-        $user->field_address = $user_info['address'];
-        $user->field_phone = $user_info['phone'];
-        $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
-        $user->field_group_names = $user_info['group'];
-        $user->save();
-        // \Drupal::logger('portland OpenID')->notice('User updated: ' . $user->mail->value);
-      }
+      $user->field_title = $user_info['title'];
+      $user->field_division_name = $user_info['division'];
+      $user->field_office_location = $user_info['officeLocation'];
+      $user->field_address = $user_info['address'];
+      $user->field_phone = $user_info['phone'];
+      $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
+      $user->field_group_names = $user_info['group'];
+      $user->setUsername( self::TrimUserName($user_info['principalName']) );
+      return true;
     } catch (RequestException $e) {
       // Do not log 404 errors since some users don't have profile
       if ($e->getCode() == 404) {
-        // Load the Drupal user with principal name
-        $users = \Drupal::entityTypeManager()->getStorage('user')
-        ->loadByProperties(['name' => $userPrincipalName]);
-        if (count($users) != 0) {
-          $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+        // If the user doesn't hav profile, disable the account
+        if ( ! $user->isNew() ) {
           PortlandOpenIdConnectUtil::DisableUser($user);
         }
       }
+      // Log other exceptions
       else {
         $variables = [
-          '@message' => 'Could not retrieve user information for principal name ' . $userPrincipalName,
+          '@message' => 'Could not retrieve user information for principal name ' . $user->getAccountName(),
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
       }
+      return false;
     }
   }
 
   /**
-   * Look up the user's manager.
-   * A user's principal name never changes. But the email may get modified after legal name change.
+   * Get the user's manager
    */
-  public static function GetUserManager($access_token, $userPrincipalName, $azure_ad_id)
+  public static function GetUserManager($access_token, $user)
   {
-    if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
+    if (empty($access_token) || empty($user)) return;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
-    // Perform the request.
-    $options = [
-      'method' => 'GET',
-      'headers' => [
-        'Content-Type' => 'application/json',
-        'Authorization' => 'Bearer ' . $access_token,
-        'ConsistencyLevel' => 'eventual', // required by Graph search API
-      ],
-    ];
-
-    // Load the Drupal user with AD ID
-    $users = \Drupal::entityTypeManager()->getStorage('user')
-      ->loadByProperties(['field_active_directory_id' => $azure_ad_id]);
-    if (count($users) == 0) return;
-    $user = array_values($users)[0];
-
     try {
-      // Example: https://graph.microsoft.com/v1.0/users/xinju.wang@portlandoregon.gov/manager
+      // https://learn.microsoft.com/en-us/graph/api/user-list-manager?view=graph-rest-1.0&tabs=http
       $response = self::$client->get(
-        'https://graph.microsoft.com/v1.0/users/' . $azure_ad_id . '/manager',
-        $options
+        'https://graph.microsoft.com/v1.0/users/' . $user->mail->value . '/manager',
+        [
+          'method' => 'GET',
+          'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $access_token,
+          ],
+        ]
       );
       $response_data = json_decode((string) $response->getBody(), TRUE);
 /*
@@ -365,15 +404,11 @@ class PortlandOpenIdConnectUtil
     "@odata.type": "#microsoft.graph.user",
     "id": "d8f3158f-2589-4b3d-86e4-d09c048c6635",
     "businessPhones": [],
-    "displayName": "Nixon, Rick",
-    "givenName": "Rick",
-    "jobTitle": null,
-    "mail": "Rick.Nixon@portlandoregon.gov",
-    "mobilePhone": null,
-    "officeLocation": null,
-    "preferredLanguage": null,
-    "surname": "Nixon",
-    "userPrincipalName": "Rick.Nixon@portlandoregon.gov"
+    "displayName": "Last, First",
+    "givenName": "First",
+    "mail": "EMAIL",
+    "surname": "Last",
+    "userPrincipalName": "PRINCIPAL_NAME"
 }
 */
       if (
@@ -392,21 +427,22 @@ class PortlandOpenIdConnectUtil
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([
-            'name' => $manager_ad_id, // temp name
-            'mail' => $manager_ad_id . '@portlandoregon.gov', // temp email
+            'name' => self::TrimUserName($response_data['userPrincipalName']),
+            'mail' => $response_data['mail'],
             'pass' => user_password(), // temp password
             'status' => 1,
+            'field_first_name' => $response_data['givenName'],
+            'field_last_name' => $response_data['surname'],
             'field_active_directory_id' => $manager_ad_id,
           ]);
           $manager_stub_user->save();
           $manager_user_ids[] = $manager_stub_user->id();
         }
-        $user->set('field_managers', $manager_user_ids);
-        $user->save();
+        $user->set('field_managers', array_unique($manager_user_ids));
       }
     } catch (RequestException $e) {
       $variables = [
-        '@message' => 'Could not retrieve user\'s manager information for principal name ' . $userPrincipalName,
+        '@message' => 'Could not retrieve user\'s manager information for principal name ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
       \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
@@ -481,47 +517,41 @@ class PortlandOpenIdConnectUtil
    * Check if a user account is enabled in Azure AD.
    * Call https://graph.microsoft.com/beta/users/USER_PRINCIPAL_NAME or UUID to check the value of "accountEnabled" field.
    */
-  public static function IsUserEnabled($access_token, $email, $azure_ad_id)
+  public static function IsUserEnabled($access_token, $user)
   {
     // Avoid disabling user accidentally
-    if (empty($access_token) || empty($email) || empty($azure_ad_id)) return true;
+    if (empty($access_token) || empty($user)) return true;
 
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
-    // Perform the request.
-    $options = [
-      'method' => 'GET',
-      'headers' => [
-        'Content-Type' => 'application/json',
-        'Authorization' => 'Bearer ' . $access_token,
-        // 'ConsistencyLevel' => 'eventual', // required by Graph search API
-      ],
-    ];
-
-    // Set default value as Disabled
-    $user_is_enabled = false;
     try {
-      // Example: https://graph.microsoft.com/beta/users/xinju.wang@portlandoregon.gov
+      // Example: https://graph.microsoft.com/beta/users/PRINCIPAL_NAME
       $response = self::$client->get(
-        'https://graph.microsoft.com/beta/users/' . $azure_ad_id,
-        $options
+        'https://graph.microsoft.com/beta/users/' . $user->mail->value,
+        [
+          'method' => 'GET',
+          'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $access_token,
+          ],
+        ]
       );
       $response_data = json_decode((string) $response->getBody(), TRUE);
-      $user_is_enabled = $response_data["accountEnabled"];
+      return $response_data["accountEnabled"];
     } catch (RequestException $e) {
-      // Treat 404 as the user doesn't exist in AD
+      // Treat 404 as the user doesn't exist in AD. Do not log 404
       if ($e->getCode() == 404) {
         return false;
       }
       else {
         $variables = [
-          '@message' => 'Could not retrieve user information for email ' . $email,
+          '@message' => 'Could not retrieve user information for user ' . $user->getAccountName(),
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
         return false;
       }
+      return false;
     }
-    return $user_is_enabled;
   }
 
   /**
