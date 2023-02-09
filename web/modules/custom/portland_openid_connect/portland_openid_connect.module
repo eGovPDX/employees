@@ -25,11 +25,7 @@ function portland_openid_connect_user_login(UserInterface $user) {
   }
 
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
-
-  // PTLD has no manager info
-  if($domain === PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME) {
-    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
-  }
+  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
 }
@@ -76,7 +72,7 @@ function portland_openid_connect_cron()
 
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
   $domains = [
-    // PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME,
+    // PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME, //TODO: commented out to test PTLD sync
     PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME,
   ];
   foreach($domains as $domain) {
@@ -141,7 +137,7 @@ function _process_users($response_data, $access_token)
     $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $user_data['mail']]);
 
     // Create a new user account if there is no existing account with the email
-    if (count($users) == 0) {
+    if (empty($users)) {
       /*
         {
             "displayName": "Smith, Joe",

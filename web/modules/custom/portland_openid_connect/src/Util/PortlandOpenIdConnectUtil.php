@@ -389,6 +389,9 @@ class PortlandOpenIdConnectUtil
   {
     if (empty($access_token) || empty($user)) return;
 
+    // PTLD has no manager info
+    if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
+
     if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       // https://learn.microsoft.com/en-us/graph/api/user-list-manager?view=graph-rest-1.0&tabs=http
