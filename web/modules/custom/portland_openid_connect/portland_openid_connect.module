@@ -134,7 +134,11 @@ function _process_users($response_data, $access_token)
     }
 
     // Use email to look up user. After PTLD migration, user's email will remain the same. There are also cases when the user gets a new AD account with the same email address.
-    $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $user_data['mail']]);
+    $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $user_data['userPrincipalName']]);
+
+    if(empty($users)) {
+      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $user_data['mail']]);
+    }
 
     // Create a new user account if there is no existing account with the email
     if (empty($users)) {
@@ -169,17 +173,11 @@ function _process_users($response_data, $access_token)
       $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
       // If the profile is empty, assume the user is not enabled
       if ($has_profile) {
-        try {
-          $user->save();
-          // Add the user to primary groups as Employee
-          PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
-          $users_created []= $user->getAccountName();
-        } catch(Drupal\Core\Database\IntegrityConstraintViolationException $dbException) {
-          // When a user's email is modified, the code will try to create a new user with the same principal name.
-          // A DB exception will be thrown. Need to log an error message and update email manually.
-          \Drupal::logger('portland OpenID')->error("Cannot create user with account name: " . $user->getAccountName() . ". Please find the user account and update email to " . $user->mail->value);
+        $user->save();
+        // Add the user to primary groups as Employee
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+        $users_created []= $user->getAccountName();
 
-        }
       }
     }
     // Else the user is already in Drupal. We need to either update or disable the user.
