@@ -39,58 +39,64 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: true
+        replace_tokens: false
     third_party_settings: {  }
-    weight: 1
+    weight: 0
+    region: content
+  field_display_in_group:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
     region: content
   field_file_size:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 5
+    weight: 3
     region: content
   field_media_document:
     type: media_entity_download_download_link
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
       rel: '0'
       target: '0'
       disposition: inline
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_mime_type:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
-  name:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: true
+  media_last_updated_media_changed_date:
+    settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 4
     region: content
 hidden:
   created: true
-  field_display_in_group: true
   field_search_keywords: true
   field_tags: true
   langcode: true
-  media_last_updated_media_changed_date: true
+  name: true
   search_api_excerpt: true
   thumbnail: true
   uid: true

@@ -31,9 +31,16 @@
 
 {%
   set classes = [
-    'embed-document'
-  ]
+  'media',
+  'document',
+  'mb-4',
+  'pb-4',
+  'border-bottom',
+  'position-relative',
+  'row',
+]
 %}
+
 {% if content.field_efiles_link['#object'] %}
   {% set filepath = content.field_efiles_link.0['#title'] %}
 {% elseif content.field_media_document %}
@@ -44,7 +51,12 @@
 {% endif %}
 
 <div{{attributes.addClass(classes)}} aria-describedby="{{ name|clean_class }}">
-  <h2><a href="{{ filepath }}">{{ name }} {{ details }}</a></h2>
+  <h2 class="h4 mb-1">
+    <a href="{{ filepath }}" class="stretched-link">{{ name }} {{ details }}</a>
+  </h2>
+  {% if content.field_description %}
+    <div id="{{ name|clean_class }}" class="description">{{ content.field_description.0 }}</div>
+  {% endif %}
   {{ content|without(
     'name',
     'field_description',
@@ -52,7 +64,4 @@
     'field_file_size',
     'field_mime_type'
     ) }}
-  {% if content.field_description %}
-    <div id="{{ name|clean_class }}" class="description">{{ content.field_description.0 }}</div>
-  {% endif %}
 </div>

@@ -1,7 +1,7 @@
 {% if content.field_parent.0|length > 0 %}
     {% set parent_path = path('entity.node.canonical', {'node': node.field_parent.entity.id}) %}
 {% endif %}
-<a href="{{ url }}" class="nav-link{% if path('<current>') == url %} active disabled{% endif %}{% if url in path('<current>') %} menu-item--active-trail{% endif %}">{{ content.field_menu_url_text.0 }}{% if not node.isPublished() %} <span class="text-danger ms-1">Unpublished</span>{% endif %}</a>
+<a href="{{ url }}" class="nav-link{% if path('<current>') == url %} active disabled{% endif %}{% if url in path('<current>') %} menu-item--active-trail{% endif %}">{{ content.field_menu_url_text.0 }}{% if not node.isPublished() %} <span class="badge badge-sm bg-danger ms-1">Unpublished</span>{% endif %}</a>
 {% if url in path('<current>') %}
     {{ content|without('field_menu_url_text','field_parent') }}
 {% endif %}
