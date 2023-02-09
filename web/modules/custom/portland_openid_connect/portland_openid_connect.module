@@ -25,7 +25,11 @@ function portland_openid_connect_user_login(UserInterface $user) {
   }
 
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
-  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
+
+  // PTLD has no manager info
+  if($domain === PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME) {
+    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
+  }
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
 }
@@ -177,6 +181,7 @@ function _process_users($response_data, $access_token)
     }
     // Else the user is already in Drupal. We need to either update or disable the user.
     else {
+      /** @var UserInterface $user */
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
 

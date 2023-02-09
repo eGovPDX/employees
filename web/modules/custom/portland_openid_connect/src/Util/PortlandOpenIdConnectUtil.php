@@ -7,6 +7,8 @@ use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\TypedData\ListInterface;
+use Drupal\taxonomy\TermStorageInterface;
 
 /**
  * A helper class provides static function to allow both cron jobs
@@ -45,7 +47,9 @@ class PortlandOpenIdConnectUtil
       //   $has_employee_role = true;
       //   continue;
       // }
-      $group_content->group_roles->appendItem(['target_id' => $role->id()]);
+      /** @var ListInterface $group_roles_list */
+      $group_roles_list = $group_content->group_roles;
+      $group_roles_list->appendItem(['target_id' => $role->id()]);
     }
 
     // // Hotfix: comment out to avoid removal of membership
@@ -153,8 +157,9 @@ class PortlandOpenIdConnectUtil
     $group_names_array = explode(',', $group_names);
 
     // Build new primary group ID array with primary group names
-    $group_ad_name_list = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
-      ->loadTree('group_ad_name_list', 0, 1, true);
+    /** @var TermStorageInterface $term_storage */
+    $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $group_ad_name_list = $term_storage->loadTree('group_ad_name_list', 0, 1, true);
     $group_ids = [];
     foreach ($group_ad_name_list as $group_ad_name) {
       if (in_array($group_ad_name->name->value, $group_names_array)) {
