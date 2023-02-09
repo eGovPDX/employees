@@ -72,7 +72,7 @@ function portland_openid_connect_cron()
 
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
   $domains = [
-    // PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME, //TODO: commented out to test PTLD sync
+    PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME,
     PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME,
   ];
   foreach($domains as $domain) {
