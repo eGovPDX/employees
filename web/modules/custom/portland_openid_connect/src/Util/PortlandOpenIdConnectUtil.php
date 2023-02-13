@@ -19,8 +19,26 @@ class PortlandOpenIdConnectUtil
   public const ROSE_DOMAIN_NAME = "portlandoregon.gov";
   public const PTLD_DOMAIN_NAME = "police.portlandoregon.gov";
 
+  // Keys
+  private static $ROSE_SYNC_CLIENT_ID;
+  private static $ROSE_SYNC_CLIENT_SECRET;
+  private static $PTLD_SYNC_CLIENT_ID;
+  private static $PTLD_SYNC_CLIENT_SECRET;
+
   /* @var \GuzzleHttp\ClientInterface $client */
   private static $client;
+
+  public static function init() {
+    if(empty(self::$ROSE_SYNC_CLIENT_ID))
+      self::$ROSE_SYNC_CLIENT_ID = file_get_contents('sites/default/files/private/rose_sync_client_id.key');
+    if(empty(self::$ROSE_SYNC_CLIENT_SECRET))
+      self::$ROSE_SYNC_CLIENT_SECRET = file_get_contents('sites/default/files/private/rose_sync_client_secret.key');
+    if(empty(self::$PTLD_SYNC_CLIENT_ID))
+      self::$PTLD_SYNC_CLIENT_ID = file_get_contents('sites/default/files/private/ptld_sync_client_id.key');
+    if(empty(self::$PTLD_SYNC_CLIENT_SECRET))
+      self::$PTLD_SYNC_CLIENT_SECRET = file_get_contents('sites/default/files/private/ptld_sync_client_secret.key');
+    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+  }
 
   /**
    * Helper function to remove a user's Employee role from a group.
@@ -28,6 +46,8 @@ class PortlandOpenIdConnectUtil
    */
   public static function removeEmployeeRoleOnUserFromGroup($account, $group_id)
   {
+    if(empty($account) || empty($group_id)) return;
+
     // Automated removal should only remove the "Employee" role
     $group = \Drupal\group\Entity\Group::load($group_id);
     $membership = $group->getMember($account);
@@ -74,6 +94,8 @@ class PortlandOpenIdConnectUtil
    */
   public static function addUserToGroupWithEmployeeRole($account, $group_id)
   {
+    if(empty($account) || empty($group_id)) return;
+
     $group = \Drupal\group\Entity\Group::load($group_id);
     $role_id_array = [$group->getGroupType()->id() . '-employee'];
     $membership = $group->getMember($account);
@@ -107,8 +129,9 @@ class PortlandOpenIdConnectUtil
   public static function updatePrimaryGroupsForUser($account)
   {
     if (empty($account)) return;
+    self::init();
 
-    $new_primary_group_ids = PortlandOpenIdConnectUtil::buildGroupIDlistFromGroupNames($account->field_group_names->value);
+    $new_primary_group_ids = self::buildGroupIDlistFromGroupNames($account->field_group_names->value);
 
     // Some AD group name does not have a matching Drupal group ID
     if(!empty($account->field_group_names->value) && empty($new_primary_group_ids)) return;
@@ -116,7 +139,7 @@ class PortlandOpenIdConnectUtil
     if ($account->isNew()) {
       $current_primary_group_ids = [];
     } else {
-      $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
+      $current_primary_group_ids = self::getGroupIdsOfUser($account);
     }
     if (empty($new_primary_group_ids) && empty($current_primary_group_ids)) return;
 
@@ -124,17 +147,17 @@ class PortlandOpenIdConnectUtil
     if (empty($new_primary_group_ids)) {
       // Remove user from all current groups
       foreach ($current_primary_group_ids as $current_primary_group_id) {
-        PortlandOpenIdConnectUtil::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
+        self::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     } else if (empty($current_primary_group_ids)) {
       // Add the Employee role to user in all new groups
       foreach ($new_primary_group_ids as $new_primary_group_id) {
-        PortlandOpenIdConnectUtil::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
+        self::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
       }
     } else {
       // For any added group, add membership
       foreach ($new_primary_group_ids as $new_primary_group_id) {
-        PortlandOpenIdConnectUtil::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
+        self::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
       }
 
       // Check if any current group is not in the new group list
@@ -142,7 +165,7 @@ class PortlandOpenIdConnectUtil
         if (in_array($current_primary_group_id, $new_primary_group_ids))
           continue;
         // Remove user from the new group
-        PortlandOpenIdConnectUtil::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
+        self::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     }
   }
@@ -178,6 +201,8 @@ class PortlandOpenIdConnectUtil
    */
   public static function getGroupIdsOfUser($account)
   {
+    if(empty($account)) return;
+
     $group_ids = [];
     $grp_membership_service = \Drupal::service('group.membership_loader');
     $grps = $grp_membership_service->loadByUser($account);
@@ -193,16 +218,17 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetAccessToken($domain = self::ROSE_DOMAIN_NAME)
   {
+    self::init();
     $settings = [
       self::ROSE_DOMAIN_NAME => [
         "tenant_id" => '636d7808-73c9-41a7-97aa-8c4733642141',
-        "client_id" =>  Settings::get('azure.rose_sync_client_id'),
-        "client_secret" =>  Settings::get('azure.rose_sync_client_secret'),
+        "client_id" =>  self::$ROSE_SYNC_CLIENT_ID,
+        "client_secret" =>  self::$ROSE_SYNC_CLIENT_SECRET,
       ],
       self::PTLD_DOMAIN_NAME => [
         "tenant_id" => 'c365223a-f116-4a03-8077-94c3f5e5ca65',
-        "client_id" =>  Settings::get('azure.ptld_sync_client_id'),
-        "client_secret" =>  Settings::get('azure.ptld_sync_client_secret'),
+        "client_id" =>  self::$PTLD_SYNC_CLIENT_ID,
+        "client_secret" =>  self::$PTLD_SYNC_CLIENT_SECRET,
       ],
     ];
 
@@ -227,7 +253,6 @@ class PortlandOpenIdConnectUtil
       ],
     ];
 
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       $response = self::$client->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", $request_options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
@@ -297,12 +322,11 @@ class PortlandOpenIdConnectUtil
   public static function GetUserProfile($access_token, $user)
   {
     if (empty($access_token) || empty($user)) return false;
+    self::init();
 
     // Some users should be skipped
     if (self::ShouldSkipUser($user)) return false;
 
-    // Get the HTTP client singleton
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
       $response = self::$client->get(
@@ -367,7 +391,7 @@ class PortlandOpenIdConnectUtil
       if ($e->getCode() == 404) {
         // If the user doesn't hav profile, disable the account
         if ( ! $user->isNew() ) {
-          PortlandOpenIdConnectUtil::DisableUser($user);
+          self::DisableUser($user);
         }
       }
       // Log other exceptions
@@ -388,11 +412,11 @@ class PortlandOpenIdConnectUtil
   public static function GetUserManager($access_token, $user)
   {
     if (empty($access_token) || empty($user)) return;
+    self::init();
 
     // PTLD has no manager info
     if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
 
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       // https://learn.microsoft.com/en-us/graph/api/user-list-manager?view=graph-rest-1.0&tabs=http
       $response = self::$client->get(
@@ -463,8 +487,8 @@ class PortlandOpenIdConnectUtil
   public static function GetUserPhoto($access_token, $userPrincipalName, $azure_ad_id)
   {
     if (empty($access_token) || empty($userPrincipalName) || empty($azure_ad_id)) return;
+    self::init();
 
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     // Perform the request.
     $options = [
       'method' => 'GET',
@@ -529,8 +553,8 @@ class PortlandOpenIdConnectUtil
   {
     // Avoid disabling user accidentally
     if (empty($access_token) || empty($user)) return true;
+    self::init();
 
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
     try {
       // Example: https://graph.microsoft.com/beta/users/PRINCIPAL_NAME
       $response = self::$client->get(

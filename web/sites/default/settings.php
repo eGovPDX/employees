@@ -165,9 +165,3 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] !== 'l
 
   $settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms
 }
-
-$settings['azure.rose_sync_client_id'] = file_get_contents('sites/default/files/private/rose_sync_client_id.key');
-$settings['azure.rose_sync_client_secret'] = file_get_contents('sites/default/files/private/rose_sync_client_secret.key');
-
-$settings['azure.ptld_sync_client_id'] = file_get_contents('sites/default/files/private/ptld_sync_client_id.key');
-$settings['azure.ptld_sync_client_secret'] = file_get_contents('sites/default/files/private/ptld_sync_client_secret.key');
