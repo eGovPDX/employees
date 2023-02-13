@@ -66,7 +66,9 @@
         {{- content.field_mime_type -}}<span class="visually-hidden">{{ mime_type_friendly }}</span>
       {% endif %}
       {{ name }} 
-      {{ content.field_file_size.0|render|striptags|format_size }}
+      {% if content.field_file_size.0|render|striptags|length > 0 %}
+       ({{ content.field_file_size.0|render|striptags|format_size }})
+      {% endif %}
     </a>
   </h2>
   {% endapply %}

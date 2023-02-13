@@ -35,7 +35,7 @@
       {{ content|without('field_featured_image', 'links') }}
     </div>
   </div>
-  {% if content.field_featured_image %}
+  {% if content.field_featured_image|render|striptags|length > 0 %}
     <div class="col-12 col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0">
       {{ content.field_featured_image }}
     </div>

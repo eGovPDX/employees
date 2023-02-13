@@ -24,6 +24,7 @@ dependencies:
   module:
     - layout_builder
     - layout_library
+    - smart_trim
     - user
 third_party_settings:
   layout_builder:
@@ -54,9 +55,23 @@ content:
     weight: 0
     region: content
   field_resource_description:
-    type: basic_string
+    type: smart_trim
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 50
+      trim_type: words
+      trim_suffix: ''
+      wrap_output: true
+      wrap_class: 'trimmed mb-3'
+      more_link: false
+      more_class: more-link
+      more_text: More
+      more_aria_label: 'Read more about [node:title]'
+      summary_handler: full
+      trim_options:
+        text: false
+        trim_zero: false
+        replace_tokens: false
     third_party_settings: {  }
     weight: 1
     region: content
