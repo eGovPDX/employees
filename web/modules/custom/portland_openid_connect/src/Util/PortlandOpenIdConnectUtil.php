@@ -176,6 +176,7 @@ class PortlandOpenIdConnectUtil
    */
   private static function buildGroupIDlistFromGroupNames($group_names)
   {
+    if(empty($group_names)) return;
     // Assume the group names have been cleaned by presave hook
     $group_names_array = explode(',', $group_names);
 
@@ -277,7 +278,9 @@ class PortlandOpenIdConnectUtil
   }
 
   public static function ShouldSkipUser($user) {
-    $email = $user->mail->value;
+    $email = strtolower($user->mail->value);
+
+    // Code below will convert these emails to lower case. OK to use upper case here.
     $skip_emails = [
       'BTS-eGov@portlandoregon.gov',
       'ally.admin@portlandoregon.gov',
@@ -287,7 +290,7 @@ class PortlandOpenIdConnectUtil
 
     if( $user->field_is_contact_only->value || // Skip contact only users
     empty($user->field_active_directory_id->value) || // Skip users without AD ID
-      in_array(strtolower($email), array_map('strtolower', $skip_emails)) || // Skip users with certain email
+      in_array($email, array_map('strtolower', $skip_emails)) || // Skip users with certain email
     str_ends_with($email, 'onmicrosoft.com') ||  // Skip users with generic email
     str_contains($email, '_adm@')) {
       return true;
