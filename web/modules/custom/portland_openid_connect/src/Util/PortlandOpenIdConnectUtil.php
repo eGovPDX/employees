@@ -278,6 +278,13 @@ class PortlandOpenIdConnectUtil
   }
 
   public static function ShouldSkipUser($user) {
+    // Skip ROSE users who are added in PTLD for special access
+    if(
+      str_ends_with($user->mail->value, "@portlandoregon.gov") &&
+      str_ends_with($user->name->value, "@police.portlandoregon.gov")
+    ) {
+      return true;
+    }
     $email = strtolower($user->mail->value);
 
     // Code below will convert these emails to lower case. OK to use upper case here.
@@ -288,11 +295,13 @@ class PortlandOpenIdConnectUtil
       'oliver.outsider@portlandoregon.gov',
     ];
 
-    if( $user->field_is_contact_only->value || // Skip contact only users
-    empty($user->field_active_directory_id->value) || // Skip users without AD ID
+    if( 
+      $user->field_is_contact_only->value || // Skip contact only users
+      empty($user->field_active_directory_id->value) || // Skip users without AD ID
       in_array($email, array_map('strtolower', $skip_emails)) || // Skip users with certain email
-    str_ends_with($email, 'onmicrosoft.com') ||  // Skip users with generic email
-    str_contains($email, '_adm@')) {
+      str_ends_with($email, 'onmicrosoft.com') ||  // Skip users with generic email
+      str_contains($email, '_adm@')
+    ) {
       return true;
     }
     return false;
