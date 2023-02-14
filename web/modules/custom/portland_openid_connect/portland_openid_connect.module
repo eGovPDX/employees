@@ -133,11 +133,17 @@ function _process_users($response_data, $access_token)
       continue;
     }
 
-    // Use email to look up user. After PTLD migration, user's email will remain the same. There are also cases when the user gets a new AD account with the same email address.
+    // Use principal name and email to look up user. After PTLD migration, user's email will remain the same. There are also cases when the user gets a new AD account with the same email address.
     $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $user_data['userPrincipalName']]);
-
     if(empty($users)) {
       $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $user_data['mail']]);
+    }
+
+    // If a user can't be found by Principal Name or Email but can be found via AD ID, it indicate the user's email or principal name have changed and we need to update email/principal name.
+    $user_found_by_id = false;
+    if(empty($users)) {
+      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['field_active_directory_id' => $user_data['id']]);
+      $user_found_by_id = !empty($users);
     }
 
     // Create a new user account if there is no existing account with the email
@@ -186,6 +192,25 @@ function _process_users($response_data, $access_token)
       $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
       if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
 
+      // ONLY update the email address when the user was found by AD ID
+      if($user_found_by_id) {
+        $user->mail->value = $user_data['mail'];
+      }
+      $user->set('field_first_name', $user_data['givenName']);
+      $user->set('field_last_name', $user_data['surname']);
+      $user->set('field_active_directory_id', $user_data['id']);
+      $user->setUsername(PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']) ); // Update account username
+
+      PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
+      $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
+      if ($has_profile) {
+        $user->save();
+
+        // Update the user's primary group membership to match the AD group names
+        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
+        $users_updated []= $user->getAccountName();
+      }
+
       // Check if the user account is enabled in AD
       $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user);
       // @removed is set when a user is removed from AD
@@ -194,24 +219,6 @@ function _process_users($response_data, $access_token)
         $user->status = 0;
         $user->save();
         $users_disabled []= $user->getAccountName();
-      }
-      // Update this user if the user is enabled in AD
-      else {
-        // DO NOT update the email address
-        $user->set('field_first_name', $user_data['givenName']);
-        $user->set('field_last_name', $user_data['surname']);
-        $user->set('field_active_directory_id', $user_data['id']);
-        $user->setUsername(PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']) ); // Update account username
-
-        PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
-        $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
-        if ($has_profile) {
-          $user->save();
-
-          // Update the user's primary group membership to match the AD group names
-          PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
-          $users_updated []= $user->getAccountName();
-        }
       }
     }
   }
