@@ -285,7 +285,14 @@ class PortlandOpenIdConnectUtil
     ) {
       return true;
     }
-    $email = strtolower($user->mail->value);
+
+    // Skip users without both firstname and lastname
+    if(
+      empty($user->field_first_name->value) &&
+      empty($user->field_last_name->value)
+    ) {
+      return true;
+    }
 
     // Code below will convert these emails to lower case. OK to use upper case here.
     $skip_emails = [
@@ -294,7 +301,7 @@ class PortlandOpenIdConnectUtil
       'marty.member@portlandoregon.gov',
       'oliver.outsider@portlandoregon.gov',
     ];
-
+    $email = strtolower($user->mail->value);
     if( 
       $user->field_is_contact_only->value || // Skip contact only users
       empty($user->field_active_directory_id->value) || // Skip users without AD ID
