@@ -390,12 +390,15 @@ class PortlandOpenIdConnectUtil
         }
 
         $user_info['principalName'] = $response_data["account"][0]['userPrincipalName'];
+        $user_info['first_name'] = $response_data['names'][0]['first'];
+        $user_info['last_name'] = $response_data['names'][0]['last'];
       }
 
       // Look up Drupal user with email
       // $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $email]);
       // $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
-
+      $user->field_first_name = $user_info['first_name'];
+      $user->field_last_name = $user_info['last_name'];
       $user->field_title = $user_info['title'];
       $user->field_division_name = $user_info['division'];
       $user->field_office_location = $user_info['officeLocation'];
