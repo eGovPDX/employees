@@ -567,7 +567,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="badge badge-sm bg-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1847,7 +1847,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{% if status == "No" %}<span class="text-danger ms-1">Unpublished</span>{% endif %}'
+            text: '{% if status == "No" %}<span class="badge badge-sm bg-danger ms-1">Unpublished</span>{% endif %}'
             make_link: false
             path: ''
             absolute: false
