@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Westy Layout for 2 column page hero
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'layout',
+    'layout--westy-two-column-page-hero',
+    'row',
+    'align-items-center',
+    'position-relative',
+    'mb-4',
+  ]
+%}
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+    {% if content.main %}
+      <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main', 'col', 'd-flex', 'flex-column', 'py-3', 'py-lg-5') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+    {% if content.side|render %}
+      <div class="w-100 d-lg-none"></div>
+      <div {{ region_attributes.side.addClass('layout__region', 'layout__region--side', 'col', 'd-flex', 'pb-3', 'pb-lg-0') }}>
+        {{ content.side }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

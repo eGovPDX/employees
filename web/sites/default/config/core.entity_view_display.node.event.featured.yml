@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_contact
     - field.field.node.event.field_display_in_group
+    - field.field.node.event.field_featured_image
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_search_keywords
@@ -33,6 +34,15 @@ targetEntityType: node
 bundle: event
 mode: featured
 content:
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_when:
     type: smartdate_default
     label: hidden
@@ -44,7 +54,7 @@ content:
       add_classes: false
       time_wrapper: true
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   body: true

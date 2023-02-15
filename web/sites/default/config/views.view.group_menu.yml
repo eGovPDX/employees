@@ -909,11 +909,11 @@ display:
       defaults:
         cache: false
         title: false
-        use_more: false
-        use_more_always: false
-        use_more_text: false
-        link_display: false
-        link_url: false
+        use_more: true
+        use_more_always: true
+        use_more_text: true
+        link_display: true
+        link_url: true
         style: false
         row: false
         relationships: false
@@ -925,11 +925,6 @@ display:
         header: false
       relationships: {  }
       display_description: ''
-      use_more: true
-      use_more_always: true
-      use_more_text: 'Search all content in this group'
-      link_display: custom_url
-      link_url: '/group/{{ raw_arguments.field_display_in_group_target_id }}/search'
       header: {  }
       display_extenders: {  }
       block_description: 'Group Homepage Menu'
@@ -945,9 +940,15 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -961,6 +962,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -2422,9 +2426,15 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -2438,6 +2448,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -2763,9 +2776,15 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -2779,6 +2798,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -3577,9 +3599,15 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -3593,6 +3621,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -3908,9 +3939,15 @@ display:
         - user.group_permissions
         - 'user.node_grants:view'
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -3924,6 +3961,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'

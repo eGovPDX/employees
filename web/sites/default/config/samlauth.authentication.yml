@@ -6,12 +6,14 @@ login_redirect_url: ''
 logout_redirect_url: ''
 error_redirect_url: ''
 error_throw: false
-local_login_saml_error: false
+local_login_saml_error: true
 logout_different_user: false
 drupal_login_roles:
-  authenticated: '0'
+  authenticated: authenticated
   publisher: '0'
   bts_catalog: '0'
+  311_support_agent: '0'
+  311_lead: '0'
   content_lead: '0'
   administrator: '0'
 sp_entity_id: employees.portland.gov
@@ -35,6 +37,8 @@ map_users_mail: true
 map_users_roles:
   publisher: publisher
   bts_catalog: bts_catalog
+  311_support_agent: 311_support_agent
+  311_lead: 311_lead
   content_lead: content_lead
   administrator: administrator
 create_users: false

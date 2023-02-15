@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
+    - field.field.node.page.field_featured_image
     - field.field.node.page.field_menu_url_text
     - field.field.node.page.field_parent
     - field.field.node.page.field_popularity
@@ -25,7 +26,6 @@ dependencies:
     - layout_builder
     - layout_builder_restrictions
     - layout_library
-    - smart_trim
     - user
 third_party_settings:
   layout_builder:
@@ -51,26 +51,17 @@ targetEntityType: node
 bundle: page
 mode: featured
 content:
-  body:
-    type: smart_trim
+  field_featured_image:
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      trim_length: 300
-      trim_type: chars
-      trim_suffix: ''
-      wrap_output: true
-      wrap_class: 'trimmed mb-2'
-      more_link: false
-      more_class: more-link
-      more_text: More
-      summary_handler: trim
-      trim_options:
-        text: true
-        trim_zero: false
+      view_mode: featured
+      link: false
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
+  body: true
   content_dates_eva_created_content: true
   content_dates_eva_updated_content: true
   content_moderation_control: true

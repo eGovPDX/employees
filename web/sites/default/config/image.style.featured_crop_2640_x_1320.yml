@@ -1,0 +1,36 @@
+uuid: e0cd5b72-fb67-4921-8140-71c701629b6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.featured_image
+  module:
+    - crop
+    - image_effects
+name: featured_crop_2640_x_1320
+label: 'Featured Crop 2640 x 1320'
+effects:
+  eac765cd-bff2-453e-a109-a26be0a60e38:
+    uuid: eac765cd-bff2-453e-a109-a26be0a60e38
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: featured_image
+      automatic_crop_provider: null
+  a7a7a938-346c-4bd4-bfeb-360b6b1a906b:
+    uuid: a7a7a938-346c-4bd4-bfeb-360b6b1a906b
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 2640
+      height: 1320
+      anchor: center-center
+  908b89eb-26bd-4574-b83a-56dc1534873e:
+    uuid: 908b89eb-26bd-4574-b83a-56dc1534873e
+    id: image_effects_imagemagick_arguments
+    weight: 3
+    data:
+      command_line: "-filter Triangle\r\n-define filter:support=2\r\n-unsharp 0.25x0.25+8+0.065\r\n-dither None\r\n-posterize 136\r\n-define jpeg:fancy-upsampling=off\r\n-define png:compression-filter=5\r\n-define png:compression-level=9\r\n-define png:compression-strategy=1\r\n-define png:exclude-chunk=all\r\n-interlace none\r\n-colorspace sRGB\r\n-strip"
+      dimensions_method: keep
+      width: ''
+      height: ''

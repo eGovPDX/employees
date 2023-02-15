@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.group.featured
+    - field.field.group.private.field_featured_content
+    - field.field.group.private.field_featured_documents
+    - field.field.group.private.field_featured_image
     - field.field.group.private.field_group_contact
     - field.field.group.private.field_group_description
     - field.field.group.private.field_group_path
@@ -37,6 +40,15 @@ targetEntityType: group
 bundle: private
 mode: featured
 content:
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_group_description:
     type: smart_trim
     label: hidden
@@ -49,12 +61,13 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   field_org_type:
     type: entity_reference_label
@@ -62,11 +75,13 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   changed: true
   created: true
+  field_featured_content: true
+  field_featured_documents: true
   field_group_contact: true
   field_group_path: true
   field_migration_status: true

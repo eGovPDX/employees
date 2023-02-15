@@ -1,0 +1,19 @@
+diff --git a/core/lib/Drupal/Core/Entity/Sql/SqlContentEntityStorage.php b/core/lib/Drupal/Core/Entity/Sql/SqlContentEntityStorage.php
+index b592f8a79b..865e7ff0b9 100644
+--- a/core/lib/Drupal/Core/Entity/Sql/SqlContentEntityStorage.php
++++ b/core/lib/Drupal/Core/Entity/Sql/SqlContentEntityStorage.php
+@@ -800,7 +800,13 @@ protected function doDeleteFieldItems($entities) {
+    */
+   public function save(EntityInterface $entity) {
+     try {
+-      $transaction = $this->database->startTransaction();
++      try {
++        $transaction = $this->database->startTransaction();
++      }
++      catch (\Exception $e) {
++        \Drupal::logger('php')->log(RfcLogLevel::DEBUG, "SqlContentEntityStorage::save() - Attempting recovery from database exception: " . $e->getMessage());
++        $transaction = $this->database->startTransaction();
++      }
+       $return = parent::save($entity);
+ 
+       // Ignore replica server temporarily.

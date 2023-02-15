@@ -84,25 +84,39 @@ final class JoinLeaveLink extends FieldPluginBase
     $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     $membership = $group->getMember($account);
     if (!empty($membership)) {
-      // Do not display join/leave link if the user has Employee or Assigned role
+      // Do not display join/leave link if the user has a role that should not be able to leave
       $roles = $membership->getRoles();
-      $roles_to_match = ["employee-employee", "employee-assigned", "private-employee", "private-assigned"];
+      $roles_to_match = ["employee-employee", "employee-assigned", "private-employee", "private-assigned", "employee-admin", "employee-editor"];
       foreach ($roles as $role) {
         if ( in_array($role->id(), $roles_to_match) ) {
-          return [
-            '#markup' => \Drupal\Core\Render\Markup::create("Assigned group"),
-          ];
+          return;
         }
       }
     }
 
     if (empty($group->getMember($user))) {
       if ($group->hasPermission('join group', $user)) {
-        $build = Link::createFromRoute('Join to Follow', 'entity.group.follow', ['group' => $group->id(), 'destination' => $current_path])->toString();
+        $options = [ 
+          'attributes' => [
+            'class' => [
+              'btn',
+              'btn-outline-primary',
+            ]
+          ]
+        ];
+        $build = Link::createFromRoute('Follow', 'entity.group.follow', ['group' => $group->id(), 'destination' => $current_path], $options)->toString();
       }
     } else {
       if ($group->getMember($user) and $group->hasPermission('leave group', $user)) {
-        $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(), 'destination' => $current_path])->toString();
+        $options = [ 
+          'attributes' => [
+            'class' => [
+              'btn',
+              'btn-outline-danger',
+            ]
+          ]
+        ];
+        $build = Link::createFromRoute('Leave', 'entity.group.leave', ['group' => $group->id(), 'destination' => $current_path], $options)->toString();
       }
     }
 

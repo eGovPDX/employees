@@ -16,6 +16,10 @@ dependencies:
     - field.storage.node.field_category
     - field.storage.node.field_cloud_service_type
     - field.storage.node.field_311_notes
+    - field.storage.node.field_first_name
+    - field.storage.node.field_last_name
+    - field.storage.node.field_mail_stop
+    - field.storage.node.field_phone
     - field.storage.node.field_title
     - field.storage.node.body
     - field.storage.node.field_display_in_group
@@ -35,14 +39,14 @@ dependencies:
     - field.storage.node.field_type
     - field.storage.node.field_updated_on
     - field.storage.node.field_when
-    - field.storage.user.field_division_name
     - field.storage.user.field_first_name
     - field.storage.user.field_group_names
     - field.storage.user.field_is_contact_only
     - field.storage.user.field_last_name
+    - field.storage.user.field_primary_groups
+    - field.storage.user.field_division_name
     - field.storage.user.field_address
     - field.storage.user.field_phone
-    - field.storage.user.field_primary_groups
     - field.storage.user.field_search_boost
     - field.storage.user.field_search_keywords
     - field.storage.user.field_section
@@ -101,6 +105,9 @@ third_party_settings:
     multilingual:
       limit_to_content_language: false
       include_language_independent: true
+      use_language_undefined_as_fallback_language: false
+      specific_languages: {  }
+      use_universal_collation: false
 id: full_index
 name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
@@ -279,6 +286,56 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_cloud_service_type
+  field_contact_first_name_fulltext:
+    label: 'Contact First Name Fulltext'
+    datasource_id: 'entity:node'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_first_name
+  field_contact_first_name_phonetic:
+    label: 'Contact First Name Phonetic'
+    datasource_id: 'entity:node'
+    property_path: field_first_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.node.field_first_name
+  field_contact_last_name_fulltext:
+    label: 'Contact Last Name Fulltext'
+    datasource_id: 'entity:node'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:edgestring'
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_last_name
+  field_contact_last_name_phonetic:
+    label: 'Contact Last Name Phonetic'
+    datasource_id: 'entity:node'
+    property_path: field_last_name
+    type: 'solr_text_custom_omit_norms:phonetic'
+    dependencies:
+      config:
+        - field.storage.node.field_last_name
+  field_contact_mail_stop:
+    label: 'Contact Mail stop Fulltext'
+    datasource_id: 'entity:node'
+    property_path: field_mail_stop
+    type: 'solr_text_custom_omit_norms:ngram'
+    dependencies:
+      config:
+        - field.storage.node.field_mail_stop
+  field_contact_phone:
+    label: 'Contact Phone Fulltext'
+    datasource_id: 'entity:node'
+    property_path: field_phone
+    type: 'solr_text_custom_omit_norms:ngram'
+    dependencies:
+      config:
+        - field.storage.node.field_phone
   field_contact_title:
     label: 'Contact Title'
     datasource_id: 'entity:node'
@@ -669,10 +726,13 @@ field_settings:
         'entity:media':
           document: ''
         'entity:node':
+          alert: ''
           bts_catalog_item: ''
+          contact: ''
           contract: ''
           event: default
           news: default
+          notification: ''
           page: default
           resource: default
         'entity:user':
