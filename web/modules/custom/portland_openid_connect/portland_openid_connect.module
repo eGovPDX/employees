@@ -199,10 +199,7 @@ function _process_users($response_data, $access_token)
       // If the profile is empty, assume the user is not enabled
       if ($has_profile) {
         $user->save();
-        // Add the user to primary groups as Employee
-        PortlandOpenIdConnectUtil::updatePrimaryGroupMembershipForUser($user);
         $users_created []= $user->getAccountName();
-
       }
     }
     // Else the user is already in Drupal. We need to either update or disable the user.
@@ -226,9 +223,6 @@ function _process_users($response_data, $access_token)
       $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
       if ($has_profile) {
         $user->save();
-
-        // Update the user's primary group membership to match the AD group names
-        PortlandOpenIdConnectUtil::updatePrimaryGroupMembershipForUser($user);
         $users_updated []= $user->getAccountName();
       }
 
