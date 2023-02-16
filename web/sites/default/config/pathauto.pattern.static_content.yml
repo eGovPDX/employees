@@ -7,12 +7,12 @@ dependencies:
 id: static_content
 label: 'Static Content'
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent:entity:field_parent:entity:field_menu_url_text]/[node:field_parent:entity:field_menu_url_text]/[node:field_menu_url_text]'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent:entity:field_parent:entity:field_parent:entity:field_menu_url_text]/[node:field_parent:entity:field_parent:entity:field_menu_url_text]/[node:field_parent:entity:field_menu_url_text]/[node:field_menu_url_text]'
 selection_criteria:
-  527a49c9-2367-4082-80ee-6a04237396cb:
+  f35474b0-75c1-4528-8b65-f4a9193e6ee9:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 527a49c9-2367-4082-80ee-6a04237396cb
+    uuid: f35474b0-75c1-4528-8b65-f4a9193e6ee9
     context_mapping:
       node: node
     bundles:
