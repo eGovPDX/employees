@@ -340,11 +340,14 @@ class PortlandOpenIdConnectUtil
    */
   public static function GetUserProfile($access_token, $user)
   {
+    \Drupal::logger('portland OpenID')->debug('enter  GetUserProfile');
+
     if (empty($access_token) || empty($user)) return false;
     self::init();
 
     // Some users should be skipped
     if (self::ShouldSkipUser($user)) return false;
+    \Drupal::logger('portland OpenID')->debug('after  ShouldSkipUser');
 
     try {
       // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
@@ -359,12 +362,18 @@ class PortlandOpenIdConnectUtil
         ]
       );
       $response_data = json_decode((string) $response->getBody(), TRUE);
+
+      \Drupal::logger('portland OpenID')->debug('after  json_decode');
+
       $user_info = [];
       if (
         array_key_exists('positions', $response_data) &&
         !empty($response_data["positions"]) &&
         array_key_exists('detail', $response_data["positions"][0])
       ) {
+
+        \Drupal::logger('portland OpenID')->debug("array_key_exists('positions'");
+
         $user_info['title'] = $response_data["positions"][0]["detail"]["jobTitle"];
         $user_info['group'] = $response_data["positions"][0]["detail"]["company"]["displayName"];
         $user_info['division'] = $response_data["positions"][0]["detail"]["company"]["department"];

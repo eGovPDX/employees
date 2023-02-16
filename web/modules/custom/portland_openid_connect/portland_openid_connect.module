@@ -12,20 +12,29 @@ use Drupal\Core\Site\Settings;
  * Update user profile and manager info during login
  */
 function portland_openid_connect_user_login(UserInterface $user) {
+  \Drupal::logger('portland OpenID')->debug('enter portland_openid_connect_user_login');
+
   if (empty($user)) return;
 
   if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) return;
 
   $domain = (str_ends_with($user->mail->value, PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME)) ? PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME : PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME;
 
+  \Drupal::logger('portland OpenID')->debug('GetAccessToken ');
+
   $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
   if (empty($tokens) || empty($tokens['access_token'])) {
     \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
     return;
   }
+  \Drupal::logger('portland OpenID')->debug('GetUserProfile ');
 
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
+  \Drupal::logger('portland OpenID')->debug('GetUserManager ');
+
   PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
+
+  $user->save();
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
 }
