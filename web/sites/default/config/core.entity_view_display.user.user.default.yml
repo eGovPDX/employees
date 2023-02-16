@@ -17,6 +17,7 @@ dependencies:
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_principal_name
     - field.field.user.user.field_publisher_role_changed
     - field.field.user.user.field_search_boost
     - field.field.user.user.field_search_keywords
@@ -118,7 +119,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 18
+    weight: 17
     region: content
   field_last_name:
     type: string
@@ -142,7 +143,7 @@ content:
     settings:
       title: ''
     third_party_settings: {  }
-    weight: 19
+    weight: 18
     region: content
   field_office_location:
     type: string
@@ -174,7 +175,7 @@ content:
     settings:
       timezone_override: ''
     third_party_settings: {  }
-    weight: 20
+    weight: 19
     region: content
   field_search_boost:
     type: number_decimal
@@ -185,7 +186,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 21
+    weight: 20
     region: content
   field_search_keywords:
     type: simple_gmap
@@ -205,7 +206,7 @@ content:
       langcode: en
       apikey: ''
     third_party_settings: {  }
-    weight: 22
+    weight: 21
     region: content
   field_section:
     type: simple_gmap
@@ -225,7 +226,7 @@ content:
       langcode: en
       apikey: ''
     third_party_settings: {  }
-    weight: 23
+    weight: 22
     region: content
   field_title:
     type: string
@@ -241,7 +242,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 26
+    weight: 25
     region: content
   field_workspace:
     type: simple_gmap
@@ -261,7 +262,7 @@ content:
       langcode: en
       apikey: ''
     third_party_settings: {  }
-    weight: 24
+    weight: 23
     region: content
   langcode:
     type: language
@@ -307,9 +308,10 @@ content:
   user_status_eva_user_status:
     settings: {  }
     third_party_settings: {  }
-    weight: 25
+    weight: 24
     region: content
 hidden:
+  field_principal_name: true
   masquerade: true
   realname: true
   search_api_excerpt: true
