@@ -6,7 +6,6 @@ use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
-use Drupal\Core\Site\Settings;
 use Drupal\Core\TypedData\ListInterface;
 use Drupal\taxonomy\TermStorageInterface;
 
@@ -123,10 +122,26 @@ class PortlandOpenIdConnectUtil
   }
 
   /**
-   * Helper function to keep a user's group membership in-sync with the AD primary group name.
-   * Will be called by User post-save hooks and this view bulk operation.
+   * Helper function to keep the Primary Groups field in sync with AD Group Names
+   * Will be called by hook_user_presave.
    */
-  public static function updatePrimaryGroupsForUser($account)
+  public static function updatePrimaryGroupFieldForUser($account) {
+    if (empty($account)) return;
+    // Skip contact only users
+    if($account->field_is_contact_only->value == 1) {
+      $account->field_primary_groups = [];
+    }
+    else {
+      $account->field_primary_groups = self::buildGroupIDlistFromGroupNames($account->field_group_names->value);
+    }
+    // DO NOT save the account. Only modify the field value.
+  }
+
+  /**
+   * Helper function to keep a user's group membership in-sync with the AD primary group name.
+   * Will be called by hook_user_update and hook_user_insert.
+   */
+  public static function updatePrimaryGroupMembershipForUser($account)
   {
     if (empty($account)) return;
     self::init();
