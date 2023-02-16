@@ -24,10 +24,12 @@ function portland_openid_connect_user_login(UserInterface $user) {
     return;
   }
 
+  // Only enabled users can log in so we don't need to check if the user is enabled
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
   PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
+  $user->save();
 }
 
 /**
