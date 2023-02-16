@@ -349,7 +349,7 @@ class PortlandOpenIdConnectUtil
     try {
       // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
       $response = self::$client->get(
-        'https://graph.microsoft.com/beta/users/' . $user->mail->value . '/profile', // User account name is the principal name
+        'https://graph.microsoft.com/beta/users/' . $user->mail->value . '/profile', // Must use email for beta user profile API
         [
           'method' => 'GET',
           'headers' => [
@@ -397,6 +397,7 @@ class PortlandOpenIdConnectUtil
       // Look up Drupal user with email
       // $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $email]);
       // $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
+      $user->field_principal_name = $user_info['principalName'];
       $user->field_first_name = $user_info['first_name'];
       $user->field_last_name = $user_info['last_name'];
       $user->field_title = $user_info['title'];
@@ -439,10 +440,11 @@ class PortlandOpenIdConnectUtil
     // PTLD has no manager info
     if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
 
+    $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
     try {
       // https://learn.microsoft.com/en-us/graph/api/user-list-manager?view=graph-rest-1.0&tabs=http
       $response = self::$client->get(
-        'https://graph.microsoft.com/v1.0/users/' . $user->mail->value . '/manager',
+        "https://graph.microsoft.com/v1.0/users/$user_lookup_key/manager", // Must use Principal Name for v1.0 API
         [
           'method' => 'GET',
           'headers' => [
@@ -488,6 +490,7 @@ class PortlandOpenIdConnectUtil
             'field_first_name' => $response_data['givenName'],
             'field_last_name' => $response_data['surname'],
             'field_active_directory_id' => $manager_ad_id,
+            'field_principal_name' => $response_data['userPrincipalName'],
           ]);
           $manager_stub_user->save();
           $manager_user_ids[] = $manager_stub_user->id();
@@ -540,7 +543,6 @@ class PortlandOpenIdConnectUtil
         FileSystemInterface::EXISTS_REPLACE
       );
 
-      // Load the Drupal user with email
       $users = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['name' => $userPrincipalName]);
       if (count($users) != 0) {
@@ -577,10 +579,12 @@ class PortlandOpenIdConnectUtil
     if (empty($access_token) || empty($user)) return true;
     self::init();
 
+    // Principal name is a new field that legacy account doesn't have values.
+    $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
     try {
       // Example: https://graph.microsoft.com/beta/users/PRINCIPAL_NAME
       $response = self::$client->get(
-        'https://graph.microsoft.com/beta/users/' . $user->mail->value,
+        "https://graph.microsoft.com/beta/users/$user_lookup_key",
         [
           'method' => 'GET',
           'headers' => [

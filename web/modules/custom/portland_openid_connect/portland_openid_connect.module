@@ -172,6 +172,7 @@ function _process_users($response_data, $access_token)
         'field_active_directory_id' => $user_data['id'],
         'field_first_name' => $user_data['givenName'],
         'field_last_name' => $user_data['surname'],
+        'field_principal_name' => $user_data['userPrincipalName'],
       ]);
 
       if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
@@ -196,9 +197,11 @@ function _process_users($response_data, $access_token)
       if($user_found_by_id) {
         $user->mail->value = $user_data['mail'];
       }
-      $user->set('field_first_name', $user_data['givenName']);
-      $user->set('field_last_name', $user_data['surname']);
-      $user->set('field_active_directory_id', $user_data['id']);
+
+      $user->field_principal_name = $user_data['userPrincipalName'];
+      $user->field_first_name = $user_data['givenName'];
+      $user->field_last_name = $user_data['surname'];
+      $user->field_active_directory_id = $user_data['id'];
       $user->setUsername(PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']) ); // Update account username
 
       PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
