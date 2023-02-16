@@ -263,9 +263,9 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // lando drush state:del user_sync.resume_url.DOMAIN
 
     if ($resume_url = $system_state->get("user_sync.resume_url.$domain")) {
-      \Drupal::logger('portland OpenID')->notice("Resume retrieving user information for $domain ...");
+      \Drupal::logger('portland OpenID')->notice("Resume user sync for $domain ...");
     } else {
-      \Drupal::logger('portland OpenID')->notice("Start retrieving user information for $domain ...");
+      \Drupal::logger('portland OpenID')->notice("Start user sync for $domain ...");
     }
 
     // If there is a resume link, use it. Otherwise start fresh
@@ -290,12 +290,12 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // Should use deltaLink to resume in the next Cron.
     $system_state->set("user_sync.resume_url.$domain", $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
     \Drupal::logger('portland OpenID')->notice(isset($response_data['@odata.nextLink']) ?
-      "More user information to be retrieved by the next cron job for $domain." :
-      "Finished retrieving all user information for $domain.");
+      "More users to be retrieved next time for $domain." :
+      "Finished retrieving all users for $domain.");
     return true;
   } catch (RequestException $e) {
     $variables = [
-      '@message' => 'Could not retrieve user information from ' . $domain,
+      '@message' => 'Cannot retrieve users from ' . $domain,
       '@error_message' => $e->getMessage(),
     ];
     \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);

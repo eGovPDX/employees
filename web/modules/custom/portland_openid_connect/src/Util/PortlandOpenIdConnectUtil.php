@@ -420,7 +420,7 @@ class PortlandOpenIdConnectUtil
       // Log other exceptions
       else {
         $variables = [
-          '@message' => 'Could not retrieve user information for principal name ' . $user->getAccountName(),
+          '@message' => 'Could not retrieve info for principal name ' . $user->getAccountName(),
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
@@ -499,10 +499,10 @@ class PortlandOpenIdConnectUtil
       }
     } catch (RequestException $e) {
       $variables = [
-        '@message' => 'Could not retrieve user\'s manager information for principal name ' . $user->getAccountName(),
+        '@message' => 'Cannot retrieve user\'s manager information for principal name ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
-      \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
+      \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
 
@@ -602,7 +602,7 @@ class PortlandOpenIdConnectUtil
       }
       else {
         $variables = [
-          '@message' => 'Could not retrieve user information for user ' . $user->getAccountName(),
+          '@message' => 'Could not retrieve info for user ' . $user->getAccountName(),
           '@error_message' => $e->getMessage(),
         ];
         \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
