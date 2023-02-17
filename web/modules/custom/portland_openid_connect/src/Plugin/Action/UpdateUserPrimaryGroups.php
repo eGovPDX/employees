@@ -24,8 +24,10 @@ class UpdateUserPrimaryGroups extends ActionBase
   {
     // Add a try catch block to help log any exception
     try {
-      PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
-    } catch (Exception $e) {
+      // field_primary_groups and group memberships are managed in hook_user_presave
+      // and hook_user_update, we only need to save the user here
+      $account->save();
+    } catch (\Exception $e) {
       \Drupal::logger('portland OpenID')->notice('Exception during UpdateUserPrimaryGroups: ' . $e->getMessage() . '. ' . $account->getAccountName());
     }
   }

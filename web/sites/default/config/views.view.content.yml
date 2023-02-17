@@ -2411,45 +2411,6 @@ display:
             311_lead: 311_lead
             administrator: administrator
       filters:
-        field_migration_date_value_1:
-          id: field_migration_date_value_1
-          table: node__field_migration_date
-          field: field_migration_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: 'not empty'
-          value: ''
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         title:
           id: title
           table: node_field_data
@@ -2743,6 +2704,57 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+        field_multco_id_value:
+          id: field_multco_id_value
+          table: node__field_multco_id
+          field: field_multco_id_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_multco_id_value_op
+            label: 'Multco ID'
+            description: ''
+            use_operator: false
+            operator: field_multco_id_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_multco_id_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
+              content_lead: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_migration_date_value:
           id: field_migration_date_value
           table: node__field_migration_date
@@ -2757,12 +2769,20 @@ display:
           exposed: true
           expose:
             operator_id: field_migration_date_value_op
-            label: 'Migration date is not'
+            label: 'Migration date'
             description: 'Enter the date as YYYY-MM-DD.'
-            use_operator: false
+            use_operator: true
             operator: field_migration_date_value_op
-            operator_limit_selection: false
-            operator_list: {  }
+            operator_limit_selection: true
+            operator_list:
+              '=': '='
+              '!=': '!='
+              contains: contains
+              starts: starts
+              not_starts: not_starts
+              ends: ends
+              not_ends: not_ends
+              not: not
             identifier: field_migration_date_value
             required: false
             remember: false
@@ -2773,6 +2793,7 @@ display:
               publisher: '0'
               bts_catalog: '0'
               311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             placeholder: 'Enter date of last migration'

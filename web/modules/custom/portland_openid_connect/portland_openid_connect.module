@@ -2,10 +2,8 @@
 
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
-use Drupal\Core\Language\LanguageInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
-use Drupal\Core\Site\Settings;
 
 /**
  * Implement hook_user_login()
@@ -29,6 +27,7 @@ function portland_openid_connect_user_login(UserInterface $user) {
   }
   \Drupal::logger('portland OpenID')->debug('GetUserProfile ');
 
+  // Only enabled users can log in so we don't need to check if the user is enabled
   PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
   \Drupal::logger('portland OpenID')->debug('GetUserManager ');
 
@@ -37,18 +36,37 @@ function portland_openid_connect_user_login(UserInterface $user) {
   $user->save();
   // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
   // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
+  $user->save();
+}
+
+
+/**
+ * Implement hook_user_presave()
+ * Keep the field_primary_groups value in sync with field_group_names
+ */
+function portland_openid_connect_user_presave($account)
+{
+  PortlandOpenIdConnectUtil::updatePrimaryGroupFieldForUser($account);
+}
+
+/**
+ * Implement hook_user_create()
+ */
+function portland_openid_connect_user_insert($account)
+{
+  // Do nothing if it's a new user and is Contact Only
+  if($account->field_is_contact_only->value == 1) return;
+  PortlandOpenIdConnectUtil::updatePrimaryGroupMembershipForUser($account);
 }
 
 /**
  * Implement hook_user_update()
- * If a user is marked as Contact Only, remove the user from all groups
+ * If a user is Contact Only, remove the user from all groups
  * If not, add the user to all her primary groups.
  */
 function portland_openid_connect_user_update($account)
 {
-  // Check if the Contact Only field is modified
-  if( $account->field_is_contact_only->value == $account->original->field_is_contact_only->value) return;
-  // Exclude "contact only" users from all groups
+  // Remove "contact only" users from all groups
   if($account->field_is_contact_only->value == 1) {
     $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     foreach ($current_primary_group_ids as $current_primary_group_id) {
@@ -59,7 +77,7 @@ function portland_openid_connect_user_update($account)
     }
   }
   else {
-    PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($account);
+    PortlandOpenIdConnectUtil::updatePrimaryGroupMembershipForUser($account);
   }
 }
 
@@ -190,10 +208,7 @@ function _process_users($response_data, $access_token)
       // If the profile is empty, assume the user is not enabled
       if ($has_profile) {
         $user->save();
-        // Add the user to primary groups as Employee
-        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
         $users_created []= $user->getAccountName();
-
       }
     }
     // Else the user is already in Drupal. We need to either update or disable the user.
@@ -217,9 +232,6 @@ function _process_users($response_data, $access_token)
       $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
       if ($has_profile) {
         $user->save();
-
-        // Update the user's primary group membership to match the AD group names
-        PortlandOpenIdConnectUtil::updatePrimaryGroupsForUser($user);
         $users_updated []= $user->getAccountName();
       }
 
