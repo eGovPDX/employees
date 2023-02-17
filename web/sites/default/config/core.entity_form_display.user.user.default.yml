@@ -17,6 +17,7 @@ dependencies:
     - field.field.user.user.field_office_location
     - field.field.user.user.field_phone
     - field.field.user.user.field_primary_groups
+    - field.field.user.user.field_principal_name
     - field.field.user.user.field_publisher_role_changed
     - field.field.user.user.field_search_boost
     - field.field.user.user.field_search_keywords
@@ -46,6 +47,7 @@ third_party_settings:
         - field_primary_groups
         - field_office_location
         - field_address
+        - field_principal_name
         - field_active_directory_id
       label: 'Active Directory profile'
       region: content
@@ -87,7 +89,7 @@ content:
     third_party_settings: {  }
   field_active_directory_id:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -127,7 +129,7 @@ content:
     third_party_settings: {  }
   field_is_contact_only:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
@@ -197,9 +199,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_principal_name:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_search_boost:
     type: number
-    weight: 19
+    weight: 13
     region: content
     settings:
       placeholder: ''
@@ -230,7 +240,7 @@ content:
     third_party_settings: {  }
   field_type:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -263,7 +273,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }

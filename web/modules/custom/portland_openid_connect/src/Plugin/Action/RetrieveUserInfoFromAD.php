@@ -20,45 +20,24 @@ class RetrieveUserInfoFromAD extends ActionBase
   /**
    * {@inheritdoc}
    */
-  public function execute($account = NULL)
+  public function execute($user = NULL)
   {
-    if (empty($account)) return;
+    if (empty($user)) return;
 
-    $account_name = $account->getAccountName();
+    if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) return;
 
-    // Skip if cannot find a Drupal user with the email
-    $users = \Drupal::entityTypeManager()->getStorage('user')
-            ->loadByProperties(['name' => $account_name]);
-    if( empty($users) ) return;
-    $user = array_values($users)[0];
-    // If the user is not active, skip
-    // If the user is Contact Only, skip
-    // If there is no Azure AD ID, skip
-    $azure_ad_id = $user->field_active_directory_id->value;
-    if ( $user->field_is_contact_only->value || empty($azure_ad_id) ) return;
+    $domain = (str_ends_with($user->mail->value, PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME)) ? PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME : PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME;
 
-    // Skip these users
-    $skip_emails = [
-      'BTS-eGov@portlandoregon.gov',
-      'ally.admin@portlandoregon.gov',
-      'marty.member@portlandoregon.gov',
-      'oliver.outsider@portlandoregon.gov',
-      // 'amy.archer-masters@portlandoregon.gov',  // User email address
-      // 'amy.archer@portlandoregon.gov',  // Principal user name
-      // 'WBUDFTeam@portlandoregon.gov',  // Outlook distribution list
-      // 'council140@portlandoregon.gov',  // Actual AD group
-    ];
-    if (in_array(strtolower($account_name), array_map('strtolower', $skip_emails))) return;
-
-    $tokens = PortlandOpenIdConnectUtil::GetAccessToken();
+    $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
       return;
     }
 
-    PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $account_name, $azure_ad_id);
-    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $account_name, $azure_ad_id);
+    PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
+    PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
     // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account_name, $azure_ad_id);
+    $user->save();
   }
 
   /**
