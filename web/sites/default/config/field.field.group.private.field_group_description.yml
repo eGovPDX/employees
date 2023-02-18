@@ -6,7 +6,12 @@ dependencies:
     - field.storage.group.field_group_description
     - group.type.private
   module:
+    - allowed_formats
     - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats:
+      - basic_html
 id: group.private.field_group_description
 field_name: field_group_description
 entity_type: group
