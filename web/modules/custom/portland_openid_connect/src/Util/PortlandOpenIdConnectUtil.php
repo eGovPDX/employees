@@ -362,9 +362,10 @@ class PortlandOpenIdConnectUtil
     if (self::ShouldSkipUser($user)) return false;
 
     try {
+      $mail = str_replace("'", "", $user->mail->value);
       // API Document: https://docs.microsoft.com/en-us/graph/api/resources/profile-example?view=graph-rest-beta
       $response = self::$client->get(
-        'https://graph.microsoft.com/beta/users/' . $user->mail->value . '/profile', // Must use email for beta user profile API
+        "https://graph.microsoft.com/beta/users/$mail/profile", // Must use email for beta user profile API
         [
           'method' => 'GET',
           'headers' => [
