@@ -6,15 +6,15 @@ id: config_multidev
 label: MultiDev
 description: 'Config for Pantheon Multi-Dev environments'
 weight: 0
+stackable: false
+storage: folder
 folder: sites/default/config_multidev
 module:
   redis: 0
   stage_file_proxy: 0
   clamav: 0
 theme: {  }
-blacklist:
+complete_list:
   - group_notifications.mail
   - clamav.settings
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }

@@ -1,0 +1,11 @@
+adding:
+  defaults:
+    sender: sendgrid_integration
+removing:
+  defaults:
+    sender: test_mail_collector
+  modules:
+    webform:
+      none:
+        sender: sendgrid_integration
+        formatter: mime_mail
