@@ -6,15 +6,15 @@ id: config_prod
 label: Production
 description: 'Config for Pantheon production environment'
 weight: 0
+stackable: false
+storage: folder
 folder: sites/default/config_prod
 module:
   redis: 0
   clamav: 0
 theme: {  }
-blacklist:
+complete_list:
   - group_notifications.mail
   - clamav.settings
-graylist:
+partial_list:
   - mailsystem.settings
-graylist_dependents: true
-graylist_skip_equal: true
