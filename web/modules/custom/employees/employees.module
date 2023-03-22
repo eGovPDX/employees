@@ -73,6 +73,14 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "media_library_add_form_media_remote":
       // Add remote document validater to the start of array
       array_unshift($form['#validate'], '_validate_remote_document_in_media_library');
+      // Add help text to media library input field on Chart, Form, and Map media type
+      $current_media_type = $form_state->getStorage("media_library_state")['media_library_state']->getSelectedTypeId();
+      if( $current_media_type == 'iframe' ) {
+        $config = \Drupal::config('field.field.media.iframe.field_media_media_remote');
+        $form['container']['url']['#description'] = [
+          '#markup' => $config->get('description'),
+        ];
+      }
       // Intentionally avoid using "break" here. Not a bug.
     case "media_library_add_form_upload":
     case "media_library_add_form_oembed":
