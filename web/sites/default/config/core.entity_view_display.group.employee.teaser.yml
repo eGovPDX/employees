@@ -56,10 +56,19 @@ content:
       more_link: false
       more_class: more-link
       more_text: More
+      more_aria_label: 'Read more about [node:title]'
       summary_handler: full
       trim_options:
         text: true
         trim_zero: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_org_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
     third_party_settings: {  }
     weight: 0
     region: content
@@ -75,7 +84,6 @@ hidden:
   field_has_contracts: true
   field_logo: true
   field_migration_status: true
-  field_org_type: true
   field_parent_group: true
   field_search_keywords: true
   label: true

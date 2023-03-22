@@ -6,14 +6,14 @@ id: config_local
 label: Local
 description: 'Config for local Lando environments'
 weight: 0
+stackable: false
+storage: folder
 folder: sites/default/config_local
 module:
   devel: 0
   stage_file_proxy: 0
 theme: {  }
-blacklist:
+complete_list:
   - group_notifications.mail
-graylist:
+partial_list:
   - search_api.server.pantheon_solr8
-graylist_dependents: false
-graylist_skip_equal: true

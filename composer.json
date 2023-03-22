@@ -17,9 +17,9 @@
         "drupal/bulk_user_registration": "^1.1@beta",
         "drupal/ckeditor_acr": "^1.0",
         "drupal/clamav": "^2.0",
-        "drupal/components": "^2.4",
+        "drupal/components": "^3.0@beta",
         "drupal/config_filter": "^2.2",
-        "drupal/config_split": "2.0.0-beta2",
+        "drupal/config_split": "^2.0@RC",
         "drupal/console": "~1.0",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
@@ -76,7 +76,7 @@
         "drupal/pathauto": "^1.6",
         "drupal/quick_node_clone": "^1.14",
         "drupal/rabbit_hole": "^1.0@beta",
-        "drupal/radix": "5.0.0",
+        "drupal/radix": "^5.0",
         "drupal/realname": "^2.0",
         "drupal/redirect": "^1.5",
         "drupal/redirect_404": "^1.4",
@@ -92,7 +92,7 @@
         "drupal/search_api_solr": "^4.2",
         "drupal/seckit": "^2.0",
         "drupal/select2": "^1.12",
-        "drupal/sendgrid_integration": "^1.7",
+        "drupal/sendgrid_integration": "^2.1",
         "drupal/show_email": "^1.1",
         "drupal/simple_gmap": "^3.0",
         "drupal/smart_date": "^3.0",
@@ -204,7 +204,8 @@
                 "2992168 - Allow appending values to multivalued fields during the migration": "https://www.drupal.org/files/issues/2020-12-29/migrate-2992168-18.patch",
                 "2329253 - Allow the ChangedItem to skip updating the entity's \"changed\" timestamp when synchronizing (f.e. when migrating)": "https://www.drupal.org/files/issues/2022-12-07/2329253-97.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
-                "3017054 - Consistently sort filter formats to simplify config exports": "https://www.drupal.org/files/issues/2021-12-14/3017054-36.patch"
+                "3017054 - Consistently sort filter formats to simplify config exports": "https://www.drupal.org/files/issues/2021-12-14/3017054-36.patch",
+                "3095434 - Access denied when view own unpublished revision, access check is not using revision author": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch"
             },
             "drupal/bulk_user_registration": {
                 "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch",
@@ -236,9 +237,6 @@
             },
             "drupal/search_api": {
                 "3262507 - Unable to render EntityFields in views with search_api_opensearch": "https://www.drupal.org/files/issues/2022-10-06/3262507-17.patch"
-            },
-            "drupal/search_api_pantheon": {
-                "3261858 - The path of a URI with an authority must start with a slash '/' or be empty. Automagically fixing the URI": "https://www.drupal.org/files/issues/2022-02-01/3261858.patch"
             },
             "drupal/search_api_group_filtering": {
                 "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
