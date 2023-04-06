@@ -9,11 +9,12 @@
 
 // External links
 span.extlink {
-  margin: 0px .5rem;
-}
+  margin: 0px 0.5rem;
 
-svg.mailto::before {
-  background: none;
+  // Make FA icon inline so it wraps correctly when word breaks
+  .fa {
+    display: inline;
+  }
 }
 
 /* Hide the extra spans when printing. */
