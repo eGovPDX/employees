@@ -1,0 +1,20 @@
+<h2 class="visually-hidden">Search in this group</h2>
+<form accept-charset="UTF-8" class="" action="{{ path('<current>') }}/search" method="get">
+  <div class="input-group mb-2">
+    <input class="form-control" maxlength="128" name="search" placeholder="Search {{ rows[0].content|render|striptags|trim }}" title="Enter the terms you wish to search for." type="search" />
+  </div>
+  <div class="input-group">
+    <select class="form-select" onchange="this.form.action = '{{ path('<current>') }}/' + this.value">
+      <option value="search">All Content</option>
+      <option value="news">News</option>
+      <option value="events">Upcoming Events</option>
+      <option value="events/past">Past Events</option>
+      <option value="documents">Documents</option>
+      <option value="member-list">Members</option>
+    </select>
+    <button class="btn btn-secondary" type="submit">
+      <i class="fa fa-magnifying-glass"></i>
+      <span class="visually-hidden">Search</span>
+    </button>
+  </div>
+</form>
