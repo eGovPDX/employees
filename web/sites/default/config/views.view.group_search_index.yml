@@ -2541,13 +2541,13 @@ display:
           exposed: true
           expose:
             operator_id: media_name_op
-            label: 'Document name contains'
+            label: 'Enter your keywords'
             description: ''
             use_operator: false
             operator: media_name_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: name
+            identifier: search
             required: false
             remember: false
             multiple: false
@@ -2555,6 +2555,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             min_placeholder: ''
@@ -4229,7 +4232,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: ''
+            label: 'Enter your keywords'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -4244,6 +4247,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -4265,7 +4270,6 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
             - rendered_item
       filter_groups:
         operator: AND
