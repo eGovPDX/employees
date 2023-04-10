@@ -38,12 +38,13 @@
         {% block right %}
           {% if page.navbar_right %}
             {{ page.navbar_right }}
-            <form accept-charset="UTF-8" action="/search" class="form-inline d-flex align-items-center" id="search-block-form" method="get">
-              <div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label form-group">
-                <input class="form-search form-control" data-drupal-selector="edit-keys" id="edit-keys" maxlength="128" name="search" placeholder="Search" size="20" title="Enter the terms you wish to search for." type="search" value="" />
-              </div>
-              <div class="form-actions js-form-wrapper form-wrapper" data-drupal-selector="edit-actions" id="edit-actions">
-                <input class="button js-form-submit form-submit btn btn-primary visually-hidden" data-drupal-selector="edit-submit" id="edit-submit" type="submit" value="Search" />
+            <form accept-charset="UTF-8" action="/search" method="get">
+              <div class="input-group">
+                <input class="form-control" maxlength="128" name="search" size="20" placeholder="Search {{ rows[0].content|render|striptags|trim }}" title="Enter the terms you wish to search for." type="search" />
+                <button class="btn btn-secondary" type="submit">
+                  <i class="fa fa-magnifying-glass"></i>
+                  <span class="visually-hidden">Search</span>
+                </button>
               </div>
             </form>
           {% endif %}
