@@ -2524,27 +2524,24 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-        media_name:
-          id: media_name
+        search_api_fulltext:
+          id: search_api_fulltext
           table: search_api_index_full_index
-          field: media_name
+          field: search_api_fulltext
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_text
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
+          plugin_id: search_api_fulltext
+          operator: and
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: media_name_op
+            operator_id: search_api_fulltext_op
             label: 'Enter your keywords'
             description: ''
             use_operator: false
-            operator: media_name_op
+            operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: search
@@ -2560,9 +2557,9 @@ display:
               311_lead: '0'
               content_lead: '0'
               administrator: '0'
-            min_placeholder: ''
-            max_placeholder: ''
+            expose_fields: false
             placeholder: ''
+            searched_fields_id: search_api_fulltext_searched_fields
           is_grouped: false
           group_info:
             label: ''
@@ -2575,6 +2572,13 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+          parse_mode: terms
+          min_length: null
+          fields:
+            - media_field_description
+            - media_name
+            - media_search_keywords
+            - rendered_item
       filter_groups:
         operator: AND
         groups:
@@ -3068,6 +3072,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -3089,7 +3095,9 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_search_keywords
+            - content_title_edge
+            - content_title_fulltext
             - rendered_item
       filter_groups:
         operator: AND
@@ -3412,6 +3420,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -3433,7 +3443,9 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_search_keywords
+            - content_title_edge
+            - content_title_fulltext
             - rendered_item
       filter_groups:
         operator: AND
@@ -3931,6 +3943,8 @@ display:
               anonymous: '0'
               publisher: '0'
               bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             expose_fields: false
@@ -3952,7 +3966,9 @@ display:
           min_length: null
           fields:
             - content_body
-            - content_title
+            - content_search_keywords
+            - content_title_edge
+            - content_title_fulltext
             - rendered_item
       filter_groups:
         operator: AND
@@ -4270,6 +4286,9 @@ display:
           min_length: null
           fields:
             - content_body
+            - content_search_keywords
+            - content_title_edge
+            - content_title_fulltext
             - rendered_item
       filter_groups:
         operator: AND
