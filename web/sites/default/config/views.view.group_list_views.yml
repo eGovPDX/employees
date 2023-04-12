@@ -1301,7 +1301,7 @@ display:
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
-          multi_type: ul
+          multi_type: separator
           separator: ', '
           field_api_classes: false
       empty: {  }
@@ -2061,7 +2061,7 @@ display:
       fields:
         view_group:
           id: view_group
-          table: groups_field_revision
+          table: groups
           field: view_group
           relationship: reverse__group__field_parent_group
           group_type: group
@@ -2104,7 +2104,7 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: false
+          element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -2126,7 +2126,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>'
+            text: '<a href="{{ view_group }}" class="nav-link p-0">{{ label }}</a>'
             make_link: false
             path: ''
             absolute: false
