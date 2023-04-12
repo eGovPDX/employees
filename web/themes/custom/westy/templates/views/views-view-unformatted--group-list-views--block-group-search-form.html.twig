@@ -1,9 +1,9 @@
 <h2 class="visually-hidden">Search this group</h2>
-<form class="d-md-flex flex-column align-items-start" accept-charset="UTF-8" action="{{ path('<current>') }}/search" method="get">
-  <div class="input-group w-auto mb-2">
-    <input class="form-control" maxlength="128" name="search" size="20" placeholder="Search {{ rows[0].content|render|striptags|trim }}" title="Enter the terms you wish to search for." type="search" />
+<form class="col-3 col-xl-12" accept-charset="UTF-8" action="{{ path('<current>') }}/search" method="get">
+  <div class="input-group mb-2">
+    <input class="form-control text-truncate" maxlength="128" name="search" placeholder="Search {{ rows[0].content|render|striptags|trim }}" title="Enter the terms you wish to search for." type="search" />
   </div>
-  <div class="input-group w-auto">
+  <div class="input-group">
     <select class="form-select" onchange="this.form.action = '{{ path('<current>') }}/' + this.value">
       <option value="search">All Content</option>
       <option value="news">News</option>
