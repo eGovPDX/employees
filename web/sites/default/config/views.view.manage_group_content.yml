@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_reviewer
+    - workflows.workflow.editorial
   module:
     - content_moderation
     - group
@@ -1023,6 +1024,10 @@ display:
           operator: in
           value:
             all: all
+            editorial-draft: editorial-draft
+            editorial-review: editorial-review
+            editorial-published: editorial-published
+            editorial-unpublished: editorial-unpublished
           group: 1
           exposed: true
           expose:
@@ -1041,21 +1046,44 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             reduce: true
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Moderation state'
             description: ''
-            identifier: ''
+            identifier: moderation_state
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: Draft
+                operator: in
+                value:
+                  editorial-draft: editorial-draft
+              2:
+                title: Review
+                operator: in
+                value:
+                  editorial-review: editorial-review
+              3:
+                title: Published
+                operator: in
+                value:
+                  editorial-published: editorial-published
+              4:
+                title: Unpublished
+                operator: in
+                value:
+                  editorial-unpublished: editorial-unpublished
         type:
           id: type
           table: node_field_data
@@ -2867,6 +2895,10 @@ display:
           operator: in
           value:
             all: all
+            editorial-draft: editorial-draft
+            editorial-review: editorial-review
+            editorial-published: editorial-published
+            editorial-unpublished: editorial-unpublished
           group: 1
           exposed: true
           expose:
@@ -2885,21 +2917,44 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
               content_lead: '0'
               administrator: '0'
             reduce: true
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Moderation state'
             description: ''
-            identifier: ''
+            identifier: moderation_state
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: Draft
+                operator: in
+                value:
+                  editorial-draft: editorial-draft
+              2:
+                title: Review
+                operator: in
+                value:
+                  editorial-review: editorial-review
+              3:
+                title: Published
+                operator: in
+                value:
+                  editorial-published: editorial-published
+              4:
+                title: Unpublished
+                operator: in
+                value:
+                  editorial-unpublished: editorial-unpublished
         type:
           id: type
           table: node_field_data
