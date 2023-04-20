@@ -1,44 +1,45 @@
 {#
 /**
  * @file
- * Template for a user view.
+ * Template for a user search result.
  */
 #}
 {%
   set classes = [
   'user',
-  'overflow-auto',
   view_mode|clean_class,
+  'row',
 ]
 %}
 
 <div{{ attributes.addClass(classes) }}>
   {% block content %}
-  <div class="float-left align-left field__item">
-    {{ content.user_picture }}
-  </div>
-  <div class="float-left align-left field__item">
-    <div>
-      <h3><a href="/user/{{ user.id }}">{{ user.field_last_name.value }}, {{ user.field_first_name.value }}</a></h3>
-      <div class="float-left align-left field__item">
-        <strong>{{ content.field_title }}</strong>
-        {{ content.field_section }}
-        {{ content.field_division_name }}
-        {{ content.field_primary_groups }}
+    <div class="col-12">
+      <h2 class="h4"><a href="/user/{{ user.id }}">{{ user.field_first_name.value }} {{ user.field_last_name.value }}</a></h2>
+      {% if not ('no.email' in user.mail.value) %}
+        <div class="mb-2 text-break"><a href="mailto:{{ user.mail.value }}">{{ user.mail.value }}</a></div>
+      {% endif %}
+      <div class="row">
+        <div class="col-lg-6">
+          {{ content.field_title }}
+          {{ content.field_section }}
+          {{ content.field_division_name }}
+          {{ content.field_primary_groups }}
+        </div>
+        <div class="col-lg-6">
+          {% if user.field_phone.value %}
+            <div class="mb-2"><a href="tel:{{ user.field_phone.value }}">{{ user.field_phone.value }}</a></div>
+          {% endif %}
+          {% if user.field_mobile_phone.value %}
+            <div class="mb-2"><a href="tel:{{ user.field_mobile_phone.value }}">{{ user.field_mobile_phone.value }}</a> (mobile)</div>
+          {% endif %}
+          {% if user.field_keep_mobile_phone_private.value == 1 %}
+            <p class="mb-2 small">Keep mobile phone private</p>
+          {% endif %}
+          {{ content.field_workspace }}
+          {{ content.field_office_location }}
+        </div>
       </div>
-      <div class="float-left align-left field__item">
-        {{ content.field_phone }}
-        {{ content.field_mobile_phone }}
-        {% if user.field_keep_mobile_phone_private.value %} Keep mobile phone private {% endif %}
-        {% if not ('no.email' in user.mail.value) %}
-        {{ content.mail }}
-        {% endif %}
-        {{ content.field_workspace }}
-      </div>
-      {# <div class="float-left align-left field__item">
-        {{ content.field_search_keywords }}
-      </div> #}
     </div>
-  </div>
   {% endblock %}
 </div>
