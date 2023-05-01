@@ -17,6 +17,8 @@ services:
       - sed 's|mozilla\/AddTrust_External_Root.crt|#mozilla\/AddTrust_External_Root.crt|g' -i /etc/ca-certificates.conf
       - /bin/sh -c "cp /app/cop_ca_*.crt /usr/local/share/ca-certificates/"
       - update-ca-certificates
+    build:
+      - terminus self:update
     run_as_root:
       - /bin/sh -c "if [ ! -d /var/www/.terminus/plugins/terminus-secrets-plugin ]; then { mkdir -p /var/www/.terminus/plugins; composer create-project -d /var/www/.terminus/plugins pantheon-systems/terminus-secrets-plugin:~1; chown -R www-data:www-data /var/www/.terminus; } fi"
     xdebug: false
@@ -49,9 +51,16 @@ services:
       dir: private/solr-conf
 tooling:
   drush:
-    description: Run drush commands
+    description: CUSTOM Run drush commands
     service: appserver
     cmd: drush --root=/app/web
+  node:
+    description: CUSTOM Run node commands
+    service: node
+  npm:
+    description: CUSTOM Run npm commands
+    service: node
+    cmd: npm -C /app/web/themes/custom/westy
   yarn:
     description: CUSTOM Run yarn commands
     service: node
@@ -83,60 +92,51 @@ tooling:
     cmd:
       - appserver: drush uli > superAdmin_uli.log
       - node: npm run jest-sandbox
-  npm:
-    description: Run npm commands
-    service: node
-    cmd: npm -C /app/web/themes/custom/westy
-  node:
-    description: Run node commands
-    service: node
   latest:
-    description: Download and import the latest database from Dev
+    description: CUSTOM Download and import the latest database from Dev
     cmd:
       - appserver: mkdir -p /app/artifacts
       - appserver: echo "Downloading latest dev database..."
       - appserver: rm -f /app/artifacts/database.tar.gz
       - appserver: terminus backup:get employees.dev --element=database --to=/app/artifacts/database.tar.gz
       - appserver: echo "Importing database..."
-      - database: /helpers/sql-import.sh artifacts/database.tar.gz
-      #      - appserver: echo "Sanitizing database..."
-      #      - appserver: drush sql-query "drop temporary table if exists to_update; create temporary table to_update select distinct uid, name from users_field_data U left outer join user__roles R on U.uid = R.entity_id where R.roles_target_id is null or 'administrator' not in (select roles_target_id from users_field_data U2 left outer join user__roles R2 on U2.uid = R2.entity_id where U2.name = U.name); update users_field_data U inner join to_update UP on U.uid = UP.uid set U.pass = '', U.mail = concat('user+', UP.uid, '@localhost.localdomain'), U.init = concat('user+', UP.uid, '@localhost.localdomain') where UP.name <> 'Oliver Outsider' and UP.name <> 'Marty Member' and UP.name <> 'Ally Admin'; drop temporary table to_update;"
-      #      - appserver: echo "Truncating webforms and logs..."
-      #      - appserver: drush sql-query "truncate table webform_submission; truncate table webform_submission_data; truncate table webform_submission_log;"
-      #      - appserver: drush sql-query "truncate table watchdog;"
-      - appserver: echo "Clearing cache..."
-      - appserver: drush cr -y
+      - database: cd /app && /helpers/sql-import.sh artifacts/database.tar.gz
+  latest-live:
+    description: CUSTOM Download and import the latest database from Live
+    cmd:
+      - appserver: mkdir -p /app/artifacts
+      - appserver: echo "Downloading latest live database..."
+      - appserver: rm -f /app/artifacts/database.tar.gz
+      - appserver: terminus backup:get employees.live --element=database --to=/app/artifacts/database.tar.gz
+      - database: echo "Importing database..."
+      - database: cd /app && /helpers/sql-import.sh artifacts/database.tar.gz
   refresh:
     description: Refresh branch by installing Composer dependencies and importing Drupal config, etc. Run after every merge from master.
     cmd:
-      - appserver: date +"%T"
       - appserver: /bin/bash -c "if [[ \$(composer install --dry-run -d /app --no-interaction 2>&1 | grep -oPc 'Removing drupal/\w+') -gt 0 ]]; then { echo Composer is about to remove one or more modules... Let\'s disable them in Drupal first.; for module in \$(composer install --dry-run -d /app --no-interaction 2>&1 | grep -oP 'Removing drupal/\K\w+'); do { echo Disabling \$module...; drush pmu \$module -y;} done } fi"
-      - appserver: echo "=====Timestamp===== Starting Drupal Config Refresh"
-      - appserver: date +"%T"
       - appserver: echo "Installing Composer dependencies..."
       - appserver: composer install -d /app
-      - appserver: date +"%T"
       - appserver: echo "Clearing cache..."
       - appserver: drush cr -y
-      - appserver: date +"%T"
       - appserver: echo "Run drush updb -y..."
       - appserver: drush updb -y
-      - appserver: date +"%T"
       - appserver: echo "Run drush cim -y..."
       - appserver: drush cim -y
-      - appserver: date +"%T"
       - appserver: echo "Clearing cache..."
       - appserver: drush cr -y
-      - appserver: date +"%T"
-      - appserver: echo "=====Timestamp===== Drupal Config Refresh Done, Starting Theme Rebuild"
-      - appserver: date +"%T"
       - node: echo "Building theme asset files..."
       - node: npm -C /app/web/themes/custom/westy install
       - node: npm -C /app/web/themes/custom/westy run build
-      - node: echo "=====Timestamp===== Theme Rebuild Done"
-      - node: date +"%T"
+  reindex:
+    description: CUSTOM Reindex the Solr searcher
+    service: appserver
+    cmd:
+      - echo "Reindexing the Solr server... (this might take several minutes; use 'lando reindex &' to run the command in the background)"
+      - drush --root=/app/web search-api:reset-tracker
+      - drush --root=/app/web search-api:index > /dev/null 2>&1
+      - echo "Done reindexing the Solr server."
   cupex:
-    description: Composer update, database update, and config export to get a clean module or theme update
+    description: Custom Composer update, database update, and config export to get a clean module or theme update
     cmd:
       - appserver: echo "Updating Composer dependencies..."
       - appserver: composer update
@@ -144,16 +144,14 @@ tooling:
       - appserver: drush updb -y
       - appserver: echo "Exporting Drupal config..."
       - appserver: drush cex -y
-      # - appserver: echo "Building theme asset files..."
-      # - node: npm -C /app/web/themes/custom/cloudy run build:dev
   xdebug-on:
     service: appserver
-    description: Enable xdebug for nginx.
+    description: CUSTOM Enable xdebug for nginx.
     cmd: docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm && echo "Enabling xdebug"
     user: root
   xdebug-off:
     service: appserver
-    description: Disable xdebug for nginx.
+    description: CUSTOM Disable xdebug for nginx.
     cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm && echo "Disabling xdebug"
     user: root
   install-certs:
@@ -163,16 +161,8 @@ tooling:
       - /bin/sh -c "cp /app/cop_ca_*.crt /usr/local/share/ca-certificates/"
       - update-ca-certificates
     user: root
-  reindex:
-    description: CUSTOM Reindex the Solr searcher
-    service: appserver
-    cmd:
-      - echo "Reindexing the Solr server... (this might take several minutes; use 'lando reindex &' to run the command in the background)"
-      - drush --root=/app/web search-api:reset-tracker
-      - drush --root=/app/web search-api:index > /dev/null 2>&1
-      - echo "Done reindexing the Solr server."
   update-core:
-    description: Updates Drupal core to latest version
+    description: CUSTOM Updates Drupal core to latest version
     cmd:
       - appserver: composer update "drupal/core-*" --with-all-dependencies
       - appserver: drush cr -y
