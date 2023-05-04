@@ -30,9 +30,11 @@
   <{{ list.type }}{{ list.attributes }}>
 
     {% for row in rows %}
-      <li{{ row.attributes }}>
-        {{- row.content -}}
-      </li>
+      {% if row.content|render|striptags|trim|length > 0 %}
+        <li{{ row.attributes }}>
+          {{- row.content -}}
+        </li>
+      {% endif %}
     {% endfor %}
 
   </{{ list.type }}>
