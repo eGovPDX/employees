@@ -1,7 +1,7 @@
 {% set has_children = content.group_menu_eva_nested_menu|render|striptags|trim|length > 0 %}
 {% set is_current_page_trail = url in path('<current>') %}
 
-<a href="{{ url }}" style="overflow-wrap: anywhere;" class="d-flex align-items-center nav-link{% if path('<current>') == url %} active disabled{% endif %}">
+<a href="{{ url }}" class="d-flex align-items-center text-break nav-link{% if path('<current>') == url %} active disabled{% endif %}">
 {{ content.field_menu_url_text.0 }}
 {% if not node.isPublished() %}
   <span class="badge badge-sm bg-danger ms-2">Unpublished</span>
