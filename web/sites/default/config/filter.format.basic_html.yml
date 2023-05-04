@@ -4,6 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.embedded
+    - core.entity_view_mode.media.embedded_16x9
+    - core.entity_view_mode.media.embedded_1x1
+    - core.entity_view_mode.media.embedded_4x3
+    - core.entity_view_mode.media.embedded_9x16
     - core.entity_view_mode.media.embedded_with_description
     - core.entity_view_mode.media.full
     - core.entity_view_mode.media.medium
@@ -100,6 +104,10 @@ filters:
       default_view_mode: embedded
       allowed_view_modes:
         embedded: embedded
+        embedded_16x9: embedded_16x9
+        embedded_1x1: embedded_1x1
+        embedded_4x3: embedded_4x3
+        embedded_9x16: embedded_9x16
         embedded_with_description: embedded_with_description
         full: full
         medium: medium

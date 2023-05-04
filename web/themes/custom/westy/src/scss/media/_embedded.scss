@@ -109,14 +109,25 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-vide
   }
 }
 
+.media--type-iframe.media--view-mode-full,
+.media--type-iframe.media--view-mode-embedded {
+  aspect-ratio: 16/9;
+}
+.media--view-mode-embedded-16x9 {
+  aspect-ratio: 16/9;
+}
+.media--view-mode-embedded-4x3 {
+  aspect-ratio: 4/3;
+}
+.media--view-mode-embedded-1x1 {
+  aspect-ratio: 1/1;
+}
+.media--view-mode-embedded-9x16 {
+  aspect-ratio: 9/16;
+}
+
 // Embedded Images
 // -----------------------------------------------------------------------------
-
-// .embedded-full {
-//   width: 100%;
-//   display: block !important;
-//   clear: both;
-// }
 
 // Constrain narrow and medium at sm and up
 @include media-breakpoint-up(sm) {
@@ -179,14 +190,6 @@ figure.caption .embed-video {
   margin-bottom: 0 !important;
 }
 
-// .field .embed-video.embedded-full .field {
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-// }
-
 figure.align-left,
 figure.align-center,
 figure.align-right,
@@ -199,15 +202,6 @@ figure.drupal-media.drupal-media-style-align-right {
     margin-right: auto;
   }
 } 
-
-// // Constrain medium at xl and up
-// @include media-breakpoint-up(xl) {
-//   .embedded-medium,
-//   .embedded-medium + figcaption,
-//   .drupal-media[data-view-mode=medium] figcaption {
-//       max-width: 417px;
-//   }
-// }
 
 // At medium breakpoint and down, center the video
 @include media-breakpoint-down(md) {
@@ -241,7 +235,6 @@ figure .embed-video.embedded-medium {
 .field .embed-video.embedded-full,
 figure .embed-video.embedded-full {
   width: 100%;
-  // padding-top: 56.25%;
 }
 
 // Embedded Documents

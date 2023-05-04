@@ -43,7 +43,8 @@ class FilterAspectRatio extends FilterBase {
 
         // Default ratio is 16x9
         if( empty($aspect_ratio)) {
-          $node->setAttribute('style', 'aspect-ratio: 16/9');
+          // Default is now defined in CSS for .media--type-iframe.media--view-mode-embedded
+          // $node->setAttribute('style', 'aspect-ratio: 16/9');
         }
         // Only allow pre-defined ratios
         else if (in_array($aspect_ratio, ['16/9', '4/3', '1/1', '9/16'])) {

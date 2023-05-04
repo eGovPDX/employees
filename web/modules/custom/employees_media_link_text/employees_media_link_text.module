@@ -16,7 +16,7 @@ function employees_media_link_text_form_editor_media_dialog_alter(array &$form, 
   // Add link text for media entities.
   $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $media_embed_element['data-entity-uuid']);
   if( empty($media) ) return;
-  // Only add aspect ratio when the Media is Iframe Embed
+  // Only add link text when the Media is document
   if($media->bundle() == 'document') {
       $form['data-alt-link-text'] = [
         '#type' => 'textfield',
