@@ -2636,7 +2636,7 @@ display:
           group_info:
             label: 'Group role'
             description: ''
-            identifier: group_roles_target_id
+            identifier: group_role
             optional: true
             widget: select
             multiple: false
@@ -2646,24 +2646,24 @@ display:
             group_items:
               1:
                 title: Admin
-                operator: '='
-                value: employee-admin
+                operator: ends
+                value: '-admin'
               2:
                 title: Assigned
-                operator: '='
-                value: employee-assigned
+                operator: ends
+                value: '-assigned'
               3:
                 title: Employee
-                operator: '='
-                value: employee-employee
+                operator: ends
+                value: '-employee'
               4:
                 title: Editor
-                operator: '='
-                value: employee-editor
+                operator: ends
+                value: '-editor'
               5:
                 title: Following
-                operator: '='
-                value: employee-following
+                operator: ends
+                value: '-following'
         roles_target_id:
           id: roles_target_id
           table: user__roles
