@@ -39,6 +39,7 @@ third_party_settings:
         - field_feature
         - field_feature_until
         - field_popularity
+        - field_search_keywords
       label: 'Administrative Fields (Site Admins Only)'
       region: content
       parent_name: ''
@@ -167,7 +168,7 @@ content:
     third_party_settings: {  }
   field_search_keywords:
     type: string_textfield
-    weight: 21
+    weight: 7
     region: content
     settings:
       size: 60
@@ -261,7 +262,7 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 12
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -296,7 +297,7 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 14
+    weight: 56
     region: content
     settings: {  }
     third_party_settings: {  }

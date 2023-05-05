@@ -18,6 +18,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - link
     - path
     - scheduler
@@ -25,6 +26,23 @@ dependencies:
     - select2
     - smart_date
     - text
+third_party_settings:
+  field_group:
+    group_administrative_fields:
+      children:
+        - field_search_keywords
+      label: 'Administrative Fields (Site Admins Only)'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
 id: node.contract.default
 targetEntityType: node
 bundle: contract
@@ -79,6 +97,7 @@ content:
         custom
       show_extra: true
       hide_date: true
+      separator: to
     third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
@@ -154,7 +173,7 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 16
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -196,7 +215,7 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 18
+    weight: 56
     region: content
     settings: {  }
     third_party_settings: {  }

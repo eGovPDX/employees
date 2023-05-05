@@ -18,6 +18,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - field_group
     - field_states_ui
     - media_library
     - path
@@ -26,6 +27,23 @@ dependencies:
     - select2
     - smart_date
     - text
+third_party_settings:
+  field_group:
+    group_administrative_fields:
+      children:
+        - field_search_keywords
+      label: 'Administrative Fields (Site Admins Only)'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
 _core:
   default_config_hash: CVAKxLp27yWdjTSep4DYtCnqX23XA8AYXXryfMA0Q3A
 id: node.event.default
@@ -171,7 +189,7 @@ content:
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 12
+    weight: 55
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -206,7 +224,7 @@ content:
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 14
+    weight: 56
     region: content
     settings: {  }
     third_party_settings: {  }

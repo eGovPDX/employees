@@ -84,8 +84,8 @@
         "drupal/redis": "^1.5",
         "drupal/remove_http_headers": "^1.0",
         "drupal/samlauth": "^3.8",
-        "drupal/scheduler": "^2.0.0-rc7",
-        "drupal/scheduler_content_moderation_integration": "2.x-dev#117b7ea21de16004befc16575b060c329bc1f621",
+        "drupal/scheduler": "^2.0.0-rc8",
+        "drupal/scheduler_content_moderation_integration": "^2.0.0-beta1",
         "drupal/search_api_autocomplete": "^1.6",
         "drupal/search_api_location": "^1.0@alpha",
         "drupal/search_api_page": "^1.0@beta",
@@ -234,7 +234,7 @@
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
             },
             "drupal/scheduler_content_moderation_integration": {
-                "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-409)": "patches/pe-409-scheduler-content-moderation-integration.patch"
+                "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch"
             },
             "drupal/search_api": {
                 "3262507 - Unable to render EntityFields in views with search_api_opensearch": "https://www.drupal.org/files/issues/2022-10-06/3262507-17.patch"
