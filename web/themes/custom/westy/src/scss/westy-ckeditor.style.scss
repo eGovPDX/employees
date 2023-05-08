@@ -1,3 +1,11 @@
+// ------------------------------------------------------------------------------------------
+// Westy CSS overrides for CKEditor 5
+//
+// This stylesheet is applied to admin pages with a CKEditor 5 WYSIWYG editor. Use it to set
+// or override styles of content within the editor.
+// ------------------------------------------------------------------------------------------
+
+
 // Import Bootstrap root variables
 @import 'init';
 @import '~bootstrap/scss/utilities';
@@ -13,6 +21,17 @@ $fa-font-path: '/themes/custom/westy/dist';
 .ck-content {
   @import "westy.style";
   
+  // Override CKEditor list styles with the default bullet styles
+  &.ck ul {
+    list-style-type: disc;
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
   // Allow selection of text within buttons
   .btn {
     user-select: text !important;   
