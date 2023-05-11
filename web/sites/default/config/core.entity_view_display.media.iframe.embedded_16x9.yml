@@ -1,8 +1,9 @@
-uuid: 37f03ae5-c5c3-46f0-9aec-2eebf3fe4d61
+uuid: 5cf14a58-790e-4623-a581-2e0e32eed90a
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.embedded_16x9
     - field.field.media.iframe.field_display_in_group
     - field.field.media.iframe.field_media_media_remote
     - field.field.media.iframe.field_preview_image
@@ -10,10 +11,15 @@ dependencies:
     - media.type.iframe
   module:
     - employees
-id: media.iframe.default
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: media.iframe.embedded_16x9
 targetEntityType: media
 bundle: iframe
-mode: default
+mode: embedded_16x9
 content:
   field_media_media_remote:
     type: media_iframe_embed
@@ -21,20 +27,13 @@ content:
     settings:
       formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaIframeEmbedFormatter
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_summary:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   created: true
   field_display_in_group: true
   field_preview_image: true
+  field_summary: true
   langcode: true
   name: true
   search_api_excerpt: true

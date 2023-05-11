@@ -1,66 +1,97 @@
-uuid: 92420a81-5d3c-4f92-9f04-d2f7e38ee9fd
+uuid: 2554170b-557b-403d-9953-7bcc237b6ac4
 langcode: en
 status: true
 dependencies:
   config:
     - filter.format.full_html
   module:
-    - ckeditor
-_core:
-  default_config_hash: 967ijj7p6i7rwrYl7r08WQFeCY_c23YAh0h8u-w_CXM
+    - ckeditor5
 format: full_html
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: 'Block Formatting'
-          items:
-            - Format
-        -
-          name: Formatting
-          items:
-            - Styles
-            - RemoveFormat
-            - Bold
-            - Italic
-            - Strike
-            - Superscript
-            - Subscript
-            - '-'
-        -
-          name: List
-          items:
-            - BulletedList
-            - NumberedList
-        -
-          name: Linking
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Media
-          items:
-            - DrupalMediaLibrary
-        -
-          name: Tools
-          items:
-            - Blockquote
-            - SpecialChar
-            - HorizontalRule
-            - Table
-            - ShowBlocks
-            - Source
-            - Maximize
+    items:
+      - heading
+      - style
+      - removeFormat
+      - bold
+      - italic
+      - strikethrough
+      - superscript
+      - subscript
+      - '|'
+      - bulletedList
+      - numberedList
+      - outdent
+      - indent
+      - '|'
+      - link
+      - '|'
+      - drupalMedia
+      - '|'
+      - '-'
+      - undo
+      - redo
+      - '|'
+      - blockQuote
+      - specialCharacters
+      - horizontalLine
+      - insertTable
+      - '|'
+      - code
+      - codeBlock
+      - '|'
+      - sourceEditing
   plugins:
-    drupallink:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Primary Button'
+          element: '<a class="btn btn-primary">'
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<cite>'
+        - '<dl>'
+        - '<dt>'
+        - '<dd>'
+        - '<span class>'
+        - '<div class>'
+        - '<abbr title>'
+        - '<i class>'
+        - '<drupal-entity data-* title alt>'
+        - '<blockquote cite>'
+        - '<ul type>'
+        - '<h2 id>'
+        - '<h3 id>'
+        - '<h4 id>'
+        - '<h5 id>'
+        - '<h6 id>'
+        - '<ol type>'
+        - '<table summary class>'
+        - '<th scope>'
+        - '<tr class>'
+        - '<td scope class>'
+        - '<thead class>'
+        - '<tbody class>'
+        - '<tfoot class>'
+        - '<caption class>'
+        - '<drupal-media title data-aspect-ratio data-alt-link-text>'
+        - '<a hreflang accesskey id rel target title>'
+    ckeditor5_list:
+      reversed: false
+      startIndex: true
+    media_media:
+      allow_view_mode_override: true
+    linkit_extension:
       linkit_enabled: true
       linkit_profile: default
-    stylescombo:
-      styles: ''
-    acrconfig:
-      ckeditor_acr_config: ''
 image_upload:
   status: true
   scheme: public

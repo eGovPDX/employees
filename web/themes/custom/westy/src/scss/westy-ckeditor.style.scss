@@ -1,0 +1,123 @@
+// ------------------------------------------------------------------------------------------
+// Westy CSS overrides for CKEditor 5
+//
+// This stylesheet is applied to admin pages with a CKEditor 5 WYSIWYG editor. Use it to set
+// or override styles of content within the editor.
+// ------------------------------------------------------------------------------------------
+
+
+// Import Bootstrap root variables
+@import 'init';
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/root';
+
+// Font Awesome
+$fa-font-path: '/themes/custom/westy/dist';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+
+// ------------------------------------------------------------------------------------------
+// Preface all Westy styles with .ck-content to restrict them to the content within CKEditor
+.ck-content {
+  @import "westy.style";
+  
+  // Override CKEditor list styles with the default bullet styles
+  &.ck ul {
+    list-style-type: disc;
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  // Allow selection of text within buttons
+  .btn {
+    user-select: text !important;   
+  }
+
+  // Overwrite the CKEditor link background color for primary button style
+  .btn.btn-primary.ck-link_selected {
+    background-color: #164c9c;
+  }
+
+  // Claro's link styles overwrite Westy so restore the link underline
+  a:hover {
+    text-decoration: underline;
+  }
+
+  // Prevent embedded document links, videos, and iframes from navigating/receiving focus when clicked
+  .embed-document a,
+  .embed-video iframe,
+  .media--type-iframe iframe {
+    pointer-events: none;
+  }
+
+  // Tweak embedded video display
+  .field .embed-video.embedded-full,
+  figure .embed-video.embedded-full {
+    padding-top: inherit;
+  }
+
+  // Undo Drupal's default center alignment for the "break text" alignment which should be left aligned
+  &.ck .drupal-media {
+    display: inherit;
+    text-align: inherit;
+  }
+  &.ck .drupal-media img {
+    min-width: inherit;
+  }
+  &.ck .drupal-media:not(.drupal-media-style-align-left, .drupal-media-style-align-center, .drupal-media-style-align-right) img {
+    margin-left: inherit;
+    margin-right: inherit;
+  }
+
+  // Center left/right aligned media within caption space
+  .drupal-media .align-left,
+  .drupal-media .align-center,
+  .drupal-media .align-right {
+    float: none;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+  
+  // Captions in the editor use the <figcaption> element, so style it like our original Westy <caption> styles
+  .drupal-media figcaption.ck-editor__editable {
+    padding: 0;
+    caption-side: bottom;
+    font-size: inherit;
+    text-align: left;
+    color: #6c757d;
+    background-color: inherit;
+  }
+  
+  // Overwrite the `display: table-caption` on captions now that <figures> are no longer `display: table`
+  &.ck .drupal-media figcaption {
+    display: inherit;
+  }
+
+
+  // Helpers for drupal-media element class in CKeditor
+  // -----------------------------------------------------------------------------
+
+  .drupal-media.drupal-media-style-align-center[data-view-mode=narrow],
+  .drupal-media.drupal-media-style-align-center[data-view-mode=medium],
+  .drupal-media.drupal-media-style-align-center[data-view-mode=full] {
+    display: table;
+    max-width: 100%;
+  }
+  &.ck .drupal-media:not(
+        .drupal-media-style-align-left, .drupal-media-style-align-center, .drupal-media-style-align-right
+      ) img {
+    margin-left: inherit;
+    margin-right: inherit;
+  }
+
+}  
+
+// Increase font size of link tooltip popup
+.ck-link-form .ck-labeled-field-view label,
+.ck-link-form .ck-labeled-field-view input {
+  font-size: 1rem;
+}

@@ -8,6 +8,8 @@ const isProd = process.env.NODE_ENV === 'production';
 const config = {
   entry: {
     westy: ['./src/scss/westy.style.scss', './src/js/westy.script.js'],
+    "westy-ckeditor": ['./src/scss/westy-ckeditor.style.scss'],
+    "ckeditor-content-styles": ['./src/scss/content-styles.scss'],
   },
   output: {
     path: path.resolve(__dirname, './dist'),

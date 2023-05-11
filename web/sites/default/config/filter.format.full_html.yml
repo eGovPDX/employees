@@ -62,17 +62,14 @@ filters:
         full: full
         medium: medium
         narrow: narrow
-      allowed_media_types:
-        document: document
-        image: image
-        remote_video: remote_video
+      allowed_media_types: {  }
   filter_html:
     id: filter_html
     provider: filter
     status: false
     weight: -44
     settings:
-      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <a href hreflang data-entity-substitution data-entity-type data-entity-uuid title>'
+      allowed_html: '<cite> <dl> <dt> <dd> <span class> <div class> <abbr title> <i class> <drupal-entity data-* title alt> <blockquote cite> <ul type> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <ol type> <table summary class> <th scope> <tr class> <td scope class> <thead class> <tbody class> <tfoot class> <caption class> <drupal-media title data-aspect-ratio data-alt-link-text> <a hreflang accesskey id rel target title class="btn btn-primary">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_html_escape:

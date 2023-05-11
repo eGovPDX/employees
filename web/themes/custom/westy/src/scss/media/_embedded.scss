@@ -10,9 +10,19 @@ figure.caption figcaption {
   display: inline-block;
 }
 
-// This doesn't really do anything at sm and down
-// Center half-width and narrow at md and up
-.align-center {
+figure figcaption {
+  clear: both;
+}
+
+// Center at md breakpoint and up
+// (This doesn't really do anything at sm breakpoint and down)
+.align-center,
+figure.figure.align-left > div,
+figure.figure.align-center > div,
+figure.figure.align-right > div,
+figure.drupal-media.drupal-media-style-align-left > div > div[class*=embed],
+figure.drupal-media.drupal-media-style-align-center > div > div[class*=embed],
+figure.drupal-media.drupal-media-style-align-right > div > div[class*=embed] {
   width: fit-content;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -20,7 +30,13 @@ figure.caption figcaption {
   margin-left: auto;
 }
 
-// At the sm breakpoint and up alignment will max width 50%
+figure.drupal-media.drupal-media-style-align-left > div > div[class~=embed-video],
+figure.drupal-media.drupal-media-style-align-center > div > div[class~=embed-video],
+figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-video] {
+  width: inherit;
+}
+
+// At the sm breakpoint and up alignment will max width to 325px
 @include media-breakpoint-up(sm) {
   figure.align-left,
   .align-left {
@@ -77,7 +93,7 @@ figure.caption figcaption {
   }
 }
 
-// sm and down is no alignment
+// At the sm breakpoint and down there is no alignment
 @include media-breakpoint-down(sm) {
   figure.align-left,
   .align-left {
@@ -93,115 +109,76 @@ figure.caption figcaption {
   }
 }
 
-// Helpers for drupal-media element in CKeditor
-// -----------------------------------------------------------------------------
-@include media-breakpoint-up(md) {
-  drupal-media[data-view-mode=half_width] {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px
-  }
+.media--type-iframe.media--view-mode-full,
+.media--type-iframe.media--view-mode-embedded {
+  aspect-ratio: 16/9;
 }
-
-drupal-media[data-view-mode=narrow] {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 325px;
+.media--view-mode-embedded-16x9 {
+  aspect-ratio: 16/9;
 }
-
-drupal-media[data-view-mode=full_width] {
-  width: 100%;
-  padding-top: 0;
+.media--view-mode-embedded-4x3 {
+  aspect-ratio: 4/3;
 }
-
-drupal-media[data-aspect-ratio] {
-  width: 100%;
-  padding-top: 0;
+.media--view-mode-embedded-1x1 {
+  aspect-ratio: 1/1;
 }
-
-drupal-media[data-view-mode=half_width] {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 400px
+.media--view-mode-embedded-9x16 {
+  aspect-ratio: 9/16;
 }
-
-@include media-breakpoint-up(md) {
-  drupal-media[data-view-mode=half_width] {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px
-  }
-}
-
-drupal-media[data-view-mode=narrow] {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 325px;
-}
-
-drupal-media[data-align=right] {
-  float: right;
-  clear: right;
-}
-
-drupal-media[data-align=left] {
-  float: left;
-  clear: left;
-}
-
 
 // Embedded Images
 // -----------------------------------------------------------------------------
 
-.embed-image {
-  margin-bottom: 1rem;
-}
-
-// Constrain narrow and half-width at medium and up
-@include media-breakpoint-up(md) {
-  .media--view-mode-narrow,
-  .media--view-mode-narrow + figcaption {
+// Constrain narrow and medium at sm and up
+@include media-breakpoint-up(sm) {
+  .embedded-narrow,
+  .embedded-narrow + figcaption,
+  .drupal-media[data-view-mode=narrow] figcaption {
     max-width: 325px;
   }
-
-  .media--view-mode-half-width {
+  
+  .embedded-medium,
+  .embedded-medium + figcaption,
+  .drupal-media[data-view-mode=medium] figcaption {
     max-width: 400px;
   }
 }
 
-// Constrain half-width at xl and up
+// Constrain medium at xl and up
 @include media-breakpoint-up(xl) {
-  .media--view-mode-half-width {
-    max-width: 483px;
+  .embedded-medium,
+  .embedded-medium + figcaption,
+  .drupal-media[data-view-mode=medium] figcaption {
+      max-width: 417px;
   }
 }
 
 // When narrow is used at sm and down, center the image
 @include media-breakpoint-down(sm) {
-  .media--view-mode-narrow {
+  .embedded-narrow {
     width: fit-content;
     width: -webkit-fit-content;
     width: -moz-fit-content;
   }
 
-  .media--view-mode-narrow,
-  .media--view-mode-half-width {
+  .embedded-narrow,
+  .embedded-medium {
     margin-left: auto;
     margin-right: auto;
   }
 }
 
 // Add margin bottom for embedded media not in a figure
-.media--view-mode-narrow,
-.media--view-mode-half-width,
-.media--view-mode-full-width {
+.embedded-narrow,
+.embedded-medium,
+.embedded-full {
   margin-bottom: $spacer;
 }
 
 figure {
-  .media--view-mode-narrow,
-  .media--view-mode-half-width,
-  .media--view-mode-full-width {
+  .embedded-narrow,
+  .embedded-medium,
+  .embedded-full {
     margin-bottom: 0;
   }
 }
@@ -213,18 +190,39 @@ figure.caption .embed-video {
   margin-bottom: 0 !important;
 }
 
-.field .embed-video.embedded-full .field {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+figure.align-left,
+figure.align-center,
+figure.align-right,
+figure.drupal-media.drupal-media-style-align-left,
+figure.drupal-media.drupal-media-style-align-center,
+figure.drupal-media.drupal-media-style-align-right {
+  .embed-video.embedded-full .field {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+} 
+
+// At medium breakpoint and down, center the video
+@include media-breakpoint-down(md) {
+  figure.align-left,
+  figure.align-center,
+  figure.align-right,
+  figure.drupal-media.drupal-media-style-align-left,
+  figure.drupal-media.drupal-media-style-align-center,
+  figure.drupal-media.drupal-media-style-align-right {
+    .embed-video.embedded-full .field {
+      width: 100%;
+    }
+  } 
 }
+
 
 .field .embed-video.embedded-full .field__item,
 .embed-video.embedded-full iframe {
   height: 100%;
   width: 100%;
+  aspect-ratio: 16/9;
 }
 
 .field .embed-video.embedded-full,
@@ -237,7 +235,6 @@ figure .embed-video.embedded-medium {
 .field .embed-video.embedded-full,
 figure .embed-video.embedded-full {
   width: 100%;
-  padding-top: 56.25%;
 }
 
 // Embedded Documents

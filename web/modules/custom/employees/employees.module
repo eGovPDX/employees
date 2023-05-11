@@ -866,42 +866,6 @@ function employees_theme() {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function employees_form_editor_media_dialog_alter(array &$form, FormStateInterface $form_state) {
-  if (isset($form_state->getUserInput()['editor_object'])) {
-    $editor_object = $form_state->getUserInput()['editor_object'];
-    $media_embed_element = $editor_object['attributes'];
-  } else {
-    // Retrieve the user input from form state.
-    $media_embed_element = $form_state->get('media_embed_element');
-  }
-  if( empty($media_embed_element) ) return;
-
-  $media = \Drupal::service('entity.repository')->loadEntityByUuid('media', $media_embed_element['data-entity-uuid']);
-  if( empty($media) ) return;
-
-  // Only add aspect ratio when the Media is Iframe Embed
-  if($media->bundle() == 'iframe') {
-    $form['data-aspect-ratio'] = [
-      '#title' => t('Aspect ratio'),
-      '#type' => 'radios',
-      '#options' => [
-        '16/9' => t('16x9'),
-        '4/3' => t('4x3'),
-        '1/1' => t('1x1'),
-        '9/16' => t('9x16'),
-      ],
-      '#step' => '1',
-      '#default_value' => empty($media_embed_element['data-aspect-ratio']) ? '16/9' : $media_embed_element['data-aspect-ratio'],
-      '#parents' => ['attributes', 'data-aspect-ratio'],
-      // Make radio buttons inline
-      '#attributes' => ['class' => ['container-inline']],
-    ];
-  }
-}
-
-/**
  * Implements hook_toolbar_alter().
  * Hide "Manage" toolbar menu element for non-admins.
  */

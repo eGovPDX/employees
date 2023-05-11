@@ -13,7 +13,7 @@ use Drupal\filter\Render\FilteredMarkup;
  *   id = "portland_document_link_text",
  *   title = @Translation("Portland Document Link Text"),
  *   description = @Translation("When enabled, convert the data-alt-link-text attribute value into anchor text. Requries a custom embed dialog field to capture the link text. This filter must be processed after the Display Embedded Entities filter."),
- *   type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
+ *   type = Drupal\filter\Plugin\FilterInterface::TYPE_TRANSFORM_IRREVERSIBLE,
  * )
  */
 class EmployeesDocumentLinkText extends FilterBase
