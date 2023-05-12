@@ -1,4 +1,19 @@
-<a href="{{ url }}" class="nav-link{% if path('<current>') == url %} active disabled{% endif %}{% if url in path('<current>') %} menu-item--active-trail{% endif %}">{{ content.field_menu_url_text.0 }}{% if not node.isPublished() %} <span class="badge badge-sm bg-danger ms-1">Unpublished</span>{% endif %}</a>
-{% if url in path('<current>') %}
+{% set has_children = content.group_menu_eva_nested_menu|render|striptags|trim|length > 0 %}
+{% set is_current_page_trail = url in path('<current>') %}
+
+<a href="{{ url }}" class="d-flex align-items-center text-break nav-link{% if path('<current>') == url %} active disabled{% endif %}">
+{{ content.field_menu_url_text.0 }}
+{% if not node.isPublished() %}
+  <span class="badge badge-sm bg-danger ms-2">Unpublished</span>
+{% endif %}
+{% if has_children and not is_current_page_trail %}
+  <i class="fa fa-chevron-right ms-auto"></i>
+{% elseif has_children and is_current_page_trail %}
+  <i class="fa fa-chevron-down ms-auto"></i>
+{% endif %}
+</a>
+
+
+{% if is_current_page_trail %}
     {{ content|without('field_menu_url_text','field_parent') }}
 {% endif %}
