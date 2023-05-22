@@ -315,6 +315,7 @@ function employees_mail($key, &$message, $params)
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      $message['headers']['Reply-To'] = $params['reply_to'];
       break;
     case 'employees_group_admin_email':
       $user = \Drupal::currentUser()->getAccount();
@@ -336,21 +337,6 @@ function employees_mail($key, &$message, $params)
       $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
       break;
-  }
-}
-
-/**
- * Implements hook_mail_alter().
- */
-function employees_mail_alter(&$message)
-{
-  // id = module + key
-  if ($message['id'] == "employees_employees_notify_reviewers") {
-    // Make the email appear to be from the current Editor
-    $user = \Drupal::currentUser()->getAccount();
-    $user_name = $user->name;
-    $user_email = $user->getEmail();
-    $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
   }
 }
 
@@ -419,7 +405,17 @@ function _notify_reviewer($entity, $entity_event_type)
     if ($reviewers == null) {
       return;
     }
-    $current_user_email = \Drupal::currentUser()->getAccount()->getEmail();
+
+    // PE-488 Get the revision author's email. This used to be the current user's email which is empty during cron job runs.
+    $current_user_email = $node->revision_uid->entity->getEmail();
+    // If it's empty, DO NOT send email.
+    if(empty($current_user_email)) {
+      \Drupal::logger('mail-log')->error(t('The latest revision author\'s email address for Node ID @id is empty.', array('@id' => $node->id())));
+      return;
+    }
+    // This will be used in employees_mail to set the Reply-To header
+    $params['reply_to'] = $current_user_email;
+
     // Send email to all reviewers EXCEPT the author
     $to_emails = [];
     foreach ($reviewers->referencedEntities() as $reviewer) {
@@ -427,7 +423,9 @@ function _notify_reviewer($entity, $entity_event_type)
         $to_emails[] = $reviewer->mail->value;
       }
     }
-    if (!empty($to_emails)) _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
+    if (!empty($to_emails)) {
+      _send_email($key, implode(',', $to_emails), $langcode, $params, $current_user_email);
+    }
   }
 }
 
@@ -436,6 +434,7 @@ function _notify_reviewer($entity, $entity_event_type)
  */
 function _send_email($key, $to, $langcode, $params, $from)
 {
+  // function mail($module, $key, $to, $langcode, $params = [], $reply = NULL, $send = TRUE)
   $result = \Drupal::service('plugin.manager.mail')->mail('employees', $key, $to, $langcode, $params, $from, true);
   if ($result['result'] != true) {
     \Drupal::logger('mail-log')->error(t('Error sending to @email.', array('@email' => $to)));
