@@ -315,6 +315,7 @@ function employees_mail($key, &$message, $params)
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+      $message['headers']['Reply-To'] = $params['reply_to'];
       break;
     case 'employees_group_admin_email':
       $user = \Drupal::currentUser()->getAccount();
@@ -336,21 +337,6 @@ function employees_mail($key, &$message, $params)
       $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
       break;
-  }
-}
-
-/**
- * Implements hook_mail_alter().
- */
-function employees_mail_alter(&$message)
-{
-  // id = module + key
-  if ($message['id'] == "employees_employees_notify_reviewers") {
-    // Make the email appear to be from the current Editor
-    $user = \Drupal::currentUser()->getAccount();
-    $user_name = $user->name;
-    $user_email = $user->getEmail();
-    $message['headers']['Reply-To'] = "\"$user_name\" <$user_email>";
   }
 }
 
@@ -427,6 +413,8 @@ function _notify_reviewer($entity, $entity_event_type)
       \Drupal::logger('mail-log')->error(t('The latest revision author\'s email address for Node ID @id is empty.', array('@id' => $node->id())));
       return;
     }
+    // This will be used in employees_mail to set the Reply-To header
+    $params['reply_to'] = $current_user_email;
 
     // Send email to all reviewers EXCEPT the author
     $to_emails = [];
