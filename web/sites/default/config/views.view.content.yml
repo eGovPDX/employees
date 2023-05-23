@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_311_referral_contact
     - field.storage.node.field_display_in_group
-    - field.storage.node.field_migration_date
+    - field.storage.node.field_marked_for_deletion
     - field.storage.node.field_type
     - node.type.contact
     - taxonomy.vocabulary.contact_type
@@ -727,11 +727,7 @@ display:
       style:
         type: table
         options:
-          grouping:
-            -
-              field: field_migration_date
-              rendered: true
-              rendered_strip: false
+          grouping: {  }
           row_class: ''
           default_row_class: true
           columns:
@@ -741,10 +737,10 @@ display:
             status: status
             changed: changed
             field_311_referral_contact: field_311_referral_contact
-            field_migration_date: field_migration_date
+            field_marked_for_deletion: field_marked_for_deletion
             field_type: field_type
             operations: operations
-          default: field_migration_date
+          default: field_marked_for_deletion
           info:
             views_bulk_operations_bulk_form:
               align: ''
@@ -784,9 +780,9 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_migration_date:
+            field_marked_for_deletion:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
@@ -1121,69 +1117,6 @@ display:
             format: custom
             format_custom_false: ''
             format_custom_true: Referral
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_migration_date:
-          id: field_migration_date
-          table: node__field_migration_date
-          field: field_migration_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Migration date'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1552,7 +1485,6 @@ display:
       tags:
         - 'config:field.storage.node.field_311_referral_contact'
         - 'config:field.storage.node.field_display_in_group'
-        - 'config:field.storage.node.field_migration_date'
         - 'config:field.storage.node.field_type'
   page_admin_content:
     id: page_admin_content
@@ -1998,44 +1930,15 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
-            1:
-              action_id: mark_for_review_action
-              preconfiguration:
-                add_confirmation: false
-                label_override: 'Mark for review'
-            2:
-              action_id: employees_copy_shortname
-              preconfiguration:
-                label_override: 'Copy shortname into group_path'
-            3:
-              action_id: employees_unpublish_action
-              preconfiguration:
-                add_confirmation: false
-                label_override: Unpublish
-            5:
-              action_id: employees_publish_action
-              preconfiguration:
-                add_confirmation: false
-                label_override: Publish
-            6:
-              action_id: employees_copy_created_to_updated
-              preconfiguration:
-                add_confirmation: false
-                label_override: 'Copy Created date to Updated On date'
-            14:
+            15:
               action_id: views_bulk_edit
               preconfiguration:
                 add_confirmation: false
                 get_bundles_from_results: true
-            15:
+            16:
               action_id: views_bulk_operations_delete_entity
               preconfiguration:
                 label_override: Delete
-            16:
-              action_id: 'entity:save_action:node'
-              preconfiguration:
-                add_confirmation: false
-                label_override: Save
         title:
           id: title
           table: node_field_data
@@ -2228,15 +2131,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_migration_date:
-          id: field_migration_date
-          table: node__field_migration_date
-          field: field_migration_date
+        field_marked_for_deletion:
+          id: field_marked_for_deletion
+          table: node__field_marked_for_deletion
+          field: field_marked_for_deletion
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'Migration date'
+          label: 'Marked for Deletion'
           exclude: false
           alter:
             alter_text: false
@@ -2278,9 +2181,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: boolean
           settings:
-            link_to_entity: false
+            format: yes-no
+            format_custom_false: ''
+            format_custom_true: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2755,35 +2660,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_migration_date_value:
-          id: field_migration_date_value
-          table: node__field_migration_date
-          field: field_migration_date_value
+        field_marked_for_deletion_value:
+          id: field_marked_for_deletion_value
+          table: node__field_marked_for_deletion
+          field: field_marked_for_deletion_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: string
-          operator: '!='
-          value: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
           group: 1
           exposed: true
           expose:
-            operator_id: field_migration_date_value_op
-            label: 'Migration date'
-            description: 'Enter the date as YYYY-MM-DD.'
-            use_operator: true
-            operator: field_migration_date_value_op
-            operator_limit_selection: true
-            operator_list:
-              '=': '='
-              '!=': '!='
-              contains: contains
-              starts: starts
-              not_starts: not_starts
-              ends: ends
-              not_ends: not_ends
-              not: not
-            identifier: field_migration_date_value
+            operator_id: ''
+            label: 'Marked for Deletion'
+            description: ''
+            use_operator: false
+            operator: field_marked_for_deletion_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: marked_for_deletion
             required: false
             remember: false
             multiple: false
@@ -2796,7 +2693,6 @@ display:
               311_lead: '0'
               content_lead: '0'
               administrator: '0'
-            placeholder: 'Enter date of last migration'
           is_grouped: false
           group_info:
             label: ''
@@ -2831,7 +2727,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total contacts. Contacts that are not in the most current migration should be reviewed for removal as they are no longer in the Multnomah County export.'
+          content: "Displaying @start - @end of @total contacts. Contacts that are not in the most current migration should be reviewed for removal as they are no longer in the Multnomah County export.\r\n<br>\r\n<a class=\"button button--primary\" href=\"/admin/content/contacts/multnomah/sync\">Sync employees from Multnomah County</a>"
       display_extenders: {  }
       path: admin/content/contacts/multnomah
       menu:
@@ -2862,5 +2758,5 @@ display:
       tags:
         - 'config:field.storage.node.field_311_referral_contact'
         - 'config:field.storage.node.field_display_in_group'
-        - 'config:field.storage.node.field_migration_date'
+        - 'config:field.storage.node.field_marked_for_deletion'
         - 'config:field.storage.node.field_type'

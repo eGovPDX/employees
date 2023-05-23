@@ -1,4 +1,4 @@
-uuid: 6e4a472b-c24d-407d-87b6-aa8cc89b2c06
+uuid: 1cd7631d-41d8-4192-b01a-350f85c9b9ad
 langcode: en
 status: true
 dependencies:
@@ -8,14 +8,11 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: custom
-id: node.field_migration_date
-field_name: field_migration_date
+id: node.field_marked_for_deletion
+field_name: field_marked_for_deletion
 entity_type: node
-type: string
-settings:
-  max_length: 255
-  case_sensitive: false
-  is_ascii: false
+type: boolean
+settings: {  }
 module: core
 locked: false
 cardinality: 1
