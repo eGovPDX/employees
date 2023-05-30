@@ -650,7 +650,7 @@ function employees_cron()
       if (count($theview->result)) {
         // Render the view and append to results
         $rendered = $theview->render($view['block_id']);
-        $results .= \Drupal::service('renderer')->render($rendered);
+        $results .= \Drupal::service('renderer')->renderPlain($rendered);
       }
     }
 
@@ -670,10 +670,12 @@ function employees_cron()
     // Send email
     $key = 'employees_daily_mail'; // Replace with Your key
     $to = 'BTS-eGov@portlandoregon.gov';
+    $params['reply_to'] = 'BTS-eGov@portlandoregon.gov';
     $params['message'] = '<p>These Employees.portland.gov items were updated in the last 24 hours and should
             be reviewed according to the specific instructions below.<p/>' . $results;
     $params['title'] = 'Employees.portland.gov list of content to review' . $environment_name;
-    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    // Cron is run with the anonymous user. Set the language code to EN.
+    $langcode = 'en';
 
     $sent_successfully = _send_email($key, $to, $langcode, $params, 'powr@portlandoregon.gov');
     if ($sent_successfully) {
