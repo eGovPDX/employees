@@ -6,3 +6,10 @@ entity.group.follow:
   requirements:
     _group_permission: 'join group'
     _group_member: 'FALSE'
+employees.multco_contact_sync_form:
+  path: '/admin/content/contacts/multnomah/sync'
+  defaults:
+    _form: '\Drupal\employees\Form\MultcoContactSyncForm'
+    _title: 'Multnomah County Contact Sync'
+  requirements:
+    _role: '311_lead+administrator'
