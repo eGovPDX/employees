@@ -733,14 +733,13 @@ display:
           columns:
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
             title: title
+            type: type
             field_display_in_group: field_display_in_group
+            name: name
             status: status
             changed: changed
-            field_311_referral_contact: field_311_referral_contact
-            field_marked_for_deletion: field_marked_for_deletion
-            field_type: field_type
             operations: operations
-          default: field_marked_for_deletion
+          default: changed
           info:
             views_bulk_operations_bulk_form:
               align: ''
@@ -754,7 +753,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            type:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             field_display_in_group:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            name:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -773,27 +786,6 @@ display:
               separator: ''
               empty_column: false
               responsive: priority-low
-            field_311_referral_contact:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_marked_for_deletion:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_type:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             operations:
               align: ''
               separator: ''
@@ -836,7 +828,7 @@ display:
     id: page_admin_contacts
     display_title: 'Admin contacts'
     display_plugin: page
-    position: 1
+    position: 2
     display_options:
       title: Contacts
       fields:
@@ -1448,9 +1440,87 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
+            title: title
+            field_display_in_group: field_display_in_group
+            status: status
+            changed: changed
+            field_311_referral_contact: field_311_referral_contact
+            field_type: field_type
+            operations: operations
+          default: changed
+          info:
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_display_in_group:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            field_311_referral_contact:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_type:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: true
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options: {  }
       defaults:
         access: false
         title: false
+        style: false
+        row: false
         fields: false
         filters: false
         filter_groups: false
@@ -1869,7 +1939,7 @@ display:
     id: page_manage_multco_contacts
     display_title: 'Manage Multco Contacts'
     display_plugin: page
-    position: 1
+    position: 3
     display_options:
       title: 'Manage Multnomah County Contacts'
       fields:
@@ -2709,9 +2779,95 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
+            title: title
+            field_display_in_group: field_display_in_group
+            status: status
+            changed: changed
+            field_311_referral_contact: field_311_referral_contact
+            field_marked_for_deletion: field_marked_for_deletion
+            field_type: field_type
+            operations: operations
+          default: field_marked_for_deletion
+          info:
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_display_in_group:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: priority-low
+            field_311_referral_contact:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_marked_for_deletion:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_type:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: true
+          summary: ''
+          empty_table: true
+          caption: ''
+          description: ''
+      row:
+        type: fields
+        options: {  }
       defaults:
         access: false
         title: false
+        style: false
+        row: false
         fields: false
         filters: false
         filter_groups: false

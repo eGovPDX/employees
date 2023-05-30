@@ -1,0 +1,18 @@
+diff --git a/core/modules/ckeditor5/src/Plugin/CKEditor5Plugin/MediaLibrary.php b/core/modules/ckeditor5/src/Plugin/CKEditor5Plugin/MediaLibrary.php
+index 17a2188..4c44af2 100644
+--- a/core/modules/ckeditor5/src/Plugin/CKEditor5Plugin/MediaLibrary.php
++++ b/core/modules/ckeditor5/src/Plugin/CKEditor5Plugin/MediaLibrary.php
+@@ -79,11 +79,11 @@ public function getDynamicPluginConfig(array $static_plugin_config, EditorInterf
+         $media_type_ids = array_intersect_key($media_type_ids, $media_embed_filter->settings['allowed_media_types']);
+       }
+     }
+-    if (in_array('image', $media_type_ids, TRUE)) {
++    if (in_array('document', $media_type_ids, TRUE)) {
+       // Move image to first position.
+       // This workaround can be removed once this issue is fixed:
+       // @see https://www.drupal.org/project/drupal/issues/3073799
+-      array_unshift($media_type_ids, 'image');
++      array_unshift($media_type_ids, 'document');
+       $media_type_ids = array_unique($media_type_ids);
+     }
+ 
