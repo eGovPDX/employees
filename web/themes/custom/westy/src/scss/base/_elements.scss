@@ -34,6 +34,38 @@ ul,
 dl {
 }
 
+// To make policy lists correctly display diff comparisons and
+// to ensure that screen readers correctly read the list items
+// this style removes numbering from an ordered list so that it can
+// be manually added into the <li> element as text.
+ol.manually-numbered-list {
+  list-style: none !important;
+  padding-inline-start: 1em;
+  li {
+    display: list-item;
+    margin-bottom: $spacer;
+  }
+  ol {
+    list-style: none !important;
+  }
+}
+
+ul.checkbox-list {
+  list-style: none !important;
+  ul {
+    list-style: none !important;
+  }
+  li::before {
+    border: 0.1rem solid $body-color;
+    content: "";
+    display: inline-flex;
+    height: 1rem;
+    margin-left: -1.5rem;
+    margin-right: 0.5rem;
+    width: 1rem;
+  }
+}
+
 // Image
 // -----------------------------------------------------------------------------
 img {
