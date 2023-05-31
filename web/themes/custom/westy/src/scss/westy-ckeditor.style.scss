@@ -31,6 +31,18 @@ $fa-font-path: '/themes/custom/westy/dist';
       }
     }
   }
+  
+  // Override Clarro list margins with Bootstrap reset.css values
+  ol, 
+  ul {
+    margin: inherit;
+    margin-bottom: 1rem;
+  }
+
+  // Fix checkbox-list styling
+  &.ck-editor__editable ul.checkbox-list .ck-list-bogus-paragraph {
+    display: inline-block !important;
+  }
 
   // Allow selection of text within buttons
   .btn {
