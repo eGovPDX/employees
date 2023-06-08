@@ -1605,6 +1605,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        body_value:
+          id: body_value
+          table: node__body
+          field: body_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: body_value_op
+            label: 'Body contains'
+            description: ''
+            use_operator: false
+            operator: body_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: body_content
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         type:
           id: type
           table: node_field_data
@@ -1854,52 +1900,6 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        body_value:
-          id: body_value
-          table: node__body
-          field: body_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: string
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: body_value_op
-            label: 'Body content contains'
-            description: ''
-            use_operator: false
-            operator: body_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: body_content
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              bts_catalog: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       filter_groups:
         operator: AND
         groups:
