@@ -1793,6 +1793,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_division_name_value:
+          id: field_division_name_value
+          table: user__field_division_name
+          field: field_division_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: allwords
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_division_name_value_op
+            label: 'Division (contains)'
+            description: ''
+            use_operator: false
+            operator: field_division_name_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_division_name_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              publisher: '0'
+              bts_catalog: '0'
+              311_support_agent: '0'
+              311_lead: '0'
+              content_lead: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_group_names_value:
           id: field_group_names_value
           table: user__field_group_names
@@ -1955,6 +2001,10 @@ display:
                   min: ''
                   max: ''
                   value: '0'
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: table
         options:
@@ -3594,39 +3644,43 @@ display:
               preconfiguration:
                 add_confirmation: false
                 label_override: 'Set search boost'
-            9:
+            8:
               action_id: sync_user_status_with_ad
               preconfiguration:
                 add_confirmation: false
-            10:
+            9:
               action_id: retrieve_user_info_from_ad
               preconfiguration:
                 add_confirmation: false
-            11:
+            10:
               action_id: user_update_user_primary_groups
               preconfiguration:
                 add_confirmation: false
-            13:
+            11:
+              action_id: realname_update_realname_action
+              preconfiguration:
+                add_confirmation: false
+            12:
               action_id: user_unblock_user_action
               preconfiguration:
                 add_confirmation: false
-            14:
+            13:
               action_id: user_block_user_action
               preconfiguration:
                 add_confirmation: false
-            15:
+            14:
               action_id: user_remove_role_action
               preconfiguration:
                 add_confirmation: false
-            16:
+            15:
               action_id: user_add_role_action
               preconfiguration:
                 add_confirmation: false
-            18:
+            17:
               action_id: vbo_cancel_user_action
               preconfiguration:
                 add_confirmation: false
-            20:
+            19:
               action_id: 'entity:save_action:user'
               preconfiguration:
                 add_confirmation: false
