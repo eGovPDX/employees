@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.group.search_result
+    - field.field.group.employee.field_contacts
     - field.field.group.employee.field_contract_search_text
     - field.field.group.employee.field_featured_content
     - field.field.group.employee.field_featured_documents
@@ -84,6 +85,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_contacts: true
   field_contract_search_text: true
   field_featured_content: true
   field_featured_documents: true

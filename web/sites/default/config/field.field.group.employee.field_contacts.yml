@@ -1,0 +1,29 @@
+uuid: a77346a7-455a-4fcf-abc0-9a18bcd98157
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_contacts
+    - group.type.employee
+    - node.type.contact
+id: group.employee.field_contacts
+field_name: field_contacts
+entity_type: group
+bundle: employee
+label: Contacts
+description: 'To display a contact that isn''t an employee (e.g. a group inbox email) on this group, you can use the "Contact" content type. <a href="content/create/group_node%3Acontact">Create a new contact here.</a>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      contact: contact
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
