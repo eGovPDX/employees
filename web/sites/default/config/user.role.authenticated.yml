@@ -4,6 +4,10 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - media.type.document
+    - media.type.image
+    - media.type.remote_document
+    - media.type.remote_video
     - workflows.workflow.editorial
   module:
     - content_moderation
@@ -29,16 +33,31 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
+  - 'create document media'
   - 'create field_job_description'
   - 'create field_mobile_phone'
   - 'create field_section'
   - 'create field_workspace'
+  - 'create image media'
+  - 'create media'
+  - 'create remote_document media'
+  - 'create remote_video media'
+  - 'delete media'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own remote_document media'
+  - 'delete own remote_video media'
   - 'download media'
+  - 'edit own document media'
   - 'edit own field_job_description'
   - 'edit own field_mobile_phone'
   - 'edit own field_section'
   - 'edit own field_workspace'
+  - 'edit own image media'
+  - 'edit own remote_document media'
+  - 'edit own remote_video media'
   - 'notify of path changes'
+  - 'update media'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use search_api_autocomplete for group_search_index'
