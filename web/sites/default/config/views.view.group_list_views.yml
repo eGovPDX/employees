@@ -1096,7 +1096,7 @@ display:
             view_mode: group_contact
           group_column: target_id
           group_columns: {  }
-          group_rows: true
+          group_rows: false
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
@@ -1159,7 +1159,7 @@ display:
             view_mode: related
           group_column: target_id
           group_columns: {  }
-          group_rows: true
+          group_rows: false
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
@@ -1167,6 +1167,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      pager:
+        type: none
+        options:
+          offset: 0
       sorts: {  }
       arguments:
         id:
@@ -1306,9 +1310,15 @@ display:
           default_row_class: false
       row:
         type: fields
-        options: {  }
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
+        query: true
         title: false
+        pager: false
         style: false
         row: false
         relationships: false
@@ -1322,6 +1332,7 @@ display:
       display_description: ''
       header: {  }
       display_extenders: {  }
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1329,7 +1340,6 @@ display:
         - 'languages:language_interface'
         - route
         - url
-        - url.query_args
       tags:
         - 'config:field.storage.group.field_contacts'
         - 'config:field.storage.group.field_group_contact'

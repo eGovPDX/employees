@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.event.body
     - field.field.node.event.field_contact
+    - field.field.node.event.field_contacts
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_featured_image
     - field.field.node.event.field_related_content
@@ -44,6 +45,22 @@ third_party_settings:
         open: true
         description: ''
         required_fields: true
+    group_add_contacts:
+      children:
+        - field_contacts
+        - field_contact
+      label: 'Page Contacts'
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 _core:
   default_config_hash: CVAKxLp27yWdjTSep4DYtCnqX23XA8AYXXryfMA0Q3A
 id: node.event.default
@@ -68,6 +85,16 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_contact:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contacts:
     type: entity_reference_autocomplete
     weight: 5
     region: content

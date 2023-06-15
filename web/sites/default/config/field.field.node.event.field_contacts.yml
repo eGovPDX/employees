@@ -1,17 +1,17 @@
-uuid: a77346a7-455a-4fcf-abc0-9a18bcd98157
+uuid: cf021139-6e31-4658-bbfa-01905edf0630
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_contacts
-    - group.type.employee
+    - field.storage.node.field_contacts
     - node.type.contact
-id: group.employee.field_contacts
+    - node.type.event
+id: node.event.field_contacts
 field_name: field_contacts
-entity_type: group
-bundle: employee
+entity_type: node
+bundle: event
 label: Contacts
-description: 'To display a contact that isn''t an employee (e.g. a group inbox email) on this group, you can use the "Contact" content type. <a href="content/create/group_node%3Acontact">Create a new contact here.</a>'
+description: 'To display a contact that isn''t an employee (e.g. a group inbox email) on this event, you can use the "Contact" content type. Create a new contact through the "Add Content" tab in the respective group.'
 required: false
 translatable: false
 default_value: {  }
