@@ -1094,15 +1094,15 @@ display:
           type: entity_reference_entity_view
           settings:
             view_mode: group_contact
-          group_column: target_id
+          group_column: entity_id
           group_columns: {  }
-          group_rows: false
+          group_rows: true
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: ', '
+          separator: ''
           field_api_classes: false
         field_contacts:
           id: field_contacts
@@ -1157,15 +1157,15 @@ display:
           type: entity_reference_entity_view
           settings:
             view_mode: related
-          group_column: target_id
+          group_column: entity_id
           group_columns: {  }
-          group_rows: false
+          group_rows: true
           delta_limit: 0
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: ', '
+          separator: ''
           field_api_classes: false
       pager:
         type: none
@@ -1299,7 +1299,7 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       filter_groups:
-        operator: AND
+        operator: OR
         groups:
           1: OR
       style:
@@ -1319,6 +1319,7 @@ display:
         query: true
         title: false
         pager: false
+        group_by: false
         style: false
         row: false
         relationships: false
@@ -1329,6 +1330,7 @@ display:
         filter_groups: false
         header: false
       relationships: {  }
+      group_by: true
       display_description: ''
       header: {  }
       display_extenders: {  }
