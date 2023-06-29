@@ -21,6 +21,15 @@ function portland_groups_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function portland_groups_form_media_form_alter(&$form, $form_state, $form_id) {
+  // Remove redundant "The list of groups media item belongs to" from groupmedia module
+  // that shows right below Displayed in field on media
+  unset($form['group_information']);
+}
+
+/**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
 function portland_groups_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
@@ -111,7 +120,7 @@ function portland_groups_entity_insert($entity) {
 
 /**
  * Helper function
- * 
+ *
  * This is the function that determines which group to assign new content to based
  * on the first delta of the display_in_groups field. If that field has at least one
  * value, the first one is used as the node "owner" and a group content relationship
@@ -123,12 +132,12 @@ function portland_groups_entity_insert($entity) {
  * with more than one group. The field_displayed_in field is used to show nodes in
  * multiple groups without a group content relationship; it is used in views to show
  * content owned by other groups in a group context.
- * 
+ *
  * If a node is created using Quick Node Clone, that module will also clone the group
  * content relationship as part of its insert/update routine, which also causes this
  * funtion to be called. Boh QNC and this function attempt to create a group node
  * relationship, so we need to check whether that relationship already exists before
- * creation, or we will get duplicates. 
+ * creation, or we will get duplicates.
  */
 function _portland_groups_synchronize_entity_group_ownership($entity) {
 
