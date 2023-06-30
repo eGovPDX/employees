@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.news.body
     - field.field.node.news.field_contact
+    - field.field.node.news.field_contacts
     - field.field.node.news.field_display_in_group
     - field.field.node.news.field_featured_image
     - field.field.node.news.field_published_on
@@ -61,6 +62,22 @@ third_party_settings:
         open: true
         description: ''
         required_fields: true
+    group_page_contacts:
+      children:
+        - field_contact
+        - field_contacts
+      label: 'Page Contacts'
+      region: content
+      parent_name: ''
+      weight: 4
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: node.news.default
 targetEntityType: node
 bundle: news
@@ -85,6 +102,16 @@ content:
   field_contact:
     type: entity_reference_autocomplete
     weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contacts:
+    type: entity_reference_autocomplete
+    weight: 57
     region: content
     settings:
       match_operator: CONTAINS

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_contact
+    - field.field.node.page.field_contacts
     - field.field.node.page.field_display_in_group
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
@@ -71,6 +72,22 @@ third_party_settings:
         open: true
         description: ''
         required_fields: true
+    group_page_contacts:
+      children:
+        - field_contact
+        - field_contacts
+      label: 'Page Contacts'
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 _core:
   default_config_hash: AD_lefuYmjsKeH3OQApsyP_nLj6ZnGaALznLQSQ0Z_o
 id: node.page.default
@@ -97,6 +114,16 @@ content:
   field_contact:
     type: entity_reference_autocomplete
     weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contacts:
+    type: entity_reference_autocomplete
+    weight: 57
     region: content
     settings:
       match_operator: CONTAINS
@@ -209,6 +236,7 @@ content:
       display_label: true
     third_party_settings:
       field_states_ui:
+        field_states: {  }
         form:
           type: ''
           list:
@@ -217,7 +245,6 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states: {  }
   field_sort_weight:
     type: number
     weight: 6
@@ -226,6 +253,15 @@ content:
       placeholder: ''
     third_party_settings:
       field_states_ui:
+        field_states:
+          dad4e9a8-45a4-462f-a4ae-8a2ec66935f9:
+            id: invisible
+            data:
+              target: field_show_in_menu
+              comparison: unchecked
+              value: ''
+              submit: 'Update State Cancel'
+            uuid: dad4e9a8-45a4-462f-a4ae-8a2ec66935f9
         form:
           type: ''
           list:
@@ -234,15 +270,6 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          dad4e9a8-45a4-462f-a4ae-8a2ec66935f9:
-            uuid: dad4e9a8-45a4-462f-a4ae-8a2ec66935f9
-            id: invisible
-            data:
-              target: field_show_in_menu
-              comparison: unchecked
-              value: ''
-              submit: 'Update State Cancel'
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 8

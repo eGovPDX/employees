@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.event.body
     - field.field.node.event.field_contact
+    - field.field.node.event.field_contacts
     - field.field.node.event.field_display_in_group
     - field.field.node.event.field_featured_image
     - field.field.node.event.field_related_content
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.event.field_type
     - field.field.node.event.field_when
     - node.type.event
+    - views.view.content_list
     - views.view.group_menu
     - views.view.related_content
   module:
@@ -124,25 +126,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: -5
             additional: {  }
-          da509b05-ba11-442a-b9bc-0e296dbe6c6d:
-            uuid: da509b05-ba11-442a-b9bc-0e296dbe6c6d
-            region: side
-            configuration:
-              id: 'field_block:node:event:field_contact'
-              label: Contact
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: group_contact
-                third_party_settings: {  }
-            weight: 0
-            additional: {  }
           ba20dbd3-456f-4587-805b-759a9ca9231d:
             uuid: ba20dbd3-456f-4587-805b-759a9ca9231d
             region: side
@@ -154,7 +137,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 1
+            weight: 2
             additional: {  }
           4379673b-2998-4ea4-b004-66e6987a4dde:
             uuid: 4379673b-2998-4ea4-b004-66e6987a4dde
@@ -167,7 +150,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           7c80755d-4fd3-4b61-880e-52758cb53bc2:
             uuid: 7c80755d-4fd3-4b61-880e-52758cb53bc2
@@ -180,7 +163,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 3
+            weight: 4
             additional: {  }
           8e0fdb59-5496-42d8-a800-22760ab5ba76:
             uuid: 8e0fdb59-5496-42d8-a800-22760ab5ba76
@@ -199,7 +182,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 4
+            weight: 5
             additional: {  }
           889449d0-d0dc-42fe-af7a-9014d517bbc3:
             uuid: 889449d0-d0dc-42fe-af7a-9014d517bbc3
@@ -218,7 +201,7 @@ third_party_settings:
                 settings:
                   link: true
                 third_party_settings: {  }
-            weight: 5
+            weight: 6
             additional: {  }
           546feb32-6c62-4c09-bceb-1d9c17e00f26:
             uuid: 546feb32-6c62-4c09-bceb-1d9c17e00f26
@@ -233,7 +216,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 6
+            weight: 7
             additional: {  }
           e52e815c-429d-4368-9390-566d3878c2d6:
             uuid: e52e815c-429d-4368-9390-566d3878c2d6
@@ -248,7 +231,7 @@ third_party_settings:
               formatter:
                 settings: {  }
                 third_party_settings: {  }
-            weight: 7
+            weight: 8
             additional: {  }
           132e40f5-39cc-4d8f-93e8-d15b5fcc68ed:
             uuid: 132e40f5-39cc-4d8f-93e8-d15b5fcc68ed
@@ -268,6 +251,19 @@ third_party_settings:
                   view_mode: banner
                 third_party_settings: {  }
             weight: -8
+            additional: {  }
+          97cda6cb-cc13-413f-ba1c-3674b5e8da65:
+            uuid: 97cda6cb-cc13-413f-ba1c-3674b5e8da65
+            region: side
+            configuration:
+              id: 'views_block:content_list-block_page_contacts'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -319,6 +315,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 7
+    region: main
+  field_contacts:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 13
     region: main
   field_featured_image:
     type: entity_reference_entity_view

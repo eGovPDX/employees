@@ -1,0 +1,29 @@
+uuid: 91f13476-c8f1-4415-b561-b29a9b73e69b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contacts
+    - node.type.contact
+    - node.type.news
+id: node.news.field_contacts
+field_name: field_contacts
+entity_type: node
+bundle: news
+label: Contacts
+description: 'To display a contact that isn''t an employee (e.g. a group inbox email) on this news item, you can use the "Contact" content type. Create a new contact through the "Add Content" tab in the respective group.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      contact: contact
+    sort:
+      field: changed
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

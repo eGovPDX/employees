@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.group.teaser
+    - field.field.group.private.field_contacts
     - field.field.group.private.field_featured_content
     - field.field.group.private.field_featured_documents
     - field.field.group.private.field_featured_image
@@ -64,6 +65,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_contacts: true
   field_featured_content: true
   field_featured_documents: true
   field_featured_image: true

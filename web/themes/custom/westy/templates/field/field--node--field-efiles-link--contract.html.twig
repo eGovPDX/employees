@@ -1,9 +1,9 @@
-{# 
+{#
   Set a custom link title by overriding `items.0.content["#title"]` and add help text
   for logging into Trim.
 #}
 
-{% set items = [ 
+{% set items = [
   {
     'content' : [
       {
@@ -17,6 +17,6 @@
 
 {% embed 'field.html.twig' %}
   {% block content_footer %}
-    <p class="small inline">(Use your Rose username and password when prompted to log in to Trim.)</p>
+    <p class="small inline">({{ 'Use your Rose username and password when prompted to log in to Trim, which is the same username and password you use to unlock your City computer.'|t }})</p>
   {% endblock %}
 {% endembed %}
