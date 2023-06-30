@@ -1,0 +1,23 @@
+{%
+  set classes = [
+    'contact',
+    view_mode|clean_class,
+    'mb-4',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <h3 class="mb-2"><a href="/node/{{ node.id }}">
+    {% if content.field_first_name.0 and content.field_last_name.0 %}
+      {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}
+    {% else %}
+      {{ node.title.value }}
+    {% endif %}
+  </a></h3>
+  <div class="mb-2">{{ content.field_title.0 }}</div>
+  <div class="mb-2">{{ content.field_organization.0 }}</div>
+  <div class="mb-2">{{ content.field_phone.0 }}</div>
+  <div class="mb-2 text-break">{{ content.field_email.0 }}</div>
+  <div class="mb-2">{{ content.field_fax }}</div>
+  <div class="mb-2">{{ content.field_mail_stop }}</div>
+</div>

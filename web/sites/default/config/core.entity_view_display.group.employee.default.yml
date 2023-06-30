@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.base_field_override.group.employee.label
+    - field.field.group.employee.field_contacts
     - field.field.group.employee.field_contract_search_text
     - field.field.group.employee.field_featured_content
     - field.field.group.employee.field_featured_documents
@@ -144,25 +145,6 @@ third_party_settings:
               items_per_page: none
             weight: 2
             additional: {  }
-          8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd:
-            uuid: 8b5dce79-fb73-4c7d-b5f9-0474fc7a5dcd
-            region: side
-            configuration:
-              id: 'field_block:group:employee:field_group_contact'
-              label: 'Group Contact'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: group_contact
-                third_party_settings: {  }
-            weight: 5
-            additional: {  }
           c09d4f1d-5c79-46c3-821f-6f949245f224:
             uuid: c09d4f1d-5c79-46c3-821f-6f949245f224
             region: side
@@ -174,7 +156,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 7
+            weight: 15
             additional: {  }
           17ce1005-a469-45b8-9fd9-7e248c1369da:
             uuid: 17ce1005-a469-45b8-9fd9-7e248c1369da
@@ -187,7 +169,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: Today
               items_per_page: none
-            weight: 6
+            weight: 14
             additional: {  }
           ee173e63-a8f1-43a4-b370-ee592b581597:
             uuid: ee173e63-a8f1-43a4-b370-ee592b581597
@@ -218,7 +200,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 4
+            weight: 7
             additional: {  }
           55ba6be4-3908-4743-9e8b-2381b5e27a46:
             uuid: 55ba6be4-3908-4743-9e8b-2381b5e27a46
@@ -256,7 +238,7 @@ third_party_settings:
                 settings:
                   view_mode: embedded_with_description
                 third_party_settings: {  }
-            weight: 8
+            weight: 16
             additional: {  }
           088fe2cf-4d08-47aa-bd50-72b25eac7fcd:
             uuid: 088fe2cf-4d08-47aa-bd50-72b25eac7fcd
@@ -269,7 +251,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 1
+            weight: 2
             additional: {  }
           7be5c372-5751-498b-89a0-b2c923df4be5:
             uuid: 7be5c372-5751-498b-89a0-b2c923df4be5
@@ -282,7 +264,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 3
+            weight: 5
             additional: {  }
           5ad76c3e-3bcf-4cf4-9293-88581dd9012c:
             uuid: 5ad76c3e-3bcf-4cf4-9293-88581dd9012c
@@ -295,7 +277,20 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 4
+            additional: {  }
+          5467c3b4-5e54-4a4e-ab65-f65b7987e20f:
+            uuid: 5467c3b4-5e54-4a4e-ab65-f65b7987e20f
+            region: side
+            configuration:
+              id: 'views_block:group_list_views-block_group_contacts'
+              label: ''
+              label_display: visible
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 12
             additional: {  }
         third_party_settings: {  }
   layout_library:
@@ -316,6 +311,14 @@ targetEntityType: group
 bundle: employee
 mode: default
 content:
+  field_contacts:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: main
   field_contract_search_text:
     type: text_default
     label: above

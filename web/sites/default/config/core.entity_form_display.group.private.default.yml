@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.private.field_contacts
     - field.field.group.private.field_featured_content
     - field.field.group.private.field_featured_documents
     - field.field.group.private.field_featured_image
@@ -38,11 +39,37 @@ third_party_settings:
         description: ''
         required_fields: true
         weight: 0
+    group_group_contact:
+      children:
+        - field_group_contact
+        - field_contacts
+      label: 'Group Contacts'
+      region: content
+      parent_name: ''
+      weight: 7
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: group.private.default
 targetEntityType: group
 bundle: private
 mode: default
 content:
+  field_contacts:
+    type: entity_reference_autocomplete
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_featured_content:
     type: entity_reference_autocomplete
     weight: 5

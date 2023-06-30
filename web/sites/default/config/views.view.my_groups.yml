@@ -172,7 +172,22 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        label:
+          id: label
+          table: groups_field_data
+          field: label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: group
+          entity_field: label
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments:
         uid:
           id: uid
@@ -210,52 +225,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-      filters:
-        field_org_type_target_id:
-          id: field_org_type_target_id
-          table: group__field_org_type
-          field: field_org_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: org_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
+      filters: {  }
       style:
         type: html_list
         options:
@@ -2355,7 +2325,22 @@ display:
             value: '<p>You are not assigned to any groups as an editor or admin. If you need to be added to a groups to edit content, contact your bureau''s intranet website lead or the eGov team at <a href="mailto:website@portlandoregon.gov">website@portlandoregon.gov</a>.</p>'
             format: basic_html
           tokenize: false
-      sorts: {  }
+      sorts:
+        label:
+          id: label
+          table: groups_field_data
+          field: label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: group
+          entity_field: label
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         group_roles_target_id_2:
           id: group_roles_target_id_2
