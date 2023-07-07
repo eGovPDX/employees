@@ -17,12 +17,6 @@ targetEntityType: media
 bundle: iframe
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
     weight: 3
@@ -85,18 +79,10 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 6
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
+  created: true
   publish_on: true
   publish_state: true
+  uid: true
   unpublish_on: true
   unpublish_state: true

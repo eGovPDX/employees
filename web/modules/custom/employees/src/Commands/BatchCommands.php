@@ -171,30 +171,31 @@ class BatchCommands extends DrushCommands
 
 
   /**
-   * Drush command to restore publisher role.
+   * Drush command to delete files with 0 usages
    *
-   * @command employees:restore_publisher_role
-   * @usage employees:restore_publisher_role
+   * @command employees:mark_unused_files_as_temp
+   * @usage employees:mark_unused_files_as_temp
    */
-  public function restore_publisher_role()
-  {
-    // The current work folder is the document root "/app/web"
-    if (($file = fopen('./modules/custom/portland_openid_connect/publisher-list.txt', "r")) !== FALSE) {
-
-      $user_storage = $this->entityTypeManager->getStorage('user');
-      while(!feof($file)) {
-        $username = trim(fgets($file));
-        $users = $user_storage->loadByProperties(['mail' => $username]);
-        if (empty($users)) {
-          $this->output()->writeln("Cannot find user $username");
-        } else {
-          $user = array_values($users)[0];
-          $user->status = 1;
-          $user->addRole('publisher');
-          $user->save();
-        }
-      }
-      fclose($file);
+  public function mark_unused_files_as_temp() {
+    $file_storage = $this->entityTypeManager->getStorage('file');
+    $db = \Drupal::database();
+    $result = $db->query("
+        SELECT
+          fid
+        FROM
+          file_managed
+        LEFT JOIN file_usage
+          USING (fid)
+        WHERE
+          count IS NULL
+          AND status = 1;
+      ")->fetchAll();
+    $unused_fids = array_column($result, 'fid');
+    foreach ($unused_fids as $fid) {
+      $file = $file_storage->load($fid);
+      $file->setTemporary();
+      $file->save();
+      print("Marked {$file->getFilename()} {$file->id()} as temp\n");
     }
   }
 }
