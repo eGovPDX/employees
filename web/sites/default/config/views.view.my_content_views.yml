@@ -332,9 +332,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -348,6 +355,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -893,9 +903,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -909,6 +926,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -927,7 +947,7 @@ display:
     display_plugin: block
     position: 3
     display_options:
-      title: 'My News'
+      title: ''
       fields:
         rendered_entity:
           id: rendered_entity
@@ -979,7 +999,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: featured
+          view_mode: teaser
       pager:
         type: some
         options:
@@ -1134,12 +1154,25 @@ display:
         filter_groups: false
         header: false
       display_description: ''
-      use_more: true
+      use_more: false
       use_more_always: true
-      use_more_text: 'More news from groups followed'
-      link_display: custom_url
+      use_more_text: ''
+      link_display: '0'
       link_url: news/my-news
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: "<div class=\"row align-items-center\">\r\n  <div class=\"col-8\"><h2>News from your groups</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news/my-news\">See all &raquo;</a></div>\r\n</div>"
+            format: full_html
+          tokenize: false
       display_extenders: {  }
       block_description: 'My News'
       block_hide_empty: true
@@ -1154,9 +1187,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -1170,6 +1210,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -1405,9 +1448,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -1421,6 +1471,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -1663,9 +1716,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -1679,6 +1739,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -1935,9 +1998,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -1951,6 +2021,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'

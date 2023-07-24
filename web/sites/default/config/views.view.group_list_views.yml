@@ -733,11 +733,11 @@ display:
         - 'config:field.storage.group.field_org_type'
   block_citywide_portals:
     id: block_citywide_portals
-    display_title: 'Block: Citywide Portals'
+    display_title: 'Block: Citywide Groups'
     display_plugin: block
     position: 2
     display_options:
-      title: 'Citywide Portals'
+      title: ''
       fields:
         view_group:
           id: view_group
@@ -999,11 +999,11 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: nav-item
+          row_class: 'list-group-item list-group-item-action text-primary bg-body'
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: 'card-body p-0'
+          class: 'list-group list-group-flush rounded-2'
       row:
         type: fields
         options: {  }
@@ -1020,7 +1020,18 @@ display:
         header: false
       relationships: {  }
       display_description: ''
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: "<h2 class=\"my-1\">Citywide groups</h2>\r\n<p class=\"py-2 m-0\">Information for all employees.</p>"
+          tokenize: false
       display_extenders: {  }
       block_description: 'Citywide Portals'
       block_hide_empty: true

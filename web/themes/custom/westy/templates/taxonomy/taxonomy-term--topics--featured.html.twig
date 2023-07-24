@@ -1,9 +1,11 @@
-<div class="card border-2 rounded-0 h-100">
-  {{ content.field_featured_image }}
-  <div class="card-body">
-    <h3 class="card-title h5 mb-1">{{ name }}</h3>
-    <div class="card-text">
-      {{ content|without('field_featured_image') }}
+<div class="card h-100">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col-8"><h3 class="h4 my-1">{{ name }}</h3></div>
+      <div class="col-4 w-auto ms-auto"><a class="text-decoration-none" href="{{ url }}">See all &raquo;</a></div>
     </div>
+  </div>
+  <div class="card-body">
+    {{ content }}
   </div>
 </div>

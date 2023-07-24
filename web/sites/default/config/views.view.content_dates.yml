@@ -235,7 +235,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"content-date mb-1\">{% if field_updated_on_1 > field_published_on_1 %}\r\n <strong>Updated</strong> {{ field_updated_on }}\r\n{% else %}\r\n<span class=\"visually-hidden\">Posted </span>{{ field_published_on }}\r\n{% endif %}\r\n</div>"
+            text: "<div class=\"content-date mb-1\">{% if field_updated_on_1 > field_published_on_1 %}\r\nUpdated {{ field_updated_on }}\r\n{% else %}\r\n<span class=\"visually-hidden\">Posted </span>{{ field_published_on }}\r\n{% endif %}\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -370,12 +370,11 @@ display:
         options:
           grouping: {  }
           row_class: ''
-          default_row_class: true
-          uses_fields: false
+          default_row_class: false
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline: {  }
           separator: ''
           hide_empty: false

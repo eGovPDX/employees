@@ -1,0 +1,11 @@
+<div class="card mb-4">
+  <div class="card-header">
+    {{ header }}
+  </div>
+
+  {% if rows %}
+    {{ rows }}
+  {% elseif empty %}
+    {{ empty }}
+  {% endif %}
+</div>

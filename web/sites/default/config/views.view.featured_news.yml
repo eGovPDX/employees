@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.featured
+    - core.entity_view_mode.node.teaser
     - node.type.news
     - taxonomy.vocabulary.org_type
   content:
@@ -80,7 +80,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: featured
+          view_mode: teaser
       pager:
         type: full
         options:
@@ -270,7 +270,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<p class=\"lead\">Services and information for City of Portland employees.</p>\r\n<h2 class=\"mb-2\">Featured News</h2>"
+            value: "<div class=\"row align-items-center\">\r\n  <div class=\"col-8\"><h2>Citywide news</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news\">See all &raquo;</a></div>\r\n</div>"
             format: full_html
           tokenize: false
       footer: {  }
@@ -284,9 +284,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -300,6 +307,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
@@ -312,8 +322,8 @@ display:
         - 'config:core.entity_view_display.node.resource.related'
         - 'config:core.entity_view_display.node.resource.search_result'
         - 'config:core.entity_view_display.node.resource.teaser'
-  page_river:
-    id: page_river
+  page_featured_home_news:
+    id: page_featured_home_news
     display_title: 'Page: Featured Home News'
     display_plugin: page
     position: 1
@@ -327,20 +337,7 @@ display:
         pager: false
         footer: false
       display_description: ''
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: '<a href="/news">View all news on Portland Employees</a>'
-            format: basic_html
-          tokenize: false
+      footer: {  }
       display_extenders: {  }
       path: node
     cache_metadata:
@@ -351,9 +348,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.alert.default'
+        - 'config:core.entity_view_display.node.alert.featured'
+        - 'config:core.entity_view_display.node.alert.teaser'
         - 'config:core.entity_view_display.node.bts_catalog_item.default'
         - 'config:core.entity_view_display.node.bts_catalog_item.search_result'
         - 'config:core.entity_view_display.node.bts_catalog_item.teaser'
+        - 'config:core.entity_view_display.node.contact.default'
+        - 'config:core.entity_view_display.node.contact.related'
+        - 'config:core.entity_view_display.node.contact.search_result'
+        - 'config:core.entity_view_display.node.contact.teaser'
         - 'config:core.entity_view_display.node.contract.default'
         - 'config:core.entity_view_display.node.contract.search_result'
         - 'config:core.entity_view_display.node.contract.teaser'
@@ -367,6 +371,9 @@ display:
         - 'config:core.entity_view_display.node.news.related'
         - 'config:core.entity_view_display.node.news.search_result'
         - 'config:core.entity_view_display.node.news.teaser'
+        - 'config:core.entity_view_display.node.notification.default'
+        - 'config:core.entity_view_display.node.notification.featured'
+        - 'config:core.entity_view_display.node.notification.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.featured'
         - 'config:core.entity_view_display.node.page.nested'
