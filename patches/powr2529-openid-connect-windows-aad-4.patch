@@ -21,8 +21,8 @@ index 6836a86..1bb868d 100644
      return $form;
    }
  
-@@ -191,13 +203,12 @@ class WindowsAad extends OpenIDConnectClientBase {
-     ];
+@@ -322,15 +322,14 @@ public function retrieveTokens(string $authorization_code): ?array {
+     $request_options = $this->getRequestOptions($authorization_code, $redirect_uri);
  
      // Add a Graph API as resource if an option is selected.
 +    // "scope" replaced "resource" parameter in Azure AD v2
@@ -33,11 +33,14 @@ index 6836a86..1bb868d 100644
 -        break;
 -
        case 2:
--        $request_options['form_params']['resource'] = 'https://graph.microsoft.com';
-+        $request_options['form_params']['scope'] = 'User.Read';
+         $v2 = str_contains($endpoints['token'], '/oauth2/v2.0/');
+         if (!$v2) {
+-          $request_options['form_params']['resource'] = 'https://graph.microsoft.com';
++          $request_options['form_params']['scope'] = 'User.Read';
+         }
          break;
      }
- 
+
 @@ -269,6 +280,16 @@ class WindowsAad extends OpenIDConnectClientBase {
        $userinfo['groups'] = $this->retrieveGroupInfo($access_token);
      }
