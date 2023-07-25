@@ -352,7 +352,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_org_type == "Citywide Portals" %}Following{% else %}{{ group_join_leave_link }}{% endif %}'
+            text: '{% if field_org_type == "Citywide Groups" %}Following{% else %}{{ group_join_leave_link }}{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -1033,7 +1033,7 @@ display:
           content: "<h2 class=\"my-1\">Citywide groups</h2>\r\n<p class=\"py-2 m-0\">Information for all employees.</p>"
           tokenize: false
       display_extenders: {  }
-      block_description: 'Citywide Portals'
+      block_description: 'Citywide Groups'
       block_hide_empty: true
       allow:
         items_per_page: true
