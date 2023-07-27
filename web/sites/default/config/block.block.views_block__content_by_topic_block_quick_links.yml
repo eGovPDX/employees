@@ -1,24 +1,24 @@
-uuid: d1fb3b42-bd16-454a-84ec-d41eac91f7d5
+uuid: c07ee27d-e39f-4098-aaa8-6b12636895bf
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.featured_events
+    - views.view.content_by_topic
   module:
     - system
     - views
   theme:
     - westy
-id: westy_views_block__featured_events_block_sitewide_today
+id: views_block__content_by_topic_block_quick_links
 theme: westy
 region: side
-weight: -35
+weight: -33
 provider: null
-plugin: 'views_block:featured_events-block_sitewide_today'
+plugin: 'views_block:content_by_topic-block_quick_links'
 settings:
-  id: 'views_block:featured_events-block_sitewide_today'
+  id: 'views_block:content_by_topic-block_quick_links'
   label: ''
-  label_display: visible
+  label_display: '0'
   provider: views
   views_label: ''
   items_per_page: none
@@ -26,5 +26,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    context_mapping: {  }
     pages: '<front>'

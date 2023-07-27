@@ -10,6 +10,7 @@ dependencies:
     - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - datetime
+    - employees
     - group
     - node
     - taxonomy
@@ -188,7 +189,7 @@ display:
           operator: or
           value:
             649: 649
-          group: 1
+          group: 2
           exposed: false
           expose:
             operator_id: ''
@@ -223,6 +224,45 @@ display:
           hierarchy: false
           limit: true
           error_message: true
+        is_current_user_member:
+          id: is_current_user_member
+          table: groups
+          field: is_current_user_member
+          relationship: field_display_in_group
+          group_type: group
+          admin_label: ''
+          entity_type: group
+          plugin_id: group_is_current_user_member
+          operator: '='
+          value: '1'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -270,7 +310,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<div class=\"row align-items-center\">\r\n  <div class=\"col-8\"><h2>Citywide news</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news\">See all &raquo;</a></div>\r\n</div>"
+            value: "<div class=\"row align-items-center\">\r\n  <div class=\"col-8\"><h2>Your news</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news\">See all &raquo;</a></div>\r\n</div>"
             format: full_html
           tokenize: false
       footer: {  }
@@ -332,7 +372,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 3
+          items_per_page: 6
       defaults:
         pager: false
         footer: false

@@ -10,6 +10,7 @@ dependencies:
     - 'taxonomy_term:org_type:29822c69-7347-4a23-8650-6ceb72cb4dfa'
   module:
     - datetime
+    - employees
     - group
     - node
     - taxonomy
@@ -345,6 +346,10 @@ display:
           2: OR
       style:
         type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
       row:
         type: 'entity:node'
         options:
@@ -396,18 +401,18 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_sitewide_today:
-    id: block_sitewide_today
-    display_title: 'Block: Today'
+  block_upcoming_sitewide_events:
+    id: block_upcoming_sitewide_events
+    display_title: 'Block: Upcoming'
     display_plugin: block
     position: 2
     display_options:
-      title: Today
+      title: ''
       pager:
         type: some
         options:
           offset: 0
-          items_per_page: 8
+          items_per_page: 6
       filters:
         status:
           id: status
@@ -464,99 +469,8 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_when_value_1:
-          id: field_when_value_1
-          table: node__field_when
-          field: field_when_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: datetime
-          operator: between
-          value:
-            min: today
-            max: 'today +23 hours +59 minutes'
-            value: today
-            type: date
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         field_org_type_target_id:
           id: field_org_type_target_id
-          table: group__field_org_type
-          field: field_org_type_target_id
-          relationship: field_display_in_group
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            649: 649
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: org_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-        field_org_type_target_id_1:
-          id: field_org_type_target_id_1
           table: group__field_org_type
           field: field_org_type_target_id
           relationship: field_display_in_group
@@ -601,16 +515,15 @@ display:
           hierarchy: false
           limit: true
           error_message: true
-        status_1:
-          id: status_1
-          table: node_field_data
-          field: status
-          relationship: none
+        is_current_user_member:
+          id: is_current_user_member
+          table: groups
+          field: is_current_user_member
+          relationship: field_display_in_group
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
+          entity_type: group
+          plugin_id: group_is_current_user_member
           operator: '='
           value: '1'
           group: 2
@@ -641,48 +554,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        type_1:
-          id: type_1
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value:
-            event: event
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
         field_when_end_value:
           id: field_when_end_value
           table: node__field_when
@@ -695,201 +566,8 @@ display:
           value:
             min: ''
             max: ''
-            value: today
-            type: date
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_when_value:
-          id: field_when_value
-          table: node__field_when
-          field: field_when_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: date
-          operator: '<'
-          value:
-            min: ''
-            max: ''
-            value: today
-            type: date
-          group: 2
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-      filter_groups:
-        operator: OR
-        groups:
-          1: AND
-          2: AND
-      defaults:
-        title: false
-        pager: false
-        use_more: false
-        use_more_always: false
-        use_more_text: false
-        link_display: false
-        link_url: false
-        filters: false
-        filter_groups: false
-        header: false
-      display_description: ''
-      use_more: false
-      use_more_always: false
-      use_more_text: 'More Events'
-      link_display: page_river
-      link_url: ''
-      header: {  }
-      display_extenders: {  }
-      block_description: 'Featured Today'
-      block_hide_empty: true
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
-  block_upcoming_sitewide_events:
-    id: block_upcoming_sitewide_events
-    display_title: 'Block: Upcoming'
-    display_plugin: block
-    position: 2
-    display_options:
-      title: 'Citywide Events'
-      pager:
-        type: some
-        options:
-          offset: 0
-          items_per_page: 8
-      filters:
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
-          value: '1'
-          group: 1
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value:
-            event: event
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_when_value:
-          id: field_when_value
-          table: node__field_when
-          field: field_when_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: date
-          operator: '>'
-          value:
-            min: ''
-            max: ''
-            value: 'today +23 hours +59 minutes'
-            type: date
+            value: now
+            type: offset
           group: 1
           exposed: false
           expose:
@@ -921,56 +599,11 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_org_type_target_id:
-          id: field_org_type_target_id
-          table: group__field_org_type
-          field: field_org_type_target_id
-          relationship: field_display_in_group
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            649: 649
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          vid: org_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
       filter_groups:
         operator: AND
         groups:
           1: AND
+          2: OR
       defaults:
         title: false
         pager: false
@@ -985,10 +618,21 @@ display:
       display_description: ''
       use_more: true
       use_more_always: true
-      use_more_text: 'More Events'
+      use_more_text: 'See all »'
       link_display: custom_url
       link_url: /events
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<h2 class="my-1"><i class="fas fa-calendar me-2"></i>Upcoming events</h2>'
+          tokenize: false
       display_extenders: {  }
       block_description: 'Featured Upcoming Events'
       block_hide_empty: true
