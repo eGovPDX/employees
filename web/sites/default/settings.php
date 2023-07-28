@@ -105,6 +105,10 @@ $config['samlauth.authentication']['sp_entity_id'] = $primary_domain;
 // Make files with 0 usages temporary so they can be deleted automatically
 $config['file.settings']['make_unused_managed_files_temporary'] = TRUE;
 
+// Opt out of certain checks on the Pantheon Dashboard Site Status page
+// https://docs.pantheon.io/drupal-launch-check#can-i-opt-out-of-a-specific-recommendation
+$config['site_audit']['opt_out']['CachePageExpire'] = TRUE;
+
 // Enable/disable config_split configurations based on the current environment
 $config['config_split.config_split.config_multidev']['status'] = FALSE;
 $config['config_split.config_split.config_dev']['status'] = FALSE;
