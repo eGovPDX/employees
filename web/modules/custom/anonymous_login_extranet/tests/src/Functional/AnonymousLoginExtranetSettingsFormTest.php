@@ -14,10 +14,15 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'anonymous_login',
     'node',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Module configuration.
@@ -29,7 +34,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->moduleConfig = $this->config('anonymous_login.settings');
   }
@@ -55,7 +60,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
       'message' => 'Test login message.',
     ];
     // Test login path validation.
-    $this->drupalPostForm(NULL, $edit, t('Save configuration'));
+    $this->submitForm($edit, t('Save configuration'));
     $this->assertSession()->pageTextContains('Login page path is invalid. Check it please.');
 
     // Prepare node to use it in login path setting.
@@ -69,7 +74,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
     $edit['login_path'] = '/node/1';
 
     // Test form saving.
-    $this->drupalPostForm(NULL, $edit, t('Save configuration'));
+    $this->submitForm($edit, t('Save configuration'));
     $this->assertSession()->pageTextContains('The configuration options have been saved.');
 
     $this->drupalGet('admin/config/user-interface/anonymous-login');

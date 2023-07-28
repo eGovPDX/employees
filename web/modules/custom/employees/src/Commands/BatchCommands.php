@@ -2,6 +2,7 @@
 
 namespace Drupal\employees\Commands;
 
+use Drupal\user\UserInterface;
 use Drush\Commands\DrushCommands;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -110,7 +111,7 @@ class BatchCommands extends DrushCommands
               preg_match('/\/([^\/]+)\?/', $row[$csv_columns['image_large_src']], $file_names);
               if (!empty($file_names) && strpos($file_names[1], 'images_0') === false) {
                 $data = file_get_contents($row[$csv_columns['image_large_src']]);
-                $file = file_save_data($data, 'public://user-photo/' . $file_names[1], FileSystemInterface::EXISTS_RENAME);
+                $file = \Drupal::service('file.repository')->writeData($data, 'public://user-photo/' . $file_names[1], FileSystemInterface::EXISTS_RENAME);
                 $user_display_name = $user->field_first_name->value . ' ' . $user->field_last_name->value;
                 $user->user_picture->setValue(
                   [
@@ -130,8 +131,8 @@ class BatchCommands extends DrushCommands
           $contact_name = trim($row[$csv_columns['name']], ", \n\r\t\v\0");
           $contact_email = $row[$csv_columns['email']];
           $user_info_array = [
-            'name' => substr($contact_name, 0, \Drupal\user\UserInterface::USERNAME_MAX_LENGTH),
-            'pass' => user_password(),
+            'name' => substr($contact_name, 0, UserInterface::USERNAME_MAX_LENGTH),
+            'pass' => \Drupal::service('password_generator')->generate(),
             'mail' => $contact_email ? $contact_email : 'no.email.'.rand(1000000, 10000000).'@portland.gov',
             'field_first_name' => $row[$csv_columns['first']],
             'field_last_name' => $row[$csv_columns['last']],
@@ -149,7 +150,7 @@ class BatchCommands extends DrushCommands
           if (!empty($file_names) && strpos($file_names[1], 'images_0') === false) {
             // Create file object from remote URL.
             $data = file_get_contents($row[$csv_columns['image_large_src']]);
-            $file = file_save_data($data, 'public://user-photo/' . $file_names[1], FileSystemInterface::EXISTS_RENAME);
+            $file = \Drupal::service('file.repository')->writeData($data, 'public://user-photo/' . $file_names[1], FileSystemInterface::EXISTS_RENAME);
 
             $user->user_picture->setValue(
               [

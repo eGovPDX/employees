@@ -61,7 +61,7 @@ class RouteSubscriber extends RouteSubscriberBase {
     if(
       isset($_ENV['PANTHEON_ENVIRONMENT']) &&
       in_array($_ENV['PANTHEON_ENVIRONMENT'], [
-        'demo', 'dev', 'test', 'live', 'sandbox', 'pe-421'])
+        'dev', 'test', 'live', 'sandbox', 'pe-421'])
     ) {
       // only log in with an OpenID provider
       // if ($route = $collection->get('user.login')) {

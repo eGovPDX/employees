@@ -23,14 +23,14 @@ class GroupMembershipController extends ControllerBase {
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
-  
+
   /**
    * The entity form builder.
    *
    * @var \Drupal\Core\Entity\EntityFormBuilderInterface
    */
   protected $entityFormBuilder;
-  
+
   /**
    * Constructs a new GroupMembershipController.
    *

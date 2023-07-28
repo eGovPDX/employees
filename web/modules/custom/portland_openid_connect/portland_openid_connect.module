@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\group\Entity\Group;
+use Drupal\Core\Cache\Cache;
+use GuzzleHttp\Client;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -61,10 +64,10 @@ function portland_openid_connect_user_update($account)
   if($account->field_is_contact_only->value == 1) {
     $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
     foreach ($current_primary_group_ids as $current_primary_group_id) {
-      $group = \Drupal\group\Entity\Group::load($current_primary_group_id);
+      $group = Group::load($current_primary_group_id);
       $group->removeMember($account);
       $group->save();
-      \Drupal\Core\Cache\Cache::invalidateTags($group->getCacheTagsToInvalidate());
+      Cache::invalidateTags($group->getCacheTagsToInvalidate());
     }
   }
   else {
@@ -186,7 +189,7 @@ function _process_users($response_data, $access_token)
       $user = User::create([
         'name' => PortlandOpenIdConnectUtil::TrimUserName( $user_data['userPrincipalName'] ),
         'mail' => $user_data['mail'],
-        'pass' => user_password(), // Create a temp password
+        'pass' => \Drupal::service('password_generator')->generate(), // Create a temp password
         'status' => 1,
         'field_active_directory_id' => $user_data['id'],
         'field_first_name' => $user_data['givenName'],
@@ -261,7 +264,7 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
   $system_state = \Drupal::state();
 
   /* @var \GuzzleHttp\ClientInterface $client */
-  $client = new \GuzzleHttp\Client();
+  $client = new Client();
   // Perform the request.
   $options = [
     'method' => 'GET',

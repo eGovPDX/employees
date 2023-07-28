@@ -2,6 +2,7 @@
 
 namespace Drupal\employees;
 
+use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 /**
@@ -25,7 +26,7 @@ class FileIconExtension extends AbstractExtension {
   public function getFunctions()
   {
     return array(
-      new \Twig\TwigFunction('file_icon_markup', array($this, 'file_icon_markup'), array('is_safe' => array('html'))),
+      new TwigFunction('file_icon_markup', array($this, 'file_icon_markup'), array('is_safe' => array('html'))),
     );
   }
 

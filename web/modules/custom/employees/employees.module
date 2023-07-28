@@ -1,5 +1,9 @@
 <?php
 
+use Drupal\group\Entity\Group;
+use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\views\Views;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Mail\MailManagerInterface;
@@ -93,7 +97,7 @@ function employees_form_alter(&$form, &$form_state, $form_id)
         unset($form["media"][0]["fields"]["field_mime_type"]);
         $group_id = \Drupal::request()->getSession()->get('parent_group_id');
         if($group_id) {
-          $form["media"][0]["fields"]['field_display_in_group']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+          $form["media"][0]["fields"]['field_display_in_group']['widget'][0]['target_id']['#default_value'] = Group::load($group_id);
           // $group_id = \Drupal::request()->getSession()->remove('parent_group_id');
         }
       }
@@ -111,7 +115,7 @@ function employees_form_alter(&$form, &$form_state, $form_id)
         if($form_id === "media_remote_document_add_form") {
           $group_id = \Drupal::request()->getSession()->get('parent_group_id');
           if($group_id) {
-            $form['field_display_in_group']['widget'][0]['target_id']['#default_value'] = \Drupal\group\Entity\Group::load($group_id);
+            $form['field_display_in_group']['widget'][0]['target_id']['#default_value'] = Group::load($group_id);
             // $group_id = \Drupal::request()->getSession()->remove('parent_group_id');
           }
         }
@@ -123,7 +127,7 @@ function employees_form_alter(&$form, &$form_state, $form_id)
 /**
  * A helper function to validate document.
  */
-function _validate_remote_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+function _validate_remote_document(&$form, FormStateInterface $form_state)
 {
   $remote_document_url = $form_state->getValue("field_media_media_remote")[0]['value'];
   // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
@@ -170,7 +174,7 @@ function _validate_remote_document(&$form, \Drupal\Core\Form\FormStateInterface 
 /**
  * A helper function to validate remote document in media library dialog.
  */
-function _validate_remote_document_in_media_library(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+function _validate_remote_document_in_media_library(&$form, FormStateInterface $form_state)
 {
   // DO NOT validate when the user clicks on the remove document button.
   // ONLY validate when the entire form is submitted.
@@ -226,7 +230,7 @@ function _validate_remote_document_in_media_library(&$form, \Drupal\Core\Form\Fo
  * Implements hook_query_TAG_alter().
  * Alter user query from "John Doe" into "John.Doe" to support autocomplete.
  */
-function employees_query_entity_query_user_alter(Drupal\Core\Database\Query\AlterableInterface $query)
+function employees_query_entity_query_user_alter(AlterableInterface $query)
 {
   $selection_handler = $query->getMetaData('entity_reference_selection_handler');
   if ($selection_handler != null && $selection_handler->getPluginId() == "default:user") {
@@ -278,6 +282,7 @@ function _remove_file_usage_from_previous_revision($entity) {
   $entity_storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
   // Retrieve the revision before this one
   $previous_vid = key($entity_storage->getQuery()
+      ->accessCheck(TRUE)
       ->allRevisions()
       ->condition($entity_type_id === 'node' ? 'nid' : 'mid', $entity->id())
       ->sort('vid', 'DESC')
@@ -333,7 +338,7 @@ function employees_user_presave($entity)
   $is_publisher = in_array('publisher', $entity->getRoles());
   if($entity->isNew() && $is_publisher) {
     // Record the date time
-    $now = new Drupal\Core\Datetime\DrupalDateTime('now', 'UTC');
+    $now = new DrupalDateTime('now', 'UTC');
     $entity->field_publisher_role_changed = $now->format('Y-m-d\TH:i:s');
   }
   else if ($entity->original != null){
@@ -343,7 +348,7 @@ function employees_user_presave($entity)
         // Was Publisher AND Status was changed in this update
        ($was_publisher_before_update && ($entity->status->value != $entity->original->status->value))) {
       // Record the date time
-      $now = new Drupal\Core\Datetime\DrupalDateTime('now', 'UTC');
+      $now = new DrupalDateTime('now', 'UTC');
       $entity->field_publisher_role_changed = $now->format('Y-m-d\TH:i:s');
     }
   }
@@ -573,7 +578,7 @@ function employees_tokens($type, $tokens, array $data, array $options, Bubbleabl
 /**
  * A helper function to validate document.
  */
-function _validate_document(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+function _validate_document(&$form, FormStateInterface $form_state)
 {
   if ($form_state->hasValue('field_efiles_link')) {
     // DO NOT validate when the user clicks on the remove document button.
@@ -690,7 +695,7 @@ function employees_cron()
 
     foreach ($views as $view) {
       // Get the view by machine id
-      $theview = \Drupal\views\Views::getView($view['view_id']);
+      $theview = Views::getView($view['view_id']);
       // Set the display machine id
       $theview->setDisplay($view['block_id']);
       $theview->preExecute();
@@ -771,7 +776,7 @@ function _notify_group_admin_for_group_change($entity)
   }
 
   $revision_author_user_id = $latest_rev->revision_uid->target_id;
-  $revision_author = \Drupal\user\Entity\User::load($revision_author_user_id);
+  $revision_author = User::load($revision_author_user_id);
 
   // DO NOT send the notification if the user is a site-wide admin or editor
   $site_roles = $revision_author->getRoles();
@@ -944,7 +949,7 @@ function employees_form_user_login_form_alter(&$form, &$form_state)
   if(
     isset($_ENV['PANTHEON_ENVIRONMENT']) &&
     in_array($_ENV['PANTHEON_ENVIRONMENT'], [
-      'pe-421', 'sandbox', 'demo', 'dev', 'test', 'live'])
+      'dev', 'test', 'live', 'sandbox', 'pe-421'])
   ) {
     $destination = \Drupal::request()->get('destination');
     $query = empty($destination) ? "?destination=/" : "?destination=$destination";
