@@ -69,7 +69,6 @@
 
 {%
   set classes = [
-    'card',
     'node',
     node.isPromoted() ? 'node--promoted',
     node.isSticky() ? 'node--sticky',
@@ -83,19 +82,19 @@
   ]
 %}
 <article{{ attributes.addClass(classes) }}>
-  <div class="card-body">
-    <h2 class="card-title h4">
-      {{ title_prefix }}
-      {% if label and not page %}
-      <a href="{{ url }}" class="stretched-link" rel="bookmark">{{ label }}</a>
-      {% endif %}
-      {{ title_suffix }}
-    </h2>
-    {% if content.content_dates_entity_view_1 %}
-    <span class="card-text"><small>{{ content.content_dates_entity_view_1 }}</small></span>
+  <header>
+    {{ title_prefix }}
+    {% if label and not page %}
+      <div class="node__top-wrapper">
+        {{ content.field_image }}
+        <h2 class="h4">
+          <a href="{{ url }}" class="stretched-link" rel="bookmark">{{ label }}</a>
+        </h2>
+      </div>
     {% endif %}
-    <div{{ content_attributes.addClass('node__content') }}>
-      {{ content|without('field_featured_image', 'content_dates_entity_view_1') }}
-    </div>
+    {{ title_suffix }}
+  </header>
+  <div{{ content_attributes.addClass('node__content', 'mb-4') }}>
+    {{ content|without('field_image') }}
   </div>
 </article>
