@@ -1,16 +1,11 @@
 services:
   employees.commands:
     class: \Drupal\employees\Commands\BatchCommands
-    arguments: ['@entity_type.manager', '@logger.factory']
+    arguments: ["@entity_type.manager", "@logger.factory"]
     tags:
       - { name: drush.command }
 
-  employees.FileSizeExtension:
-    class: Drupal\employees\FileSizeExtension
-    tags:
-      - { name: twig.extension }
-
-  employees.FileIconExtension:
-    class: Drupal\employees\FileIconExtension
+  employees.is_logged_in_extension:
+    class: Drupal\employees\IsLoggedInExtension
     tags:
       - { name: twig.extension }
