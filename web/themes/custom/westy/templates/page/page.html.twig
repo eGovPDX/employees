@@ -53,7 +53,7 @@
     </div>
   </header>
   {{ page.preheader }}
-  <main class="container">
+  <main class="container {{ container_classes|join(' ') }}">
     {% if page.header|render|striptags|trim is not empty %}
       <div class="row align-items-center">
         <header class="page__sub_header col">
