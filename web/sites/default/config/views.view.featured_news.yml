@@ -310,7 +310,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: "<div class=\"row align-items-center border-bottom border-4 mb-4\">\r\n  <div class=\"col-8\"><h2>{{ is_logged_in() ? 'Your news' : 'News' }}</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news\">All news &raquo;</a></div>\r\n</div>"
+            value: "<div class=\"row align-items-center mb-2\">\r\n  <div class=\"col-8\"><h2>{{ is_logged_in() ? 'News for you' : 'News' }}</h2></div>\r\n  <div class=\"col-4 w-auto ms-auto\"><a class=\"text-decoration-none\" href=\"/news\">All news &raquo;</a></div>\r\n</div>"
             format: full_html
           tokenize: true
       footer: {  }
