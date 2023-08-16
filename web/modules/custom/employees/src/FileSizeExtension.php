@@ -2,6 +2,7 @@
 
 namespace Drupal\employees;
 
+use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 
 /**
@@ -25,7 +26,7 @@ class FileSizeExtension extends AbstractExtension {
   public function getFunctions()
   {
     return array(
-      new \Twig\TwigFunction('file_size_string', array($this, 'file_size_string'), array('is_safe' => array('html'))),
+      new TwigFunction('file_size_string', array($this, 'file_size_string'), array('is_safe' => array('html'))),
     );
   }
 

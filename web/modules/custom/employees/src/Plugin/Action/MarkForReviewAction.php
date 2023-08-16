@@ -2,6 +2,7 @@
 
 namespace Drupal\employees\Plugin\Action;
 
+use Drupal\user\Entity\User;
 use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -29,7 +30,7 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
   public function execute($entity = NULL) {
     // This is a required field in the form below. So it will not be NULL.
     $reviewer_uid = $this->configuration['reviewer'];
-    $user_display_name = \Drupal\user\Entity\User::load($reviewer_uid)->getDisplayName();
+    $user_display_name = User::load($reviewer_uid)->getDisplayName();
 
     $entity->status->value = 0;
     $entity->moderation_state->value = 'review';
@@ -37,7 +38,7 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
     $entity->setNewRevision(TRUE);
     $entity->revision_log = 'Bulk operation: assigned to '. $user_display_name .' for review';
     $entity->setRevisionUserId(\Drupal::currentUser()->id());
-    $entity->setRevisionCreationTime(REQUEST_TIME);
+    $entity->setRevisionCreationTime(\Drupal::time()->getRequestTime());
     $entity->save();
     // Don't return anything for a default completion message, otherwise return translatable markup.
     return $this->t('Bulk operation: assigned to '. $user_display_name .' for review');

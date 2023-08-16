@@ -2,6 +2,7 @@
 
 namespace Drupal\employees_migrations\Plugin\migrate\process;
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -99,7 +100,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
         $media_type = $this->getMediaType($filename);
 
         // Search for possible duplicates using filename sans POG content id
-        $realpath_dir = drupal_realpath($download_dir_uri);
+        $realpath_dir = \Drupal::service('file_system')->realpath($download_dir_uri);
         $realpath_filename = $realpath_dir . '/' . $filename;
         $filename_search = str_replace($content_id, '*', $filename);
         $files = glob($realpath_dir . '/' . $filename_search);
@@ -130,7 +131,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
             }
             if (count($result) > 0) {
               $fid = $result[0]->fid;
-              $downloaded_file = \Drupal\file\Entity\File::load($fid);
+              $downloaded_file = File::load($fid);
             } else {
               // File exists in the file system but not in the database, so delete file then
               // redownload and save managed file
@@ -185,7 +186,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
         } else {
           // modify link to use file URL
           $file_uri = $downloaded_file->getFileUri();
-          $file_url = file_url_transform_relative(file_create_url($file_uri));
+          $file_url = \Drupal::service('file_url_generator')->generateString($file_uri);
           if (!empty($link->getAttribute('href'))) {
             $link->setAttribute("href", $file_url);
           } else {
@@ -333,10 +334,10 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
   protected function prepareDownloadDirectory() {
     // prepare download directory
     $folder_name = date("Y-m");
-    $folder_uri = file_build_uri($folder_name);
-    $public_path = \Drupal::service('file_system')->realpath(file_default_scheme() . "://");
+    $folder_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri(\Drupal::config('system.file')->get('default_scheme') . ('://' . $folder_name));
+    $public_path = \Drupal::service('file_system')->realpath(\Drupal::config('system.file')->get('default_scheme') . "://");
     $download_path = $public_path . "/" . $folder_name;
-    $dir = file_prepare_directory($download_path, FILE_CREATE_DIRECTORY);
+    $dir = \Drupal::service('file_system')->prepareDirectory($download_path, FileSystemInterface::CREATE_DIRECTORY);
     return $folder_uri;
   }
 

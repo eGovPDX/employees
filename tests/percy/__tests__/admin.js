@@ -8,6 +8,7 @@ const HOME_PAGE = SITE_NAME
     ? `https://${SITE_NAME}-${PROJECT_NAME}.pantheonsite.io`
     : "https://employees.lndo.site";
 const ARTIFACTS_FOLDER = (SITE_NAME) ? `/home/circleci/artifacts/` : `./`;
+var fs = require('fs');
 
 let BROWSER_OPTION = {
     ignoreHTTPSErrors: true,

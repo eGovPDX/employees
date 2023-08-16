@@ -2,6 +2,8 @@
 
 namespace Drupal\portland_openid_connect\Util;
 
+use GuzzleHttp\Client;
+use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -36,7 +38,7 @@ class PortlandOpenIdConnectUtil
       self::$PTLD_SYNC_CLIENT_ID = file_get_contents('sites/default/files/private/ptld_sync_client_id.key');
     if(empty(self::$PTLD_SYNC_CLIENT_SECRET))
       self::$PTLD_SYNC_CLIENT_SECRET = file_get_contents('sites/default/files/private/ptld_sync_client_secret.key');
-    if (empty(self::$client)) self::$client = new \GuzzleHttp\Client();
+    if (empty(self::$client)) self::$client = new Client();
   }
 
   /**
@@ -48,7 +50,7 @@ class PortlandOpenIdConnectUtil
     if(empty($account) || empty($group_id)) return;
 
     // Automated removal should only remove the "Employee" role
-    $group = \Drupal\group\Entity\Group::load($group_id);
+    $group = Group::load($group_id);
     $membership = $group->getMember($account);
     if (empty($membership)) return;
 
@@ -95,7 +97,7 @@ class PortlandOpenIdConnectUtil
   {
     if(empty($account) || empty($group_id)) return;
 
-    $group = \Drupal\group\Entity\Group::load($group_id);
+    $group = Group::load($group_id);
     $role_id_array = [$group->getGroupType()->id() . '-employee'];
     $membership = $group->getMember($account);
     // The user is NOT in the group
@@ -501,7 +503,7 @@ class PortlandOpenIdConnectUtil
           $manager_stub_user = User::create([
             'name' => self::TrimUserName($response_data['userPrincipalName']),
             'mail' => $response_data['mail'],
-            'pass' => user_password(), // temp password
+            'pass' => \Drupal::service('password_generator')->generate(), // temp password
             'status' => 1,
             'field_first_name' => $response_data['givenName'],
             'field_last_name' => $response_data['surname'],
@@ -553,11 +555,7 @@ class PortlandOpenIdConnectUtil
         $user_photo_folder_name,
         FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
       );
-      $user_photo_file = file_save_data(
-        (string) $response->getBody(),
-        'public://user-photo/' . $file_name . '.jpg',
-        FileSystemInterface::EXISTS_REPLACE
-      );
+      $user_photo_file = \Drupal::service('file.repository')->writeData((string) $response->getBody(), 'public://user-photo/' . $file_name . '.jpg', FileSystemInterface::EXISTS_REPLACE);
 
       $users = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['name' => $userPrincipalName]);

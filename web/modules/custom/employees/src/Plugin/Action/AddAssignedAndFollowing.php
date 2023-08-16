@@ -2,6 +2,7 @@
 
 namespace Drupal\employees\Plugin\Action;
 
+use Drupal\group\Entity\Group;
 use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -33,7 +34,7 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
 
     // Add the Employee role to user in all new groups
     foreach ($current_primary_group_ids as $current_primary_group_id) {
-      $group = \Drupal\group\Entity\Group::load($current_primary_group_id);
+      $group = Group::load($current_primary_group_id);
       $group_type = $group->type->entity->id();
       $membership = $group->getMember($account);
       $group_content = $membership->getGroupContent();
