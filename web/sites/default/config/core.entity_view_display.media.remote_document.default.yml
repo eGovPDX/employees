@@ -10,6 +10,8 @@ dependencies:
     - field.field.media.remote_document.field_mime_type
     - field.field.media.remote_document.field_tags
     - media.type.remote_document
+  module:
+    - employees
 id: media.remote_document.default
 targetEntityType: media
 bundle: remote_document
@@ -40,10 +42,10 @@ content:
     weight: 2
     region: content
   field_media_media_remote:
-    type: string
+    type: media_remote_document
     label: visually_hidden
     settings:
-      link_to_entity: false
+      formatter_class: Drupal\employees\Plugin\Field\FieldFormatter\MediaRemoteDocumentFormatter
     third_party_settings: {  }
     weight: 0
     region: content

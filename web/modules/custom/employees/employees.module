@@ -138,6 +138,11 @@ function _validate_remote_document(&$form, FormStateInterface $form_state)
     $remote_document_url .= "/file/document";
   }
 
+  if (strlen($remote_document_url) == 0) {
+    $form_state->setErrorByName('field_media_media_remote', 'This field is required.');
+    return;
+  }
+
   // Get eFiles file size and MIME type
   try {
     $headers = get_headers($remote_document_url, 1);
@@ -192,6 +197,11 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
       $remote_document_url .= "/file/document";
     }
 
+    if (strlen($remote_document_url) == 0) {
+      $form_state->setErrorByName('field_media_media_remote', 'This field is required.');
+      return;
+    }
+  
     // Get eFiles file size and MIME type
     try {
       $headers = get_headers($remote_document_url, 1);

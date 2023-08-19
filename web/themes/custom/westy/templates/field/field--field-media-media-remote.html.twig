@@ -68,7 +68,7 @@
           {% for item in items %}
             <div{{ item.attributes.addClass(item_classes) }}>
               {{ icon }}
-              <a href="{{ item.content['#context'].value }}">{{ item.content['#context'].value }}</a>
+              {{ item.content }}
             </div>
           {% endfor %}
       {% if multiple %}

@@ -67,8 +67,7 @@ class MediaRemoteDocumentFormatter extends MediaRemoteFormatterBase {
       $document_id = $matches[1];
       $elements[$delta] = [
         '#theme' => 'media_remote_document',
-        // '#document_id' => $document_id,
-        // '#slug' => $matches[2][0] ?? '',
+        '#markup' => "<a href='$item->value'>$item->value</a>",
       ];
     }
     return $elements;
