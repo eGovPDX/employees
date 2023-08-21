@@ -361,16 +361,18 @@ clone_live_database: &clone_live_database
     - run:
         name: Run Percy tests
         command: |
-          mkdir /home/circleci/artifacts
-          cd /home/circleci/app/tests/percy
-          # Start Percy sandbox tests 
-          TESTFILES=$(circleci tests glob "__sandbox_tests__/*.js" | circleci tests split)
-          for TESTFILE in $TESTFILES
-          do
-            # Generate one time login link for tests
-            echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
-            npm run jest-sandbox -- ${TESTFILE}
-          done
+          if [[ $CIRCLE_BRANCH = "sandbox" ]]; then
+            mkdir /home/circleci/artifacts
+            cd /home/circleci/app/tests/percy
+            # Start Percy sandbox tests 
+            TESTFILES=$(circleci tests glob "__sandbox_tests__/*.js" | circleci tests split)
+            for TESTFILE in $TESTFILES
+            do
+              # Generate one time login link for tests
+              echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+              npm run jest-sandbox -- ${TESTFILE}
+            done
+          fi
     - store_artifacts:
         path: /home/circleci/artifacts
         destination: /
