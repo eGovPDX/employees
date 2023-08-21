@@ -25,14 +25,14 @@ describe('Visual Regression Testing', () => {
         if (process.env.CIRCLECI) {
             // On CI, the CI script will call terminus to retrieve login URL
             login_url = process.env.SUPERADMIN_LOGIN;
-            await page.goto(login_url);
         }
         else {
             var drush_uli_result = fs.readFileSync("superAdmin_uli.log").toString();
             login_url = drush_uli_result.replace('http://default', 'https://portlandor.lndo.site');
-            // Log in once for all tests to save time
-            await page.goto(login_url);
         }
+        // Log in once for all tests to save time
+        console.log("Login URL", login_url);
+        await page.goto(login_url);
     })
 
     afterAll(async () => {
