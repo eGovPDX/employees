@@ -50,19 +50,10 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'test') {
     /** Replace www.example.com with your registered domain name */
-    // $primary_domain = 'test-employees.portland.gov';
     $primary_domain = 'test-employees.pantheonsite.io';
     $config['environment_indicator.indicator']['bg_color'] = '#ffb81c';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Test';
-  }
-  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
-    /** Replace www.example.com with your registered domain name */
-    $primary_domain = 'employees.lndo.site';
-    $config['environment_indicator.indicator']['bg_color'] = '#046a38';
-    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
-    $config['environment_indicator.indicator']['name'] = 'Local';
-
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'dev') {
     /** Replace www.example.com with your registered domain name */
@@ -70,6 +61,20 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
     $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Dev';
+  }
+  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'sandbox') {
+    /** Replace www.example.com with your registered domain name */
+    $primary_domain = 'sandbox.employees.portland.gov';
+    $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Sandbox';
+  }
+  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
+    /** Replace www.example.com with your registered domain name */
+    $primary_domain = 'employees.lndo.site';
+    $config['environment_indicator.indicator']['bg_color'] = '#046a38';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Local';
   }
   else {
     // Redirect to HTTPS on every Pantheon environment.
