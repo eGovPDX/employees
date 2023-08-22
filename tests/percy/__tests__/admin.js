@@ -30,16 +30,32 @@ describe('Visual Regression Testing', () => {
         }
         else {
             var drush_uli_result = fs.readFileSync("superAdmin_uli.log").toString();
-            login_url = drush_uli_result.replace('http://default', 'https://portlandor.lndo.site');
+            login_url = drush_uli_result.replace('http://default', 'https://employees.lndo.site');
         }
         // Log in once for all tests to save time
         console.log("Login URL", login_url);
+        console.log("Initial cookies: ", await page.cookies());
         await page.goto(login_url);
         await page.screenshot({
             path: `${ARTIFACTS_FOLDER}login-page.jpg`,
             type: "jpeg",
             fullPage: true
         });
+        const cookies = await page.cookies();
+        // await fs.writeFile("./cookies.json", cookies);
+        console.log("After login cookies: ", await page.cookies());
+        
+        // const cookiesString = await fs.readFile("./cookies.json");
+        // const cookies = JSON.parse(cookiesString);
+        await page.setCookie(...cookies);
+
+        await page.goto(HOME_PAGE);
+        await page.screenshot({
+            path: `${ARTIFACTS_FOLDER}post-login-home-page.jpg`,
+            type: "jpeg",
+            fullPage: true
+        });
+        console.log("After homepage cookies: ", await page.cookies());
     });
 
     afterAll(async () => {
@@ -49,9 +65,9 @@ describe('Visual Regression Testing', () => {
     // Home Page
     it('Home Page', async function () {
         try {
-            await page.goto(HOME_PAGE)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - Home Page")
+            await page.goto(HOME_PAGE);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - Home Page");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
