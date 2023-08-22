@@ -34,7 +34,12 @@ describe('Visual Regression Testing', () => {
         // Log in once for all tests to save time
         console.log("Login URL", login_url);
         await page.goto(login_url);
-    })
+        await page.screenshot({
+            path: `${ARTIFACTS_FOLDER}login-page.jpg`,
+            type: "jpeg",
+            fullPage: true
+        });
+})
 
     afterAll(async () => {
         await browser.close();
