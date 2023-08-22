@@ -22,7 +22,7 @@ describe('Visual Regression Testing', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
-        // await page.setDefaultTimeout(60 * 1000);
+        await page.setDefaultTimeout(45 * 1000);
 
         if (process.env.CIRCLECI) {
             // On CI, the CI script will call terminus to retrieve login URL
@@ -33,29 +33,7 @@ describe('Visual Regression Testing', () => {
             login_url = drush_uli_result.replace('http://default', 'https://employees.lndo.site');
         }
         // Log in once for all tests to save time
-        console.log("Login URL", login_url);
-        console.log("Initial cookies: ", await page.cookies());
         await page.goto(login_url);
-        await page.screenshot({
-            path: `${ARTIFACTS_FOLDER}login-page.jpg`,
-            type: "jpeg",
-            fullPage: true
-        });
-        const cookies = await page.cookies();
-        // await fs.writeFile("./cookies.json", cookies);
-        console.log("After login cookies: ", await page.cookies());
-        
-        // const cookiesString = await fs.readFile("./cookies.json");
-        // const cookies = JSON.parse(cookiesString);
-        await page.setCookie(...cookies);
-
-        await page.goto(HOME_PAGE);
-        await page.screenshot({
-            path: `${ARTIFACTS_FOLDER}post-login-home-page.jpg`,
-            type: "jpeg",
-            fullPage: true
-        });
-        console.log("After homepage cookies: ", await page.cookies());
     });
 
     afterAll(async () => {
@@ -81,9 +59,9 @@ describe('Visual Regression Testing', () => {
     // Group Home Page
     it('Group Home Page', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/web-support`)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - City Web Editors")
+            await page.goto(`${HOME_PAGE}/web-support`);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - City Web Editors");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -97,9 +75,9 @@ describe('Visual Regression Testing', () => {
     // Directory Search View
     it('Directory Search View', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/directory`)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - Directory")
+            await page.goto(`${HOME_PAGE}/directory`);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - Directory");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -114,7 +92,7 @@ describe('Visual Regression Testing', () => {
     it('Site health check', async function () {
         try {
             // Verify the site status
-            await page.goto(`${HOME_PAGE}/admin/reports/status`)
+            await page.goto(`${HOME_PAGE}/admin/reports/status`);
             await page.waitForSelector('.system-status-report');
             let text_content = await page.evaluate(() => document.querySelector('.system-status-report').textContent);
             // Negative test
@@ -139,9 +117,9 @@ describe('Visual Regression Testing', () => {
     // News Search View
     it('News Search View', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/news`)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - News")
+            await page.goto(`${HOME_PAGE}/news`);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - News");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -155,9 +133,9 @@ describe('Visual Regression Testing', () => {
     // Events Search View
     it('Events Search View', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/events`)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - Events")
+            await page.goto(`${HOME_PAGE}/events`);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - Events");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
@@ -171,9 +149,9 @@ describe('Visual Regression Testing', () => {
     // Groups Search View
     it('Groups', async function () {
         try {
-            await page.goto(`${HOME_PAGE}/groups`)
-            await util.removeEnvironmentIndicator(page)
-            await percySnapshot(page, "SuperAdmin - Groups")
+            await page.goto(`${HOME_PAGE}/groups`);
+            await util.removeEnvironmentIndicator(page);
+            await percySnapshot(page, "SuperAdmin - Groups");
         } catch (e) {
             // Capture the screenshot when test fails and re-throw the exception
             await page.screenshot({
