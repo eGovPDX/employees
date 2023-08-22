@@ -18,10 +18,11 @@ let BROWSER_OPTION = {
 
 describe('Visual Regression Testing', () => {
     let browser, page;
+    
     beforeAll(async () => {
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
-        await page.setDefaultTimeout(60 * 1000);
+        // await page.setDefaultTimeout(60 * 1000);
 
         if (process.env.CIRCLECI) {
             // On CI, the CI script will call terminus to retrieve login URL
@@ -39,11 +40,12 @@ describe('Visual Regression Testing', () => {
             type: "jpeg",
             fullPage: true
         });
-})
+    });
 
     afterAll(async () => {
         await browser.close();
-    })
+    });
+    
     // Home Page
     it('Home Page', async function () {
         try {
