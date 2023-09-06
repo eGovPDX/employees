@@ -925,24 +925,24 @@ display:
             group_items:
               1:
                 title: Assigned
-                operator: '='
-                value: employee-assigned
+                operator: ends
+                value: '-assigned'
               2:
                 title: Admin
-                operator: '='
-                value: employee-admin
+                operator: ends
+                value: '-admin'
               3:
                 title: Editor
-                operator: '='
-                value: employee-editor
+                operator: ends
+                value: '-editor'
               4:
                 title: Employee
-                operator: '='
-                value: employee-employee
+                operator: ends
+                value: '-employee'
               5:
                 title: Following
-                operator: '='
-                value: employee-following
+                operator: ends
+                value: '-following'
         roles_target_id:
           id: roles_target_id
           table: user__roles
