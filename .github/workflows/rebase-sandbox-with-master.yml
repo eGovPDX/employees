@@ -1,7 +1,7 @@
 # Github action to rebase sandbox with master
 name: Rebase Sandbox with Master
 
-# Run every Monday at 00:30 UTC (5:30pm Sunday PDT)
+# Run when manually triggered by a workflow dispatch event (GitHub API)
 on:
   workflow_dispatch:
 
