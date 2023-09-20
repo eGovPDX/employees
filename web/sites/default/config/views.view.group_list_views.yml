@@ -1325,7 +1325,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_group_path|preg_replace(''/^\\//'','''') }}'
+            text: "{{ field_group_path|preg_replace('/^\\\\//','') }}"
             make_link: false
             path: ''
             absolute: false
@@ -2142,7 +2142,7 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: '{{ field_group_path|preg_replace(''/^\\//'','''') }}'
+            text: "{{ field_group_path|preg_replace('/^\\\\//','') }}"
             make_link: false
             path: ''
             absolute: false
