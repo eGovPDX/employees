@@ -49,8 +49,8 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
       $download_dir_uri = $this->prepareDownloadDirectory();
 
       // reusable db connection
-      if (is_null($_SESSION['drupal_dbConn'])) {
-        $_SESSION['drupal_dbConn'] = \Drupal::database();
+      if (!isset($_REQUEST['drupal_dbConn'])) {
+        $_REQUEST['drupal_dbConn'] = \Drupal::database();
       }
 
       // look for links with an href and save the linked file
@@ -77,7 +77,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
         if (substr($url, 0, 1) == "/") {
           $url = "https://www.portlandoregon.gov" . $url;
         }
-
+        
         // skip external links and leave the link tag alone
         if (substr($url, 0, strlen("http://www.portlandonline.com/")) !== "http://www.portlandonline.com/") {
           $internal_link = $this->isInternalLink($url);
@@ -86,21 +86,21 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
 
         // build filename/uri
         $arr_filename = $this->buildPogFilename($url);
-        $filename = $arr_filename[0];
-        $content_id = $arr_filename[1];
-
         // if buildPogFilename returns false, that means either the URL didn't have a
         // Content-Disposition header (not a binary file), the URL returned 404, or it was
         // a link to the homepage/root.
         if ($arr_filename === false) {
           continue;
         }
+        $filename = $arr_filename[0];
+        $content_id = $arr_filename[1];
+
         $destination_uri = $download_dir_uri . "/" . $filename;
 
         $media_type = $this->getMediaType($filename);
 
         // Search for possible duplicates using filename sans POG content id
-        $realpath_dir = \Drupal::service('file_system')->realpath($download_dir_uri);
+        $realpath_dir = realpath($destination_uri);
         $realpath_filename = $realpath_dir . '/' . $filename;
         $filename_search = str_replace($content_id, '*', $filename);
         $files = glob($realpath_dir . '/' . $filename_search);
@@ -122,7 +122,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
           if ($key !== false) {
             // use existing file. glob only returns path; we need to get fid and load file entity.
             $query = "SELECT fid FROM file_managed FM where uri = '" . $destination_uri . "'";
-            $query = $_SESSION['drupal_dbConn']->query($query);
+            $query = $_REQUEST['drupal_dbConn']->query($query);
             $result = $query->fetchAll();
             if (is_array($result) && count($result) > 1) {
               // duplicate document media entities exist! log it, but then use the first one found.
@@ -227,15 +227,12 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
           'uid' => 1,
           'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
           'name' => $media_name,
-          'field_title' => $media_name,
           'status' => 1,
-          'image' => [
+          'field_media_image' => [
             'alt' => $media_name,
             'target_id' => $downloaded_file->id()
           ],
-          'field_summary' => $media_name,
-          'field_media_in_library' => 1,
-          'field_display_groups' => $this->configuration['group_id'],
+          'field_display_in_group' => $this->configuration['group_id'],
         ]);
       } else { // Document
         $media = Media::create([
@@ -244,16 +241,15 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
           'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
           'name' => $media_name,
           'status' => 1,
-          'field_document' => [
+          'field_media_document' => [
             'target_id' => $downloaded_file->id()
           ],
-          'field_summary' => $media_name,
-          'field_display_groups' => $this->configuration['group_id'],
+          'field_display_in_group' => $this->configuration['group_id'],
         ]);
       }
       $media->save();
       $media->status->value = 1;
-      $media->moderation_state->value = 'published';
+      // $media->moderation_state->value = 'published';
       $media->save();
     }
     
@@ -261,9 +257,9 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
     $media_uuid = $media->uuid();
     $newNode = $dom->createDocumentFragment();
     if ( $media_type == 'image' ) {
-      $newNode->appendXML("<drupal-entity data-align=\"responsive-full\" data-embed-button=\"image_browser\" data-entity-embed-display=\"media_image\" data-entity-type=\"media\" data-entity-uuid=\"$media_uuid\" data-langcode=\"en\"></drupal-entity>");
+      $newNode->appendXML("<drupal-media data-entity-type=\"media\" data-entity-uuid=\"$media_uuid\" data-view-mode=\"full\"></drupal-media>");
     } else {
-      $newNode->appendXML("<drupal-entity data-embed-button=\"document_browser\" data-entity-embed-display=\"view_mode:media.embedded\" data-entity-type=\"media\" data-entity-uuid=\"$media_uuid\" data-langcode=\"en\"></drupal-entity>");
+      $newNode->appendXML("<drupal-media data-entity-type=\"media\" data-entity-uuid=\"$media_uuid\"></drupal-media>");
     }
     $link->parentNode->replaceChild($newNode, $link);
   }
@@ -314,11 +310,11 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
       'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
       'name' => $pogDescription,
       'status' => 1,
-      'field_document' => [
+      'field_media_document' => [
         'target_id' => $downloaded_file->id()
       ],
       'field_summary' => $pogDescription,
-      'field_display_groups' => $this->configuration['group_id'],
+      'field_display_in_group' => $this->configuration['group_id'],
       ]);
     $media->save();
     $media->status->value = 1;
@@ -335,7 +331,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
     // prepare download directory
     $folder_name = date("Y-m");
     $folder_uri = \Drupal::service('stream_wrapper_manager')->normalizeUri(\Drupal::config('system.file')->get('default_scheme') . ('://' . $folder_name));
-    $public_path = \Drupal::service('file_system')->realpath(\Drupal::config('system.file')->get('default_scheme') . "://");
+    $public_path = \Drupal::service('file_system')->realpath(\Drupal::config('system.file')->get('default_scheme') . '://');
     $download_path = $public_path . "/" . $folder_name;
     $dir = \Drupal::service('file_system')->prepareDirectory($download_path, FileSystemInterface::CREATE_DIRECTORY);
     return $folder_uri;
@@ -375,7 +371,7 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
         $content_id = $queries['a'];
       }
     }
-
+    
     // get name from Content-Disposition header; if not there, that means this isn't
     // a binary file URL, so we don't want it; return false.
     $headers = get_headers($url, 1);
@@ -403,13 +399,14 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
     if (function_exists("transliterate_filenames_transliteration")) {
       $final_filename = transliterate_filenames_transliteration($final_filename);
     }
-
+    
     return [$final_filename, $content_id];
   }
 
 
   protected function getMediaType($filename) {
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $ext = strtolower($ext);
     switch ($ext) {
       case "jpg":
       case "jpeg":

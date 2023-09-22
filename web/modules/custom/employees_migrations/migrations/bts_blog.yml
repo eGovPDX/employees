@@ -1,0 +1,41 @@
+id: bts_blog
+label: 'BTS Blog Import'
+migration_group: bts_blog
+source:
+  plugin: csv
+  path: modules/custom/employees_migrations/sources/bts_blog.csv
+  header_row_count: 1
+  ids:
+    - CONTENT_ID
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  title: CONTENT_NAME
+  field_type:
+    plugin: default_value
+    default_value: 642
+  body/summary: SUMMARY_TEXT
+  body/value: 
+    plugin: migrate_body_content_and_linked_media
+    source: TEXT
+    group_id: 48
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  field_published_on:
+    plugin: format_date
+    from_format: 'Y-m-d H:i:s T'
+    to_format: 'Y-m-d\TH:i:s'
+    source: PUBLISH_DATE
+  field_updated_on:
+    plugin: format_date
+    from_format: 'Y-m-d H:i:s T'
+    to_format: 'Y-m-d\TH:i:s'
+    source: LAST_UPDATED_DATE
+  field_display_in_group:
+      plugin: default_value
+      default_value: 48
+destination:
+  plugin: 'entity:node'
+  default_bundle: news
