@@ -14,9 +14,11 @@ dependencies:
     - field.storage.user.field_search_boost
     - field.storage.user.field_title
     - field.storage.user.user_picture
+    - image.style.thumbnail
     - responsive_image.styles.medium
   module:
     - csv_serialization
+    - image
     - responsive_image
     - rest
     - serialization
@@ -94,6 +96,7 @@ display:
           batch: true
           batch_size: 10
           form_step: true
+          ajax_loader: false
           buttons: false
           action_title: Action
           clear_on_exposed: true
@@ -511,6 +514,8 @@ display:
           settings:
             responsive_image_style: medium
             image_link: ''
+            image_loading:
+              attribute: eager
           group_column: entity_id
           group_columns: {  }
           group_rows: true
@@ -1765,7 +1770,7 @@ display:
           expose:
             operator_id: uid_op
             label: Manager
-            description: 'Type a manager''s name to view suggestions'
+            description: "Type a manager's name to view suggestions"
             use_operator: false
             operator: uid_op
             operator_limit_selection: false
@@ -2278,6 +2283,7 @@ display:
           batch: true
           batch_size: 10
           form_step: true
+          ajax_loader: false
           buttons: false
           action_title: Action
           clear_on_exposed: true
@@ -3066,6 +3072,8 @@ display:
           settings:
             responsive_image_style: medium
             image_link: ''
+            image_loading:
+              attribute: eager
           group_column: entity_id
           group_columns: {  }
           group_rows: true
@@ -3624,6 +3632,7 @@ display:
           batch: true
           batch_size: 10
           form_step: true
+          ajax_loader: false
           buttons: false
           action_title: Action
           clear_on_exposed: true
@@ -4041,10 +4050,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: responsive_image
+          type: image
           settings:
-            responsive_image_style: medium
             image_link: ''
+            image_style: thumbnail
+            image_loading:
+              attribute: eager
           group_column: entity_id
           group_columns: {  }
           group_rows: true
@@ -4623,132 +4634,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_office_location:
-          id: field_office_location
-          table: user__field_office_location
-          field: field_office_location
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Mail stop'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_address:
-          id: field_address
-          table: user__field_address
-          field: field_address
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Address
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_search_boost:
           id: field_search_boost
           table: user__field_search_boost
@@ -4895,13 +4780,11 @@ display:
         - url.query_args
         - user.permissions
       tags:
-        - 'config:field.storage.user.field_address'
         - 'config:field.storage.user.field_division_name'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_group_names'
         - 'config:field.storage.user.field_last_name'
         - 'config:field.storage.user.field_managers'
-        - 'config:field.storage.user.field_office_location'
         - 'config:field.storage.user.field_phone'
         - 'config:field.storage.user.field_search_boost'
         - 'config:field.storage.user.field_title'

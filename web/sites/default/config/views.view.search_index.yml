@@ -1179,7 +1179,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_date_range_end_value|date(''Y-m-d'') < ''now''|date(''Y-m-d'') %}<em>{% set expired = true %}{% endif %}{{ field_date_range_end_value }}{% if expired %}</em>{% endif %}'
+            text: "{% if field_date_range_end_value|date('Y-m-d') < 'now'|date('Y-m-d') %}<em>{% set expired = true %}{% endif %}{{ field_date_range_end_value }}{% if expired %}</em>{% endif %}"
             make_link: false
             path: ''
             absolute: false

@@ -20,10 +20,9 @@
         "drupal/components": "^3.0@beta",
         "drupal/config_filter": "^2.2",
         "drupal/config_split": "^2.0@RC",
-        "drupal/console": "~1.0",
-        "drupal/core-composer-scaffold": "^9",
-        "drupal/core-project-message": "^9",
-        "drupal/core-recommended": "^9",
+        "drupal/core-composer-scaffold": "^10",
+        "drupal/core-project-message": "^10",
+        "drupal/core-recommended": "^10",
         "drupal/crop": "^2.0",
         "drupal/ctools": "^3.0",
         "drupal/datalayer": "^2.0@RC",
@@ -109,8 +108,9 @@
         "drupal/views_bulk_operations": "^4.1",
         "drupal/views_data_export": "^1.1",
         "drupal/webform": "^6.2@beta",
-        "drush/drush": "^11.5",
+        "drush/drush": "^12",
         "fengyuanchen/cropper": "dev-master",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "mglaman/phpstan-drupal": "^1.1",
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^2.0",
@@ -121,9 +121,7 @@
     },
     "require-dev": {
         "drupal-composer/drupal-security-advisories": "9.x-dev",
-        "drupal/core-dev": "9.5.9",
         "drupal/devel": "^5.1",
-        "palantirnet/drupal-rector": "^0.15.1",
         "roave/security-advisories": "dev-latest"
     },
     "repositories": [
@@ -152,7 +150,8 @@
             "oomphinc/composer-installers-extender": true,
             "wikimedia/composer-merge-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "mglaman/composer-drupal-lenient": true
+            "mglaman/composer-drupal-lenient": true,
+            "phpstan/extension-installer": true
         }
     },
     "extra": {
@@ -192,20 +191,16 @@
             "drupal/core": {
                 "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
                 "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
-                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2021-04-02/1349080-487.patch",
+                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2023-06-15/1349080-521.patch",
                 "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2018-04-19/node-revisions-missing-local-tasks-2885278-11.patch",
                 "2769289 - Revision User information not displayed in views when content revision user is selected for View type Content": "https://www.drupal.org/files/issues/2018-09-07/node_revision_author-2769289-11.patch",
                 "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2020-03-23/3114467-8.patch",
                 "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2023-01-05/962664-195.patch",
-                "3099878 - Media Library: Default value for data-align attribute should not be center": "https://www.drupal.org/files/issues/2022-12-19/3099878-40.patch",
-                "2719797 - New option for Views page displays to use the admin theme": "https://www.drupal.org/files/issues/2020-10-07/2719797-109.patch",
                 "3056135 - Viewing Layout Builder enable node fails after Workflow enabled on bundle if another node was created before enabling": "https://www.drupal.org/files/issues/2020-09-23/3056135-17.patch",
                 "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2021-07-14/autocomplete-element-3212854-4.patch",
-                "2984504 - Access to 'Reset to alphabetical' denied for users without administer permission (POWR-4155)": "https://www.drupal.org/files/issues/2022-03-15/2984504-46.patch",
                 "2992168 - Allow appending values to multivalued fields during the migration": "https://www.drupal.org/files/issues/2020-12-29/migrate-2992168-18.patch",
                 "2329253 - Allow the ChangedItem to skip updating the entity's \"changed\" timestamp when synchronizing (f.e. when migrating)": "https://www.drupal.org/files/issues/2022-12-07/2329253-97.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
-                "3017054 - Consistently sort filter formats to simplify config exports": "https://www.drupal.org/files/issues/2021-12-14/3017054-36.patch",
                 "3095434 - Access denied when view own unpublished revision, access check is not using revision author": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
                 "Update media library so that documents are the default first media type": "patches/pe-479-media-library-default-documents.patch"
             },
@@ -222,7 +217,9 @@
                 "2842630 - Empty page when trying to create group node": "https://www.drupal.org/files/issues/2019-01-04/2842630-20.patch",
                 "3020883 - Use VBO together with group permission": "https://www.drupal.org/files/issues/2020-08-17/3020883-22.patch",
                 "3256998 - Access to Revisions of Group Content is Broken": "https://www.drupal.org/files/issues/2022-02-09/group-fix-group-revisions-3256998-22_0.patch",
-                "3210808 - uasort deprecation in PHP 8": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
+                "3210808 - uasort deprecation in PHP 8": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch",
+                "3367539 - Initiative for Group 1.x compatibility under Drupal 10": "https://www.drupal.org/files/issues/2023-07-19/3367539--011-drupal-10-compatibility-group-1.x.patch",
+                "3029908 - Add revisions tab on groups (Groups have two revisions tabs)": "https://www.drupal.org/files/issues/2023-08-24/groups-have-two-revisions-tabs.patch"
             },
             "drupal/group_notifications": {
                 "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
@@ -242,6 +239,9 @@
             "drupal/show_email": {
                 "3289599 - Automated Drupal 10 compatibility fixes": "patches/pe-513-drupal-10-compatibility-fixes.patch"
             }
+        },
+        "drupal-lenient": {
+            "allowed-list": ["drupal/show_email", "drupal/group_notifications"]
         }
     },
     "minimum-stability": "dev",

@@ -22,7 +22,7 @@ describe('Visual Regression Testing', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch(BROWSER_OPTION);
         page = await browser.newPage();
-        await page.setDefaultTimeout(45 * 1000);
+        page.setDefaultTimeout(45 * 1000);
 
         if (process.env.CIRCLECI) {
             // On CI, the CI script will call terminus to retrieve login URL

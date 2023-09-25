@@ -282,7 +282,7 @@ handlers:
       assignee_id: ''
       type: incident
       collaborators: ''
-      custom_fields: '1500013095781: ''[webform_submission:uuid]'''
+      custom_fields: "1500013095781: '[webform_submission:uuid]'"
       ticket_id_field: '[webform_submission:values:ticket_id]'
       group_id: '4549352062487'
   zendesk_update_ticket:
@@ -312,7 +312,7 @@ handlers:
     id: ticket_validation
     handler_id: zendesk_ticket_validator
     label: 'Zendesk ticket validator'
-    notes: 'Used when updating a ticket through the API. Validates that the correct ticket is being updated by checking the webform submission UUID that''s stored in Zendesk when the ticket is initially created.'
+    notes: "Used when updating a ticket through the API. Validates that the correct ticket is being updated by checking the webform submission UUID that's stored in Zendesk when the ticket is initially created."
     status: true
     conditions:
       enabled:

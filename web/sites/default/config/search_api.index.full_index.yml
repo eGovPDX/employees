@@ -162,7 +162,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 42
+    boost: 42.0
     dependencies:
       config:
         - field.storage.node.field_search_keywords
@@ -181,7 +181,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 5
+    boost: 5.0
     dependencies:
       module:
         - node
@@ -292,7 +292,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_first_name
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       config:
         - field.storage.node.field_first_name
@@ -309,7 +309,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_last_name
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       config:
         - field.storage.node.field_last_name
@@ -398,7 +398,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: field_first_name
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       config:
         - field.storage.user.field_first_name
@@ -447,7 +447,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: field_last_name
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       config:
         - field.storage.user.field_last_name
@@ -616,7 +616,7 @@ field_settings:
     datasource_id: 'entity:group'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 42
+    boost: 42.0
     dependencies:
       config:
         - field.storage.group.field_search_keywords
@@ -633,7 +633,7 @@ field_settings:
     datasource_id: 'entity:group'
     property_path: label
     type: text
-    boost: !!float 5
+    boost: 5.0
     dependencies:
       module:
         - group
@@ -650,7 +650,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: mail
     type: 'solr_text_custom_omit_norms:edge'
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       module:
         - user
@@ -659,7 +659,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: mail
     type: solr_text_unstemmed
-    boost: !!float 3
+    boost: 3.0
     dependencies:
       module:
         - user
@@ -700,7 +700,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: name
     type: 'solr_text_custom_omit_norms:edgestring'
-    boost: !!float 5
+    boost: 5.0
     dependencies:
       module:
         - media
@@ -709,7 +709,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 42
+    boost: 42.0
     dependencies:
       config:
         - field.storage.media.field_search_keywords
@@ -758,7 +758,7 @@ field_settings:
     datasource_id: 'entity:user'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
-    boost: !!float 42
+    boost: 42.0
     dependencies:
       config:
         - field.storage.user.field_search_keywords
@@ -850,7 +850,7 @@ processor_settings:
       - group_title
       - group_type
       - rendered_item
-    ignorable: '[''¿¡!?,.:;]'
+    ignorable: "['¿¡!?,.:;]"
     ignorable_classes:
       - Pc
       - Pe
@@ -868,25 +868,25 @@ processor_settings:
       preprocess_index: 0
     boosts:
       'entity:group':
-        datasource_boost: !!float 1
+        datasource_boost: 1.0
         bundle_boosts:
-          employee: !!float 1
-          private: !!float 1
+          employee: 1.0
+          private: 1.0
       'entity:media':
-        datasource_boost: !!float 1
+        datasource_boost: 1.0
         bundle_boosts:
-          document: !!float 1
+          document: 1.0
       'entity:node':
-        datasource_boost: !!float 1
+        datasource_boost: 1.0
         bundle_boosts:
-          bts_catalog_item: !!float 1
-          contract: !!float 1
-          event: !!float 1
-          news: !!float 1
-          page: !!float 1
-          resource: !!float 1
+          bts_catalog_item: 1.0
+          contract: 1.0
+          event: 1.0
+          news: 1.0
+          page: 1.0
+          resource: 1.0
       'entity:user':
-        datasource_boost: !!float 1
+        datasource_boost: 1.0
 tracker_settings:
   default:
     indexing_order: fifo
