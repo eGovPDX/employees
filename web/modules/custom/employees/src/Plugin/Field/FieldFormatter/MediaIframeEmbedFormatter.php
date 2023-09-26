@@ -38,6 +38,9 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
       "^https?:\/\/(app|publish)\.smartsheet\.com\/(.*)$",
       // Tableau
       '^https?:\/\/(online|public)\.tableau\.com\/(.*)$',
+      // Microsoft Stream
+      '^https?:\/\/web\.microsoftstream\.com\/embed\/video\/(.*)$',
+      '^https?:\/\/portlandoregongov\-my\.sharepoint\.com\/(.*)$',
     ];
 
     return "/" . join("|", $patterns) . "/";
@@ -47,7 +50,7 @@ class MediaIframeEmbedFormatter extends MediaRemoteFormatterBase {
    * {@inheritdoc}
    */
   public static function getValidUrlExampleStrings(): array {
-    return ['arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, and Smartsheet.'];
+    return ['arcg.is, arcgis.com, pdx.maps.arcgis.com, Google Maps, PortlandMaps.com, PortlandOregon.gov, Tableau, Smartsheet, and Microsoft Stream.'];
   }
 
   /**
