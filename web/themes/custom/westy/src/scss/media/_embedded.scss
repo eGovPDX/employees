@@ -30,9 +30,9 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class*=embed] {
   margin-left: auto;
 }
 
-figure.drupal-media.drupal-media-style-align-left > div > div[class~=embed-video],
-figure.drupal-media.drupal-media-style-align-center > div > div[class~=embed-video],
-figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-video] {
+figure.drupal-media.drupal-media-style-align-left > div > div[class~=embed-remote-video],
+figure.drupal-media.drupal-media-style-align-center > div > div[class~=embed-remote-video],
+figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-remote-video] {
   width: inherit;
 }
 
@@ -136,7 +136,7 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-vide
   .drupal-media[data-view-mode=narrow] figcaption {
     max-width: 325px;
   }
-  
+
   .embedded-medium,
   .embedded-medium + figcaption,
   .drupal-media[data-view-mode=medium] figcaption {
@@ -186,7 +186,7 @@ figure {
 // Embedded videos
 // -----------------------------------------------------------------------------
 
-figure.caption .embed-video {
+figure.caption .embed-remote-video {
   margin-bottom: 0 !important;
 }
 
@@ -196,12 +196,12 @@ figure.align-right,
 figure.drupal-media.drupal-media-style-align-left,
 figure.drupal-media.drupal-media-style-align-center,
 figure.drupal-media.drupal-media-style-align-right {
-  .embed-video.embedded-full .field {
+  .embed-remote-video.embedded-full .field {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
   }
-} 
+}
 
 // At medium breakpoint and down, center the video
 @include media-breakpoint-down(md) {
@@ -211,29 +211,29 @@ figure.drupal-media.drupal-media-style-align-right {
   figure.drupal-media.drupal-media-style-align-left,
   figure.drupal-media.drupal-media-style-align-center,
   figure.drupal-media.drupal-media-style-align-right {
-    .embed-video.embedded-full .field {
+    .embed-remote-video.embedded-full .field {
       width: 100%;
     }
-  } 
+  }
 }
 
 
-.field .embed-video.embedded-full .field__item,
-.embed-video.embedded-full iframe {
+.field .embed-remote-video.embedded-full .field__item,
+.embed-remote-video.embedded-full iframe {
   height: 100%;
   width: 100%;
   aspect-ratio: 16/9;
 }
 
-.field .embed-video.embedded-full,
-.field .embed-video.embedded-medium,
-figure .embed-video.embedded-full,
-figure .embed-video.embedded-medium {
+.field .embed-remote-video.embedded-full,
+.field .embed-remote-video.embedded-medium,
+figure .embed-remote-video.embedded-full,
+figure .embed-remote-video.embedded-medium {
   position: relative;
 }
 
-.field .embed-video.embedded-full,
-figure .embed-video.embedded-full {
+.field .embed-remote-video.embedded-full,
+figure .embed-remote-video.embedded-full {
   width: 100%;
 }
 

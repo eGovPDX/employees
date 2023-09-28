@@ -24,7 +24,7 @@ $fa-font-path: '/themes/custom/westy/dist';
   // Copy all `html, body { }` styles from _typography.scss or elsewhere here
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
-  
+
   // Override CKEditor list styles with the default bullet styles
   &.ck ul {
     list-style-type: disc;
@@ -35,9 +35,9 @@ $fa-font-path: '/themes/custom/westy/dist';
       }
     }
   }
-  
+
   // Override Clarro list margins with Bootstrap reset.css values
-  ol, 
+  ol,
   ul {
     margin: inherit;
     margin-bottom: 1rem;
@@ -50,7 +50,7 @@ $fa-font-path: '/themes/custom/westy/dist';
 
   // Allow selection of text within buttons
   .btn {
-    user-select: text !important;   
+    user-select: text !important;
   }
 
   // Overwrite the CKEditor link background color for primary button style
@@ -65,14 +65,14 @@ $fa-font-path: '/themes/custom/westy/dist';
 
   // Prevent embedded document links, videos, and iframes from navigating/receiving focus when clicked
   .embed-document a,
-  .embed-video iframe,
+  .embed-remote-video iframe,
   .media--type-iframe iframe {
     pointer-events: none;
   }
 
   // Tweak embedded video display
-  .field .embed-video.embedded-full,
-  figure .embed-video.embedded-full {
+  .field .embed-remote-video.embedded-full,
+  figure .embed-remote-video.embedded-full {
     padding-top: inherit;
   }
 
@@ -97,7 +97,7 @@ $fa-font-path: '/themes/custom/westy/dist';
     margin-right: auto !important;
     margin-left: auto !important;
   }
-  
+
   // Captions in the editor use the <figcaption> element, so style it like our original Westy <caption> styles
   .drupal-media figcaption.ck-editor__editable {
     padding: 0;
@@ -107,7 +107,7 @@ $fa-font-path: '/themes/custom/westy/dist';
     color: #6c757d;
     background-color: inherit;
   }
-  
+
   // Overwrite the `display: table-caption` on captions now that <figures> are no longer `display: table`
   &.ck .drupal-media figcaption {
     display: inherit;
@@ -130,7 +130,7 @@ $fa-font-path: '/themes/custom/westy/dist';
     margin-right: inherit;
   }
 
-}  
+}
 
 // Increase font size of link tooltip popup
 .ck-link-form .ck-labeled-field-view label,

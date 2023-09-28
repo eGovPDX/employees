@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = classes|default([
+    'embed-' ~ media.bundle()|clean_class,
+    view_mode ? 'embedded-' ~ view_mode|clean_class,
+  ])
+%}
+{%
+  set badge_classes = badge_classes|default([
+    'badge',
+    'bg-danger',
+    'mb-2',
+  ])
+%}
+
+{% apply spaceless %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_suffix.contextual_links }}
+    {% block status %}
+      {% if not media.isPublished() %}
+        {% set status_attributes = create_attribute() %}
+        <span{{ status_attributes.addClass(badge_classes) }}>{{ 'unpublished'|t|capitalize }}</span>
+      {% endif %}
+    {% endblock %}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+{% endapply %}
