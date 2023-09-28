@@ -41,7 +41,6 @@
   {% set file_size_friendly = content.field_file_size.0|render|striptags|format_size %}
 {% endif %}
 
- {#<div{{ attributes.addClass(classes) }} {% if with_description %}aria-describedby="{{ name|clean_class }}:"{% endif %}> #}
 {% embed 'media.html.twig' with {
   attributes: with_description ? attributes.setAttribute('aria-describedby', 'desc-' ~ name|clean_class) : attributes,
   badge_classes: ['badge', 'bg-danger', 'me-2'],
