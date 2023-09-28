@@ -18,21 +18,15 @@
     view_mode ? 'embedded-' ~ view_mode|clean_class,
   ])
 %}
-{%
-  set badge_classes = badge_classes|default([
-    'badge',
-    'bg-danger',
-    'mb-2',
-  ])
-%}
 
 {% apply spaceless %}
   <div{{ attributes.addClass(classes) }}>
     {{ title_suffix.contextual_links }}
     {% block status %}
       {% if not media.isPublished() %}
-        {% set status_attributes = create_attribute() %}
-        <span{{ status_attributes.addClass(badge_classes) }}>{{ 'unpublished'|t|capitalize }}</span>
+        <div>
+          <span class="badge bg-danger mb-2">{{ 'unpublished'|t|capitalize }}</span>
+        </div>
       {% endif %}
     {% endblock %}
     {% block content %}

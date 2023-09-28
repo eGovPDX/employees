@@ -43,7 +43,6 @@
 
 {% embed 'media.html.twig' with {
   attributes: with_description ? attributes.setAttribute('aria-describedby', 'desc-' ~ name|clean_class) : attributes,
-  badge_classes: ['badge', 'bg-danger', 'me-2'],
 } %}
   {% block content %}
     {% if content.field_mime_type.0|length > 0 %}
