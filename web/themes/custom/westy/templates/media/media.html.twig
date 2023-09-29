@@ -14,8 +14,9 @@
 #}
 {%
   set classes = classes|default([
-    'embed-' ~ media.bundle()|clean_class,
-    view_mode ? 'embedded-' ~ view_mode|clean_class,
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
   ])
 %}
 

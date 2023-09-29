@@ -64,15 +64,15 @@ $fa-font-path: '/themes/custom/westy/dist';
   }
 
   // Prevent embedded document links, videos, and iframes from navigating/receiving focus when clicked
-  .embed-document a,
-  .embed-remote-video iframe,
+  .media--type-document a,
+  .media--type-remote-video iframe,
   .media--type-iframe iframe {
     pointer-events: none;
   }
 
   // Tweak embedded video display
-  .field .embed-remote-video.embedded-full,
-  figure .embed-remote-video.embedded-full {
+  .field .media--type-remote-video.media--view-mode-full,
+  figure .media--type-remote-video.media--view-mode-full {
     padding-top: inherit;
   }
 
