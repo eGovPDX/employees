@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = classes|default([
+    'media',
+    'media--type-' ~ media.bundle()|clean_class,
+    view_mode ? 'media--view-mode-' ~ view_mode|clean_class,
+  ])
+%}
+
+{% apply spaceless %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_suffix.contextual_links }}
+    {% block status %}
+      {% if not media.isPublished() %}
+        <div>
+          <span class="badge bg-danger mb-2">{{ 'unpublished'|t|capitalize }}</span>
+        </div>
+      {% endif %}
+    {% endblock %}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+{% endapply %}
