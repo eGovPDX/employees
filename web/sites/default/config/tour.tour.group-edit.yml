@@ -1,0 +1,84 @@
+uuid: 30ba9a73-e08f-4149-9aec-da077f491b70
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - employees
+id: group-edit
+label: 'Group edit page'
+module: employees
+routes:
+  - route_name: entity.group.edit_form
+tips:
+  title:
+    id: title
+    plugin: text
+    label: Set your group's title
+    weight: 1
+    selector: '.field--name-label input'
+    body: 'This is the name of the group, and will be displayed on its homepage, in search results, and anywhere the group is displayed on the site.'
+  parent-group:
+    id: parent-group
+    plugin: text
+    label: Optionally, add a parent group
+    weight: 2
+    selector: '.field--name-field-parent-group'
+    body: 'If this group is the underneath another group (i.e. a subdivision of a bureau), you can add any parent groups here.'
+  group-description:
+    id: group-description
+    plugin: text
+    label: Add a description
+    weight: 3
+    selector: '.field--name-field-group-description'
+    body: 'This description is displayed on the group homepage, and is a great place to highlight what this group is about, or add any necessary information.'
+  group-summary:
+    id: group-summary
+    plugin: text
+    label: Group summary
+    weight: 4
+    selector: '.link-edit-summary'
+    body: 'You can click here to add a quick, concise summary for this group. This summary will be displayed in search results.'
+  featured-image:
+    id: featured-image
+    plugin: text
+    label: Add a featured image
+    weight: 5
+    selector: '.field--name-field-featured-image .js-media-library-open-button'
+    body: 'You can click here to upload or select an image to display on the group''s homepage.'
+  featured-content:
+    id: featured-content
+    plugin: text
+    label: Add featured content
+    weight: 6
+    selector: '.field--name-field-featured-content input.form-autocomplete[value=""]'
+    body: 'Here, you can feature any pages or resources to show on the group''s homepage. Type in the title of the content you want to feature, and a dropdown will appear from which you can select the correct page.'
+  featured-documents:
+    id: featured-documents
+    plugin: text
+    label: Add featured documents or forms
+    weight: 7
+    selector: '.field--name-field-featured-documents input.form-autocomplete[value=""]'
+    body: 'Here, you can feature any popular documents (i.e. forms, guides, reports) to show on the group''s homepage.. Type in the title of the document you want to feature, and a dropdown will appear from which you can select the correct document.'
+  group-contacts:
+    id: group-contacts
+    plugin: text
+    label: Add contacts
+    weight: 8
+    selector: '#edit-group-group-contact'
+    body: 'Click here to expand the menu. You can then select any Employees or Contacts to show on the group homepage.'
+  revision-log:
+    id: revision-log
+    plugin: text
+    label: Describe your changes
+    weight: 9
+    selector: '.field--name-revision-log-message'
+    body: 'Here, you can describe the changes you made for the revision log.'
+  save:
+    id: Save
+    plugin: text
+    label: Save your changes
+    weight: 10
+    selector: '#edit-submit'
+    body: 'Click here to save all of the changes you made.'
+
