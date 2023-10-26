@@ -53,7 +53,7 @@
     </div>
   </header>
   {{ page.preheader }}
-  <main class="container">
+  <main id="main-content" class="container">
     {% if page.header|render|striptags|trim is not empty %}
       <div class="row align-items-center">
         <header class="page__sub_header col">
@@ -91,4 +91,5 @@
     {{ page.footer }}
   </footer>
 
+  <a class="westy-back-to-top btn btn-dark d-none" href="#header">{{ 'Back to top'|t }}</a>
 </div>
