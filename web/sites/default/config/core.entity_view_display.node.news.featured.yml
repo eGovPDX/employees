@@ -68,6 +68,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  field_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   content_moderation_control: true
   field_contact: true
@@ -79,7 +87,6 @@ hidden:
   field_search_keywords: true
   field_tags: true
   field_topics: true
-  field_type: true
   field_updated_on: true
   langcode: true
   links: true
