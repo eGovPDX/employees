@@ -1,0 +1,67 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function portland_legacy_redirects_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $entity_id = $entity_type->id();
+  if ($entity_id === 'node' || $entity_id === 'group' || $entity_type->id() == 'media') {
+    $fields = [];
+
+    // add a field that allows the page's redirects (labeled as Legacy Paths) to be modified
+    // outside the redirects UI.
+    // TODO: this adds the field to EVERY node, even ones we don't want the Legacy Path for.
+    //       it's not harmful except that it adds extra processing. it basically runs through
+    //       the validation routines but does nothing if not valid on a form where the field
+    //       is disabled/hidden. the only way I can think of to prevent this is to create and
+    //       maintain a list of content types that it applies to; or maybe there's a way to
+    //       determine whether the field is enabled in form view?
+    $fields['field_redirects'] = BaseFieldDefinition::create('string')
+      ->setName('field_redirects')
+      ->setLabel(t('Legacy path'))
+      ->setComputed(TRUE)
+      ->setClass('\Drupal\portland_legacy_redirects\Field\RedirectList')
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'text_textfield',
+        'weight' => 50,
+      ])
+      ->setDescription(t('This field is used to create redirects to this page from legacy pages in the old site. Multiple paths may be entered in case several pages have been combined during migration. Once these paths are created, they may only be modified or removed by an administrator. Paths must be relative and start with a slash. For example, the page "https://www.portlandoregon.gov/bts/39479" should be entered as "/bts/39479."'))
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->addConstraint('relative_path', []);;
+
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * The legacy path field is actually just a reference to the Drupal redirect table, not a field stored
+ * on the node itself. That means we can't choose to hide it for translations like a normal field.
+ *
+ * This piece of custom code detects when the editor is editing a non-English translation and hides the
+ * legacy paths field, because the field isn't actually translatable.
+ */
+function portland_legacy_redirects_form_node_form_alter(&$form) {
+  $current_lang = \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+  if ($current_lang !== 'en') {
+    $form['field_redirects']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ * Add the constraint for the Legacy Path field to validate input
+ */
+function portland_legacy_redirects_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  // Only add constraint for the entity types specified in portland_legacy_redirects_entity_base_field_info
+  if ( ( $entity_type->id() == 'node' || $entity_type->id() == 'group' || $entity_type->id() == 'media' ) && !empty($fields['field_redirects'])) {
+    $fields['field_redirects']->addConstraint('relative_path');
+  }
+}
