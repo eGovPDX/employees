@@ -47,7 +47,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
-    weight: 9
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -72,43 +72,43 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 52
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 53
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 50
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 54
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -116,4 +116,5 @@ hidden:
   created: true
   field_file_size: true
   field_mime_type: true
+  field_redirects: true
   uid: true

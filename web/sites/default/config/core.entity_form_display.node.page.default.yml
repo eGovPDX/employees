@@ -79,7 +79,7 @@ third_party_settings:
       label: 'Page Contacts'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: details
       format_settings:
         classes: ''
@@ -107,7 +107,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 19
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -195,6 +195,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_redirects:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_related_content:
     type: entity_reference_autocomplete
     weight: 7
@@ -207,7 +215,7 @@ content:
     third_party_settings: {  }
   field_reviewer:
     type: entity_reference_autocomplete
-    weight: 17
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
@@ -298,30 +306,30 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 16
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 20
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 52
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 53
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 50
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -335,7 +343,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -345,18 +353,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 54
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 21
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
