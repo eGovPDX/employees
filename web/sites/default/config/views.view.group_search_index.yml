@@ -210,6 +210,7 @@ display:
         - user.permissions
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   block_group_events:
     id: block_group_events
     display_title: 'Block: Upcoming'
@@ -478,6 +479,7 @@ display:
         - user.permissions
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   block_group_news:
     id: block_group_news
     display_title: 'Block: News'
@@ -698,6 +700,7 @@ display:
         - user.permissions
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   block_group_todays_events:
     id: block_group_todays_events
     display_title: 'Block: Today'
@@ -1102,6 +1105,7 @@ display:
         - user.permissions
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_contracts:
     id: page_contracts
     display_title: 'Page: Contracts'
@@ -2314,6 +2318,7 @@ display:
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_documents:
     id: page_documents
     display_title: 'Page: Documents'
@@ -3156,7 +3161,7 @@ display:
     display_plugin: page
     position: 4
     display_options:
-      title: '{{ label }} News'
+      title: "{{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }} News"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -4732,4 +4737,5 @@ display:
       tags:
         - 'config:facets.facet.group_filter_by_contact_type'
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
     deleted: false
