@@ -836,7 +836,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<h2 class="my-1"><i class="fas fa-link me-2"></i>Quick links</h2>'
+          content: '<h2 class="my-1">Quick links</h2>'
           tokenize: false
       display_extenders: {  }
       block_hide_empty: true
@@ -869,7 +869,7 @@ display:
         link_url: false
       display_description: ''
       use_more: true
-      use_more_always: false
+      use_more_always: true
       use_more_text: 'See all »'
       link_display: custom_url
       link_url: '/taxonomy/term/{{ arguments.field_topics_target_id }}'
