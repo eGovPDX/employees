@@ -53,7 +53,7 @@ third_party_settings:
       label: 'Owner Details'
       region: content
       parent_name: ''
-      weight: 14
+      weight: 15
       format_type: details
       format_settings:
         classes: ''
@@ -68,7 +68,7 @@ third_party_settings:
       label: 'Administrative Fields (Site Admins Only)'
       region: content
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: details
       format_settings:
         classes: ''
@@ -84,17 +84,26 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 19
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   field_bts_application_exception:
     type: options_select
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings:
       field_states_ui:
+        field_states:
+          c9b0eb34-b9b1-4de3-99ae-fa74df6cf357:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: c9b0eb34-b9b1-4de3-99ae-fa74df6cf357
         form:
           type: ''
           list:
@@ -103,18 +112,9 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          c9b0eb34-b9b1-4de3-99ae-fa74df6cf357:
-            uuid: c9b0eb34-b9b1-4de3-99ae-fa74df6cf357
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   field_bureaus:
     type: select2_entity_reference
-    weight: 3
+    weight: 4
     region: content
     settings:
       width: 100%
@@ -123,6 +123,15 @@ content:
       match_limit: 10
     third_party_settings:
       field_states_ui:
+        field_states:
+          6798c2d7-ea05-4e03-8ecc-83ea5a04bda3:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: 6798c2d7-ea05-4e03-8ecc-83ea5a04bda3
         form:
           type: ''
           list:
@@ -131,18 +140,9 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          6798c2d7-ea05-4e03-8ecc-83ea5a04bda3:
-            uuid: 6798c2d7-ea05-4e03-8ecc-83ea5a04bda3
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   field_business_capability:
     type: select2_entity_reference
-    weight: 4
+    weight: 5
     region: content
     settings:
       width: 100%
@@ -167,17 +167,26 @@ content:
           add: Add
   field_business_priority:
     type: options_select
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_cloud_service_type:
     type: options_select
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings:
       field_states_ui:
+        field_states:
+          2cf1bb86-9d6c-4afc-9d36-03b61c39d536:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: 2cf1bb86-9d6c-4afc-9d36-03b61c39d536
         form:
           type: ''
           list:
@@ -186,18 +195,9 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          2cf1bb86-9d6c-4afc-9d36-03b61c39d536:
-            uuid: 2cf1bb86-9d6c-4afc-9d36-03b61c39d536
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   field_description:
     type: text_textarea
-    weight: 7
+    weight: 8
     region: content
     settings:
       rows: 5
@@ -205,7 +205,7 @@ content:
     third_party_settings: {  }
   field_display_in_group:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -230,11 +230,20 @@ content:
           add: Add
   field_hosting_environment:
     type: options_select
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings:
       field_states_ui:
+        field_states:
+          ee1ad42b-eb22-43f0-9a58-38a1d60e9017:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: ee1ad42b-eb22-43f0-9a58-38a1d60e9017
         form:
           type: ''
           list:
@@ -243,18 +252,9 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          ee1ad42b-eb22-43f0-9a58-38a1d60e9017:
-            uuid: ee1ad42b-eb22-43f0-9a58-38a1d60e9017
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   field_link_example_application:
     type: link_default
-    weight: 13
+    weight: 14
     region: content
     settings:
       placeholder_url: ''
@@ -322,14 +322,14 @@ content:
           add: Add
   field_public:
     type: boolean_checkbox
-    weight: 16
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_related_content:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 12
     region: content
     settings:
       match_operator: CONTAINS
@@ -339,7 +339,7 @@ content:
     third_party_settings: {  }
   field_reviewer:
     type: select2_entity_reference
-    weight: 18
+    weight: 19
     region: content
     settings:
       width: 100%
@@ -362,7 +362,7 @@ content:
     third_party_settings: {  }
   field_service:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 13
     region: content
     settings:
       match_operator: CONTAINS
@@ -372,11 +372,20 @@ content:
     third_party_settings: {  }
   field_support_model:
     type: options_select
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings:
       field_states_ui:
+        field_states:
+          a1e4f760-9fc8-4835-a561-53f5f53fc90f:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: a1e4f760-9fc8-4835-a561-53f5f53fc90f
         form:
           type: ''
           list:
@@ -385,15 +394,6 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          a1e4f760-9fc8-4835-a561-53f5f53fc90f:
-            uuid: a1e4f760-9fc8-4835-a561-53f5f53fc90f
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   field_support_owner:
     type: select2_entity_reference
     weight: 32
@@ -417,13 +417,22 @@ content:
     third_party_settings: {  }
   field_vendor:
     type: string_textfield
-    weight: 6
+    weight: 7
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings:
       field_states_ui:
+        field_states:
+          1ba54797-37ee-4a4a-b5eb-a448ad690dc4:
+            id: visible
+            data:
+              target: field_type
+              comparison: value
+              value: '1715'
+              submit: 'Update State Cancel'
+            uuid: 1ba54797-37ee-4a4a-b5eb-a448ad690dc4
         form:
           type: ''
           list:
@@ -432,41 +441,32 @@ content:
                 edit: Edit
                 delete: Delete
           add: Add
-        field_states:
-          1ba54797-37ee-4a4a-b5eb-a448ad690dc4:
-            uuid: 1ba54797-37ee-4a4a-b5eb-a448ad690dc4
-            id: visible
-            data:
-              target: field_type
-              comparison: value
-              value: '1715'
-              submit: 'Update State Cancel'
   moderation_state:
     type: moderation_state_default
-    weight: 17
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 52
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 50
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -480,7 +480,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 20
+    weight: 21
     region: content
     settings:
       match_operator: CONTAINS
@@ -490,22 +490,23 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 54
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 56
+    weight: 28
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 22
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_redirects: true
   langcode: true
   promote: true
   status: true

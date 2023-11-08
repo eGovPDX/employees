@@ -56,18 +56,18 @@ content:
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 52
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 55
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 50
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -91,13 +91,13 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 54
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 56
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -107,6 +107,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_redirects: true
   langcode: true
   promote: true
   status: true
