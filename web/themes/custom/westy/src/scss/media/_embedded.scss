@@ -20,9 +20,9 @@ figure figcaption {
 figure.figure.align-left > div,
 figure.figure.align-center > div,
 figure.figure.align-right > div,
-figure.drupal-media.drupal-media-style-align-left > div > div[class*=embed],
-figure.drupal-media.drupal-media-style-align-center > div > div[class*=embed],
-figure.drupal-media.drupal-media-style-align-right > div > div[class*=embed] {
+figure.drupal-media.drupal-media-style-align-left > div > div[class*=media],
+figure.drupal-media.drupal-media-style-align-center > div > div[class*=media],
+figure.drupal-media.drupal-media-style-align-right > div > div[class*=media] {
   width: fit-content;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -30,9 +30,9 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class*=embed] {
   margin-left: auto;
 }
 
-figure.drupal-media.drupal-media-style-align-left > div > div[class~=embed-video],
-figure.drupal-media.drupal-media-style-align-center > div > div[class~=embed-video],
-figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-video] {
+figure.drupal-media.drupal-media-style-align-left > div > div[class~=media--type-remote-video],
+figure.drupal-media.drupal-media-style-align-center > div > div[class~=media--type-remote-video],
+figure.drupal-media.drupal-media-style-align-right > div > div[class~=media--type-remote-video] {
   width: inherit;
 }
 
@@ -131,14 +131,14 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-vide
 
 // Constrain narrow and medium at sm and up
 @include media-breakpoint-up(sm) {
-  .embedded-narrow,
-  .embedded-narrow + figcaption,
+  .media--view-mode-narrow,
+  .media--view-mode-narrow + figcaption,
   .drupal-media[data-view-mode=narrow] figcaption {
     max-width: 325px;
   }
-  
-  .embedded-medium,
-  .embedded-medium + figcaption,
+
+  .media--view-mode-medium,
+  .media--view-mode-medium + figcaption,
   .drupal-media[data-view-mode=medium] figcaption {
     max-width: 400px;
   }
@@ -146,8 +146,8 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-vide
 
 // Constrain medium at xl and up
 @include media-breakpoint-up(xl) {
-  .embedded-medium,
-  .embedded-medium + figcaption,
+  .media--view-mode-medium,
+  .media--view-mode-medium + figcaption,
   .drupal-media[data-view-mode=medium] figcaption {
       max-width: 417px;
   }
@@ -155,30 +155,30 @@ figure.drupal-media.drupal-media-style-align-right > div > div[class~=embed-vide
 
 // When narrow is used at sm and down, center the image
 @include media-breakpoint-down(sm) {
-  .embedded-narrow {
+  .media--view-mode-narrow {
     width: fit-content;
     width: -webkit-fit-content;
     width: -moz-fit-content;
   }
 
-  .embedded-narrow,
-  .embedded-medium {
+  .media--view-mode-narrow,
+  .media--view-mode-medium {
     margin-left: auto;
     margin-right: auto;
   }
 }
 
 // Add margin bottom for embedded media not in a figure
-.embedded-narrow,
-.embedded-medium,
-.embedded-full {
+.media--view-mode-narrow,
+.media--view-mode-medium,
+.media--view-mode-full {
   margin-bottom: $spacer;
 }
 
 figure {
-  .embedded-narrow,
-  .embedded-medium,
-  .embedded-full {
+  .media--view-mode-narrow,
+  .media--view-mode-medium,
+  .media--view-mode-full {
     margin-bottom: 0;
   }
 }
@@ -186,7 +186,7 @@ figure {
 // Embedded videos
 // -----------------------------------------------------------------------------
 
-figure.caption .embed-video {
+figure.caption .media--type-remote-video {
   margin-bottom: 0 !important;
 }
 
@@ -196,12 +196,12 @@ figure.align-right,
 figure.drupal-media.drupal-media-style-align-left,
 figure.drupal-media.drupal-media-style-align-center,
 figure.drupal-media.drupal-media-style-align-right {
-  .embed-video.embedded-full .field {
+  .media--type-remote-video.media--view-mode-full .field {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
   }
-} 
+}
 
 // At medium breakpoint and down, center the video
 @include media-breakpoint-down(md) {
@@ -211,43 +211,43 @@ figure.drupal-media.drupal-media-style-align-right {
   figure.drupal-media.drupal-media-style-align-left,
   figure.drupal-media.drupal-media-style-align-center,
   figure.drupal-media.drupal-media-style-align-right {
-    .embed-video.embedded-full .field {
+    .media--type-remote-video.media--view-mode-full .field {
       width: 100%;
     }
-  } 
+  }
 }
 
 
-.field .embed-video.embedded-full .field__item,
-.embed-video.embedded-full iframe {
+.field .media--type-remote-video.media--view-mode-full .field__item,
+.media--type-remote-video.media--view-mode-full iframe {
   height: 100%;
   width: 100%;
   aspect-ratio: 16/9;
 }
 
-.field .embed-video.embedded-full,
-.field .embed-video.embedded-medium,
-figure .embed-video.embedded-full,
-figure .embed-video.embedded-medium {
+.field .media--type-remote-video.media--view-mode-full,
+.field .media--type-remote-video.media--view-mode-medium,
+figure .media--type-remote-video.media--view-mode-full,
+figure .media--type-remote-video.media--view-mode-medium {
   position: relative;
 }
 
-.field .embed-video.embedded-full,
-figure .embed-video.embedded-full {
+.field .media--type-remote-video.media--view-mode-full,
+figure .media--type-remote-video.media--view-mode-full {
   width: 100%;
 }
 
 // Embedded Documents
 // -----------------------------------------------------------------------------
 
-.embed-document {
+.media--type-document {
   margin-bottom: $spacer;
 }
 
-li .embed-document {
+li .media--type-document {
   margin-bottom: 0;
 }
 
-.embed-document .caption {
+.media--type-document .caption {
   font-size: 90%;
 }

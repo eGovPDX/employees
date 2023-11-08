@@ -2,11 +2,11 @@
 
 namespace Drupal\Tests\anonymous_login\Unit;
 
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\anonymous_login\EventSubscriber\AnonymousLoginExtranetSubscriber;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * Tests the redirect logic.
@@ -66,31 +66,25 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
    * @param string $request_uri
    *   The URI of the request.
    *
-   * @return \Symfony\Component\HttpKernel\Event\GetResponseEvent
+   * @return \Symfony\Component\HttpKernel\Event\RequestEvent
    *   THe response event.
    */
   protected function callOnKernelRequestCheckRedirect($request_uri) {
     $event = $this->getGetResponseEventStub($request_uri);
     $request = $event->getRequest();
 
-    $state = $this->getMockBuilder('Drupal\Core\State\StateInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $state = $this->createMock('Drupal\Core\State\StateInterface');
     $state->expects($this->any())
       ->method('get')
       ->with('system.maintenance_mode')
       ->will($this->returnValue(FALSE));
 
-    $current_user = $this->getMockBuilder('Drupal\Core\Session\AccountProxyInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $current_user = $this->createMock('Drupal\Core\Session\AccountProxyInterface');
     $current_user->expects($this->any())
       ->method('isAnonymous')
       ->will($this->returnValue(TRUE));
 
-    $alias_manager = $this->getMockBuilder('Drupal\path_alias\AliasManagerInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $alias_manager = $this->createMock('Drupal\path_alias\AliasManagerInterface');
     $alias_manager->expects($this->any())
       ->method('getPathByAlias')
       ->with($this->anything())
@@ -139,9 +133,7 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
         'sites/default/files/*',
       ],
     ];
-    $path_matcher = $this->getMockBuilder('Drupal\Core\Path\PathMatcherInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $path_matcher = $this->createMock('Drupal\Core\Path\PathMatcherInterface');
     $path_matcher->expects($this->any())
       ->method('matchPath')
       ->with($this->anything(), $this->anything())
@@ -161,21 +153,15 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
 
           return (bool) preg_match($search, $path);
       }));
-    $module_handler = $this->getMockBuilder('Drupal\Core\Extension\ModuleHandlerInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $module_handler = $this->createMock('Drupal\Core\Extension\ModuleHandlerInterface');
     $module_handler->expects($this->any())
       ->method('alter')
       ->will($this->returnValue($paths));
-    $path_validator = $this->getMockBuilder('Drupal\Core\Path\PathValidatorInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $path_validator = $this->createMock('Drupal\Core\Path\PathValidatorInterface');
     $path_validator->expects($this->any())
       ->method('getUrlIfValidWithoutAccessCheck')
       ->will($this->returnValue(FALSE));
-    $current_path = $this->getMockBuilder('Drupal\Core\Path\CurrentPathStack')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $current_path = $this->createMock('Drupal\Core\Path\CurrentPathStack');
     $current_path->expects($this->any())
       ->method('getPath')
       ->with($request)
@@ -214,15 +200,14 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
    * @param string $request_uri
    *   The URI of the request.
    *
-   * @return \Symfony\Component\HttpKernel\Event\GetResponseEvent
+   * @return \Symfony\Component\HttpKernel\Event\RequestEvent
    *   The get response event object.
    */
   protected function getGetResponseEventStub($request_uri) {
     $request = Request::create($request_uri, 'GET', [], [], [], ['SCRIPT_NAME' => 'index.php']);
 
-    $http_kernel = $this->getMockBuilder('\Symfony\Component\HttpKernel\HttpKernelInterface')
-      ->getMock();
-    return new GetResponseEvent($http_kernel, $request, 'test');
+    $http_kernel = $this->createMock('\Symfony\Component\HttpKernel\HttpKernelInterface');
+    return new RequestEvent($http_kernel, $request, 'test');
   }
 
 }

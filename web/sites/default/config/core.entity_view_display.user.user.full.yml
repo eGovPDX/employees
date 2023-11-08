@@ -62,11 +62,13 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: responsive_image
+                type: image
                 label: hidden
                 settings:
-                  responsive_image_style: narrow
-                  image_link: content
+                  image_link: ''
+                  image_style: medium
+                  image_loading:
+                    attribute: lazy
                 third_party_settings: {  }
             weight: 0
             additional: {  }
@@ -263,6 +265,15 @@ third_party_settings:
                   date_format: medium
                   custom_date_format: ''
                   timezone: ''
+                  tooltip:
+                    date_format: ''
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
                 third_party_settings: {  }
             weight: 21
             additional: {  }
@@ -284,6 +295,15 @@ third_party_settings:
                   date_format: medium
                   custom_date_format: ''
                   timezone: ''
+                  tooltip:
+                    date_format: ''
+                    custom_date_format: ''
+                  time_diff:
+                    enabled: false
+                    future_format: '@interval hence'
+                    past_format: '@interval ago'
+                    granularity: 2
+                    refresh: 60
                 third_party_settings: {  }
             weight: 22
             additional: {  }

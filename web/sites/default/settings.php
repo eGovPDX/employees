@@ -50,19 +50,10 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'test') {
     /** Replace www.example.com with your registered domain name */
-    // $primary_domain = 'test-employees.portland.gov';
     $primary_domain = 'test-employees.pantheonsite.io';
     $config['environment_indicator.indicator']['bg_color'] = '#ffb81c';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Test';
-  }
-  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
-    /** Replace www.example.com with your registered domain name */
-    $primary_domain = 'employees.lndo.site';
-    $config['environment_indicator.indicator']['bg_color'] = '#046a38';
-    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
-    $config['environment_indicator.indicator']['name'] = 'Local';
-
   }
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'dev') {
     /** Replace www.example.com with your registered domain name */
@@ -70,6 +61,20 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
     $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Dev';
+  }
+  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'sandbox') {
+    /** Replace www.example.com with your registered domain name */
+    $primary_domain = 'sandbox.employees.portland.gov';
+    $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Sandbox';
+  }
+  elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'lando') {
+    /** Replace www.example.com with your registered domain name */
+    $primary_domain = 'employees.lndo.site';
+    $config['environment_indicator.indicator']['bg_color'] = '#046a38';
+    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+    $config['environment_indicator.indicator']['name'] = 'Local';
   }
   else {
     // Redirect to HTTPS on every Pantheon environment.
@@ -104,6 +109,10 @@ $config['samlauth.authentication']['sp_entity_id'] = $primary_domain;
 
 // Make files with 0 usages temporary so they can be deleted automatically
 $config['file.settings']['make_unused_managed_files_temporary'] = TRUE;
+
+// Opt out of certain checks on the Pantheon Dashboard Site Status page
+// https://docs.pantheon.io/drupal-launch-check#can-i-opt-out-of-a-specific-recommendation
+$config['site_audit']['opt_out']['CachePageExpire'] = TRUE;
 
 // Enable/disable config_split configurations based on the current environment
 $config['config_split.config_split.config_multidev']['status'] = FALSE;

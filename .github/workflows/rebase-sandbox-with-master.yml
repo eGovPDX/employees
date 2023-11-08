@@ -1,0 +1,31 @@
+# Github action to rebase sandbox with master
+name: Rebase Sandbox with Master
+
+# Run when manually triggered by a workflow dispatch event (GitHub API)
+on:
+  workflow_dispatch:
+
+  # Allows external webhook trigger
+  repository_dispatch:
+    types:
+      - rebase-sandbox
+      
+jobs:
+  rebase-sandbox-and-push:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out the Sandbox branch from Github
+        uses: actions/checkout@v3
+        with:
+          ref: sandbox
+
+      - name: Rebase the Sandbox branch on Github
+        run: |
+          git fetch --all --quiet
+          git switch master
+          git checkout sandbox
+          git config --global user.name "BTS eGov"
+          git config --global user.email BTS-eGov@portlandoregon.gov
+          git rebase -X ours origin/master
+          git push -f

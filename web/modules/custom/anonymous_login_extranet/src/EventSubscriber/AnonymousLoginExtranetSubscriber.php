@@ -2,6 +2,7 @@
 
 namespace Drupal\anonymous_login_extranet\EventSubscriber;
 
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Path\CurrentPathStack;
@@ -16,7 +17,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;    
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * Class AnonymousLoginExtranetSubscriber.
@@ -156,10 +156,10 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
    * This method is called whenever the KernelEvents::REQUEST event is
    * dispatched.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   The Event to process.
    */
-  public function redirect(GetResponseEvent $event) {
+  public function redirect(RequestEvent $event) {
     // Skip if maintenance mode is enabled.
     if ($this->state->get('system.maintenance_mode')) {
       return;

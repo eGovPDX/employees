@@ -70,7 +70,7 @@ class TextToTaxonomy extends ProcessPluginBase {
     if (!empty($name)) {
       $properties['name'] = $name;
     }
-    $vocabularies = taxonomy_vocabulary_get_names();
+    $vocabularies = \Drupal::entityQuery('taxonomy_vocabulary')->accessCheck(FALSE)->execute();
     if (isset($vocabularies[$vocabulary])) {
       $properties['vid'] = $vocabulary;
     }

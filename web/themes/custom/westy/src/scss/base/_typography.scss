@@ -13,7 +13,10 @@ $h6-font-size:                $font-size-base;
 
 // Typography elements.
 // -----------------------------------------------------------------------------
-body, html{
+body, html {
+  // This selector doesn't work when wrapped inside of the .ck-content class in
+  // westy-ckeditor.style.scss so all of these styles need to be copied into that
+  // .ck-content definition
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
