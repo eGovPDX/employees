@@ -737,7 +737,7 @@ display:
     display_plugin: block
     position: 2
     display_options:
-      title: ''
+      title: 'Citywide groups'
       fields:
         view_group:
           id: view_group
@@ -806,7 +806,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>'
+            text: '<a href="{{ view_group }}">{{ label }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -999,16 +999,21 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: 'list-group-item list-group-item-action text-primary bg-body'
+          row_class: 'list-group-item list-group-item-action'
           default_row_class: false
           type: ul
-          wrapper_class: 'card-body p-0'
-          class: 'list-group list-group-flush rounded-2'
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
       row:
         type: fields
-        options: {  }
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         title: false
+        css_class: true
         pager: false
         style: false
         row: false
@@ -1030,7 +1035,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<h2 class=\"my-1\">Citywide groups</h2>\r\n<p class=\"py-2 m-0\">Information for all employees.</p>"
+          content: '<p class="card-text mb-4">Information for all employees.</p>'
           tokenize: false
       display_extenders: {  }
       block_description: 'Citywide Groups'

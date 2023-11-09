@@ -1,0 +1,14 @@
+{% embed '@westy/block/block.twig' with {
+  html_tag: 'div',
+  utility_classes: ['card mb-4'],
+} %}
+  {% block label %}
+    <h2 class="card-header">{{ label }}</h2>
+  {% endblock %}
+
+  {% block content %}
+    <div class="card-body">
+      {{ content }}
+    </div>
+  {% endblock %}
+{% endembed %}

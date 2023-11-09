@@ -7,7 +7,7 @@ dependencies:
     - node.type.resource
     - taxonomy.vocabulary.topics
   content:
-    - 'taxonomy_term:topics:f5265615-fa97-4a80-b45d-12dc3b8c85ac'
+    - 'taxonomy_term:topics:83050b36-9101-4979-b881-c40f510ee595'
   module:
     - datetime
     - eva
@@ -28,6 +28,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: ''
       fields:
         title:
           id: title
@@ -432,6 +433,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      title: 'Quick links'
       fields:
         view_node:
           id: view_node
@@ -500,7 +502,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a class="nav-link" href="{{ view_node }}">{{ title }}</a>'
+            text: '<a href="{{ view_node }}">{{ title }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -751,7 +753,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            - 2132
+            - 980
           group: 1
           exposed: false
           expose:
@@ -796,11 +798,11 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: 'list-group-item list-group-item-action text-primary bg-body d-flex align-items-center justify-content-between'
+          row_class: 'list-group-item list-group-item-action'
           default_row_class: false
           type: ul
-          wrapper_class: 'card-body p-0'
-          class: 'list-group list-group-flush rounded-2'
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
       row:
         type: fields
         options:
@@ -809,6 +811,8 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        title: false
+        css_class: true
         pager: false
         use_more: false
         use_more_always: false
@@ -826,19 +830,9 @@ display:
       use_more: false
       use_more_always: true
       use_more_text: 'View all'
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: false
-          content: '<h2 class="my-1">Quick links</h2>'
-          tokenize: false
+      header: {  }
       display_extenders: {  }
+      block_description: 'Quick Links'
       block_hide_empty: true
     cache_metadata:
       max-age: -1

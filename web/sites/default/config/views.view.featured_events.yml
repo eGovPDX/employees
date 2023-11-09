@@ -407,7 +407,7 @@ display:
     display_plugin: block
     position: 2
     display_options:
-      title: ''
+      title: 'Upcoming events'
       pager:
         type: some
         options:
@@ -621,18 +621,7 @@ display:
       use_more_text: 'See all »'
       link_display: custom_url
       link_url: /events
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: false
-          content: '<h2 class="my-1">Upcoming events</h2>'
-          tokenize: false
+      header: {  }
       display_extenders: {  }
       block_description: 'Featured Upcoming Events'
       block_hide_empty: true

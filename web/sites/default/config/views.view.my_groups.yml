@@ -97,7 +97,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>'
+            text: '<a href="{{ view_group }}">{{ label }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -230,11 +230,11 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: 'list-group-item list-group-item-action text-primary bg-body d-flex align-items-center justify-content-between'
+          row_class: 'list-group-item list-group-item-action'
           default_row_class: false
           type: ul
-          wrapper_class: 'card-body p-0'
-          class: 'list-group list-group-flush rounded-2'
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
       row:
         type: fields
         options:
@@ -301,7 +301,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: ''
+      title: 'Assigned groups'
       empty: {  }
       filters:
         field_org_type_target_id:
@@ -528,7 +528,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<h2 class=\"my-1\">Assigned groups</h2>\r\n<p class=\"py-2 m-0\">Determined by your bureau and role.</p>"
+          content: '<p class="card-text mb-4">Determined by your bureau and role.</p>'
           tokenize: false
       display_extenders: {  }
       block_description: 'Groups Assigned'
@@ -548,7 +548,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: ''
+      title: 'Groups you follow'
       empty:
         area:
           id: area
@@ -660,18 +660,7 @@ display:
         filter_groups: false
         header: false
       display_description: ''
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: true
-          content: '<h2 class="my-1">Groups you follow</h2>'
-          tokenize: false
+      header: {  }
       display_extenders: {  }
       block_description: 'Groups Followed'
     cache_metadata:
@@ -689,7 +678,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: ''
+      title: 'Groups you manage'
       fields:
         view_group:
           id: view_group
@@ -821,7 +810,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>{{ group_roles }}'
+            text: '<a href="{{ view_group }}">{{ label }}</a>{{ group_roles }}'
             make_link: false
             path: ''
             absolute: false
@@ -1039,26 +1028,33 @@ display:
         groups:
           1: AND
           2: OR
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: 'list-group-item list-group-item-action d-flex align-items-center justify-content-between'
+          default_row_class: false
+          type: ul
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         empty: false
         title: false
+        style: false
+        row: false
         fields: false
         filters: false
         filter_groups: false
         header: false
       display_description: ''
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: false
-          content: '<h2 class="my-1">Groups you manage</h2>'
-          tokenize: false
+      header: {  }
       display_extenders: {  }
       block_description: 'Groups Managed'
       block_hide_empty: true
@@ -1471,6 +1467,7 @@ display:
         empty: false
         access: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -1764,6 +1761,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -2129,6 +2127,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -2856,6 +2855,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         pager: false
         style: false
         row: false
