@@ -1,0 +1,116 @@
+uuid: b5fd7679-56b9-4552-8f2c-8627e619074b
+langcode: en
+status: true
+dependencies:
+  module:
+    - employees
+id: employees-content-type-page
+label: 'Page Content Type'
+module: employees
+routes:
+  - route_name: node.add
+    route_params:
+      node_type: page
+  - route_name: entity.group_content.create_form
+    route_params:
+      plugin_id: group_node:page
+tips:
+  title:
+    id: title
+    plugin: text
+    label: "Set your page's title"
+    weight: 1
+    selector: '.field--name-title'
+    body: 'This is the name of the page, which will be displayed on the page itself, in search results, and anywhere else on the site.'
+  type:
+    id: type
+    plugin: text
+    label: Optionally, choose a type
+    weight: 2
+    selector: '.field--name-field-type'
+    body: 'If this page fits one of the defined types (e.g. documentation or internal policy), you can set it here.'
+  short-title:
+    id: short-title
+    plugin: text
+    label: Set the short title
+    weight: 3
+    selector: '.field--name-field-menu-url-text'
+    body: 'The short title should be a concise version of the full page title. It''s mainly used to create the URL, but will also be used if you choose to show this page in a menu.<br><br>For example, if your page title was "Sign up for the Environmental Project newsletter," your short title could be "Newsletter signup."'
+  show-in-menu:
+    id: show-in-menu
+    plugin: text
+    label: Want to show this page in a menu?
+    weight: 4
+    selector: '.field--name-field-show-in-menu'
+    body: 'If you enable this option, this page will show in your group''s main menu, or you can optionally add a parent page below, and it will show in the parent page''s menu.'
+  parent:
+    id: parent
+    plugin: text
+    label: Optionally, set a parent page
+    weight: 5
+    selector: '.field--name-field-parent'
+    body: 'If you chose above to "Show in Menu," you can add a parent to this page. This will make the page only show up in that parent page''s menu, rather than the group as a whole.'
+  body-content:
+    id: body-content
+    plugin: text
+    label: Add body content
+    weight: 6
+    selector: '.field--name-body'
+    body: 'The "body" is what contains the real content of your page. Write your heart out!'
+  summary:
+    id: summary
+    plugin: text
+    label: Summary
+    weight: 7
+    selector: '.link-edit-summary'
+    body: 'Optionally, you can click here to add a quick, concise summary of your page. This summary will be displayed in search results.'
+  featured-image:
+    id: featured-image
+    plugin: text
+    label: Optionally, add a featured image
+    weight: 8
+    selector: '.field--name-field-featured-image .js-media-library-open-button'
+    body: 'You can click here to upload or select an image which will be displayed on the page, as well as in search results and when the page is featured.'
+  page-contacts:
+    id: page-contacts
+    plugin: text
+    label: Optionally, add contacts
+    weight: 9
+    selector: '#edit-group-page-contacts'
+    body: 'Click here to expand the menu. You can then select any Employees or Contacts to show on the page.'
+  related-content:
+    id: related-content
+    plugin: text
+    label: Optionally, add related content
+    weight: 10
+    selector: '.field--name-field-related-content'
+    body: 'Here, you can add any other pages or resources as related, to show up on this page.'
+  tags:
+    id: tags
+    plugin: text
+    label: Optionally, add tags
+    weight: 11
+    selector: '.field--name-field-tags'
+    body: 'Here, you can add freeform tags to this page. This is helpful if you have a collection of pages that someone might want to search for by filtering.'
+  displayed-in:
+    id: displayed-in
+    plugin: text
+    label: Displayed in groups
+    weight: 12
+    selector: '.field--name-field-tags'
+    body: 'Choose which groups this page will be displayed in. By default this will be the group you chose to create the page in, but you can also "cross-post" it to any other groups where it may be relevant.'
+  revision-log:
+    id: revision-log
+    plugin: text
+    label: Describe your changes
+    weight: 13
+    selector: '.field--name-revision-log'
+    body: 'Here, you can describe the changes you made (or the page you created) for the revision log.'
+  save:
+    id: Save
+    plugin: text
+    label: Save your changes
+    weight: 14
+    selector: '#edit-submit'
+    body: 'Click here to save (or create) your page.'
+
