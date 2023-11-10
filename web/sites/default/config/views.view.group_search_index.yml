@@ -1112,7 +1112,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      title: '{{ label }} Contracts'
+      title: "{{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }} Contracts"
       fields:
         field_date_range_end_value_1:
           id: field_date_range_end_value_1
@@ -2636,7 +2636,7 @@ display:
     display_plugin: page
     position: 6
     display_options:
-      title: '{{ label }} Events'
+      title: "{{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }} Events"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -3507,7 +3507,7 @@ display:
     display_plugin: page
     position: 7
     display_options:
-      title: '{{ label }} Past Events'
+      title: "{{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }} Past Events"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -4032,7 +4032,7 @@ display:
     display_plugin: page
     position: 4
     display_options:
-      title: 'Search {{ label }}'
+      title: "Search {{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }}"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -4367,7 +4367,7 @@ display:
     display_plugin: page
     position: 4
     display_options:
-      title: 'Search {{ label }} Contacts'
+      title: "Search {{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }} Contacts"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
