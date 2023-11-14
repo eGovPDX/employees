@@ -1,0 +1,26 @@
+uuid: fe356606-bb87-49d3-8301-5fb6ee7a7ad8
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+id: private-reviewer
+label: Reviewer
+weight: -1
+internal: false
+audience: member
+group_type: private
+permissions_ui: true
+permissions:
+  - 'view group_media:document revision'
+  - 'view group_media:iframe revision'
+  - 'view group_media:image revision'
+  - 'view group_media:remote_document revision'
+  - 'view group_media:remote_video revision'
+  - 'view group_node:bts_catalog_item revision'
+  - 'view group_node:contact revision'
+  - 'view group_node:event revision'
+  - 'view group_node:news revision'
+  - 'view group_node:notification revision'
+  - 'view group_node:page revision'
+  - 'view group_node:resource revision'

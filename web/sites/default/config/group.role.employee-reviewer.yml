@@ -1,0 +1,27 @@
+uuid: a9f668c8-aae3-44db-a20e-34c4d3bf4c1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+id: employee-reviewer
+label: Reviewer
+weight: -2
+internal: false
+audience: member
+group_type: employee
+permissions_ui: true
+permissions:
+  - 'view group_media:document revision'
+  - 'view group_media:iframe revision'
+  - 'view group_media:image revision'
+  - 'view group_media:remote_document revision'
+  - 'view group_media:remote_video revision'
+  - 'view group_node:bts_catalog_item revision'
+  - 'view group_node:contact revision'
+  - 'view group_node:contract revision'
+  - 'view group_node:event revision'
+  - 'view group_node:news revision'
+  - 'view group_node:notification revision'
+  - 'view group_node:page revision'
+  - 'view group_node:resource revision'
