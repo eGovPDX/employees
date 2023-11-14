@@ -97,20 +97,48 @@ tips:
     plugin: text
     label: Displayed in groups
     weight: 12
-    selector: '.field--name-field-tags'
+    selector: '.field--name-field-display-in-group'
     body: 'Choose which groups this page will be displayed in. By default this will be the group you chose to create the page in, but you can also "cross-post" it to any other groups where it may be relevant.'
+  legacy-paths:
+    id: legacy-paths
+    plugin: text
+    label: Add legacy paths
+    weight: 13
+    selector: '.field--name-field-redirects'
+    body: 'If the page you''re creating is being migrated from the old website, portlandoregon.gov, you can add the legacy path here (e.g. /bts/123456).'
+  scheduler:
+    id: scheduler
+    plugin: text
+    label: Schedule publishing
+    weight: 14
+    selector: '#edit-scheduler-settings'
+    body: 'If you want this page to go live at a certain time, you can do that here. You can also schedule it to be unpublished at a certain time, if it''s only relevant for a period of time.'
+  moderation-state:
+    id: moderation-state
+    plugin: text
+    label: Workflow state
+    weight: 15
+    selector: '.field--name-moderation-state'
+    body: 'Choose the state you want to save your edits in, e.g. as a draft or publish them. <a href="/web-support/portland-employees-editor-resources/workflows-and-revisions" target="_blank">Learn more about workflows.</a>'
+  reviewers:
+    id: reviewers
+    plugin: text
+    label: Notify reviewers about this page
+    weight: 16
+    selector: '.field--name-field-reviewer'
+    body: 'If you''ve made substantial edits or you''re creating a new page that needs to be reviewed, you can set people as a reviewer here. They will be notified of your changes by email. <strong>Important: Make sure to set the state as Review above, or else reviewers will not be notified.</strong>'
   revision-log:
     id: revision-log
     plugin: text
     label: Describe your changes
-    weight: 13
+    weight: 17
     selector: '.field--name-revision-log'
     body: 'Here, you can describe the changes you made (or the page you created) for the revision log.'
   save:
     id: Save
     plugin: text
     label: Save your changes
-    weight: 14
+    weight: 18
     selector: '#edit-submit'
     body: 'Click here to save (or create) your page.'
 
