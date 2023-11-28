@@ -741,7 +741,7 @@ function employees_cron()
     // Cron is run with the anonymous user. Set the language code to EN.
     $langcode = 'en';
 
-    $sent_successfully = _send_email($key, $to, $langcode, $params, 'powr@portlandoregon.gov');
+    $sent_successfully = _send_email($key, $to, $langcode, $params, 'website@portlandoregon.gov');
     if ($sent_successfully) {
       \Drupal::logger('mail-log')->notice(t('Daily content update summary email sent successfully.'));
       \Drupal::state()->set('portland.last_daily_email_sent', date('m/d/Y'));
