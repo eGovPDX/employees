@@ -1,11 +1,10 @@
 services:
   employees.commands:
     class: \Drupal\employees\Commands\BatchCommands
-    arguments: ["@entity_type.manager", "@logger.factory"]
+    arguments: ['@entity_type.manager', '@logger.factory']
     tags:
       - { name: drush.command }
-
   employees.is_logged_in_extension:
-    class: Drupal\employees\IsLoggedInExtension
+    class: \Drupal\employees\IsLoggedInExtension
     tags:
       - { name: twig.extension }
