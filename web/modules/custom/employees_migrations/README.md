@@ -137,3 +137,13 @@ lando drush migrate:import --group=tech_catalog
 ```
 lando terminus drush employees.[env] -- migrate:import --group=tech_catalog
 ```
+
+#### BTS Blog
+##### Local
+```
+lando drush migrate:import --group=bts_blog
+```
+##### On Pantheon
+```
+lando terminus drush employees.[env] -- migrate:import --group=bts_blog
+```

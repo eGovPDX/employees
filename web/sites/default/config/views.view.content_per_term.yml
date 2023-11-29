@@ -925,6 +925,18 @@ display:
     display_plugin: block
     position: 1
     display_options:
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: '<p>No results found.</p>'
+          tokenize: false
       sorts:
         title:
           id: title
@@ -953,10 +965,34 @@ display:
           relationship: none
           view_mode: search_result
       defaults:
+        empty: false
         style: false
         row: false
         sorts: false
+        header: false
       display_description: ''
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: "<ul class=\"nav nav-tabs mb-2\">\r\n<li class=\"nav-item\"><a href=\"{{ path('<current>') }}\" class=\"nav-link active\">Content</a></li>\r\n<li class=\"nav-item\"><a href=\"{{ path('<current>') }}/documents\" class=\"nav-link\">Documents</a></li>\r\n</ul>\r\n"
+          tokenize: true
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '<p>Displaying @start - @end of @total</p>'
       display_extenders: {  }
       block_description: 'Content Per Term'
       block_category: 'Block Views'
