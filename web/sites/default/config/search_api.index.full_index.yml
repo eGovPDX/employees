@@ -107,7 +107,8 @@ third_party_settings:
       limit_to_content_language: false
       include_language_independent: true
       use_language_undefined_as_fallback_language: false
-      specific_languages: {  }
+      specific_languages:
+        en: '0'
       use_universal_collation: false
 id: full_index
 name: 'Full index'
@@ -804,6 +805,7 @@ processor_settings:
   content_access:
     weights:
       preprocess_query: -30
+  custom_value: {  }
   entity_status: {  }
   entity_type: {  }
   hierarchy:
