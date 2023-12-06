@@ -1,0 +1,11 @@
+--- a/core/modules/tour/js/tour.js
++++ b/core/modules/tour/js/tour.js
+@@ -223,7 +223,7 @@
+                   // creation functionality due to focus being set on the tour
+                   // item container after every scroll and resize event. In its
+                   // place, the 'next' button is focused here.
+-                  nextButton.focus();
++                  nextButton.focus({ preventScroll: true });
+
+                   // When Stable 9 is part of the active theme, the
+                   // Drupal.tour.convertToJoyrideMarkup() function is available.
