@@ -52,10 +52,27 @@ describe('SuperAdmin user test', () => {
           editor = Drupal.CKEditor5Instances.get(ck5);
           editor.setData('This site is a Monday morning snapshot copy of employees.portland.gov and provides a safe environment for editor training classes, self learning, or experimentation, etc. Changes made here will not affect the live site and cannot be imported into the live site.');
         });
-        // Default publish date and time to authored on date and time
+        // Set publish date and time
         await page.evaluate(() => {
-          document.querySelector('#edit-publish-on-0-value-date').value = document.querySelector('#edit-created-0-value-date').value;
-          document.querySelector('#edit-publish-on-0-value-time').value = document.querySelector('#edit-created-0-value-time').value;
+          var date = new Date();
+          date.setMinutes(date.getMinutes() - 480);   // Convert UTC to PST
+          
+          var day = date.getDate(),
+              month = date.getMonth() + 1,
+              year = date.getFullYear(),
+              hour = date.getHours(),
+              min  = date.getMinutes();
+          
+          month = (month < 10 ? "0" : "") + month;
+          day = (day < 10 ? "0" : "") + day;
+          hour = (hour < 10 ? "0" : "") + hour;
+          min = (min < 10 ? "0" : "") + min;
+          
+          var today = year + "-" + month + "-" + day,
+              displayTime = hour + ":" + min;
+
+          document.querySelector('#edit-publish-on-0-value-date').value = today;
+          document.querySelector('#edit-publish-on-0-value-time').value = displayTime;
         });
         await page.select("#edit-moderation-state-0-state", "published");
         
