@@ -37,25 +37,31 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "group_content_private-group_membership_edit_form":
       $options = &$form["group_roles"]["widget"]["#options"];
       if( array_key_exists("employee-admin", $options) ) {
-        $options["employee-admin"] = 'Admin: choose either Admin or Editor for collaborators';
+        $options["employee-admin"] = 'Admin: choose one of Admin, Editor, or Reviewer';
       }
       if( array_key_exists("employee-assigned", $options) ) {
         $options["employee-assigned"] = 'Assigned: can view group content';
       }
       if( array_key_exists("employee-editor", $options) ) {
-        $options["employee-editor"] = 'Editor: choose either Admin or Editor for collaborators';
+        $options["employee-editor"] = 'Editor: choose one of Admin, Editor, or Reviewer';
       }
       if( array_key_exists("employee-employee", $options) ) {
         $options["employee-employee"] = 'Employee: assigned automativally by AD sync';
       }
+      if( array_key_exists("employee-reviewer", $options) ) {
+        $options["employee-reviewer"] = 'Reviewer: choose one of Admin, Editor, or Reviewer';
+      }
       if( array_key_exists("private-admin", $options) ) {
-        $options["private-admin"] = 'Admin: choose either Admin or Editor for collaborators';
+        $options["private-admin"] = 'Admin: choose one of Admin, Editor, or Reviewer';
       }
       if( array_key_exists("private-assigned", $options) ) {
         $options["private-assigned"] = 'Assigned: can view group content';
       }
       if( array_key_exists("private-editor", $options) ) {
-        $options["private-editor"] = 'Editor: choose either Admin or Editor for collaborators';
+        $options["private-editor"] = 'Editor: choose one of Admin, Editor, or Reviewer';
+      }
+      if( array_key_exists("private-reviewer", $options) ) {
+        $options["private-reviewer"] = 'Reviewer: choose one of Admin, Editor, or Reviewer';
       }
 
       //  Don't modify role checkboxes for site admins
