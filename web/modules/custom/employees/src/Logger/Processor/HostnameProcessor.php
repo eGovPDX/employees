@@ -3,8 +3,12 @@
 namespace Drupal\employees\Logger\Processor;
 
 use Drupal\monolog\Logger\Processor\AbstractRequestProcessor;
+use Monolog\LogRecord;
+
 /**
- * Class HostnameProcessor.php
+ * Injects hostname into all records.
+ * 
+ * Adapted from https://github.com/Seldaek/monolog/blob/main/src/Monolog/Processor/HostnameProcessor.php
  */
 class HostnameProcessor extends AbstractRequestProcessor {
 
@@ -13,9 +17,9 @@ class HostnameProcessor extends AbstractRequestProcessor {
    *
    * @return array
    */
-  public function __invoke(array $record) {
+  public function __invoke(LogRecord $record): LogRecord {
     if ($request = $this->getRequest()) {
-      $record['extra']['hostname'] = $request->getHost();
+      $record->extra['hostname'] = $request->getHost();
     }
 
     return $record;
