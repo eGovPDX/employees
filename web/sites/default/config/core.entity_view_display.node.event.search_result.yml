@@ -57,14 +57,6 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_display_in_group:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_featured_image:
     type: entity_reference_entity_view
     label: hidden
@@ -94,6 +86,7 @@ hidden:
   content_moderation_control: true
   field_contact: true
   field_contacts: true
+  field_display_in_group: true
   field_related_content: true
   field_reviewer: true
   field_search_keywords: true

@@ -97,7 +97,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>'
+            text: '<a href="{{ view_group }}">{{ label }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -230,11 +230,11 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: nav-item
+          row_class: 'list-group-item list-group-item-action'
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
       row:
         type: fields
         options:
@@ -301,7 +301,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: Assigned
+      title: 'Assigned groups'
       empty: {  }
       filters:
         field_org_type_target_id:
@@ -516,7 +516,20 @@ display:
         title: false
         filters: false
         filter_groups: false
+        header: false
       display_description: ''
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<p class="card-text mb-4">Determined by your bureau and role.</p>'
+          tokenize: false
       display_extenders: {  }
       block_description: 'Groups Assigned'
       block_hide_empty: true
@@ -535,7 +548,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: Following
+      title: 'Groups you follow'
       empty:
         area:
           id: area
@@ -547,8 +560,8 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: "<p>You are not following any groups.</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>\r\n"
-            format: basic_html
+            value: "<p>You are not following any groups.</p>\r\n<p>Following a group will highlight its events and news on your homepage.</p>\r\n<a class=\"card-link\" href=\"/groups\">Find a group to follow</a>"
+            format: full_html
           tokenize: false
       filters:
         field_org_type_target_id:
@@ -645,7 +658,9 @@ display:
         title: false
         filters: false
         filter_groups: false
+        header: false
       display_description: ''
+      header: {  }
       display_extenders: {  }
       block_description: 'Groups Followed'
     cache_metadata:
@@ -663,21 +678,190 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      title: Manage
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
+      title: 'Groups you manage'
+      fields:
+        view_group:
+          id: view_group
+          table: groups
+          field: view_group
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: "<p>You don't belong to any bureaus or offices. Join to add them to \"my bureau/offices\".</p>\r\n<ul class=\"nav flex-column\">\r\n  <li class=\"nav-item\"><a class=\"nav-link\" href=\"/groups\">Join a group</a></li>\r\n</ul>"
-            format: full_html
-          tokenize: false
+          entity_type: group
+          plugin_id: entity_link
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: true
+          absolute: false
+        group_roles:
+          id: group_roles
+          table: group_content__group_roles
+          field: group_roles
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<span class="badge bg-light text-dark ms-2">{{ group_roles }}</span>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 1
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        label:
+          id: label
+          table: groups_field_data
+          field: label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: null
+          entity_field: label
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a href="{{ view_group }}">{{ label }}</a>{{ group_roles }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      empty: {  }
       filters:
         group_roles_target_id_4:
           id: group_roles_target_id_4
@@ -921,12 +1105,33 @@ display:
         operator: AND
         groups:
           1: OR
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: 'list-group-item list-group-item-action d-flex align-items-center justify-content-between'
+          default_row_class: false
+          type: ul
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         empty: false
         title: false
+        style: false
+        row: false
+        fields: false
         filters: false
         filter_groups: false
+        header: false
       display_description: ''
+      header: {  }
       display_extenders: {  }
       block_description: 'Groups Managed'
       block_hide_empty: true
@@ -938,7 +1143,8 @@ display:
         - url
         - user
         - user.roles
-      tags: {  }
+      tags:
+        - 'config:field.storage.group_content.group_roles'
   block_profile_groups_assigned:
     id: block_profile_groups_assigned
     display_title: 'Profile Assigned'
@@ -1338,6 +1544,7 @@ display:
         empty: false
         access: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -1631,6 +1838,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -2073,6 +2281,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         style: false
         row: false
         fields: false
@@ -2800,6 +3009,7 @@ display:
       defaults:
         empty: false
         title: false
+        css_class: true
         pager: false
         style: false
         row: false
