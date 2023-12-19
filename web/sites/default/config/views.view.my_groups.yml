@@ -863,6 +863,84 @@ display:
           field_api_classes: false
       empty: {  }
       filters:
+        group_roles_target_id_4:
+          id: group_roles_target_id_4
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: employee-reviewer
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        group_roles_target_id_5:
+          id: group_roles_target_id_5
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: private-reviewer
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         group_roles_target_id_2:
           id: group_roles_target_id_2
           table: group_content__group_roles
@@ -873,7 +951,7 @@ display:
           plugin_id: string
           operator: '='
           value: private-admin
-          group: 2
+          group: 1
           exposed: false
           expose:
             operator_id: group_roles_target_id_2_op
@@ -916,7 +994,7 @@ display:
           plugin_id: string
           operator: '='
           value: employee-admin
-          group: 2
+          group: 1
           exposed: false
           expose:
             operator_id: ''
@@ -955,7 +1033,7 @@ display:
           plugin_id: string
           operator: '='
           value: employee-editor
-          group: 2
+          group: 1
           exposed: false
           expose:
             operator_id: ''
@@ -994,7 +1072,7 @@ display:
           plugin_id: string
           operator: '='
           value: private-editor
-          group: 2
+          group: 1
           exposed: false
           expose:
             operator_id: ''
@@ -1026,8 +1104,7 @@ display:
       filter_groups:
         operator: AND
         groups:
-          1: AND
-          2: OR
+          1: OR
       style:
         type: html_list
         options:
@@ -2103,11 +2180,88 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        group_roles_target_id_4:
+          id: group_roles_target_id_4
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: private-reviewer
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        group_roles_target_id_5:
+          id: group_roles_target_id_5
+          table: group_content__group_roles
+          field: group_roles_target_id
+          relationship: group_content_id
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: '='
+          value: employee-reviewer
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
           1: OR
-          2: AND
       style:
         type: html_list
         options:
