@@ -2333,6 +2333,73 @@ display:
     display_options:
       title: Subgroups
       fields:
+        status:
+          id: status
+          table: groups_field_data
+          field: status
+          relationship: reverse__group__field_parent_group
+          group_type: group
+          admin_label: ''
+          entity_type: group
+          entity_field: status
+          plugin_id: field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: custom
+            format_custom_false: '<span class="badge bg-danger mb-2">Unpublished</span>'
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         view_group:
           id: view_group
           table: groups
@@ -2400,7 +2467,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link p-0">{{ label }}</a>'
+            text: "{% if view_group %}\r\n<a href=\"{{ view_group }}\" class=\"d-inline-block nav-link p-0\">{{ label }}</a> {{ status }}\r\n{% else %}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -2455,6 +2522,10 @@ display:
         type: none
         options:
           offset: 0
+      access:
+        type: group_permission
+        options:
+          group_permission: 'view group'
       sorts:
         label:
           id: label
@@ -2572,6 +2643,7 @@ display:
         type: fields
         options: {  }
       defaults:
+        access: false
         title: false
         pager: false
         style: false
@@ -2605,7 +2677,9 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - route
+        - route.group
         - url
+        - user.group_permissions
       tags: {  }
   entity_ref_bts_groups:
     id: entity_ref_bts_groups
