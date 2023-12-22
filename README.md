@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/eGovPDX/employees.svg?style=svg)](https://circleci.com/gh/eGovPDX/employees)
 
-# Intranet site for City of Portland employees
+# Portland Employees intranet site
 
 ## Get the code
 
