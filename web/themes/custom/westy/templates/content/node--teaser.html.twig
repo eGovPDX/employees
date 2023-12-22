@@ -69,17 +69,17 @@
 
 {%
   set classes = [
-  'node',
-  node.isPromoted() ? 'node--promoted',
-  node.isSticky() ? 'node--sticky',
-  not node.isPublished() ? 'node--unpublished',
-  node.bundle|clean_class,
-  view_mode|clean_class,
-  node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
-  'mb-4',
-  'border-bottom',
-  'position-relative',
-]
+    'node',
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    node.bundle|clean_class,
+    view_mode|clean_class,
+    node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+    'mb-4',
+    'border-bottom',
+    'position-relative',
+  ]
 %}
 <article{{ attributes.addClass(classes) }}>
   <header>
@@ -94,7 +94,7 @@
     {% endif %}
     {{ title_suffix }}
   </header>
-  <div{{ content_attributes.addClass('node__content') }}>
+  <div{{ content_attributes.addClass('node__content', 'mb-4') }}>
     {{ content|without('field_image') }}
   </div>
 </article>

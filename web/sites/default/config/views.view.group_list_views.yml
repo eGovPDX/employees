@@ -352,7 +352,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_org_type == "Citywide Portals" %}Following{% else %}{{ group_join_leave_link }}{% endif %}'
+            text: '{% if field_org_type == "Citywide Groups" %}Following{% else %}{{ group_join_leave_link }}{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -733,11 +733,11 @@ display:
         - 'config:field.storage.group.field_org_type'
   block_citywide_portals:
     id: block_citywide_portals
-    display_title: 'Block: Citywide Portals'
+    display_title: 'Block: Citywide Groups'
     display_plugin: block
     position: 2
     display_options:
-      title: 'Citywide Portals'
+      title: 'Citywide groups'
       fields:
         view_group:
           id: view_group
@@ -806,7 +806,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ view_group }}" class="nav-link">{{ label }}</a>'
+            text: '<a href="{{ view_group }}">{{ label }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -999,16 +999,21 @@ display:
         type: html_list
         options:
           grouping: {  }
-          row_class: nav-item
+          row_class: 'list-group-item list-group-item-action'
           default_row_class: false
           type: ul
-          wrapper_class: item-list
-          class: 'nav flex-column'
+          wrapper_class: ''
+          class: 'westy-card-list-group list-group list-group-flush'
       row:
         type: fields
-        options: {  }
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
         title: false
+        css_class: true
         pager: false
         style: false
         row: false
@@ -1020,9 +1025,20 @@ display:
         header: false
       relationships: {  }
       display_description: ''
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<p class="card-text mb-4">Information for all employees.</p>'
+          tokenize: false
       display_extenders: {  }
-      block_description: 'Citywide Portals'
+      block_description: 'Citywide Groups'
       block_hide_empty: true
       allow:
         items_per_page: true

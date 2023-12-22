@@ -1,31 +1,29 @@
-uuid: 5e839ff5-a268-4ddd-8033-60551b7ed608
+uuid: c07ee27d-e39f-4098-aaa8-6b12636895bf
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.my_content_views
+    - views.view.content_by_topic
   module:
     - system
     - views
   theme:
     - westy
-id: westy_views_block__my_content_views_block_my_upcoming_events
+id: views_block__content_by_topic_block_quick_links
 theme: westy
 region: side
-weight: -32
+weight: -33
 provider: null
-plugin: 'views_block:my_content_views-block_my_upcoming_events'
+plugin: 'views_block:content_by_topic-block_quick_links'
 settings:
-  id: 'views_block:my_content_views-block_my_upcoming_events'
+  id: 'views_block:content_by_topic-block_quick_links'
   label: ''
   label_display: visible
   provider: views
-  context_mapping: {  }
   views_label: ''
   items_per_page: none
 visibility:
   request_path:
     id: request_path
     negate: false
-    context_mapping: {  }
     pages: '<front>'
