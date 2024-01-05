@@ -4,14 +4,10 @@ status: true
 dependencies:
   config:
     - field.storage.group.field_group_description
+    - filter.format.basic_html
     - group.type.employee
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - basic_html
 id: group.employee.field_group_description
 field_name: field_group_description
 entity_type: group
@@ -25,4 +21,6 @@ default_value_callback: ''
 settings:
   display_summary: true
   required_summary: false
+  allowed_formats:
+    - basic_html
 field_type: text_with_summary
