@@ -428,21 +428,12 @@ class PortlandOpenIdConnectUtil
       $user->setUsername( self::TrimUserName($user_info['principalName']) );
       return true;
     } catch (RequestException $e) {
-      // Do not log 404 errors since some users don't have profile
-      if ($e->getCode() == 404) {
-        // If the user doesn't hav profile, disable the account
-        if ( ! $user->isNew() ) {
-          self::DisableUser($user);
-        }
-      }
-      // Log other exceptions
-      else {
-        $variables = [
-          '@message' => 'Could not retrieve info for principal name ' . $user->getAccountName(),
-          '@error_message' => $e->getMessage(),
-        ];
-        \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
-      }
+      // Log a notice when the user's profile can't be retrieved but do not disable the user.
+      $variables = [
+        '@message' => 'Could not retrieve info for principal name ' . $user->getAccountName(),
+        '@error_message' => $e->getMessage(),
+      ];
+      \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
       return false;
     }
   }
