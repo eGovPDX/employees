@@ -199,12 +199,9 @@ function _process_users($response_data, $access_token)
 
       if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
       PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
-      $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
-      // If the profile is empty, assume the user is not enabled
-      if ($has_profile) {
-        $user->save();
-        $users_created []= $user->getAccountName();
-      }
+      PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
+      $user->save();
+      $users_created []= $user->getAccountName();
     }
     // Else the user is already in Drupal. We need to either update or disable the user.
     else {
@@ -224,11 +221,9 @@ function _process_users($response_data, $access_token)
       $user->setUsername(PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']) ); // Update account username
 
       PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
-      $has_profile = PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
-      if ($has_profile) {
-        $user->save();
-        $users_updated []= $user->getAccountName();
-      }
+      PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
+      $user->save();
+      $users_updated []= $user->getAccountName();
 
       // Check if the user account is enabled in AD
       $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user);
