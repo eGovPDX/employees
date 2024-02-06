@@ -50,6 +50,11 @@
   max-width: 255px;
 }
 
+.form-item {
+  margin-top: $spacer;
+  margin-bottom: $spacer;
+}
+
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
@@ -86,4 +91,9 @@
     margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
+}
+
+.user-login-form #edit-name,
+.user-login-form #edit-pass {
+  width: inherit;
 }
