@@ -1,4 +1,4 @@
-uuid: 64477759-37d5-44b0-83ed-785f28db722a
+uuid: c52259dc-9c64-449e-b31e-b8ca0c3d7f9e
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
     - views.view.search_index
   module:
     - search_api
-id: content_displayed_in
+id: agg_displayed_in
 name: 'Filter by Group'
 weight: 0
 min_count: 1
@@ -15,7 +15,7 @@ missing: false
 missing_label: others
 url_alias: group
 facet_source_id: 'search_api:views_page__search_index__page_search'
-field_identifier: field_display_in_group
+field_identifier: agg_display_in_group
 query_operator: and
 hard_limit: 0
 exclude: false
@@ -43,18 +43,6 @@ only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: true
 processor_configs:
-  active_widget_order:
-    processor_id: active_widget_order
-    weights:
-      sort: 20
-    settings:
-      sort: DESC
-  count_widget_order:
-    processor_id: count_widget_order
-    weights:
-      sort: 30
-    settings:
-      sort: DESC
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
@@ -71,8 +59,8 @@ processor_configs:
     weights:
       build: 100
     settings: {  }
-  translate_entity:
-    processor_id: translate_entity
+  translate_entity_aggregated_fields:
+    processor_id: translate_entity_aggregated_fields
     weights:
       build: 5
     settings: {  }
