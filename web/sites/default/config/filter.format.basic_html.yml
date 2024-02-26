@@ -24,6 +24,36 @@ name: 'Basic HTML'
 format: basic_html
 weight: 0
 filters:
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
+    status: true
+    weight: -40
+    settings: {  }
+  filter_align:
+    id: filter_align
+    provider: filter
+    status: true
+    weight: -45
+    settings: {  }
+  filter_aspect_ratio:
+    id: filter_aspect_ratio
+    provider: employees
+    status: true
+    weight: -44
+    settings: {  }
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: false
+    weight: -48
+    settings: {  }
+  filter_caption:
+    id: filter_caption
+    provider: filter
+    status: true
+    weight: -43
+    settings: {  }
   filter_html:
     id: filter_html
     provider: filter
@@ -39,11 +69,17 @@ filters:
     status: false
     weight: -49
     settings: {  }
-  filter_autop:
-    id: filter_autop
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: true
+    weight: -42
+    settings: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
     provider: filter
     status: false
-    weight: -48
+    weight: -41
     settings: {  }
   filter_url:
     id: filter_url
@@ -59,42 +95,6 @@ filters:
     weight: -46
     settings:
       title: true
-  filter_align:
-    id: filter_align
-    provider: filter
-    status: true
-    weight: -45
-    settings: {  }
-  filter_aspect_ratio:
-    id: filter_aspect_ratio
-    provider: employees
-    status: true
-    weight: -44
-    settings: {  }
-  filter_caption:
-    id: filter_caption
-    provider: filter
-    status: true
-    weight: -43
-    settings: {  }
-  filter_html_image_secure:
-    id: filter_html_image_secure
-    provider: filter
-    status: true
-    weight: -42
-    settings: {  }
-  filter_htmlcorrector:
-    id: filter_htmlcorrector
-    provider: filter
-    status: false
-    weight: -41
-    settings: {  }
-  editor_file_reference:
-    id: editor_file_reference
-    provider: editor
-    status: true
-    weight: -40
-    settings: {  }
   media_embed:
     id: media_embed
     provider: media
