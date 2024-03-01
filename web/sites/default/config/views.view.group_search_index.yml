@@ -460,8 +460,8 @@ display:
       use_more: true
       use_more_always: true
       use_more_text: 'More Events'
-      link_display: page_group_events
-      link_url: ''
+      link_display: custom_url
+      link_url: '/group/{{ raw_arguments.field_display_in_group }}/events'
       header: {  }
       display_comment: ''
       display_extenders: {  }
@@ -681,8 +681,8 @@ display:
       use_more: true
       use_more_always: true
       use_more_text: 'All News'
-      link_display: page_group_news
-      link_url: ''
+      link_display: custom_url
+      link_url: '/group/{{ raw_arguments.field_display_in_group }}/news'
       header: {  }
       display_extenders: {  }
       block_description: 'Group News'
@@ -1084,8 +1084,8 @@ display:
       use_more: false
       use_more_always: false
       use_more_text: 'More Events'
-      link_display: page_group_events
-      link_url: ''
+      link_display: custom_url
+      link_url: '/group/{{ raw_arguments.field_display_in_group }}/events'
       header: {  }
       display_comment: ''
       display_extenders: {  }
