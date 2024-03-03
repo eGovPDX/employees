@@ -16,6 +16,7 @@
         "drupal/anonymous_login": "^2.0",
         "drupal/block_exclude_pages": "^2.1@beta",
         "drupal/bulk_user_registration": "^2.0",
+        "drupal/ckeditor5_fullscreen": "^1.0@beta",
         "drupal/clamav": "^2.0",
         "drupal/components": "^3.0@beta",
         "drupal/config_filter": "^2.2",
@@ -190,20 +191,21 @@
             "drupal/core": {
                 "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
                 "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
-                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2023-06-15/1349080-521.patch",
+                "1349080 - node_access filters out accessible nodes when node is left joined.": "https://www.drupal.org/files/issues/2023-11-27/1349080-537.patch",
                 "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2018-04-19/node-revisions-missing-local-tasks-2885278-11.patch",
                 "2769289 - Revision User information not displayed in views when content revision user is selected for View type Content": "https://www.drupal.org/files/issues/2018-09-07/node_revision_author-2769289-11.patch",
                 "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
-                "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2023-01-05/962664-195.patch",
-                "3056135 - Viewing Layout Builder enable node fails after Workflow enabled on bundle if another node was created before enabling": "https://www.drupal.org/files/issues/2020-09-23/3056135-17.patch",
+                "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2023-12-19/962664-206.patch",
                 "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2021-07-14/autocomplete-element-3212854-4.patch",
                 "2992168 - Allow appending values to multivalued fields during the migration": "https://www.drupal.org/files/issues/2020-12-29/migrate-2992168-18.patch",
                 "2329253 - Allow the ChangedItem to skip updating the entity's \"changed\" timestamp when synchronizing (f.e. when migrating)": "https://www.drupal.org/files/issues/2022-12-07/2329253-97.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
                 "3095434 - Access denied when view own unpublished revision, access check is not using revision author": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
-                "2791693 - Remove sample date from date field error message and title attribute": "https://www.drupal.org/files/issues/2023-10-05/2791693-datetime-issue-fix.patch",
                 "PE-479 - Update media library so that documents are the default first media type": "patches/pe-479-media-library-default-documents.patch",
                 "2851086 - Tour tip displays under toolbar": "https://www.drupal.org/files/issues/2022-03-17/2851086-42.patch",
+                "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified": "https://www.drupal.org/files/issues/2024-01-23/drupal-revert-source-editing-validation-tightening-3410100-38.patch",
+                "3394048 - [Drupal 10.2 regression] Media Library \"widget\" View media type tabs have lost styling": "https://www.drupal.org/files/issues/2024-02-14/3394048.patch",
+                "3415961 - [drupalMedia] Using the Insert Media button causes the window to scroll to the bottom of the page": "https://www.drupal.org/files/issues/2024-02-15/3415961.patch",
                 "PE-543 - Fix tour scrolling": "patches/pe-543-fix-tour-scrolling.patch"
             },
             "drupal/bulk_user_registration": {
@@ -220,7 +222,8 @@
                 "3020883 - Use VBO together with group permission": "https://www.drupal.org/files/issues/2020-08-17/3020883-22.patch",
                 "3256998 - Access to Revisions of Group Content is Broken": "https://www.drupal.org/files/issues/2022-02-09/group-fix-group-revisions-3256998-22_0.patch",
                 "3210808 - uasort deprecation in PHP 8": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch",
-                "3029908 - Add revisions tab on groups (Groups have two revisions tabs)": "https://www.drupal.org/files/issues/2023-08-24/groups-have-two-revisions-tabs.patch"
+                "3029908 - Add revisions tab on groups (Groups have two revisions tabs)": "https://www.drupal.org/files/issues/2023-08-24/groups-have-two-revisions-tabs.patch",
+                "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL": "https://www.drupal.org/files/issues/2023-01-24/group-3336280-3.patch"
             },
             "drupal/group_notifications": {
                 "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
@@ -237,8 +240,8 @@
             "drupal/search_api_group_filtering": {
                 "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
             },
-            "drupal/show_email": {
-                "3289599 - Automated Drupal 10 compatibility fixes": "patches/pe-513-drupal-10-compatibility-fixes.patch"
+            "drupal/smart_date": {
+                "3409287 - Deprecation in Drupal 10.2: Smart Date List Item allowed values must be passed as array": "https://www.drupal.org/files/issues/2023-12-18/3409287.patch"
             }
         },
         "drupal-lenient": {

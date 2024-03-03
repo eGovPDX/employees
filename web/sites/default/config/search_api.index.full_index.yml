@@ -115,6 +115,22 @@ name: 'Full index'
 description: 'Full index of all content and group entities on employees.portland.gov'
 read_only: false
 field_settings:
+  agg_display_in_group:
+    label: 'Displayed in'
+    property_path: aggregated_field
+    type: string
+    configuration:
+      type: union
+      separator: |+
+
+
+
+
+
+
+      fields:
+        - 'entity:media/field_display_in_group'
+        - 'entity:node/field_display_in_group'
   content_body:
     label: 'Content Body'
     datasource_id: 'entity:node'
@@ -736,10 +752,13 @@ field_settings:
         'entity:media':
           document: ''
         'entity:node':
+          alert: ''
           bts_catalog_item: ''
+          contact: ''
           contract: ''
           event: default
           news: default
+          notification: ''
           page: default
           resource: default
         'entity:user':

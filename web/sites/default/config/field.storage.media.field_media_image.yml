@@ -3,12 +3,16 @@ langcode: en
 status: true
 dependencies:
   module:
+    - field_permissions
     - file
     - image
     - media
   enforced:
     module:
       - media
+third_party_settings:
+  field_permissions:
+    permission_type: public
 _core:
   default_config_hash: 7ZBrcl87ZXaw42v952wwcw_9cQgTBq5_5tgyUkE-VV0
 id: media.field_media_image

@@ -18,18 +18,23 @@ name: 'Full HTML'
 format: full_html
 weight: 2
 filters:
-  linkit:
-    id: linkit
-    provider: linkit
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
     status: true
-    weight: -50
-    settings:
-      title: true
+    weight: -46
+    settings: {  }
   filter_align:
     id: filter_align
     provider: filter
     status: true
     weight: -49
+    settings: {  }
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: false
+    weight: -42
     settings: {  }
   filter_caption:
     id: filter_caption
@@ -37,32 +42,6 @@ filters:
     status: true
     weight: -48
     settings: {  }
-  filter_htmlcorrector:
-    id: filter_htmlcorrector
-    provider: filter
-    status: true
-    weight: -47
-    settings: {  }
-  editor_file_reference:
-    id: editor_file_reference
-    provider: editor
-    status: true
-    weight: -46
-    settings: {  }
-  media_embed:
-    id: media_embed
-    provider: media
-    status: true
-    weight: -45
-    settings:
-      default_view_mode: embedded
-      allowed_view_modes:
-        embedded: embedded
-        embedded_with_description: embedded_with_description
-        full: full
-        medium: medium
-        narrow: narrow
-      allowed_media_types: {  }
   filter_html:
     id: filter_html
     provider: filter
@@ -78,11 +57,17 @@ filters:
     status: false
     weight: -43
     settings: {  }
-  filter_autop:
-    id: filter_autop
+  filter_html_image_secure:
+    id: filter_html_image_secure
     provider: filter
     status: false
-    weight: -42
+    weight: -40
+    settings: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: -47
     settings: {  }
   filter_url:
     id: filter_url
@@ -91,9 +76,24 @@ filters:
     weight: -41
     settings:
       filter_url_length: 72
-  filter_html_image_secure:
-    id: filter_html_image_secure
-    provider: filter
-    status: false
-    weight: -40
-    settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -50
+    settings:
+      title: true
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: -45
+    settings:
+      default_view_mode: embedded
+      allowed_view_modes:
+        embedded: embedded
+        embedded_with_description: embedded_with_description
+        full: full
+        medium: medium
+        narrow: narrow
+      allowed_media_types: {  }
