@@ -32,7 +32,6 @@ third_party_settings:
       children:
         - field_group_path
         - field_org_type
-        - field_has_contracts
       label: 'Administrative fields'
       region: content
       parent_name: ''
@@ -52,7 +51,7 @@ third_party_settings:
       label: Logo
       region: content
       parent_name: ''
-      weight: 11
+      weight: 10
       format_type: details
       format_settings:
         classes: ''
@@ -77,6 +76,22 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
+    group_contracts:
+      children:
+        - field_has_contracts
+        - field_contract_search_text
+      label: Contracts
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        required_fields: true
+        effect: none
 id: group.employee.default
 targetEntityType: group
 bundle: employee
@@ -94,7 +109,7 @@ content:
     third_party_settings: {  }
   field_contract_search_text:
     type: text_textarea
-    weight: 2
+    weight: 5
     region: content
     settings:
       rows: 3
@@ -226,6 +241,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_redirects:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_search_keywords:
     type: string_textfield
     weight: 15
@@ -257,7 +280,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
