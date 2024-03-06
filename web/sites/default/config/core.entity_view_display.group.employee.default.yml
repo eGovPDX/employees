@@ -12,7 +12,6 @@ dependencies:
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
-    - field.field.group.employee.field_has_contracts
     - field.field.group.employee.field_logo
     - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
@@ -357,16 +356,6 @@ content:
     third_party_settings: {  }
     weight: -3
     region: content
-  field_has_contracts:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 0
-    region: main
   field_logo:
     type: file_default
     label: above
