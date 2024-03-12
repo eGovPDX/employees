@@ -11,7 +11,6 @@ dependencies:
     - field.field.group.employee.field_group_contact
     - field.field.group.employee.field_group_description
     - field.field.group.employee.field_group_path
-    - field.field.group.employee.field_has_contracts
     - field.field.group.employee.field_logo
     - field.field.group.employee.field_migration_status
     - field.field.group.employee.field_org_type
@@ -32,7 +31,6 @@ third_party_settings:
       children:
         - field_group_path
         - field_org_type
-        - field_has_contracts
       label: 'Administrative fields'
       region: content
       parent_name: ''
@@ -52,7 +50,7 @@ third_party_settings:
       label: Logo
       region: content
       parent_name: ''
-      weight: 11
+      weight: 10
       format_type: details
       format_settings:
         classes: ''
@@ -77,6 +75,22 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
+    group_contracts:
+      children:
+        - field_has_contracts
+        - field_contract_search_text
+      label: Contracts
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        required_fields: true
+        effect: none
 id: group.employee.default
 targetEntityType: group
 bundle: employee
@@ -94,29 +108,16 @@ content:
     third_party_settings: {  }
   field_contract_search_text:
     type: text_textarea
-    weight: 2
+    weight: 5
     region: content
     settings:
       rows: 3
       placeholder: ''
     third_party_settings:
       field_states_ui:
-        field_states:
-          d4f7a9b7-1b7a-4c5d-9b64-f40767f6f386:
-            id: visible
-            data:
-              target: field_has_contracts
-              comparison: checked
-              value: ''
-              submit: 'Add Cancel'
-            uuid: d4f7a9b7-1b7a-4c5d-9b64-f40767f6f386
         form:
           type: ''
-          list:
-            d4f7a9b7-1b7a-4c5d-9b64-f40767f6f386:
-              operations:
-                edit: Edit
-                delete: Delete
+          list: ''
           add: Add
       allowed_formats:
         hide_help: '0'
@@ -181,13 +182,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_has_contracts:
-    type: boolean_checkbox
-    weight: 4
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   field_logo:
     type: file_generic
     weight: 5
@@ -226,6 +220,14 @@ content:
           type: ''
           list: ''
           add: Add
+  field_redirects:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_search_keywords:
     type: string_textfield
     weight: 15
@@ -257,7 +259,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 10
+    weight: 9
     region: content
     settings:
       match_operator: CONTAINS
