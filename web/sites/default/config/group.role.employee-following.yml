@@ -7,10 +7,10 @@ dependencies:
 id: employee-following
 label: Following
 weight: -10
-internal: false
-audience: member
+admin: false
+scope: individual
+global_role: null
 group_type: employee
-permissions_ui: true
 permissions:
   - 'leave group'
   - 'view group'
@@ -20,6 +20,7 @@ permissions:
   - 'view group_media:remote_document entity'
   - 'view group_media:remote_video entity'
   - 'view group_membership content'
+  - 'view group_membership relationship'
   - 'view group_node:bts_catalog_item entity'
   - 'view group_node:contact entity'
   - 'view group_node:contract entity'

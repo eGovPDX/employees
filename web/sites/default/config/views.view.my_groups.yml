@@ -246,7 +246,7 @@ display:
         options:
           query_comment: ''
           disable_sql_rewrite: false
-          distinct: false
+          distinct: true
           replica: false
           query_tags: {  }
       relationships:
@@ -271,7 +271,7 @@ display:
             'group_media:remote_video': '0'
         gc__user:
           id: gc__user
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gc__user
           relationship: group_content_id
           group_type: group

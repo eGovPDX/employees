@@ -4,13 +4,14 @@ status: true
 dependencies:
   config:
     - group.type.employee
+    - user.role.authenticated
 id: employee-outsider
 label: Outsider
 weight: -101
-internal: true
-audience: outsider
+admin: false
+scope: outsider
+global_role: authenticated
 group_type: employee
-permissions_ui: true
 permissions:
   - 'join group'
   - 'view group'
@@ -20,6 +21,7 @@ permissions:
   - 'view group_media:remote_document entity'
   - 'view group_media:remote_video entity'
   - 'view group_membership content'
+  - 'view group_membership relationship'
   - 'view group_node:bts_catalog_item entity'
   - 'view group_node:contact entity'
   - 'view group_node:contract entity'

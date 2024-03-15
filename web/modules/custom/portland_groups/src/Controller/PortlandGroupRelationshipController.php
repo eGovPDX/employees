@@ -6,12 +6,12 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityFormBuilderInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\group\Entity\Controller\GroupContentController;
+use Drupal\group\Entity\Controller\GroupRelationshipController;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Plugin\GroupContentEnablerManagerInterface;
 use Drupal\user\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\group\Entity\GroupContentType;
+use Drupal\group\Entity\GroupRelationshipType;
 use Drupal\node\Entity\NodeType;
 use Drupal\media\Entity\MediaType;
 
@@ -20,16 +20,16 @@ use Symfony\Component\HttpKernel;
 use Drupal\Core\Plugin;
 
 /**
- * Returns responses for 'group_node' GroupContent routes.
+ * Returns responses for 'group_node' GroupRelationship routes.
  */
-class PortlandGroupContentController extends GroupContentController {
+class PortlandGroupRelationshipController extends GroupRelationshipController {
 
     /**
      * {@inheritdoc}
      */
-    public function addPage(GroupInterface $group, $create_mode = FALSE) {
+    public function addPage(GroupInterface $group, $create_mode = FALSE, $base_plugin_id = NULL) {
 
-        $build = GroupContentController::addPage($group, $create_mode);
+        $build = GroupRelationshipController::addPage($group, $create_mode, $base_plugin_id);
 
         // Do not interfere with redirects.
         if (!is_array($build)) {
@@ -38,13 +38,11 @@ class PortlandGroupContentController extends GroupContentController {
 
         // Overwrite the label and description for all of the displayed bundles.
         $storage_handler = $this->entityTypeManager->getStorage('node_type');
-        $page_bundles = $this->addPageBundles($group, $create_mode);
-        // NOTE: ksort is working here, but bundle types are still displayed out of order.
-        // there must be some other sorting process that occurs after this point.
-        ksort($page_bundles);
-        // we need the $build['#bundles'] array to be sorted the same as $page_bundles, but it's
-        // being handed to us sorted by plugin_id, which doens't map well to the bundle machine names.
-        // we need to build a new array based on the foreach order below.
+        $page_bundles = $this->addPageBundles($group, $create_mode, $base_plugin_id);
+
+        // We want the $build['#bundles'] array to be sorted by bundle label, but it's
+        // sorted by array index which is the bundle machine name.
+        // We need to build a new array using the bundle label as the array index.
         $new_bundles = [];
         foreach ($page_bundles as $plugin_id => $bundle_name) {
             // Don't process Media types. They are handled by PortlanMediaController next door.
@@ -52,21 +50,25 @@ class PortlandGroupContentController extends GroupContentController {
                 unset($build['#bundles'][$bundle_name]);
                 continue;
             }
-            if (!empty($build['#bundles'][$bundle_name])) {
-                $plugin = $group->getGroupType()->getContentPlugin($plugin_id);
-                $bundle_label = $storage_handler->load($plugin->getEntityBundle())->label();
-                $bundle_id = $storage_handler->load($plugin->getEntityBundle())->id();
+            if (!empty($build['#bundles'][$plugin_id])) {
+                $pluginID = $bundle_name->getPlugin()->getPluginId();
+                $plugin = $group->getGroupType()->getPlugin($pluginID);
+                $plugin_bundle = $plugin->getPluginDefinition()->getEntityBundle();
+                $bundle_label = $storage_handler->load($plugin_bundle)->label();
+                $bundle_id = $storage_handler->load($plugin_bundle)->id();
                 $bundle_desc = \Drupal::config('node.type.' . $bundle_id)->get('description');
-                $t_args = ['%node_type' => $bundle_label];
 
-                $new_bundles[$bundle_name] = $build['#bundles'][$bundle_name];
-                $new_bundles[$bundle_name]['label'] = $bundle_label;
-                $new_bundles[$bundle_name]['description'] = $bundle_desc;
+                $new_bundles[$bundle_label] = $build['#bundles'][$plugin_id];
+                $new_bundles[$bundle_label]['label'] = $bundle_label;
+                $new_bundles[$bundle_label]['description'] = $bundle_desc;
                 // build custom link text; this overrides the link text created in the GroupNodeDeriver
-                $new_bundles[$bundle_name]['add_link']->setText(t('Add ' . $bundle_label));
+                $new_bundles[$bundle_label]['add_link']->setText(t('Add ' . $bundle_label));
             }
         }
 
+        // Sort the new array by key (i.e. bundle label)
+        ksort($new_bundles);
+        
         $build['#bundles'] = $new_bundles;
         return $build;
     }
@@ -84,17 +86,18 @@ class PortlandGroupContentController extends GroupContentController {
      */
     public function createFormTitle(GroupInterface $group, $plugin_id) {
         /** @var \Drupal\group\Plugin\GroupContentEnablerInterface $plugin */
-        $plugin = $group->getGroupType()->getContentPlugin($plugin_id);
-        $entity_type = $plugin->getEntityTypeId();
+        $plugin = $group->getGroupType()->getPlugin($plugin_id);
+        $entity_type = $plugin->getPluginDefinition()->getEntityTypeId();
+        $plugin_bundle = $plugin->getPluginDefinition()->getEntityBundle();
         switch ($entity_type) {
-        case "media":
-            $content_type = MediaType::load($plugin->getEntityBundle());
-            break;
-        case "node":
-            $content_type = NodeType::load($plugin->getEntityBundle());
-            break;
-        default:
-            $content_type = "undefined";
+            case "media":
+                $content_type = MediaType::load($plugin_bundle);
+                break;
+            case "node":
+                $content_type = NodeType::load($plugin_bundle);
+                break;
+            default:
+                $content_type = "undefined";
         }
         $return = $this->t('Create @name in @group', ['@name' => $content_type->label(), '@group' => $group->label()]);
         return $return;
