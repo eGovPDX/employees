@@ -1,11 +1,11 @@
 <?php
 
-use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
 use \Drupal\group\Entity\Group;
 use Drupal\group\GroupMembershipLoaderInterface;
 use Drupal\group\Entity\GroupInterface;
 use Drupal\group\Entity\GroupTypeInterface;
-use Drupal\group\Entity\GroupContentTypeInterface;
+use Drupal\group\Entity\GroupRelationshipTypeInterface;
 use Drupal\pathauto\Form\PathautoBulkUpdateForm;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Form\FormStateInterface;
@@ -143,12 +143,11 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
 
   // start building entity type id; we only support node and media entity types
   // if other, return immediately and avoid unnecessary processing.
-  $plugin_id = ":";
   $entity_type = $entity->getEntityTypeId();
   if ($entity_type == "node") {
-    $plugin_id = "group_node" . $plugin_id . $entity->bundle();
+    $plugin_id = "group_node:" . $entity->bundle();
   } else if ($entity_type == "media") {
-    $plugin_id = "group_media" . $plugin_id . $entity->bundle();
+    $plugin_id = "group_media:" . $entity->bundle();
   } else {
     return;
   }
@@ -190,7 +189,7 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
         // node was originally in a different group, remove it and reassign
         $old_group = \Drupal\group\Entity\Group::load($orig_owner_group);
         if ($old_group) {
-          $current_node = $old_group->getContent($plugin_id, ['entity_id' => $eid]);
+          $current_node = $old_group->getRelationshipsByEntity($entity, $plugin_id);
           if(count($current_node) > 0) {
             $content = array_values($current_node)[0];
             $content->delete();
@@ -206,7 +205,7 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
       if ($new_group) {
         // When the Display In field has a group but there is no group content relationship,
         // add a group content relationship
-        $current_node = $new_group->getContent($plugin_id, ['entity_id' => $eid]);
+        $current_node = $new_group->getRelationshipsByEntity($entity, $plugin_id);
         if(count($current_node) == 0) {
           _portland_groups_add_entity_to_group($entity, $new_owner_group, $plugin_id);
         }
@@ -218,7 +217,7 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
         }
 
         // POWR-2800 One entity added to many different groups, delete all but the first Displayed In group
-        $group_content_nodes = GroupContent::loadByEntity($entity);
+        $group_content_nodes = GroupRelationship::loadByEntity($entity);
         if (count($group_content_nodes) > 1) {
           foreach($group_content_nodes as $group_content_node) {
             if($group_content_node->getGroup()->id() != $new_owner_group) {
@@ -235,15 +234,16 @@ function _portland_groups_add_entity_to_group($entity, $group_id, $plugin_id) {
   // make sure entity isn't already in group; the entity may already be assigned to
   // the group by virtue of having been created in that context.
   $group = \Drupal\group\Entity\Group::load($group_id);
-  $current_node = $group->getContent($plugin_id, ['entity_id' => $entity->id()]);
+  $current_node = $group->getRelationshipsByEntity($entity, $plugin_id);
   if (!$current_node || count($current_node) < 1) {
-   $group->addContent($entity, $plugin_id);
+    $group->addRelationship($entity, $plugin_id);
   }
 }
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
+// TODO: The module name is correct, so this hook will never be called. (It should be portland_groups.)
 function portland_inline_entity_form_entity_form_alter(&$entity_form, &$form_state)
 {
     if (
@@ -263,6 +263,7 @@ function portland_inline_entity_form_entity_form_alter(&$entity_form, &$form_sta
 /**
  * Implements hook_form_alter().
  */
+// TODO: The module name is correct, so this hook will never be called. (It should be portland_groups.)
 function portland_form_alter(&$form, &$form_state, $form_id)
 {
     // Only set the default field for new Media items
@@ -321,7 +322,7 @@ function getGroupIdsByEntity($entity)
     }
     $group_ids = [];
 
-    $group_contents = GroupContent::loadByEntity($entity);
+    $group_contents = GroupRelationship::loadByEntity($entity);
     foreach ($group_contents as $group_content) {
         $group_ids[] = $group_content->getGroup()->id();
     }
@@ -404,7 +405,7 @@ function _clean_group_group_path(&$group_group_path)
  * Implements hook_ENTITY_TYPE_update().
  * Add and update group aliases like "/powr/news" when a group is updated.
  */
-function portland_group_update(GroupInterface $group)
+function portland_groups_group_update(GroupInterface $group)
 {
     // get group path
     $group_path = $group->get('field_group_path')->value;
@@ -425,17 +426,5 @@ function portland_group_update(GroupInterface $group)
         $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group_content", "update"]);
         $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:media", "update"]);
         batch_set($batch);
-
-        $gid = $group->id();
-        $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-        // TODO: manually regenerate URL alias for main group page; pathauto bulk update isn't getting it sometimes
-        $existing_alias = \Drupal::service('path.alias_storage')->lookupPathAlias("/group/$gid", $lang);
-        $alias = "/$group_path";
-        // if it exists and doesn't match current alias, delete and re-save
-        if ($existing_alias && $existing_alias != $alias) {
-            \Drupal::service('path.alias_storage')->delete(['alias' => $existing_alias, 'langcode' => $lang]);
-            $path = \Drupal::service('path.alias_storage')->save("/group/$gid", $alias, $lang);
-        }
     }
 }

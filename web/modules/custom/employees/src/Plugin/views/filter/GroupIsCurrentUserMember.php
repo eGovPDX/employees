@@ -56,7 +56,7 @@ class GroupIsCurrentUserMember extends BooleanOperator implements ContainerFacto
 
     $uid = $this->currentUser->id();
     $subselect = $this->database
-      ->select('group_content_field_data', 'gc')
+      ->select('group_relationship_field_data', 'gc')
       ->fields('gc', ['type', 'gid', 'entity_id'])
       ->where("[gc].[gid] = [$query_base_table].[$entity_id_key]")
       ->condition('type', '%-group_membership', 'LIKE')

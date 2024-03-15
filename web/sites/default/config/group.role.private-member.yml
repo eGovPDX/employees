@@ -4,13 +4,14 @@ status: true
 dependencies:
   config:
     - group.type.private
+    - user.role.authenticated
 id: private-member
 label: Member
 weight: -100
-internal: true
-audience: member
+admin: false
+scope: insider
+global_role: authenticated
 group_type: private
-permissions_ui: true
 permissions:
   - 'leave group'
   - 'view group'
@@ -20,6 +21,7 @@ permissions:
   - 'view group_media:remote_document entity'
   - 'view group_media:remote_video entity'
   - 'view group_membership content'
+  - 'view group_membership relationship'
   - 'view group_node:bts_catalog_item entity'
   - 'view group_node:contact entity'
   - 'view group_node:event entity'
