@@ -4279,6 +4279,7 @@ display:
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -4298,6 +4299,9 @@ display:
             - content_search_keywords
             - content_title_edge
             - content_title_fulltext
+            - media_field_description
+            - media_name
+            - media_search_keywords
             - rendered_item
       filter_groups:
         operator: AND
