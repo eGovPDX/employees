@@ -54,9 +54,9 @@ class PortlandOpenIdConnectUtil
     $membership = $group->getMember($account);
     if (empty($membership)) return;
 
-    $roles = $membership->getRoles();
+    $roles = $membership->getRoles(FALSE);
     $has_employee_role = false;
-    $group_content = $membership->getGroupContent();
+    $group_content = $membership->getGroupRelationship();
     $group_content->group_roles = [];
     foreach ($roles as $role) {
       if ($role->id() === 'employee-employee' || $role->id() === 'private-employee') {
@@ -109,8 +109,8 @@ class PortlandOpenIdConnectUtil
     else {
       // https://drupal.stackexchange.com/questions/232530/programmatically-add-new-role-to-group-member/232646#232646
       // Array of Role-name=>Role_entity
-      $roles = $membership->getRoles();
-      $group_content = $membership->getGroupContent();
+      $roles = $membership->getRoles(FALSE);
+      $group_content = $membership->getGroupRelationship();
       $has_new_role = false;
       foreach ($role_id_array as $role_id) {
         // Check if the user has the new role
@@ -160,14 +160,13 @@ class PortlandOpenIdConnectUtil
     }
     if (empty($new_primary_group_ids) && empty($current_primary_group_ids)) return;
 
-    // If the primary group is empty, remove all group memberships
     if (empty($new_primary_group_ids)) {
-      // Remove user from all current groups
+      // If the AD primary group is empty, remove employee role from group memberships
       foreach ($current_primary_group_ids as $current_primary_group_id) {
         self::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     } else if (empty($current_primary_group_ids)) {
-      // Add the Employee role to user in all new groups
+      // Add the employee role to user in all new groups
       foreach ($new_primary_group_ids as $new_primary_group_id) {
         self::addUserToGroupWithEmployeeRole($account, $new_primary_group_id);
       }
@@ -181,7 +180,7 @@ class PortlandOpenIdConnectUtil
       foreach ($current_primary_group_ids as $current_primary_group_id) {
         if (in_array($current_primary_group_id, $new_primary_group_ids))
           continue;
-        // Remove user from the new group
+        // Remove employee role from the group membership
         self::removeEmployeeRoleOnUserFromGroup($account, $current_primary_group_id);
       }
     }

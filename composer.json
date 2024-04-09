@@ -40,10 +40,11 @@
         "drupal/field_group": "^3.1",
         "drupal/field_permissions": "^1.1",
         "drupal/field_states_ui": "^3.0",
+        "drupal/flexible_permissions": "^1.1",
         "drupal/google_tag": "^1.4",
-        "drupal/group": "^1.2",
+        "drupal/group": "^2.2",
         "drupal/group_notifications": "^1.0@beta",
-        "drupal/groupmedia": "^2.0",
+        "drupal/groupmedia": "^3.0",
         "drupal/image_effects": "^3.2",
         "drupal/image_widget_crop": "^2.4",
         "drupal/imagemagick": "^3.3",
@@ -218,18 +219,18 @@
                 "3325538 - Remove extra strings added to the environment title": "https://www.drupal.org/files/issues/2022-12-06/remove_environment_identifier_0.patch"
             },
             "drupal/group": {
-                "2842630 - Empty page when trying to create group node": "https://www.drupal.org/files/issues/2019-01-04/2842630-20.patch",
                 "3020883 - Use VBO together with group permission": "https://www.drupal.org/files/issues/2020-08-17/3020883-22.patch",
-                "3256998 - Access to Revisions of Group Content is Broken": "https://www.drupal.org/files/issues/2022-02-09/group-fix-group-revisions-3256998-22_0.patch",
-                "3210808 - uasort deprecation in PHP 8": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch",
                 "3029908 - Add revisions tab on groups (Groups have two revisions tabs)": "https://www.drupal.org/files/issues/2023-08-24/groups-have-two-revisions-tabs.patch",
-                "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL": "https://www.drupal.org/files/issues/2023-01-24/group-3336280-3.patch"
+                "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL": "https://git.drupalcode.org/project/group/-/merge_requests/121.patch"
             },
             "drupal/group_notifications": {
                 "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
             },
             "drupal/media_entity_download": {
                 "3059830 - Make link title editable / add token support / more options - feature/WCOR-1199": "https://www.drupal.org/files/issues/2022-03-25/3059830-make-link-title-15.patch"
+            },
+            "drupal/media_revisions_ui": {
+                "3428662 - Drupal 10.1: Revisions tab appears twice on media": "https://www.drupal.org/files/issues/2024-03-15/media_duplicate_revision_tabs.patch"
             },
             "drupal/openid_connect_windows_aad": {
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"

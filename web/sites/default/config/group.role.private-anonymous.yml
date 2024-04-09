@@ -4,11 +4,12 @@ status: true
 dependencies:
   config:
     - group.type.private
+    - user.role.anonymous
 id: private-anonymous
 label: Anonymous
 weight: -102
-internal: true
-audience: anonymous
+admin: false
+scope: outsider
+global_role: anonymous
 group_type: private
-permissions_ui: true
 permissions: {  }
