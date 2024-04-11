@@ -4186,19 +4186,6 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
-        media_name:
-          id: media_name
-          table: search_api_index_full_index
-          field: media_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
         content_title_string:
           id: content_title_string
           table: search_api_index_full_index
@@ -4300,7 +4287,8 @@ display:
             - content_title_edge
             - content_title_fulltext
             - media_field_description
-            - media_name
+            - media_name_edgestring
+            - media_name_fulltext
             - media_search_keywords
             - rendered_item
       filter_groups:
