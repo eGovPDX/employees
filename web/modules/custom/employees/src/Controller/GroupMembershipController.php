@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityFormBuilderInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\GroupContent;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\group\Entity\GroupRelationship;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -65,11 +66,13 @@ class GroupMembershipController extends ControllerBase {
    */
   public function follow(GroupInterface $group) {
     /** @var \Drupal\group\Plugin\GroupContentEnablerInterface $plugin */
-    $plugin = $group->getGroupType()->getContentPlugin('group_membership');
+    $plugin_id = 'group_membership';
+    $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_content_type');
+    $group_type_id = $group->getGroupType()->id();
 
     // Pre-populate a group membership with the current user.
-    $group_content = GroupContent::create([
-      'type' => $plugin->getContentTypeConfigId(),
+    $group_content = GroupRelationship::create([
+      'type' => $relationship_type_storage->getRelationshipTypeId($group_type_id, $plugin_id),
       'gid' => $group->id(),
       'entity_id' => $this->currentUser->id(),
       'group_roles' => ["employee-following"],

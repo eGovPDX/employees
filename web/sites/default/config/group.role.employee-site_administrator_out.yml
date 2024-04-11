@@ -1,0 +1,15 @@
+uuid: 137d5ad5-db9f-42d0-b8c3-2c45cce3f0b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.employee
+    - user.role.administrator
+id: employee-site_administrator_out
+label: 'Site Administrator Outsider'
+weight: 1
+admin: true
+scope: outsider
+global_role: administrator
+group_type: employee
+permissions: {  }

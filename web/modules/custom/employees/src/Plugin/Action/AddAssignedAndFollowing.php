@@ -32,24 +32,40 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
     // Get all groups the user belongs to
     $current_primary_group_ids = PortlandOpenIdConnectUtil::getGroupIdsOfUser($account);
 
-    // Add the Employee role to user in all new groups
     foreach ($current_primary_group_ids as $current_primary_group_id) {
       $group = Group::load($current_primary_group_id);
       $group_type = $group->type->entity->id();
       $membership = $group->getMember($account);
-      $group_content = $membership->getGroupContent();
-      $roles = array_keys($membership->getRoles());
+      $group_content = $membership->getGroupRelationship();
+      $roles = array_keys($membership->getRoles(FALSE));
       $only_has_member_role = ( count($roles) === 1 && ( $roles[0] === 'private-member' || $roles[0] === 'employee-member' ) );
-      // For all Private groups, if there is only Member role, add Assigned role
-      if( $only_has_member_role && $group_type === 'private') {
-        $group_content->group_roles->appendItem(['target_id' => 'private-assigned']);
+      if ($only_has_member_role) {
+        // For all Private groups, if there is only Member role, replace it with Assigned role
+        if($group_type === 'private') {
+          $roles[0] = 'private-assigned';
+        }
+        // For all Employee groups, if there is only Member role, replace it with Following role
+        else if($group_type === 'employee') {
+          $roles[0] = 'employee-following';
+        }
+        
+        $group_content->group_roles = $roles;
+        $group_content->save();
+      } elseif (in_array('private-member', $roles) || in_array('employee-member', $roles)) {
+        // Remove the member role from their list of roles
+        $key = array_search('private-member', $roles);
+        if ($key !== false) {
+          unset($roles[$key]);
+        }
+
+        $key = array_search('employee-member', $roles);
+        if ($key !== false) {
+          unset($roles[$key]);
+        }
+
+        $group_content->group_roles = $roles;
         $group_content->save();
       }
-      // For all Employee groups, if there is only Member role, add Following role
-      else if($only_has_member_role && $group_type === 'employee') {
-        $group_content->group_roles->appendItem(['target_id' => 'employee-following']);
-        $group_content->save();
-      } 
     }
 
     // Don't return anything for a default completion message, otherwise return translatable markup.
