@@ -2469,19 +2469,19 @@ display:
             label: Changed
             field_identifier: media_changed
           exposed: true
-        media_name:
-          id: media_name
+        media_name_fulltext:
+          id: media_name_fulltext
           table: search_api_index_full_index
-          field: media_name
+          field: media_name_fulltext
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: search_api
           order: ASC
           expose:
-            label: Name
-            field_identifier: media_name
-          exposed: true
+            label: ''
+            field_identifier: ''
+          exposed: false
       filters:
         media_bundle:
           id: media_bundle
@@ -4182,6 +4182,19 @@ display:
           admin_label: ''
           plugin_id: search_api
           order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        media_name_fulltext:
+          id: media_name_fulltext
+          table: search_api_index_full_index
+          field: media_name_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
           expose:
             label: ''
             field_identifier: ''
