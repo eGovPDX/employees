@@ -706,12 +706,20 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_display_in_group
-  media_name:
-    label: Name
+  media_name_edgestring:
+    label: 'Media Name Edgestring'
     datasource_id: 'entity:media'
     property_path: name
     type: 'solr_text_custom_omit_norms:edgestring'
     boost: 5.0
+    dependencies:
+      module:
+        - media
+  media_name_fulltext:
+    label: 'Media Name Fulltext'
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
     dependencies:
       module:
         - media

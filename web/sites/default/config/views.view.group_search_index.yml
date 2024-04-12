@@ -2469,10 +2469,10 @@ display:
             label: Changed
             field_identifier: media_changed
           exposed: true
-        media_name:
-          id: media_name
+        media_name_fulltext:
+          id: media_name_fulltext
           table: search_api_index_full_index
-          field: media_name
+          field: media_name_fulltext
           relationship: none
           group_type: group
           admin_label: ''
@@ -2480,7 +2480,7 @@ display:
           order: ASC
           expose:
             label: Name
-            field_identifier: media_name
+            field_identifier: media_name_fulltext
           exposed: true
       filters:
         media_bundle:
@@ -4024,7 +4024,7 @@ display:
     display_plugin: page
     position: 4
     display_options:
-      title: "Search {{ drupal_field('label', 'group', raw_arguments.field_display_in_group, {label: 'hidden'}) }}"
+      title: "Search {{ drupal_field('label', 'group', raw_arguments.agg_display_in_group, {label: 'hidden'}) }}"
       fields:
         search_api_rendered_item:
           id: search_api_rendered_item
@@ -4186,6 +4186,19 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
+        media_name_fulltext:
+          id: media_name_fulltext
+          table: search_api_index_full_index
+          field: media_name_fulltext
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         content_title_string:
           id: content_title_string
           table: search_api_index_full_index
@@ -4200,10 +4213,10 @@ display:
             field_identifier: ''
           exposed: false
       arguments:
-        field_display_in_group:
-          id: field_display_in_group
+        agg_display_in_group:
+          id: agg_display_in_group
           table: search_api_index_full_index
-          field: field_display_in_group
+          field: agg_display_in_group
           relationship: none
           group_type: group
           admin_label: ''
@@ -4266,6 +4279,7 @@ display:
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -4285,6 +4299,10 @@ display:
             - content_search_keywords
             - content_title_edge
             - content_title_fulltext
+            - media_field_description
+            - media_name_edgestring
+            - media_name_fulltext
+            - media_search_keywords
             - rendered_item
       filter_groups:
         operator: AND
@@ -4326,6 +4344,17 @@ display:
           group_type: group
           admin_label: 'Displayed in: Group'
           entity_type: node
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_display_in_group_1:
+          id: field_display_in_group_1
+          table: search_api_datasource_full_index_entity_media
+          field: field_display_in_group
+          relationship: none
+          group_type: group
+          admin_label: 'Belongs to: Group'
+          entity_type: media
           plugin_id: search_api
           required: false
           skip_access: false
