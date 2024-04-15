@@ -3,60 +3,78 @@ langcode: en
 status: true
 dependencies:
   module:
-    - webform
+    - system
 id: employees_portland.gov
 label: 'Employees Portland.gov'
 weight: 0
-container_id: GTM-558BXL5
-data_layer: dataLayer
-include_classes: false
-whitelist_classes: |-
-  google
-  nonGooglePixels
-  nonGoogleScripts
-  nonGoogleIframes
-blacklist_classes: |-
-  customScripts
-  customPixels
-include_environment: true
-environment_id: env-3
-environment_token: 7m8jEDA_wx-D-szWRcWBhQ
-path_toggle: 'exclude listed'
-path_list: |-
-  /admin*
-  /batch*
-  /clone/*
-  /devel/*
-  /node/add*
-  /node/*/edit
-  /node/*/delete
-  /node/*/revisions
-  /node/*/usage
-  /user/*/edit*
-  /user/*/cancel*
-  /user/*/scheduled*
-  /user/*/connected-accounts
-  /user/*/submissions
-  /group/*/edit
-  /group/*/delete
-  /group/*/content*
-  /group/*/nodes
-  /group/*/revisions
-  /group/*/members
-  /group/*/media*
-  /group/*/usage
-  /group/*/subgroups
-  /group/*/create
-  /media/*/edit
-  /media/*/delete
-  /media/*/usage
-  /taxonomy/*/edit
-  /taxonomy/*/delete
-  /taxonomy/*/usage
-role_toggle: 'exclude listed'
-role_list: {  }
-status_toggle: 'exclude listed'
-status_list: |-
-  403
-  404
-conditions: {  }
+tag_container_ids:
+  - GTM-558BXL5
+advanced_settings:
+  gtm:
+    GTM-558BXL5:
+      data_layer: dataLayer
+      include_classes: false
+      allowlist_classes: |-
+        google
+        nonGooglePixels
+        nonGoogleScripts
+        nonGoogleIframes
+      blocklist_classes: |-
+        customScripts
+        customPixels
+      include_environment: true
+      environment_id: env-3
+      environment_token: 7m8jEDA_wx-D-szWRcWBhQ
+dimensions_metrics: {  }
+conditions:
+  request_path:
+    id: request_path
+    negate: true
+    pages: |-
+      /admin*
+      /batch*
+      /clone/*
+      /devel/*
+      /node/add*
+      /node/*/edit
+      /node/*/delete
+      /node/*/revisions
+      /node/*/usage
+      /user/*/edit*
+      /user/*/cancel*
+      /user/*/scheduled*
+      /user/*/connected-accounts
+      /user/*/submissions
+      /group/*/edit
+      /group/*/delete
+      /group/*/content*
+      /group/*/nodes
+      /group/*/revisions
+      /group/*/members
+      /group/*/media*
+      /group/*/usage
+      /group/*/subgroups
+      /group/*/create
+      /media/*/edit
+      /media/*/delete
+      /media/*/usage
+      /taxonomy/*/edit
+      /taxonomy/*/delete
+      /taxonomy/*/usage
+  response_code:
+    id: response_code
+    negate: true
+    response_codes: |-
+      403
+      404
+events:
+  search: {  }
+  webform_purchase: {  }
+  login:
+    method: CMS
+  custom: {  }
+  generate_lead:
+    value: ''
+    currency: ''
+  sign_up:
+    method: CMS
