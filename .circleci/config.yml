@@ -31,10 +31,11 @@ commands:
             export TERMINUS_RELEASE=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest" | jq -r .tag_name)
             export CURRENT_TERMINUS_VERSION=$(~/terminus/terminus self:info --field terminus_version 2>/dev/null)
             if [ ! -d "$HOME/terminus" ] || [ "$CURRENT_TERMINUS_VERSION" != $TERMINUS_RELEASE ]; then
-              mkdir ~/terminus && cd ~/terminus
+              mkdir -p ~/terminus && cd ~/terminus
               echo "Installing Terminus v$TERMINUS_RELEASE"
               curl -L https://github.com/pantheon-systems/terminus/releases/download/$TERMINUS_RELEASE/terminus.phar --output terminus
               chmod +x terminus
+              ./terminus self:plugin:reload
               ./terminus self:plugin:install terminus-build-tools-plugin
             fi
             echo 'export PATH=$PATH:~/terminus' >> $BASH_ENV
