@@ -142,7 +142,7 @@ third_party_settings:
               context_mapping: {  }
               views_label: ''
               items_per_page: none
-            weight: 2
+            weight: 3
             additional: {  }
           c09d4f1d-5c79-46c3-821f-6f949245f224:
             uuid: c09d4f1d-5c79-46c3-821f-6f949245f224
@@ -200,25 +200,6 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 7
-            additional: {  }
-          55ba6be4-3908-4743-9e8b-2381b5e27a46:
-            uuid: 55ba6be4-3908-4743-9e8b-2381b5e27a46
-            region: main
-            configuration:
-              id: 'field_block:group:employee:field_featured_content'
-              label: 'Featured Content'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: entity_reference_entity_view
-                label: above
-                settings:
-                  view_mode: featured
-                third_party_settings: {  }
-            weight: 3
             additional: {  }
           d7937f08-7970-474e-8dea-63a3f352928b:
             uuid: d7937f08-7970-474e-8dea-63a3f352928b
@@ -290,6 +271,25 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 12
+            additional: {  }
+          55ba6be4-3908-4743-9e8b-2381b5e27a46:
+            uuid: 55ba6be4-3908-4743-9e8b-2381b5e27a46
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_featured_content'
+              label: 'Featured Content'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: above
+                settings:
+                  view_mode: featured
+                third_party_settings: {  }
+            weight: 2
             additional: {  }
         third_party_settings: {  }
   layout_library:
