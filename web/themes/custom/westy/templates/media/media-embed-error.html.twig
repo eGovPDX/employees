@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a missing media error.
+ *
+ * Available variables
+ * - message: The message text.
+ * - attributes: HTML attributes for the containing element.
+ *
+ * When a response from the back end can't be returned, a related error message
+ * is displayed from JavaScript.
+ *
+ * @see Drupal.theme.mediaEmbedPreviewError
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('media d-flex flex-column align-items-start') }}>
+  <img width="100rem" src="/core/modules/media/images/icons/no-thumbnail.png" />
+  <span class="badge text-white bg-danger">{{ message }}</span>
+</div>
