@@ -1,0 +1,24 @@
+uuid: 0b51d60a-1c40-4c51-8986-b5b568efe327
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_search_tags
+  module:
+    - facets
+  theme:
+    - westy
+id: groupsearchtags
+theme: westy
+region: side
+weight: 15
+provider: null
+plugin: 'facet_block:group_search_tags'
+settings:
+  id: 'facet_block:group_search_tags'
+  label: 'Group Search: Tags'
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: groupsearchtags
+visibility: {  }
