@@ -13,6 +13,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
@@ -128,6 +129,37 @@ function employees_form_alter(&$form, &$form_state, $form_id)
       }
       break;
   }
+
+  // PE-595 Add a custom submit handler to the Resource form submit action to alter the redirect URL
+  if ($form_id === 'node_resource_form' || $form_id === 'node_resource_edit_form')  {
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = '_resource_node_form_submit';
+      }
+    }
+  }
+}
+
+/**
+ * A helper function to redirect Resource form submissions to their latest revision URL
+ * instead of their canonical 'view' URL because that URL is rabbit hole redirected to
+ * the resource's destination URL.
+ */
+function _resource_node_form_submit($form, FormStateInterface $form_state) {
+  $node = $form_state->getFormObject()->getEntity();
+
+  $form_state->setRedirect(
+    'entity.node.revision',
+    ['node' => $node->id(),
+    'node_revision' => $node->getLoadedRevisionId()]
+  );
+
+  // This is a bit of a hack as it forces the redirect to execute immediately instead of allowing
+  // Drupal's naitive form processing to handle it. But our redirect gets overwritten by other 
+  // redirects if left to the default handling.
+  $url = $form_state->getRedirect()->setAbsolute()->toString();
+  $response = new RedirectResponse($url);
+  $response->send();
 }
 
 /**
