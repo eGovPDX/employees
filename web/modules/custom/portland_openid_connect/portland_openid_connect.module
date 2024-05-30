@@ -227,6 +227,10 @@ function _process_users($response_data, $access_token)
 
       // Check if the user account is enabled in AD
       $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user);
+      if( $user_is_enabled_in_AD === null ) {
+        // Do nothing if the access token is invalid
+        return;
+      }
       // @removed is set when a user is removed from AD
       $user_is_disabled = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
       if ($user_is_disabled) {

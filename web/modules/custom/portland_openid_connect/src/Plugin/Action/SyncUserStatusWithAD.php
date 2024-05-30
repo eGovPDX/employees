@@ -34,6 +34,10 @@ class SyncUserStatusWithAD extends ViewsBulkOperationsActionBase
     }
 
     $user_is_enabled = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $user);
+    if( $user_is_enabled === null ) {
+      return $this->t('Cannot retrieve user status for ' . $user->mail->value);
+    }
+
     if($user_is_enabled) {
       PortlandOpenIdConnectUtil::EnableUser($user);
     }

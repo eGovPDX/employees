@@ -608,7 +608,12 @@ class PortlandOpenIdConnectUtil
       return $response_data["accountEnabled"];
     } catch (RequestException $e) {
       // Treat 404 as the user doesn't exist in AD. Do not log 404
-      if ($e->getCode() == 404) {
+      if ($e->getCode() == 401) {
+        \Drupal::logger('portland OpenID')->error("Invalid access token. Please verify client secret is valid for " . $user->mail->value);
+        return null; 
+      }
+      // Treat 404 as the user doesn't exist in AD. Do not log 404
+      else if ($e->getCode() == 404) {
         return false;
       }
       else {
