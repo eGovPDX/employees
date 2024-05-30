@@ -447,7 +447,7 @@ class PortlandOpenIdConnectUtil
 
     // PTLD has no manager info
     if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
-
+    // Must use Principal Name to look up manager
     $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
     try {
       // https://learn.microsoft.com/en-us/graph/api/user-list-manager?view=graph-rest-1.0&tabs=http
@@ -573,6 +573,14 @@ class PortlandOpenIdConnectUtil
     }
   }
 
+  public static function GetUserLookupKey($user) {
+    // Use Active Directory Object ID first, Principal Name next, and username as the last resort.
+    $user_lookup_key = $user->field_active_directory_id->value ?? $user->field_principal_name->value;
+    if(empty($user_lookup_key)) $user_lookup_key = $user->name->value;
+    if(empty($user_lookup_key)) $user_lookup_key = $user->mail->value;
+    return $user_lookup_key;
+  }
+
   /**
    * Check if a user account is enabled in Azure AD.
    * Call https://graph.microsoft.com/beta/users/USER_PRINCIPAL_NAME or UUID to check the value of "accountEnabled" field.
@@ -583,8 +591,7 @@ class PortlandOpenIdConnectUtil
     if (empty($access_token) || empty($user)) return true;
     self::init();
 
-    // Principal name is a new field that legacy account doesn't have values.
-    $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
+    $user_lookup_key = PortlandOpenIdConnectUtil::GetUserLookupKey($user);
     try {
       // Example: https://graph.microsoft.com/beta/users/PRINCIPAL_NAME
       $response = self::$client->get(
