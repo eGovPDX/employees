@@ -83,8 +83,8 @@ function portland_openid_connect_user_update($account)
  */
 function portland_openid_connect_cron()
 {
-  // To manually stop user sync:
-  // drush state:set portland.stop_user_sync true
+  // To stop user sync: drush state:set portland.stop_user_sync true
+  // To restart user sync: drush state:delete portland.stop_user_sync
   $stop_user_sync = \Drupal::state()->get('portland.stop_user_sync');
   if (!empty($stop_user_sync) && strtolower($stop_user_sync) === "true") {
     \Drupal::logger('portland OpenID')->notice("portland.stop_user_sync set to TRUE. Skip user sync.");
@@ -227,6 +227,10 @@ function _process_users($response_data, $access_token)
 
       // Check if the user account is enabled in AD
       $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user);
+      if( $user_is_enabled_in_AD === null ) {
+        // Do nothing if the access token is invalid
+        return;
+      }
       // @removed is set when a user is removed from AD
       $user_is_disabled = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
       if ($user_is_disabled) {

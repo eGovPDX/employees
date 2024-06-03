@@ -2,9 +2,8 @@
 
 namespace Drupal\portland_openid_connect\Plugin\Action;
 
-use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\group\Entity\GroupInterface;
+use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 /**
  * Update the user's primary groups to match the AD group names.
@@ -15,7 +14,7 @@ use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
  *   type = "user"
  * )
  */
-class RetrieveUserInfoFromAD extends ActionBase
+class RetrieveUserInfoFromAD extends ViewsBulkOperationsActionBase
 {
   /**
    * {@inheritdoc}
@@ -31,13 +30,14 @@ class RetrieveUserInfoFromAD extends ActionBase
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
-      return;
+      return $this->t('Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.');
     }
 
     PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
     PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
     // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account_name, $azure_ad_id);
     $user->save();
+    return $this->t('User information retrieved from Entra ID.');
   }
 
   /**
