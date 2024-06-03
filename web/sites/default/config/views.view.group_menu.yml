@@ -1648,6 +1648,7 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        group_by: false
         style: false
         row: false
         relationships: false
@@ -1676,6 +1677,7 @@ display:
           entity_type: group
           plugin_id: entity_reverse
           required: true
+      group_by: true
       display_description: "Block to show the current page's children."
       display_extenders: {  }
       block_description: 'Page Children Menu'
