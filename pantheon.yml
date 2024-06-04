@@ -13,6 +13,10 @@ database:
 search:
   version: 8
 
+# Enable Drupal-specific metrics in New Relic
+new_relic:
+  drupal_hooks: true
+
 # Add a comment to trigger a deploy on Pantheon
 workflows:
   clear_cache:
