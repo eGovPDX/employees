@@ -106,7 +106,7 @@ commands:
 ## Job to build and deploy to Pantheon
 build_and_deploy: &build_and_deploy
   docker:
-    - image: cimg/php:8.1-node
+    - image: cimg/php:8.3-node
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
@@ -319,7 +319,7 @@ build_and_deploy: &build_and_deploy
 
 visual_regression: &visual_regression
   docker:
-    - image: cimg/php:8.1-browsers
+    - image: cimg/php:8.3-browsers
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
@@ -346,7 +346,7 @@ visual_regression: &visual_regression
 
 clone_live_database: &clone_live_database
   docker:
-    - image: cimg/php:8.1-browsers
+    - image: cimg/php:8.3-browsers
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
