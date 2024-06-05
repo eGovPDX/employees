@@ -2,9 +2,8 @@
 
 namespace Drupal\portland_openid_connect\Plugin\Action;
 
-use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\group\Entity\GroupInterface;
+use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 /**
  * Disalbe a user if the account is disabled in AD.
@@ -15,7 +14,7 @@ use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
  *   type = "user"
  * )
  */
-class SyncUserStatusWithAD extends ActionBase
+class SyncUserStatusWithAD extends ViewsBulkOperationsActionBase
 {
   /**
    * {@inheritdoc}
@@ -31,15 +30,21 @@ class SyncUserStatusWithAD extends ActionBase
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
+      return $this->t('Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.');
     }
 
     $user_is_enabled = PortlandOpenIdConnectUtil::IsUserEnabled($tokens['access_token'], $user);
+    if( $user_is_enabled === null ) {
+      return $this->t('Cannot retrieve user status for ' . $user->mail->value);
+    }
+
     if($user_is_enabled) {
       PortlandOpenIdConnectUtil::EnableUser($user);
     }
     else {
       PortlandOpenIdConnectUtil::DisableUser($user);
     }
+    return $this->t('User status synchronized with Entra ID.');
   }
 
   /**

@@ -2,9 +2,8 @@
 
 namespace Drupal\portland_openid_connect\Plugin\Action;
 
-use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\group\Entity\GroupInterface;
+use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 /**
  * Update the user's primary groups to match the AD group names.
@@ -15,7 +14,7 @@ use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
  *   type = "user"
  * )
  */
-class UpdateUserPrimaryGroups extends ActionBase
+class UpdateUserPrimaryGroups extends ViewsBulkOperationsActionBase
 {
   /**
    * {@inheritdoc}
@@ -27,8 +26,10 @@ class UpdateUserPrimaryGroups extends ActionBase
       // field_primary_groups and group memberships are managed in hook_user_presave
       // and hook_user_update, we only need to save the user here
       $account->save();
+      return $this->t("User's primary group updated.");
     } catch (\Exception $e) {
       \Drupal::logger('portland OpenID')->notice('Exception during UpdateUserPrimaryGroups: ' . $e->getMessage() . '. ' . $account->getAccountName());
+      return $this->t("Failed to update primary group. Please review logs.");
     }
   }
 
