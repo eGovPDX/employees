@@ -1,4 +1,4 @@
-uuid: e5934e9c-0495-464d-8881-494adafa8093
+uuid: c5fe6a3d-8cb2-49d0-9af2-000a3d24d636
 langcode: en
 status: true
 dependencies:
@@ -7,15 +7,15 @@ dependencies:
     - views.view.group_search_index
   module:
     - search_api
-id: group_search_last_updated_month
-name: 'Filter by Month Last Updated'
+id: group_past_events_filter_by_tags
+name: 'Filter by Tags'
 weight: 0
 min_count: 1
 missing: false
 missing_label: others
-url_alias: group_search_last_updated_month
-facet_source_id: 'search_api:views_page__group_search_index__page_group_search_content'
-field_identifier: content_changed
+url_alias: tags
+facet_source_id: 'search_api:views_page__group_search_index__page_group_past_events'
+field_identifier: field_tags
 query_operator: or
 hard_limit: 0
 exclude: false
@@ -43,51 +43,22 @@ only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: true
 processor_configs:
-  date_item:
-    processor_id: date_item
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      build: 35
+      sort: 40
     settings:
-      date_display: actual_date
-      granularity: 5
-      date_format: F
-      hierarchy: false
-  dependent_processor:
-    processor_id: dependent_processor
-    weights:
-      build: 5
-    settings:
-      group_search_last_updated_year:
-        enable: true
-        condition: not_empty
-        values: ''
-        negate: false
-      group_search_type:
-        enable: false
-        condition: null
-        values: ''
-        negate: false
-  hide_non_narrowing_result_processor:
-    processor_id: hide_non_narrowing_result_processor
-    weights:
-      build: 40
-    settings: {  }
+      sort: ASC
   hierarchy_processor:
     processor_id: hierarchy_processor
     weights:
       build: 100
     settings: {  }
-  list_item:
-    processor_id: list_item
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }
-  raw_value_widget_order:
-    processor_id: raw_value_widget_order
-    weights:
-      sort: 50
-    settings:
-      sort: ASC
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

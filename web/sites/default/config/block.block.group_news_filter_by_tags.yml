@@ -1,0 +1,24 @@
+uuid: cec4d1d0-a44e-4c9b-ad80-481c631a1d9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_events_filter_by_tags
+  module:
+    - facets
+  theme:
+    - westy
+id: group_news_filter_by_tags
+theme: westy
+region: side
+weight: 0
+provider: null
+plugin: 'facet_block:group_events_filter_by_tags'
+settings:
+  id: 'facet_block:group_events_filter_by_tags'
+  label: 'Group News: Filter by Tags'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_news_filter_by_tags
+visibility: {  }
