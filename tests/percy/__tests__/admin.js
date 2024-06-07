@@ -16,7 +16,7 @@ let BROWSER_OPTION = {
     defaultViewport: null,
 };
 
-describe('Visual Regression Testing', () => {
+describe('Functional Testing', () => {
     let browser, page;
     
     beforeAll(async () => {
