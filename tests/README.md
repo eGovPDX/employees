@@ -8,7 +8,7 @@ Tests available:
 
 IMPORTANT: Tests **must** be independent and have no side effect in other tests.
 
-### Add visual_regression test
+### Add new test
 To add new test:
 1. Identify which user the test should run as.
 2. Edit the test file. Copy an existing test `it()` and modify the test code inside `async () => {...}`
