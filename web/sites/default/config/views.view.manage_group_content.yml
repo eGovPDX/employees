@@ -7,6 +7,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - csv_serialization
     - group
     - node
     - rest
@@ -2413,6 +2414,20 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
       defaults:
         fields: false
         filters: false
@@ -2420,6 +2435,10 @@ display:
       display_description: ''
       display_extenders: {  }
       path: group/%group/nodes.csv
+      displays:
+        moderated_content: moderated_content
+        default: '0'
+        page_content_with_pog_urls: '0'
       filename: ''
       automatic_download: false
       store_in_public_file_directory: false
