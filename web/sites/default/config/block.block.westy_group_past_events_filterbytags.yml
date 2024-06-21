@@ -1,0 +1,29 @@
+uuid: 90874a1b-9d3a-4168-b0a2-d577ccebc247
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_past_events_filter_by_tags
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_group_past_events_filterbytags
+theme: westy
+region: side
+weight: -5
+provider: null
+plugin: 'facet_block:group_past_events_filter_by_tags'
+settings:
+  id: 'facet_block:group_past_events_filter_by_tags'
+  label: 'Group Events Past: Filter by Tags'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: westy_group_past_events_filterbytags
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/events/past\r\n!/group/*/nodes/events"

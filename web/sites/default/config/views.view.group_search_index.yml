@@ -3143,6 +3143,7 @@ display:
         - user.permissions
       tags:
         - 'config:facets.facet.group_events_filter_by_month'
+        - 'config:facets.facet.group_events_filter_by_tags'
         - 'config:facets.facet.group_events_filter_by_topic'
         - 'config:facets.facet.group_events_filter_by_type'
         - 'config:facets.facet.group_events_filter_by_year'
@@ -3488,6 +3489,7 @@ display:
         - user.permissions
       tags:
         - 'config:facets.facet.group_news_filter_by_month'
+        - 'config:facets.facet.group_news_filter_by_tags'
         - 'config:facets.facet.group_news_filter_by_topic'
         - 'config:facets.facet.group_news_filter_by_type'
         - 'config:facets.facet.group_news_filter_by_year'
@@ -4012,6 +4014,7 @@ display:
         - user.permissions
       tags:
         - 'config:facets.facet.group_past_events_filter_by_month'
+        - 'config:facets.facet.group_past_events_filter_by_tags'
         - 'config:facets.facet.group_past_events_filter_by_topic'
         - 'config:facets.facet.group_past_events_filter_by_type'
         - 'config:facets.facet.group_past_events_filter_by_year'
@@ -4374,6 +4377,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:facets.facet.group_search_filter_by_tags'
+        - 'config:facets.facet.group_search_filter_by_tags_agg'
+        - 'config:facets.facet.group_search_filter_by_topic'
         - 'config:facets.facet.group_search_last_updated_month'
         - 'config:facets.facet.group_search_last_updated_year'
         - 'config:facets.facet.group_search_type'

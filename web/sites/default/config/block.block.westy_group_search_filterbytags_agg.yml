@@ -1,0 +1,29 @@
+uuid: 7649d914-da51-40d6-8e41-f8330cf7757f
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_search_filter_by_tags_agg
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_group_search_filterbytags_agg
+theme: westy
+region: side
+weight: -32
+provider: null
+plugin: 'facet_block:group_search_filter_by_tags_agg'
+settings:
+  id: 'facet_block:group_search_filter_by_tags_agg'
+  label: 'Group Search: Filter by Tags (Agg)'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: westy_group_search_filterbytags_agg
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/search'
