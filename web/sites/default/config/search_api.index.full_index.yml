@@ -35,6 +35,7 @@ dependencies:
     - field.storage.node.field_published_on
     - field.storage.node.field_search_keywords
     - field.storage.node.field_support_model
+    - field.storage.node.field_tags
     - field.storage.node.field_topics
     - field.storage.node.field_type
     - field.storage.node.field_updated_on
@@ -550,6 +551,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_tags
+  field_tags_1:
+    label: Tags
+    datasource_id: 'entity:node'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_tags
   field_title:
     label: 'User title'
     datasource_id: 'entity:user'
