@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60af3655947ca69233c0b52e98f6f015",
+    "content-hash": "8561de2dfd5e4bf0cb16ec11e9a93bce",
     "packages": [
         {
             "name": "algolia/places",
@@ -82,7 +82,7 @@
             "version": "v4.1.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:fengyuanchen/cropper.git",
+                "url": "https://github.com/fengyuanchen/cropper.git",
                 "reference": "617d9bdb8688cc4edb3b03bc49a04b83c7facbe7"
             },
             "dist": {
@@ -3363,6 +3363,57 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/easy_breadcrumb",
                 "issues": "https://www.drupal.org/project/issues/easy_breadcrumb"
+            }
+        },
+        {
+            "name": "drupal/edit_media_modal",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/edit_media_modal.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/edit_media_modal-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "bd99bb6667aff7a94e77b234b78900a510a25941"
+            },
+            "require": {
+                "drupal/core": "^8.8.0 || ^9.0 || ^10.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1718838864",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Sharkov",
+                    "homepage": "https://www.drupal.org/u/blade_ukraine",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "The module provide ability to edit Media entity embedded via CKEditor in a modal window.",
+            "homepage": "https://www.drupal.org/project/edit_media_modal",
+            "keywords": [
+                "CKEditor",
+                "Drupal",
+                "Media"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/edit_media_modal",
+                "issues": "https://www.drupal.org/project/issues/edit_media_modal"
             }
         },
         {
