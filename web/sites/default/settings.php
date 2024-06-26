@@ -142,8 +142,8 @@ switch ($env) {
 // Overwrite Google Tag Manager environment setting in 'live' production site.
 if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
   if ($_ENV['PANTHEON_ENVIRONMENT'] === 'live') {
-    $config['google_tag.container.employees_portland.gov']['environment_id'] = 'env-1';
-    $config['google_tag.container.employees_portland.gov']['environment_token'] = 'ooMp5LjvXgMdbFJ9wE617g';
+    $config['google_tag.container.employees_portland.gov']['advanced_settings']['gtm']['GTM-558BXL5']['environment_id'] = 'env-1';
+    $config['google_tag.container.employees_portland.gov']['advanced_settings']['gtm']['GTM-558BXL5']['environment_token'] = 'ooMp5LjvXgMdbFJ9wE617g';
   }
 }
 
