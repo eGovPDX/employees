@@ -1592,7 +1592,7 @@ display:
           label: Created
           exclude: false
           alter:
-            alter_text: true
+            alter_text: false
             text: '{{ created }} <br> {{ uid }}'
             make_link: false
             path: ''
@@ -1864,7 +1864,7 @@ display:
           label: 'Last Updated'
           exclude: false
           alter:
-            alter_text: true
+            alter_text: false
             text: "{{ changed }}<br>\r\n{{ revision_uid }}<br>\r\n{{ moderation_state }}\r\n{% if moderation_state != \"<strong>Published</strong>\" %}{{ status }}{% endif %}"
             make_link: false
             path: ''
