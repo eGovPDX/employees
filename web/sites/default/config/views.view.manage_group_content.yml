@@ -1525,7 +1525,7 @@ display:
           entity_field: uid
           plugin_id: field
           label: 'Authored by'
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -1665,7 +1665,7 @@ display:
           entity_type: node
           plugin_id: field
           label: 'Moderation state'
-          exclude: true
+          exclude: false
           alter:
             alter_text: true
             text: '<strong>{{ moderation_state }}</strong>'
@@ -1728,8 +1728,8 @@ display:
           entity_type: node
           entity_field: revision_uid
           plugin_id: field
-          label: 'Revision user'
-          exclude: true
+          label: 'Updated by'
+          exclude: false
           alter:
             alter_text: false
             text: ''
