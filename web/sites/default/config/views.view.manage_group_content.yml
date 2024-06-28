@@ -1981,6 +1981,23 @@ display:
           text: view
           output_url_as_text: true
           absolute: true
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: nid
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+          granularity: second
       filters:
         latest_translation_affected_revision:
           id: latest_translation_affected_revision
@@ -2356,6 +2373,7 @@ display:
             use_serializer_encode_only: false
       defaults:
         fields: false
+        sorts: false
         filters: false
         filter_groups: false
       display_description: ''
