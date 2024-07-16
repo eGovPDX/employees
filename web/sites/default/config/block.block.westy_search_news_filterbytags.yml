@@ -1,0 +1,29 @@
+uuid: e45ab15d-2b80-4b9b-a569-811159737d4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.search_news_filter_by_tags
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_search_news_filterbytags
+theme: westy
+region: side
+weight: 2
+provider: null
+plugin: 'facet_block:search_news_filter_by_tags'
+settings:
+  id: 'facet_block:search_news_filter_by_tags'
+  label: 'News: Filter by Tags'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: westy_search_news_filterbytags
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /news

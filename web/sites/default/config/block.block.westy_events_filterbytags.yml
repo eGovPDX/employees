@@ -1,0 +1,29 @@
+uuid: ee275407-21e5-41b7-8624-b6cd078efd3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.events_filter_by_tags
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_events_filterbytags
+theme: westy
+region: side
+weight: -22
+provider: null
+plugin: 'facet_block:events_filter_by_tags'
+settings:
+  id: 'facet_block:events_filter_by_tags'
+  label: 'Events: Filter by Tags'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: westy_events_filterbytags
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /events

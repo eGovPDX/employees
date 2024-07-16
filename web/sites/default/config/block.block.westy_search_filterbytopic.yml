@@ -1,0 +1,29 @@
+uuid: a6eaac9b-b302-4fe1-bef8-4966fa35acb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.search_filter_by_topic
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: westy_search_filterbytopic
+theme: westy
+region: side
+weight: -38
+provider: null
+plugin: 'facet_block:search_filter_by_topic'
+settings:
+  id: 'facet_block:search_filter_by_topic'
+  label: 'Search: Filter by Topic'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: westy_search_filterbytopic
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/search\r\n/search*"

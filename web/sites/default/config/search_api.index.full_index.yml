@@ -7,8 +7,8 @@ dependencies:
     - field.storage.group.field_search_keywords
     - field.storage.media.field_display_in_group
     - field.storage.media.field_description
-    - field.storage.media.field_search_keywords
     - field.storage.media.field_tags
+    - field.storage.media.field_search_keywords
     - field.storage.node.field_bts_application_exception
     - field.storage.node.field_bureaus
     - field.storage.node.field_business_capability
@@ -23,6 +23,7 @@ dependencies:
     - field.storage.node.field_title
     - field.storage.node.body
     - field.storage.node.field_display_in_group
+    - field.storage.node.field_tags
     - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
     - field.storage.node.field_description
@@ -118,13 +119,22 @@ field_settings:
   agg_display_in_group:
     label: 'Displayed in'
     property_path: aggregated_field
-    type: string
+    type: integer
     configuration:
       type: union
       separator: ''
       fields:
         - 'entity:media/field_display_in_group'
         - 'entity:node/field_display_in_group'
+  agg_tags:
+    label: 'Tags (Content and Media)'
+    property_path: aggregated_field
+    type: integer
+    configuration:
+      type: union
+      fields:
+        - 'entity:media/field_tags'
+        - 'entity:node/field_tags'
   content_body:
     label: 'Content Body'
     datasource_id: 'entity:node'
@@ -543,13 +553,21 @@ field_settings:
       config:
         - field.storage.node.field_support_model
   field_tags:
-    label: Tags
+    label: 'Media Tags'
     datasource_id: 'entity:media'
     property_path: field_tags
     type: integer
     dependencies:
       config:
         - field.storage.media.field_tags
+  field_tags_content:
+    label: 'Content Tags'
+    datasource_id: 'entity:node'
+    property_path: field_tags
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_tags
   field_title:
     label: 'User title'
     datasource_id: 'entity:user'
