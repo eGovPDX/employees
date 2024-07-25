@@ -153,6 +153,9 @@ if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
   require $ddev_settings;
 }
 
+// Set the Solr site hash to a permanent value instead of using the auto-generated hash
+$settings['search_api_solr.site_hash'] = 'employees';
+
 // Set the configuration sync directory
 $settings['config_sync_directory'] = 'sites/default/config';
 
