@@ -865,7 +865,7 @@ display:
       use_more_always: true
       use_more_text: 'See all »'
       link_display: custom_url
-      link_url: '/taxonomy/term/{{ arguments.field_topics_target_id }}'
+      link_url: '/taxonomy/term/{{ raw_arguments.field_topics_target_id }}'
       display_extenders: {  }
       entity_type: taxonomy_term
       bundles:
