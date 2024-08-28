@@ -1,0 +1,143 @@
+uuid: 3db7d46a-bec7-4775-adc1-d739ce61b9b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+    - media.type.document
+    - media.type.iframe
+    - media.type.image
+    - media.type.remote_document
+    - media.type.remote_video
+    - node.type.alert
+    - node.type.contact
+    - node.type.contract
+    - node.type.event
+    - node.type.news
+    - node.type.notification
+    - node.type.page
+    - node.type.resource
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_permissions
+    - file
+    - filter
+    - media
+    - node
+    - scheduler
+    - taxonomy
+id: site_editor
+label: 'Site Editor'
+weight: -2
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access taxonomy overview'
+  - 'administer nodes'
+  - 'create alert content'
+  - 'create contact content'
+  - 'create contract content'
+  - 'create event content'
+  - 'create field_feature'
+  - 'create field_feature_until'
+  - 'create field_homepage'
+  - 'create field_popularity'
+  - 'create media'
+  - 'create news content'
+  - 'create notification content'
+  - 'create page content'
+  - 'create resource content'
+  - 'create terms in tags'
+  - 'create terms in topics'
+  - 'delete any alert content'
+  - 'delete any contact content'
+  - 'delete any contract content'
+  - 'delete any event content'
+  - 'delete any media'
+  - 'delete any news content'
+  - 'delete any notification content'
+  - 'delete any page content'
+  - 'delete any resource content'
+  - 'delete own alert content'
+  - 'delete own contact content'
+  - 'delete own contract content'
+  - 'delete own event content'
+  - 'delete own files'
+  - 'delete own news content'
+  - 'delete own notification content'
+  - 'delete own page content'
+  - 'delete own resource content'
+  - 'delete term revisions in tags'
+  - 'delete term revisions in topics'
+  - 'delete terms in tags'
+  - 'delete terms in topics'
+  - 'edit any alert content'
+  - 'edit any contact content'
+  - 'edit any contract content'
+  - 'edit any document media'
+  - 'edit any event content'
+  - 'edit any iframe media'
+  - 'edit any image media'
+  - 'edit any news content'
+  - 'edit any notification content'
+  - 'edit any page content'
+  - 'edit any remote_document media'
+  - 'edit any remote_video media'
+  - 'edit any resource content'
+  - 'edit field_feature'
+  - 'edit field_feature_until'
+  - 'edit field_homepage'
+  - 'edit field_popularity'
+  - 'edit own alert content'
+  - 'edit own contact content'
+  - 'edit own contract content'
+  - 'edit own event content'
+  - 'edit own field_feature'
+  - 'edit own field_feature_until'
+  - 'edit own field_homepage'
+  - 'edit own field_popularity'
+  - 'edit own news content'
+  - 'edit own notification content'
+  - 'edit own page content'
+  - 'edit own resource content'
+  - 'edit terms in tags'
+  - 'edit terms in topics'
+  - 'revert alert revisions'
+  - 'revert all revisions'
+  - 'revert contact revisions'
+  - 'revert contract revisions'
+  - 'revert event revisions'
+  - 'revert news revisions'
+  - 'revert notification revisions'
+  - 'revert page revisions'
+  - 'revert resource revisions'
+  - 'schedule publishing of media'
+  - 'schedule publishing of nodes'
+  - 'update any media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition mark_for_review'
+  - 'use editorial transition publish'
+  - 'use editorial transition unpublish'
+  - 'use text format restricted_html'
+  - 'view alert revisions'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view contact revisions'
+  - 'view contract revisions'
+  - 'view event revisions'
+  - 'view field_feature'
+  - 'view field_feature_until'
+  - 'view field_homepage'
+  - 'view field_popularity'
+  - 'view news revisions'
+  - 'view notification revisions'
+  - 'view own field_feature'
+  - 'view own field_feature_until'
+  - 'view own field_homepage'
+  - 'view own field_popularity'
+  - 'view page revisions'
+  - 'view resource revisions'
