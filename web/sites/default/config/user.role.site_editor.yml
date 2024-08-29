@@ -27,8 +27,14 @@ dependencies:
     - filter
     - media
     - node
+    - path
+    - pathauto
+    - quick_node_clone
+    - redirect
     - scheduler
+    - system
     - taxonomy
+    - toolbar_menu
 id: site_editor
 label: 'Site Editor'
 weight: -2
@@ -36,7 +42,17 @@ is_admin: null
 permissions:
   - 'access content overview'
   - 'access taxonomy overview'
+  - 'administer menu'
   - 'administer nodes'
+  - 'administer redirects'
+  - 'clone alert content'
+  - 'clone contact content'
+  - 'clone contract content'
+  - 'clone event content'
+  - 'clone news content'
+  - 'clone notification content'
+  - 'clone page content'
+  - 'clone resource content'
   - 'create alert content'
   - 'create contact content'
   - 'create contract content'
@@ -52,6 +68,7 @@ permissions:
   - 'create resource content'
   - 'create terms in tags'
   - 'create terms in topics'
+  - 'create url aliases'
   - 'delete any alert content'
   - 'delete any contact content'
   - 'delete any contract content'
@@ -105,6 +122,7 @@ permissions:
   - 'edit own resource content'
   - 'edit terms in tags'
   - 'edit terms in topics'
+  - 'notify of path changes'
   - 'revert alert revisions'
   - 'revert all revisions'
   - 'revert contact revisions'
@@ -128,6 +146,7 @@ permissions:
   - 'view any unpublished content'
   - 'view contact revisions'
   - 'view contract revisions'
+  - 'view editor in toolbar'
   - 'view event revisions'
   - 'view field_feature'
   - 'view field_feature_until'
@@ -141,3 +160,4 @@ permissions:
   - 'view own field_popularity'
   - 'view page revisions'
   - 'view resource revisions'
+  - 'view the administration theme'
