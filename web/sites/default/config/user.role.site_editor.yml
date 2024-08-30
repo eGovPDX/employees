@@ -10,6 +10,7 @@ dependencies:
     - media.type.remote_document
     - media.type.remote_video
     - node.type.alert
+    - node.type.bts_catalog_item
     - node.type.contact
     - node.type.contract
     - node.type.event
@@ -25,6 +26,7 @@ dependencies:
     - field_permissions
     - file
     - filter
+    - group
     - media
     - node
     - path
@@ -36,11 +38,12 @@ dependencies:
     - taxonomy
     - toolbar_menu
 id: site_editor
-label: 'Site Editor'
+label: 'Sitewide Editor'
 weight: -2
 is_admin: null
 permissions:
   - 'access content overview'
+  - 'access group overview'
   - 'access taxonomy overview'
   - 'administer menu'
   - 'administer nodes'
@@ -54,8 +57,10 @@ permissions:
   - 'clone page content'
   - 'clone resource content'
   - 'create alert content'
+  - 'create bts_catalog_item content'
   - 'create contact content'
   - 'create contract content'
+  - 'create employee group'
   - 'create event content'
   - 'create field_feature'
   - 'create field_feature_until'
@@ -65,11 +70,13 @@ permissions:
   - 'create news content'
   - 'create notification content'
   - 'create page content'
+  - 'create private group'
   - 'create resource content'
   - 'create terms in tags'
   - 'create terms in topics'
   - 'create url aliases'
   - 'delete any alert content'
+  - 'delete any bts_catalog_item content'
   - 'delete any contact content'
   - 'delete any contract content'
   - 'delete any event content'
@@ -78,7 +85,9 @@ permissions:
   - 'delete any notification content'
   - 'delete any page content'
   - 'delete any resource content'
+  - 'delete bts_catalog_item revisions'
   - 'delete own alert content'
+  - 'delete own bts_catalog_item content'
   - 'delete own contact content'
   - 'delete own contract content'
   - 'delete own event content'
@@ -92,6 +101,7 @@ permissions:
   - 'delete terms in tags'
   - 'delete terms in topics'
   - 'edit any alert content'
+  - 'edit any bts_catalog_item content'
   - 'edit any contact content'
   - 'edit any contract content'
   - 'edit any document media'
@@ -109,6 +119,7 @@ permissions:
   - 'edit field_homepage'
   - 'edit field_popularity'
   - 'edit own alert content'
+  - 'edit own bts_catalog_item content'
   - 'edit own contact content'
   - 'edit own contract content'
   - 'edit own event content'
@@ -125,6 +136,7 @@ permissions:
   - 'notify of path changes'
   - 'revert alert revisions'
   - 'revert all revisions'
+  - 'revert bts_catalog_item revisions'
   - 'revert contact revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
@@ -144,6 +156,8 @@ permissions:
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
+  - 'view bts_catalog in toolbar'
+  - 'view bts_catalog_item revisions'
   - 'view contact revisions'
   - 'view contract revisions'
   - 'view editor in toolbar'
