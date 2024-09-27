@@ -3,15 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.restricted_html
     - media.type.document
     - media.type.iframe
     - media.type.image
     - media.type.remote_document
     - media.type.remote_video
     - node.type.alert
-    - node.type.bts_catalog_item
-    - node.type.contact
     - node.type.contract
     - node.type.event
     - node.type.news
@@ -19,13 +16,11 @@ dependencies:
     - node.type.page
     - node.type.resource
     - taxonomy.vocabulary.tags
-    - taxonomy.vocabulary.topics
     - workflows.workflow.editorial
   module:
     - content_moderation
     - field_permissions
     - file
-    - filter
     - group
     - media
     - node
@@ -44,12 +39,12 @@ is_admin: null
 permissions:
   - 'access content overview'
   - 'access group overview'
+  - 'access media overview'
   - 'access taxonomy overview'
   - 'administer menu'
   - 'administer nodes'
   - 'administer redirects'
   - 'clone alert content'
-  - 'clone contact content'
   - 'clone contract content'
   - 'clone event content'
   - 'clone news content'
@@ -57,8 +52,6 @@ permissions:
   - 'clone page content'
   - 'clone resource content'
   - 'create alert content'
-  - 'create bts_catalog_item content'
-  - 'create contact content'
   - 'create contract content'
   - 'create employee group'
   - 'create event content'
@@ -73,11 +66,8 @@ permissions:
   - 'create private group'
   - 'create resource content'
   - 'create terms in tags'
-  - 'create terms in topics'
   - 'create url aliases'
   - 'delete any alert content'
-  - 'delete any bts_catalog_item content'
-  - 'delete any contact content'
   - 'delete any contract content'
   - 'delete any event content'
   - 'delete any media'
@@ -85,10 +75,7 @@ permissions:
   - 'delete any notification content'
   - 'delete any page content'
   - 'delete any resource content'
-  - 'delete bts_catalog_item revisions'
   - 'delete own alert content'
-  - 'delete own bts_catalog_item content'
-  - 'delete own contact content'
   - 'delete own contract content'
   - 'delete own event content'
   - 'delete own files'
@@ -96,13 +83,7 @@ permissions:
   - 'delete own notification content'
   - 'delete own page content'
   - 'delete own resource content'
-  - 'delete term revisions in tags'
-  - 'delete term revisions in topics'
-  - 'delete terms in tags'
-  - 'delete terms in topics'
   - 'edit any alert content'
-  - 'edit any bts_catalog_item content'
-  - 'edit any contact content'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
@@ -119,8 +100,6 @@ permissions:
   - 'edit field_homepage'
   - 'edit field_popularity'
   - 'edit own alert content'
-  - 'edit own bts_catalog_item content'
-  - 'edit own contact content'
   - 'edit own contract content'
   - 'edit own event content'
   - 'edit own field_feature'
@@ -131,13 +110,9 @@ permissions:
   - 'edit own notification content'
   - 'edit own page content'
   - 'edit own resource content'
-  - 'edit terms in tags'
-  - 'edit terms in topics'
   - 'notify of path changes'
   - 'revert alert revisions'
   - 'revert all revisions'
-  - 'revert bts_catalog_item revisions'
-  - 'revert contact revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
@@ -151,14 +126,11 @@ permissions:
   - 'use editorial transition mark_for_review'
   - 'use editorial transition publish'
   - 'use editorial transition unpublish'
-  - 'use text format restricted_html'
   - 'view alert revisions'
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view bts_catalog in toolbar'
-  - 'view bts_catalog_item revisions'
-  - 'view contact revisions'
   - 'view contract revisions'
   - 'view editor in toolbar'
   - 'view event revisions'
