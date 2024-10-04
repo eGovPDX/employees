@@ -716,9 +716,17 @@ function _validate_document(&$form, FormStateInterface $form_state)
 
 /**
  * Implement hook_cron()
- * Retrieve a view and send it to powr@portlandoregon.gov
  */
 function employees_cron()
+{
+  _content_updated_recently();
+  _send_reviewer_notifications();
+}
+
+/**
+ * Retrieve a view and send it to BTS-eGov@portlandoregon.gov
+ */
+function _content_updated_recently()
 {
   // In each cron run after 12pm, check if we've sent the content update summary email today.
   $hour = (int)(date('G')); // 0 to 23
@@ -780,6 +788,104 @@ function employees_cron()
       \Drupal::logger('mail-log')->notice(t('Daily content update summary email sent successfully.'));
       \Drupal::state()->set('portland.last_daily_email_sent', date('m/d/Y'));
     }
+  }
+}
+
+/**
+ * Retrieve a view of content with reviewer notifications and use it to send 
+ * emails to reviewers as appropriate.
+ */
+function _send_reviewer_notifications()
+{
+  // In each cron run after 6am, check if we've sent the content update summary email today.
+  $hour = (int)(date('G')); // 0 to 23
+  if ($hour >= 6) {
+    // If an email is already sent today, do not send again
+    $last_daily_email_sent = \Drupal::state()->get('portland.last_reviewer_notification_email_sent');
+    if (!empty($last_daily_email_sent) && $last_daily_email_sent === date('m/d/Y')) {
+      return;
+    }
+
+    // View that includes all content which has a value set for reviewer notification emails
+    $view = ['view_id' => 'content_updated_recently', 'block_id' => 'block_reviewer_notifications'];
+
+    // Get the view by machine id
+    $theview = Views::getView($view['view_id']);
+    // Set the display machine id
+    $theview->setDisplay($view['block_id']);
+    $theview->preExecute();
+    $theview->execute();
+
+    // If the view is empty, do not send any emails
+    if (!count($theview->result)) {
+      \Drupal::state()->set('portland.last_reviewer_notification_email_sent', date('m/d/Y'));
+      \Drupal::logger('mail-log')->notice(t('No content has been marked for reviewer notification emails.'));
+      return;
+    }
+
+    // Add environment name to the email subject if it's not Live
+    $environment_name = '';
+    if(isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] != 'live') {
+        $environment_name = ' (' . $_ENV['PANTHEON_ENVIRONMENT'] . ')';
+    }
+
+    $email_count = 0;
+    foreach ($theview->result as $result) {
+      $id = $result->_entity->id();
+      $entity_type = $result->_entity->getEntityTypeId();
+
+      $changed = $result->_entity->get("changed")->value;   // In Unix epoch timestamp format
+      $last_changed = new DateTime("@$changed");
+      $last_changed->setTime(0, 0, 0);  // Ignore the timestamp part of the DateTime
+      
+      $notification_period = $result->_entity->get("field_send_reviewer_notification")->value;
+      $interval = new DateInterval($notification_period);
+      
+      $last_notification_date = \Drupal::keyValue('employees')->get("last_reviewer_notification_date.$entity_type.$id");
+      if (empty($last_notification_date)) {
+        $last_notification_date = 0;  // Equivalent to 1/1/1970 in Unix epoch format
+      }
+      
+      // Create list of email recipients
+      $to_emails = [];
+      // $to_emails[] = $result->_entity->getOwner()->mail->value;
+      $reviewers = $result->_entity->get("field_reviewer");
+      foreach ($reviewers->referencedEntities() as $reviewer) {
+        $to_emails[] = $reviewer->mail->value;
+      }
+      
+      // Send reviewer notification email if the specified amount of time has elapsed since last changed date 
+      // and an email hasn't already been sent since it was last changed
+      // TODO: Remove "TRUE" debugging override
+      if (!empty($to_emails) 
+          && ($last_notification_date < $last_changed->getTimeStamp())
+          && (date_add($last_changed, $interval) <= date_create()->setTime(0, 0, 0))) {
+        // Send email
+        $key = 'employees_notify_reviewers';
+        $to = $to_emails;
+        $params['reply_to'] = 'BTS-eGov@portlandoregon.gov';
+        $params['message'] = '<p>This is a notification that the following webpage is scheduled for periodic
+                review and should be updated if necessary:<p/>';
+        $params['message'] .= "<p><a href=\"" . $result->_entity->toUrl()->toString() . "\">" . $result->_entity->get('title')->value . "</a><p/>";
+        $params['title'] = 'Employees.portland.gov scheduled reviewer notification: ' . $result->_entity->get('title')->value . $environment_name;
+        // Cron is run with the anonymous user. Set the language code to EN.
+        $langcode = 'en';
+    
+        $sent_successfully = _send_email($key, implode(',', $to_emails), $langcode, $params, 'powr@portlandoregon.gov');
+
+        // Record email timestamp to avoid resending email again on following days
+        // Use the KeyValue API instead of State API beacuse of the potentially very large number of keys https://www.drupal.org/node/3177901
+        if ($sent_successfully) {
+          $email_count++;
+          \Drupal::keyValue('employees')->set("last_reviewer_notification_date.$entity_type.$id", time());
+        }
+      }
+    }
+    // TODO: Remove debug return below
+    // return;
+
+    \Drupal::logger('mail-log')->notice(t("Seccessfully sent $email_count reviewer notification emails."));
+    \Drupal::state()->set('portland.last_reviewer_notification_email_sent', date('m/d/Y'));
   }
 }
 

@@ -1,0 +1,42 @@
+uuid: dd0c66c8-a0b1-4f70-a986-a32db7d025d2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_send_reviewer_notification
+field_name: field_send_reviewer_notification
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: P1M
+      label: '1 month'
+    -
+      value: P3M
+      label: '3 months'
+    -
+      value: P6M
+      label: '6 months'
+    -
+      value: P1Y
+      label: '1 year'
+    -
+      value: P1D
+      label: '1 day'
+    -
+      value: P3D
+      label: '3 days'
+    -
+      value: P7D
+      label: '1 week'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

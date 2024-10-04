@@ -1,0 +1,21 @@
+uuid: bd6797f6-814f-448c-b376-0f58a0720938
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_send_reviewer_notification
+    - node.type.page
+  module:
+    - options
+id: node.page.field_send_reviewer_notification
+field_name: field_send_reviewer_notification
+entity_type: node
+bundle: page
+label: 'Send reviewer notification email'
+description: 'This will send an email to the reviewers after the selected amount of time has passed since the content was last updated to remind them to review it. This is useful for content that should be updated periodically.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
