@@ -18,7 +18,6 @@ dependencies:
     - field.field.node.news.field_updated_on
     - node.type.news
     - views.view.content_list
-    - views.view.group_menu
     - views.view.related_content
   module:
     - datetime
@@ -42,19 +41,6 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          6657e72d-b567-43e3-958b-38bf5e933dce:
-            uuid: 6657e72d-b567-43e3-958b-38bf5e933dce
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_menu_by_path'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 0
-            additional: {  }
           6c775ec7-8eb4-402c-9936-a492f558cb90:
             uuid: 6c775ec7-8eb4-402c-9936-a492f558cb90
             region: main

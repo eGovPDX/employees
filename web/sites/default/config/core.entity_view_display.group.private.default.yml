@@ -16,7 +16,6 @@ dependencies:
     - field.field.group.private.field_parent_group
     - group.type.private
     - views.view.group_list_views
-    - views.view.group_menu
     - views.view.group_search_index
   module:
     - layout_builder
@@ -95,19 +94,6 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          3caaae81-378c-4be0-a102-0dbd348288fb:
-            uuid: 3caaae81-378c-4be0-a102-0dbd348288fb
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 1
-            additional: {  }
           6066a5fe-57b8-49ec-9275-538b104f1398:
             uuid: 6066a5fe-57b8-49ec-9275-538b104f1398
             region: main
