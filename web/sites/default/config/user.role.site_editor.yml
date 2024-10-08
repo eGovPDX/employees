@@ -1,10 +1,10 @@
-uuid: baf86895-37e5-4133-80ea-b6555e694f61
+uuid: 3db7d46a-bec7-4775-adc1-d739ce61b9b5
 langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.basic_html
     - media.type.document
+    - media.type.iframe
     - media.type.image
     - media.type.remote_document
     - media.type.remote_video
@@ -20,10 +20,9 @@ dependencies:
   module:
     - content_moderation
     - field_permissions
-    - filter
+    - file
     - group
     - media
-    - moderation_sidebar
     - node
     - path
     - pathauto
@@ -33,15 +32,17 @@ dependencies:
     - system
     - taxonomy
     - toolbar_menu
-id: content_lead
-label: 'Content Lead'
-weight: -4
+id: site_editor
+label: 'Sitewide Editor'
+weight: -3
 is_admin: null
 permissions:
   - 'access content overview'
   - 'access group overview'
   - 'access media overview'
+  - 'access taxonomy overview'
   - 'administer menu'
+  - 'administer nodes'
   - 'administer redirects'
   - 'clone alert content'
   - 'clone contract content'
@@ -52,72 +53,66 @@ permissions:
   - 'clone resource content'
   - 'create alert content'
   - 'create contract content'
-  - 'create document media'
+  - 'create employee group'
   - 'create event content'
   - 'create field_feature'
   - 'create field_feature_until'
   - 'create field_homepage'
   - 'create field_popularity'
-  - 'create image media'
   - 'create media'
   - 'create news content'
   - 'create notification content'
   - 'create page content'
   - 'create private group'
-  - 'create remote_document media'
-  - 'create remote_video media'
   - 'create resource content'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete any alert content'
   - 'delete any contract content'
   - 'delete any event content'
+  - 'delete any media'
   - 'delete any news content'
   - 'delete any notification content'
   - 'delete any page content'
   - 'delete any resource content'
-  - 'delete media'
   - 'delete own alert content'
   - 'delete own contract content'
-  - 'delete own document media'
   - 'delete own event content'
-  - 'delete own image media'
+  - 'delete own files'
   - 'delete own news content'
   - 'delete own notification content'
   - 'delete own page content'
-  - 'delete own remote_document media'
-  - 'delete own remote_video media'
+  - 'delete own resource content'
   - 'edit any alert content'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
+  - 'edit any iframe media'
   - 'edit any image media'
   - 'edit any news content'
   - 'edit any notification content'
   - 'edit any page content'
   - 'edit any remote_document media'
   - 'edit any remote_video media'
+  - 'edit any resource content'
   - 'edit field_feature'
   - 'edit field_feature_until'
   - 'edit field_homepage'
   - 'edit field_popularity'
   - 'edit own alert content'
   - 'edit own contract content'
-  - 'edit own document media'
   - 'edit own event content'
   - 'edit own field_feature'
   - 'edit own field_feature_until'
   - 'edit own field_homepage'
   - 'edit own field_popularity'
-  - 'edit own image media'
   - 'edit own news content'
   - 'edit own notification content'
   - 'edit own page content'
-  - 'edit own remote_document media'
-  - 'edit own remote_video media'
   - 'edit own resource content'
   - 'notify of path changes'
   - 'revert alert revisions'
+  - 'revert all revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
@@ -127,27 +122,28 @@ permissions:
   - 'schedule publishing of media'
   - 'schedule publishing of nodes'
   - 'update any media'
-  - 'update media'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use editorial transition publish'
   - 'use editorial transition unpublish'
-  - 'use moderation sidebar'
-  - 'use text format basic_html'
   - 'view alert revisions'
   - 'view all media revisions'
+  - 'view all revisions'
   - 'view any unpublished content'
+  - 'view bts_catalog in toolbar'
+  - 'view contract revisions'
   - 'view editor in toolbar'
+  - 'view event revisions'
   - 'view field_feature'
   - 'view field_feature_until'
   - 'view field_homepage'
   - 'view field_popularity'
-  - 'view latest version'
+  - 'view news revisions'
   - 'view notification revisions'
   - 'view own field_feature'
   - 'view own field_feature_until'
   - 'view own field_homepage'
   - 'view own field_popularity'
-  - 'view own unpublished content'
-  - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view resource revisions'
   - 'view the administration theme'
