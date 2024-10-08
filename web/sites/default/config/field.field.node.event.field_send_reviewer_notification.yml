@@ -1,16 +1,16 @@
-uuid: f75a76e3-8e15-42d6-be63-a22807868c9a
+uuid: 9d47f2c2-f7b6-4bb8-bb38-764328aa7dbc
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_send_reviewer_notification
-    - node.type.page
+    - node.type.event
   module:
     - datetime
-id: node.page.field_send_reviewer_notification
+id: node.event.field_send_reviewer_notification
 field_name: field_send_reviewer_notification
 entity_type: node
-bundle: page
+bundle: event
 label: 'Send reviewer notification email'
 description: "This will send an email to the content's reviewers on the selected date to remind them to review it. This is useful for content that should be updated periodically."
 required: false

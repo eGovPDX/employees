@@ -16,7 +16,7 @@ class ResourceUrlConstraintValidator extends ConstraintValidator {
   public function validate($entity, Constraint $constraint) {
     if (!isset($entity) || 
       $entity->bundle() != 'resource' || 
-      empty($entity->field_resource_link)) {
+      empty($entity->field_resource_link[0])) {
       return;
     }
 
