@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_search_keywords
+    - field.field.node.bts_catalog_item.field_send_reviewer_notification
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
@@ -31,6 +32,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - datetime
     - field_group
     - field_states_ui
     - link
@@ -84,7 +86,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 20
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -338,14 +340,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_reviewer:
-    type: select2_entity_reference
+    type: entity_reference_autocomplete
     weight: 19
     region: content
     settings:
-      width: 100%
-      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 20
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings:
       field_states_ui:
         form:
@@ -359,6 +361,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_send_reviewer_notification:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_service:
     type: entity_reference_autocomplete
@@ -449,24 +457,24 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 22
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 25
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 27
+    weight: 28
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 24
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -480,7 +488,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -490,18 +498,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 26
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 28
+    weight: 29
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 23
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
