@@ -417,9 +417,11 @@ content:
     weight: 12
     region: main
   field_send_reviewer_notification:
-    type: list_default
+    type: datetime_default
     label: above
-    settings: {  }
+    settings:
+      timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
     weight: 15
     region: main

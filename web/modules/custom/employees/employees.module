@@ -27,11 +27,6 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   // decides how it wants to handle accessible and usable validation.
 
   switch($form_id) {
-    case "media_document_add_form":
-    case "media_document_edit_form":
-      // Validate the file field in Document
-      $form['#validate'][] = '_validate_document';
-      break;
     case "group_content_employee-group_membership_add_form":
     case "group_content_employee-group_membership_edit_form":
     case "group_content_private-group_membership_add_form":
@@ -132,6 +127,16 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "node_resource_form":
     case "node_resource_edit_form":
       $form['actions']['submit']['#submit'][] = '_resource_node_form_submit';
+      // Intentionally avoid using "break" here. Not a bug.
+    case "node_bts_catalog_item_form":
+    case "node_bts_catalog_item_edit_form":
+    case "node_event_form":
+    case "node_event_edit_form":
+    case "node_news_form":
+    case "node_news_edit_form":
+    case "node_page_form":
+    case "node_page_edit_form":
+      $form['#validate'][] = '_validate_send_reviewer_notification_date';
       break;
   }
 }
@@ -173,7 +178,7 @@ function _validate_remote_document(&$form, FormStateInterface $form_state)
   }
 
   if (strlen($remote_document_url) == 0) {
-    $form_state->setErrorByName('field_media_media_remote', 'This field is required.');
+    $form_state->setErrorByName('field_media_media_remote][0][value', 'This field is required.');
     return;
   }
 
@@ -181,7 +186,7 @@ function _validate_remote_document(&$form, FormStateInterface $form_state)
   try {
     $headers = get_headers($remote_document_url, 1);
   } catch (Exception $e) {
-    $form_state->setErrorByName('field_media_media_remote', 'Cannot retrieve file size and mimetype from this link.');
+    $form_state->setErrorByName('field_media_media_remote][0][value', 'Cannot retrieve file size and mimetype from this link.');
     return;
   }
 
@@ -193,7 +198,7 @@ function _validate_remote_document(&$form, FormStateInterface $form_state)
   ) {
     $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
     if ($file_size === 0) {
-      $form_state->setErrorByName('field_media_media_remote', t('The linked file is empty.'));
+      $form_state->setErrorByName('field_media_media_remote][0][value', t('The linked file is empty.'));
       return;
     }
     // Content-Type header can be "text/html; charset=utf-8"
@@ -201,7 +206,7 @@ function _validate_remote_document(&$form, FormStateInterface $form_state)
     // If content type is text/HTML, it's not a file
     if (empty($content_type_array) || $content_type_array[0] === "text/html") {
       // Commented this line out to support existing documents that are linked to an eFiles folder
-      // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+      // $form_state->setErrorByName('field_efiles_link][0][value', t('The linked file is an HTML page. Please use External Resource instead.'));
       return;
     }
 
@@ -232,7 +237,7 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
     }
 
     if (strlen($remote_document_url) == 0) {
-      $form_state->setErrorByName('field_media_media_remote', 'This field is required.');
+      $form_state->setErrorByName('field_media_media_remote][0][value', 'This field is required.');
       return;
     }
   
@@ -240,7 +245,7 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
     try {
       $headers = get_headers($remote_document_url, 1);
     } catch (Exception $e) {
-      $form_state->setErrorByName('field_media_media_remote', 'Cannot retrieve file size and mimetype from this link.');
+      $form_state->setErrorByName('field_media_media_remote][0][value', 'Cannot retrieve file size and mimetype from this link.');
       return;
     }
 
@@ -252,7 +257,7 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
     ) {
       $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
       if ($file_size === 0) {
-        $form_state->setErrorByName('field_media_media_remote', t('The linked file is empty.'));
+        $form_state->setErrorByName('field_media_media_remote][0][value', t('The linked file is empty.'));
         return;
       }
       // Content-Type header can be "text/html; charset=utf-8"
@@ -260,12 +265,29 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
       // If content type is text/HTML, it's not a file
       if (empty($content_type_array) || $content_type_array[0] === "text/html") {
         // Commented this line out to support existing documents that are linked to an eFiles folder
-        // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
+        // $form_state->setErrorByName('field_efiles_link][0][value', t('The linked file is an HTML page. Please use External Resource instead.'));
         return;
       }
 
       $form_state->getValue('media')[0]['fields']['field_file_size'] = [["value" => $file_size]];
       $form_state->getValue('media')[0]['fields']['field_mime_type'] = [["value" => $content_type_array[0]]];
+    }
+  }
+}
+
+/**
+ * A helper function to validate the 'Send reviewer notification email' date field.
+ */
+function _validate_send_reviewer_notification_date(&$form, FormStateInterface $form_state)
+{
+  $notification_date = $form_state->getValue("field_send_reviewer_notification")[0]['value'];
+  if ($notification_date) {
+    $notification_date = date_create($notification_date)->getTimestamp();
+  
+    if ($notification_date <= time()) {
+      $form_state->setErrorByName('field_send_reviewer_notification][0][value', 'Send reviewer notification email date must be a future date. You can also clear an existing date if you no longer want a reminder set.');
+    } elseif (!$form_state->getValue("field_reviewer")[0]['target_id']) {
+      $form_state->setErrorByName('field_send_reviewer_notification][0][value', 'Send reviewer notification email cannot be set if there are no assigned reviewers for this content. Use the \'Notify reviewers\' field to assign reviewers.');
     }
   }
 }
@@ -620,101 +642,6 @@ function employees_tokens($type, $tokens, array $data, array $options, Bubbleabl
 }
 
 /**
- * A helper function to validate document.
- */
-function _validate_document(&$form, FormStateInterface $form_state)
-{
-  if ($form_state->hasValue('field_efiles_link')) {
-    // DO NOT validate when the user clicks on the remove document button.
-    // ONLY validate when the entire form is submitted.
-    if ($form_state->getTriggeringElement()["#name"] === "field_media_document_0_remove_button") return;
-
-    $efiles_link = $form_state->getValue('field_efiles_link');
-    $document = $form_state->getValue('field_media_document');
-
-    if (!empty($efiles_link) && !empty($efiles_link[0]['uri']) && !empty($document) && !empty($document[0]["fids"])) {
-      $form_state->setErrorByName('field_media_document', t('Please remove either the Document or the eFiles link.'));
-      return;
-    }
-
-    // If the eFiles link has value
-    if (!empty($efiles_link) && !empty($efiles_link[0]['uri'])) {
-      $user_input_file_url = strtolower($efiles_link[0]['uri']);
-      $external_file_url = $user_input_file_url;
-      // Validate the file URL is an eFiles link
-      $efiles_url_regex = '/^https:\/\/efiles.portlandoregon.gov\/(.*)/i';
-      if (!preg_match($efiles_url_regex, $external_file_url)) {
-        $form_state->setErrorByName('field_efiles_link', t('The eFiles link must start with https://efiles.portlandoregon.gov/.'));
-        return;
-      }
-
-      // Append "/file/document" if it's missing on an eFiles link in order to retrieve mime type and file size
-      if (
-        strpos($external_file_url, 'https://efiles.portlandoregon.gov/') === 0 &&
-        !(substr_compare($external_file_url, "/file/document", -strlen("/file/document")) === 0)
-      ) {
-        $external_file_url .= "/file/document";
-      }
-
-      // Get eFiles file size and MIME type
-      try {
-        $headers = get_headers($external_file_url, 1);
-      } catch (Exception $e) {
-        $form_state->setErrorByName('field_efiles_link', 'Cannot retrieve file size and mimetype from this link.');
-        return;
-      }
-      if (
-        !empty($headers) &&
-        (substr_compare($headers[0], "200 OK", -strlen("200 OK")) === 0) &&
-        array_key_exists('Content-Type', $headers) &&
-        array_key_exists('Content-Length', $headers)
-      ) {
-        $file_size = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
-        if ($file_size === 0) {
-          $form_state->setErrorByName('field_efiles_link', t('The linked file is empty.'));
-          return;
-        }
-        // Content-Type header can be "text/html; charset=utf-8"
-        $content_type_array = explode(';', $headers['Content-Type']);
-        // If content type is text/HTML, it's not a file
-        if (empty($content_type_array) || $content_type_array[0] === "text/html") {
-          // Commented this line out to support existing documents that are linked to an eFiles folder
-          // $form_state->setErrorByName('field_efiles_link', t('The linked file is an HTML page. Please use External Resource instead.'));
-          return;
-        }
-
-        $form_state->setValue('field_file_size', [["value" => $file_size]]);
-        $form_state->setValue('field_mime_type', [["value" => $content_type_array[0]]]);
-      } else {
-        // Verify it's a valid eFiles folder
-        try {
-          $headers = get_headers($user_input_file_url, 1);
-        } catch (Exception $e) {
-          $form_state->setErrorByName('field_efiles_link', 'Please verify the eFiles link is valid.');
-          return;
-        }
-
-        // Make sure the response code is 200 and content type is HTML
-        if (
-          empty($headers) ||
-          (substr_compare($headers[0], "200 OK", -strlen("200 OK")) !== 0) ||
-          (!array_key_exists('Content-Type', $headers)) ||
-          substr($headers['Content-Type'], 0, strlen("text/html")) !== "text/html"
-        ) {
-          $form_state->setErrorByName('field_efiles_link', t('Please verify the eFiles link is valid.'));
-        }
-      }
-    } else {
-      $document = $form_state->getValue('field_media_document');
-      // The document field can't be empty when the eFile link is empty
-      if (empty($document) || empty($document[0]["fids"])) {
-        $form_state->setErrorByName('field_media_document', t('Please upload a file or add an external file link'));
-      }
-    }
-  }
-}
-
-/**
  * Implement hook_cron()
  */
 function employees_cron()
@@ -818,8 +745,8 @@ function _send_reviewer_notifications()
 
     // If the view is empty, do not send any emails
     if (!count($theview->result)) {
-      \Drupal::state()->set('portland.last_reviewer_notification_email_sent', date('m/d/Y'));
       \Drupal::logger('mail-log')->notice(t('No content has been marked for reviewer notification emails.'));
+      \Drupal::state()->set('portland.last_reviewer_notification_email_sent', date('m/d/Y'));
       return;
     }
 
@@ -834,12 +761,8 @@ function _send_reviewer_notifications()
       $id = $result->_entity->id();
       $entity_type = $result->_entity->getEntityTypeId();
 
-      $changed = $result->_entity->get("changed")->value;   // In Unix epoch timestamp format
-      $last_changed = new DateTime("@$changed");
-      $last_changed->setTime(0, 0, 0);  // Ignore the timestamp part of the DateTime
-      
-      $notification_period = $result->_entity->get("field_send_reviewer_notification")->value;
-      $interval = new DateInterval($notification_period);
+      $notification_date = $result->_entity->get("field_send_reviewer_notification")->value;
+      $notification_date = date_create($notification_date)->getTimestamp();
       
       $last_notification_date = \Drupal::keyValue('employees')->get("last_reviewer_notification_date.$entity_type.$id");
       if (empty($last_notification_date)) {
@@ -854,18 +777,15 @@ function _send_reviewer_notifications()
         $to_emails[] = $reviewer->mail->value;
       }
       
-      // Send reviewer notification email if the specified amount of time has elapsed since last changed date 
-      // and an email hasn't already been sent since it was last changed
+      // Send reviewer notification email if an email hasn't already been sent
       // TODO: Remove "TRUE" debugging override
-      if (!empty($to_emails) 
-          && ($last_notification_date < $last_changed->getTimeStamp())
-          && (date_add($last_changed, $interval) <= date_create()->setTime(0, 0, 0))) {
+      if (!empty($to_emails) && ($last_notification_date < $notification_date)) {
         // Send email
         $key = 'employees_notify_reviewers';
         $to = $to_emails;
         $params['reply_to'] = 'BTS-eGov@portlandoregon.gov';
-        $params['message'] = '<p>This is a notification that the following webpage is scheduled for periodic
-                review and should be updated if necessary:<p/>';
+        $params['message'] = '<p>This is a notification that the following webpage is scheduled for review
+                and should be updated if necessary:<p/>';
         $params['message'] .= "<p><a href=\"" . $result->_entity->toUrl()->toString() . "\">" . $result->_entity->get('title')->value . "</a><p/>";
         $params['title'] = 'Employees.portland.gov scheduled reviewer notification: ' . $result->_entity->get('title')->value . $environment_name;
         // Cron is run with the anonymous user. Set the language code to EN.

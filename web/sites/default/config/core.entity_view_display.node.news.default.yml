@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.news.field_related_content
     - field.field.node.news.field_reviewer
     - field.field.node.news.field_search_keywords
+    - field.field.node.news.field_send_reviewer_notification
     - field.field.node.news.field_tags
     - field.field.node.news.field_topics
     - field.field.node.news.field_type
@@ -333,6 +334,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 11
+    region: main
+  field_send_reviewer_notification:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 15
     region: main
   field_tags:
     type: entity_reference_label

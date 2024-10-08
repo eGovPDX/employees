@@ -6,8 +6,8 @@ dependencies:
     - field.storage.node.field_send_reviewer_notification
     - user.role.authenticated
   module:
+    - datetime
     - node
-    - options
     - smart_date
     - user
 id: content_updated_recently
@@ -435,21 +435,6 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: type
-          exposed: false
         title:
           id: title
           table: node_field_data
@@ -589,20 +574,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: "<hr>\r\n<h2>Tables</h2>\r\n<p>Tables should be reviewed for accessibility and for mobile friendliness. Inclusion in this list does not necessarily indicate that a table was created or modified. (If the tables have been styled with appropriate table classes they were previously reviewed and are likely still okay.)</p>"
-            format: full_html
-          tokenize: false
+      header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -613,398 +585,9 @@ display:
         - 'user.node_grants:view'
         - user.roles
       tags: {  }
-  block_reviewer_notification_1_mo:
-    id: block_reviewer_notification_1_mo
-    display_title: '1 month reviewer notification'
-    display_plugin: block
-    position: 1
-    display_options:
-      title: '1 month reviewer notification'
-      fields:
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        changed:
-          id: changed
-          table: node_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: changed
-          plugin_id: field
-          label: Changed
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: medium
-            custom_date_format: ''
-            timezone: ''
-            tooltip:
-              date_format: ''
-              custom_date_format: ''
-            time_diff:
-              enabled: false
-              future_format: '@interval hence'
-              past_format: '@interval ago'
-              granularity: 2
-              refresh: 60
-              description: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: type
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: '{{ type }} with a table'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_send_reviewer_notification:
-          id: field_send_reviewer_notification
-          table: node__field_send_reviewer_notification
-          field: field_send_reviewer_notification
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: list_default
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-      filters:
-        changed:
-          id: changed
-          table: node_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: changed
-          plugin_id: date
-          operator: '<='
-          value:
-            min: ''
-            max: ''
-            value: '-1 month'
-            type: offset
-            granularity: second
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_send_reviewer_notification_value:
-          id: field_send_reviewer_notification_value
-          table: node__field_send_reviewer_notification
-          field: field_send_reviewer_notification_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: list_field
-          operator: or
-          value:
-            P1M: P1M
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        header: false
-      display_description: ''
-      header: {  }
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.roles
-      tags:
-        - 'config:field.storage.node.field_send_reviewer_notification'
   block_reviewer_notifications:
     id: block_reviewer_notifications
-    display_title: 'Send reviewer notifications'
+    display_title: 'Send Reviewer Notifications'
     display_plugin: block
     position: 1
     display_options:
@@ -1129,7 +712,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: medium_date
             custom_date_format: ''
             timezone: ''
             tooltip:
@@ -1160,7 +743,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: 'Notification date'
           exclude: false
           alter:
             alter_text: false
@@ -1193,7 +776,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1202,8 +785,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: medium_date
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1215,22 +800,20 @@ display:
           separator: ', '
           field_api_classes: false
       sorts:
-        changed:
-          id: changed
-          table: node_field_data
-          field: changed
+        field_send_reviewer_notification_value:
+          id: field_send_reviewer_notification_value
+          table: node__field_send_reviewer_notification
+          field: field_send_reviewer_notification_value
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: changed
-          plugin_id: date
-          order: ASC
+          plugin_id: datetime
+          order: DESC
           expose:
             label: ''
-            field_identifier: changed
+            field_identifier: ''
           exposed: false
-          granularity: second
+          granularity: day
         title:
           id: title
           table: node_field_data
@@ -1247,17 +830,20 @@ display:
             field_identifier: title
           exposed: false
       filters:
-        field_send_reviewer_notification_value:
-          id: field_send_reviewer_notification_value
+        field_send_reviewer_notification_value_1:
+          id: field_send_reviewer_notification_value_1
           table: node__field_send_reviewer_notification
           field: field_send_reviewer_notification_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: list_field
-          operator: 'not empty'
+          plugin_id: datetime
+          operator: between
           value:
-            P1M: P1M
+            min: '-7 days'
+            max: now
+            value: ''
+            type: offset
           group: 1
           exposed: false
           expose:
@@ -1274,7 +860,9 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1287,7 +875,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
       filter_groups:
         operator: AND
         groups:
@@ -1309,9 +896,7 @@ display:
         sorts: false
         filters: false
         filter_groups: false
-        header: false
       display_description: ''
-      header: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1

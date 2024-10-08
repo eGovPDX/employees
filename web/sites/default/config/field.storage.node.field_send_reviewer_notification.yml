@@ -1,39 +1,17 @@
-uuid: dd0c66c8-a0b1-4f70-a986-a32db7d025d2
+uuid: ac18b690-bac6-40be-942d-f0065b2c8767
 langcode: en
 status: true
 dependencies:
   module:
+    - datetime
     - node
-    - options
 id: node.field_send_reviewer_notification
 field_name: field_send_reviewer_notification
 entity_type: node
-type: list_string
+type: datetime
 settings:
-  allowed_values:
-    -
-      value: P1M
-      label: '1 month'
-    -
-      value: P3M
-      label: '3 months'
-    -
-      value: P6M
-      label: '6 months'
-    -
-      value: P1Y
-      label: '1 year'
-    -
-      value: P1D
-      label: '1 day'
-    -
-      value: P3D
-      label: '3 days'
-    -
-      value: P7D
-      label: '1 week'
-  allowed_values_function: ''
-module: options
+  datetime_type: date
+module: datetime
 locked: false
 cardinality: 1
 translatable: true
