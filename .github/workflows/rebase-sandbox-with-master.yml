@@ -23,9 +23,8 @@ jobs:
       - name: Rebase the Sandbox branch on Github
         run: |
           git fetch --all --quiet
-          git switch master
           git checkout sandbox
           git config --global user.name "BTS eGov"
           git config --global user.email BTS-eGov@portlandoregon.gov
-          git rebase -X ours origin/master
+          git rebase origin/master
           git push -f

@@ -146,7 +146,7 @@ tooling:
     description: Custom Composer update, database update, and config export to get a clean module or theme update
     cmd:
       - appserver: echo "Updating Composer dependencies..."
-      - appserver: composer update
+      - appserver: composer update -W
       - appserver: echo "Run database updates..."
       - appserver: drush updb -y
       - appserver: echo "Exporting Drupal config..."

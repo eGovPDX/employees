@@ -68,7 +68,7 @@ commands:
             cd /home/circleci/app/tests/percy
             export PERCY_POSTINSTALL_BROWSER=true
             yarn install --frozen-lockfile
-            node node_modules/puppeteer/install.js
+            node node_modules/puppeteer/install.mjs
       - save_cache:
           name: Save Jest and Percy dependencies cache
           key: jest-{{ checksum "tests/percy/yarn.lock" }}-v2
@@ -338,7 +338,7 @@ tests: &tests
           cd /home/circleci/app/tests/percy
 
           # Start Percy tests
-          echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+          echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin | sed 's/^http:/https:/')' > $BASH_ENV && source $BASH_ENV
           npm run single-test -- admin
     - store_artifacts:
         path: /home/circleci/artifacts
@@ -388,7 +388,7 @@ clone_live_database: &clone_live_database
             for TESTFILE in $TESTFILES
             do
               # Generate one time login link for tests
-              echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin)' > $BASH_ENV && source $BASH_ENV
+              echo 'export SUPERADMIN_LOGIN=$(terminus drush ${CIRCLE_PROJECT_REPONAME}.${SITE_NAME} -- uli --name superAdmin | sed 's/^http:/https:/')' > $BASH_ENV && source $BASH_ENV
               npm run jest-sandbox -- ${TESTFILE}
             done
           fi
