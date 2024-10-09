@@ -9,9 +9,10 @@ use Drupal\file\Entity\File;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
- * A Drush commandfile.
+ * Custom Drush commands in Employees.
  */
-final class CustomCommands extends DrushCommands {
+final class CustomCommands extends DrushCommands
+{
   /**
    * Entity type service.
    *
@@ -35,8 +36,9 @@ final class CustomCommands extends DrushCommands {
    */
   #[CLI\Command(name: 'employees:find_missing_media_files')]
   #[CLI\Usage(name: 'employees:find_missing_media_files', description: 'Print out media items without file')]
-  public function commandName() {
-    
+  public function commandName()
+  {
+    $site_addr = "https://" . \Drupal::request()->getHost();
     $file_system = \Drupal::service('file_system');
     $media_storage = \Drupal::entityTypeManager()->getStorage('media');
     $ids = \Drupal::entityQuery('media')
@@ -48,9 +50,15 @@ final class CustomCommands extends DrushCommands {
       foreach ($chunk_ids as $media_id) {
         $media_obj = Media::load($media_id);
         $fid = $media_obj->get('field_media_image')->target_id;
-        $file_obj = File::load($fid);
-        if ( empty($file_obj) ) {
-          print "broken fid: $fid in media $media_id https://employees.lndo.site/media/$media_id"; print PHP_EOL;
+        if (empty($fid)) {
+          print "Missing File (id:$fid) in Image (id:$media_id). $site_addr/media/$media_id";
+          print PHP_EOL;
+        } else {
+          $file_obj = File::load($fid);
+          if (empty($file_obj)) {
+            print "Missing File (id:$fid) in Image (id:$media_id). $site_addr/media/$media_id";
+            print PHP_EOL;
+          }
         }
       }
     }
@@ -64,13 +72,14 @@ final class CustomCommands extends DrushCommands {
       foreach ($chunk_ids as $media_id) {
         $media_obj = Media::load($media_id);
         $fid = $media_obj->get('field_media_document')->target_id;
-        if(empty($fid)) {
-          print "broken fid: NULL in media $media_id https://employees.lndo.site/media/$media_id"; print PHP_EOL;
-        }
-        else {
+        if (empty($fid)) {
+          print "Missing File (id:$fid) in Document (id:$media_id). $site_addr/media/$media_id";
+          print PHP_EOL;
+        } else {
           $file_obj = File::load($fid);
-          if ( empty($file_obj) ) {
-            print "broken fid: $fid in media $media_id https://employees.lndo.site/media/$media_id"; print PHP_EOL;
+          if (empty($file_obj)) {
+            print "Missing File (id:$fid) in Document (id:$media_id). $site_addr/media/$media_id";
+            print PHP_EOL;
           }
         }
       }
@@ -82,7 +91,8 @@ final class CustomCommands extends DrushCommands {
    */
   #[CLI\Command(name: 'employees:mark_unused_files_as_temp')]
   #[CLI\Usage(name: 'employees:mark_unused_files_as_temp', description: 'Delete files with 0 usages')]
-  public function mark_unused_files_as_temp() {
+  public function mark_unused_files_as_temp()
+  {
     $file_storage = $this->entityTypeManager->getStorage('file');
     $db = \Drupal::database();
     $result = $db->query("
