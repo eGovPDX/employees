@@ -338,6 +338,16 @@ function _remove_file_usage_from_previous_revision($entity) {
   if (!$previous_revision->hasTranslation($langcode)) return;
 
   $previous_revision_translated = $previous_revision->getTranslation($langcode);
+
+  // If the file is not updated, do not delete file usage
+  if($entity->bundle() == "image" && $previous_revision_translated->field_media_image->target_id == $entity->field_media_image->target_id) {
+    return;
+  }
+
+  if($entity->bundle() == "document" && $previous_revision_translated->field_media_document->target_id == $entity->field_media_document->target_id) {
+    return;
+  }
+
   foreach ($previous_revision_translated->getFields() as $field) {
     if ($field instanceof FileFieldItemList) {
       foreach ($field as $item) {
@@ -346,7 +356,15 @@ function _remove_file_usage_from_previous_revision($entity) {
         // If the new revision still uses the old file, the new revision will be the source of usage for the file.
         // If the new revision uses a new file, the old revision will no longer be a source of usage,
         // allowing the file to be marked as temporary and get deleted.
-        if ($file) \Drupal::service('file.usage')->delete($file, 'file', $entity_type_id, $entity->id(), 1);
+        if ($file) {
+          \Drupal::service('file.usage')->delete($file, 'file');
+          \Drupal::logger('File debug')->info('File (ID: %id) "%path" usage reduced by 1. Current user ID %user_id', [
+            '%id' => $file->id(),
+            '%path' => $file->getFileUri(),
+            '%user_id' => \Drupal::currentUser()->id(),
+            'RequestUri' => \Drupal::request()->getRequestUri()
+          ]);
+        }
       }
     }
   }
