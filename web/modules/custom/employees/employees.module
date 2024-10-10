@@ -318,12 +318,13 @@ function _remove_file_usage_from_previous_revision($entity) {
   if (($entity_type_id !== 'node' && $entity_type_id !== 'media')
     || !$entity->getEntityType()->isRevisionable()) return;
 
+  $entity_id =  $entity->id();
   $entity_storage = \Drupal::entityTypeManager()->getStorage($entity_type_id);
   // Retrieve the revision before this one
   $previous_vid = key($entity_storage->getQuery()
       ->accessCheck(TRUE)
       ->allRevisions()
-      ->condition($entity_type_id === 'node' ? 'nid' : 'mid', $entity->id())
+      ->condition($entity_type_id === 'node' ? 'nid' : 'mid', $entity_id)
       ->sort('vid', 'DESC')
       ->range(1, 1)
       ->execute());
@@ -352,13 +353,16 @@ function _remove_file_usage_from_previous_revision($entity) {
         // If the new revision uses a new file, the old revision will no longer be a source of usage,
         // allowing the file to be marked as temporary and get deleted.
         if ($file) {
-          \Drupal::service('file.usage')->delete($file, 'file');
-          \Drupal::logger('employees')->info('File (ID: %id) "%path" usage cleared. Current user ID: %user_id. RequestUri: %RequestUri', [
-            '%id' => $file->id(),
-            '%path' => $file->getFileUri(),
-            '%user_id' => \Drupal::currentUser()->id(),
-            '%RequestUri' => \Drupal::request()->getRequestUri()
-          ]);
+          $usage = \Drupal::service('file.usage')->listUsage($file);
+          if (!empty($usage) && array_key_exists('file', $usage) && array_key_exists('media', $usage['file']) && array_key_exists($entity_id, $usage['file']['media']) ) {
+            \Drupal::service('file.usage')->delete($file, 'file', $entity_type_id, $entity_id, $usage['file']['media'][$entity_id]);
+            \Drupal::logger('employees')->info('File (ID: %id) "%path" usage cleared. Current user ID: %user_id. RequestUri: %RequestUri', [
+              '%id' => $file->id(),
+              '%path' => $file->getFileUri(),
+              '%user_id' => \Drupal::currentUser()->id(),
+              '%RequestUri' => \Drupal::request()->getRequestUri()
+            ]);
+          }
         }
       }
     }
