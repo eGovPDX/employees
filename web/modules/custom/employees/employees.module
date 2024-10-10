@@ -5,16 +5,11 @@ use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\views\Views;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Cache\Cache;
-use Drupal\Core\Mail\MailManagerInterface;
-use Drupal\Component\Utility\SafeMarkup;
-use Drupal\Component\Utility\Html;
 use Drupal\user\Entity\User;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
 
 /**
  * Implements hook_form_alter()
@@ -313,7 +308,7 @@ function employees_entity_insert($entity)
  *
  * By purging the usage from files in past revisions, we ensure they get marked as temporary.
  *
- * @see PGOV-880, PE-475
+ * @see PGOV-880, PE-475, PE-632
  */
 function _remove_file_usage_from_previous_revision($entity) {
   // Get the language of the content that the editor is modifying
@@ -352,17 +347,17 @@ function _remove_file_usage_from_previous_revision($entity) {
     if ($field instanceof FileFieldItemList) {
       foreach ($field as $item) {
         $file = $item->entity;
-        // Remove 1 usage count from the old revision's file.
+        // Remove all file usages for the old revision's file.
         // If the new revision still uses the old file, the new revision will be the source of usage for the file.
         // If the new revision uses a new file, the old revision will no longer be a source of usage,
         // allowing the file to be marked as temporary and get deleted.
         if ($file) {
           \Drupal::service('file.usage')->delete($file, 'file');
-          \Drupal::logger('File debug')->info('File (ID: %id) "%path" usage reduced by 1. Current user ID %user_id', [
+          \Drupal::logger('employees')->info('File (ID: %id) "%path" usage cleared. Current user ID: %user_id. RequestUri: %RequestUri', [
             '%id' => $file->id(),
             '%path' => $file->getFileUri(),
             '%user_id' => \Drupal::currentUser()->id(),
-            'RequestUri' => \Drupal::request()->getRequestUri()
+            '%RequestUri' => \Drupal::request()->getRequestUri()
           ]);
         }
       }
