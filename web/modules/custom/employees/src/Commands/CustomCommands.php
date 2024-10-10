@@ -36,7 +36,7 @@ final class CustomCommands extends DrushCommands
    */
   #[CLI\Command(name: 'employees:find_missing_media_files')]
   #[CLI\Usage(name: 'employees:find_missing_media_files', description: 'Print out media items without file')]
-  public function commandName()
+  public function find_missing_media_files()
   {
     $site_addr = "https://" . \Drupal::request()->getHost();
     $file_system = \Drupal::service('file_system');
