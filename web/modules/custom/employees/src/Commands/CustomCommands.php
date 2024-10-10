@@ -45,18 +45,24 @@ final class CustomCommands extends DrushCommands
       ->accessCheck(FALSE)
       ->condition('bundle', 'image')
       ->execute();
+    print "fileID,mediaID,mediaBundle,createdBy,createdOn,updatedBy,updatedOn,URL";
+    print PHP_EOL;
     $chunks = array_chunk($ids, 100);
     foreach ($chunks as $chunk_ids) {
       foreach ($chunk_ids as $media_id) {
         $media_obj = Media::load($media_id);
         $fid = $media_obj->get('field_media_image')->target_id;
+        $createdBy = empty($media_obj->uid[0]) ? "" : $media_obj->uid[0]->entity->mail->value;
+        $created = empty($media_obj->uid[0]) ? "" : date( "Y/m/d h:i A", $media_obj->created->value);
+        $updatedBy = empty($media_obj->revision_user[0]) ? "" : $media_obj->revision_user[0]->entity->mail->value;
+        $updated = empty($media_obj->revision_user[0]) ? "" : date( "Y/m/d h:i A", $media_obj->changed->value);
         if (empty($fid)) {
-          print "Missing File (id:$fid) in Image (id:$media_id). $site_addr/media/$media_id";
+          print "NULL,$media_id,Image,$createdBy,\"$created\",$updatedBy,\"$updated\",$site_addr/media/$media_id";
           print PHP_EOL;
         } else {
           $file_obj = File::load($fid);
           if (empty($file_obj)) {
-            print "Missing File (id:$fid) in Image (id:$media_id). $site_addr/media/$media_id";
+            print "$fid,$media_id,Image,$createdBy,\"$created\",$updatedBy,\"$updated\",$site_addr/media/$media_id";
             print PHP_EOL;
           }
         }
@@ -72,13 +78,17 @@ final class CustomCommands extends DrushCommands
       foreach ($chunk_ids as $media_id) {
         $media_obj = Media::load($media_id);
         $fid = $media_obj->get('field_media_document')->target_id;
+        $createdBy = empty($media_obj->uid[0]) ? "" : $media_obj->uid[0]->entity->mail->value;
+        $created = empty($media_obj->uid[0]) ? "" : date( "Y/m/d h:i A", $media_obj->created->value);
+        $updatedBy = empty($media_obj->revision_user[0]) ? "" : $media_obj->revision_user[0]->entity->mail->value;
+        $updated = empty($media_obj->revision_user[0]) ? "" : date( "Y/m/d h:i A", $media_obj->changed->value);
         if (empty($fid)) {
-          print "Missing File (id:$fid) in Document (id:$media_id). $site_addr/media/$media_id";
+          print "NULL,$media_id,Document,$createdBy,\"$created\",$updatedBy,\"$updated\",$site_addr/media/$media_id";
           print PHP_EOL;
         } else {
           $file_obj = File::load($fid);
           if (empty($file_obj)) {
-            print "Missing File (id:$fid) in Document (id:$media_id). $site_addr/media/$media_id";
+            print "$fid,$media_id,Document,$createdBy,\"$created\",$updatedBy,\"$updated\",$site_addr/media/$media_id";
             print PHP_EOL;
           }
         }
