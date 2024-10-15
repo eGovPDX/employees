@@ -86,7 +86,7 @@
         "drupal/remove_http_headers": "^1.0 || ^2.0",
         "drupal/samlauth": "^3.8",
         "drupal/scheduler": "^2.0.0-rc8",
-        "drupal/scheduler_content_moderation_integration": "^2.0.0-beta1",
+        "drupal/scheduler_content_moderation_integration": "^3.0",
         "drupal/search_api_autocomplete": "^1.6",
         "drupal/search_api_page": "^1.0@beta",
         "drupal/search_api_pantheon": "^8",
@@ -106,7 +106,7 @@
         "drupal/toolbar_menu": "^3.0",
         "drupal/twig_tools": "^2.0",
         "drupal/twig_tweak": "^3.1",
-        "drupal/views_bulk_edit": "^2.4",
+        "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.1",
         "drupal/views_data_export": "^1.1",
         "drupal/webform": "^6.2@beta",
@@ -120,9 +120,6 @@
         "webmozart/path-util": "^2.3",
         "wikimedia/composer-merge-plugin": "^2.0",
         "zendesk/zendesk_api_client_php": "^2.2"
-    },
-    "require-dev": {
-        "roave/security-advisories": "dev-latest"
     },
     "repositories": [
         {
@@ -240,9 +237,7 @@
                 "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)": "https://www.drupal.org/files/issues/2024-04-25/3401916-8.x-1.9.patch"
             },
             "drupal/scheduler_content_moderation_integration": {
-                "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch",
-                "3442694 - TypeError: Drupal\\scheduler_content_moderation_integration\\EventSubscriber\\SchedulerEventSubscriber::publishImmediately()": "https://www.drupal.org/files/issues/2024-04-23/scheduler_content_moderation_integration-3442694.patch",
-                "3447266 - 10.3 makes terms moderatable so makes this module need to provide an update path": "https://git.drupalcode.org/project/scheduler_content_moderation_integration/-/merge_requests/63.patch"
+                "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch"
             },
             "drupal/search_api_group_filtering": {
                 "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
@@ -254,5 +249,8 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "scripts": {}
+    "scripts": {},
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
 }

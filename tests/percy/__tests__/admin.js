@@ -4,15 +4,13 @@ const util = require('../lib/util');
 
 const SITE_NAME = process.env.SITE_NAME;
 const PROJECT_NAME = process.env.CIRCLE_PROJECT_REPONAME
-const HOME_PAGE = SITE_NAME
-    ? `https://${SITE_NAME}-${PROJECT_NAME}.pantheonsite.io`
-    : "https://employees.lndo.site";
+const HOME_PAGE = SITE_NAME ? `https://${SITE_NAME}-${PROJECT_NAME}.pantheonsite.io` : "https://employees.lndo.site";
 const ARTIFACTS_FOLDER = (SITE_NAME) ? `/home/circleci/artifacts/` : `./`;
 var fs = require('fs');
 
 let BROWSER_OPTION = {
     ignoreHTTPSErrors: true,
-    args: ["--no-sandbox"],
+    args: ["--no-sandbox", "--ignore-certificate-errors"],
     defaultViewport: null,
 };
 
