@@ -7,7 +7,7 @@ dependencies:
     - node.type.alert
     - system.menu.editor-toolbar
     - user.role.administrator
-    - user.role.content_lead
+    - user.role.site_editor
   module:
     - content_moderation
     - node
@@ -715,7 +715,7 @@ display:
         type: role
         options:
           role:
-            content_lead: content_lead
+            site_editor: site_editor
             administrator: administrator
       filters:
         title:
