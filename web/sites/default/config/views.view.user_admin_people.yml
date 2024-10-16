@@ -102,61 +102,66 @@ display:
           clear_on_exposed: true
           force_selection_info: false
           selected_actions:
-            2:
+            -
               action_id: employees_email
               preconfiguration:
                 add_confirmation: false
                 label_override: 'Email users'
-            3:
+            -
               action_id: add_assigned_and_following
               preconfiguration:
                 add_confirmation: false
                 label_override: 'Convert Member to Assigned or Following'
-            4:
+            -
               action_id: employees_set_search_boost_action
               preconfiguration:
                 add_confirmation: false
                 label_override: 'Set search boost'
-            8:
+            -
               action_id: sync_user_status_with_ad
               preconfiguration:
                 add_confirmation: false
-            9:
+            -
               action_id: retrieve_user_info_from_ad
               preconfiguration:
                 add_confirmation: false
-            10:
+            -
               action_id: user_update_user_primary_groups
               preconfiguration:
                 add_confirmation: false
-            11:
+            -
               action_id: realname_update_realname_action
               preconfiguration:
                 add_confirmation: false
-            12:
+            -
               action_id: user_unblock_user_action
               preconfiguration:
                 add_confirmation: false
-            13:
+            -
               action_id: user_block_user_action
               preconfiguration:
                 add_confirmation: false
-            14:
+            -
               action_id: user_remove_role_action
               preconfiguration:
                 add_confirmation: false
-            15:
+            -
               action_id: user_add_role_action
               preconfiguration:
                 add_confirmation: false
-            17:
+            -
               action_id: vbo_cancel_user_action
               preconfiguration:
                 add_confirmation: false
-            19:
+            -
               action_id: 'entity:save_action:user'
               preconfiguration:
                 add_confirmation: false
+            -
+              action_id: views_bulk_edit
+              preconfiguration:
+                add_confirmation: false
+                get_bundles_from_results: true
         field_phone:
           id: field_phone
           table: user__field_phone
@@ -1296,6 +1301,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 100
           total_pages: 0
           id: 0
@@ -1313,7 +1319,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
