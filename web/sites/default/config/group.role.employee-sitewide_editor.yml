@@ -7,7 +7,7 @@ dependencies:
     - user.role.site_editor
 id: employee-sitewide_editor
 label: 'Sitewide Editor Outsider'
-weight: 4
+weight: 1
 admin: false
 scope: outsider
 global_role: site_editor
@@ -53,10 +53,8 @@ permissions:
   - 'delete any group_node:event entity'
   - 'delete any group_node:news entity'
   - 'delete any group_node:notification entity'
-  - 'delete any group_node:notification relationship'
   - 'delete any group_node:page entity'
   - 'delete any group_node:resource entity'
-  - 'delete group_node:notification entity revisions'
   - 'delete own group_media:document entity'
   - 'delete own group_media:iframe entity'
   - 'delete own group_media:image entity'
@@ -68,7 +66,6 @@ permissions:
   - 'delete own group_node:event entity'
   - 'delete own group_node:news entity'
   - 'delete own group_node:notification entity'
-  - 'delete own group_node:notification relationship'
   - 'delete own group_node:page entity'
   - 'delete own group_node:resource entity'
   - 'edit group'
@@ -93,7 +90,6 @@ permissions:
   - 'update any group_node:event entity'
   - 'update any group_node:news entity'
   - 'update any group_node:notification entity'
-  - 'update any group_node:notification relationship'
   - 'update any group_node:page entity'
   - 'update any group_node:resource entity'
   - 'update own group_media:document entity'
@@ -107,7 +103,6 @@ permissions:
   - 'update own group_node:event entity'
   - 'update own group_node:news entity'
   - 'update own group_node:notification entity'
-  - 'update own group_node:notification relationship'
   - 'update own group_node:page entity'
   - 'update own group_node:resource entity'
   - 'view all group revisions'
@@ -150,7 +145,6 @@ permissions:
   - 'view group_node:news entity revisions'
   - 'view group_node:notification entity'
   - 'view group_node:notification entity revisions'
-  - 'view group_node:notification relationship'
   - 'view group_node:page entity'
   - 'view group_node:page entity revisions'
   - 'view group_node:resource entity'
