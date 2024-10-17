@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_related_content
     - field.field.node.bts_catalog_item.field_reviewer
     - field.field.node.bts_catalog_item.field_search_keywords
+    - field.field.node.bts_catalog_item.field_send_reviewer_notification
     - field.field.node.bts_catalog_item.field_service
     - field.field.node.bts_catalog_item.field_support_model
     - field.field.node.bts_catalog_item.field_support_owner
@@ -29,6 +30,7 @@ dependencies:
     - field.field.node.bts_catalog_item.field_vendor
     - node.type.bts_catalog_item
   module:
+    - datetime
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -613,6 +615,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 24
+    region: main
+  field_send_reviewer_notification:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 15
     region: main
   field_service:
     type: entity_reference_label
