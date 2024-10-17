@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_search_keywords
+    - field.field.node.event.field_send_reviewer_notification
     - field.field.node.event.field_tags
     - field.field.node.event.field_topics
     - field.field.node.event.field_type
@@ -20,6 +21,7 @@ dependencies:
     - views.view.group_menu
     - views.view.related_content
   module:
+    - datetime
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -348,6 +350,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 11
+    region: main
+  field_send_reviewer_notification:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 15
     region: main
   field_tags:
     type: entity_reference_label

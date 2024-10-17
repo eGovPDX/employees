@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.event.field_related_content
     - field.field.node.event.field_reviewer
     - field.field.node.event.field_search_keywords
+    - field.field.node.event.field_send_reviewer_notification
     - field.field.node.event.field_tags
     - field.field.node.event.field_topics
     - field.field.node.event.field_type
@@ -19,6 +20,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - datetime
     - field_group
     - field_states_ui
     - media_library
@@ -80,7 +82,7 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -123,7 +125,7 @@ content:
     third_party_settings: {  }
   field_redirects:
     type: string_textfield
-    weight: 17
+    weight: 18
     region: content
     settings:
       size: 60
@@ -161,6 +163,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_send_reviewer_notification:
+    type: datetime_default
+    weight: 13
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete_tags
@@ -203,6 +211,8 @@ content:
       default_duration_increments: "30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
       show_extra: true
       hide_date: true
+      allday: true
+      remove_seconds: false
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
@@ -212,24 +222,24 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 19
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_state:
     type: scheduler_moderation
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -243,7 +253,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -253,18 +263,18 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 20
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   unpublish_state:
     type: scheduler_moderation
-    weight: 22
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
