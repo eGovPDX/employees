@@ -1,4 +1,4 @@
-uuid: baf86895-37e5-4133-80ea-b6555e694f61
+uuid: 3db7d46a-bec7-4775-adc1-d739ce61b9b5
 langcode: en
 status: true
 dependencies:
@@ -9,16 +9,27 @@ dependencies:
     - media.type.remote_document
     - media.type.remote_video
     - node.type.alert
+    - node.type.bts_catalog_item
+    - node.type.contact
     - node.type.contract
     - node.type.event
     - node.type.news
     - node.type.notification
     - node.type.page
     - node.type.resource
+    - taxonomy.vocabulary.bts_application_exception
+    - taxonomy.vocabulary.bts_business_capability
+    - taxonomy.vocabulary.bts_business_priority
+    - taxonomy.vocabulary.bts_catalog_item_type
+    - taxonomy.vocabulary.bureaus
+    - taxonomy.vocabulary.cloud_service_type
+    - taxonomy.vocabulary.hosting_environment
+    - taxonomy.vocabulary.support_model
     - taxonomy.vocabulary.tags
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - entity_usage
     - field_permissions
     - filter
     - group
@@ -33,17 +44,23 @@ dependencies:
     - system
     - taxonomy
     - toolbar_menu
-id: content_lead
-label: 'Content Lead'
-weight: -4
+id: site_editor
+label: 'Sitewide Editor'
+weight: -3
 is_admin: null
 permissions:
+  - 'access content'
   - 'access content overview'
+  - 'access entity usage statistics'
   - 'access group overview'
   - 'access media overview'
+  - 'access taxonomy overview'
   - 'administer menu'
+  - 'administer nodes'
   - 'administer redirects'
   - 'clone alert content'
+  - 'clone bts_catalog_item content'
+  - 'clone contact content'
   - 'clone contract content'
   - 'clone event content'
   - 'clone news content'
@@ -51,43 +68,61 @@ permissions:
   - 'clone page content'
   - 'clone resource content'
   - 'create alert content'
+  - 'create bts_catalog_item content'
+  - 'create contact content'
   - 'create contract content'
-  - 'create document media'
+  - 'create employee group'
   - 'create event content'
   - 'create field_feature'
   - 'create field_feature_until'
   - 'create field_homepage'
   - 'create field_popularity'
-  - 'create image media'
   - 'create media'
   - 'create news content'
   - 'create notification content'
   - 'create page content'
   - 'create private group'
-  - 'create remote_document media'
-  - 'create remote_video media'
   - 'create resource content'
+  - 'create terms in bts_application_exception'
+  - 'create terms in bts_business_capability'
+  - 'create terms in bts_business_priority'
+  - 'create terms in bts_catalog_item_type'
+  - 'create terms in bureaus'
+  - 'create terms in cloud_service_type'
+  - 'create terms in hosting_environment'
+  - 'create terms in support_model'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete any alert content'
+  - 'delete any bts_catalog_item content'
+  - 'delete any contact content'
   - 'delete any contract content'
   - 'delete any event content'
+  - 'delete any media'
   - 'delete any news content'
   - 'delete any notification content'
   - 'delete any page content'
   - 'delete any resource content'
-  - 'delete media'
   - 'delete own alert content'
+  - 'delete own bts_catalog_item content'
+  - 'delete own contact content'
   - 'delete own contract content'
-  - 'delete own document media'
   - 'delete own event content'
-  - 'delete own image media'
   - 'delete own news content'
   - 'delete own notification content'
   - 'delete own page content'
-  - 'delete own remote_document media'
-  - 'delete own remote_video media'
+  - 'delete own resource content'
+  - 'delete terms in bts_application_exception'
+  - 'delete terms in bts_business_capability'
+  - 'delete terms in bts_business_priority'
+  - 'delete terms in bts_catalog_item_type'
+  - 'delete terms in bureaus'
+  - 'delete terms in cloud_service_type'
+  - 'delete terms in hosting_environment'
+  - 'delete terms in support_model'
   - 'edit any alert content'
+  - 'edit any bts_catalog_item content'
+  - 'edit any contact content'
   - 'edit any contract content'
   - 'edit any document media'
   - 'edit any event content'
@@ -97,37 +132,53 @@ permissions:
   - 'edit any page content'
   - 'edit any remote_document media'
   - 'edit any remote_video media'
+  - 'edit any resource content'
   - 'edit field_feature'
   - 'edit field_feature_until'
   - 'edit field_homepage'
   - 'edit field_popularity'
   - 'edit own alert content'
+  - 'edit own bts_catalog_item content'
+  - 'edit own contact content'
   - 'edit own contract content'
-  - 'edit own document media'
   - 'edit own event content'
   - 'edit own field_feature'
   - 'edit own field_feature_until'
   - 'edit own field_homepage'
   - 'edit own field_popularity'
-  - 'edit own image media'
   - 'edit own news content'
   - 'edit own notification content'
   - 'edit own page content'
-  - 'edit own remote_document media'
-  - 'edit own remote_video media'
   - 'edit own resource content'
+  - 'edit terms in bts_application_exception'
+  - 'edit terms in bts_business_capability'
+  - 'edit terms in bts_business_priority'
+  - 'edit terms in bts_catalog_item_type'
+  - 'edit terms in bureaus'
+  - 'edit terms in cloud_service_type'
+  - 'edit terms in hosting_environment'
+  - 'edit terms in support_model'
   - 'notify of path changes'
   - 'revert alert revisions'
+  - 'revert bts_catalog_item revisions'
+  - 'revert contact revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
   - 'revert news revisions'
   - 'revert notification revisions'
   - 'revert page revisions'
   - 'revert resource revisions'
+  - 'revert term revisions in bts_application_exception'
+  - 'revert term revisions in bts_business_capability'
+  - 'revert term revisions in bts_business_priority'
+  - 'revert term revisions in bts_catalog_item_type'
+  - 'revert term revisions in bureaus'
+  - 'revert term revisions in cloud_service_type'
+  - 'revert term revisions in hosting_environment'
+  - 'revert term revisions in support_model'
   - 'schedule publishing of media'
   - 'schedule publishing of nodes'
   - 'update any media'
-  - 'update media'
   - 'use editorial transition create_new_draft'
   - 'use editorial transition mark_for_review'
   - 'use editorial transition publish'
@@ -136,13 +187,21 @@ permissions:
   - 'use text format basic_html'
   - 'view alert revisions'
   - 'view all media revisions'
+  - 'view all revisions'
   - 'view any unpublished content'
+  - 'view bts_catalog in toolbar'
+  - 'view bts_catalog_item revisions'
+  - 'view contact revisions'
+  - 'view contract revisions'
   - 'view editor in toolbar'
+  - 'view event revisions'
   - 'view field_feature'
   - 'view field_feature_until'
   - 'view field_homepage'
   - 'view field_popularity'
   - 'view latest version'
+  - 'view media'
+  - 'view news revisions'
   - 'view notification revisions'
   - 'view own field_feature'
   - 'view own field_feature_until'
@@ -150,4 +209,14 @@ permissions:
   - 'view own field_popularity'
   - 'view own unpublished content'
   - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view resource revisions'
+  - 'view term revisions in bts_application_exception'
+  - 'view term revisions in bts_business_capability'
+  - 'view term revisions in bts_business_priority'
+  - 'view term revisions in bts_catalog_item_type'
+  - 'view term revisions in bureaus'
+  - 'view term revisions in cloud_service_type'
+  - 'view term revisions in hosting_environment'
+  - 'view term revisions in support_model'
   - 'view the administration theme'

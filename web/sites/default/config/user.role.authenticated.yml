@@ -6,6 +6,7 @@ dependencies:
     - filter.format.basic_html
     - filter.format.webform_default
     - media.type.document
+    - media.type.iframe
     - media.type.image
     - media.type.remote_document
     - media.type.remote_video
@@ -41,12 +42,14 @@ permissions:
   - 'create field_mobile_phone'
   - 'create field_section'
   - 'create field_workspace'
+  - 'create iframe media'
   - 'create image media'
   - 'create media'
   - 'create remote_document media'
   - 'create remote_video media'
   - 'delete media'
   - 'delete own document media'
+  - 'delete own iframe media'
   - 'delete own image media'
   - 'delete own remote_document media'
   - 'delete own remote_video media'
@@ -56,6 +59,7 @@ permissions:
   - 'edit own field_mobile_phone'
   - 'edit own field_section'
   - 'edit own field_workspace'
+  - 'edit own iframe media'
   - 'edit own image media'
   - 'edit own remote_document media'
   - 'edit own remote_video media'
