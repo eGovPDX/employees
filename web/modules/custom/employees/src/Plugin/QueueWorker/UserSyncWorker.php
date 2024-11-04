@@ -19,7 +19,7 @@ use Exception;
  * @QueueWorker(
  *   id = "user_sync",
  *   title = @Translation("Synchronize Users Queue"),
- *   cron = {"time" = 180}
+ *   cron = {"time" = 120}
  * )
  */
 class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface

@@ -135,8 +135,8 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
       \Drupal::logger('portland OpenID')->notice("Start user sync for $domain ...");
     }
 
-    // Get the user sync batch size. Default is 100 users
-    $batch_size = \Drupal::state()->get('epgov.user_sync.batch_size') ?? "100";
+    // Get the user sync batch size. Default is 50 users
+    $batch_size = \Drupal::state()->get('epgov.user_sync.batch_size') ?? "50";
 
     // If there is a resume link, use it. Otherwise start fresh
     // The hardcoded initial URL is intentional. It's only used for the first request.
