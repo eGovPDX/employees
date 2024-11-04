@@ -109,10 +109,6 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         'name' => PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']),
         'pass' => \Drupal::service('password_generator')->generate(), // Create a temp password
       ]) :  array_values($users)[0];
-
-      if( ! array_key_exists('accountEnabled', $user_data))
-        \Drupal::logger('portland OpenID')->error('Missing accountEnabled ' . $user_data['userPrincipalName']);
-
       $user->field_active_directory_id = $user_data['id'];
       $user->status = $user_data['accountEnabled'];
       $user->field_principal_name = $user_data['userPrincipalName'];
