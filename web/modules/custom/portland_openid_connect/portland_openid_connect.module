@@ -89,7 +89,7 @@ function portland_openid_connect_cron()
     PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME,
   ];
   foreach($domains as $domain) {
-    // Get the last sync date. Default to 8 days ago.
+    // Get the last sync date. Default to 10/01/2024.
     $last_user_sync_date = \Drupal::state()->get("epgov.user_sync.last_sync_date.$domain");
     $last_user_sync_date = empty($last_user_sync_date) ? (new DateTime("2024-10-01")) : new DateTime($last_user_sync_date);
 

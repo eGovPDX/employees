@@ -124,4 +124,31 @@ final class CustomCommands extends DrushCommands
       print("Marked {$file->getFilename()} {$file->id()} as temp\n");
     }
   }
+
+  /**
+   * Drush command to reset the user sync process so the next cron run will restart the sync process.
+   */
+  #[CLI\Command(name: 'employees:reset_user_sync')]
+  #[CLI\Usage(name: 'employees:reset_user_sync', description: 'Reset the user sync process')]
+  public function reset_user_sync()
+  {
+    // Clear all items in the queue
+    /** @var QueueFactory $queue_factory */
+    $queue_factory = \Drupal::service('queue');
+    /** @var QueueInterface $queue */
+    $queue = $queue_factory->get('user_sync');
+    if( $queue != null ) $queue->deleteQueue();
+
+    // Set the Day of Week to today
+    \Drupal::state()->set('epgov.user_sync.day_of_week', date("l"));
+
+    // Delete variables tracking user sync progress
+    \Drupal::state()->deleteMultiple([
+      'epgov.user_sync.stop',
+      'epgov.user_sync.last_sync_date.portlandoregon.gov',
+      'epgov.user_sync.last_sync_date.police.portlandoregon.gov',
+      'epgov.user_sync.resume_url.portlandoregon.gov',
+      'epgov.user_sync.resume_url.police.portlandoregon.gov',
+    ]);
+  }
 }
