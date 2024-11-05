@@ -17,6 +17,7 @@
         "drupal/block_exclude_pages": "^2.1@beta",
         "drupal/bulk_user_registration": "^2.0",
         "drupal/ckeditor5_fullscreen": "^1.0@beta",
+        "drupal/ckeditor_accordion": "^2.1",
         "drupal/clamav": "^2.0",
         "drupal/components": "^3.0@beta",
         "drupal/config_split": "^2.0@RC",
@@ -116,6 +117,7 @@
         "mglaman/phpstan-drupal": "^1.1",
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^2.0",
+        "smillart/wai-aria-patterns-and-widgets": "1.0.6",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
         "wikimedia/composer-merge-plugin": "^2.0",
@@ -129,6 +131,19 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "smillart/wai-aria-patterns-and-widgets",
+                "version": "1.0.6",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/smillart/WAI-ARIA-Patterns-And-Widgets.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "conflict": {
@@ -206,6 +221,10 @@
             },
             "drupal/bulk_user_registration": {
                 "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch"
+            },
+            "drupal/ckeditor_accordion": {
+              "3469556 - Set accordion title and content as empty when adding new row": "https://www.drupal.org/files/issues/2024-08-21/3469556-1.patch",
+              "3124167 - Provide an accessible variant (MR #13 @ df3c1110)": "patches/ckeditor-accordion-mr-13-df3c1110.patch"
             },
             "drupal/datetime_range": {
                 "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch"
