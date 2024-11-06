@@ -2,6 +2,10 @@ uuid: ecf9fe2a-986c-40bd-9cb8-3b12835a7836
 langcode: en
 status: true
 dependencies:
+  config:
+    - search_api_autocomplete.search.group_search_index
+    - search_api_autocomplete.search.search_index
+    - search_api_autocomplete.search.technology_catalog
   module:
     - field_permissions
     - media
