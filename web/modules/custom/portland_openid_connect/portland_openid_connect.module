@@ -58,7 +58,7 @@ function portland_openid_connect_user_update($account)
  * Get state values: 
  *    drush state:get epgov.user_sync.stop
  *    drush state:get epgov.user_sync.day_of_week
- *    drush state:get epgov.user_sync.interval_in_days
+ *    drush state:get epgov.user_sync.sync_now
  *    drush state:get epgov.user_sync.batch_size
  *    drush state:get epgov.user_sync.last_sync_date.DOMAIN
  *    drush state:get epgov.user_sync.resume_url.DOMAIN
@@ -76,12 +76,14 @@ function portland_openid_connect_cron()
     return;
   }
 
-  // Get the day of the week to sync. Default is Saturday.
-  $sync_day = \Drupal::state()->get('epgov.user_sync.day_of_week') ?? "Saturday";
-  if(date("l") != $sync_day) return;
+  // Check if we need to sync now
+  $sync_now = (strtolower(\Drupal::state()->get('epgov.user_sync.sync_now')) === "true");
 
-  // Get the sync interval in days. Default is 7 days.
-  $sync_interval = \Drupal::state()->get('epgov.user_sync.interval_in_days') ?? "7";
+  // Get the day of the week to sync. Default is Saturday.
+  if( !$sync_now ) {
+    $sync_day = \Drupal::state()->get('epgov.user_sync.day_of_week') ?? "Saturday";
+    if(strtolower(date("l")) !== strtolower($sync_day) ) return;
+  }
 
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
   $domains = [
@@ -93,9 +95,9 @@ function portland_openid_connect_cron()
     $last_user_sync_date = \Drupal::state()->get("epgov.user_sync.last_sync_date.$domain");
     $last_user_sync_date = empty($last_user_sync_date) ? (new DateTime("2024-10-01")) : new DateTime($last_user_sync_date);
 
-    // Do nothing if the last sync was done within the interval
+    // Skip this domain if the last sync was done within the interval
     $now = new DateTime();
-    if($now->diff($last_user_sync_date)->days < (int)$sync_interval) break;
+    if($now->diff($last_user_sync_date)->days < 7) continue;
 
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
@@ -103,6 +105,15 @@ function portland_openid_connect_cron()
       return;
     }
     _get_all_users($tokens['access_token'], $domain);
+  }
+
+  // Clear the sync_now flag if all domains have finished user sync to go back to the weekly sync schedule
+  $all_domains_done = true;
+  foreach($domains as $domain) {
+    $all_domains_done &= empty(\Drupal::state()->get("epgov.user_sync.resume_url.$domain"));
+  }
+  if($all_domains_done) {
+    \Drupal::state()->delete("epgov.user_sync.sync_now");
   }
 }
 
@@ -130,13 +141,13 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // lando drush state:del epgov.user_sync.resume_url.DOMAIN
 
     if ($resume_url = $system_state->get("epgov.user_sync.resume_url.$domain")) {
-      \Drupal::logger('portland OpenID')->notice("Resume user sync for $domain ...");
+      \Drupal::logger('portland OpenID')->notice("Resuming user sync for $domain");
     } else {
-      \Drupal::logger('portland OpenID')->notice("Start user sync for $domain ...");
+      \Drupal::logger('portland OpenID')->notice("Starting user sync for $domain");
     }
 
     // Get the user sync batch size. Default is 50 users
-    $batch_size = \Drupal::state()->get('epgov.user_sync.batch_size') ?? "50";
+    $batch_size = $system_state->get('epgov.user_sync.batch_size') ?? "50";
 
     // If there is a resume link, use it. Otherwise start fresh
     // The hardcoded initial URL is intentional. It's only used for the first request.
@@ -152,8 +163,8 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
       /** @var QueueFactory $queue_factory */
       $queue_factory = \Drupal::service('queue');
       /** @var QueueInterface $queue */
-      $queue = $queue_factory->get('user_sync');
-      $queue->createItem([
+      $queue = $queue_factory?->get('user_sync');
+      $queue?->createItem([
         "access_token" => $access_token,
         "domain" => $domain,
         "users" => $response_data['value']
@@ -171,13 +182,13 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // When there is @odata.nextLink, prepare for the next run
     if( isset($response_data['@odata.nextLink']) ) {
       $system_state->set("epgov.user_sync.resume_url.$domain", $response_data['@odata.nextLink']);
-      \Drupal::logger('portland OpenID')->info("@odata.nextLink updated for domain $domain.");
+      \Drupal::logger('portland OpenID')->info("Updated resume link for $domain.");
     }
     // When there is no @odata.nextLink, there is no more user to sync
     else {
-      \Drupal::state()->set("epgov.user_sync.last_sync_date.$domain", (new DateTime())->format('Y-m-d'));
+      $system_state->set("epgov.user_sync.last_sync_date.$domain", (new DateTime())->format('Y-m-d'));
       $system_state->set("epgov.user_sync.resume_url.$domain", '');
-      \Drupal::logger('portland OpenID')->info("All users have been sychronized in domain $domain.");
+      \Drupal::logger('portland OpenID')->info("Finished user sync for $domain.");
     }
   } catch (RequestException $e) {
     $variables = [

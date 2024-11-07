@@ -99,19 +99,21 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
 
       // Look up user by Drupal user name (Principal name in AD)
       // Sometimes a user will be recreated with the same principal name but different AD ID
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $user_data['userPrincipalName']]);
+      // User name in Drupal has a limit of 60 characters
+      $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
+      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $userName]);
 
       // Create a new user if no user is found
       /** @var User $user */
       $user = (empty($users)) ? User::create([
         'field_active_directory_id' => $user_data['id'],
         'mail' => $user_data['mail'],
-        'name' => PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']),
+        'name' => $userName,
         'pass' => \Drupal::service('password_generator')->generate(), // Create a temp password
       ]) :  array_values($users)[0];
       $user->field_active_directory_id = $user_data['id'];
       $user->status = $user_data['accountEnabled'];
-      $user->field_principal_name = $user_data['userPrincipalName'];
+      $user->field_principal_name = $user_data['userPrincipalName']; // No length limit, can use the value from EntraID
       $user->field_first_name = $user_data['givenName'];
       $user->field_last_name = $user_data['surname'];
       $user->field_title = $user_data['jobTitle'];
