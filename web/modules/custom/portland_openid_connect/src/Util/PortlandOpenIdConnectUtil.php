@@ -339,14 +339,13 @@ class PortlandOpenIdConnectUtil
       return $userName;
     }
 
-    // Leave 3 characters for a random number to reduce conflict
-    $countOfCharToRemove = strlen($userName) - 60 + 3;
+    // Use MD5 hash (32 char) with the email domain as the user name
     if(str_contains($userName, "@")) {
       $parts = explode("@", $userName);
-      return substr($parts[0], 0, -($countOfCharToRemove)) . rand(100, 999) . "@" . $parts[1];
+      return hash("md5", $parts[0]) . "@" . $parts[1];
     }
     else {
-      return substr($userName, 0, -($countOfCharToRemove)) . rand(100, 999);
+      return hash("md5", $userName);
     }
   }
 
@@ -507,7 +506,7 @@ class PortlandOpenIdConnectUtil
       }
     } catch (RequestException $e) {
       $variables = [
-        '@message' => 'Cannot retrieve user\'s manager information for principal name ' . $user->getAccountName(),
+        '@message' => 'No manager info for ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
       \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);

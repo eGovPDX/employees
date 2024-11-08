@@ -9,32 +9,6 @@ use GuzzleHttp\Exception\RequestException;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 
 /**
- * Implement hook_user_login()
- * Update user profile and manager info during login
- */
-function portland_openid_connect_user_login(UserInterface $user) {
-  if (empty($user)) return;
-
-  if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) return;
-
-  $domain = (str_ends_with($user->mail->value, PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME)) ? PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME : PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME;
-
-  $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
-  if (empty($tokens) || empty($tokens['access_token'])) {
-    \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph. Make sure the client secret is correct.");
-    return;
-  }
-
-  // Only enabled users can log in so we don't need to check if the user is enabled
-  PortlandOpenIdConnectUtil::GetUserProfile($tokens['access_token'], $user);
-  PortlandOpenIdConnectUtil::GetUserManager($tokens['access_token'], $user);
-  // POWR-4008 Disable getting user photo from AD to avoid wiping out the badge photo uploaded
-  // PortlandOpenIdConnectUtil::GetUserPhoto($tokens['access_token'], $account->getAccountName(), $azure_ad_id);
-  $user->save();
-}
-
-
-/**
  * Implement hook_user_presave()
  * Keep the field_primary_groups value in sync with field_group_names
  */
@@ -79,16 +53,36 @@ function portland_openid_connect_user_update($account)
  * Implement hook_cron()
  * 
  * When Cron got into a locked state, you will see the log "Attempting to re-run cron while it is already running.".
- * Run this command: lando drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
+ * Run this command:
+ *    drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
+ * Get state values: 
+ *    drush state:get epgov.user_sync.stop
+ *    drush state:get epgov.user_sync.day_of_week
+ *    drush state:get epgov.user_sync.sync_now
+ *    drush state:get epgov.user_sync.batch_size
+ *    drush state:get epgov.user_sync.last_sync_date.DOMAIN
+ *    drush state:get epgov.user_sync.resume_url.DOMAIN
+ * To start sync from a fresh state:
+ *    drush state:del epgov.user_sync.last_sync_date.DOMAIN
+ *    drush state:del epgov.user_sync.resume_url.DOMAIN
  */
 function portland_openid_connect_cron()
 {
-  // To stop user sync: drush state:set portland.stop_user_sync true
-  // To restart user sync: drush state:delete portland.stop_user_sync
-  $stop_user_sync = \Drupal::state()->get('portland.stop_user_sync');
+  // To stop user sync: drush state:set epgov.user_sync.stop true
+  // To restart user sync: drush state:delete epgov.user_sync.stop
+  $stop_user_sync = \Drupal::state()->get('epgov.user_sync.stop');
   if (!empty($stop_user_sync) && strtolower($stop_user_sync) === "true") {
-    \Drupal::logger('portland OpenID')->notice("portland.stop_user_sync set to TRUE. Skip user sync.");
+    \Drupal::logger('portland OpenID')->notice("epgov.user_sync.stop set to TRUE. Skip user sync.");
     return;
+  }
+
+  // Check if we need to sync now
+  $sync_now = (strtolower(\Drupal::state()->get('epgov.user_sync.sync_now')) === "true");
+
+  // Get the day of the week to sync. Default is Saturday.
+  if( !$sync_now ) {
+    $sync_day = \Drupal::state()->get('epgov.user_sync.day_of_week') ?? "Saturday";
+    if(strtolower(date("l")) !== strtolower($sync_day) ) return;
   }
 
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
@@ -97,6 +91,14 @@ function portland_openid_connect_cron()
     PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME,
   ];
   foreach($domains as $domain) {
+    // Get the last sync date. Default to 10/01/2024.
+    $last_user_sync_date = \Drupal::state()->get("epgov.user_sync.last_sync_date.$domain");
+    $last_user_sync_date = empty($last_user_sync_date) ? (new DateTime("2024-10-01")) : new DateTime($last_user_sync_date);
+
+    // Skip this domain if the last sync was done within the interval
+    $now = new DateTime();
+    if($now->diff($last_user_sync_date)->days < 7) continue;
+
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph for domain $domain. Make sure the client credentials are correct and not expired.");
@@ -104,155 +106,15 @@ function portland_openid_connect_cron()
     }
     _get_all_users($tokens['access_token'], $domain);
   }
-}
 
-/**
- * Parse the response json from Microsoft Graph API to add/update users.
- * https://docs.microsoft.com/en-us/graph/delta-query-users
- * 
- * @param array $response_data
- *   The decoded JSON response from Microsoft Graph.
- * 
- * A person must have givenName, surname, mail, pincipal name and id
- * {
- *    businessPhones (may be empty)
- *    displayName
- *    givenName
- *    jobTitle (may be empty)
- *    mail
- *    surname (may be empty)
- *    officeLocation (may be empty)
- *    userPrincipalName
- *    id
- *    manager@delta [ (may be empty)
- *      [
- *        id
- *      ]
- *    ]
- * }
- */
-function _process_users($response_data, $access_token)
-{
-  $user_data_array = $response_data['value']; // array of users
-  if (empty($user_data_array)) {
-    \Drupal::logger('portland OpenID')->notice('No user change since the last sync.');
-    return;
+  // Clear the sync_now flag if all domains have finished user sync to go back to the weekly sync schedule
+  $all_domains_done = true;
+  foreach($domains as $domain) {
+    $all_domains_done &= empty(\Drupal::state()->get("epgov.user_sync.resume_url.$domain"));
   }
-
-  $users_created = [];
-  $users_updated = [];
-  $users_disabled = [];
-  foreach ($user_data_array as $user_data) {
-    // Skip accounts without first name, last name, userPrincipalName, or email. These are not people acount.
-    if (
-      empty($user_data['givenName']) ||
-      empty($user_data['surname']) ||
-      empty($user_data['mail']) ||
-      empty($user_data['userPrincipalName']) ||
-      empty($user_data['id']) ||
-      str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com')
-    ) {
-      continue;
-    }
-
-    // Use principal name and email to look up user. After PTLD migration, user's email will remain the same. There are also cases when the user gets a new AD account with the same email address.
-    $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $user_data['userPrincipalName']]);
-    if(empty($users)) {
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $user_data['mail']]);
-    }
-
-    // If a user can't be found by Principal Name or Email but can be found via AD ID, it indicate the user's email or principal name have changed and we need to update email/principal name.
-    $user_found_by_id = false;
-    if(empty($users)) {
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['field_active_directory_id' => $user_data['id']]);
-      $user_found_by_id = !empty($users);
-    }
-
-    // Create a new user account if there is no existing account with the email
-    if (empty($users)) {
-      /*
-        {
-            "displayName": "Smith, Joe",
-            "givenName": "Joe",
-            "mail": "Joe.Smith@portlandoregon.gov",
-            "surname": "Smith",
-            "userPrincipalName": "Joe.Smith@portlandoregon.gov",
-            "id": "9afb6f12-f5c2-4c30-b87c-5532ce6788f2",
-            "manager@delta": [
-                {
-                    "@odata.type": "#microsoft.graph.user",
-                    "id": "872995ed-515b-41fc-a318-93cf66f52f1f"
-                }
-            ]
-        }
-      */
-      $user = User::create([
-        'name' => PortlandOpenIdConnectUtil::TrimUserName( $user_data['userPrincipalName'] ),
-        'mail' => $user_data['mail'],
-        'pass' => \Drupal::service('password_generator')->generate(), // Create a temp password
-        'status' => 1,
-        'field_active_directory_id' => $user_data['id'],
-        'field_first_name' => $user_data['givenName'],
-        'field_last_name' => $user_data['surname'],
-        'field_principal_name' => $user_data['userPrincipalName'],
-      ]);
-
-      if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
-      PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
-      PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
-      $user->save();
-      $users_created []= $user->getAccountName();
-    }
-    // Else the user is already in Drupal. We need to either update or disable the user.
-    else {
-      /** @var UserInterface $user */
-      $user = array_values($users)[0]; // Assume the lookup returns only one unique user.
-      if(PortlandOpenIdConnectUtil::ShouldSkipUser($user)) continue;
-
-      // ONLY update the email address when the user was found by AD ID
-      if($user_found_by_id) {
-        $user->mail->value = $user_data['mail'];
-      }
-
-      $user->field_principal_name = $user_data['userPrincipalName'];
-      $user->field_first_name = $user_data['givenName'];
-      $user->field_last_name = $user_data['surname'];
-      $user->field_active_directory_id = $user_data['id'];
-      $user->setUsername(PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']) ); // Update account username
-
-      PortlandOpenIdConnectUtil::GetUserManager($access_token, $user);
-      PortlandOpenIdConnectUtil::GetUserProfile($access_token, $user);
-      $user->save();
-      $users_updated []= $user->getAccountName();
-
-      // Check if the user account is enabled in AD
-      $user_is_enabled_in_AD = PortlandOpenIdConnectUtil::IsUserEnabled($access_token, $user);
-      if( $user_is_enabled_in_AD === null ) {
-        // Do nothing if the access token is invalid
-        return;
-      }
-      // @removed is set when a user is removed from AD
-      $user_is_disabled = array_key_exists('@removed', $user_data) || (! $user_is_enabled_in_AD);
-      if ($user_is_disabled) {
-        $user->status = 0;
-        $user->save();
-        $users_disabled []= $user->getAccountName();
-      }
-    }
+  if($all_domains_done) {
+    \Drupal::state()->delete("epgov.user_sync.sync_now");
   }
-
-  // Summarize the changes made in this batch
-  $log_message = 'Retrieved ' . count($user_data_array) . ' users. ';
-  if (!empty($users_created)) {
-    $log_message .= count($users_created) . " new users created: " . implode(", ", $users_created) . ". ";
-  }
-  if (!empty($users_updated)) {
-    $log_message .= count($users_updated) . " users updated: " . implode(", ", $users_updated) . ". ";
-  }
-  if (!empty($users_disabled)) {
-    $log_message .= count($users_disabled) . " users disabled: " . implode(", ", $users_disabled);
-  }
-  \Drupal::logger('portland OpenID')->notice($log_message);
 }
 
 /**
@@ -270,50 +132,69 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     'headers' => [
       'Content-Type' => 'application/json',
       'Authorization' => 'Bearer ' . $access_token,
-    ],
+      'ConsistencyLevel' => 'eventual',
+    ]
   ];
 
   try {
     // Run this command to delete the resume link in order to start fresh
-    // lando drush state:del user_sync.resume_url.DOMAIN
+    // lando drush state:del epgov.user_sync.resume_url.DOMAIN
 
-    if ($resume_url = $system_state->get("user_sync.resume_url.$domain")) {
-      \Drupal::logger('portland OpenID')->notice("Resume user sync for $domain ...");
+    if ($resume_url = $system_state->get("epgov.user_sync.resume_url.$domain")) {
+      \Drupal::logger('portland OpenID')->notice("Resuming user sync for $domain");
     } else {
-      \Drupal::logger('portland OpenID')->notice("Start user sync for $domain ...");
+      \Drupal::logger('portland OpenID')->notice("Starting user sync for $domain");
     }
 
+    // Get the user sync batch size. Default is 50 users
+    $batch_size = $system_state->get('epgov.user_sync.batch_size') ?? "50";
+
     // If there is a resume link, use it. Otherwise start fresh
-    $request_url = (empty($resume_url)) ? 'https://graph.microsoft.com/v1.0/users/delta' : $resume_url;
-    $request_limit = 1;
+    // The hardcoded initial URL is intentional. It's only used for the first request.
+    $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=endswith(mail,'@$domain')&\$orderby=userPrincipalName&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
+    // Queue up 10 items in each call
+    $request_limit = 10;
     $request_count = 0;
     $response_data = null;
     while (strlen($request_url) > 0 && $request_count < $request_limit) {
       $response = $client->get($request_url, $options);
       $response_data = json_decode((string) $response->getBody(), TRUE);
-      if ((!isset($response_data['@odata.nextLink'])) && !($response_data['@odata.deltaLink'])) {
-        \Drupal::logger('portland OpenID')->error("Users delta response contains neither nextLink nor deltaLink for $domain");
-        return false;
-      }
-      _process_users($response_data, $access_token, $domain);
-      $request_url = $response_data['@odata.nextLink'] ?? '';
-      $request_count++;
-    }
-    if ($response_data == null) return false;
+      
+      /** @var QueueFactory $queue_factory */
+      $queue_factory = \Drupal::service('queue');
+      /** @var QueueInterface $queue */
+      $queue = $queue_factory?->get('user_sync');
+      $queue?->createItem([
+        "access_token" => $access_token,
+        "domain" => $domain,
+        "users" => $response_data['value']
+      ]);
 
-    // When there is no nextLink, there is no new user info.
-    // Should use deltaLink to resume in the next Cron.
-    $system_state->set("user_sync.resume_url.$domain", $response_data['@odata.nextLink'] ?? $response_data['@odata.deltaLink']);
-    \Drupal::logger('portland OpenID')->notice(isset($response_data['@odata.nextLink']) ?
-      "More users to be retrieved next time for $domain." :
-      "Finished retrieving all users for $domain.");
-    return true;
+      if( isset($response_data['@odata.nextLink']) ) {
+        $request_url = $response_data['@odata.nextLink'] ?? '';
+        $request_count++;
+      }
+      else {
+        break;
+      }
+    }
+
+    // When there is @odata.nextLink, prepare for the next run
+    if( isset($response_data['@odata.nextLink']) ) {
+      $system_state->set("epgov.user_sync.resume_url.$domain", $response_data['@odata.nextLink']);
+      \Drupal::logger('portland OpenID')->info("Updated resume link for $domain.");
+    }
+    // When there is no @odata.nextLink, there is no more user to sync
+    else {
+      $system_state->set("epgov.user_sync.last_sync_date.$domain", (new DateTime())->format('Y-m-d'));
+      $system_state->set("epgov.user_sync.resume_url.$domain", '');
+      \Drupal::logger('portland OpenID')->info("Finished user sync for $domain.");
+    }
   } catch (RequestException $e) {
     $variables = [
-      '@message' => 'Cannot retrieve users from ' . $domain,
+      '@message' => 'Cannot synchronize users from ' . $domain,
       '@error_message' => $e->getMessage(),
     ];
-    \Drupal::logger('portland OpenID')->notice('@message. Details: @error_message', $variables);
-    return false;
+    \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
   }
 }
