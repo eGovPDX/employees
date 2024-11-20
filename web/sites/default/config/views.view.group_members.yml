@@ -1983,6 +1983,10 @@ display:
         fields: false
       display_extenders: {  }
       path: group/%group/members/export
+      displays:
+        page_1: page_1
+        default: '0'
+        page_group_member_list: '0'
       filename: 'group-member-export-[date:numeric_year]-[date:numeric_month]-[date:numeric_day].csv'
       automatic_download: false
       store_in_public_file_directory: false
@@ -2824,20 +2828,7 @@ display:
       defaults:
         fields: false
         footer: false
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: false
-          content:
-            value: '<p><a href="members/export">Download CSV</a></p>'
-            format: basic_html
-          tokenize: false
+      footer: {  }
       display_extenders: {  }
       path: group/%group/members
       menu:
