@@ -167,6 +167,7 @@ function _update_users_removed_from_ad($access_token, $domain)
   // Done when the returned user count is less than the limit
   if (count($uids) < $drupal_user_limit) {
     \Drupal::logger('portland OpenID')->notice("Finished checking for users removed in $domain");
+    \Drupal::state()->set("epgov.user_sync.drupal_user_offset.$domain", 0);
     \Drupal::state()->set("epgov.user_sync.last_check_removals_date.$domain", (new DateTime())->format('Y-m-d'));
     return;
   }
