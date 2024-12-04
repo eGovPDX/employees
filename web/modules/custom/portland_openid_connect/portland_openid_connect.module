@@ -61,10 +61,11 @@ function portland_openid_connect_user_update($account)
  *    drush state:get epgov.user_sync.sync_now
  *    drush state:get epgov.user_sync.batch_size
  *    drush state:get epgov.user_sync.last_sync_date.DOMAIN
+ *    drush state:get epgov.user_sync.last_check_removals_date.DOMAIN
  *    drush state:get epgov.user_sync.resume_url.DOMAIN
+ *    drush state:get epgov.user_sync.drupal_user_offset.DOMAIN
  * To start sync from a fresh state:
- *    drush state:del epgov.user_sync.last_sync_date.DOMAIN
- *    drush state:del epgov.user_sync.resume_url.DOMAIN
+ *    drush employees:reset_user_sync
  */
 function portland_openid_connect_cron()
 {
@@ -87,38 +88,93 @@ function portland_openid_connect_cron()
 
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
   $domains = [
-    PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME,
-    PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME,
+    PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME => false,
+    PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME => false,
   ];
-  foreach($domains as $domain) {
+  foreach($domains as $domain => $done) {
     // Get the last sync date. Default to 10/01/2024.
     $last_user_sync_date = \Drupal::state()->get("epgov.user_sync.last_sync_date.$domain");
     $last_user_sync_date = empty($last_user_sync_date) ? (new DateTime("2024-10-01")) : new DateTime($last_user_sync_date);
+    $last_check_removals_date = \Drupal::state()->get("epgov.user_sync.last_check_removals_date.$domain");
+    $last_check_removals_date = empty($last_check_removals_date) ? (new DateTime("2024-10-01")) : new DateTime($last_check_removals_date);
 
-    // Skip this domain if the last sync was done within the interval
+    // Do nothing if the last sync was done within 7 days
     $now = new DateTime();
-    if($now->diff($last_user_sync_date)->days < 7) continue;
+    $skip_user_sync = ($now->diff($last_user_sync_date)->days < 7);
+    $skip_user_removal_check = ($now->diff($last_check_removals_date)->days < 7);
+    if($skip_user_sync && $skip_user_removal_check) {
+      $domains[$domain] = true;
+      continue;
+    }
 
     $tokens = PortlandOpenIdConnectUtil::GetAccessToken($domain);
     if (empty($tokens) || empty($tokens['access_token'])) {
       \Drupal::logger('portland OpenID')->error("Cannot retrieve access token for Microsoft Graph for domain $domain. Make sure the client credentials are correct and not expired.");
       return;
     }
-    _get_all_users($tokens['access_token'], $domain);
+
+    if( !$skip_user_sync ) _get_all_users($tokens['access_token'], $domain);
+    if( !$skip_user_removal_check ) _update_users_removed_from_ad($tokens['access_token'], $domain);
   }
 
-  // Clear the sync_now flag if all domains have finished user sync to go back to the weekly sync schedule
+  // When all domains are done, clear the sync_now flag
   $all_domains_done = true;
-  foreach($domains as $domain) {
-    $all_domains_done &= empty(\Drupal::state()->get("epgov.user_sync.resume_url.$domain"));
+  foreach($domains as $domain => $done) {
+    $all_domains_done &= $done;
   }
-  if($all_domains_done) {
-    \Drupal::state()->delete("epgov.user_sync.sync_now");
+  if($all_domains_done) \Drupal::state()->delete("epgov.user_sync.sync_now");
+}
+
+/**
+ * Check if Drupal users have been removed from EntraID
+ */
+function _update_users_removed_from_ad($access_token, $domain)
+{
+  $drupal_user_offset = \Drupal::state()->get("epgov.user_sync.drupal_user_offset.$domain") ?? 0;
+  $drupal_user_limit = 100;
+
+  if ($drupal_user_offset == 0) {
+    \Drupal::logger('portland OpenID')->notice("Started checking for users removed in $domain");
+  }
+
+  // Get 100 enabled users at a time and add the array into the queue
+  $userStorage = \Drupal::entityTypeManager()->getStorage('user');
+  $query = $userStorage->getQuery();
+  $uids = $query
+    ->condition('status', '1') // Enabled users
+    ->condition('field_principal_name', "@".$domain, 'ENDS_WITH') // User in the domain
+    ->sort('uid', 'ASC')
+    ->range($drupal_user_offset, $drupal_user_limit)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (count($uids) > 0) {
+    $users = $userStorage->loadMultiple($uids);
+    /** @var QueueFactory $queue_factory */
+    $queue_factory = \Drupal::service('queue');
+    /** @var QueueInterface $queue */
+    $queue = $queue_factory->get('user_sync');
+    $queue->createItem([
+      "access_token" => $access_token,
+      "domain" => $domain,
+      "user_type" => "drupal",
+      "users" => $users
+    ]);
+  }
+
+  // Update the user offset
+  \Drupal::state()->set("epgov.user_sync.drupal_user_offset.$domain", $drupal_user_offset + count($uids));
+  // Done when the returned user count is less than the limit
+  if (count($uids) < $drupal_user_limit) {
+    \Drupal::logger('portland OpenID')->notice("Finished checking for users removed in $domain");
+    \Drupal::state()->set("epgov.user_sync.drupal_user_offset.$domain", 0);
+    \Drupal::state()->set("epgov.user_sync.last_check_removals_date.$domain", (new DateTime())->format('Y-m-d'));
+    return;
   }
 }
 
 /**
- * Call the user delta API to get users incrementally
+ * Call the list users API to get all users from EntraID
  */
 function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME)
 {
@@ -167,6 +223,7 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
       $queue?->createItem([
         "access_token" => $access_token,
         "domain" => $domain,
+        "user_type" => "entra_id",
         "users" => $response_data['value']
       ]);
 
