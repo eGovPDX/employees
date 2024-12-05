@@ -715,6 +715,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 50
           total_pages: null
           id: 0
@@ -732,7 +733,6 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -1617,6 +1617,59 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        view_user:
+          id: view_user
+          table: users
+          field: view_user
+          relationship: gc__user
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          plugin_id: entity_link
+          label: 'Link to User'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: view
+          output_url_as_text: false
+          absolute: false
         view_group_content:
           id: view_group_content
           table: group_relationship
@@ -1682,8 +1735,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{% if view_user|length %}\r\n  {{ edit_group_content }}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -2798,12 +2851,6 @@ display:
         - url.query_args
         - user.group_permissions
       tags:
-        - 'config:core.entity_view_display.user.user.compact'
-        - 'config:core.entity_view_display.user.user.contact_details'
-        - 'config:core.entity_view_display.user.user.default'
-        - 'config:core.entity_view_display.user.user.full'
-        - 'config:core.entity_view_display.user.user.group_contact'
-        - 'config:core.entity_view_display.user.user.search_result'
         - 'config:field.storage.group_content.group_roles'
         - 'config:field.storage.user.field_first_name'
         - 'config:field.storage.user.field_last_name'

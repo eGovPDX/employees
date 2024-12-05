@@ -101,12 +101,24 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
               formatter:
-                type: daterange_default
+                type: smartdate_default
                 label: inline
                 settings:
                   timezone_override: ''
-                  format_type: medium
-                  separator: '-'
+                  format: compact
+                  force_chronological: false
+                  add_classes: false
+                  time_wrapper: true
+                  localize: false
+                  parts:
+                    start: start
+                    end: end
+                    duration: '0'
+                  duration:
+                    separator: ' | '
+                    unit: ''
+                    decimals: 2
+                    suffix: h
                 third_party_settings: {  }
             weight: -6
             additional: {  }
