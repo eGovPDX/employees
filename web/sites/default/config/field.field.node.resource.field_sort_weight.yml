@@ -1,0 +1,25 @@
+uuid: eda572c9-8f41-41d2-887c-2fe703e11b88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sort_weight
+    - node.type.resource
+id: node.resource.field_sort_weight
+field_name: field_sort_weight
+entity_type: node
+bundle: resource
+label: 'Sort Weight'
+description: 'Sort weight defaults to 0. Resources are sorted by short title in menus, but sort weight will override this sort when needed. Smaller numbers (or negative numbers) will be sorted higher in the list than larger numbers.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
