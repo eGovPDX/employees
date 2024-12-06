@@ -9,6 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\user\Entity\User;
 use Drupal\portland_openid_connect\Util\PortlandOpenIdConnectUtil;
 use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * SyncUsersWorker class.
@@ -51,9 +53,75 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
    * [
    *   "access_token" => $access_token,
    *   "domain" => $domain,
-   *   "users" => users[{...}]
+   *   "user_type" => "drupal" or "entra_id"
+   *   "users" => users[] // Drupal User objects for "drupal" user type or PHP Arrays for "entra_id" user type
    * ]
-   * 
+   */
+  public function processItem($data)
+  {
+    if ($data["user_type"] === "drupal") {
+      $this->processDrupalUsers($data);
+    } else if ($data["user_type"] === "entra_id") {
+      $this->processEntraIDUsers($data);
+    }
+  }
+
+  public function processDrupalUsers($data)
+  {
+    $users_disabled = [];
+    /* @var \GuzzleHttp\ClientInterface $client */
+    $client = new Client();
+    // Perform the request.
+    $options = [
+      'method' => 'GET',
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'Authorization' => 'Bearer ' . $data["access_token"],
+        'ConsistencyLevel' => 'eventual',
+      ],
+    ];
+    $skip_emails = [
+      'BTS-eGov@portlandoregon.gov',
+      'ally.admin@portlandoregon.gov',
+      'marty.member@portlandoregon.gov',
+      'oliver.outsider@portlandoregon.gov',
+    ];
+
+    $email_domain = '@' . $data['domain'];
+    foreach ($data["users"] as $user) {
+      if ($user->field_is_contact_only->value) continue;
+      if (in_array(strtolower($user->getEmail()), array_map('strtolower', $skip_emails))) continue;
+      if (!str_ends_with(strtolower($user->getEmail()), $email_domain)) continue;
+
+      $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
+      $result_is_404 = false;
+      try {
+        $response = $client->get($request_url, $options);
+      } catch (RequestException $e) {
+        if ($e->getCode() == 404) {
+          $result_is_404 = true;
+        }
+        else {
+          $variables = [
+            '@message' => 'Error retrieving user ' . $user->getEmail(),
+            '@error_message' => $e->getMessage(),
+          ];
+          \Drupal::logger('portland OpenID')->error('@message. Details: @error_message', $variables);
+        }
+      }
+
+      // Only disable user if it's enabled
+      if ($result_is_404 && $user->status->value == 1) {
+        $user->status = 0;
+        $user->save();
+        $users_disabled[] = $user->getEmail();
+      }
+    }
+
+    if (count($users_disabled) > 0) \Drupal::logger('portland OpenID')->info("(Removal) Disabled " . count($users_disabled) . " users: " . implode(",", $users_disabled));
+  }
+
+  /**
    * User data example:
    * {
    *     "id": "1234dfc6-310c-4d5e-aa62-6237a8222f1b",
@@ -81,8 +149,11 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
    *     "mailNickname": "jdoe"
    * }
    */
-  public function processItem($data)
+  public function processEntraIDUsers($data)
   {
+    $users_created = [];
+    $users_enabled = [];
+    $users_disabled = [];
     foreach ($data["users"] as $user_data) {
       // Skip accounts without first name, last name, userPrincipalName, or email. These are not people acount.
       if (
@@ -125,6 +196,15 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user->field_mobile_phone = $user_data['mobilePhone'];
       $user->field_address = empty($user_data['streetAddress']) ? '' : ($user_data['streetAddress'] . ', ' . $user_data['city'] . ', ' . $user_data['state'] . ', ' . $user_data['postalCode']);
 
+
+      if($user->isNew()) {
+        $users_created []= $userName;
+      }
+      else {
+        if($user_data['accountEnabled'] == 1 && $user->status->value == 0) $users_enabled []= $userName;
+        if($user_data['accountEnabled'] == 0 && $user->status->value == 1) $users_disabled []= $userName;
+      }
+
       // echo (($user->isNew()) ? "created," : "updated,") . $user_data['userPrincipalName'] . PHP_EOL;
       try {
         $user->save();
@@ -133,9 +213,13 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       }
 
       // PTLD users don't have manager data
-      if($data["domain"] == "portlandoregon.gov") {
+      if ($data["domain"] == "portlandoregon.gov") {
         PortlandOpenIdConnectUtil::GetUserManager($data["access_token"], $user);
       }
     }
+
+    if(count($users_created) > 0) \Drupal::logger('portland OpenID')->info("Created " . count($users_created) . " users: " . implode(",", $users_created));
+    if(count($users_enabled) > 0) \Drupal::logger('portland OpenID')->info("Enabed " . count($users_enabled) . " users: " . implode(",", $users_enabled));
+    if(count($users_disabled) > 0) \Drupal::logger('portland OpenID')->info("Disabled " . count($users_disabled) . " users: " . implode(",", $users_disabled));
   }
 }
