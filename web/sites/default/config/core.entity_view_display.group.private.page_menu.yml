@@ -1,0 +1,124 @@
+uuid: da9dcd6f-8fb3-425d-aa5c-3b61c7a13f87
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.page_menu
+    - field.field.group.private.field_contacts
+    - field.field.group.private.field_featured_content
+    - field.field.group.private.field_featured_documents
+    - field.field.group.private.field_featured_image
+    - field.field.group.private.field_group_contact
+    - field.field.group.private.field_group_description
+    - field.field.group.private.field_group_path
+    - field.field.group.private.field_migration_status
+    - field.field.group.private.field_org_type
+    - field.field.group.private.field_parent_group
+    - group.type.private
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - options
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+      allowlisted_blocks: null
+      denylisted_blocks: null
+id: group.private.page_menu
+targetEntityType: group
+bundle: private
+mode: page_menu
+content:
+  field_contacts:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: main
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: main
+  field_featured_media:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: main
+  field_group_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: -3
+    region: content
+  field_group_path:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -4
+    region: content
+  field_migration_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: main
+  field_org_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: -1
+    region: first
+  field_parent_group:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: -2
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_featured_documents: true
+  field_featured_image: true
+  field_group_contact: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true
