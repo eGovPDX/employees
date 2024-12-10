@@ -18,11 +18,13 @@ dependencies:
     - field.field.group.employee.field_parent_group
     - field.field.group.employee.field_search_keywords
     - group.type.employee
+    - group_content_menu.group_content_menu_type.page_menu
     - views.view.group_list_views
     - views.view.group_menu
     - views.view.group_search_index
   module:
     - file
+    - group_content_menu
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -289,6 +291,23 @@ third_party_settings:
                 settings:
                   view_mode: featured
                 third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          f7a38b7a-e8f3-42aa-a624-948139ebf482:
+            uuid: f7a38b7a-e8f3-42aa-a624-948139ebf482
+            region: menu
+            configuration:
+              id: 'group_content_menu:page_menu'
+              label: 'Page menu'
+              label_display: visible
+              provider: group_content_menu
+              context_mapping:
+                group: layout_builder.entity
+              level: 1
+              depth: 0
+              expand_all_items: false
+              relative_visibility: true
+              theme_hook_suggestion: ''
             weight: 2
             additional: {  }
         third_party_settings: {  }
