@@ -38,22 +38,6 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          91c33fe7-093e-4c92-b8f9-704538dda565:
-            uuid: 91c33fe7-093e-4c92-b8f9-704538dda565
-            region: content
-            configuration:
-              id: 'field_block:group:employee:field_group_path'
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              formatter:
-                type: string
-                label: above
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 2
-            additional: {  }
           c4c73e13-2df8-4f8d-9b1f-aeb7cbb4264c:
             uuid: c4c73e13-2df8-4f8d-9b1f-aeb7cbb4264c
             region: main
@@ -170,7 +154,7 @@ third_party_settings:
             configuration:
               id: 'group_content_menu:page_menu'
               label: 'Page menu'
-              label_display: visible
+              label_display: '0'
               provider: group_content_menu
               context_mapping:
                 group: layout_builder.entity
