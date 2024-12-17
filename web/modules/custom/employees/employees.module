@@ -949,6 +949,9 @@ function employees_preprocess_block(&$variables) {
     substr($variables["content"][0]["#title"], 0, 8) == "no.email" ) {
     $variables["content"] = [];
   }
+  else if($variables['plugin_id'] === "group_content_menu:page_menu") {
+    unset($variables['label']); // Remove the "Page menu" label
+  }
 }
 
 /**
