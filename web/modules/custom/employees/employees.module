@@ -951,6 +951,25 @@ function employees_preprocess_block(&$variables) {
   }
   else if($variables['plugin_id'] === "group_content_menu:page_menu") {
     unset($variables['label']); // Remove the "Page menu" label
+
+    // Prepare the group ID and menu ID in order to build the link for the "Manage menu" button. Only display the button if the user has the correct permission.
+    if(array_key_exists("#contextual_links", $variables["elements"]) && 
+      array_key_exists("group_menu", $variables["elements"]["#contextual_links"]) ) {
+        $group_menu = $variables["elements"]["#contextual_links"]["group_menu"];
+
+        $group_id = $group_menu['route_parameters']['group'];
+        if( !empty($group_id) ) {
+          $group = Group::load($group_id);
+          if( !empty($group) ) {
+            $current_user = \Drupal::currentUser();
+            if($group->hasPermission("manage group_content_menu menu items", $current_user)) {
+              // These array keys are defined by group_cotent_menu. Should be safe to access without checking if key exists
+              $variables['group_id'] = $group_menu['route_parameters']['group'];
+              $variables['menu_id'] = $group_menu['route_parameters']['group_content_menu'];
+            }
+          }
+        }
+      }
   }
 }
 
