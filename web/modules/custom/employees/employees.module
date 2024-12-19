@@ -1072,3 +1072,45 @@ function employees_form_user_login_form_alter(&$form, &$form_state)
     ];
   }
 }
+
+/**
+ * Implement hook_ENTITY_TYPE_update()
+ * Detect any changes in a Page Menu, re-save the node to update the URL alias
+ */
+function employees_group_content_menu_update($menu) {
+  if($menu->bundle() !== "page_menu") return;
+  $link_tree_service = \Drupal::service('menu.link_tree');
+  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+  foreach($menu_tree as $key => $menu_link_tree_element) {
+    generate_alias($menu_link_tree_element);
+  }
+}
+
+function generate_alias($menu_link_tree_element) {
+  // Traverse the tree to re-generate alias
+  $pathauto_generator = \Drupal::service('pathauto.generator');
+  // The link field is a MenuLinkContent object
+  $menu_link_url = $menu_link_tree_element->link->getUrlObject();
+  try {
+    if( !$menu_link_url->isExternal() ) {
+      $node_id = $menu_link_url->getRouteParameters()["node"];
+      $node = Drupal\node\Entity\Node::load($node_id);
+      $pathauto_generator->updateEntityAlias($node, "update");
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('employees')->error('Failed to generate alias for node @nid when saving Page Menu. @message', [
+      '@nid' => $node->id(),
+      '@message' => $e->getMessage(),
+    ]);
+    \Drupal::messenger()->addError('Failed to generate path alias. Check the logs for more information.');
+  }
+
+  if($menu_link_tree_element->hasChildren) {
+    foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
+      generate_alias($menu_link_tree_element);
+    }
+  }
+}
