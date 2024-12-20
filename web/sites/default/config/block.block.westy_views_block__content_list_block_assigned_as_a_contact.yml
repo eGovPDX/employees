@@ -1,0 +1,29 @@
+uuid: 80f27921-76fe-496f-8560-564bbc72a56b
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_list
+  module:
+    - system
+    - views
+  theme:
+    - westy
+id: westy_views_block__content_list_block_assigned_as_a_contact
+theme: westy
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:content_list-block_assigned_as_a_contact'
+settings:
+  id: 'views_block:content_list-block_assigned_as_a_contact'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/user/*\r\n!/user/*/*"
