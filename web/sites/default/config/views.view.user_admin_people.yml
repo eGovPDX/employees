@@ -129,15 +129,15 @@ display:
               preconfiguration:
                 add_confirmation: false
             -
-              action_id: user_unblock_user_action
-              preconfiguration:
-                add_confirmation: false
-            -
               action_id: user_block_user_action
               preconfiguration:
                 add_confirmation: false
             -
-              action_id: user_remove_role_action
+              action_id: user_unblock_user_action
+              preconfiguration:
+                add_confirmation: false
+            -
+              action_id: vbo_cancel_user_action
               preconfiguration:
                 add_confirmation: false
             -
@@ -145,9 +145,14 @@ display:
               preconfiguration:
                 add_confirmation: false
             -
-              action_id: vbo_cancel_user_action
+              action_id: user_remove_role_action
               preconfiguration:
                 add_confirmation: false
+            -
+              action_id: employees_add_users_to_group
+              preconfiguration:
+                add_confirmation: false
+                label_override: 'Add users to a group'
             -
               action_id: 'entity:save_action:user'
               preconfiguration:
