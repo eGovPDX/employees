@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_published_on
     - field.storage.node.field_updated_on
-    - node.type.bts_catalog_item
     - node.type.contract
     - node.type.event
     - node.type.news
@@ -555,7 +554,6 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            bts_catalog_item: bts_catalog_item
             contract: contract
             event: event
             page: page
@@ -604,7 +602,6 @@ display:
       display_extenders: {  }
       entity_type: node
       bundles:
-        - bts_catalog_item
         - contract
         - event
         - page
@@ -752,7 +749,6 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            bts_catalog_item: bts_catalog_item
             contract: contract
             event: event
             page: page
@@ -800,7 +796,6 @@ display:
       display_extenders: {  }
       entity_type: node
       bundles:
-        - bts_catalog_item
         - contract
         - event
         - page

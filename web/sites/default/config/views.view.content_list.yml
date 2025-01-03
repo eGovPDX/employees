@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_contact
     - field.storage.node.field_contacts
-    - taxonomy.vocabulary.bts_catalog_item_type
-  content:
-    - 'taxonomy_term:bts_catalog_item_type:ba488e54-b7e5-4ee8-8a90-bd0564fa1b84'
   module:
     - node
     - taxonomy
@@ -78,6 +75,7 @@ display:
         type: mini
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: null
           id: 0
@@ -92,7 +90,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:
@@ -444,78 +441,3 @@ display:
       tags:
         - 'config:field.storage.node.field_contact'
         - 'config:field.storage.node.field_contacts'
-  ref_bts_services:
-    id: ref_bts_services
-    display_title: 'Ref: BTS Services'
-    display_plugin: entity_reference
-    position: 1
-    display_options:
-      filters:
-        field_type_target_id:
-          id: field_type_target_id
-          table: node__field_type
-          field: field_type_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value:
-            1716: 1716
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: bts_catalog_item_type
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      style:
-        type: entity_reference
-        options:
-          search_fields:
-            title: title
-      defaults:
-        filters: false
-        filter_groups: false
-      display_description: ''
-      display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags: {  }
