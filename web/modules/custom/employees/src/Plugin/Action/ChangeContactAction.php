@@ -37,6 +37,22 @@ class ChangeContactAction extends ViewsBulkOperationsActionBase {
       $user_id = $contact->getValue()['target_id'];
       if ($user_id == $this->configuration['old_user_id']) {
         $contact->setValue($this->configuration['new_user_id']);
+        
+        // Get the first and last name of the old and new contacts for the revision log message
+        $from_user = \Drupal::entityTypeManager()->getStorage('user')->load($this->configuration['old_user_id']);
+        $from_first_name = $from_user->get('field_first_name')->value;
+        $from_last_name = $from_user->get('field_last_name')->value;
+        
+        $to_user = \Drupal::entityTypeManager()->getStorage('user')->load($this->configuration['new_user_id']);
+        $to_first_name = $to_user->get('field_first_name')->value;
+        $to_last_name = $to_user->get('field_last_name')->value;
+    
+        // Make this change a new revision
+        if($entity->hasField('revision_log'))
+          $entity->revision_log = "Bulk operation: Changed contact $from_first_name $from_last_name to $to_first_name $to_last_name";
+        $entity->setNewRevision(TRUE);
+        $entity->setRevisionCreationTime(\Drupal::time()->getRequestTime());
+        $entity->setRevisionUserId(\Drupal::currentUser()->id());
 
         $entity->save();
         return $this->t('Contact successfully changed.');

@@ -38,6 +38,18 @@ class RemoveContactAction extends ViewsBulkOperationsActionBase {
       if ($user_id == $this->configuration['user_id']) {
         $contacts->removeItem($contact->getName());
 
+        // Get the first and last name of the contact for the revision log message
+        $user = \Drupal::entityTypeManager()->getStorage('user')->load($this->configuration['user_id']);
+        $user_first_name = $user->get('field_first_name')->value;
+        $user_last_name = $user->get('field_last_name')->value;
+        
+        // Make this change a new revision
+        if($entity->hasField('revision_log'))
+          $entity->revision_log = "Bulk operation: Removed contact $user_first_name $user_last_name";
+        $entity->setNewRevision(TRUE);
+        $entity->setRevisionCreationTime(\Drupal::time()->getRequestTime());
+        $entity->setRevisionUserId(\Drupal::currentUser()->id());
+
         $entity->save();
         return $this->t('Contact successfully removed.');
       }
