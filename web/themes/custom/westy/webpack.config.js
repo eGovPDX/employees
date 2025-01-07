@@ -16,6 +16,7 @@ const config = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/themes/custom/westy/dist/',
     filename: '[name].bundle.js',
+    devtoolModuleFilenameTemplate: '../[resource-path]'.replace(/.\//g, ""),
   },
   /**
    * The externals configuration option provides a way of excluding dependencies from the output bundles.
