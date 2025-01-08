@@ -4,14 +4,12 @@ status: true
 dependencies:
   module:
     - field_permissions
-    - migrate_source_ui
     - toolbar_menu
 id: 311_lead
 label: '311 Lead'
 weight: -5
 is_admin: null
 permissions:
-  - 'access migrate source ui'
   - 'create field_311_notes'
   - 'create field_311_referral_contact'
   - 'edit field_311_notes'
