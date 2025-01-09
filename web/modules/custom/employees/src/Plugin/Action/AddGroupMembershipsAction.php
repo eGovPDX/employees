@@ -66,6 +66,25 @@ final class AddGroupMembershipsAction extends ViewsBulkOperationsActionBase impl
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    // Make sure all selected groups are of the same group type
+    $groups = $form_state->getStorage()['views_bulk_operations']['list'];
+    $group_types = array();
+    foreach ($groups as $group) {
+      $group_id = $group[0];
+      $group_type = \Drupal::entityTypeManager()->getStorage('group')->load($group_id)->getGroupType();
+      $group_types[$group_type->id()] = $group_type->label();
+
+      if (count($group_types) > 1) {
+        $group_type_labels = implode(', ', $group_types);
+        $form['error'] = [
+          '#type' => 'markup',
+          '#markup' => '<p>' . t("Error: All selected groups must be of the same group type. Current selection includes groups of type $group_type_labels.") . '</p>',
+        ];
+        $form['actions']['submit']['#disabled'] = TRUE;
+        return $form;
+      }
+    }
+
     $form['user_id'] = [
       '#type' => 'entity_autocomplete',
       '#title' => $this->t('User'),
@@ -78,8 +97,6 @@ final class AddGroupMembershipsAction extends ViewsBulkOperationsActionBase impl
     ];
     
     // Get the group roles associated with the first selected group
-    // HACK ALERT: This code assumes that all selected groups are of the same group type
-    // and thereby have the same roles.
     $groups = $form_state->getStorage()['views_bulk_operations']['list'];
     $first_key = array_keys($groups)[0];
     $group_id = $groups[$first_key][0];
