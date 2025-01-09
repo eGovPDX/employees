@@ -3,67 +3,59 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_group_description
-    - field.storage.group.field_search_keywords
-    - field.storage.media.field_display_in_group
-    - field.storage.media.field_description
-    - field.storage.media.field_tags
-    - field.storage.media.field_search_keywords
-    - field.storage.node.field_bts_application_exception
-    - field.storage.node.field_bureaus
-    - field.storage.node.field_business_capability
-    - field.storage.node.field_business_priority
-    - field.storage.node.field_category
-    - field.storage.node.field_cloud_service_type
+    - field.storage.node.body
+    - field.storage.group.field_org_type
+    - field.storage.node.field_display_in_group
+    - field.storage.node.field_search_keywords
     - field.storage.node.field_311_notes
+    - field.storage.user.field_address
+    - field.storage.node.field_category
     - field.storage.node.field_first_name
     - field.storage.node.field_last_name
     - field.storage.node.field_mail_stop
     - field.storage.node.field_phone
     - field.storage.node.field_title
-    - field.storage.node.body
-    - field.storage.node.field_display_in_group
-    - field.storage.node.field_tags
-    - field.storage.node.field_date_range
     - field.storage.node.field_contract_number
-    - field.storage.node.field_description
-    - field.storage.group.field_org_type
+    - field.storage.node.field_date_range
+    - field.storage.user.field_division_name
     - field.storage.node.field_email
-    - field.storage.node.field_hosting_environment
-    - field.storage.node.field_mandated_purchases
-    - field.storage.node.field_organization
-    - field.storage.node.field_p_card_allowed
-    - field.storage.node.field_published_on
-    - field.storage.node.field_search_keywords
-    - field.storage.node.field_support_model
-    - field.storage.node.field_topics
-    - field.storage.node.field_type
-    - field.storage.node.field_updated_on
-    - field.storage.node.field_when
     - field.storage.user.field_first_name
     - field.storage.user.field_group_names
     - field.storage.user.field_is_contact_only
     - field.storage.user.field_job_description
     - field.storage.user.field_last_name
-    - field.storage.user.field_primary_groups
-    - field.storage.user.field_division_name
-    - field.storage.user.field_address
+    - field.storage.node.field_mandated_purchases
+    - field.storage.node.field_organization
+    - field.storage.node.field_p_card_allowed
     - field.storage.user.field_phone
+    - field.storage.user.field_primary_groups
+    - field.storage.node.field_published_on
     - field.storage.user.field_search_boost
-    - field.storage.user.field_search_keywords
     - field.storage.user.field_section
+    - field.storage.media.field_tags
+    - field.storage.node.field_tags
     - field.storage.user.field_title
+    - field.storage.node.field_topics
+    - field.storage.node.field_type
     - field.storage.user.field_type
+    - field.storage.node.field_updated_on
+    - field.storage.node.field_when
     - field.storage.user.field_workspace
+    - field.storage.group.field_search_keywords
+    - field.storage.group.field_group_description
+    - field.storage.media.field_description
+    - field.storage.media.field_display_in_group
+    - field.storage.media.field_search_keywords
+    - field.storage.user.field_search_keywords
     - search_api.server.pantheon_solr8
     - core.entity_view_mode.user.compact
   module:
     - search_api_solr
-    - group
-    - media
-    - taxonomy
     - node
+    - group
+    - taxonomy
     - user
+    - media
     - search_api
 third_party_settings:
   search_api_solr:
@@ -151,14 +143,6 @@ field_settings:
     dependencies:
       module:
         - node
-  content_field_description:
-    label: Description
-    datasource_id: 'entity:node'
-    property_path: field_description
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_description
   content_group_type:
     label: 'Displayed in » Group » Type'
     datasource_id: 'entity:node'
@@ -250,38 +234,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_address
-  field_bts_application_exception:
-    label: 'Application exception'
-    datasource_id: 'entity:node'
-    property_path: field_bts_application_exception
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_bts_application_exception
-  field_bureaus:
-    label: Bureaus
-    datasource_id: 'entity:node'
-    property_path: field_bureaus
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_bureaus
-  field_business_capability:
-    label: 'Business capability'
-    datasource_id: 'entity:node'
-    property_path: field_business_capability
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_business_capability
-  field_business_priority:
-    label: 'Business priority'
-    datasource_id: 'entity:node'
-    property_path: field_business_priority
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_business_priority
   field_category:
     label: Category
     datasource_id: 'entity:node'
@@ -300,14 +252,6 @@ field_settings:
         - field.storage.node.field_category
       module:
         - taxonomy
-  field_cloud_service_type:
-    label: 'Cloud service type'
-    datasource_id: 'entity:node'
-    property_path: field_cloud_service_type
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_cloud_service_type
   field_contact_first_name_fulltext:
     label: 'Contact First Name Fulltext'
     datasource_id: 'entity:node'
@@ -439,14 +383,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_group_names
-  field_hosting_environment:
-    label: 'Hosting environment'
-    datasource_id: 'entity:node'
-    property_path: field_hosting_environment
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_hosting_environment
   field_is_contact_only:
     label: 'Is contact only'
     datasource_id: 'entity:user'
@@ -544,14 +480,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.user.field_section
-  field_support_model:
-    label: 'Support model'
-    datasource_id: 'entity:node'
-    property_path: field_support_model
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_support_model
   field_tags:
     label: 'Media Tags'
     datasource_id: 'entity:media'
@@ -773,7 +701,6 @@ field_settings:
           document: ''
         'entity:node':
           alert: ''
-          bts_catalog_item: ''
           contact: ''
           contract: ''
           event: default
@@ -920,7 +847,6 @@ processor_settings:
       'entity:node':
         datasource_boost: 1.0
         bundle_boosts:
-          bts_catalog_item: 1.0
           contract: 1.0
           event: 1.0
           news: 1.0

@@ -9,7 +9,6 @@ dependencies:
     - media.type.remote_document
     - media.type.remote_video
     - node.type.alert
-    - node.type.bts_catalog_item
     - node.type.contact
     - node.type.contract
     - node.type.event
@@ -17,14 +16,6 @@ dependencies:
     - node.type.notification
     - node.type.page
     - node.type.resource
-    - taxonomy.vocabulary.bts_application_exception
-    - taxonomy.vocabulary.bts_business_capability
-    - taxonomy.vocabulary.bts_business_priority
-    - taxonomy.vocabulary.bts_catalog_item_type
-    - taxonomy.vocabulary.bureaus
-    - taxonomy.vocabulary.cloud_service_type
-    - taxonomy.vocabulary.hosting_environment
-    - taxonomy.vocabulary.support_model
     - taxonomy.vocabulary.tags
     - workflows.workflow.editorial
   module:
@@ -59,7 +50,6 @@ permissions:
   - 'administer nodes'
   - 'administer redirects'
   - 'clone alert content'
-  - 'clone bts_catalog_item content'
   - 'clone contact content'
   - 'clone contract content'
   - 'clone event content'
@@ -68,7 +58,6 @@ permissions:
   - 'clone page content'
   - 'clone resource content'
   - 'create alert content'
-  - 'create bts_catalog_item content'
   - 'create contact content'
   - 'create contract content'
   - 'create employee group'
@@ -83,18 +72,9 @@ permissions:
   - 'create page content'
   - 'create private group'
   - 'create resource content'
-  - 'create terms in bts_application_exception'
-  - 'create terms in bts_business_capability'
-  - 'create terms in bts_business_priority'
-  - 'create terms in bts_catalog_item_type'
-  - 'create terms in bureaus'
-  - 'create terms in cloud_service_type'
-  - 'create terms in hosting_environment'
-  - 'create terms in support_model'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete any alert content'
-  - 'delete any bts_catalog_item content'
   - 'delete any contact content'
   - 'delete any contract content'
   - 'delete any event content'
@@ -104,7 +84,6 @@ permissions:
   - 'delete any page content'
   - 'delete any resource content'
   - 'delete own alert content'
-  - 'delete own bts_catalog_item content'
   - 'delete own contact content'
   - 'delete own contract content'
   - 'delete own event content'
@@ -112,16 +91,8 @@ permissions:
   - 'delete own notification content'
   - 'delete own page content'
   - 'delete own resource content'
-  - 'delete terms in bts_application_exception'
-  - 'delete terms in bts_business_capability'
-  - 'delete terms in bts_business_priority'
-  - 'delete terms in bts_catalog_item_type'
-  - 'delete terms in bureaus'
-  - 'delete terms in cloud_service_type'
-  - 'delete terms in hosting_environment'
-  - 'delete terms in support_model'
+  - 'delete terms in tags'
   - 'edit any alert content'
-  - 'edit any bts_catalog_item content'
   - 'edit any contact content'
   - 'edit any contract content'
   - 'edit any document media'
@@ -138,7 +109,6 @@ permissions:
   - 'edit field_homepage'
   - 'edit field_popularity'
   - 'edit own alert content'
-  - 'edit own bts_catalog_item content'
   - 'edit own contact content'
   - 'edit own contract content'
   - 'edit own event content'
@@ -150,17 +120,9 @@ permissions:
   - 'edit own notification content'
   - 'edit own page content'
   - 'edit own resource content'
-  - 'edit terms in bts_application_exception'
-  - 'edit terms in bts_business_capability'
-  - 'edit terms in bts_business_priority'
-  - 'edit terms in bts_catalog_item_type'
-  - 'edit terms in bureaus'
-  - 'edit terms in cloud_service_type'
-  - 'edit terms in hosting_environment'
-  - 'edit terms in support_model'
+  - 'edit terms in tags'
   - 'notify of path changes'
   - 'revert alert revisions'
-  - 'revert bts_catalog_item revisions'
   - 'revert contact revisions'
   - 'revert contract revisions'
   - 'revert event revisions'
@@ -168,14 +130,7 @@ permissions:
   - 'revert notification revisions'
   - 'revert page revisions'
   - 'revert resource revisions'
-  - 'revert term revisions in bts_application_exception'
-  - 'revert term revisions in bts_business_capability'
-  - 'revert term revisions in bts_business_priority'
-  - 'revert term revisions in bts_catalog_item_type'
-  - 'revert term revisions in bureaus'
-  - 'revert term revisions in cloud_service_type'
-  - 'revert term revisions in hosting_environment'
-  - 'revert term revisions in support_model'
+  - 'revert term revisions in tags'
   - 'schedule publishing of media'
   - 'schedule publishing of nodes'
   - 'update any media'
@@ -189,8 +144,6 @@ permissions:
   - 'view all media revisions'
   - 'view all revisions'
   - 'view any unpublished content'
-  - 'view bts_catalog in toolbar'
-  - 'view bts_catalog_item revisions'
   - 'view contact revisions'
   - 'view contract revisions'
   - 'view editor in toolbar'
@@ -211,12 +164,5 @@ permissions:
   - 'view own unpublished media'
   - 'view page revisions'
   - 'view resource revisions'
-  - 'view term revisions in bts_application_exception'
-  - 'view term revisions in bts_business_capability'
-  - 'view term revisions in bts_business_priority'
-  - 'view term revisions in bts_catalog_item_type'
-  - 'view term revisions in bureaus'
-  - 'view term revisions in cloud_service_type'
-  - 'view term revisions in hosting_environment'
-  - 'view term revisions in support_model'
+  - 'view term revisions in tags'
   - 'view the administration theme'
