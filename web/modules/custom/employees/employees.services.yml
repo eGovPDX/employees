@@ -8,3 +8,9 @@ services:
     class: \Drupal\employees\IsLoggedInExtension
     tags:
       - { name: twig.extension }
+  employees.autocomplete_matcher:
+    class: Drupal\employees\EntityAutocompleteMatcher
+    public: false
+    arguments: ['@plugin.manager.entity_reference_selection']
+    decorates: entity.autocomplete_matcher
+    decoration_priority: 1
