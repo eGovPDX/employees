@@ -7,12 +7,12 @@ dependencies:
 id: static_content
 label: 'Static Content'
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:field_parent:entity:field_parent:entity:field_parent:entity:field_menu_url_text]/[node:field_parent:entity:field_parent:entity:field_menu_url_text]/[node:field_parent:entity:field_menu_url_text]/[node:field_menu_url_text]'
+pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:menu-link:parents:join-path]/[node:menu-link]'
 selection_criteria:
-  f35474b0-75c1-4528-8b65-f4a9193e6ee9:
+  82ca54e4-26f8-406f-a3f3-730834df8915:
     id: 'entity_bundle:node'
     negate: false
-    uuid: f35474b0-75c1-4528-8b65-f4a9193e6ee9
+    uuid: 82ca54e4-26f8-406f-a3f3-730834df8915
     context_mapping:
       node: node
     bundles:

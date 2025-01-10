@@ -1,0 +1,20 @@
+{#
+/**
+  * @file
+  * Template for the branding block.
+  *
+  * @see themes/contrib/radix/templates/block/block--system-branding-block.html.twig
+  */
+#}
+{% embed '@westy/block/block.twig' with {
+  html_tag: 'div',
+} %}
+  {% block content %}
+    {{ content }}
+    {% if group_id is not empty and menu_id is not empty %}
+    <div class="mb-5 views-row">
+     <br><a href="/group/{{group_id}}/menu/{{menu_id}}/edit" class="btn btn-primary">Manage Menu</a>
+    </div>
+    {% endif %}
+  {% endblock %}
+{% endembed %}

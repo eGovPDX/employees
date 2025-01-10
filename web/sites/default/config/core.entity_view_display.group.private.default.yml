@@ -15,10 +15,11 @@ dependencies:
     - field.field.group.private.field_org_type
     - field.field.group.private.field_parent_group
     - group.type.private
+    - group_content_menu.group_content_menu_type.page_menu
     - views.view.group_list_views
-    - views.view.group_menu
     - views.view.group_search_index
   module:
+    - group_content_menu
     - layout_builder
     - layout_builder_restrictions
     - layout_library
@@ -95,19 +96,6 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          3caaae81-378c-4be0-a102-0dbd348288fb:
-            uuid: 3caaae81-378c-4be0-a102-0dbd348288fb
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_group_homepage_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 1
-            additional: {  }
           6066a5fe-57b8-49ec-9275-538b104f1398:
             uuid: 6066a5fe-57b8-49ec-9275-538b104f1398
             region: main
@@ -267,6 +255,23 @@ third_party_settings:
                   view_mode: featured
                 third_party_settings: {  }
             weight: 3
+            additional: {  }
+          ead87d6c-7dfe-455e-8717-78711bc819ed:
+            uuid: ead87d6c-7dfe-455e-8717-78711bc819ed
+            region: menu
+            configuration:
+              id: 'group_content_menu:page_menu'
+              label: 'Page menu'
+              label_display: '0'
+              provider: group_content_menu
+              context_mapping:
+                group: layout_builder.entity
+              level: 1
+              depth: 0
+              expand_all_items: false
+              relative_visibility: false
+              theme_hook_suggestion: ''
+            weight: 2
             additional: {  }
         third_party_settings: {  }
   layout_library:

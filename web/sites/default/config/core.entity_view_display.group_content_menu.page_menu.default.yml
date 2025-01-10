@@ -1,0 +1,22 @@
+uuid: 113a6679-01a6-4369-a811-de94bf66d7c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - group_content_menu.group_content_menu_type.page_menu
+id: group_content_menu.page_menu.default
+targetEntityType: group_content_menu
+bundle: page_menu
+mode: default
+content:
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
