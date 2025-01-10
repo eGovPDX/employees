@@ -10,6 +10,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_form_alter()
@@ -22,6 +23,10 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   // decides how it wants to handle accessible and usable validation.
 
   switch($form_id) {
+    case "menu_link_content_menu_link_content_form":
+    case "menu_link_content_menu_link_content_edit_form":
+      $form['#validate'][] = '_validate_unique_menu_link';
+      break;
     case "group_content_employee-group_membership_add_form":
     case "group_content_employee-group_membership_edit_form":
     case "group_content_private-group_membership_add_form":
@@ -1111,6 +1116,59 @@ function generate_alias($menu_link_tree_element) {
   if($menu_link_tree_element->hasChildren) {
     foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
       generate_alias($menu_link_tree_element);
+    }
+  }
+}
+
+function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
+  $route_match = \Drupal::service('current_route_match');
+  $parameters = $route_match->getParameters();
+  $group = $parameters->get("group");
+  $group_content_menu = $parameters->get("group_content_menu");
+  $uri = $form_state->getValue("link")[0]["uri"];
+  if(empty($uri)) {
+    $form_state->setErrorByName('link', t('Link is a required field.'));
+    return;
+  }
+  $url = Url::fromUri($uri);
+
+  if($url !== null && $url->isExternal()) return;
+  $node_id = $url->getRouteParameters()["node"];
+  
+  $link_tree_service = \Drupal::service('menu.link_tree');
+  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+  // Get a flattened array of all nodes in the menu
+  $nodes_in_menu = [];
+  foreach($menu_tree as $key => $menu_link_tree_element) {
+    _get_node_ids($menu_link_tree_element, $nodes_in_menu);
+  }
+
+  $menu_link_content = $form_state->getformObject()->getEntity();
+  if(array_key_exists($node_id, $nodes_in_menu)) {
+    if( $menu_link_content->isNew() || 
+    ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
+      // Prepare the error message
+      $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+      return;
+    }
+  }
+}
+
+function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
+  // The link field is a MenuLinkContent object
+  $menu_link_url = $menu_link_tree_element->link->getUrlObject();
+  // Only internal links have node ID
+  if( !$menu_link_url->isExternal() ) {
+    $nodes_in_menu[$menu_link_url->getRouteParameters()["node"]] = [
+      "id" => $menu_link_tree_element->link->getMetaData()["entity_id"],
+      "url" => $menu_link_url->toString(),];
+  }
+
+  if($menu_link_tree_element->hasChildren) {
+    foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
+      $nodes_in_menu []= _get_node_ids($menu_link_tree_element, $nodes_in_menu);
     }
   }
 }

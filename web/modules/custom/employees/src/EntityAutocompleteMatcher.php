@@ -12,17 +12,30 @@ class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMa
    */
   public function getMatches($target_type, $selection_handler, $selection_settings, $string = '') {
     $referer = \Drupal::request()->headers->get('referer');
-    $url_parts = parse_url($referer);
-    $path_parts = explode("/", $url_parts["path"]);
-    // Try to get the group ID of the referer URL
     $group_id = "-1";
-    $group_path = \Drupal::service('path_alias.manager')->getPathByAlias("/".$path_parts[1]);
-    if (strpos($group_path, '/group/') === 0) {
-      $group_path_parts = explode('/', $group_path);
-      $group_id = (int)$group_path_parts[2];
+    if(!empty($referer)) {
+      $url_parts = parse_url($referer);
+      if(array_key_exists("path", $url_parts)) {
+        $path_parts = explode("/", $url_parts["path"]);
+        if(count($path_parts) >= 2) {
+          // When the referer path is like /group/19/menu/6/add-link
+          if($path_parts[1] == "group" && $path_parts[3] == "menu" && in_array($path_parts[5], ["add-link", "edit", "link"])) {
+            $group_id = (count($path_parts) >= 3) ? $path_parts[2] : "-1";
+          }
+          // When the referer path is like /bes/menu/6/add-link
+          else if( $path_parts[2] == "menu" && in_array($path_parts[4], ["add-link", "edit", "link"]) ){
+            // Convert alias into the cannonical path
+            $group_path = \Drupal::service('path_alias.manager')->getPathByAlias("/".$path_parts[1]);
+            if (strpos($group_path, '/group/') === 0) {
+              $group_path_parts = explode('/', $group_path);
+              $group_id = (count($group_path_parts) >= 3) ? $group_path_parts[2] : "-1";
+            }
+          }
+        }
+      }
     }
-    // Only alter the autocomplete result for paths like /bes/menu/6/add-link
-    if($group_id === "-1" || ( $path_parts[2] != "menu" && !in_array($path_parts[4], ["add-link", "edit"]) ) ) {
+    // If the group ID is not found in the referer path, use the default selection handler
+    if($group_id === "-1") {
       return parent::getMatches($target_type, $selection_handler, $selection_settings, $string);
     }
 
@@ -48,9 +61,6 @@ class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMa
 
           $entity = \Drupal::entityTypeManager()->getStorage($target_type)->load($entity_id);
           $entity = \Drupal::service('entity.repository')->getTranslationFromContext($entity);
-
-          // Only include entities that are part of the group
-          // if($group_id !== $entity->field_display_in_group->target_id) continue;
 
           $type = !empty($entity->type->entity) ? $entity->type->entity->label() : $entity->bundle();
           $status = '';
