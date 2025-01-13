@@ -1172,3 +1172,13 @@ function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
     }
   }
 }
+
+
+/**
+ * Implement hook_preprocess_breadcrumb()
+ * Append "/edit" to the last breadcrumb link if it's a Page Menu. Otherwise the Page Menu is a blank page.
+ */
+function employees_preprocess_breadcrumb(&$variables) {
+  if( count($variables['breadcrumb']) !== 3 || ! str_starts_with($variables['breadcrumb'][2]["text"], "Page Menu For")) return;
+  $variables['breadcrumb'][2]["url"] .= "/edit";
+}
