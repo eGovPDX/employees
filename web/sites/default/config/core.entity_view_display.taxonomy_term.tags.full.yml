@@ -5,11 +5,13 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
     - taxonomy.vocabulary.tags
+    - views.view.content_per_term
   module:
     - layout_builder
     - layout_discovery
     - layout_library
     - text
+    - views
 third_party_settings:
   layout_builder:
     enabled: true
@@ -34,6 +36,19 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 0
+            additional: {  }
+          15571c4b-2bed-4bde-a610-1189c804bb91:
+            uuid: 15571c4b-2bed-4bde-a610-1189c804bb91
+            region: content
+            configuration:
+              id: 'views_block:content_per_term-block_content_per_term'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 1
             additional: {  }
         third_party_settings: {  }
   layout_library:
