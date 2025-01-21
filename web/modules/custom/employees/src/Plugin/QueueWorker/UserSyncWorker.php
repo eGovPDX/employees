@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * SyncUsersWorker class.
+ * UserSyncWorker class.
  *
  * A worker plugin to consume items from "user_sync"
  * and synchronize users from Entra ID.
@@ -168,11 +168,13 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         continue;
       }
 
-      // Look up user by Drupal user name (Principal name in AD)
-      // Sometimes a user will be recreated with the same principal name but different AD ID
-      // User name in Drupal has a limit of 60 characters
+      // Look up user by email
+      $users = \Drupal::entityTypeManager()
+        ->getStorage('user')
+        ->loadByProperties(['mail' => $user_data['mail']]);
+
+      // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
       $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $userName]);
 
       // Create a new user if no user is found
       /** @var User $user */
