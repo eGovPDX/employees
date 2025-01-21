@@ -168,13 +168,19 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         continue;
       }
 
-      // Look up user by email
-      $users = \Drupal::entityTypeManager()
-        ->getStorage('user')
-        ->loadByProperties(['mail' => $user_data['mail']]);
-
       // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
       $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
+
+      // Look up user by email. Sometimes the email address is reused in a new AD account.
+      $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $user_data['mail']]);
+
+      // Look up user by Active Directory ID if the email lookup returns no result.
+      // In this case, the user's email address is changed in AD.
+      if(empty($users)) {
+        $users = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['field_active_directory_id' => $user_data['id']]);
+      }
 
       // Create a new user if no user is found
       /** @var User $user */
