@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * SyncUsersWorker class.
+ * UserSyncWorker class.
  *
  * A worker plugin to consume items from "user_sync"
  * and synchronize users from Entra ID.
@@ -168,11 +168,19 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         continue;
       }
 
-      // Look up user by Drupal user name (Principal name in AD)
-      // Sometimes a user will be recreated with the same principal name but different AD ID
-      // User name in Drupal has a limit of 60 characters
+      // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
       $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
-      $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $userName]);
+
+      // Look up user by email. Sometimes the email address is reused in a new AD account.
+      $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $user_data['mail']]);
+
+      // Look up user by Active Directory ID if the email lookup returns no result.
+      // In this case, the user's email address is changed in AD.
+      if(empty($users)) {
+        $users = \Drupal::entityTypeManager()->getStorage('user')
+          ->loadByProperties(['field_active_directory_id' => $user_data['id']]);
+      }
 
       // Create a new user if no user is found
       /** @var User $user */
@@ -196,11 +204,11 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user->field_mobile_phone = $user_data['mobilePhone'];
       $user->field_address = empty($user_data['streetAddress']) ? '' : ($user_data['streetAddress'] . ', ' . $user_data['city'] . ', ' . $user_data['state'] . ', ' . $user_data['postalCode']);
 
-
       if($user->isNew()) {
         $users_created []= $userName;
       }
       else {
+        $user->setUsername($userName);
         if($user_data['accountEnabled'] == 1 && $user->status->value == 0) $users_enabled []= $userName;
         if($user_data['accountEnabled'] == 0 && $user->status->value == 1) $users_disabled []= $userName;
       }
