@@ -204,11 +204,11 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user->field_mobile_phone = $user_data['mobilePhone'];
       $user->field_address = empty($user_data['streetAddress']) ? '' : ($user_data['streetAddress'] . ', ' . $user_data['city'] . ', ' . $user_data['state'] . ', ' . $user_data['postalCode']);
 
-
       if($user->isNew()) {
         $users_created []= $userName;
       }
       else {
+        $user->setUsername($userName);
         if($user_data['accountEnabled'] == 1 && $user->status->value == 0) $users_enabled []= $userName;
         if($user_data['accountEnabled'] == 0 && $user->status->value == 1) $users_disabled []= $userName;
       }
