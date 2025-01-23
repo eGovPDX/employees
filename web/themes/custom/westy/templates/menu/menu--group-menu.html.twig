@@ -44,8 +44,7 @@
         ]
       %}
       <li{{ item.attributes.addClass(classes) }}>
-
-        <a href="{{item.url}}" class="d-flex align-items-center text-break nav-link{% if path('<current>') == item.url.toString %} active disabled{% endif %}">
+        <a href="{{item.url}}" title="{{item.original_link.getDescription()}}" class="d-flex align-items-center text-break nav-link{% if path('<current>') == item.url.toString %} active disabled{% endif %}">
           {{item.title}}
           {# {{ devel_breakpoint() }} #}
           {# {% if item.below %} #}
