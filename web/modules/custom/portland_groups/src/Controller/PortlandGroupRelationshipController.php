@@ -98,8 +98,8 @@ class PortlandGroupRelationshipController extends GroupRelationshipController {
                 $content_type = NodeType::load($plugin_bundle);
                 break;
             case "group_content_menu":
-              $content_type = GroupContentMenuType::load($plugin_bundle);
-              break;
+                $content_type = GroupContentMenuType::load($plugin_bundle);
+                break;
             default:
                 $content_type = "undefined";
         }
