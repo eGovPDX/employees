@@ -1,11 +1,18 @@
 uuid: 0c5bdf29-5ec5-4730-aa8c-17ff21a0dc4a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - field_permissions
 _core:
   default_config_hash: Om6FEO7vZZMkPIbVvfxtdkWerQ2PvQM4sWUd6Q3ZnfI
 id: administrator
 label: 'Site Administrator'
 weight: -2
 is_admin: true
-permissions: {  }
+permissions:
+  - 'create field_popularity'
+  - 'edit field_popularity'
+  - 'edit own field_popularity'
+  - 'view field_popularity'
+  - 'view own field_popularity'

@@ -6,7 +6,7 @@ dependencies:
     - group.type.employee
 id: employee-reviewer
 label: Reviewer
-weight: -1
+weight: -4
 admin: false
 scope: individual
 global_role: null
@@ -19,7 +19,6 @@ permissions:
   - 'view all group_media:image entity revisions'
   - 'view all group_media:remote_document entity revisions'
   - 'view all group_media:remote_video entity revisions'
-  - 'view all group_node:bts_catalog_item entity revisions'
   - 'view all group_node:contact entity revisions'
   - 'view all group_node:contract entity revisions'
   - 'view all group_node:event entity revisions'
@@ -47,10 +46,6 @@ permissions:
   - 'view group_media:remote_video entity revisions'
   - 'view group_media:remote_video revision'
   - 'view group_media:remote_video revisions'
-  - 'view group_node:bts_catalog_item entity'
-  - 'view group_node:bts_catalog_item entity revisions'
-  - 'view group_node:bts_catalog_item revision'
-  - 'view group_node:bts_catalog_item revisions'
   - 'view group_node:contact entity'
   - 'view group_node:contact entity revisions'
   - 'view group_node:contact revision'
@@ -84,7 +79,6 @@ permissions:
   - 'view unpublished group_media:image entity'
   - 'view unpublished group_media:remote_document entity'
   - 'view unpublished group_media:remote_video entity'
-  - 'view unpublished group_node:bts_catalog_item entity'
   - 'view unpublished group_node:contact entity'
   - 'view unpublished group_node:contract entity'
   - 'view unpublished group_node:event entity'

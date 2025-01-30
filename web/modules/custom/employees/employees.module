@@ -128,8 +128,6 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "node_resource_edit_form":
       $form['actions']['submit']['#submit'][] = '_resource_node_form_submit';
       // Intentionally avoid using "break" here. Not a bug.
-    case "node_bts_catalog_item_form":
-    case "node_bts_catalog_item_edit_form":
     case "node_event_form":
     case "node_event_edit_form":
     case "node_news_form":
@@ -156,7 +154,7 @@ function _resource_node_form_submit($form, FormStateInterface $form_state) {
   );
 
   // This is a bit of a hack as it forces the redirect to execute immediately instead of allowing
-  // Drupal's native form processing to handle it. But our redirect gets overwritten by other 
+  // Drupal's native form processing to handle it. But our redirect gets overwritten by other
   // redirects if left to the default handling.
   $url = $form_state->getRedirect()->setAbsolute()->toString();
   $response = new RedirectResponse($url);
@@ -240,7 +238,7 @@ function _validate_remote_document_in_media_library(&$form, FormStateInterface $
       $form_state->setErrorByName('field_media_media_remote][0][value', 'This field is required.');
       return;
     }
-  
+
     // Get eFiles file size and MIME type
     try {
       $headers = get_headers($remote_document_url, 1);
@@ -283,7 +281,7 @@ function _validate_send_reviewer_notification_date(&$form, FormStateInterface $f
   $notification_date = $form_state->getValue("field_send_reviewer_notification")[0]['value'];
   if ($notification_date) {
     $notification_date = date_create($notification_date)->getTimestamp();
-  
+
     if ($notification_date <= time()) {
       $form_state->setErrorByName('field_send_reviewer_notification][0][value', 'Send reviewer notification email date must be a future date. You can also clear an existing date if you no longer want a reminder set.');
     } elseif (!$form_state->getValue("field_reviewer")[0]['target_id']) {
@@ -729,7 +727,7 @@ function _content_updated_recently()
 }
 
 /**
- * Retrieve a view of content with reviewer notifications and use it to send 
+ * Retrieve a view of content with reviewer notifications and use it to send
  * emails to reviewers as appropriate.
  */
 function _send_reviewer_notifications()
@@ -773,12 +771,12 @@ function _send_reviewer_notifications()
 
       $notification_date = $result->_entity->get("field_send_reviewer_notification")->value;
       $notification_date = date_create($notification_date)->getTimestamp();
-      
+
       $last_notification_date = \Drupal::keyValue('employees')->get("last_reviewer_notification_date.$entity_type.$id");
       if (empty($last_notification_date)) {
         $last_notification_date = 0;  // Equivalent to 1/1/1970 in Unix epoch format
       }
-      
+
       // Create list of email recipients
       $to_emails = [];
       // $to_emails[] = $result->_entity->getOwner()->mail->value;
@@ -786,7 +784,7 @@ function _send_reviewer_notifications()
       foreach ($reviewers->referencedEntities() as $reviewer) {
         $to_emails[] = $reviewer->mail->value;
       }
-      
+
       // Send reviewer notification email if an email hasn't already been sent
       // TODO: Remove "TRUE" debugging override
       if (!empty($to_emails) && ($last_notification_date < $notification_date)) {
@@ -800,7 +798,7 @@ function _send_reviewer_notifications()
         $params['title'] = 'Employees.portland.gov scheduled reviewer notification: ' . $result->_entity->get('title')->value . $environment_name;
         // Cron is run with the anonymous user. Set the language code to EN.
         $langcode = 'en';
-    
+
         $sent_successfully = _send_email($key, implode(',', $to_emails), $langcode, $params, 'powr@portlandoregon.gov');
 
         // Record email timestamp to avoid resending email again on following days
@@ -1032,7 +1030,7 @@ function employees_toolbar_alter(&$items) {
   if (!in_array('administrator', $account->getRoles())) {
     $items['administration']['tab']['#attributes']['class'][] = 'd-none';
     $items['administration']['tray']['toolbar_administration']['#attributes']['class'][] = 'd-none';
-    // Some views like /my-content are displayed in the Claro theme which doesn't have the `d-none` CSS 
+    // Some views like /my-content are displayed in the Claro theme which doesn't have the `d-none` CSS
     // class defined so apply a style directly to the elements instead
     $items['administration']['tab']['#attributes']['style'][] = 'display: none !important;';
     $items['administration']['tray']['toolbar_administration']['#attributes']['style'][] = 'display: none !important;';
