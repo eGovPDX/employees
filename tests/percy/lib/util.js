@@ -1,3 +1,7 @@
 exports.removeEnvironmentIndicator = async function (page) {
-  await page.locator("a#toolbar-item-environment-indicator").evaluate(el => el.innerText = "");
+    await page.evaluate(
+        () => {
+          document.querySelector("#toolbar-item-environment-indicator").innerText = ""
+          
+        })
 }
