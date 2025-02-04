@@ -1154,7 +1154,7 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
   }
   else {
     $form_state->getValue("link")[0]["uri"] = $relative_uri;
-    $url = Url::fromUri($uri);
+    $url = Url::fromUri($relative_uri);
     // Check if the URL can be routed
     if(!$url->isRouted()) {
       $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
