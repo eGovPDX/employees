@@ -1128,11 +1128,41 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
     $form_state->setErrorByName('link', t('Link is a required field.'));
     return;
   }
-  $url = Url::fromUri($uri);
 
-  if($url !== null && $url->isExternal()) return;
-  $node_id = $url->getRouteParameters()["node"];
-  
+  // Check if the link field contains a URL string on the same site. Try to convert it to an internal URI. Valid entries are:
+  // https://host/path/to/node
+  // internal:/path/to/node
+  $scheme_and_host = \Drupal::request()->getSchemeAndHttpHost();
+  $relative_uri = "";
+  if(strpos($uri, $scheme_and_host) === 0) {
+    $relative_uri = 'internal:' . substr($uri, strlen($scheme_and_host));
+  }
+  else if (strpos($uri, 'internal:') === 0) {
+    // Make sure the relative path starts with "/"
+    if (strpos($uri, 'internal:/') !== 0) {
+      $form_state->setErrorByName('link', t('Relative paths must start with "/".'));
+      return;
+    }
+    $relative_uri = $uri;
+  }
+
+  // The Link is not an internal link in string
+  if(empty($relative_uri)) {
+    $url = Url::fromUri($uri);
+    // Do not validate external links
+    if($url !== null && $url->isExternal()) return;
+  }
+  else {
+    $form_state->getValue("link")[0]["uri"] = $relative_uri;
+    $url = Url::fromUri($uri);
+    // Check if the URL can be routed
+    if(!$url->isRouted()) {
+      $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
+      return;
+    }
+  }
+
+  $node_id = $url->getRouteParameters()["node"];  
   $link_tree_service = \Drupal::service('menu.link_tree');
   // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
   $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
