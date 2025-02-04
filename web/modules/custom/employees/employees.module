@@ -10,6 +10,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_form_alter()
@@ -22,6 +23,10 @@ function employees_form_alter(&$form, &$form_state, $form_id)
   // decides how it wants to handle accessible and usable validation.
 
   switch($form_id) {
+    case "menu_link_content_menu_link_content_form":
+    case "menu_link_content_menu_link_content_edit_form":
+      $form['#validate'][] = '_validate_unique_menu_link';
+      break;
     case "group_content_employee-group_membership_add_form":
     case "group_content_employee-group_membership_edit_form":
     case "group_content_private-group_membership_add_form":
@@ -947,6 +952,28 @@ function employees_preprocess_block(&$variables) {
     substr($variables["content"][0]["#title"], 0, 8) == "no.email" ) {
     $variables["content"] = [];
   }
+  else if($variables['plugin_id'] === "group_content_menu:page_menu") {
+    unset($variables['label']); // Remove the "Page menu" label
+
+    // Prepare the group ID and menu ID in order to build the link for the "Manage menu" button. Only display the button if the user has the correct permission.
+    if(array_key_exists("#contextual_links", $variables["elements"]) && 
+      array_key_exists("group_menu", $variables["elements"]["#contextual_links"]) ) {
+        $group_menu = $variables["elements"]["#contextual_links"]["group_menu"];
+
+        $group_id = $group_menu['route_parameters']['group'];
+        if( !empty($group_id) ) {
+          $group = Group::load($group_id);
+          if( !empty($group) ) {
+            $current_user = \Drupal::currentUser();
+            if($group->hasPermission("manage group_content_menu menu items", $current_user)) {
+              // These array keys are defined by group_cotent_menu. Should be safe to access without checking if key exists
+              $variables['group_id'] = $group_menu['route_parameters']['group'];
+              $variables['menu_id'] = $group_menu['route_parameters']['group_content_menu'];
+            }
+          }
+        }
+      }
+  }
 }
 
 /**
@@ -1046,5 +1073,143 @@ function employees_form_user_login_form_alter(&$form, &$form_state)
         'onclick' => 'location.href="/saml/login'.$query.'";return false;',
       ],
     ];
+  }
+}
+
+/**
+ * Implement hook_ENTITY_TYPE_update()
+ * Detect any changes in a Page Menu, re-save the node to update the URL alias
+ */
+function employees_group_content_menu_update($menu) {
+  if($menu->bundle() !== "page_menu") return;
+  $link_tree_service = \Drupal::service('menu.link_tree');
+  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+  foreach($menu_tree as $key => $menu_link_tree_element) {
+    generate_alias($menu_link_tree_element);
+  }
+}
+
+function generate_alias($menu_link_tree_element) {
+  // Traverse the tree to re-generate alias
+  $pathauto_generator = \Drupal::service('pathauto.generator');
+  // The link field is a MenuLinkContent object
+  $menu_link_url = $menu_link_tree_element->link->getUrlObject();
+  try {
+    if( !$menu_link_url->isExternal() ) {
+      $node_id = $menu_link_url->getRouteParameters()["node"];
+      $node = Drupal\node\Entity\Node::load($node_id);
+      $pathauto_generator->updateEntityAlias($node, "update");
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('employees')->error('Failed to generate alias for node @nid when saving Page Menu. @message', [
+      '@nid' => $node->id(),
+      '@message' => $e->getMessage(),
+    ]);
+    \Drupal::messenger()->addError('Failed to generate path alias. Check the logs for more information.');
+  }
+
+  if($menu_link_tree_element->hasChildren) {
+    foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
+      generate_alias($menu_link_tree_element);
+    }
+  }
+}
+
+function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
+  $route_match = \Drupal::service('current_route_match');
+  $parameters = $route_match->getParameters();
+  $group = $parameters->get("group");
+  $group_content_menu = $parameters->get("group_content_menu");
+  $uri = $form_state->getValue("link")[0]["uri"];
+  if(empty($uri)) {
+    $form_state->setErrorByName('link', t('Link is a required field.'));
+    return;
+  }
+
+  // Check if the link field contains a URL string on the same site. Try to convert it to an internal URI. Valid entries are:
+  // https://host/path/to/node
+  // internal:/path/to/node
+  $scheme_and_host = \Drupal::request()->getSchemeAndHttpHost();
+  $relative_uri = "";
+  if(strpos($uri, $scheme_and_host) === 0) {
+    $relative_uri = 'internal:' . substr($uri, strlen($scheme_and_host));
+  }
+  else if (strpos($uri, 'internal:') === 0) {
+    // Make sure the relative path starts with "/"
+    if (strpos($uri, 'internal:/') !== 0) {
+      $form_state->setErrorByName('link', t('Relative paths must start with "/".'));
+      return;
+    }
+    $relative_uri = $uri;
+  }
+
+  // The Link is not an internal link in string
+  if(empty($relative_uri)) {
+    $url = Url::fromUri($uri);
+    // Do not validate external links
+    if($url !== null && $url->isExternal()) return;
+  }
+  else {
+    $form_state->getValue("link")[0]["uri"] = $relative_uri;
+    $url = Url::fromUri($relative_uri);
+    // Check if the URL can be routed
+    if(!$url->isRouted()) {
+      $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
+      return;
+    }
+  }
+
+  $node_id = $url->getRouteParameters()["node"];  
+  $link_tree_service = \Drupal::service('menu.link_tree');
+  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+  // Get a flattened array of all nodes in the menu
+  $nodes_in_menu = [];
+  foreach($menu_tree as $key => $menu_link_tree_element) {
+    _get_node_ids($menu_link_tree_element, $nodes_in_menu);
+  }
+
+  $menu_link_content = $form_state->getformObject()->getEntity();
+  if(array_key_exists($node_id, $nodes_in_menu)) {
+    if( $menu_link_content->isNew() || 
+    ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
+      // Prepare the error message
+      $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+      return;
+    }
+  }
+}
+
+function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
+  // The link field is a MenuLinkContent object
+  $menu_link_url = $menu_link_tree_element->link->getUrlObject();
+  // Only internal links have node ID
+  if( !$menu_link_url->isExternal() ) {
+    $nodes_in_menu[$menu_link_url->getRouteParameters()["node"]] = [
+      "id" => $menu_link_tree_element->link->getMetaData()["entity_id"],
+      "url" => $menu_link_url->toString(),];
+  }
+
+  if($menu_link_tree_element->hasChildren) {
+    foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
+      $nodes_in_menu []= _get_node_ids($menu_link_tree_element, $nodes_in_menu);
+    }
+  }
+}
+
+
+/**
+ * Implement hook_preprocess_breadcrumb()
+ * Append "/edit" to the last breadcrumb link if it's a Page Menu because the default link leads to a blank page.
+ */
+function employees_preprocess_breadcrumb(&$variables) {
+  if( array_key_exists('breadcrumb', $variables) && 
+  count($variables['breadcrumb']) >= 3 && 
+  preg_match('/\/menu\/\d+$/', $variables['breadcrumb'][2]["url"])) {
+    $variables['breadcrumb'][2]["url"] .= "/edit";
   }
 }

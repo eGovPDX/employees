@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\group\Entity\GroupRelationshipType;
 use Drupal\node\Entity\NodeType;
 use Drupal\media\Entity\MediaType;
+use Drupal\group_content_menu\Entity\GroupContentMenuType;
 
 use Drupal\Core\Config\Entity;
 use Symfony\Component\HttpKernel;
@@ -95,6 +96,9 @@ class PortlandGroupRelationshipController extends GroupRelationshipController {
                 break;
             case "node":
                 $content_type = NodeType::load($plugin_bundle);
+                break;
+            case "group_content_menu":
+                $content_type = GroupContentMenuType::load($plugin_bundle);
                 break;
             default:
                 $content_type = "undefined";

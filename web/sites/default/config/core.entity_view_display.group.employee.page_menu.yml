@@ -1,0 +1,287 @@
+uuid: 301e218d-6250-4f91-abc8-fae5c18b5187
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.page_menu
+    - field.field.group.employee.field_contacts
+    - field.field.group.employee.field_contract_search_text
+    - field.field.group.employee.field_featured_content
+    - field.field.group.employee.field_featured_documents
+    - field.field.group.employee.field_featured_image
+    - field.field.group.employee.field_group_contact
+    - field.field.group.employee.field_group_description
+    - field.field.group.employee.field_group_path
+    - field.field.group.employee.field_logo
+    - field.field.group.employee.field_migration_status
+    - field.field.group.employee.field_org_type
+    - field.field.group.employee.field_parent_group
+    - field.field.group.employee.field_search_keywords
+    - group.type.employee
+    - group_content_menu.group_content_menu_type.page_menu
+  module:
+    - file
+    - group_content_menu
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
+    - options
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          c4c73e13-2df8-4f8d-9b1f-aeb7cbb4264c:
+            uuid: c4c73e13-2df8-4f8d-9b1f-aeb7cbb4264c
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_contract_search_text'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          9fb82cbc-17da-4e67-bb73-a59bb79a723f:
+            uuid: 9fb82cbc-17da-4e67-bb73-a59bb79a723f
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_migration_status'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: list_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          e0b89aac-de96-4232-bfd7-7e298db397f9:
+            uuid: e0b89aac-de96-4232-bfd7-7e298db397f9
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_logo'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: file_default
+                label: above
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          62721903-8e02-4db5-9fa6-c36b9daf0e70:
+            uuid: 62721903-8e02-4db5-9fa6-c36b9daf0e70
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_search_keywords'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          120cdcca-01eb-4d49-9be8-d43a3bab31d0:
+            uuid: 120cdcca-01eb-4d49-9be8-d43a3bab31d0
+            region: first
+            configuration:
+              id: 'field_block:group:employee:field_featured_image'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          ba6c04ca-9b38-48d5-a97f-4461169c67a3:
+            uuid: ba6c04ca-9b38-48d5-a97f-4461169c67a3
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_featured_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          4f1983fb-c1e8-40f5-a56d-fc2965864b89:
+            uuid: 4f1983fb-c1e8-40f5-a56d-fc2965864b89
+            region: main
+            configuration:
+              id: 'field_block:group:employee:field_contacts'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          3ded05eb-7972-48da-9ba9-f96135245fcd:
+            uuid: 3ded05eb-7972-48da-9ba9-f96135245fcd
+            region: content
+            configuration:
+              id: 'group_content_menu:page_menu'
+              label: 'Page menu'
+              label_display: '0'
+              provider: group_content_menu
+              context_mapping:
+                group: layout_builder.entity
+              level: 1
+              depth: 0
+              expand_all_items: false
+              relative_visibility: false
+              theme_hook_suggestion: ''
+            weight: 3
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
+    entity_view_mode_restriction_by_region:
+      allowed_layouts: {  }
+      allowlisted_blocks: null
+      denylisted_blocks: null
+id: group.employee.page_menu
+targetEntityType: group
+bundle: employee
+mode: page_menu
+content:
+  field_contacts:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: main
+  field_contract_search_text:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: main
+  field_featured_content:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: main
+  field_featured_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: first
+  field_group_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: -4
+    region: content
+  field_group_path:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -3
+    region: content
+  field_logo:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 3
+    region: main
+  field_migration_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: main
+  field_org_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: -1
+    region: content
+  field_parent_group:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: -2
+    region: content
+  field_search_keywords:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: main
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_featured_documents: true
+  field_group_contact: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true
