@@ -1201,7 +1201,6 @@ function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
   }
 }
 
-
 /**
  * Implement hook_preprocess_breadcrumb()
  * Append "/edit" to the last breadcrumb link if it's a Page Menu because the default link leads to a blank page.
@@ -1211,5 +1210,18 @@ function employees_preprocess_breadcrumb(&$variables) {
   count($variables['breadcrumb']) >= 3 && 
   preg_match('/\/menu\/\d+$/', $variables['breadcrumb'][2]["url"])) {
     $variables['breadcrumb'][2]["url"] .= "/edit";
+  }
+}
+
+/**
+ * Implement hook_pathauto_pattern_alter()
+ * Alter the pattern for Pages that are not in the group's page menu
+ */
+function employees_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterface $pattern, array $context) {
+  if($context["bundle"] === "page") {
+    $menu_path = \Drupal::token()->replace('[node:menu-link:parents:join-path]', $context['data']);
+    if( $menu_path === "[node:menu-link:parents:join-path]") {
+      $pattern->setPattern(str_replace('[node:menu-link:parents:join-path]/[node:menu-link]', '[node:title]', $pattern->getPattern()));
+    }
   }
 }
