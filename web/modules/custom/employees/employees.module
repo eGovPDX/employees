@@ -324,10 +324,7 @@ function employees_entity_insert($entity)
 {
   _notify_reviewer($entity, 'created');
   _notify_group_admin_for_group_change($entity);
-
-  if($entity->bundle() === "menu_link_content" && str_starts_with($entity->get('menu_name')->value, 'group_menu_link_content')) {
-    _update_alias_for_menu_linked_node($entity);
-  }
+  _update_alias_for_menu_linked_node($entity);
 }
 
 /**
@@ -395,6 +392,7 @@ function employees_entity_update($entity)
   _remove_file_usage_from_previous_revision($entity);
   _notify_reviewer($entity, 'updated');
   _notify_group_admin_for_group_change($entity);
+  _update_alias_for_menu_linked_node($entity);
 }
 
 /**
@@ -1238,16 +1236,15 @@ function employees_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterf
  * When an entry is deleted from a Page Menu, update the page's URL alias
  */
 function employees_entity_delete($entity) {
-  if($entity->bundle() === "menu_link_content" && str_starts_with($entity->get('menu_name')->value, 'group_menu_link_content')) {
-    _update_alias_for_menu_linked_node($entity);
-  }
+  _update_alias_for_menu_linked_node($entity);
 }
 
 /**
  * Helper function to update the alias of the node linked to a menu link content
  */
 function _update_alias_for_menu_linked_node(MenuLinkContent $menu_link_content) {
-  if($menu_link_content->bundle() !== "menu_link_content") return;
+  if($menu_link_content->bundle() !== "menu_link_content" || 
+  ! str_starts_with($menu_link_content->get('menu_name')->value, 'group_menu_link_content')) return;
 
   $menu_link_url = $menu_link_content->getUrlObject();
   if( !$menu_link_url->isExternal() ) {
