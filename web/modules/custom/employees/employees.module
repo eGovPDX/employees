@@ -11,6 +11,7 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_form_alter()
@@ -323,6 +324,10 @@ function employees_entity_insert($entity)
 {
   _notify_reviewer($entity, 'created');
   _notify_group_admin_for_group_change($entity);
+
+  if($entity->bundle() === "menu_link_content" && str_starts_with($entity->get('menu_name')->value, 'group_menu_link_content')) {
+    _update_alias_for_menu_linked_node($entity);
+  }
 }
 
 /**
@@ -1175,7 +1180,7 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
 
   $menu_link_content = $form_state->getformObject()->getEntity();
   if(array_key_exists($node_id, $nodes_in_menu)) {
-    if( $menu_link_content->isNew() || 
+    if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
     ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
       // Prepare the error message
       $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
@@ -1219,9 +1224,36 @@ function employees_preprocess_breadcrumb(&$variables) {
  */
 function employees_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterface $pattern, array $context) {
   if($context["bundle"] === "page") {
-    $menu_path = \Drupal::token()->replace('[node:menu-link:parents:join-path]', $context['data']);
-    if( $menu_path === "[node:menu-link:parents:join-path]") {
+    // Try to render the token, if it can't be rendered, it means the node is not in a menu.
+    // This is much easier than traversing the menu tree to find the node.
+    $menu_path = \Drupal::token()->replace('[node:menu-link]', $context['data']);
+    if( $menu_path === "[node:menu-link]") {
       $pattern->setPattern(str_replace('[node:menu-link:parents:join-path]/[node:menu-link]', '[node:title]', $pattern->getPattern()));
     }
+  }
+}
+
+/**
+ * Implement hook_entity_delete()
+ * When an entry is deleted from a Page Menu, update the page's URL alias
+ */
+function employees_entity_delete($entity) {
+  if($entity->bundle() === "menu_link_content" && str_starts_with($entity->get('menu_name')->value, 'group_menu_link_content')) {
+    _update_alias_for_menu_linked_node($entity);
+  }
+}
+
+/**
+ * Helper function to update the alias of the node linked to a menu link content
+ */
+function _update_alias_for_menu_linked_node(MenuLinkContent $menu_link_content) {
+  if($menu_link_content->bundle() !== "menu_link_content") return;
+
+  $menu_link_url = $menu_link_content->getUrlObject();
+  if( !$menu_link_url->isExternal() ) {
+    $node_id = $menu_link_url->getRouteParameters()["node"];
+    $node = Drupal\node\Entity\Node::load($node_id);
+    $pathauto_generator = \Drupal::service('pathauto.generator');
+    $pathauto_generator->updateEntityAlias($node, "update");
   }
 }
