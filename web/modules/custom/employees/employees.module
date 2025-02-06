@@ -1247,9 +1247,12 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
   ! str_starts_with($menu_link_content->get('menu_name')->value, 'group_menu_link_content')) return;
 
   $menu_link_url = $menu_link_content->getUrlObject();
+  if(empty($menu_link_url)) return;
   if( !$menu_link_url->isExternal() ) {
     $node_id = $menu_link_url->getRouteParameters()["node"];
+    if(empty($node_id)) return;
     $node = Drupal\node\Entity\Node::load($node_id);
+    if(empty($node)) return;
     $pathauto_generator = \Drupal::service('pathauto.generator');
     $pathauto_generator->updateEntityAlias($node, "update");
   }
