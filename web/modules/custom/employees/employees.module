@@ -1242,7 +1242,7 @@ function employees_entity_delete($entity) {
 /**
  * Helper function to update the alias of the node linked to a menu link content
  */
-function _update_alias_for_menu_linked_node(MenuLinkContent $menu_link_content) {
+function _update_alias_for_menu_linked_node($menu_link_content) {
   if($menu_link_content->bundle() !== "menu_link_content" || 
   ! str_starts_with($menu_link_content->get('menu_name')->value, 'group_menu_link_content')) return;
 
