@@ -11,6 +11,7 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
 
 /**
  * Implements hook_form_alter()
@@ -323,6 +324,7 @@ function employees_entity_insert($entity)
 {
   _notify_reviewer($entity, 'created');
   _notify_group_admin_for_group_change($entity);
+  _update_alias_for_menu_linked_node($entity);
 }
 
 /**
@@ -390,6 +392,7 @@ function employees_entity_update($entity)
   _remove_file_usage_from_previous_revision($entity);
   _notify_reviewer($entity, 'updated');
   _notify_group_admin_for_group_change($entity);
+  _update_alias_for_menu_linked_node($entity);
 }
 
 /**
@@ -1175,7 +1178,7 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
 
   $menu_link_content = $form_state->getformObject()->getEntity();
   if(array_key_exists($node_id, $nodes_in_menu)) {
-    if( $menu_link_content->isNew() || 
+    if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
     ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
       // Prepare the error message
       $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
@@ -1201,7 +1204,6 @@ function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
   }
 }
 
-
 /**
  * Implement hook_preprocess_breadcrumb()
  * Append "/edit" to the last breadcrumb link if it's a Page Menu because the default link leads to a blank page.
@@ -1211,5 +1213,47 @@ function employees_preprocess_breadcrumb(&$variables) {
   count($variables['breadcrumb']) >= 3 && 
   preg_match('/\/menu\/\d+$/', $variables['breadcrumb'][2]["url"])) {
     $variables['breadcrumb'][2]["url"] .= "/edit";
+  }
+}
+
+/**
+ * Implement hook_pathauto_pattern_alter()
+ * Alter the pattern for Pages that are not in the group's page menu
+ */
+function employees_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterface $pattern, array $context) {
+  if($context["bundle"] === "page") {
+    // Try to render the token, if it can't be rendered, it means the node is not in a menu.
+    // This is much easier than traversing the menu tree to find the node.
+    $menu_path = \Drupal::token()->replace('[node:menu-link]', $context['data']);
+    if( $menu_path === "[node:menu-link]") {
+      $pattern->setPattern(str_replace('[node:menu-link:parents:join-path]/[node:menu-link]', '[node:title]', $pattern->getPattern()));
+    }
+  }
+}
+
+/**
+ * Implement hook_entity_delete()
+ * When an entry is deleted from a Page Menu, update the page's URL alias
+ */
+function employees_entity_delete($entity) {
+  _update_alias_for_menu_linked_node($entity);
+}
+
+/**
+ * Helper function to update the alias of the node linked to a menu link content
+ */
+function _update_alias_for_menu_linked_node($menu_link_content) {
+  if($menu_link_content->bundle() !== "menu_link_content" || 
+  ! str_starts_with($menu_link_content->get('menu_name')->value, 'group_menu_link_content')) return;
+
+  $menu_link_url = $menu_link_content->getUrlObject();
+  if(empty($menu_link_url)) return;
+  if( !$menu_link_url->isExternal() ) {
+    $node_id = $menu_link_url->getRouteParameters()["node"];
+    if(empty($node_id)) return;
+    $node = Drupal\node\Entity\Node::load($node_id);
+    if(empty($node)) return;
+    $pathauto_generator = \Drupal::service('pathauto.generator');
+    $pathauto_generator->updateEntityAlias($node, "update");
   }
 }
