@@ -1,0 +1,19 @@
+uuid: b38cf1f3-8497-47ec-b92f-35aed9d6aa2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.private
+    - group_content_menu.group_content_menu_type.page_menu
+  module:
+    - group_content_menu
+id: group_content_type_c4348dddf7242
+group_type: private
+content_plugin: 'group_content_menu:page_menu'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false
+  auto_create_group_menu: true
+  auto_create_home_link: false
+  auto_create_home_link_title: Home
