@@ -575,7 +575,6 @@ class PortlandOpenIdConnectUtil
   public static function GetUserLookupKey($user) {
     // Use Active Directory Object ID first, Principal Name next, and email as the last resort.
     $user_lookup_key = $user->field_active_directory_id->value ?? $user->field_principal_name->value;
-    if(empty($user_lookup_key)) $user_lookup_key = $user->name->value;
     if(empty($user_lookup_key)) $user_lookup_key = $user->mail->value;
     return $user_lookup_key;
   }

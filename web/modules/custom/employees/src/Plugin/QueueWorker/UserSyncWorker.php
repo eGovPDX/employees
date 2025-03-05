@@ -93,6 +93,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       if (in_array(strtolower($user->getEmail()), array_map('strtolower', $skip_emails))) continue;
       if (!str_ends_with(strtolower($user->getEmail()), $email_domain)) continue;
 
+      // Must use the principal name as the lookup key
       $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
       $result_is_404 = false;
       try {
@@ -162,14 +163,15 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         empty($user_data['mail']) ||
         empty($user_data['userPrincipalName']) ||
         empty($user_data['id']) ||
-        str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') ||
+        (str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') &&
+        ! str_ends_with($user_data['mail'], '@prosperportland.us')) ||
         str_contains(strtolower($user_data['mail']), '_adm@')
       ) {
         continue;
       }
 
       // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
-      $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
+      $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']);
 
       // Look up user by email. Sometimes the email address is reused in a new AD account.
       $users = \Drupal::entityTypeManager()->getStorage('user')
