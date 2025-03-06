@@ -408,6 +408,7 @@ class PortlandOpenIdConnectUtil
         $user_info['principalName'] = $response_data["account"][0]['userPrincipalName'];
         $user_info['first_name'] = $response_data['names'][0]['first'];
         $user_info['last_name'] = $response_data['names'][0]['last'];
+        $user_info['mail'] = $response_data['emails'][0]['address'];
       }
 
       // Look up Drupal user with email
@@ -423,7 +424,7 @@ class PortlandOpenIdConnectUtil
       $user->field_phone = $user_info['phone'];
       $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
       $user->field_group_names = $user_info['group'];
-      $user->setUsername( self::TrimUserName($user_info['principalName']) );
+      $user->setUsername( self::TrimUserName($user_info['mail']) );
       return true;
     } catch (RequestException $e) {
       // Log a notice when the user's profile can't be retrieved but do not disable the user.
@@ -490,7 +491,7 @@ class PortlandOpenIdConnectUtil
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([
-            'name' => self::TrimUserName($response_data['userPrincipalName']),
+            'name' => self::TrimUserName($response_data['mail']),
             'mail' => $response_data['mail'],
             'pass' => \Drupal::service('password_generator')->generate(), // temp password
             'status' => 1,
@@ -509,7 +510,7 @@ class PortlandOpenIdConnectUtil
         '@message' => 'No manager info for ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
-      \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
+      // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
 
