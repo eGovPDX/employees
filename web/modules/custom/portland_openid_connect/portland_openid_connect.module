@@ -142,8 +142,8 @@ function _update_users_removed_from_ad($access_token, $domain)
   $query = \Drupal::database()->select('users_field_data', 'u')
     ->fields('u', ['uid']);
   $email_domain_condition_group = $query->orConditionGroup();
-  $email_domain_condition_group->condition('LOWER(u.mail)', "@".$domain, 'LIKE');
-  $email_domain_condition_group->condition('LOWER(u.mail)', PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
+  $email_domain_condition_group->condition('u.mail', "%@".$domain, 'LIKE');
+  $email_domain_condition_group->condition('u.mail', "%" . PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
   $uids = $query->condition($email_domain_condition_group)
     ->condition('u.status', 1, '=')
     ->orderBy('u.uid', 'ASC')
