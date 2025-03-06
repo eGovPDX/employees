@@ -516,7 +516,8 @@ class PortlandOpenIdConnectUtil
         '@message' => 'No manager info for ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
-      \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
+      // To many 404 errors. Disable logging for now.
+      // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
 
