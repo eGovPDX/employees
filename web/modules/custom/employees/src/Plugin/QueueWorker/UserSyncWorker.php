@@ -164,13 +164,13 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         empty($user_data['userPrincipalName']) ||
         empty($user_data['id']) ||
         (str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') &&
-        ! str_ends_with($user_data['mail'], '@prosperportland.us')) ||
+        ! str_ends_with($user_data['mail'], '@prosperportland.us')) || // Allow Prosper Portland users to be processed
         str_contains(strtolower($user_data['mail']), '_adm@')
       ) {
         continue;
       }
 
-      // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
+      // User name in Drupal has a limit of 60 characters
       $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']);
 
       // Look up user by email. Sometimes the email address is reused in a new AD account.
