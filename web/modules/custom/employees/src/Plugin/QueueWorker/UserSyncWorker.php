@@ -212,6 +212,8 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user->field_address = empty($user_data['streetAddress']) ? '' : ($user_data['streetAddress'] . ', ' . $user_data['city'] . ', ' . $user_data['state'] . ', ' . $user_data['postalCode']);
 
       if($user->isNew()) {
+        // Do not add disabled user
+        if($user->status->value == 0) continue;
         $users_created []= $userName;
       }
       else {
