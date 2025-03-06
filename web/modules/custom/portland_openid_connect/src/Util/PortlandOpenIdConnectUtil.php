@@ -512,11 +512,11 @@ class PortlandOpenIdConnectUtil
         $user->set('field_managers', array_unique($manager_user_ids));
       }
     } catch (RequestException $e) {
-      $variables = [
-        '@message' => 'No manager info for ' . $user->getAccountName(),
-        '@error_message' => $e->getMessage(),
-      ];
       // To many 404 errors. Disable logging for now.
+      // $variables = [
+      //   '@message' => 'No manager info for ' . $user->getAccountName(),
+      //   '@error_message' => $e->getMessage(),
+      // ];
       // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
