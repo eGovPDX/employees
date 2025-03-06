@@ -143,7 +143,8 @@ function _update_users_removed_from_ad($access_token, $domain)
     ->fields('u', ['uid']);
   $email_domain_condition_group = $query->orConditionGroup();
   $email_domain_condition_group->condition('u.mail', "%@".$domain, 'LIKE');
-  $email_domain_condition_group->condition('u.mail', "%" . PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
+  // For the ROSE domain, also check users with Prosper Portland email suffix
+  if($domain === PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME) $email_domain_condition_group->condition('u.mail', "%" . PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
   $uids = $query->condition($email_domain_condition_group)
     ->condition('u.status', 1, '=')
     ->orderBy('u.uid', 'ASC')
@@ -212,8 +213,10 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // If there is a resume link, use it. Otherwise start fresh
     // The hardcoded initial URL is intentional. It's only used for the first request.
     $prosper_portland_suffix = PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX;
+    $filter_value = ($domain === PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME) ? "endswith(mail,'@$domain') or endswith(mail,'$prosper_portland_suffix')" : "endswith(mail,'@$domain')";
+  
     // The endswith() function in $filter is case insensitive
-    $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=endswith(mail,'@$domain') or endswith(mail,'$prosper_portland_suffix')&\$orderby=createdDateTime&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
+    $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=$filter_value&\$orderby=createdDateTime&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
     // Queue up 10 items in each call
     $request_limit = 10;
     $request_count = 0;
