@@ -91,7 +91,10 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     foreach ($data["users"] as $user) {
       if ($user->field_is_contact_only->value) continue;
       if (in_array(strtolower($user->getEmail()), array_map('strtolower', $skip_emails))) continue;
-      if (!str_ends_with(strtolower($user->getEmail()), $email_domain)) continue;
+      // If the user's email address is not in the domain AND is not ProsperPortland.us, skip the user
+      $user_email = strtolower($user->getEmail());
+      if (!str_ends_with($user_email, $email_domain) && 
+      !str_ends_with($user_email, '@prosperportland.us')) continue;
 
       // Must use the principal name as the lookup key
       $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
