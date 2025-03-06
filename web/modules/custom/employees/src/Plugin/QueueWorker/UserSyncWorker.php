@@ -160,21 +160,23 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     $users_disabled = [];
     foreach ($data["users"] as $user_data) {
       // Skip accounts without first name, last name, userPrincipalName, or email. These are not people acount.
+      if(empty($user_data['mail'])) continue;
+      $user_email_in_lower_case = strtolower($user_data['mail']);
+
       if (
         empty($user_data['givenName']) ||
         empty($user_data['surname']) ||
-        empty($user_data['mail']) ||
         empty($user_data['userPrincipalName']) ||
         empty($user_data['id']) ||
         (str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') &&
-        ! str_ends_with($user_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) || // Allow Prosper Portland users to be processed
-        str_contains(strtolower($user_data['mail']), '_adm@')
+        ! str_ends_with($user_email_in_lower_case, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) || // Allow Prosper Portland users to be processed
+        str_contains($user_email_in_lower_case, '_adm@')
       ) {
         continue;
       }
 
       // User name in Drupal has a limit of 60 characters
-      $userName = (str_ends_with($user_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? 
+      $userName = (str_ends_with($user_email_in_lower_case, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? 
         PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']) :
         PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
 

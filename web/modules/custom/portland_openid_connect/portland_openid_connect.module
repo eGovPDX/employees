@@ -138,19 +138,20 @@ function _update_users_removed_from_ad($access_token, $domain)
   }
 
   // Get 100 enabled users at a time and add the array into the queue
-  $userStorage = \Drupal::entityTypeManager()->getStorage('user');
-  $query = $userStorage->getQuery();
-  $email_domain_condition_group = $query->orConditionGroup()
-    ->condition('mail', "@".$domain, 'ENDS_WITH')
-    ->condition('mail', PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'ENDS_WITH');
-  $uids = $query
-    ->condition('status', '1') // Enabled users
-    ->condition($email_domain_condition_group)
-    ->sort('uid', 'ASC')
+  // Entity Query doesn't directly support LOWER(), so we have to use a workaround.
+  $query = \Drupal::database()->select('users_field_data', 'u')
+    ->fields('u', ['uid']);
+  $email_domain_condition_group = $query->orConditionGroup();
+  $email_domain_condition_group->condition('LOWER(u.mail)', "@".$domain, 'LIKE');
+  $email_domain_condition_group->condition('LOWER(u.mail)', PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
+  $uids = $query->condition($email_domain_condition_group)
+    ->condition('u.status', 1, '=')
+    ->orderBy('u.uid', 'ASC')
     ->range($drupal_user_offset, $drupal_user_limit)
-    ->accessCheck(FALSE)
-    ->execute();
+    ->execute()
+    ->fetchCol();
 
+  $userStorage = \Drupal::entityTypeManager()->getStorage('user');
   if (count($uids) > 0) {
     $users = $userStorage->loadMultiple($uids);
     /** @var QueueFactory $queue_factory */
@@ -211,6 +212,7 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     // If there is a resume link, use it. Otherwise start fresh
     // The hardcoded initial URL is intentional. It's only used for the first request.
     $prosper_portland_suffix = PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX;
+    // The endswith() function in $filter is case insensitive
     $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=endswith(mail,'@$domain') or endswith(mail,'$prosper_portland_suffix')&\$orderby=createdDateTime&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
     // Queue up 10 items in each call
     $request_limit = 10;

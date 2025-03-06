@@ -425,7 +425,7 @@ class PortlandOpenIdConnectUtil
       $user->field_phone = $user_info['phone'];
       $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
       $user->field_group_names = $user_info['group'];
-      if(str_ends_with($user_info['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) {
+      if(str_ends_with(strtolower($user_info['mail']), PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) {
         $user->setUsername( self::TrimUserName($user_info['mail']) );
       }
       else {
@@ -452,7 +452,7 @@ class PortlandOpenIdConnectUtil
     self::init();
 
     // PTLD has no manager info
-    if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
+    if(str_ends_with(strtolower($user->mail->value), self::PTLD_DOMAIN_NAME)) return;
     // Must use Principal Name to look up manager
     $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
     try {
@@ -497,7 +497,7 @@ class PortlandOpenIdConnectUtil
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([
-            'name' => (str_ends_with($response_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? self::TrimUserName($response_data['mail']) : self::TrimUserName($response_data['userPrincipalName']),
+            'name' => (str_ends_with(strtolower($response_data['mail']), PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? self::TrimUserName($response_data['mail']) : self::TrimUserName($response_data['userPrincipalName']),
             'mail' => $response_data['mail'],
             'pass' => \Drupal::service('password_generator')->generate(), // temp password
             'status' => 1,
