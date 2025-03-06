@@ -94,7 +94,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       // If the user's email address is not in the domain AND is not ProsperPortland.us, skip the user
       $user_email = strtolower($user->getEmail());
       if (!str_ends_with($user_email, $email_domain) && 
-      !str_ends_with($user_email, '@prosperportland.us')) continue;
+      !str_ends_with($user_email, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) continue;
 
       // Must use the principal name as the lookup key
       $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
@@ -167,14 +167,16 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         empty($user_data['userPrincipalName']) ||
         empty($user_data['id']) ||
         (str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') &&
-        ! str_ends_with($user_data['mail'], '@prosperportland.us')) || // Allow Prosper Portland users to be processed
+        ! str_ends_with($user_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) || // Allow Prosper Portland users to be processed
         str_contains(strtolower($user_data['mail']), '_adm@')
       ) {
         continue;
       }
 
       // User name in Drupal has a limit of 60 characters
-      $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']);
+      $userName = (str_ends_with($user_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? 
+        PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']) :
+        PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
 
       // Look up user by email. Sometimes the email address is reused in a new AD account.
       $users = \Drupal::entityTypeManager()->getStorage('user')

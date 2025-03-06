@@ -142,7 +142,7 @@ function _update_users_removed_from_ad($access_token, $domain)
   $query = $userStorage->getQuery();
   $email_domain_condition_group = $query->orConditionGroup()
     ->condition('mail', "@".$domain, 'ENDS_WITH')
-    ->condition('mail', "@prosperportland.us", 'ENDS_WITH');
+    ->condition('mail', PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'ENDS_WITH');
   $uids = $query
     ->condition('status', '1') // Enabled users
     ->condition($email_domain_condition_group)
@@ -210,7 +210,8 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
 
     // If there is a resume link, use it. Otherwise start fresh
     // The hardcoded initial URL is intentional. It's only used for the first request.
-    $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=endswith(mail,'@$domain') or endswith(mail,'@prosperportland.us')&\$orderby=userPrincipalName&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
+    $prosper_portland_suffix = PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX;
+    $request_url = empty($resume_url) ? "https://graph.microsoft.com/v1.0/users?\$top=$batch_size&\$filter=endswith(mail,'@$domain') or endswith(mail,$prosper_portland_suffix)&\$orderby=userPrincipalName&\$count=true&\$select=id,accountEnabled,userPrincipalName,displayName,givenName,surname,jobTitle,mail,companyName,department,officeLocation,businessPhones,mobilePhone,employeeId,userType,employeeType,streetAddress,city,state,postalCode,mailNickname" : $resume_url;
     // Queue up 10 items in each call
     $request_limit = 10;
     $request_count = 0;

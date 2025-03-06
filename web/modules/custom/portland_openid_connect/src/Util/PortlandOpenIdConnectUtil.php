@@ -19,6 +19,7 @@ class PortlandOpenIdConnectUtil
 {
   public const ROSE_DOMAIN_NAME = "portlandoregon.gov";
   public const PTLD_DOMAIN_NAME = "police.portlandoregon.gov";
+  public const PROSPER_PORTLAND_EMAIL_SUFFIX = "@prosperportland.us";
 
   // Keys
   private static $ROSE_SYNC_CLIENT_ID;
@@ -424,7 +425,12 @@ class PortlandOpenIdConnectUtil
       $user->field_phone = $user_info['phone'];
       $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
       $user->field_group_names = $user_info['group'];
-      $user->setUsername( self::TrimUserName($user_info['mail']) );
+      if(str_ends_with($user_info['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) {
+        $user->setUsername( self::TrimUserName($user_info['mail']) );
+      }
+      else {
+        $user->setUsername( self::TrimUserName($user_info['principalName']) );
+      }
       return true;
     } catch (RequestException $e) {
       // Log a notice when the user's profile can't be retrieved but do not disable the user.
@@ -491,7 +497,7 @@ class PortlandOpenIdConnectUtil
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([
-            'name' => self::TrimUserName($response_data['mail']),
+            'name' => (str_ends_with($response_data['mail'], PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? self::TrimUserName($response_data['mail']) : self::TrimUserName($response_data['userPrincipalName']),
             'mail' => $response_data['mail'],
             'pass' => \Drupal::service('password_generator')->generate(), // temp password
             'status' => 1,
@@ -510,7 +516,7 @@ class PortlandOpenIdConnectUtil
         '@message' => 'No manager info for ' . $user->getAccountName(),
         '@error_message' => $e->getMessage(),
       ];
-      // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
+      \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
 
