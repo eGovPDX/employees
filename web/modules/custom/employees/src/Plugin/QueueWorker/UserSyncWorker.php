@@ -97,7 +97,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       !str_ends_with($user_email, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) continue;
 
       // Must use the principal name as the lookup key
-      $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
+      $request_url = 'https://graph.microsoft.com/v1.0/users/' . urlencode($user->field_principal_name->value);
       $result_is_404 = false;
       try {
         $response = $client->get($request_url, $options);
