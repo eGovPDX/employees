@@ -274,4 +274,34 @@ final class CustomCommands extends DrushCommands
     }
     return;
   }
+  
+  /**
+   * Drush command to remove deleted references from entity reference fields.
+   */
+  #[CLI\Command(name: 'employees:remove_deleted_references')]
+  #[CLI\Usage(name: 'employees:remove_deleted_references', description: 'Remove deleted references from entity reference fields')]
+  public function remove_deleted_references()
+  {
+    // Iterate through all taxonomy term IDs looking for deleted terms to remove from entity reference fields.
+    $field_name = 'field_tags';
+    for ($entity_id = 1; $entity_id <= 2800; $entity_id++) {
+      $entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity_id);
+      if (empty($entity)) {
+        echo "Removing references to deleted entity $entity_id from field $field_name... ";
+        _remove_deleted_entity_references($entity_id, $field_name);
+        echo "done." . PHP_EOL;
+      }
+    }
+
+    // Iterate through all group IDs looking for deleted groups to remove from entity reference fields.
+    $field_name = 'field_display_in_group';
+    for ($entity_id = 1; $entity_id <= 165; $entity_id++) {
+      $entity = \Drupal::entityTypeManager()->getStorage('group')->load($entity_id);
+      if (empty($entity)) {
+        echo "Removing references to deleted entity $entity_id from field $field_name... ";
+        _remove_deleted_entity_references($entity_id, $field_name);
+        echo "done." . PHP_EOL;
+      }
+    }
+  }
 }
