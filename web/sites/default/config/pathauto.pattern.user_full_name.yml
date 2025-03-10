@@ -7,7 +7,7 @@ dependencies:
 id: user_full_name
 label: Users
 type: 'canonical_entities:user'
-pattern: '[user:field_first_name].[user:field_last_name]'
+pattern: '[user:field_first_name:value].[user:field_last_name:value]'
 selection_criteria: {  }
 selection_logic: and
 weight: 1

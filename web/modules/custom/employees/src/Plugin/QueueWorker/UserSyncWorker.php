@@ -91,9 +91,13 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     foreach ($data["users"] as $user) {
       if ($user->field_is_contact_only->value) continue;
       if (in_array(strtolower($user->getEmail()), array_map('strtolower', $skip_emails))) continue;
-      if (!str_ends_with(strtolower($user->getEmail()), $email_domain)) continue;
+      // If the user's email address is not in the domain AND is not ProsperPortland.us, skip the user
+      $user_email = strtolower($user->getEmail());
+      if (!str_ends_with($user_email, $email_domain) && 
+      !str_ends_with($user_email, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) continue;
 
-      $request_url = 'https://graph.microsoft.com/v1.0/users/' . $user->field_principal_name->value;
+      // Must use the principal name as the lookup key
+      $request_url = 'https://graph.microsoft.com/v1.0/users/' . urlencode($user->field_principal_name->value);
       $result_is_404 = false;
       try {
         $response = $client->get($request_url, $options);
@@ -156,20 +160,25 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     $users_disabled = [];
     foreach ($data["users"] as $user_data) {
       // Skip accounts without first name, last name, userPrincipalName, or email. These are not people acount.
+      if(empty($user_data['mail'])) continue;
+      $user_email_in_lower_case = strtolower($user_data['mail']);
+
       if (
         empty($user_data['givenName']) ||
         empty($user_data['surname']) ||
-        empty($user_data['mail']) ||
         empty($user_data['userPrincipalName']) ||
         empty($user_data['id']) ||
-        str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') ||
-        str_contains(strtolower($user_data['mail']), '_adm@')
+        (str_ends_with($user_data['userPrincipalName'], 'onmicrosoft.com') &&
+        ! str_ends_with($user_email_in_lower_case, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) || // Allow Prosper Portland users to be processed
+        str_contains($user_email_in_lower_case, '_adm@')
       ) {
         continue;
       }
 
-      // User name in Drupal has a limit of 60 characters. Need to trim the AD principal name
-      $userName = PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
+      // User name in Drupal has a limit of 60 characters
+      $userName = (str_ends_with($user_email_in_lower_case, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? 
+        PortlandOpenIdConnectUtil::TrimUserName($user_data['mail']) :
+        PortlandOpenIdConnectUtil::TrimUserName($user_data['userPrincipalName']);
 
       // Look up user by email. Sometimes the email address is reused in a new AD account.
       $users = \Drupal::entityTypeManager()->getStorage('user')
@@ -205,6 +214,8 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       $user->field_address = empty($user_data['streetAddress']) ? '' : ($user_data['streetAddress'] . ', ' . $user_data['city'] . ', ' . $user_data['state'] . ', ' . $user_data['postalCode']);
 
       if($user->isNew()) {
+        // Do not add disabled user
+        if($user->status->value == 0) continue;
         $users_created []= $userName;
       }
       else {

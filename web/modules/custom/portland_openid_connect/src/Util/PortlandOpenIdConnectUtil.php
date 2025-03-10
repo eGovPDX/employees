@@ -19,6 +19,7 @@ class PortlandOpenIdConnectUtil
 {
   public const ROSE_DOMAIN_NAME = "portlandoregon.gov";
   public const PTLD_DOMAIN_NAME = "police.portlandoregon.gov";
+  public const PROSPER_PORTLAND_EMAIL_SUFFIX = "@prosperportland.us";
 
   // Keys
   private static $ROSE_SYNC_CLIENT_ID;
@@ -408,6 +409,7 @@ class PortlandOpenIdConnectUtil
         $user_info['principalName'] = $response_data["account"][0]['userPrincipalName'];
         $user_info['first_name'] = $response_data['names'][0]['first'];
         $user_info['last_name'] = $response_data['names'][0]['last'];
+        $user_info['mail'] = $response_data['emails'][0]['address'];
       }
 
       // Look up Drupal user with email
@@ -423,7 +425,12 @@ class PortlandOpenIdConnectUtil
       $user->field_phone = $user_info['phone'];
       $user->field_mobile_phone = array_key_exists('mobile_phone', $user_info) ? $user_info['mobile_phone'] : '';
       $user->field_group_names = $user_info['group'];
-      $user->setUsername( self::TrimUserName($user_info['principalName']) );
+      if(str_ends_with(strtolower($user_info['mail']), PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) {
+        $user->setUsername( self::TrimUserName($user_info['mail']) );
+      }
+      else {
+        $user->setUsername( self::TrimUserName($user_info['principalName']) );
+      }
       return true;
     } catch (RequestException $e) {
       // Log a notice when the user's profile can't be retrieved but do not disable the user.
@@ -445,7 +452,7 @@ class PortlandOpenIdConnectUtil
     self::init();
 
     // PTLD has no manager info
-    if(str_ends_with($user->mail->value, self::PTLD_DOMAIN_NAME)) return;
+    if(str_ends_with(strtolower($user->mail->value), self::PTLD_DOMAIN_NAME)) return;
     // Must use Principal Name to look up manager
     $user_lookup_key = $user->field_principal_name->value ?? $user->name->value;
     try {
@@ -490,7 +497,7 @@ class PortlandOpenIdConnectUtil
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([
-            'name' => self::TrimUserName($response_data['userPrincipalName']),
+            'name' => (str_ends_with(strtolower($response_data['mail']), PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) ? self::TrimUserName($response_data['mail']) : self::TrimUserName($response_data['userPrincipalName']),
             'mail' => $response_data['mail'],
             'pass' => \Drupal::service('password_generator')->generate(), // temp password
             'status' => 1,
@@ -505,11 +512,12 @@ class PortlandOpenIdConnectUtil
         $user->set('field_managers', array_unique($manager_user_ids));
       }
     } catch (RequestException $e) {
-      $variables = [
-        '@message' => 'No manager info for ' . $user->getAccountName(),
-        '@error_message' => $e->getMessage(),
-      ];
-      \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
+      // To many 404 errors. Disable logging for now.
+      // $variables = [
+      //   '@message' => 'No manager info for ' . $user->getAccountName(),
+      //   '@error_message' => $e->getMessage(),
+      // ];
+      // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
     }
   }
 
@@ -575,7 +583,6 @@ class PortlandOpenIdConnectUtil
   public static function GetUserLookupKey($user) {
     // Use Active Directory Object ID first, Principal Name next, and email as the last resort.
     $user_lookup_key = $user->field_active_directory_id->value ?? $user->field_principal_name->value;
-    if(empty($user_lookup_key)) $user_lookup_key = $user->name->value;
     if(empty($user_lookup_key)) $user_lookup_key = $user->mail->value;
     return $user_lookup_key;
   }
