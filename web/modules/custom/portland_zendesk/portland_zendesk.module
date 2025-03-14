@@ -1,0 +1,113 @@
+<?php
+
+/**
+ * Implements hook_webform_element_alter().
+ * 
+ * This hook is used to populate the options of a select element with data from a view.
+ * The view and display are defined in the custom property 'populate_options_from_view',
+ * in the format 'view_name.display_name'.
+ */
+function portland_zendesk_webform_element_alter(array &$element, $webform_element, array $form_state)
+{
+    // Check if this is the Zendesk Group select element
+    if (isset($element['#type']) && $element['#type'] === 'select' && isset($form_state['form']['elements']['zendesk_group']['#populate_options_from_view'])) {
+
+        //$test1 = recursive_array_search($element, 'zendesk_group');
+        $element_name = $element['#parents'][0];
+        $viewname = $form_state['form']['elements'][$element_name]['#populate_options_from_view'];
+        $viewkey = explode('.', $viewname);
+        $view = $viewkey[0];
+        $display = $viewkey[1];
+
+        $groups = _portland_zendesk_fetch_zendesk_groups($view, $display);
+
+        // Ensure the select list always has at least one option
+        if (empty($groups)) {
+            $groups = ['' => 'No Zendesk Groups found'];
+        }
+
+        // Always ensure "_other_" => "Other..." is present
+        $groups['_other_'] = 'Other...';
+
+        // Set the updated options list
+        $element['#options'] = $groups;
+
+        // ✅ Ensure "Sort options" and "Select2" remain enabled
+        if (isset($element['#webform']) && is_array($element['#webform'])) {
+            $element['#webform']['sort_options']['#default_value'] = TRUE;
+            $element['#webform']['select2']['#default_value'] = TRUE;
+        }
+    }
+}
+
+function recursive_array_search(array $array, $search_value, $path = []) {
+    foreach ($array as $key => $value) {
+        $current_path = array_merge($path, [$key]);
+
+        if ($value === $search_value) {
+            return $current_path; // Return the path if found
+        } elseif (is_array($value)) {
+            $result = recursive_array_search($value, $search_value, $current_path);
+            if ($result !== false) {
+                return $result;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * 
+ * This hook is used to modify the webform UI element form. It looks for any element with the custom property 'populate_options_from_view'.
+ * If found, it removes the options and other settings from the form.
+ */
+function portland_zendesk_form_webform_ui_element_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+    if ($form_id === 'webform_ui_element_form') {
+        // Check if 'use_custom_options' is set and enabled.
+        if (!empty($form['properties']['custom']['properties']['#default_value']['populate_options_from_view'])) {
+            unset($form['properties']['options']['options']);
+
+            // Add a read-only description instead
+            $form['properties']['options']['#title'] = t('Automatic Options');
+            $form['properties']['options']['#markup'] = t('These options are automatically populated from the Zendesk Groups API and cannot be manually modified. This behavior is controlled by the Portland Zendesk module. To change the view from which the options are populated, set the populate_options_from_view custom property with the view name and display. Example: zendesk_groups.default.<br><br>');
+            //$form['properties']['options']['#disabled'] = TRUE;
+
+            // Remove the "Other option settings" section.
+            unset($form['properties']['options_other']);
+
+            \Drupal::logger('portland_zendesk')->notice('Replaced Element Options and Other Option Settings with a help text section.');
+        }
+    }
+}
+
+/**
+ * Fetches Zendesk Groups using the custom Views plugin.
+ */
+function _portland_zendesk_fetch_zendesk_groups($view, $display)
+{
+    $options = [];
+
+    // Load the view and get the executable.
+    $view = \Drupal\views\Views::getView($view);
+
+    if ($view) {
+        $view->setDisplay($display); // Set the display (must match the one in Views UI).
+        $view->execute();
+
+        // Check if the view has results before processing
+        if (!empty($view->result)) {
+            foreach ($view->result as $row) {
+                if (!empty($row->group_id) && !empty($row->group_name)) {
+                    $options[$row->group_id] = $row->group_name;
+                }
+            }
+        }
+    } else {
+        \Drupal::logger('portland_zendesk')->error('View ' . $view . ' not found.');
+    }
+
+    return $options;
+}

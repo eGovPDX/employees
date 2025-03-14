@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @ViewsQuery(
  *   id = "zendesk",
  *   title = @Translation("Zendesk"),
- *   help = @Translation("Query against the Zendeks Tickets API.")
+ *   help = @Translation("Query against the Zendesk Tickets API.")
  * )
  */
 class Zendesk extends QueryPluginBase {
@@ -24,34 +24,47 @@ class Zendesk extends QueryPluginBase {
    * {@inheritdoc}
    */
   public function execute(ViewExecutable $view) {
-
     $client = new ZendeskClient();
 
-    $query = $view->query->options['ticket_query'];
+    if ($view->storage->get('base_table') == 'zendesk_ticket') {
+      $query = $view->query->options['ticket_query'];
+      $response = $client->search()->find($query, ['sort_by' => 'updated_at']);
+      $items = $response->results;
+    }
+    elseif ($view->storage->get('base_table') == 'zendesk_group') {
+      $query = $view->query->options['group_query'];
+      $response = $client->groups()->findAll(['query' => $query]);
+      $items = $response->groups;
+    }
 
-    $response = $client->search()->find($query, ['sort_by' => 'updated_at']);
-    $tickets = $response->results;
     $index = 0;
 
-    foreach($tickets as $ticket) {
-      $row['ticket_id'] = $ticket->id;
-      $row['ticket_status'] = $ticket->status;
-      $row['ticket_subject'] = $ticket->subject;
-      $row['ticket_description'] = $ticket->description;
-      $row['ticket_priority'] = $ticket->priority;
-      $row['ticket_created_date'] = date("U", strtotime($ticket->created_at));
-      $row['ticket_updated_date'] = date("U", strtotime($ticket->updated_at));
+    foreach($items as $item) {
+      if ($view->storage->get('base_table') == 'zendesk_ticket') {
+        $row['ticket_id'] = $item->id;
+        $row['ticket_status'] = $item->status;
+        $row['ticket_subject'] = $item->subject;
+        $row['ticket_description'] = $item->description;
+        $row['ticket_priority'] = $item->priority;
+        $row['ticket_created_date'] = date("U", strtotime($item->created_at));
+        $row['ticket_updated_date'] = date("U", strtotime($item->updated_at));
 
-      $row['custom_reported_issue'] = array_column($ticket->custom_fields, null, 'id')['1500012743981']->value;
-      $row['custom_asset_id'] = array_column($ticket->custom_fields, null, 'id')['1500012801542']->value;
-      $row['custom_location_lat'] = array_column($ticket->custom_fields, null, 'id')['5581480390679']->value;
-      $row['custom_location_lon'] = array_column($ticket->custom_fields, null, 'id')['5581490332439']->value;
-      $row['custom_address'] = array_column($ticket->custom_fields, null, 'id')['1500012743961']->value;
-      $row['custom_public_description'] = array_column($ticket->custom_fields, null, 'id')['7557381052311']->value;      
+        $row['custom_reported_issue'] = array_column($item->custom_fields, null, 'id')['1500012743981']->value;
+        $row['custom_asset_id'] = array_column($item->custom_fields, null, 'id')['1500012801542']->value;
+        $row['custom_location_lat'] = array_column($item->custom_fields, null, 'id')['5581480390679']->value;
+        $row['custom_location_lon'] = array_column($item->custom_fields, null, 'id')['5581490332439']->value;
+        $row['custom_address'] = array_column($item->custom_fields, null, 'id')['1500012743961']->value;
+        $row['custom_public_description'] = array_column($item->custom_fields, null, 'id')['7557381052311']->value;
+      }
+      elseif ($view->storage->get('base_table') == 'zendesk_group') {
+        $row['group_id'] = $item->id;
+        $row['group_name'] = $item->name;
+        $row['group_description'] = $item->description;
+      }
 
       $row['index'] = $index;
       $index = $index + 1;
-      
+
       $view->result[] = new ResultRow($row);
     }
   }
@@ -70,6 +83,7 @@ class Zendesk extends QueryPluginBase {
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['ticket_query'] = ['default' => 'type:ticket status:open form:6499767163543'];
+    $options['group_query'] = ['default' => ''];
     return $options;
   }
 
@@ -79,13 +93,16 @@ class Zendesk extends QueryPluginBase {
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     $form['ticket_query'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Zendesk Search API query string'),
+      '#title' => $this->t('Zendesk Search API query string for tickets'),
       '#default_value' => $this->options['ticket_query'],
-      '#description' => $this->t('Use the Zendesk Search API query string needed to display the desired results. This query is used in place of view filters. Example: "type:ticket status:open form:6499767163543"'),
+      '#description' => $this->t('Use the Zendesk Search API query string needed to display the desired ticket results. This query is used in place of view filters. Example: "type:ticket status:open form:6499767163543"'),
+    ];
+    $form['group_query'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Zendesk Search API query string for groups'),
+      '#default_value' => $this->options['group_query'],
+      '#description' => $this->t('Use the Zendesk Search API query string needed to display the desired group results. This query is used in place of view filters.'),
     ];
     parent::buildOptionsForm($form, $form_state);
   }
-
-
-
 }

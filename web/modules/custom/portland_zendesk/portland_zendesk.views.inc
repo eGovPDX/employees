@@ -5,7 +5,8 @@
  */
 function portland_zendesk_views_data() {
   $data = [];
-  // Base data.
+  
+  // Base data for Zendesk tickets.
   $data['zendesk_ticket']['table']['group'] = t('Zendesk ticket');
   $data['zendesk_ticket']['table']['base'] = [
     'title' => t('Zendesk ticket'),
@@ -14,7 +15,7 @@ function portland_zendesk_views_data() {
     'type' => '',
   ];
 
-  // Fields.
+  // Fields for Zendesk tickets.
   $data['zendesk_ticket']['ticket_id'] = [
     'title' => t('Ticket ID'),
     'help' => t('The ID of the associated Zendesk ticket.'),
@@ -92,7 +93,7 @@ function portland_zendesk_views_data() {
     'help' => t('The latitude coordinate associated with the ticket.'),
     'field' => [
       'id' => 'standard',
-    'type' => 'standard',
+      'type' => 'standard',
     ],
   ];
   $data['zendesk_ticket']['custom_location_lon'] = [
@@ -100,7 +101,7 @@ function portland_zendesk_views_data() {
     'help' => t('The longitude coordinate associated with the ticket.'),
     'field' => [
       'id' => 'standard',
-    'type' => 'standard',
+      'type' => 'standard',
     ],
   ];
   $data['zendesk_ticket']['custom_address'] = [
@@ -108,7 +109,7 @@ function portland_zendesk_views_data() {
     'help' => t('The street address associated with the ticket.'),
     'field' => [
       'id' => 'standard',
-    'type' => 'standard',
+      'type' => 'standard',
     ],
   ];
   $data['zendesk_ticket']['custom_public_description'] = [
@@ -120,6 +121,40 @@ function portland_zendesk_views_data() {
     'type' => 'standard',
   ];
 
+  // Base data for Zendesk groups.
+  $data['zendesk_group']['table']['group'] = t('Zendesk group');
+  $data['zendesk_group']['table']['base'] = [
+    'title' => t('Zendesk group'),
+    'help' => t('Zendesk group data provided by the Zendesk Groups API.'),
+    'query_id' => 'zendesk',
+    'type' => '',
+  ];
+
+  // Fields for Zendesk groups.
+  $data['zendesk_group']['group_id'] = [
+    'title' => t('Group ID'),
+    'help' => t('The ID of the associated Zendesk group.'),
+    'field' => [
+      'id' => 'numeric',
+    ],
+    'type' => 'numeric',
+  ];
+  $data['zendesk_group']['group_name'] = [
+    'title' => t('Group name'),
+    'help' => t('The name of the Zendesk group.'),
+    'field' => [
+      'id' => 'standard',
+    ],
+    'type' => 'standard',
+  ];
+  $data['zendesk_group']['group_description'] = [
+    'title' => t('Group description'),
+    'help' => t('The description of the Zendesk group.'),
+    'field' => [
+      'id' => 'standard',
+    ],
+    'type' => 'standard',
+  ];
 
   return $data;
 }

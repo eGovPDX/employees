@@ -43,12 +43,14 @@ elements: |-
             'Full Agent': 'Full Agent'
           '#required': true
           '#title': 'License Type'
-        license_group:
-          '#type': textarea
-          '#required': true
-          '#title': 'Zendesk Group(s)'
-          '#description': 'Please list all Zendesk groups to which the new agent should be assigned.'
-      '#required': true
+        zendesk_group:
+          '#type': select_other
+          '#title': 'Zendesk Group'
+          '#multiple': true
+          '#sort_options': true
+          '#select2': true
+          '#populate_options_from_view': zendesk_groups.default
+    '#required': true
     request_cost_code:
       '#type': textfield
       '#title': 'Cost Code'
@@ -71,6 +73,13 @@ elements: |-
       '#type': textfield
       '#title': Email
       '#required': true
+  zendesk_group:
+    '#type': webform_select_other
+    '#title': 'Zendesk Group'
+    '#multiple': true
+    '#sort_options': true
+    '#select2': true
+    '#populate_options_from_view': zendesk_groups.default
 css: ''
 javascript: ''
 settings:
