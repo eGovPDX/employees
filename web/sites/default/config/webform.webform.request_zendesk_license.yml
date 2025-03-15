@@ -13,48 +13,49 @@ title: 'Request Zendesk License'
 description: ''
 categories: {  }
 elements: |-
-  section_licenses:
+  section_request_licenses:
     '#type': webform_section
-    '#title': Licenses
-    request_licenses:
-      '#type': webform_custom_composite
-      '#title': 'Request Licenses'
-      '#title_display': invisible
-      '#multiple__item_label': license
-      '#multiple__no_items_message': '<p>No licenses entered. Please add licenses below.</p>'
-      '#multiple__sorting': false
-      '#multiple__add_more': false
-      '#multiple__add_more_input': false
-      '#element':
-        license_name:
-          '#type': textfield
-          '#required': true
-          '#title': 'Licensee Full Name'
-          '#description': "The user's full (first+last) name."
-        license_email:
-          '#type': textfield
-          '#required': true
-          '#title': 'Email Address'
-          '#description': "The user's City email address."
-        license_type:
-          '#type': radios
-          '#options':
-            'Light Agent': 'Light Agent'
-            'Full Agent': 'Full Agent'
-          '#required': true
-          '#title': 'License Type'
-        zendesk_group:
-          '#type': select_other
-          '#title': 'Zendesk Group'
-          '#multiple': true
-          '#sort_options': true
-          '#select2': true
-          '#populate_options_from_view': zendesk_groups.default
+    '#title': 'Request a License'
     '#required': true
+    request_licensee:
+      '#type': entity_autocomplete
+      '#title': Licensee
+      '#description': '<p>Start typing to see a list of matching names, then select one. This search includes all active City employees.</p>'
+      '#description_display': before
+      '#target_type': user
+      '#selection_handler': views
+      '#selection_settings':
+        view:
+          view_name: people_list
+          display_name: ref_users
+          arguments: {  }
+    request_license_type:
+      '#type': radios
+      '#title': 'License Type'
+      '#options':
+        'Full Agent': 'Full Agent'
+        'Light Agent': 'Light Agent'
+    markup_full_license_notice:
+      '#type': webform_markup
+      '#states':
+        visible:
+          ':input[name="request_license_type"]':
+            value: 'Full Agent'
+      '#markup': '<div class="alert alert--info next-steps"><h2>Notice</h2><p class="mb-0">Full Agent license requests will be filled in the order received. It may take up to 2 weeks or more to requisition more licenses. In the meantime, we will give this person a Light Agent license. They will be able to view tickets and add private notes, but not add public comments or edit ticket fields.</p></div>'
     request_cost_code:
       '#type': textfield
       '#title': 'Cost Code'
       '#required': true
+    zendesk_group:
+      '#type': webform_select_other
+      '#title': 'Zendesk Group'
+      '#multiple': true
+      '#description': '<p>Please specify the Zendesk group(s) to which the agent should be added. You may select more than one. Choose "Other..." if you wish to specify a group that does not exist yet.</p>'
+      '#description_display': before
+      '#sort_options': true
+      '#select2': true
+      '#required': true
+      '#populate_options_from_view': zendesk_groups.default
     request_fulfillment_date:
       '#type': webform_radios_other
       '#title': 'Requested Fulfillment Date'
@@ -73,14 +74,17 @@ elements: |-
       '#type': textfield
       '#title': Email
       '#required': true
-  zendesk_group:
+  zendesk_group2:
     '#type': webform_select_other
     '#title': 'Zendesk Group'
     '#multiple': true
+    '#description': '<p>Please specify the Zendesk group(s) to which the agent should be added. You may select more than one. Choose "Other..." if you wish to specify a group that does not exist yet.</p>'
+    '#description_display': before
     '#sort_options': true
     '#select2': true
+    '#required': true
     '#populate_options_from_view': zendesk_groups.default
-css: ''
+css: ".next-steps {\r\n  background-color: #4545a1;\r\n  color: #fff;\r\n  display: block;\r\n  margin-bottom: 2px;\r\n  padding: 1rem;\r\n}"
 javascript: ''
 settings:
   ajax: false

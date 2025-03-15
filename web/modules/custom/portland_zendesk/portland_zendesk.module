@@ -9,52 +9,42 @@
  */
 function portland_zendesk_webform_element_alter(array &$element, $webform_element, array $form_state)
 {
+    $element_name = isset($element['#parents'][0]) ? $element['#parents'][0] : 'zendesk_group';
+
     // Check if this is the Zendesk Group select element
-    if (isset($element['#type']) && $element['#type'] === 'select' && isset($form_state['form']['elements']['zendesk_group']['#populate_options_from_view'])) {
-
-        //$test1 = recursive_array_search($element, 'zendesk_group');
-        $element_name = $element['#parents'][0];
+    if (isset($element['#type']) && $element['#type'] === 'select' && isset($form_state['form']['elements'][$element_name]['#populate_options_from_view'])) {
         $viewname = $form_state['form']['elements'][$element_name]['#populate_options_from_view'];
-        $viewkey = explode('.', $viewname);
-        $view = $viewkey[0];
-        $display = $viewkey[1];
-
-        $groups = _portland_zendesk_fetch_zendesk_groups($view, $display);
-
-        // Ensure the select list always has at least one option
-        if (empty($groups)) {
-            $groups = ['' => 'No Zendesk Groups found'];
-        }
-
-        // Always ensure "_other_" => "Other..." is present
-        $groups['_other_'] = 'Other...';
-
-        // Set the updated options list
-        $element['#options'] = $groups;
-
-        // ✅ Ensure "Sort options" and "Select2" remain enabled
-        if (isset($element['#webform']) && is_array($element['#webform'])) {
-            $element['#webform']['sort_options']['#default_value'] = TRUE;
-            $element['#webform']['select2']['#default_value'] = TRUE;
-        }
+        _portland_zendesk_populate_groups_select($element, $viewname);
     }
 }
 
-function recursive_array_search(array $array, $search_value, $path = []) {
-    foreach ($array as $key => $value) {
-        $current_path = array_merge($path, [$key]);
+function _portland_zendesk_populate_groups_select(&$element, $viewname)
+{
+    $viewkey = explode('.', $viewname);
+    $view = $viewkey[0];
+    $display = $viewkey[1];
 
-        if ($value === $search_value) {
-            return $current_path; // Return the path if found
-        } elseif (is_array($value)) {
-            $result = recursive_array_search($value, $search_value, $current_path);
-            if ($result !== false) {
-                return $result;
-            }
-        }
+    $groups = _portland_zendesk_fetch_zendesk_groups($view, $display);
+
+    // Ensure the select list always has at least one option
+    if (empty($groups)) {
+        $groups = ['' => 'No Zendesk Groups found'];
     }
 
-    return false;
+    $groups['_not_sure_'] = 'Not sure...';
+
+    // Always ensure "_other_" => "Other..." is present
+    $groups['_other_'] = 'Other...';
+
+    // Set the updated options list
+    $element['#options'] = $groups;
+
+    // ✅ Ensure "Sort options" and "Select2" remain enabled
+    if (isset($element['#webform']) && is_array($element['#webform'])) {
+        $element['#webform']['sort_options']['#default_value'] = TRUE;
+        $element['#webform']['select2']['#default_value'] = TRUE;
+    }
+
 }
 
 /**
