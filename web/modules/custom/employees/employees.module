@@ -1233,10 +1233,21 @@ function employees_pathauto_pattern_alter(\Drupal\pathauto\PathautoPatternInterf
 
 /**
  * Implement hook_entity_delete()
- * When an entry is deleted from a Page Menu, update the page's URL alias
  */
 function employees_entity_delete($entity) {
+  // When an entry is deleted from a Page Menu, update the page's URL alias
   _update_alias_for_menu_linked_node($entity);
+
+  // We have aggregated Search API fields that combine entity reference fields from different
+  // entity types. When a referenced entity is deleted, we need to remove the reference from
+  // all nodes and media that reference the deleted entity so that the aggregated field is updated.
+  if ($entity instanceof \Drupal\Taxonomy\Entity\Term && $entity->bundle() == 'tags') {
+    // Remove references to deleted tag from all nodes and media
+    _remove_deleted_entity_references($entity, "field_tags");
+  }  elseif ($entity instanceof Drupal\group\Entity\Group) {
+    // Remove references to deleted groups from all nodes and media
+    _remove_deleted_entity_references($entity, "field_display_in_group");
+  }
 }
 
 /**
@@ -1255,5 +1266,38 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
     if(empty($node)) return;
     $pathauto_generator = \Drupal::service('pathauto.generator');
     $pathauto_generator->updateEntityAlias($node, "update");
+  }
+}
+
+/**
+ * Helper function to remove references to deleted entities
+ */
+function _remove_deleted_entity_references($entity, $field_name) {
+  $eid = is_numeric($entity) ? $entity : $entity->id();
+  $entity_types = ['node', 'media'];
+  foreach ($entity_types as $entity_type) {
+    // Find all nodes or media that reference the deleted entity
+    $query = \Drupal::entityQuery($entity_type)
+      ->condition($field_name, $eid, 'IN')
+      ->accessCheck(FALSE);
+    $ids = $query->execute();
+
+    // Load the entities and remove deleted entity references in the provided field
+    $entities = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($ids);
+    foreach ($entities as $entity) {
+      $entity_references = $entity->get($field_name)->getValue();
+      if ($field_name == 'field_display_in_group' && count($entity_references) == 1) {
+        // Delete the entity if it was only displayed in the deleted group
+        $entity->delete();
+      } else {
+        // Remove deleted entity references in the provided field
+        foreach ($entity_references as $key => $entity_reference) {
+          if ($entity_reference['target_id'] == $eid) {
+            $entity->get($field_name)->removeItem($key);
+            $entity->save();
+          }
+        }
+      }
+    }
   }
 }

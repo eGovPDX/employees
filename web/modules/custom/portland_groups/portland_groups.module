@@ -324,7 +324,7 @@ function getGroupIdsByEntity($entity)
 
     $group_contents = GroupRelationship::loadByEntity($entity);
     foreach ($group_contents as $group_content) {
-        $group_ids[] = $group_content->getGroup()->id();
+        $group_ids[] = $group_content?->getGroup()?->id();
     }
 
     return $group_ids;
