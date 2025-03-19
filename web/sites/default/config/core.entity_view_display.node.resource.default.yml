@@ -7,21 +7,16 @@ dependencies:
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
     - field.field.node.resource.field_featured_image
-    - field.field.node.resource.field_menu_url_text
-    - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
     - field.field.node.resource.field_reviewer
     - field.field.node.resource.field_search_keywords
     - field.field.node.resource.field_send_reviewer_notification
-    - field.field.node.resource.field_show_in_menu
-    - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
     - field.field.node.resource.field_topics
     - field.field.node.resource.field_type
     - node.type.resource
-    - views.view.group_menu
   module:
     - datetime
     - layout_builder
@@ -30,7 +25,6 @@ dependencies:
     - link
     - options
     - user
-    - views
   theme:
     - westy
 third_party_settings:
@@ -301,22 +295,6 @@ content:
     third_party_settings: {  }
     weight: 15
     region: main
-  field_menu_url_text:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_parent:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 9
-    region: content
   field_popularity:
     type: list_default
     label: above
@@ -368,25 +346,6 @@ content:
     third_party_settings: {  }
     weight: 15
     region: main
-  field_show_in_menu:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_sort_weight:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 8
-    region: content
   field_tags:
     type: entity_reference_label
     label: inline
@@ -410,11 +369,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 13
-    region: main
-  group_menu_eva_nested_menu:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
     region: main
 hidden:
   langcode: true

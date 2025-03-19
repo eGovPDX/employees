@@ -10,15 +10,11 @@ dependencies:
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
     - field.field.node.page.field_featured_image
-    - field.field.node.page.field_menu_url_text
-    - field.field.node.page.field_parent
     - field.field.node.page.field_popularity
     - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
     - field.field.node.page.field_search_keywords
     - field.field.node.page.field_send_reviewer_notification
-    - field.field.node.page.field_show_in_menu
-    - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
     - field.field.node.page.field_topics
     - field.field.node.page.field_type
@@ -54,24 +50,6 @@ third_party_settings:
         open: true
         description: ''
         required_fields: false
-    group_menu:
-      children:
-        - field_menu_url_text
-        - field_show_in_menu
-        - field_sort_weight
-        - field_parent
-      label: Menu
-      region: hidden
-      parent_name: ''
-      weight: 23
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: true
-        description: ''
-        required_fields: true
     group_page_contacts:
       children:
         - field_contact
@@ -310,10 +288,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_menu_url_text: true
-  field_parent: true
-  field_show_in_menu: true
-  field_sort_weight: true
   langcode: true
   promote: true
   status: true

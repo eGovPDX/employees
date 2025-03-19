@@ -10,15 +10,11 @@ dependencies:
     - field.field.node.page.field_feature
     - field.field.node.page.field_feature_until
     - field.field.node.page.field_featured_image
-    - field.field.node.page.field_menu_url_text
-    - field.field.node.page.field_parent
     - field.field.node.page.field_popularity
     - field.field.node.page.field_related_content
     - field.field.node.page.field_reviewer
     - field.field.node.page.field_search_keywords
     - field.field.node.page.field_send_reviewer_notification
-    - field.field.node.page.field_show_in_menu
-    - field.field.node.page.field_sort_weight
     - field.field.node.page.field_tags
     - field.field.node.page.field_topics
     - field.field.node.page.field_type
@@ -364,14 +360,6 @@ content:
     third_party_settings: {  }
     weight: 13
     region: main
-  field_menu_url_text:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 4
-    region: first
   field_popularity:
     type: list_default
     label: above
@@ -412,25 +400,6 @@ content:
     third_party_settings: {  }
     weight: 15
     region: main
-  field_show_in_menu:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 3
-    region: first
-  field_sort_weight:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 5
-    region: first
   field_tags:
     type: entity_reference_label
     label: inline
@@ -455,15 +424,9 @@ content:
     third_party_settings: {  }
     weight: 11
     region: main
-  group_menu_eva_nested_menu:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
-    region: main
 hidden:
   field_contact: true
   field_display_in_group: true
-  field_parent: true
   langcode: true
   links: true
   search_api_excerpt: true
