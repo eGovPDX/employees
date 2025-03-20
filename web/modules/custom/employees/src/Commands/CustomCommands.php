@@ -163,4 +163,145 @@ final class CustomCommands extends DrushCommands
 
     echo "The user sync process will start in the next cron run." . PHP_EOL;
   }
+
+  /**
+   * Helper function to look up an internal URI in a menu. Return NULL if not found.
+   */
+  private function find_menu_item_by_internal_uri(string $menu_name, string $internal_uri): ?MenuLinkContent
+  {
+    $menu_link_ids = \Drupal::entityTypeManager()->getStorage('menu_link_content')
+      ->getQuery()
+      ->condition('menu_name', $menu_name)
+      ->condition('link.uri', $internal_uri)
+      ->accessCheck(false)
+      ->execute();
+    if (!empty($menu_link_ids)) {
+      $id = reset($menu_link_ids); // Get the first ID (in case there are duplicates, which shouldn't happen).
+      $menu_link = MenuLinkContent::load($id);
+      return $menu_link;
+    }
+    return NULL;
+  }
+
+  /**
+   * Helper function to create the chain from a leaf menu link to the root level
+   */
+  private function create_menu_links($menu_name, $page_or_resource): MenuLinkContent
+  {
+    if($page_or_resource->field_parent->entity && $page_or_resource->id() === $page_or_resource->field_parent->entity->id()) {
+      echo "Self as parent: https://employees.lndo.site/node/" . $page_or_resource->id() . PHP_EOL;
+    }
+
+    if ($page_or_resource->field_parent->entity && $page_or_resource->id() !== $page_or_resource->field_parent->entity->id()) {
+      $parent_link = $this->create_menu_links($menu_name, $page_or_resource->field_parent->entity);
+      $menu_link = $this->find_menu_item_by_internal_uri($menu_name, 'internal:/node/' . $page_or_resource->id());
+      if (is_null($menu_link)) {
+        $menu_link = MenuLinkContent::create([
+          'title' => $page_or_resource->field_menu_url_text->value,
+          'link' => [
+            'uri' => 'internal:/node/' . $page_or_resource->id(),
+          ],
+          'menu_name' => $menu_name,
+          'weight' => $page_or_resource->field_sort_weight->value,
+          'parent' => 'menu_link_content:' . $parent_link->uuid(), // Set the parent.
+        ]);
+        $menu_link->save();
+      }
+      return $menu_link;
+    } else {
+      $menu_link = $this->find_menu_item_by_internal_uri($menu_name, 'internal:/node/' . $page_or_resource->id());
+      if (is_null($menu_link)) {
+        $menu_link = MenuLinkContent::create([
+          'title' => $page_or_resource->field_menu_url_text->value,
+          'link' => [
+            'uri' => 'internal:/node/' . $page_or_resource->id(),
+          ],
+          'menu_name' => $menu_name,
+          'weight' => $page_or_resource->field_sort_weight->value,
+        ]);
+        $menu_link->save();
+      }
+      return $menu_link;
+    }
+  }
+
+  /**
+   * Drush command to migrate the page menu.
+   */
+  #[CLI\Command(name: 'employees:migrate_page_menu')]
+  #[CLI\Usage(name: 'employees:migrate_page_menu', description: 'Migrate the page menu')]
+  public function migrate_page_menu()
+  {
+    $groups = Group::loadMultiple();
+    foreach ($groups as $group) {
+      // Get all the group_content_menu plugins in this group
+      // The function is defined in group_content_menu.module
+      $plugins = group_content_menu_get_plugins_per_group($group);
+
+      // For each installed group_content_menu, create a new menu
+      foreach ($plugins as $plugin) {
+        $group_content_type = GroupContentMenuType::load($plugin->getDerivativeId());
+        $group_menu = \Drupal::entityTypeManager()->getStorage('group_content_menu')->create([
+          'label' => "Page menu for " . $group->label(),
+          'bundle' => $plugin->getDerivativeId(),
+        ]);
+        $group_menu->save();
+
+        /* @var GroupRelationshipStorageInterface $storage */
+        $group_content_storage = \Drupal::entityTypeManager()->getStorage('group_content');
+        $group_pages = $group_content_storage->loadByGroup($group, "group_node:page");
+        $group_resources = $group_content_storage->loadByGroup($group, "group_node:resource");
+        $group_pages_or_resources = array_merge($group_pages, $group_resources);
+        foreach ($group_pages_or_resources as $group_page_or_resource) {
+          $page_or_resource = $group_page_or_resource->getEntity();
+          // Skip if the "Show In Menu" field is false
+          if (! $page_or_resource->field_show_in_menu->value) continue;
+
+          $menu_name = GroupContentMenuInterface::MENU_PREFIX . $group_menu->id();
+          $this->create_menu_links($menu_name, $page_or_resource);
+        }
+
+        $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_content_type');
+        $group_relationship = \Drupal::entityTypeManager()->getStorage('group_content')->create([
+          'type' => $relationship_type_storage->getRelationshipTypeId($group->bundle(), $plugin->getPluginId()),
+          'gid' => $group->id(),
+          'label' => $group_content_type->label(),
+          'entity_id' => $group_menu,
+        ]);
+        $group_relationship->save();
+      }
+      echo "Finished migrating page menu for " . $group->label() . PHP_EOL;
+    }
+    return;
+  }
+  
+  /**
+   * Drush command to remove deleted references from entity reference fields.
+   */
+  #[CLI\Command(name: 'employees:remove_deleted_references')]
+  #[CLI\Usage(name: 'employees:remove_deleted_references', description: 'Remove deleted references from entity reference fields')]
+  public function remove_deleted_references()
+  {
+    // Iterate through all taxonomy term IDs looking for deleted terms to remove from entity reference fields.
+    $field_name = 'field_tags';
+    for ($entity_id = 1; $entity_id <= 2800; $entity_id++) {
+      $entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity_id);
+      if (empty($entity)) {
+        echo "Removing references to deleted entity $entity_id from field $field_name... ";
+        _remove_deleted_entity_references($entity_id, $field_name);
+        echo "done." . PHP_EOL;
+      }
+    }
+
+    // Iterate through all group IDs looking for deleted groups to remove from entity reference fields.
+    $field_name = 'field_display_in_group';
+    for ($entity_id = 1; $entity_id <= 165; $entity_id++) {
+      $entity = \Drupal::entityTypeManager()->getStorage('group')->load($entity_id);
+      if (empty($entity)) {
+        echo "Removing references to deleted entity $entity_id from field $field_name... ";
+        _remove_deleted_entity_references($entity_id, $field_name);
+        echo "done." . PHP_EOL;
+      }
+    }
+  }
 }
