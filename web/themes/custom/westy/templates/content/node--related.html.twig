@@ -1,8 +1,4 @@
-{% if content.field_menu_url_text %}
-  {% set title = content.field_menu_url_text %}
-{% else %}
-  {% set title = label %}
-{% endif %}
+{% set title = label %}
 
 {% if content.field_resource_link %}
   {% set link = content.field_resource_link.0 %}

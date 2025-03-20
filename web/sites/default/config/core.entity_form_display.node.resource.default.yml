@@ -7,16 +7,12 @@ dependencies:
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
     - field.field.node.resource.field_featured_image
-    - field.field.node.resource.field_menu_url_text
-    - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
     - field.field.node.resource.field_reviewer
     - field.field.node.resource.field_search_keywords
     - field.field.node.resource.field_send_reviewer_notification
-    - field.field.node.resource.field_show_in_menu
-    - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
     - field.field.node.resource.field_topics
     - field.field.node.resource.field_type
@@ -45,24 +41,6 @@ third_party_settings:
       region: content
       parent_name: ''
       weight: 2
-      format_type: details
-      format_settings:
-        classes: ''
-        show_empty_fields: false
-        id: ''
-        open: true
-        description: ''
-        required_fields: true
-    group_menu:
-      children:
-        - field_menu_url_text
-        - field_show_in_menu
-        - field_sort_weight
-        - field_parent
-      label: Menu
-      region: hidden
-      parent_name: ''
-      weight: 22
       format_type: details
       format_settings:
         classes: ''
@@ -262,10 +240,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_menu_url_text: true
-  field_parent: true
-  field_show_in_menu: true
-  field_sort_weight: true
   langcode: true
   promote: true
   status: true

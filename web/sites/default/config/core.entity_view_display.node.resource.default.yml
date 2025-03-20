@@ -7,16 +7,12 @@ dependencies:
     - field.field.node.resource.field_feature
     - field.field.node.resource.field_feature_until
     - field.field.node.resource.field_featured_image
-    - field.field.node.resource.field_menu_url_text
-    - field.field.node.resource.field_parent
     - field.field.node.resource.field_popularity
     - field.field.node.resource.field_resource_description
     - field.field.node.resource.field_resource_link
     - field.field.node.resource.field_reviewer
     - field.field.node.resource.field_search_keywords
     - field.field.node.resource.field_send_reviewer_notification
-    - field.field.node.resource.field_show_in_menu
-    - field.field.node.resource.field_sort_weight
     - field.field.node.resource.field_tags
     - field.field.node.resource.field_topics
     - field.field.node.resource.field_type
@@ -44,32 +40,6 @@ third_party_settings:
           label: ''
           context_mapping: {  }
         components:
-          5f2b7a3d-fdb5-43ba-8624-070d2b951e56:
-            uuid: 5f2b7a3d-fdb5-43ba-8624-070d2b951e56
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_page_children_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 0
-            additional: {  }
-          ae00bbc9-ac0f-4e74-b79e-17fa423fc3b8:
-            uuid: ae00bbc9-ac0f-4e74-b79e-17fa423fc3b8
-            region: menu
-            configuration:
-              id: 'views_block:group_menu-block_sibling_page_menu'
-              label: ''
-              label_display: '0'
-              provider: views
-              context_mapping: {  }
-              views_label: ''
-              items_per_page: none
-            weight: 1
-            additional: {  }
           da86317c-5716-43b2-90b5-d572bdc10f88:
             uuid: da86317c-5716-43b2-90b5-d572bdc10f88
             region: main
@@ -232,6 +202,19 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          1c3e2dcf-1916-4da3-9691-66a1c4d62196:
+            uuid: 1c3e2dcf-1916-4da3-9691-66a1c4d62196
+            region: menu
+            configuration:
+              id: 'views_block:group_menu-block_group_content_menu'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: none
+            weight: 0
+            additional: {  }
         third_party_settings: {  }
   layout_library:
     enable: false
@@ -301,22 +284,6 @@ content:
     third_party_settings: {  }
     weight: 15
     region: main
-  field_menu_url_text:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_parent:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 9
-    region: content
   field_popularity:
     type: list_default
     label: above
@@ -368,25 +335,6 @@ content:
     third_party_settings: {  }
     weight: 15
     region: main
-  field_show_in_menu:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_sort_weight:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 8
-    region: content
   field_tags:
     type: entity_reference_label
     label: inline
@@ -410,11 +358,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 13
-    region: main
-  group_menu_eva_nested_menu:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 10
     region: main
 hidden:
   langcode: true
