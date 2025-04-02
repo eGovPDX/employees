@@ -961,21 +961,86 @@ function employees_preprocess_block(&$variables) {
     // Prepare the group ID and menu ID in order to build the link for the "Manage menu" button. Only display the button if the user has the correct permission.
     if(array_key_exists("#contextual_links", $variables["elements"]) && 
       array_key_exists("group_menu", $variables["elements"]["#contextual_links"]) ) {
-        $group_menu = $variables["elements"]["#contextual_links"]["group_menu"];
+      $group_menu = $variables["elements"]["#contextual_links"]["group_menu"];
 
-        $group_id = $group_menu['route_parameters']['group'];
-        if( !empty($group_id) ) {
-          $group = Group::load($group_id);
-          if( !empty($group) ) {
-            $current_user = \Drupal::currentUser();
-            if($group->hasPermission("manage group_content_menu menu items", $current_user)) {
-              // These array keys are defined by group_cotent_menu. Should be safe to access without checking if key exists
-              $variables['group_id'] = $group_menu['route_parameters']['group'];
-              $variables['menu_id'] = $group_menu['route_parameters']['group_content_menu'];
-            }
+      $group_id = $group_menu['route_parameters']['group'];
+      if( !empty($group_id) ) {
+        $group = Group::load($group_id);
+        if( !empty($group) ) {
+          $current_user = \Drupal::currentUser();
+          if($group->hasPermission("manage group_content_menu menu items", $current_user)) {
+            // These array keys are defined by group_cotent_menu. Should be safe to access without checking if key exists
+            $variables['group_id'] = $group_menu['route_parameters']['group'];
+            $variables['menu_id'] = $group_menu['route_parameters']['group_content_menu'];
           }
         }
       }
+
+      $link_tree_service = \Drupal::service('menu.link_tree');
+      // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+      $menu_tree = $link_tree_service->load($variables["content"]["#menu_name"], new \Drupal\Core\Menu\MenuTreeParameters());
+    
+      // Find out if a node in the menu is published.
+      $menu_link_properties = [];
+      foreach($menu_tree as $key => $menu_link_tree_element) {
+        _get_node_published_value($menu_link_tree_element, $menu_link_properties);
+      }
+
+      // Update the variables for the template
+      _set_published_status($variables["content"]["#items"], $menu_link_properties);
+    }
+  }
+}
+
+/**
+ * Helper function to traverse the menu tree and get the published status for each node
+ */
+function _get_node_published_value($menu_link_tree_element, &$menu_link_properties) {
+  $menu_link_url = $menu_link_tree_element->link->getUrlObject();
+  $key = $menu_link_tree_element->link->getPluginId();
+
+  // Only internal links have node ID
+  if( !$menu_link_url->isExternal() ) {
+    $nid = $menu_link_url->getRouteParameters()["node"];
+    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+    // If we can't find node, treat it as published
+    if($node== null) {
+      $menu_link_properties[$key] = [
+        "isPublished" => true,
+      ];
+    }
+    else {
+      $menu_link_properties[$key] = [
+        "isPublished" => $node->isPublished(),
+      ];
+    }
+  }
+  else {
+    // If we can't find node, treat it as published
+    $menu_link_properties[$key] = [
+      "isPublished" => true,
+    ];
+  }
+
+  if($menu_link_tree_element->hasChildren) {
+    foreach($menu_link_tree_element->subtree as $key => $menu_link_tree_element) {
+      _get_node_published_value($menu_link_tree_element, $menu_link_properties);
+    }
+  }
+}
+
+/**
+ * Helper function to set the published status for each menu item in the build variables
+ */
+function _set_published_status(&$items, $menu_link_properties) {
+  foreach($items as $key => $item) {
+    if( array_key_exists($key, $menu_link_properties) ) {
+      // Must use $items[$key] to update the original array
+      $items[$key]["isPublished"] = $menu_link_properties[$key]["isPublished"];
+      if(! empty($item["below"]) ) {
+        _set_published_status($item["below"], $menu_link_properties);
+      }
+    }
   }
 }
 
