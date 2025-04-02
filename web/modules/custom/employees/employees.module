@@ -393,6 +393,22 @@ function employees_entity_update($entity)
   _notify_reviewer($entity, 'updated');
   _notify_group_admin_for_group_change($entity);
   _update_alias_for_menu_linked_node($entity);
+  _invalidate_group_page_menu_cache($entity);
+}
+
+/**
+ * Helper function to invalidate the entity's primary group page menu cache.
+ */
+function _invalidate_group_page_menu_cache($entity) {
+  if ($entity->getEntityTypeId() === 'node' && 
+    $entity->hasField('field_display_in_group') &&
+    $entity->field_display_in_group->count() > 0) {
+    $group = $entity->field_display_in_group->referencedEntities()[0];
+    if(empty($group)) return;
+    $group_page_menu = group_content_menu_get_menus_per_group($group);
+    if(empty($group_page_menu)) return;
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(["group_menu_link_content-" . $group_page_menu[0]->getEntityId()]);
+  }
 }
 
 /**
