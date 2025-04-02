@@ -993,32 +993,24 @@ function employees_preprocess_block(&$variables) {
 }
 
 /**
- * Helper function to traverse the menu tree and get the published status for each node
+ * Helper function to traverse the menu tree and get the published status for each internal node
  */
 function _get_node_published_value($menu_link_tree_element, &$menu_link_properties) {
   $menu_link_url = $menu_link_tree_element->link->getUrlObject();
   $key = $menu_link_tree_element->link->getPluginId();
 
-  // Only internal links have node ID
-  if( !$menu_link_url->isExternal() ) {
+  if( $menu_link_url->isExternal() ) {
+    // Treat all external links as published
+    $menu_link_properties[$key] = [
+      "isPublished" => true,
+    ];
+  }
+  else {
     $nid = $menu_link_url->getRouteParameters()["node"];
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     // If we can't find node, treat it as published
-    if($node== null) {
-      $menu_link_properties[$key] = [
-        "isPublished" => true,
-      ];
-    }
-    else {
-      $menu_link_properties[$key] = [
-        "isPublished" => $node->isPublished(),
-      ];
-    }
-  }
-  else {
-    // If we can't find node, treat it as published
     $menu_link_properties[$key] = [
-      "isPublished" => true,
+      "isPublished" => ($node == null) ? true : $node->isPublished(),
     ];
   }
 
@@ -1033,10 +1025,10 @@ function _get_node_published_value($menu_link_tree_element, &$menu_link_properti
  * Helper function to set the published status for each menu item in the build variables
  */
 function _set_published_status(&$items, $menu_link_properties) {
-  foreach($items as $key => $item) {
+  // Must use the reference to $item in order to update the isPublished value
+  foreach($items as $key => &$item) {
     if( array_key_exists($key, $menu_link_properties) ) {
-      // Must use $items[$key] to update the original array
-      $items[$key]["isPublished"] = $menu_link_properties[$key]["isPublished"];
+      $item["isPublished"] = $menu_link_properties[$key]["isPublished"];
       if(! empty($item["below"]) ) {
         _set_published_status($item["below"], $menu_link_properties);
       }
