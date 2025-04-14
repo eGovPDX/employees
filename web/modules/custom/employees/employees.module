@@ -1022,12 +1022,19 @@ function _get_node_published_value($menu_link_tree_element, &$menu_link_properti
     ];
   }
   else {
-    $nid = $menu_link_url->getRouteParameters()["node"];
-    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-    // If we can't find node, treat it as published
-    $menu_link_properties[$key] = [
-      "isPublished" => ($node == null) ? true : $node->isPublished(),
-    ];
+    if($menu_link_url->isRouted()) {
+      $nid = $menu_link_url->getRouteParameters()["node"];
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+      // If we can't find node, treat it as published
+      $menu_link_properties[$key] = [
+        "isPublished" => ($node == null) ? true : $node->isPublished(),
+      ];
+    }
+    else {
+      $menu_link_properties[$key] = [
+        "isPublished" => false,
+      ];
+    }
   }
 
   if($menu_link_tree_element->hasChildren) {
@@ -1173,7 +1180,7 @@ function generate_alias($menu_link_tree_element) {
   // The link field is a MenuLinkContent object
   $menu_link_url = $menu_link_tree_element->link->getUrlObject();
   try {
-    if( !$menu_link_url->isExternal() ) {
+    if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
       $node_id = $menu_link_url->getRouteParameters()["node"];
       $node = Drupal\node\Entity\Node::load($node_id);
       $pathauto_generator->updateEntityAlias($node, "update");
@@ -1264,7 +1271,7 @@ function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
   // The link field is a MenuLinkContent object
   $menu_link_url = $menu_link_tree_element->link->getUrlObject();
   // Only internal links have node ID
-  if( !$menu_link_url->isExternal() ) {
+  if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
     $nodes_in_menu[$menu_link_url->getRouteParameters()["node"]] = [
       "id" => $menu_link_tree_element->link->getMetaData()["entity_id"],
       "url" => $menu_link_url->toString(),];
@@ -1332,7 +1339,7 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
 
   $menu_link_url = $menu_link_content->getUrlObject();
   if(empty($menu_link_url)) return;
-  if( !$menu_link_url->isExternal() ) {
+  if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
     $node_id = $menu_link_url->getRouteParameters()["node"];
     if(empty($node_id)) return;
     $node = Drupal\node\Entity\Node::load($node_id);
