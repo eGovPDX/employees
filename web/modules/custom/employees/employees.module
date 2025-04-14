@@ -994,17 +994,20 @@ function employees_preprocess_block(&$variables) {
 
       $link_tree_service = \Drupal::service('menu.link_tree');
       // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
-      $menu_tree = $link_tree_service->load($variables["content"]["#menu_name"], new \Drupal\Core\Menu\MenuTreeParameters());
-    
-      // Find out if a node in the menu is published.
-      $menu_link_properties = [];
-      foreach($menu_tree as $key => $menu_link_tree_element) {
-        _get_node_published_value($menu_link_tree_element, $menu_link_properties);
-      }
 
-      // Update the variables for the template
-      _set_published_status($variables["content"]["#items"], $menu_link_properties);
-    }
+      if( array_key_exists("#menu_name", $variables["content"]) ) {
+        $menu_tree = $link_tree_service->load($variables["content"]["#menu_name"], new \Drupal\Core\Menu\MenuTreeParameters());
+      
+        // Find out if a node in the menu is published.
+        $menu_link_properties = [];
+        foreach($menu_tree as $key => $menu_link_tree_element) {
+          _get_node_published_value($menu_link_tree_element, $menu_link_properties);
+        }
+
+        // Update the variables for the template
+        _set_published_status($variables["content"]["#items"], $menu_link_properties);
+      }
+  }
   }
 }
 
@@ -1032,7 +1035,7 @@ function _get_node_published_value($menu_link_tree_element, &$menu_link_properti
     }
     else {
       $menu_link_properties[$key] = [
-        "isPublished" => false,
+        "isPublished" => true, // Default to Published if the URL is not routed
       ];
     }
   }
