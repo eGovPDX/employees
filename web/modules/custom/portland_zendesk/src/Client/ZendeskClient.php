@@ -18,8 +18,16 @@ class ZendeskClient extends HttpClient
      * @param \GuzzleHttp\Client|null $guzzle
      * @throws \Zendesk\API\Exceptions\AuthException
      */
-    public function __construct($scheme = "https", $hostname = "zendesk.com", $port = 443, \GuzzleHttp\Client $guzzle = null)
+    public function __construct()
     {
+        $scheme = "https";
+        $hostname = "zendesk.com";
+        $port = 443;
+        $guzzle = new \GuzzleHttp\Client([
+            'timeout' => 30,
+            'verify' => true,
+        ]);
+
         $config = \Drupal::config('portland_zendesk.adminsettings');
 
         $subdomain = $config->get('subdomain');
