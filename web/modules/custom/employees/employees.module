@@ -1184,9 +1184,32 @@ function generate_alias($menu_link_tree_element) {
   $menu_link_url = $menu_link_tree_element->link->getUrlObject();
   try {
     if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
-      $node_id = $menu_link_url->getRouteParameters()["node"];
-      $node = Drupal\node\Entity\Node::load($node_id);
-      $pathauto_generator->updateEntityAlias($node, "update");
+      $route_parameters = $menu_link_url->getRouteParameters();
+      if( array_key_exists("node", $route_parameters) ) {
+        $node_id = $route_parameters["node"];
+        if( empty($node_id) ) {
+          \Drupal::logger('employees')->error('Failed to load node ID for the route @route when saving Page Menu.', [
+            '@route' => $menu_link_url->toString(),
+          ]);
+        }
+        else {
+          $node = Drupal\node\Entity\Node::load($node_id);
+          if( $node == null ) {
+            \Drupal::logger('employees')->error('Failed to load node @nid when saving Page Menu.', [
+              '@nid' => $node_id,
+            ]);
+          }
+          else {
+            // Generate the alias for the node
+            $pathauto_generator->updateEntityAlias($node, "update");
+          }
+        }
+      }
+      else {
+        \Drupal::logger('employees')->error('Cannnot find the route parameter "node" for @route when saving Page Menu.', [
+          '@route' => $menu_link_url->toString(),
+        ]);
+      }
     }
   }
   catch (\Exception $e) {
@@ -1344,7 +1367,9 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
   $menu_link_url = $menu_link_content->getUrlObject();
   if(empty($menu_link_url)) return;
   if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
-    $node_id = $menu_link_url->getRouteParameters()["node"];
+    $route_parameters = $menu_link_url->getRouteParameters();
+    if( !array_key_exists("node", $route_parameters) ) return;
+    $node_id = $route_parameters["node"];
     if(empty($node_id)) return;
     $node = Drupal\node\Entity\Node::load($node_id);
     if(empty($node)) return;
