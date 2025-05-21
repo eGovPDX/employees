@@ -12,6 +12,7 @@ use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Implements hook_form_alter()
@@ -1212,6 +1213,8 @@ function generate_alias($menu_link_tree_element) {
           else {
             // Generate the alias for the node
             $pathauto_generator->updateEntityAlias($node, "update");
+            Cache::invalidateTags(['node:' . $node_id]);
+            Cache::invalidateTags(['menu:local_tasks']);
           }
         }
       }
@@ -1389,6 +1392,8 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
     if(empty($node)) return;
     $pathauto_generator = \Drupal::service('pathauto.generator');
     $pathauto_generator->updateEntityAlias($node, "update");
+    Cache::invalidateTags(['node:' . $node_id]);
+    Cache::invalidateTags(['menu:local_tasks']);
   }
 }
 
