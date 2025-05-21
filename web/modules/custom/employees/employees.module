@@ -1037,6 +1037,11 @@ function _get_node_published_value($menu_link_tree_element, &$menu_link_properti
           ];
         }
       }
+      else {
+        $menu_link_properties[$key] = [
+          "isPublished" => true, // Default to Published if it's not a Node page
+        ];
+      }
     }
     else {
       $menu_link_properties[$key] = [
