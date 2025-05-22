@@ -1281,8 +1281,6 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
       $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
       return;
     }
-    // Convert the relative internal URL to an internal path
-    $form_state->getValue("link")[0]["uri"] = "entity:" . $url->getInternalPath();
   }
 
   $route_parameters = $url->getRouteParameters();
@@ -1326,10 +1324,20 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
         return;
       }
     }
+
+    // Convert the relative internal URL to an internal path
+    $form_state->getValue("link")[0]["uri"] = "entity:" . $url->getInternalPath();
   }
   else {
-      $form_state->setErrorByName('link', t('Only Page and Resource can be added to the page menu.'));
+    $group_path = $group->field_group_path->value;
+    if(! str_starts_with($group_path, '/')) {
+      $group_path = '/' . $group_path;
+    }
+    // Check if the relative path starts with the group path
+    if( ! str_starts_with($relative_uri, 'internal:'.$group->field_group_path->value) ) {
+      $form_state->setErrorByName('link', t('Only internal path within the same group can be added to the page menu.'));
       return;
+    }
   }
 }
 
