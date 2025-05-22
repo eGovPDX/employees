@@ -1218,11 +1218,6 @@ function generate_alias($menu_link_tree_element) {
           }
         }
       }
-      else {
-        \Drupal::logger('employees')->error('Cannnot find the route parameter "node" for @route when saving Page Menu.', [
-          '@route' => $menu_link_url->toString(),
-        ]);
-      }
     }
   }
   catch (\Exception $e) {
