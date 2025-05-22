@@ -1285,25 +1285,51 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
     $form_state->getValue("link")[0]["uri"] = "entity:" . $url->getInternalPath();
   }
 
-  $node_id = $url->getRouteParameters()["node"];  
-  $link_tree_service = \Drupal::service('menu.link_tree');
-  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
-  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
-
-  // Get a flattened array of all nodes in the menu
-  $nodes_in_menu = [];
-  foreach($menu_tree as $key => $menu_link_tree_element) {
-    _get_node_ids($menu_link_tree_element, $nodes_in_menu);
-  }
-
-  $menu_link_content = $form_state->getformObject()->getEntity();
-  if(array_key_exists($node_id, $nodes_in_menu)) {
-    if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
-    ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
-      // Prepare the error message
-      $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+  $route_parameters = $url->getRouteParameters();
+  if( array_key_exists("node", $route_parameters) ) {
+    $node_id = $route_parameters["node"];
+    if( empty($node_id) ) {
+      $form_state->setErrorByName('link', t('Cannot find the Node ID for :url. Only Page and Resrouce can be added to the page menu.', [':url' => $uri]));
       return;
     }
+    $node = Drupal\node\Entity\Node::load($node_id);
+    if( $node == null ) {
+      $form_state->setErrorByName('link', t('Cannot load the node for :nodeID.', [':nodeID' => $node_id]));
+      return;
+    }
+    if( $node->bundle() !== "page" && $node->bundle() !== "resource") {
+      $form_state->setErrorByName('link', t('Only Page and Resource can be added to the page menu.'));
+      return;
+    }
+    $primary_group_id = $node->field_display_in_group->target_id;
+    if( empty($primary_group_id) || $primary_group_id != $group->id() ) {
+      $form_state->setErrorByName('link', t('Cannot add content that is not in :group_name.', [':group_name' => $group->label()]));
+      return;
+    }
+
+    $link_tree_service = \Drupal::service('menu.link_tree');
+    // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+    $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+    // Get a flattened array of all nodes in the menu
+    $nodes_in_menu = [];
+    foreach($menu_tree as $key => $menu_link_tree_element) {
+      _get_node_ids($menu_link_tree_element, $nodes_in_menu);
+    }
+
+    $menu_link_content = $form_state->getformObject()->getEntity();
+    if(array_key_exists($node_id, $nodes_in_menu)) {
+      if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
+      ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
+        // Prepare the error message
+        $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+        return;
+      }
+    }
+  }
+  else {
+      $form_state->setErrorByName('link', t('Only Page and Resource can be added to the page menu.'));
+      return;
   }
 }
 
