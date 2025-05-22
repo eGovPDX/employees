@@ -1334,7 +1334,7 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
       $group_path = '/' . $group_path;
     }
     // Check if the relative path starts with the group path
-    if( ! str_starts_with($relative_uri, 'internal:'.$group->field_group_path->value) ) {
+    if( ! str_starts_with($relative_uri, 'internal:'.$group_path) ) {
       $form_state->setErrorByName('link', t('Only internal path within the same group can be added to the page menu.'));
       return;
     }
