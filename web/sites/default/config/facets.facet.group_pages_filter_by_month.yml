@@ -57,14 +57,24 @@ processor_configs:
     weights:
       build: 5
     settings:
-      group_search_last_updated_year:
-        enable: true
-        condition: not_empty
-        values: ''
-        negate: false
-      group_search_type:
+      group_pages_filter_by_tags:
         enable: false
         condition: null
+        values: ''
+        negate: false
+      group_pages_filter_by_topic:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      group_pages_filter_by_type:
+        enable: false
+        condition: null
+        values: ''
+        negate: false
+      group_pages_filter_by_year:
+        enable: true
+        condition: not_empty
         values: ''
         negate: false
   hide_non_narrowing_result_processor:
