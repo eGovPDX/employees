@@ -1026,12 +1026,22 @@ function _get_node_published_value($menu_link_tree_element, &$menu_link_properti
   }
   else {
     if($menu_link_url->isRouted()) {
-      $nid = $menu_link_url->getRouteParameters()["node"];
-      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-      // If we can't find node, treat it as published
-      $menu_link_properties[$key] = [
-        "isPublished" => ($node == null) ? true : $node->isPublished(),
-      ];
+      $route_parameters = $menu_link_url->getRouteParameters();
+      if( array_key_exists("node", $route_parameters) ) {
+        $nid = $route_parameters["node"];
+        if(!empty($nid)) {
+          $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+          // If we can't find node, treat it as published
+          $menu_link_properties[$key] = [
+            "isPublished" => ($node == null) ? true : $node->isPublished(),
+          ];
+        }
+      }
+      else {
+        $menu_link_properties[$key] = [
+          "isPublished" => true, // Default to Published if it's not a Node page
+        ];
+      }
     }
     else {
       $menu_link_properties[$key] = [

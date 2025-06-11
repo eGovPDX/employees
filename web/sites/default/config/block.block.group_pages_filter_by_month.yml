@@ -1,0 +1,29 @@
+uuid: a27fe4c0-c698-480f-b806-ebdde47e4dbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_pages_filter_by_month
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_pages_filter_by_month
+theme: westy
+region: side
+weight: -1
+provider: null
+plugin: 'facet_block:group_pages_filter_by_month'
+settings:
+  id: 'facet_block:group_pages_filter_by_month'
+  label: 'Group Page: Filter by Month'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_pages_filter_by_month
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/pages'

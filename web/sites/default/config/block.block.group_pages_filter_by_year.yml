@@ -1,0 +1,29 @@
+uuid: 7b5d785a-80a6-4521-a935-73d475774248
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_pages_filter_by_year
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_pages_filter_by_year
+theme: westy
+region: side
+weight: -2
+provider: null
+plugin: 'facet_block:group_pages_filter_by_year'
+settings:
+  id: 'facet_block:group_pages_filter_by_year'
+  label: 'Group Page: Filter by Year'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_pages_filter_by_year
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/pages'
