@@ -777,9 +777,6 @@ processor_settings:
     weights:
       preprocess_index: -45
     fields:
-      field_bureaus: taxonomy_term-parent
-      field_business_capability: taxonomy_term-parent
-      field_business_priority: taxonomy_term-parent
       field_category: taxonomy_term-parent
       field_tags: taxonomy_term-parent
       field_type: taxonomy_term-parent
@@ -827,6 +824,10 @@ processor_settings:
       - Ps
   language_with_fallback: {  }
   rendered_item: {  }
+  solr_boost_more_recent:
+    weights:
+      preprocess_query: 0
+    boosts: {  }
   solr_date_range:
     weights:
       preprocess_index: 0
@@ -858,6 +859,7 @@ tracker_settings:
     indexing_order: fifo
 options:
   cron_limit: 50
+  delete_on_fail: true
   index_directly: true
   track_changes_in_references: false
 server: pantheon_solr8
