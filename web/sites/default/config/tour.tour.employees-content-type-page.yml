@@ -101,13 +101,13 @@ tips:
     weight: 12
     selector: .field--name-field-display-in-group
     body: 'Choose which groups this page will be displayed in. By default this will be the group you chose to create the page in, but you can also "cross-post" it to any other groups where it may be relevant.'
-  legacy-paths:
-    id: legacy-paths
+  url-redirects:
+    id: url-redirects
     plugin: text
-    label: 'Add legacy paths'
+    label: 'Add URL redirects'
     weight: 13
     selector: .field--name-field-redirects
-    body: "If the page you're creating is being migrated from the old website, portlandoregon.gov, you can add the legacy path here (e.g. /bts/123456)."
+    body: "If needed, add any URL redirects for this page here. If the page you're creating had a URL on the old website (portlandoregon.gov), you can also add the legacy path here (e.g. /bts/123456)."
   scheduler:
     id: scheduler
     plugin: text
