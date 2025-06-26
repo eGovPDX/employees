@@ -21,6 +21,12 @@ class RelativePathConstraintValidator extends ConstraintValidator {
       foreach($field as $delta => $value) {
         $path = $value->value;
 
+        // Prevent redirects to common canonical paths.
+        if(str_starts_with($path, '/node/') || str_starts_with($path, '/media/') || str_starts_with($path, '/user/')) {
+          $this->setViolation("Cannot redirect to a canonical path.", $delta);
+          continue;
+        }
+
         $entity = $field->getEntity();
         $original = $entity->original;
 
