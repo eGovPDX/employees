@@ -1240,6 +1240,11 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
   $parameters = $route_match->getParameters();
   $group = $parameters->get("group");
   $group_content_menu = $parameters->get("group_content_menu");
+  if( empty($group) || empty($group_content_menu) ) {
+    $form_state->setErrorByName('link', t('The menu link form does not have a group or grou page menu. Please contact the site administrator.'));
+    return;
+  }
+
   $uri = $form_state->getValue("link")[0]["uri"];
   if(empty($uri)) {
     $form_state->setErrorByName('link', t('Link is a required field.'));
@@ -1279,7 +1284,15 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
   }
 
   $route_parameters = $url->getRouteParameters();
-  if( array_key_exists("node", $route_parameters) ) {
+  if( empty($route_parameters) ) {
+    $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
+    return;
+  }
+  else if (array_key_exists("node_revision", $route_parameters)) {
+    $form_state->setErrorByName('link', t('Cannot use a revision link in the menu.'));
+    return;
+  }
+  else if( array_key_exists("node", $route_parameters) ) {
     $node_id = $route_parameters["node"];
     if( empty($node_id) ) {
       $form_state->setErrorByName('link', t('Cannot find the Node ID for :url. Only Page and Resrouce can be added to the page menu.', [':url' => $uri]));
@@ -1311,8 +1324,8 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
     }
 
     $menu_link_content = $form_state->getformObject()->getEntity();
-    if(array_key_exists($node_id, $nodes_in_menu)) {
-      if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
+    if(array_key_exists($node_id, $nodes_in_menu) && $nodes_in_menu[$node_id] !== null) {
+      if( ($menu_link_content->isNew() )|| 
       ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
         // Prepare the error message
         $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
