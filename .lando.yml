@@ -1,7 +1,7 @@
 name: employees
 recipe: pantheon
 config:
-  framework: drupal9
+  framework: drupal10
   site: employees
   id: 7f99fc39-aa02-4ea5-a753-9ea5e2b38435
   index: false
@@ -36,16 +36,14 @@ services:
         # Move /app/vendor/bin from the start of the path to the end so that `composer` executes /usr/local/bin/composer
         PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/.composer/vendor/bin:/srv/bin:/app/vendor/bin
   node:
-    type: node:custom
+    type: lando
     overrides:
+      user: root
       image: cimg/node:lts-browsers
       environment:
         NODE_EXTRA_CA_CERTS: /app/cop_ca.pem
-    build_as_root:
-      - /bin/sh -c "mkdir /home/node"
-      - /bin/sh -c "chmod -R 777 /home/node"
+        LANDO_DROP_USER: www-data
     run_as_root:
-      - /bin/sh -c "adduser www-data node"
       - /bin/sh -c "chmod -R 775 /var/www"
     build:
       - echo "Installing Node.js dependencies and building theme..."
