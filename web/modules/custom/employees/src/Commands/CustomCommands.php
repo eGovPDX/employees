@@ -340,4 +340,15 @@ final class CustomCommands extends DrushCommands
     }
     return;
   }
+
+  /**
+   * Drush command to set module weight.
+   */
+  #[CLI\Command(name: 'employees:set_module_weight')]
+  #[CLI\Usage(name: 'employees:set_module_weight', description: 'Set the weight of a module. Module with higher weight is executed later.')]
+  public function set_module_weight(string $module_name, int $weight)
+  {
+    module_set_weight($module_name, $weight);
+    $this->output()->writeln("Set weight of module '{$module_name}' to {$weight}.");
+  }
 }

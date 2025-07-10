@@ -130,12 +130,22 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "node_resource_edit_form":
       $form['actions']['submit']['#submit'][] = '_resource_node_form_submit';
       // Intentionally avoid using "break" here. Not a bug.
+    case "node_page_form":
+    case "node_page_edit_form":
+      // Prevent users from setting menu parent to "site-map"
+      if (isset($form['menu']['link']['menu_parent'])) {
+        $options = &$form['menu']['link']['menu_parent']['#options'];
+        $current_user = \Drupal::currentUser();
+        if ( ! $current_user->hasRole('administrator') ) {
+          // Non-admins cannot set menu parent to "site-map"
+          unset($options['site-map:']);
+        }
+      }      
+      // Intentionally avoid using "break" here. Not a bug.
     case "node_event_form":
     case "node_event_edit_form":
     case "node_news_form":
     case "node_news_edit_form":
-    case "node_page_form":
-    case "node_page_edit_form":
       $form['#validate'][] = '_validate_send_reviewer_notification_date';
       break;
   }
@@ -1469,5 +1479,14 @@ function _remove_deleted_entity_references($entity, $field_name) {
         }
       }
     }
+  }
+}
+
+function employees_module_implements_alter(&$implementations, $hook) {
+  // Make sure our hook_node_form_alter runs after the menu_ui module.
+  if ($hook === 'form_alter' && isset($implementations['employees'])) {
+    $employees = $implementations['employees'];
+    unset($implementations['employees']);
+    $implementations['employees'] = $employees;
   }
 }
