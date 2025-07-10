@@ -419,6 +419,7 @@ function _invalidate_group_page_menu_cache($entity) {
     $group_page_menu = group_content_menu_get_menus_per_group($group);
     if(empty($group_page_menu)) return;
     \Drupal::service('cache_tags.invalidator')->invalidateTags(["group_menu_link_content-" . $group_page_menu[0]->getEntityId()]);
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(['breadcrumb']);
   }
 }
 
