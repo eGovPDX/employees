@@ -1482,8 +1482,11 @@ function _remove_deleted_entity_references($entity, $field_name) {
   }
 }
 
+/**
+ * Implement hook_module_implements_alter()
+ */
 function employees_module_implements_alter(&$implementations, $hook) {
-  // Make sure our hook_node_form_alter runs after the menu_ui module.
+  // Make sure our hook_node_form_alter runs other modules.
   if ($hook === 'form_alter' && isset($implementations['employees'])) {
     $employees = $implementations['employees'];
     unset($implementations['employees']);
