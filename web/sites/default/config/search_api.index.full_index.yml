@@ -126,6 +126,17 @@ field_settings:
       fields:
         - 'entity:media/field_tags'
         - 'entity:node/field_tags'
+  aggregated_changed_date:
+    label: 'Aggregated changed date'
+    property_path: aggregated_field
+    type: date
+    configuration:
+      type: max
+      fields:
+        - 'entity:group/changed'
+        - 'entity:media/changed'
+        - 'entity:node/changed'
+        - 'entity:user/changed'
   content_body:
     label: 'Content Body'
     datasource_id: 'entity:node'
@@ -628,7 +639,7 @@ field_settings:
       module:
         - media
   media_changed:
-    label: Changed
+    label: 'Media Changed'
     datasource_id: 'entity:media'
     property_path: changed
     type: date
@@ -636,7 +647,7 @@ field_settings:
       module:
         - media
   media_field_description:
-    label: Description
+    label: 'Media Description'
     datasource_id: 'entity:media'
     property_path: field_description
     type: text
@@ -644,7 +655,7 @@ field_settings:
       config:
         - field.storage.media.field_description
   media_field_display_in_group:
-    label: 'Belongs to'
+    label: 'Media Belongs to'
     datasource_id: 'entity:media'
     property_path: field_display_in_group
     type: integer
@@ -669,7 +680,7 @@ field_settings:
       module:
         - media
   media_search_keywords:
-    label: 'Search keywords'
+    label: 'Media Search keywords'
     datasource_id: 'entity:media'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
@@ -827,7 +838,14 @@ processor_settings:
   solr_boost_more_recent:
     weights:
       preprocess_query: 0
-    boosts: {  }
+    boosts:
+      aggregated_changed_date:
+        boost: 1.0
+        resolution: NOW
+        m: '9.51e-11'
+        a: 1.0
+        b: 0.25
+        support_future_dates: true
   solr_date_range:
     weights:
       preprocess_index: 0

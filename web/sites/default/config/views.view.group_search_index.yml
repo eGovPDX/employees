@@ -4525,7 +4525,7 @@ display:
           reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: false
+          expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
       sorts:
@@ -4539,9 +4539,22 @@ display:
           plugin_id: search_api
           order: DESC
           expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
+            label: Relevance
+            field_identifier: search_api_relevance
+          exposed: true
+        aggregated_changed_date:
+          id: aggregated_changed_date
+          table: search_api_index_full_index
+          field: aggregated_changed_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: Changed
+            field_identifier: aggregated_changed_date
+          exposed: true
         media_name_fulltext:
           id: media_name_fulltext
           table: search_api_index_full_index
@@ -4726,6 +4739,8 @@ display:
         - route
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:
