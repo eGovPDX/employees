@@ -25,6 +25,19 @@ $fa-font-path: '/themes/custom/westy/dist';
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
 
+  // The CKEditor preview HTML for drupal media includes a duplicate list container when media is inside of a list.
+  // Prevent double-bullets by resetting any lists inside of a <drupal-media> tag.
+  .drupal-media {
+    list-style-type: none !important;
+  }
+
+  .drupal-media ul,
+  .drupal-media ol {
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   // Override CKEditor list styles with the default bullet styles
   &.ck ul {
     list-style-type: disc;
@@ -78,7 +91,7 @@ $fa-font-path: '/themes/custom/westy/dist';
 
   // Undo Drupal's default center alignment for the "break text" alignment which should be left aligned
   &.ck .drupal-media {
-    display: inherit;
+    display: block;
     text-align: inherit;
   }
   &.ck .drupal-media img {
@@ -110,7 +123,7 @@ $fa-font-path: '/themes/custom/westy/dist';
 
   // Overwrite the `display: table-caption` on captions now that <figures> are no longer `display: table`
   &.ck .drupal-media figcaption {
-    display: inherit;
+    display: block;
   }
 
 

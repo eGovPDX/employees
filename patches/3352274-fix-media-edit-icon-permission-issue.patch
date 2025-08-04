@@ -1,0 +1,72 @@
+diff --git a/js/build/editMediaModal.js b/js/build/editMediaModal.js
+index 4006f06..bcee18a 100644
+--- a/js/build/editMediaModal.js
++++ b/js/build/editMediaModal.js
+@@ -1 +1 @@
+-!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.CKEditor5=t():(e.CKEditor5=e.CKEditor5||{},e.CKEditor5.editMediaModal=t())}(self,(()=>(()=>{var e={"ckeditor5/src/core.js":(e,t,o)=>{e.exports=o("dll-reference CKEditor5.dll")("./src/core.js")},"ckeditor5/src/icons.js":(e,t,o)=>{e.exports=o("dll-reference CKEditor5.dll")("./src/icons.js")},"ckeditor5/src/ui.js":(e,t,o)=>{e.exports=o("dll-reference CKEditor5.dll")("./src/ui.js")},"dll-reference CKEditor5.dll":e=>{"use strict";e.exports=CKEditor5.dll}},t={};function o(r){var i=t[r];if(void 0!==i)return i.exports;var d=t[r]={exports:{}};return e[r](d,d.exports,o),d.exports}o.d=(e,t)=>{for(var r in t)o.o(t,r)&&!o.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},o.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var r={};return(()=>{"use strict";o.d(r,{default:()=>s});var e=o("ckeditor5/src/core.js"),t=o("ckeditor5/src/icons.js"),i=o("ckeditor5/src/ui.js");class d extends e.Plugin{constructor(e){super(e);e.plugins.get("DrupalMediaEditing").converterAttributes.push("emmDrupalMediaUpdated")}init(){this._defineSchema(),this._createButton()}_defineSchema(){this.editor.model.schema.extend("drupalMedia",{allowAttributes:["emmDrupalMediaUpdated"]})}_createButton(){const e=this.editor,o=this.editor.config.get("editMediaModal"),{openDialog:r,dialogSettings:d={}}=o;e.ui.componentFactory.add("editMediaButton",(e=>{const o=new i.ButtonView(e);return o.set({label:Drupal.t("Edit media"),icon:t.IconPencil,tooltip:!0}),this.listenTo(o,"execute",(e=>{const t=this.editor.model.document.selection.getSelectedElement().getAttribute("drupalMediaEntityUuid");fetch(Drupal.url(`edit-media-modal/edit-url/${t}`)).then((e=>e.json())).then((e=>{r(e.url,(()=>{const e=this.editor.model.document.selection.getSelectedElement();e&&void 0!==e.name&&"drupalMedia"===e.name&&this.editor.model.change((t=>{t.setAttribute("emmDrupalMediaUpdated",Date.now(),e)}))}),d)}))})),o}))}}const s={EditMediaModal:d}})(),r=r.default})()));
+\ No newline at end of file
++!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.CKEditor5=t():(e.CKEditor5=e.CKEditor5||{},e.CKEditor5.editMediaModal=t())}(self,(()=>(()=>{var e={"ckeditor5/src/core.js":(e,t,r)=>{e.exports=r("dll-reference CKEditor5.dll")("./src/core.js")},"ckeditor5/src/icons.js":(e,t,r)=>{e.exports=r("dll-reference CKEditor5.dll")("./src/icons.js")},"ckeditor5/src/ui.js":(e,t,r)=>{e.exports=r("dll-reference CKEditor5.dll")("./src/ui.js")},"dll-reference CKEditor5.dll":e=>{"use strict";e.exports=CKEditor5.dll}},t={};function r(o){var i=t[o];if(void 0!==i)return i.exports;var d=t[o]={exports:{}};return e[o](d,d.exports,r),d.exports}r.d=(e,t)=>{for(var o in t)r.o(t,o)&&!r.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var o={};return(()=>{"use strict";r.d(o,{default:()=>s});var e=r("ckeditor5/src/core.js"),t=r("ckeditor5/src/icons.js"),i=r("ckeditor5/src/ui.js");class d extends e.Plugin{constructor(e){super(e);e.plugins.get("DrupalMediaEditing").converterAttributes.push("emmDrupalMediaUpdated")}init(){this._defineSchema(),this._createButton()}_defineSchema(){this.editor.model.schema.extend("drupalMedia",{allowAttributes:["emmDrupalMediaUpdated"]})}_createButton(){const e=this.editor,r=this.editor.config.get("editMediaModal"),{openDialog:o,dialogSettings:d={}}=r;e.ui.componentFactory.add("editMediaButton",(e=>{const r=new i.ButtonView(e);return r.set({label:Drupal.t("Edit media"),icon:t.IconPencil,tooltip:!0}),this.listenTo(r,"execute",(e=>{const t=this.editor.model.document.selection.getSelectedElement().getAttribute("drupalMediaEntityUuid");fetch(Drupal.url(`edit-media-modal/edit-url/${t}`)).then((e=>e.json())).then((e=>{window.open(e.url,"_blank").focus()}))})),r}))}}const s={EditMediaModal:d}})(),o=o.default})()));
+\ No newline at end of file
+diff --git a/js/ckeditor5_plugins/editMediaModal/src/editmediamodal.js b/js/ckeditor5_plugins/editMediaModal/src/editmediamodal.js
+index e3960a9..fc22981 100644
+--- a/js/ckeditor5_plugins/editMediaModal/src/editmediamodal.js
++++ b/js/ckeditor5_plugins/editMediaModal/src/editmediamodal.js
+@@ -44,22 +44,7 @@ export default class EditMediaModal extends Plugin {
+         fetch(Drupal.url(`edit-media-modal/edit-url/${uuid}`))
+           .then(response => response.json())
+           .then((data) => {
+-            openDialog(
+-              data.url,
+-              () => {
+-                const element = this.editor.model.document.selection.getSelectedElement();
+-                if (element && typeof element.name !== "undefined" && element.name === 'drupalMedia') {
+-                  this.editor.model.change(writer => {
+-                    writer.setAttribute(
+-                      'emmDrupalMediaUpdated',
+-                      Date.now(),
+-                      element,
+-                    );
+-                  });
+-                }
+-              },
+-              dialogSettings
+-            );
++            window.open(data.url, '_blank').focus();
+           })
+       });
+ 
+diff --git a/src/Controller/EditMediaModalController.php b/src/Controller/EditMediaModalController.php
+index 666a07b..80beb61 100644
+--- a/src/Controller/EditMediaModalController.php
++++ b/src/Controller/EditMediaModalController.php
+@@ -41,9 +41,18 @@ class EditMediaModalController extends ControllerBase {
+    */
+   public function getEditUrl(string $uuid) {
+     $entity = $this->entityRepository->loadEntityByUuid('media', $uuid);
+-    $url = $entity->toUrl('edit-form');
+-    $url->setOption('query', ['edit_media_in_modal' => TRUE]);
+-    return new JsonResponse(['url' => $url->toString()]);
++    $edit_allowed = $entity->access('update', \Drupal::currentUser());
++    if($edit_allowed) {
++      $url = $entity->toUrl('edit-form');
++      $url->setOption('query', ['edit_media_in_modal' => TRUE]);
++    }
++    else {
++      $url = $entity->toUrl();
++    }
++    return new JsonResponse([
++      'edit_allowed' => $edit_allowed,
++      'url' => $url->toString(),
++    ]);
+   }
+ 
+   /**
+@@ -62,7 +71,7 @@ class EditMediaModalController extends ControllerBase {
+       return AccessResult::forbidden();
+     }
+ 
+-    return $entity->access('update', $account, TRUE);
++    return $entity->access('view', $account, TRUE);
+   }
+ 
+ }
