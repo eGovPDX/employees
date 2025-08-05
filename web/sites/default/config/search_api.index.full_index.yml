@@ -840,12 +840,12 @@ processor_settings:
       preprocess_query: 0
     boosts:
       aggregated_changed_date:
-        boost: 1.0
+        boost: 0.5
         resolution: NOW
-        m: '9.51e-11'
-        a: 1.0
-        b: 0.25
-        support_future_dates: true
+        m: '18.96e-11'
+        a: 0.05
+        b: 0.05
+        support_future_dates: false
   solr_date_range:
     weights:
       preprocess_index: 0
