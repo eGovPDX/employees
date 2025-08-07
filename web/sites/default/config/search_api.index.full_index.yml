@@ -205,6 +205,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: 3.0
     dependencies:
       module:
         - node
@@ -676,6 +677,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: name
     type: text
+    boost: 2.0
     dependencies:
       module:
         - media
@@ -840,14 +842,14 @@ processor_settings:
       preprocess_query: 0
     boosts:
       field_updated_on:
-        boost: 0.5
+        boost: 1.0
         resolution: NOW
         m: '18.96e-11'
         a: 0.1
         b: 0.05
         support_future_dates: false
       field_when:
-        boost: 0.5
+        boost: 1.0
         resolution: NOW
         m: '18.96e-11'
         a: 0.1
@@ -873,8 +875,8 @@ processor_settings:
         datasource_boost: 1.0
         bundle_boosts:
           contract: 1.0
-          event: 0.2
-          news: 0.2
+          event: 0.1
+          news: 0.1
           page: 1.0
           resource: 1.0
       'entity:user':
