@@ -329,7 +329,7 @@ final class CustomCommands extends DrushCommands
           $node->set('field_type', ['target_id' => 2861]); // 2861 is the tid of 'Information'.
           $node->save();
           $updated_count++;
-          $this->output()->writeln("Set field_type to 'Information' for node {$nid}");
+          echo "Set field_type to 'Information' for node ID $nid." . PHP_EOL;
         }
       }
     }
