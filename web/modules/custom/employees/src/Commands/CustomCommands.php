@@ -304,4 +304,36 @@ final class CustomCommands extends DrushCommands
       }
     }
   }
+  
+  /**
+   * Drush command to set default page type.
+   */
+  #[CLI\Command(name: 'employees:set_default_page_type')]
+  #[CLI\Usage(name: 'employees:set_default_page_type', description: 'Set the default page type to Information')]
+  public function set_default_page_type()
+  {
+    // Query all nodes of type 'page'.
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'page')
+      ->accessCheck(FALSE)
+      ->execute();
+
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $updated_count = 0;
+
+    foreach ($nids as $nid) {
+      $node = $node_storage->load($nid);
+      if ($node && $node->hasField('field_type')) {
+        $field_type_value = $node->get('field_type')->target_id;
+        if (empty($field_type_value)) {
+          $node->set('field_type', ['target_id' => 2861]); // 2861 is the tid of 'Information'.
+          $node->save();
+          $updated_count++;
+          $this->output()->writeln("Set field_type to 'Information' for node {$nid}");
+        }
+      }
+    }
+
+    echo "Updated $updated_count nodes with the default page type: Information." . PHP_EOL;
+  }
 }
