@@ -44,7 +44,7 @@ function employees_form_alter(&$form, &$form_state, $form_id)
         $options["employee-editor"] = 'Editor: choose one of Admin, Editor, or Reviewer';
       }
       if( array_key_exists("employee-employee", $options) ) {
-        $options["employee-employee"] = 'Employee: assigned automativally by AD sync';
+        $options["employee-employee"] = 'Employee: assigned automatically by AD sync';
       }
       if( array_key_exists("employee-reviewer", $options) ) {
         $options["employee-reviewer"] = 'Reviewer: choose one of Admin, Editor, or Reviewer';
