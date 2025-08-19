@@ -6,11 +6,11 @@
   * @see themes/contrib/radix/templates/block/block--system-branding-block.html.twig
   */
 #}
-{% embed '@radix/block/block.twig' with {
+{% embed 'radix:block' with {
   html_tag: 'div',
 } %}
 
-  {% block content %}
+  {% block block_content %}
     {% set branding = 'City of Portland Employees'| t %}
     {% set url = '/' %}
     <div class="my-2">
