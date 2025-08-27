@@ -12,6 +12,7 @@ use Drupal\file\Plugin\Field\FieldType\FileFieldItemList;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Implements hook_form_alter()
@@ -129,12 +130,22 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "node_resource_edit_form":
       $form['actions']['submit']['#submit'][] = '_resource_node_form_submit';
       // Intentionally avoid using "break" here. Not a bug.
+    case "node_page_form":
+    case "node_page_edit_form":
+      // Prevent users from setting menu parent to "site-map"
+      if (isset($form['menu']['link']['menu_parent'])) {
+        $options = &$form['menu']['link']['menu_parent']['#options'];
+        $current_user = \Drupal::currentUser();
+        if ( ! $current_user->hasRole('administrator') ) {
+          // Non-admins cannot set menu parent to "site-map"
+          unset($options['site-map:']);
+        }
+      }      
+      // Intentionally avoid using "break" here. Not a bug.
     case "node_event_form":
     case "node_event_edit_form":
     case "node_news_form":
     case "node_news_edit_form":
-    case "node_page_form":
-    case "node_page_edit_form":
       $form['#validate'][] = '_validate_send_reviewer_notification_date';
       break;
   }
@@ -408,6 +419,7 @@ function _invalidate_group_page_menu_cache($entity) {
     $group_page_menu = group_content_menu_get_menus_per_group($group);
     if(empty($group_page_menu)) return;
     \Drupal::service('cache_tags.invalidator')->invalidateTags(["group_menu_link_content-" . $group_page_menu[0]->getEntityId()]);
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(['breadcrumb']);
   }
 }
 
@@ -1212,13 +1224,10 @@ function generate_alias($menu_link_tree_element) {
           else {
             // Generate the alias for the node
             $pathauto_generator->updateEntityAlias($node, "update");
+            Cache::invalidateTags(['node:' . $node_id]);
+            Cache::invalidateTags(['menu:local_tasks']);
           }
         }
-      }
-      else {
-        \Drupal::logger('employees')->error('Cannnot find the route parameter "node" for @route when saving Page Menu.', [
-          '@route' => $menu_link_url->toString(),
-        ]);
       }
     }
   }
@@ -1242,6 +1251,11 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
   $parameters = $route_match->getParameters();
   $group = $parameters->get("group");
   $group_content_menu = $parameters->get("group_content_menu");
+  if( empty($group) || empty($group_content_menu) ) {
+    $form_state->setErrorByName('link', t('The menu link form does not have a group or grou page menu. Please contact the site administrator.'));
+    return;
+  }
+
   $uri = $form_state->getValue("link")[0]["uri"];
   if(empty($uri)) {
     $form_state->setErrorByName('link', t('Link is a required field.'));
@@ -1278,27 +1292,69 @@ function _validate_unique_menu_link(&$form, FormStateInterface $form_state) {
       $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
       return;
     }
+  }
+
+  $route_parameters = $url->getRouteParameters();
+  if( empty($route_parameters) ) {
+    $form_state->setErrorByName('link', t('The link must be a valid internal link.'));
+    return;
+  }
+  else if (array_key_exists("node_revision", $route_parameters)) {
+    $form_state->setErrorByName('link', t('Cannot use a revision link in the menu.'));
+    return;
+  }
+  else if( array_key_exists("node", $route_parameters) ) {
+    $node_id = $route_parameters["node"];
+    if( empty($node_id) ) {
+      $form_state->setErrorByName('link', t('Cannot find the Node ID for :url. Only Page and Resrouce can be added to the page menu.', [':url' => $uri]));
+      return;
+    }
+    $node = Drupal\node\Entity\Node::load($node_id);
+    if( $node == null ) {
+      $form_state->setErrorByName('link', t('Cannot load the node for :nodeID.', [':nodeID' => $node_id]));
+      return;
+    }
+    if( $node->bundle() !== "page" && $node->bundle() !== "resource") {
+      $form_state->setErrorByName('link', t('Only Page and Resource can be added to the page menu.'));
+      return;
+    }
+    $primary_group_id = $node->field_display_in_group->target_id;
+    if( empty($primary_group_id) || $primary_group_id != $group->id() ) {
+      $form_state->setErrorByName('link', t('Cannot add content that is not in :group_name.', [':group_name' => $group->label()]));
+      return;
+    }
+
+    $link_tree_service = \Drupal::service('menu.link_tree');
+    // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
+    $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
+
+    // Get a flattened array of all nodes in the menu
+    $nodes_in_menu = [];
+    foreach($menu_tree as $key => $menu_link_tree_element) {
+      _get_node_ids($menu_link_tree_element, $nodes_in_menu);
+    }
+
+    $menu_link_content = $form_state->getformObject()->getEntity();
+    if(array_key_exists($node_id, $nodes_in_menu) && $nodes_in_menu[$node_id] !== null) {
+      if( ($menu_link_content->isNew() )|| 
+      ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
+        // Prepare the error message
+        $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+        return;
+      }
+    }
+
     // Convert the relative internal URL to an internal path
     $form_state->getValue("link")[0]["uri"] = "entity:" . $url->getInternalPath();
   }
-
-  $node_id = $url->getRouteParameters()["node"];  
-  $link_tree_service = \Drupal::service('menu.link_tree');
-  // [ "menu_link_content:UUID" => MenuLinkTreeElement object]
-  $menu_tree = $link_tree_service->load("group_menu_link_content-" . $group_content_menu->id(), new \Drupal\Core\Menu\MenuTreeParameters());
-
-  // Get a flattened array of all nodes in the menu
-  $nodes_in_menu = [];
-  foreach($menu_tree as $key => $menu_link_tree_element) {
-    _get_node_ids($menu_link_tree_element, $nodes_in_menu);
-  }
-
-  $menu_link_content = $form_state->getformObject()->getEntity();
-  if(array_key_exists($node_id, $nodes_in_menu)) {
-    if( ($menu_link_content->isNew() && $nodes_in_menu[$node_id] !== null)|| 
-    ( !$menu_link_content->isNew() && $menu_link_content->id() !== $nodes_in_menu[$node_id]["id"] ) ) {
-      // Prepare the error message
-      $form_state->setErrorByName('link', t('The link has already been used in the menu at <a href="' . $nodes_in_menu[$node_id]["url"] . '">:url</a>.', [':url' => $nodes_in_menu[$node_id]["url"]]));
+  else {
+    $group_path = $group->field_group_path->value;
+    if(! str_starts_with($group_path, '/')) {
+      $group_path = '/' . $group_path;
+    }
+    // Check if the relative path starts with the group path
+    if( ! str_starts_with($relative_uri, 'internal:'.$group_path) ) {
+      $form_state->setErrorByName('link', t('Only internal path within the same group can be added to the page menu.'));
       return;
     }
   }
@@ -1309,9 +1365,13 @@ function _get_node_ids($menu_link_tree_element, &$nodes_in_menu) {
   $menu_link_url = $menu_link_tree_element->link->getUrlObject();
   // Only internal links have node ID
   if( !$menu_link_url->isExternal() && $menu_link_url->isRouted()) {
-    $nodes_in_menu[$menu_link_url->getRouteParameters()["node"]] = [
-      "id" => $menu_link_tree_element->link->getMetaData()["entity_id"],
-      "url" => $menu_link_url->toString(),];
+    $route_parameters = $menu_link_url->getRouteParameters();
+    if( array_key_exists("node", $route_parameters) ) {
+      $nodes_in_menu[$route_parameters["node"]] = [
+        "id" => $menu_link_tree_element->link->getMetaData()["entity_id"],
+        "url" => $menu_link_url->toString(),
+      ];
+    }
   }
 
   if($menu_link_tree_element->hasChildren) {
@@ -1385,6 +1445,8 @@ function _update_alias_for_menu_linked_node($menu_link_content) {
     if(empty($node)) return;
     $pathauto_generator = \Drupal::service('pathauto.generator');
     $pathauto_generator->updateEntityAlias($node, "update");
+    Cache::invalidateTags(['node:' . $node_id]);
+    Cache::invalidateTags(['menu:local_tasks']);
   }
 }
 
@@ -1418,5 +1480,17 @@ function _remove_deleted_entity_references($entity, $field_name) {
         }
       }
     }
+  }
+}
+
+/**
+ * Implement hook_module_implements_alter()
+ */
+function employees_module_implements_alter(&$implementations, $hook) {
+  // Make sure our hook_node_form_alter runs other modules.
+  if ($hook === 'form_alter' && isset($implementations['employees'])) {
+    $employees = $implementations['employees'];
+    unset($implementations['employees']);
+    $implementations['employees'] = $employees;
   }
 }
