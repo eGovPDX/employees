@@ -126,6 +126,17 @@ field_settings:
       fields:
         - 'entity:media/field_tags'
         - 'entity:node/field_tags'
+  aggregated_changed_date:
+    label: 'Aggregated changed date'
+    property_path: aggregated_field
+    type: date
+    configuration:
+      type: max
+      fields:
+        - 'entity:group/changed'
+        - 'entity:media/changed'
+        - 'entity:node/changed'
+        - 'entity:user/changed'
   content_body:
     label: 'Content Body'
     datasource_id: 'entity:node'
@@ -194,6 +205,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: 3.0
     dependencies:
       module:
         - node
@@ -628,7 +640,7 @@ field_settings:
       module:
         - media
   media_changed:
-    label: Changed
+    label: 'Media Changed'
     datasource_id: 'entity:media'
     property_path: changed
     type: date
@@ -636,7 +648,7 @@ field_settings:
       module:
         - media
   media_field_description:
-    label: Description
+    label: 'Media Description'
     datasource_id: 'entity:media'
     property_path: field_description
     type: text
@@ -644,7 +656,7 @@ field_settings:
       config:
         - field.storage.media.field_description
   media_field_display_in_group:
-    label: 'Belongs to'
+    label: 'Media Belongs to'
     datasource_id: 'entity:media'
     property_path: field_display_in_group
     type: integer
@@ -665,11 +677,12 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: name
     type: text
+    boost: 2.0
     dependencies:
       module:
         - media
   media_search_keywords:
-    label: 'Search keywords'
+    label: 'Media Search keywords'
     datasource_id: 'entity:media'
     property_path: field_search_keywords
     type: 'solr_text_custom:ngram'
@@ -688,7 +701,7 @@ field_settings:
     label: 'Rendered HTML output'
     property_path: rendered_item
     type: text
-    boost: 0.8
+    boost: 0.2
     configuration:
       roles:
         - anonymous
@@ -777,9 +790,6 @@ processor_settings:
     weights:
       preprocess_index: -45
     fields:
-      field_bureaus: taxonomy_term-parent
-      field_business_capability: taxonomy_term-parent
-      field_business_priority: taxonomy_term-parent
       field_category: taxonomy_term-parent
       field_tags: taxonomy_term-parent
       field_type: taxonomy_term-parent
@@ -827,6 +837,24 @@ processor_settings:
       - Ps
   language_with_fallback: {  }
   rendered_item: {  }
+  solr_boost_more_recent:
+    weights:
+      preprocess_query: 0
+    boosts:
+      field_updated_on:
+        boost: 1.0
+        resolution: NOW
+        m: '18.96e-11'
+        a: 0.1
+        b: 0.05
+        support_future_dates: false
+      field_when:
+        boost: 1.0
+        resolution: NOW
+        m: '18.96e-11'
+        a: 0.1
+        b: 0.05
+        support_future_dates: true
   solr_date_range:
     weights:
       preprocess_index: 0
@@ -847,8 +875,8 @@ processor_settings:
         datasource_boost: 1.0
         bundle_boosts:
           contract: 1.0
-          event: 1.0
-          news: 1.0
+          event: 0.1
+          news: 0.1
           page: 1.0
           resource: 1.0
       'entity:user':
@@ -858,6 +886,7 @@ tracker_settings:
     indexing_order: fifo
 options:
   cron_limit: 50
+  delete_on_fail: true
   index_directly: true
   track_changes_in_references: false
 server: pantheon_solr8
