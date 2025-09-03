@@ -1,9 +1,7 @@
 uuid: 627cfeed-2114-4e55-a97d-9ec63263ee5a
 langcode: en
 status: true
-dependencies:
-  module:
-    - search_api
+dependencies: {  }
 _core:
   default_config_hash: j-YgGnx-C5I3OTFsDsNkTyPC8zH7ZQyBMvmZ6gUMH3Q
 id: search-api-server
@@ -17,12 +15,15 @@ tips:
     plugin: text
     label: 'Information about a server'
     weight: 1
+    position: ''
+    selector: null
     body: 'This page shows a summary of a search server.'
   search-api-server-status:
     id: search-api-server-status
     plugin: text
     label: Status
     weight: 2
+    position: ''
     selector: .search-api-server-summary--status
     body: 'Shows whether the server is currently enabled or disabled.'
   search-api-server-backend:
@@ -30,6 +31,7 @@ tips:
     plugin: text
     label: 'Backend class'
     weight: 3
+    position: ''
     selector: .search-api-server-summary--backend
     body: 'The backend plugin used for this server. The backend plugin determines how items are indexed and searched – for example, using the database or an Apache Solr server.'
   search-api-server-indexes:
@@ -37,6 +39,7 @@ tips:
     plugin: text
     label: 'Search indexes'
     weight: 4
+    position: ''
     selector: .search-api-server-summary--indexes
     body: 'Lists all search indexes that are attached to this server.'
   search-api-server-clear:
@@ -44,5 +47,6 @@ tips:
     plugin: text
     label: 'Delete all indexed data'
     weight: 5
+    position: ''
     selector: '#edit-clear'
     body: "This will permanently remove all data currently indexed on this server for indexes that aren't read-only. Items are queued for reindexing. Until reindexing occurs, searches for the affected indexes will not return any results."
