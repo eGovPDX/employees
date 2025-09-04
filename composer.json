@@ -63,12 +63,11 @@
         "drupal/masquerade": "^2.0",
         "drupal/media_entity_download": "^2.1",
         "drupal/media_remote": "^1.2",
-        "drupal/media_revisions_ui": "^2.1",
         "drupal/menu_breadcrumb": "^2.0@alpha",
         "drupal/migrate_plus": "^6.0",
         "drupal/migrate_source_csv": "^3.5",
         "drupal/migrate_tools": "^6.0",
-        "drupal/mimemail": "^1.0@alpha",
+        "drupal/mimemail": "^2.0@alpha",
         "drupal/moderation_sidebar": "^1.3",
         "drupal/monolog": "^3.0",
         "drupal/openid_connect": "^3.0@alpha",
@@ -95,7 +94,7 @@
         "drupal/seckit": "^2.0",
         "drupal/select2": "^2.0",
         "drupal/sendgrid_integration": "^2.1",
-        "drupal/show_email": "^1.1",
+        "drupal/show_email": "1.x-dev@dev",
         "drupal/simple_gmap": "^4.0",
         "drupal/smart_date": "^4.0",
         "drupal/smart_trim": "^2.0",
@@ -222,6 +221,7 @@
                 "PE-543 - Fix tour scrolling": "patches/pe-543-fix-tour-scrolling.patch"
             },
             "drupal/bulk_user_registration": {
+                "Drupal 11 Compatibility": "https://www.drupal.org/files/issues/2025-08-01/3519503-drupal-11-compatibility-2.patch",
                 "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch"
             },
             "drupal/ckeditor_accordion": {
@@ -247,6 +247,7 @@
                 "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
             },
             "drupal/field_states_ui": {
+                "Drupal 11 compatibility": "https://git.drupalcode.org/project/field_states_ui/-/merge_requests/9.patch",
                 "3263814 - Error: Call to undefined method Drupal\\commerce_checkout\\Plugin\\Commerce\\CheckoutFlow\\MultistepDefault::getFormDisplay() ": "https://www.drupal.org/files/issues/2024-12-09/3263814-2.patch"
             },
             "drupal/linkit": {
@@ -269,6 +270,9 @@
             },
             "drupal/search_api_group_filtering": {
                 "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
+            },
+            "drupal/show_email": {
+                "3485932 - D11 compatibility of show email address": "https://git.drupalcode.org/project/show_email/-/merge_requests/2.patch"
             },
             "drupal/views_bulk_edit": {
                 "3024419 - Fix Required fields to really not be required (PE-669)": "https://www.drupal.org/files/issues/2024-12-04/3024419_fix-required_fields_mr20_68.patch"

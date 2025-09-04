@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee8d8137b5d50bee8f17898c550e73dd",
+    "content-hash": "f2f43660195a0334a3706b3e704d397d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6230,62 +6230,6 @@
             }
         },
         {
-            "name": "drupal/media_revisions_ui",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/media_revisions_ui.git",
-                "reference": "2.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_revisions_ui-2.1.0.zip",
-                "reference": "2.1.0",
-                "shasum": "fab967dbaebc96350d2334d8ff09e257f943b4e0"
-            },
-            "require": {
-                "drupal/core": "^9.3 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.1.0",
-                    "datestamp": "1663070347",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "acbramley",
-                    "homepage": "https://www.drupal.org/user/1036766"
-                },
-                {
-                    "name": "bcizej",
-                    "homepage": "https://www.drupal.org/user/3612191"
-                },
-                {
-                    "name": "mstrelan",
-                    "homepage": "https://www.drupal.org/user/314289"
-                }
-            ],
-            "description": "Adds admin interface to handle media revisions.",
-            "homepage": "https://www.drupal.org/project/media_revisions_ui",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/media_revisions_ui",
-                "issues": "https://www.drupal.org/project/issues/media_revisions_ui"
-            }
-        },
-        {
             "name": "drupal/menu_breadcrumb",
             "version": "2.0.0",
             "source": {
@@ -6539,30 +6483,30 @@
         },
         {
             "name": "drupal/mimemail",
-            "version": "1.0.0-alpha6",
+            "version": "2.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/mimemail.git",
-                "reference": "8.x-1.0-alpha6"
+                "reference": "2.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/mimemail-8.x-1.0-alpha6.zip",
-                "reference": "8.x-1.0-alpha6",
-                "shasum": "c25246747dac4372c7d5a5a5fd0f276d9e468eff"
+                "url": "https://ftp.drupal.org/files/projects/mimemail-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "0fd7b7c8c308244b6e72f9e02234eef2cf4324cb"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10",
+                "drupal/core": "^10.3 || ^11",
                 "drupal/mailsystem": "^4"
             },
             "require-dev": {
-                "drupal/rules": "^3"
+                "drupal/rules": "^4.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-alpha6",
-                    "datestamp": "1697143284",
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1756673846",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -6574,6 +6518,10 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "mark_fullmer",
+                    "homepage": "https://www.drupal.org/user/2612816"
+                },
                 {
                     "name": "tr",
                     "homepage": "https://www.drupal.org/user/202830"
@@ -8579,29 +8527,26 @@
         },
         {
             "name": "drupal/show_email",
-            "version": "1.2.0",
+            "version": "dev-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/show_email.git",
-                "reference": "8.x-1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/show_email-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "727cd8ae7d08459ce24470bd7e740af1c37b0cc4"
+                "reference": "54d8c2a9a34a5979b536fba620ffcf8dbece6b9a"
             },
             "require": {
                 "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1705778377",
+                    "version": "8.x-1.1+1-dev",
+                    "datestamp": "1705778187",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -17612,6 +17557,7 @@
         "drupal/openid_connect_windows_aad": 10,
         "drupal/rabbit_hole": 10,
         "drupal/search_api_page": 10,
+        "drupal/show_email": 20,
         "drupal/webform": 10,
         "fengyuanchen/cropper": 20,
         "npm-asset/select2": 20,
