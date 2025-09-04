@@ -1,0 +1,29 @@
+uuid: 6ef34374-ca34-4305-b316-7eb33815da11
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.group_pages_filter_by_topic
+  module:
+    - facets
+    - system
+  theme:
+    - westy
+id: group_pages_filter_by_topic
+theme: westy
+region: side
+weight: 1
+provider: null
+plugin: 'facet_block:group_pages_filter_by_topic'
+settings:
+  id: 'facet_block:group_pages_filter_by_topic'
+  label: 'Group Pages: Filter by Topic'
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: group_pages_filter_by_topic
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/group/*/pages'

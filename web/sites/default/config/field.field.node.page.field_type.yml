@@ -6,15 +6,19 @@ dependencies:
     - field.storage.node.field_type
     - node.type.page
     - taxonomy.vocabulary.page_type
+  content:
+    - 'taxonomy_term:page_type:d47abdc2-690c-428d-86d7-3aa9434dfc55'
 id: node.page.field_type
 field_name: field_type
 entity_type: node
 bundle: page
 label: Type
 description: 'Type is used for search facets and appears as a label on the page. Request new types from <a href="mailto:website@portlandoregon.gov">website@portlandoregon.gov</a>.'
-required: false
+required: true
 translatable: true
-default_value: {  }
+default_value:
+  -
+    target_uuid: d47abdc2-690c-428d-86d7-3aa9434dfc55
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

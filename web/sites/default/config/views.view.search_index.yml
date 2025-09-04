@@ -111,11 +111,14 @@ display:
               authenticated: authenticated
               anonymous: '0'
               publisher: '0'
-              content_lead: '0'
+              311_support_agent: '0'
+              311_lead: '0'
+              site_editor: '0'
               administrator: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: ''
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -134,13 +137,15 @@ display:
             - content_body
             - content_search_keywords
             - content_title_edge
+            - content_title_fulltext
             - field_first_name
             - field_last_name
             - group_search_keywords
             - group_summary
             - group_title
             - media_field_description
-            - media_name
+            - media_name_edgestring
+            - media_name_fulltext
             - media_search_keywords
             - rendered_item
             - user_search_keywords
@@ -282,6 +287,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_contacts:
     id: page_contacts
     display_title: 'Page: Directory'
@@ -641,6 +647,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_contracts:
     id: page_contracts
     display_title: 'Page: Contracts'
@@ -1647,6 +1654,7 @@ display:
         - 'config:field.storage.node.field_p_card_allowed'
         - 'config:field.storage.node.field_type'
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_events:
     id: page_events
     display_title: 'Page: Events'
@@ -2089,6 +2097,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_news:
     id: page_news
     display_title: 'Page: News'
@@ -2502,6 +2511,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_past_events:
     id: page_past_events
     display_title: 'Page: Past Events'
@@ -2944,6 +2954,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_search:
     id: page_search
     display_title: 'Page: Search'
@@ -2982,6 +2993,7 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'
   page_search_contacts:
     id: page_search_contacts
     display_title: 'Page: Contacts'
@@ -3211,3 +3223,4 @@ display:
         - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.full_index'
+        - 'search_api_list:full_index'

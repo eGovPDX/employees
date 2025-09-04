@@ -304,4 +304,72 @@ final class CustomCommands extends DrushCommands
       }
     }
   }
+
+  /**
+   * Drush command to set entity uri: link.uri', 'entity:node/1234'
+   */
+  #[CLI\Command(name: 'employees:set_entity_uri_in_page_menu')]
+  #[CLI\Usage(name: 'employees:set_entity_uri_in_page_menu', description: 'Convert internal node URIs in the page menu to entity URIs')]
+  public function set_entity_uri_in_menu()
+  {
+    $query = \Drupal::entityQuery('menu_link_content')
+      // ->condition('link.uri', 'entity:node/' . $node->id())
+      ->condition('menu_name', GroupContentMenuInterface::MENU_PREFIX, 'STARTS_WITH')
+      ->sort('id', 'ASC')
+      ->accessCheck(TRUE);
+    $menu_link_contents = $query->execute();
+    foreach($menu_link_contents as $menu_link_content_id) {
+      $menu_link_content = MenuLinkContent::load($menu_link_content_id);
+
+      $uri = $menu_link_content->link?->uri;
+      if(empty($uri)) {
+        echo "Skipping empty link.uri for menu link " . $menu_link_content->id() . PHP_EOL;
+        continue;
+      } 
+      if ( str_starts_with($uri, 'entity:') || str_starts_with($uri, 'https://')) continue;
+      // If the link is an internal node URI, convert it to entity URI.
+      if (preg_match('/internal:\/node\/(\d+)/', $uri, $matches)) {
+        $menu_link_content->link->uri = 'entity:node/' . $matches[1];
+        $menu_link_content->save();
+        // echo "Updated menu link " . $menu_link_content->id() . " to use entity URI." . PHP_EOL;
+      }
+      else {
+        echo $uri . PHP_EOL;
+        continue;
+      }
+    }
+    return;
+  }
+  
+  /**
+   * Drush command to set default page type.
+   */
+  #[CLI\Command(name: 'employees:set_default_page_type')]
+  #[CLI\Usage(name: 'employees:set_default_page_type', description: 'Set the default page type to Information')]
+  public function set_default_page_type()
+  {
+    // Query all nodes of type 'page'.
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'page')
+      ->accessCheck(FALSE)
+      ->execute();
+
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $updated_count = 0;
+
+    foreach ($nids as $nid) {
+      $node = $node_storage->load($nid);
+      if ($node && $node->hasField('field_type')) {
+        $field_type_value = $node->get('field_type')->target_id;
+        if (empty($field_type_value)) {
+          $node->set('field_type', ['target_id' => 2861]); // 2861 is the tid of 'Information'.
+          $node->save();
+          $updated_count++;
+          echo "Set field_type to 'Information' for node ID $nid." . PHP_EOL;
+        }
+      }
+    }
+
+    echo "Updated $updated_count nodes with the default page type: Information." . PHP_EOL;
+  }
 }
