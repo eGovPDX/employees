@@ -933,7 +933,7 @@ if (isset($_ENV['PANTHEON_ENVIRONMENT']) && php_sapi_name() != 'cli') {
   elseif ($_ENV['PANTHEON_ENVIRONMENT'] === 'sandbox') {
     /** Replace www.example.com with your registered domain name */
     $primary_domain = 'sandbox.employees.portland.gov';
-    $config['environment_indicator.indicator']['bg_color'] = '#3455eb';
+    $config['environment_indicator.indicator']['bg_color'] = '#606060';
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Sandbox';
   }
