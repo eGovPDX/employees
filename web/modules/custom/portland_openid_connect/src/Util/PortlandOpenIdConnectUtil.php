@@ -5,6 +5,7 @@ namespace Drupal\portland_openid_connect\Util;
 use GuzzleHttp\Client;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
@@ -552,7 +553,7 @@ class PortlandOpenIdConnectUtil
         $user_photo_folder_name,
         FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
       );
-      $user_photo_file = \Drupal::service('file.repository')->writeData((string) $response->getBody(), 'public://user-photo/' . $file_name . '.jpg', FileSystemInterface::EXISTS_REPLACE);
+      $user_photo_file = \Drupal::service('file.repository')->writeData((string) $response->getBody(), 'public://user-photo/' . $file_name . '.jpg', FileExists::Replace);
 
       $users = \Drupal::entityTypeManager()->getStorage('user')
         ->loadByProperties(['name' => $userPrincipalName]);

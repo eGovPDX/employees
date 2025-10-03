@@ -4,40 +4,55 @@
  */
 
 
- // Facets
+// Facets
+// Facets
 .facets-widget {
   &-checkbox {
-    padding: $spacer;
-    background: $gray-300;
+    padding: spacer(3);
+    background: $light;
+
     ul {
       list-style: none;
       margin-bottom: 0;
-      padding: 0;
+      padding-left: 0;
     }
   }
 }
 
 .facet-item {
   @extend .form-check;
-  margin-bottom: calc($spacer / 2);
+  padding-left: 0;
+
+  &:not(:last-of-type) {
+    margin-bottom: spacer(2);
+  }
+
+  &__count {
+    margin-left: spacer(1);
+  }
+
+  .facets-checkbox {
+    float: left;
+    margin-right: spacer(2);
+    margin-top: 0.35rem;
+  }
+
+  label {
+    display: table;
+    font-weight: normal;
+    margin: 0;
+  }
+
   ul {
-    margin-top: calc($spacer / 2);
+    margin-top: spacer(2);
   }
 }
 
-.facet-item label {
-  display: inline-block;
-  margin: 0;
-  font-weight: normal;
-}
-
-.facet-item input.facets-checkbox {
-  position: absolute;
-  margin-top: 0.3rem;
-  margin-left: -$spacer * 1.25;
-}
-
 .facet-empty {
+  display: none;
+}
+
+.facets-reset .facet-item__count {
   display: none;
 }
 

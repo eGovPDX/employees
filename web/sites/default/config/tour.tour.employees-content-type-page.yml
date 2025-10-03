@@ -1,12 +1,9 @@
 uuid: b5fd7679-56b9-4552-8f2c-8627e619074b
 langcode: en
 status: true
-dependencies:
-  module:
-    - employees
+dependencies: {  }
 id: employees-content-type-page
 label: 'Page Content Type'
-module: employees
 routes:
   -
     route_name: node.add
@@ -22,6 +19,7 @@ tips:
     plugin: text
     label: "Set your page's title"
     weight: 1
+    position: ''
     selector: .field--name-title
     body: 'This is the name of the page, which will be displayed on the page itself, in search results, and anywhere else on the site.'
   type:
@@ -29,6 +27,7 @@ tips:
     plugin: text
     label: 'Optionally, choose a type'
     weight: 2
+    position: ''
     selector: .field--name-field-type
     body: 'If this page fits one of the defined types (e.g. documentation or internal policy), you can set it here.'
   short-title:
@@ -36,6 +35,7 @@ tips:
     plugin: text
     label: 'Set the short title'
     weight: 3
+    position: ''
     selector: .field--name-field-menu-url-text
     body: 'The short title should be a concise version of the full page title. It''s mainly used to create the URL, but will also be used if you choose to show this page in a menu.<br><br>For example, if your page title was "Sign up for the Environmental Project newsletter," your short title could be "Newsletter signup."'
   show-in-menu:
@@ -43,6 +43,7 @@ tips:
     plugin: text
     label: 'Want to show this page in a menu?'
     weight: 4
+    position: ''
     selector: .field--name-field-show-in-menu
     body: "If you enable this option, this page will show in your group's main menu, or you can optionally add a parent page below, and it will show in the parent page's menu."
   parent:
@@ -50,6 +51,7 @@ tips:
     plugin: text
     label: 'Optionally, set a parent page'
     weight: 5
+    position: ''
     selector: .field--name-field-parent
     body: 'If you chose above to "Show in Menu," you can add a parent to this page. This will make the page only show up in that parent page''s menu, rather than the group as a whole.'
   body-content:
@@ -57,6 +59,7 @@ tips:
     plugin: text
     label: 'Add body content'
     weight: 6
+    position: ''
     selector: .field--name-body
     body: 'The "body" is what contains the real content of your page. Write your heart out!'
   summary:
@@ -64,6 +67,7 @@ tips:
     plugin: text
     label: Summary
     weight: 7
+    position: ''
     selector: .link-edit-summary
     body: 'Optionally, you can click here to add a quick, concise summary of your page. This summary will be displayed in search results.'
   featured-image:
@@ -71,6 +75,7 @@ tips:
     plugin: text
     label: 'Optionally, add a featured image'
     weight: 8
+    position: ''
     selector: '.field--name-field-featured-image .js-media-library-open-button'
     body: 'You can click here to upload or select an image which will be displayed on the page, as well as in search results and when the page is featured.'
   page-contacts:
@@ -78,6 +83,7 @@ tips:
     plugin: text
     label: 'Optionally, add contacts'
     weight: 9
+    position: ''
     selector: '#edit-group-page-contacts'
     body: 'Click here to expand the menu. You can then select any Employees or Contacts to show on the page.'
   related-content:
@@ -85,6 +91,7 @@ tips:
     plugin: text
     label: 'Optionally, add related content'
     weight: 10
+    position: ''
     selector: .field--name-field-related-content
     body: 'Here, you can add any other pages or resources as related, to show up on this page.'
   tags:
@@ -92,6 +99,7 @@ tips:
     plugin: text
     label: 'Optionally, add tags'
     weight: 11
+    position: ''
     selector: .field--name-field-tags
     body: 'Here, you can add freeform tags to this page. This is helpful if you have a collection of pages that someone might want to search for by filtering.'
   displayed-in:
@@ -99,6 +107,7 @@ tips:
     plugin: text
     label: 'Displayed in groups'
     weight: 12
+    position: ''
     selector: .field--name-field-display-in-group
     body: 'Choose which groups this page will be displayed in. By default this will be the group you chose to create the page in, but you can also "cross-post" it to any other groups where it may be relevant.'
   url-redirects:
@@ -106,6 +115,7 @@ tips:
     plugin: text
     label: 'Add URL redirects'
     weight: 13
+    position: ''
     selector: .field--name-field-redirects
     body: "If needed, add any URL redirects for this page here. If the page you're creating had a URL on the old website (portlandoregon.gov), you can also add the legacy path here (e.g. /bts/123456)."
   scheduler:
@@ -113,6 +123,7 @@ tips:
     plugin: text
     label: 'Schedule publishing'
     weight: 14
+    position: ''
     selector: '#edit-scheduler-settings'
     body: "If you want this page to go live at a certain time, you can do that here. You can also schedule it to be unpublished at a certain time, if it's only relevant for a period of time."
   moderation-state:
@@ -120,6 +131,7 @@ tips:
     plugin: text
     label: 'Workflow state'
     weight: 15
+    position: ''
     selector: .field--name-moderation-state
     body: 'Choose the state you want to save your edits in, e.g. as a draft or publish them. <a href="/web-support/portland-employees-editor-resources/workflows-and-revisions" target="_blank">Learn more about workflows.</a>'
   reviewers:
@@ -127,6 +139,7 @@ tips:
     plugin: text
     label: 'Notify reviewers about this page'
     weight: 16
+    position: ''
     selector: .field--name-field-reviewer
     body: "If you've made substantial edits or you're creating a new page that needs to be reviewed, you can set people as a reviewer here. They will be notified of your changes by email. <strong>Important: Make sure to set the state as Review above, or else reviewers will not be notified.</strong>"
   revision-log:
@@ -134,12 +147,14 @@ tips:
     plugin: text
     label: 'Describe your changes'
     weight: 17
+    position: ''
     selector: .field--name-revision-log
     body: 'Here, you can describe the changes you made (or the page you created) for the revision log.'
-  save:
+  Save:
     id: Save
     plugin: text
     label: 'Save your changes'
     weight: 18
+    position: ''
     selector: '#edit-submit'
     body: 'Click here to save (or create) your page.'
