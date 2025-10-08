@@ -2,7 +2,11 @@
 
 namespace Drupal\employees_migrations\Plugin\migrate\process;
 
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\FileTransfer\FileTransferException;
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\Exception\InvalidStreamWrapperException;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -137,10 +141,16 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
               // redownload and save managed file
               try {
                 unlink($realpath_filename);
-                $downloaded_file = system_retrieve_file($url, $destination_uri, TRUE);
+                $data = (string) \Drupal::httpClient()->get($url)->getBody();
+                $downloaded_file = \Drupal::service('file.repository')->writeData($data, $destination_uri, FileExists::Replace);
               }
-              catch (Exception $e) {
-                $message = "Error occurred while trying to redownload URL target at " . $url . " and create managed file. Skipping file. Page: $page_title. Exception: " . $e->getMessage();
+              catch (FileTransferException $e) {
+                $message = t('Failed to fetch file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
+                \Drupal::logger('employees_migrations')->error($message);
+                continue;
+              }
+              catch (FileException | InvalidStreamWrapperException $e) {
+                $message = t('Failed to save file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
                 \Drupal::logger('employees_migrations')->error($message);
                 continue;
               }
@@ -154,10 +164,16 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
 
             // download and save managed file if it's not a dupe
             try {
-              $downloaded_file = system_retrieve_file($url, $destination_uri, TRUE);
+              $data = (string) \Drupal::httpClient()->get($url)->getBody();
+              $downloaded_file = \Drupal::service('file.repository')->writeData($data, $destination_uri, FileExists::Replace);
             }
-            catch (Exception $e) {
-              $message = "Error occurred while trying to download URL target at " . $url . " and create managed file. Skipping file. Page: $page_title. Exception: " . $e->getMessage();
+            catch (FileTransferException $e) {
+              $message = t('Failed to fetch file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
+              \Drupal::logger('employees_migrations')->error($message);
+              continue;
+            }
+            catch (FileException | InvalidStreamWrapperException $e) {
+              $message = t('Failed to save file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
               \Drupal::logger('employees_migrations')->error($message);
               continue;
             }
@@ -165,10 +181,16 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
         } else {
           // download and save managed file if it's not a dupe
           try {
-            $downloaded_file = system_retrieve_file($url, $destination_uri, TRUE);
+            $data = (string) \Drupal::httpClient()->get($url)->getBody();
+            $downloaded_file = \Drupal::service('file.repository')->writeData($data, $destination_uri, FileExists::Replace);
           }
-          catch (Exception $e) {
-            $message = "Error occurred while trying to download URL target at " . $url . " and create managed file. Skipping file. Page: $page_title. Exception: " . $e->getMessage();
+          catch (FileTransferException $e) {
+            $message = t('Failed to fetch file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
+            \Drupal::logger('employees_migrations')->error($message);
+            continue;
+          }
+          catch (FileException | InvalidStreamWrapperException $e) {
+            $message = t('Failed to save file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $url, '%page_title' => $page_title]);
             \Drupal::logger('employees_migrations')->error($message);
             continue;
           }
@@ -292,11 +314,16 @@ class MigrateBodyContentAndLinkedMedia extends ProcessPluginBase {
 
     // download and save managed file
     try {
-      $downloaded_file = system_retrieve_file($pogFileUrl, $destination_uri, TRUE);
+      $data = (string) \Drupal::httpClient()->get($pogFileUrl)->getBody();
+      $downloaded_file = \Drupal::service('file.repository')->writeData($data, $destination_uri, FileExists::Replace);
     }
-    catch (Exception $e) {
-      $message = "Error occurred while trying to download URL target at " . $pogFileUrl . " and create managed file. Exception: " . $e->getMessage();
-      \Drupal::logger('employees_migrations')->notice($message);
+    catch (FileTransferException $e) {
+      $message = t('Failed to fetch file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $pogFileUrl, '%page_title' => $page_title]);
+      \Drupal::logger('employees_migrations')->error($message);
+    }
+    catch (FileException | InvalidStreamWrapperException $e) {
+      $message = t('Failed to save file %url for $page_title due to error "%error"', ['%error' => $e->getMessage(), '%url' => $pogFileUrl, '%page_title' => $page_title]);
+      \Drupal::logger('employees_migrations')->error($message);
     }
     if ( $downloaded_file == FALSE ) {
       echo "Failed to download $pogFileUrl";

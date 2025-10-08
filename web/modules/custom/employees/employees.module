@@ -722,7 +722,7 @@ function _content_updated_recently()
       if (count($theview->result)) {
         // Render the view and append to results
         $rendered = $theview->render($view['block_id']);
-        $results .= \Drupal::service('renderer')->renderPlain($rendered);
+        $results .= \Drupal::service('renderer')->renderInIsolation($rendered);
       }
     }
 
