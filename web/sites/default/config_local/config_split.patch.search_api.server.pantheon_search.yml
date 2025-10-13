@@ -8,9 +8,8 @@ adding:
       port: 8983
       path: /
       core: lando
-      index_timeout: 5
-      optimize_timeout: 10
       skip_schema_check: false
+      solr_version: ''
 removing:
   dependencies:
     module:
@@ -19,6 +18,5 @@ removing:
   backend_config:
     connector: pantheon
     connector_config:
-      index_timeout: 60
-      optimize_timeout: 60
       skip_schema_check: true
+      solr_version: '8'

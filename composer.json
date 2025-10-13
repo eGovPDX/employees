@@ -42,8 +42,8 @@
         "drupal/environment_indicator": "^4.0",
         "drupal/eva": "^3.0",
         "drupal/extlink": "^2.0",
-        "drupal/facets": "^2.0",
-        "drupal/field_group": "^3.1",
+        "drupal/facets": "^3.0",
+        "drupal/field_group": "^4.0",
         "drupal/field_permissions": "^1.1",
         "drupal/field_states_ui": "^3.0",
         "drupal/flexible_permissions": "^2.0",
@@ -94,7 +94,7 @@
         "drupal/seckit": "^2.0",
         "drupal/select2": "^2.0",
         "drupal/sendgrid_integration": "^2.1",
-        "drupal/show_email": "1.x-dev@dev",
+        "drupal/show_email": "^1.2",
         "drupal/simple_gmap": "^4.0",
         "drupal/smart_date": "^4.0",
         "drupal/smart_trim": "^2.0",
@@ -225,14 +225,13 @@
                 "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch"
             },
             "drupal/ckeditor_accordion": {
-              "3469556 - Set accordion title and content as empty when adding new row": "https://www.drupal.org/files/issues/2025-07-23/3469556-2.patch",
-              "3124167 - Provide an accessible variant (MR #13 @ df3c1110)": "patches/ckeditor-accordion-mr-13-df3c1110-v3.patch"
+                "3469556 - Set accordion title and content as empty when adding new row": "https://www.drupal.org/files/issues/2025-07-23/3469556-2.patch",
+                "3124167 - Provide an accessible variant (MR #13 @ df3c1110)": "patches/ckeditor-accordion-mr-13-df3c1110-v3.patch"
             },
             "drupal/datetime_range": {
                 "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch"
             },
             "drupal/edit_media_modal": {
-                "3531671 - Drupal 10.5/11.2 compatability": "https://www.drupal.org/files/issues/2025-07-02/edit_media_modal-3531671-drupal_compatibility-6.patch",
                 "3352274 - Add edit media link in CKEditor5": "patches/3352274-fix-media-edit-icon-permission-issue.patch"
             },
             "drupal/group": {
@@ -241,7 +240,7 @@
                 "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL": "https://git.drupalcode.org/project/group/-/merge_requests/121.patch"
             },
             "drupal/group_content_menu": {
-                "3519798 - Add ability to set new menu link defaults to first available group menu": "https://www.drupal.org/files/issues/2025-06-10/3519798-set-default-group-menu-2.patch"
+                "3519798 - Add ability to set new menu link defaults to first available group menu": "https://www.drupal.org/files/issues/2025-07-29/3519798-set-default-group-menu-gcm3.0.6.x-4.patch"
             },
             "drupal/group_notifications": {
                 "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
@@ -249,9 +248,6 @@
             "drupal/field_states_ui": {
                 "Drupal 11 compatibility": "https://git.drupalcode.org/project/field_states_ui/-/merge_requests/9.patch",
                 "3263814 - Error: Call to undefined method Drupal\\commerce_checkout\\Plugin\\Commerce\\CheckoutFlow\\MultistepDefault::getFormDisplay() ": "https://www.drupal.org/files/issues/2024-12-09/3263814-2.patch"
-            },
-            "drupal/linkit": {
-                "3532814 - Title labels and default description too long": "https://git.drupalcode.org/project/linkit/-/merge_requests/104.patch"
             },
             "drupal/media_entity_download": {
                 "3059830 - Make link title editable / add token support / more options - feature/WCOR-1199": "https://www.drupal.org/files/issues/2024-06-03/3059830-make-link-title-20.patch"
@@ -263,7 +259,7 @@
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
             },
             "drupal/redirect": {
-                "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)": "https://www.drupal.org/files/issues/2024-04-25/3401916-8.x-1.9.patch"
+                "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)": "https://www.drupal.org/files/issues/2025-09-08/redirect-loop-3401916-20.patch"
             },
             "drupal/scheduler_content_moderation_integration": {
                 "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch"
