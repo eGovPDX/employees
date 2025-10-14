@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.group_content.employee-group_membership.group_roles
-    - group.content_type.employee-group_membership
+    - field.field.group_relationship.employee-group_membership.group_roles
+    - group.relationship_type.employee-group_membership
   module:
     - field_states_ui
     - select2
-id: group_content.employee-group_membership.default
-targetEntityType: group_content
+id: group_relationship.employee-group_membership.default
+targetEntityType: group_relationship
 bundle: employee-group_membership
 mode: default
 content:

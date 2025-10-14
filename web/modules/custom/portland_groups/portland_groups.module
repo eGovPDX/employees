@@ -49,7 +49,7 @@ function _portland_groups_populate_field_display_groups(&$form, &$form_state) {
   if ($node->isNew()) {
     if (array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != null) {
         $group_id = $form_state->getStorage()['group']->id();
-        if (array_key_exists('group_content', $form) && $group_id != null) {
+        if (array_key_exists('group_relationship', $form) && $group_id != null) {
             \Drupal::request()->getSession()->set('parent_group_id', $group_id);
         }
     }
@@ -217,11 +217,11 @@ function _portland_groups_synchronize_entity_group_ownership($entity) {
         }
 
         // POWR-2800 One entity added to many different groups, delete all but the first Displayed In group
-        $group_content_nodes = GroupRelationship::loadByEntity($entity);
-        if (count($group_content_nodes) > 1) {
-          foreach($group_content_nodes as $group_content_node) {
-            if($group_content_node->getGroup()->id() != $new_owner_group) {
-              $group_content_node->delete();
+        $group_relationship_nodes = GroupRelationship::loadByEntity($entity);
+        if (count($group_relationship_nodes) > 1) {
+          foreach($group_relationship_nodes as $group_relationship_node) {
+            if($group_relationship_node->getGroup()->id() != $new_owner_group) {
+              $group_relationship_node->delete();
             }
           }
         }
@@ -291,7 +291,7 @@ function portland_form_alter(&$form, &$form_state, $form_id)
         if ($node->isNew()) {
             if (array_key_exists('group', $form_state->getStorage()) && $form_state->getStorage()['group'] != null) {
                 $group_id = $form_state->getStorage()['group']->id();
-                if (array_key_exists('group_content', $form) && $group_id != null) {
+                if (array_key_exists('group_relationship', $form) && $group_id != null) {
                     \Drupal::request()->getSession()->set('parent_group_id', $group_id);
                 }
             }
@@ -322,9 +322,9 @@ function getGroupIdsByEntity($entity)
     }
     $group_ids = [];
 
-    $group_contents = GroupRelationship::loadByEntity($entity);
-    foreach ($group_contents as $group_content) {
-        $group_ids[] = $group_content?->getGroup()?->id();
+    $group_relationships = GroupRelationship::loadByEntity($entity);
+    foreach ($group_relationships as $group_relationship) {
+        $group_ids[] = $group_relationship?->getGroup()?->id();
     }
 
     return $group_ids;
@@ -423,7 +423,7 @@ function portland_groups_group_update(GroupInterface $group)
         );
         $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:node", "update"]);
         $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group", "update"]);
-        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group_content", "update"]);
+        $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:group_relationship", "update"]);
         $batch['operations'][] = array('Drupal\pathauto\Form\PathautoBulkUpdateForm::batchProcess', ["canonical_entities:media", "update"]);
         batch_set($batch);
     }

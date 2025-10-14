@@ -8,7 +8,7 @@ dependencies:
     - field.storage.group.field_group_description
     - field.storage.group.field_group_path
     - field.storage.group.field_org_type
-    - field.storage.group_content.group_roles
+    - field.storage.group_relationship.group_roles
     - group.type.employee
     - system.menu.main
     - taxonomy.vocabulary.org_type
@@ -1530,9 +1530,9 @@ display:
       fields:
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -1693,17 +1693,17 @@ display:
         filter_groups: false
         header: false
       relationships:
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: none
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             'group_node:alert': '0'
             'group_node:contact': '0'
             'group_node:contract': '0'
@@ -1722,13 +1722,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: '0'
       display_description: ''
       header: {  }
@@ -1745,7 +1745,7 @@ display:
         - url.query_args
         - user
       tags:
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'
   block_group_search_form:
     id: block_group_search_form
     display_title: 'Block: Group Search Form'

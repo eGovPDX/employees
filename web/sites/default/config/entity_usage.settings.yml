@@ -6,34 +6,34 @@ local_task_enabled_entity_types:
   - node
   - taxonomy_term
 track_enabled_source_entity_types:
-  - node
   - group
-  - group_content
+  - group_relationship
   - media
+  - node
   - redirect
   - taxonomy_term
 track_enabled_target_entity_types:
-  - node
   - group
   - media
+  - node
   - taxonomy_term
 track_enabled_plugins:
   - entity_embed
-  - linkit
-  - link
   - entity_reference
   - html_link
+  - link
+  - linkit
   - media_embed
 track_enabled_base_fields: false
 site_domains:
-  - employees.portland.gov
-  - test-employees.pantheonsite.io
   - dev-employees.pantheonsite.io
   - employees.lndo.site
+  - employees.portland.gov
+  - test-employees.pantheonsite.io
 edit_warning_message_entity_types: {  }
 delete_warning_message_entity_types:
-  - node
   - group
   - media
+  - node
   - taxonomy_term
 usage_controller_items_per_page: 25

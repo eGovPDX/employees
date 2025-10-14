@@ -29,10 +29,10 @@ function employees_form_alter(&$form, &$form_state, $form_id)
     case "menu_link_content_menu_link_content_edit_form":
       $form['#validate'][] = '_validate_unique_menu_link';
       break;
-    case "group_content_employee-group_membership_add_form":
-    case "group_content_employee-group_membership_edit_form":
-    case "group_content_private-group_membership_add_form":
-    case "group_content_private-group_membership_edit_form":
+    case "group_relationship_employee-group_membership_add_form":
+    case "group_relationship_employee-group_membership_edit_form":
+    case "group_relationship_private-group_membership_add_form":
+    case "group_relationship_private-group_membership_edit_form":
       $options = &$form["group_roles"]["widget"]["#options"];
       if( array_key_exists("employee-admin", $options) ) {
         $options["employee-admin"] = 'Admin: choose one of Admin, Editor, or Reviewer';
@@ -74,10 +74,10 @@ function employees_form_alter(&$form, &$form_state, $form_id)
       $form['#attached']['library'][] = 'employees/employees';
       $form["group_roles"]["widget"]["#required"] = true;
       break;
-    case "group_content_employee-group_membership_group-join_form":
+    case "group_relationship_employee-group_membership_group-join_form":
       $form['actions']['submit']['#value'] = t('Follow group');
       break;
-    case "group_content_employee-group_membership_group-leave_form":
+    case "group_relationship_employee-group_membership_group-leave_form":
       $form['actions']['submit']['#value'] = t('Unfollow group');
       break;
     case "media_library_add_form_media_remote":

@@ -18,7 +18,7 @@ use Drupal\Core\Access\AccessResult;
  * @Action(
  *   id = "employees_edit_users_membership",
  *   label = @Translation("Edit group roles (custom action)"),
- *   type = "group_content",
+ *   type = "group_relationship",
  *   confirm = FALSE,
  * )
  */
@@ -52,10 +52,10 @@ final class EditGroupMembershipAction extends ViewsBulkOperationsActionBase impl
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     // Get the group roles associated with the group
-    $group_contents = $form_state->getStorage()['views_bulk_operations']['list'];
-    $first_key = array_keys($group_contents)[0];
-    $group_content_id = $group_contents[$first_key][0];
-    $roles = \Drupal::entityTypeManager()->getStorage('group_content')->load($group_content_id)->getGroup()->getGroupType()->getRoles(FALSE);
+    $group_relationships = $form_state->getStorage()['views_bulk_operations']['list'];
+    $first_key = array_keys($group_relationships)[0];
+    $group_relationship_id = $group_relationships[$first_key][0];
+    $roles = \Drupal::entityTypeManager()->getStorage('group_relationship')->load($group_relationship_id)->getGroup()->getGroupType()->getRoles(FALSE);
     $role_options = array();
     foreach ($roles as $role) {
       $role_options[$role->id()] = $role->label();
@@ -68,14 +68,14 @@ final class EditGroupMembershipAction extends ViewsBulkOperationsActionBase impl
       '#description' => $this->t('IMPORTANT: This will remove the users\' current roles and assign the roles selected here.'),
     ];
     
-    // The "Items selected" list on group_content-based views has the user’s name. Include the 
+    // The "Items selected" list on group_relationship-based views has the user’s name. Include the 
     // selected groups' name too.
     $list = $form_state->getStorage()['views_bulk_operations']['list'];
     $count = 0;
     foreach ($list as $item) {
       $entity_id = $item[0];
       $username = $form['list']['#items'][$count];
-      $group = \Drupal::entityTypeManager()->getStorage('group_content')->load($entity_id)->getGroup();
+      $group = \Drupal::entityTypeManager()->getStorage('group_relationship')->load($entity_id)->getGroup();
       $form['list']['#items'][$count++] = "$username in " . $group->label();
     }
 

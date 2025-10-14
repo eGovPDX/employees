@@ -240,7 +240,7 @@ final class CustomCommands extends DrushCommands
 
       // For each installed group_content_menu, create a new menu
       foreach ($plugins as $plugin) {
-        $group_content_type = GroupContentMenuType::load($plugin->getDerivativeId());
+        $group_content_menu_type = GroupContentMenuType::load($plugin->getDerivativeId());
         $group_menu = \Drupal::entityTypeManager()->getStorage('group_content_menu')->create([
           'label' => "Page menu for " . $group->label(),
           'bundle' => $plugin->getDerivativeId(),
@@ -248,9 +248,9 @@ final class CustomCommands extends DrushCommands
         $group_menu->save();
 
         /* @var GroupRelationshipStorageInterface $storage */
-        $group_content_storage = \Drupal::entityTypeManager()->getStorage('group_content');
-        $group_pages = $group_content_storage->loadByGroup($group, "group_node:page");
-        $group_resources = $group_content_storage->loadByGroup($group, "group_node:resource");
+        $group_relationship_storage = \Drupal::entityTypeManager()->getStorage('group_relationship');
+        $group_pages = $group_relationship_storage->loadByGroup($group, "group_node:page");
+        $group_resources = $group_relationship_storage->loadByGroup($group, "group_node:resource");
         $group_pages_or_resources = array_merge($group_pages, $group_resources);
         foreach ($group_pages_or_resources as $group_page_or_resource) {
           $page_or_resource = $group_page_or_resource->getEntity();
@@ -261,11 +261,11 @@ final class CustomCommands extends DrushCommands
           $this->create_menu_links($menu_name, $page_or_resource);
         }
 
-        $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_content_type');
-        $group_relationship = \Drupal::entityTypeManager()->getStorage('group_content')->create([
+        $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_relationship_type');
+        $group_relationship = \Drupal::entityTypeManager()->getStorage('group_relationship')->create([
           'type' => $relationship_type_storage->getRelationshipTypeId($group->bundle(), $plugin->getPluginId()),
           'gid' => $group->id(),
-          'label' => $group_content_type->label(),
+          'label' => $group_content_menu_type->label(),
           'entity_id' => $group_menu,
         ]);
         $group_relationship->save();

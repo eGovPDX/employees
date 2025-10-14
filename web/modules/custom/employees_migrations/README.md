@@ -17,7 +17,7 @@ The Migrate Tools module provides drush commands to run the migrations. The orde
 lando terminus drush [environment] -- migrate:import [migration_id]
 ```
 
-Some migrations have interdependencies, such as employee_news, employee_news_group_content, and employee_news_redirects. You can automatically run all migrations in a group with:
+Some migrations have interdependencies, such as employee_news, employee_news_group_relationship, and employee_news_redirects. You can automatically run all migrations in a group with:
 
 ```
 lando terminus drush [environment] -- migrate:import --group=[migration_group]
@@ -31,7 +31,7 @@ If the migration reports that any items failed, you can see what the failed item
 
 To roll back a migration, use the `migrate:rollback [migration_name]` command, and roll back migrations in the reverse order than they were originally rolled.
 
-Some migrations have interdependencies, such as employee_news, employee_news_group_content, and employee_news_redirects. Interdependent migrations must all be rolled back together. This can be done automatically with:
+Some migrations have interdependencies, such as employee_news, employee_news_group_relationship, and employee_news_redirects. Interdependent migrations must all be rolled back together. This can be done automatically with:
 
 ```
 lando terminus drush [environment] migrate:rollback --group=[migration_group]
@@ -98,11 +98,11 @@ python3 [script_name.py]
 
 ## Migrations
 
-In addition to the primary content migrations, there are two supplemental migrations that are run for some content types: redirects and group_content.
+In addition to the primary content migrations, there are two supplemental migrations that are run for some content types: redirects and group_relationship.
 
 Redirects migrations write entities to the redirects table. This is used for creating the legacy paths functionality, where the path from POG is linked to the corresponding page in the new site. Redirects migrations are named with the suffix "_redirects." *Example: employees_news_redirects*
 
-Group content migrations are used to add content to a group by creating a group content entity. These migrations are named with the suffix "_group_content." *Example: employees_news_group_content*
+Group content migrations are used to add content to a group by creating a group content entity. These migrations are named with the suffix "_group_relationship." *Example: employees_news_group_relationship*
 
 ### Migrations in this module
 
