@@ -2,13 +2,13 @@
 employees.group.nodes:
   title: 'Content'
   base_route: 'entity.group.canonical'
-  route_name: 'view.manage_group_content.moderated_content'
+  route_name: 'view.manage_group_nodes.moderated_content'
   weight: 20
 # Define the default tab menu item
 employees.group.nodes.all:
   title: 'Content'
   base_route: 'entity.group.canonical'
-  route_name: 'view.manage_group_content.moderated_content'
+  route_name: 'view.manage_group_nodes.moderated_content'
   parent_id: 'employees.group.nodes'
   weight: 10
 # Define the rest of tab menu item
@@ -17,5 +17,5 @@ employees.group.nodes.content_with_pog_urls:
   title: 'Content with POG URLs'
   parent_id: 'employees.group.nodes'
   base_route: 'entity.group.canonical'
-  route_name: 'view.manage_group_content.page_content_with_pog_urls'
+  route_name: 'view.manage_group_nodes.page_content_with_pog_urls'
   weight: 60
