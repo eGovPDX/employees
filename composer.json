@@ -26,9 +26,9 @@
         "drupal/composer_deploy": "^1.10",
         "drupal/config_split": "^2.0@RC",
         "drupal/content_lock": "^3.0@alpha",
-        "drupal/core-composer-scaffold": "^10",
-        "drupal/core-project-message": "^10",
-        "drupal/core-recommended": "^10",
+        "drupal/core-composer-scaffold": "^11",
+        "drupal/core-project-message": "^11",
+        "drupal/core-recommended": "^11",
         "drupal/crop": "^2.0",
         "drupal/ctools": "^4.1",
         "drupal/datalayer": "^2.0@RC",
@@ -119,6 +119,7 @@
         "mglaman/phpstan-drupal": "^1.1",
         "npm-asset/select2": "dev-develop",
         "oomphinc/composer-installers-extender": "^2.0",
+        "pantheon-systems/drupal-integrations": "^11",
         "smillart/wai-aria-patterns-and-widgets": "1.0.6",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
@@ -172,6 +173,14 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
+            },
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
+            "file-mapping": {
+                "[project-root]/.editorconfig": false,
+                "[project-root]/pantheon.upstream.yml": false,
+                "[project-root]/.gitattributes": false
             }
         },
         "installer-types": [
@@ -208,17 +217,13 @@
                 "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2018-04-19/node-revisions-missing-local-tasks-2885278-11.patch",
                 "2769289 - Revision User information not displayed in views when content revision user is selected for View type Content": "https://www.drupal.org/files/issues/2018-09-07/node_revision_author-2769289-11.patch",
                 "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
-                "962664 - Taxonomy Index for unpublished entities": "https://www.drupal.org/files/issues/2023-12-19/962664-206.patch",
                 "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2024-07-17/autocomplete-element-3212854-5.patch",
-                "2992168 - Allow appending values to multivalued fields during the migration": "https://www.drupal.org/files/issues/2020-12-29/migrate-2992168-18.patch",
-                "2329253 - Allow the ChangedItem to skip updating the entity's \"changed\" timestamp when synchronizing (f.e. when migrating)": "https://git.drupalcode.org/project/drupal/-/merge_requests/8536.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
                 "3095434 - Access denied when view own unpublished revision, access check is not using revision author": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
                 "PE-479 - Update media library so that documents are the default first media type": "patches/pe-479-media-library-default-documents.patch",
-                "2851086 - Tour tip displays under toolbar": "https://www.drupal.org/files/issues/2022-03-17/2851086-42.patch",
-                "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified": "https://www.drupal.org/files/issues/2024-01-23/drupal-revert-source-editing-validation-tightening-3410100-38.patch",
+                "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified": "https://www.drupal.org/files/issues/2025-06-26/3410100-108-revert-3396628-11-x.patch",
                 "3415961 - [drupalMedia] Using the Insert Media button causes the window to scroll to the bottom of the page": "https://www.drupal.org/files/issues/2024-02-15/3415961.patch",
-                "PE-543 - Fix tour scrolling": "patches/pe-543-fix-tour-scrolling.patch"
+                "3474018 - [regression] CSS class is not added to MediaLibrary dialog": "https://www.drupal.org/files/issues/2025-10-09/3474018-11.2.5.patch"
             },
             "drupal/bulk_user_registration": {
                 "Drupal 11 Compatibility": "https://www.drupal.org/files/issues/2025-08-01/3519503-drupal-11-compatibility-2.patch",
@@ -268,14 +273,17 @@
                 "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
             },
             "drupal/show_email": {
-                "3485932 - D11 compatibility of show email address": "https://git.drupalcode.org/project/show_email/-/merge_requests/2.patch"
+                "3485932 - D11 compatibility of show email address": "https://www.drupal.org/files/issues/2025-10-21/show_email-d11-compatibility.patch"
+            },
+            "drupal/tour": {
+                "PE-543 - Fix tour scrolling": "patches/pe-543-fix-tour-scrolling.patch"
             },
             "drupal/views_bulk_edit": {
                 "3024419 - Fix Required fields to really not be required (PE-669)": "https://www.drupal.org/files/issues/2024-12-04/3024419_fix-required_fields_mr20_68.patch"
             }
         },
         "drupal-lenient": {
-            "allowed-list": ["drupal/show_email", "drupal/group_notifications"]
+            "allowed-list": ["drupal/bulk_user_registration", "drupal/field_states_ui", "drupal/show_email"]
         }
     },
     "minimum-stability": "dev",

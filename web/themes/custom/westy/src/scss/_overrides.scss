@@ -26,3 +26,23 @@ em.placeholder {
 .field--name-field-featured-image img {
   width: 100%;
 }
+
+// Fix dialog title overflow issue
+.ui-dialog .ui-dialog-title {
+	font-size: 1.2rem;
+	white-space: normal;
+	text-overflow: initial;
+}
+
+// Fix dialog close button appearance
+.ui-dialog .ui-dialog-titlebar-close {
+	background: url("data:image/svg+xml,%3csvg width='12' height='12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M11 1.318l-10 10M11 11.318l-10-10' stroke='%23333' stroke-width='1.5'/%3e%3c/svg%3e") no-repeat 50%;
+	border: none;
+
+  &:hover {
+    border: 2px solid #666;
+    border-radius: 1em;
+    padding: 10px;
+    translate: 2px -2px;
+  }
+}
