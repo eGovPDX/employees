@@ -300,14 +300,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_group_content:
-          id: view_group_content
+        view_group_relationship:
+          id: view_group_relationship
           table: group_relationship
-          field: view_group_content
-          relationship: group_content
+          field: view_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'View relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link
           label: 'Link to Group content'
           exclude: true
@@ -353,14 +353,14 @@ display:
           text: 'View relation'
           output_url_as_text: false
           absolute: false
-        edit_group_content:
-          id: edit_group_content
+        edit_group_relationship:
+          id: edit_group_relationship
           table: group_relationship
-          field: edit_group_content
-          relationship: group_content
+          field: edit_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'Edit relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link_edit
           label: 'Link to edit Group content'
           exclude: true
@@ -404,14 +404,14 @@ display:
           empty_zero: false
           hide_alter_empty: true
           text: 'Edit relation'
-        delete_group_content:
-          id: delete_group_content
+        delete_group_relationship:
+          id: delete_group_relationship
           table: group_relationship
-          field: delete_group_content
-          relationship: group_content
+          field: delete_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'Delete relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link_delete
           label: 'Link to delete Group content'
           exclude: true
@@ -616,10 +616,10 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: numeric
           default_action: 'access denied'
@@ -677,10 +677,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -722,9 +718,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              group_admin: '0'
           is_grouped: true
           group_info:
             label: 'Published status'
@@ -773,9 +766,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              group_admin: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -810,9 +800,9 @@ display:
             revision_uid: revision_uid
             changed: changed
             operations: operations
-            view_group_content: view_group_content
-            delete_group_content: delete_group_content
-            edit_group_content: edit_group_content
+            view_group_relationship: view_group_relationship
+            delete_group_relationship: delete_group_relationship
+            edit_group_relationship: edit_group_relationship
             delete_node: delete_node
           default: changed
           info:
@@ -880,21 +870,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            view_group_content:
+            view_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            delete_group_content:
+            delete_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            edit_group_content:
+            edit_group_relationship:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -914,6 +904,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
@@ -930,17 +921,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: node_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Content relation'
           entity_type: node
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: true
-          group_content_plugins: {  }
+          group_relation_plugins: {  }
       header:
         result:
           id: result
@@ -1029,7 +1020,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             3:
               action_id: employees_publish_action
@@ -1634,14 +1626,14 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: false
-        view_group_content:
-          id: view_group_content
+        view_group_relationship:
+          id: view_group_relationship
           table: group_relationship
-          field: view_group_content
-          relationship: group_content
+          field: view_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'View relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link
           label: 'Link to Group content'
           exclude: true
@@ -1687,14 +1679,14 @@ display:
           text: 'View relation'
           output_url_as_text: false
           absolute: false
-        delete_group_content:
-          id: delete_group_content
+        delete_group_relationship:
+          id: delete_group_relationship
           table: group_relationship
-          field: delete_group_content
-          relationship: group_content
+          field: delete_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'Delete relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link_delete
           label: 'Link to delete Group content'
           exclude: true
@@ -1738,14 +1730,14 @@ display:
           empty_zero: false
           hide_alter_empty: true
           text: 'Delete relation'
-        edit_group_content:
-          id: edit_group_content
+        edit_group_relationship:
+          id: edit_group_relationship
           table: group_relationship
-          field: edit_group_content
-          relationship: group_content
+          field: edit_group_relationship
+          relationship: group_relationship
           group_type: group
           admin_label: 'Edit relation link'
-          entity_type: group_content
+          entity_type: group_relationship
           plugin_id: entity_link_edit
           label: 'Link to edit Group content'
           exclude: true

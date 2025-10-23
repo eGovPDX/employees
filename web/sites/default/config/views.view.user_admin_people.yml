@@ -95,7 +95,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             -
               action_id: employees_email
@@ -1325,10 +1326,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1374,8 +1371,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: true
           group_info:
             label: Status
@@ -1422,8 +1417,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1464,8 +1457,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1588,10 +1579,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1631,10 +1618,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              editor: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1676,10 +1659,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1719,12 +1698,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1764,10 +1737,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1807,10 +1776,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1852,10 +1817,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
@@ -2064,6 +2025,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       relationships:
         field_managers:
           id: field_managers

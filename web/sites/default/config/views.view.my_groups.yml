@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group_content.group_roles
+    - field.storage.group_relationship.group_roles
     - system.menu.editor-toolbar
     - taxonomy.vocabulary.org_type
     - user.role.anonymous
@@ -251,17 +251,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: none
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             'group_node:event': '0'
             'group_node:news': '0'
             'group_node:page': '0'
@@ -274,13 +274,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: '0'
       css_class: ''
       header: {  }
@@ -352,9 +352,9 @@ display:
           error_message: true
         group_roles_target_id_2:
           id: group_roles_target_id_2
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -391,9 +391,9 @@ display:
             group_items: {  }
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -430,9 +430,9 @@ display:
             group_items: {  }
         group_roles_target_id_3:
           id: group_roles_target_id_3
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -469,9 +469,9 @@ display:
             group_items: {  }
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -612,9 +612,9 @@ display:
           error_message: true
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -735,9 +735,9 @@ display:
           absolute: false
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -865,9 +865,9 @@ display:
       filters:
         group_roles_target_id_4:
           id: group_roles_target_id_4
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -904,9 +904,9 @@ display:
             group_items: {  }
         group_roles_target_id_5:
           id: group_roles_target_id_5
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -943,9 +943,9 @@ display:
             group_items: {  }
         group_roles_target_id_2:
           id: group_roles_target_id_2
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -967,10 +967,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -986,9 +982,9 @@ display:
             group_items: {  }
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1025,9 +1021,9 @@ display:
             group_items: {  }
         group_roles_target_id_3:
           id: group_roles_target_id_3
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1064,9 +1060,9 @@ display:
             group_items: {  }
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1144,7 +1140,7 @@ display:
         - user
         - user.roles
       tags:
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'
   block_profile_groups_assigned:
     id: block_profile_groups_assigned
     display_title: 'Profile Assigned'
@@ -1318,9 +1314,9 @@ display:
       filters:
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1357,9 +1353,9 @@ display:
             group_items: {  }
         group_roles_target_id_2:
           id: group_roles_target_id_2
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1396,9 +1392,9 @@ display:
             group_items: {  }
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1435,9 +1431,9 @@ display:
             group_items: {  }
         group_roles_target_id_3:
           id: group_roles_target_id_3
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -1775,9 +1771,9 @@ display:
           error_message: true
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2021,9 +2017,9 @@ display:
       filters:
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2060,9 +2056,9 @@ display:
             group_items: {  }
         group_roles_target_id_2:
           id: group_roles_target_id_2
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2099,9 +2095,9 @@ display:
             group_items: {  }
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2138,9 +2134,9 @@ display:
             group_items: {  }
         group_roles_target_id_3:
           id: group_roles_target_id_3
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2177,9 +2173,9 @@ display:
             group_items: {  }
         group_roles_target_id_4:
           id: group_roles_target_id_4
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2216,9 +2212,9 @@ display:
             group_items: {  }
         group_roles_target_id_5:
           id: group_roles_target_id_5
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2359,7 +2355,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             -
               action_id: employees_add_user_to_groups
@@ -2503,9 +2500,9 @@ display:
           field_api_classes: false
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -2770,9 +2767,9 @@ display:
       filters:
         group_roles_target_id_2:
           id: group_roles_target_id_2
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2794,10 +2791,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2813,9 +2806,9 @@ display:
             group_items: {  }
         group_roles_target_id_1:
           id: group_roles_target_id_1
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2852,9 +2845,9 @@ display:
             group_items: {  }
         group_roles_target_id_3:
           id: group_roles_target_id_3
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2891,9 +2884,9 @@ display:
             group_items: {  }
         group_roles_target_id:
           id: group_roles_target_id
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles_target_id
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -2956,10 +2949,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -3001,10 +2990,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -3060,6 +3045,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:
@@ -3113,4 +3099,4 @@ display:
         - user
         - user.roles
       tags:
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'

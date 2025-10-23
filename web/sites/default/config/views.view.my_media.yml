@@ -966,10 +966,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1011,10 +1007,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1056,10 +1048,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: true
           group_info:
             label: Published
@@ -1167,6 +1155,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -1178,17 +1167,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: media_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Media group content'
           entity_type: media
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             'group_media:document': '0'
             'group_media:image': '0'
             'group_media:remote_document': '0'
@@ -1197,24 +1186,24 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: Group
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: standard
           required: true
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: gid
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
             'group_node:contract': '0'
             'group_node:event': '0'
@@ -1229,13 +1218,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
         field_media_document_target_id:
           id: field_media_document_target_id
@@ -2251,10 +2240,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2296,10 +2281,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2341,10 +2322,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: true
           group_info:
             label: Published
@@ -2421,17 +2398,17 @@ display:
         filter_groups: false
         header: false
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: media_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Media group content'
           entity_type: media
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             'group_media:document': '0'
             'group_media:image': '0'
             'group_media:remote_document': '0'
@@ -2440,24 +2417,24 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: Group
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: standard
           required: true
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: gid
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
             'group_node:contract': '0'
             'group_node:event': '0'
@@ -2472,13 +2449,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
         field_media_document_target_id:
           id: field_media_document_target_id

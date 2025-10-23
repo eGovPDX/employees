@@ -1,0 +1,44 @@
+uuid: 7d0db8d8-27b3-428e-bf5d-2e3a93857f3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group_relationship.employee-group_membership.group_roles
+    - group.relationship_type.employee-group_membership
+  module:
+    - field_states_ui
+    - select2
+id: group_relationship.employee-group_membership.default
+targetEntityType: group_relationship
+bundle: employee-group_membership
+mode: default
+content:
+  entity_id:
+    type: select2_entity_reference
+    weight: 0
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 20
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+  group_roles:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
+          add: Add
+hidden:
+  langcode: true
+  path: true
+  uid: true

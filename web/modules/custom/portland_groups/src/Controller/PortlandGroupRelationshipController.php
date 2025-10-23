@@ -75,7 +75,7 @@ class PortlandGroupRelationshipController extends GroupRelationshipController {
     }
 
     /**
-     * The _title_callback for the entity.group_content.create_form route.
+     * The _title_callback for the entity.group_relationship.create_form route.
      *
      * @param \Drupal\group\Entity\GroupInterface $group
      *   The group to create the group content in.

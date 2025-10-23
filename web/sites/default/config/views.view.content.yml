@@ -94,7 +94,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             1:
               action_id: mark_for_review_action
@@ -469,8 +470,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -511,10 +510,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -604,8 +599,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -657,10 +650,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -706,10 +695,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -806,6 +791,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -914,7 +900,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             1:
               action_id: mark_for_review_action
@@ -1303,8 +1290,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1346,8 +1331,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1387,11 +1370,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1548,6 +1526,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options: {  }
@@ -1654,7 +1633,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             1:
               action_id: mark_for_review_action
@@ -1993,8 +1973,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -2033,12 +2011,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2080,10 +2052,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2173,8 +2141,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2228,12 +2194,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2273,10 +2233,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2322,10 +2278,6 @@ display:
             multiple: true
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2362,17 +2314,17 @@ display:
           admin_label: author
           plugin_id: standard
           required: true
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: node_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Content group relationship'
           entity_type: node
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             'group_node:alert': '0'
             'group_node:contact': '0'
             'group_node:contract': '0'
@@ -2385,10 +2337,10 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: Group
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: standard
           required: false
@@ -2484,7 +2436,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             15:
               action_id: views_bulk_edit
@@ -2909,8 +2862,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -2952,8 +2903,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2993,12 +2942,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -3088,11 +3031,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -3201,12 +3139,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
             min_placeholder: ''
             max_placeholder: ''
             placeholder: ''
@@ -3248,12 +3180,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -3351,6 +3277,7 @@ display:
           empty_table: true
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options: {  }

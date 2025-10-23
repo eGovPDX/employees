@@ -128,7 +128,7 @@ final class AddGroupMembershipAction extends ViewsBulkOperationsActionBase imple
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state):void {
     $button = $form_state->getTriggeringElement()['#value']->getUntranslatedString();
 
     if ($button === 'Next') {

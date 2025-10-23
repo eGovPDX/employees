@@ -8,7 +8,6 @@ dependencies:
     - field.storage.node.field_display_in_group
   module:
     - node
-    - taxonomy
     - user
     - views_bulk_operations
 id: content_list
@@ -239,7 +238,8 @@ display:
           buttons: false
           action_title: Action
           clear_on_exposed: true
-          force_selection_info: false
+          show_multipage_selection_box: default
+          show_select_all: default
           selected_actions:
             -
               action_id: employees_change_contact_action
@@ -839,6 +839,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
         options:

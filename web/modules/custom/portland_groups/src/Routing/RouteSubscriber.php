@@ -50,23 +50,23 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function alterRoutes(RouteCollection $collection) {
     // override routes from the Group gnode and groupmedia modules to set our own controller::method
-    if ($route = $collection->get('entity.group_content.group_node_create_page')) {
+    if ($route = $collection->get('entity.group_relationship.group_node_create_page')) {
         $route->setDefault('_controller', '\Drupal\portland_groups\Controller\PortlandGroupRelationshipController::addPage');
     }
-    if ($route = $collection->get('entity.group_content.group_node_add_page')) {
+    if ($route = $collection->get('entity.group_relationship.group_node_add_page')) {
         $route->setDefault('_controller', '\Drupal\portland_groups\Controller\PortlandGroupRelationshipController::addPage');
     }
-    if ($route = $collection->get('entity.group_content.group_media_create_page')) {
+    if ($route = $collection->get('entity.group_relationship.group_media_create_page')) {
         $route->setDefault('_controller', '\Drupal\portland_groups\Controller\PortlandGroupMediaController::addPage');
         $route->setDefault('_title', 'Create media');
     }
-    if ($route = $collection->get('entity.group_content.group_media_add_page')) {
+    if ($route = $collection->get('entity.group_relationship.group_media_add_page')) {
         $route->setDefault('_controller', '\Drupal\portland_groups\Controller\PortlandGroupMediaController::addPage');
         $route->setDefault('_title', 'Relate media');
     }
 
     // override group create content route to set our own title callback so we can customize it
-    if ($route = $collection->get('entity.group_content.create_form')) {
+    if ($route = $collection->get('entity.group_relationship.create_form')) {
         $route->setDefault('_title_callback', '\Drupal\portland_groups\Controller\PortlandGroupRelationshipController::createFormTitle');
     }
   }

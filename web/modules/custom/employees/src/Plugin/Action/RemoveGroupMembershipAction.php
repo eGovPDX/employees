@@ -14,7 +14,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  * @Action(
  *   id = "employees_remove_group_membership",
  *   label = @Translation("Remove users from group (custom action)"),
- *   type = "group_content",
+ *   type = "group_relationship",
  *   confirm = TRUE,
  * )
  */
@@ -41,14 +41,14 @@ class RemoveGroupMembershipAction extends ViewsBulkOperationsActionBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    // The "Items selected" list on group_content-based views has the user’s name. Include the 
+    // The "Items selected" list on group_relationship-based views has the user’s name. Include the 
     // selected groups' name too.
     $list = $form_state->getStorage()['views_bulk_operations']['list'];
     $count = 0;
     foreach ($list as $item) {
       $entity_id = $item[0];
       $username = $form['list']['#items'][$count];
-      $group = \Drupal::entityTypeManager()->getStorage('group_content')->load($entity_id)->getGroup();
+      $group = \Drupal::entityTypeManager()->getStorage('group_relationship')->load($entity_id)->getGroup();
       $form['list']['#items'][$count++] = "$username in " . $group->label();
     }
 

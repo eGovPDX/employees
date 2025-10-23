@@ -67,18 +67,18 @@ class GroupMembershipController extends ControllerBase {
   public function follow(GroupInterface $group) {
     /** @var \Drupal\group\Plugin\GroupContentEnablerInterface $plugin */
     $plugin_id = 'group_membership';
-    $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_content_type');
+    $relationship_type_storage = \Drupal::entityTypeManager()->getStorage('group_relationship_type');
     $group_type_id = $group->getGroupType()->id();
 
     // Pre-populate a group membership with the current user.
-    $group_content = GroupRelationship::create([
+    $group_relationship = GroupRelationship::create([
       'type' => $relationship_type_storage->getRelationshipTypeId($group_type_id, $plugin_id),
       'gid' => $group->id(),
       'entity_id' => $this->currentUser->id(),
       'group_roles' => ["employee-following"],
     ]);
 
-    return $this->entityFormBuilder->getForm($group_content, 'group-join');
+    return $this->entityFormBuilder->getForm($group_relationship, 'group-join');
   }
 
   /**
@@ -104,8 +104,8 @@ class GroupMembershipController extends ControllerBase {
    *   A group leave form.
    */
   // public function leave(GroupInterface $group) {
-  //   $group_content = $group->getMember($this->currentUser)->getGroupContent();
-  //   return $this->entityFormBuilder->getForm($group_content, 'group-leave');
+  //   $group_relationship = $group->getMember($this->currentUser)->getGroupContent();
+  //   return $this->entityFormBuilder->getForm($group_relationship, 'group-leave');
   // }
 
 }

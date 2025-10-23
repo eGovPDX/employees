@@ -58,8 +58,8 @@ class PortlandOpenIdConnectUtil
 
     $roles = $membership->getRoles(FALSE);
     $has_employee_role = false;
-    $group_content = $membership->getGroupRelationship();
-    $group_content->group_roles = [];
+    $group_relationship = $membership->getGroupRelationship();
+    $group_relationship->group_roles = [];
     foreach ($roles as $role) {
       if ($role->id() === 'employee-employee' || $role->id() === 'private-employee') {
         $has_employee_role = true;
@@ -71,24 +71,24 @@ class PortlandOpenIdConnectUtil
       //   continue;
       // }
       /** @var ListInterface $group_roles_list */
-      $group_roles_list = $group_content->group_roles;
+      $group_roles_list = $group_relationship->group_roles;
       $group_roles_list->appendItem(['target_id' => $role->id()]);
     }
 
     // // Hotfix: comment out to avoid removal of membership
     // If the user has no role in the group, remove the user completely
     // $group = \Drupal\group\Entity\Group::load($group_id);
-    // if($group_content->group_roles->count() === 0) {
+    // if($group_relationship->group_roles->count() === 0) {
     //   $group->removeMember($account);
     //   $group->save();
     // }
     // // Else only remove the Employee roles. Keep roles like Following
     // else {
-    //   $group_content->save();
+    //   $group_relationship->save();
     // }
 
     if($has_employee_role) {
-      $group_content->save();
+      $group_relationship->save();
     }
   }
 
@@ -112,16 +112,16 @@ class PortlandOpenIdConnectUtil
       // https://drupal.stackexchange.com/questions/232530/programmatically-add-new-role-to-group-member/232646#232646
       // Array of Role-name=>Role_entity
       $roles = $membership->getRoles(FALSE);
-      $group_content = $membership->getGroupRelationship();
+      $group_relationship = $membership->getGroupRelationship();
       $has_new_role = false;
       foreach ($role_id_array as $role_id) {
         // Check if the user has the new role
         if (!isset($roles[$role_id])) {
-          $group_content->group_roles->appendItem(['target_id' => $role_id]);
+          $group_relationship->group_roles->appendItem(['target_id' => $role_id]);
           $has_new_role = true;
         }
       }
-      if ($has_new_role) $group_content->save();
+      if ($has_new_role) $group_relationship->save();
     }
   }
 

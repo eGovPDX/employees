@@ -78,7 +78,7 @@ function portland_openid_connect_cron()
   }
 
   // Check if we need to sync now
-  $sync_now = (strtolower(\Drupal::state()->get('epgov.user_sync.sync_now')) === "true");
+  $sync_now = (strtolower(\Drupal::state()->get('epgov.user_sync.sync_now') ?? "") === "true");
 
   // Get the day of the week to sync. Default is Saturday.
   if( !$sync_now ) {

@@ -79,7 +79,7 @@
     {% endif %}
     </div>
 
-    {% if page.content_bottom|render|striptags|trim is not empty %}
+    {% if page.content_bottom is not empty %}
       <div class="page__content_bottom col">
         {{ page.content_bottom }}
       </div>

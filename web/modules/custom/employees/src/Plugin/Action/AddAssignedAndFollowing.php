@@ -36,7 +36,7 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
       $group = Group::load($current_primary_group_id);
       $group_type = $group->type->entity->id();
       $membership = $group->getMember($account);
-      $group_content = $membership->getGroupRelationship();
+      $group_relationship = $membership->getGroupRelationship();
       $roles = array_keys($membership->getRoles(FALSE));
       $only_has_member_role = ( count($roles) === 1 && ( $roles[0] === 'private-member' || $roles[0] === 'employee-member' ) );
       if ($only_has_member_role) {
@@ -49,8 +49,8 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
           $roles[0] = 'employee-following';
         }
         
-        $group_content->group_roles = $roles;
-        $group_content->save();
+        $group_relationship->group_roles = $roles;
+        $group_relationship->save();
       } elseif (in_array('private-member', $roles) || in_array('employee-member', $roles)) {
         // Remove the member role from their list of roles
         $key = array_search('private-member', $roles);
@@ -63,8 +63,8 @@ class AddAssignedAndFollowing extends ViewsBulkOperationsActionBase {
           unset($roles[$key]);
         }
 
-        $group_content->group_roles = $roles;
-        $group_content->save();
+        $group_relationship->group_roles = $roles;
+        $group_relationship->save();
       }
     }
 

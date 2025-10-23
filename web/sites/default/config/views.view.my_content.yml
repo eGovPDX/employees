@@ -266,10 +266,10 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: field
           label: 'Owned by'
@@ -958,10 +958,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1003,10 +999,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1048,10 +1040,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1091,10 +1079,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1201,10 +1185,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1246,10 +1226,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1368,6 +1344,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -1390,17 +1367,17 @@ display:
           entity_field: nid
           plugin_id: standard
           required: true
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: node_field_data
-          field: group_content
+          field: group_relationship
           relationship: nid
           group_type: group
           admin_label: 'Content group content'
           entity_type: node
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             'group_node:contract': '0'
             'group_node:event': '0'
             'group_node:news': '0'
@@ -1410,24 +1387,24 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: Group
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: standard
           required: true
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: gid
           group_type: group
           admin_label: 'Group user'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
             'group_node:contract': '0'
             'group_node:event': '0'
@@ -1442,13 +1419,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: true
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
       header:
         area:
@@ -1517,10 +1494,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1560,12 +1533,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              311_support_agent: '0'
-              311_lead: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1607,10 +1574,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1652,10 +1615,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1695,10 +1654,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -1805,10 +1760,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -1850,10 +1801,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2095,10 +2042,10 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: field
           label: 'Owned by'
@@ -2709,10 +2656,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2754,10 +2697,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2799,10 +2738,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -2842,10 +2777,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -2952,10 +2883,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2997,10 +2924,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              publisher: '0'
-              content_lead: '0'
-              administrator: '0'
             reduce: false
           is_grouped: false
           group_info:
