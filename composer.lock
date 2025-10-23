@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd794d372fd41fb64259586d9eab2b98",
+    "content-hash": "e0b1f5a0c49d38bf74351572caedb0d2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2156,17 +2156,17 @@
         },
         {
             "name": "drupal/block_exclude_pages",
-            "version": "2.1.2",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/block_exclude_pages.git",
-                "reference": "2.1.2"
+                "reference": "2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/block_exclude_pages-2.1.2.zip",
-                "reference": "2.1.2",
-                "shasum": "c7051b3efd3c3cabad2a313acdad662e0f2168e8"
+                "url": "https://ftp.drupal.org/files/projects/block_exclude_pages-2.2.0.zip",
+                "reference": "2.2.0",
+                "shasum": "47105dff225bbd2e6a4ec5b744a124e18235a5eb"
             },
             "require": {
                 "drupal/core": "^10 || ^11"
@@ -2174,8 +2174,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.2",
-                    "datestamp": "1733763550",
+                    "version": "2.2.0",
+                    "datestamp": "1761149215",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3723,26 +3723,26 @@
         },
         {
             "name": "drupal/edit_media_modal",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/edit_media_modal.git",
-                "reference": "2.0.2"
+                "reference": "2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/edit_media_modal-2.0.2.zip",
-                "reference": "2.0.2",
-                "shasum": "46c46eb0c0afb984f974be8467a71ca6fe97fde5"
+                "url": "https://ftp.drupal.org/files/projects/edit_media_modal-2.1.0.zip",
+                "reference": "2.1.0",
+                "shasum": "4da47f0064514426cfa847835ae6e553bf282bad"
             },
             "require": {
-                "drupal/core": "^10.0 || ^11.0"
+                "drupal/core": "^10.5 || ^11.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.2",
-                    "datestamp": "1754071488",
+                    "version": "2.1.0",
+                    "datestamp": "1761150636",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -4060,6 +4060,10 @@
                 "GPL-2.0+"
             ],
             "authors": [
+                {
+                    "name": "alexpott",
+                    "homepage": "https://www.drupal.org/user/157725"
+                },
                 {
                     "name": "lullabot",
                     "homepage": "https://www.drupal.org/user/3815489"
@@ -9513,17 +9517,17 @@
         },
         {
             "name": "drupal/views_bulk_operations",
-            "version": "4.4.2",
+            "version": "4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/views_bulk_operations.git",
-                "reference": "4.4.2"
+                "reference": "4.4.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/views_bulk_operations-4.4.2.zip",
-                "reference": "4.4.2",
-                "shasum": "74bbcc1669d9f4455cc935422c45048f7be8500c"
+                "url": "https://ftp.drupal.org/files/projects/views_bulk_operations-4.4.3.zip",
+                "reference": "4.4.3",
+                "shasum": "127b21b2d72fef9afb41fd839fb06d0e31d52827"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11"
@@ -9532,7 +9536,10 @@
                 "drush/drush": "<12.5.1"
             },
             "require-dev": {
-                "drush/drush": "^12 || ^13"
+                "drush/drush": "^12 || ^13",
+                "ergebnis/phpstan-rules": "^2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-strict-rules": "^2"
             },
             "suggest": {
                 "drush/drush": "^12 || ^13"
@@ -9540,8 +9547,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.4.2",
-                    "datestamp": "1760982083",
+                    "version": "4.4.3",
+                    "datestamp": "1761141954",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -11908,16 +11915,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.6.1",
+            "version": "v5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2"
+                "reference": "3a454ca033b9e06b63282ce19562e892747449bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3a454ca033b9e06b63282ce19562e892747449bb",
+                "reference": "3a454ca033b9e06b63282ce19562e892747449bb",
                 "shasum": ""
             },
             "require": {
@@ -11960,9 +11967,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.2"
             },
-            "time": "2025-08-13T20:13:15+00:00"
+            "time": "2025-10-21T19:32:17+00:00"
         },
         {
             "name": "npm-asset/select2",
@@ -16863,18 +16870,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "960ccb49b6f273fa566a23fd2e8968f81ad207dd"
+                "reference": "785bf86a070e8e21eb07b875d8790a960984d6ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/960ccb49b6f273fa566a23fd2e8968f81ad207dd",
-                "reference": "960ccb49b6f273fa566a23fd2e8968f81ad207dd",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/785bf86a070e8e21eb07b875d8790a960984d6ca",
+                "reference": "785bf86a070e8e21eb07b875d8790a960984d6ca",
                 "shasum": ""
             },
             "conflict": {
                 "3f/pygmentize": "<1.2",
                 "adaptcms/adaptcms": "<=1.3",
-                "admidio/admidio": "<4.3.12",
+                "admidio/admidio": "<=4.3.16",
                 "adodb/adodb-php": "<=5.22.9",
                 "aheinze/cockpit": "<2.2",
                 "aimeos/ai-admin-graphql": ">=2022.04.1,<2022.10.10|>=2023.04.1,<2023.10.6|>=2024.04.1,<2024.07.2",
@@ -16977,6 +16984,7 @@
                 "clickstorm/cs-seo": ">=6,<6.8|>=7,<7.5|>=8,<8.4|>=9,<9.3",
                 "co-stack/fal_sftp": "<0.2.6",
                 "cockpit-hq/cockpit": "<2.11.4",
+                "code16/sharp": "<9.7",
                 "codeception/codeception": "<3.1.3|>=4,<4.1.22",
                 "codeigniter/framework": "<3.1.10",
                 "codeigniter4/framework": "<4.6.2",
@@ -17463,7 +17471,7 @@
                 "prestashop/ps_facetedsearch": "<3.4.1",
                 "prestashop/ps_linklist": "<3.1",
                 "privatebin/privatebin": "<1.4|>=1.5,<1.7.4",
-                "processwire/processwire": "<=3.0.229",
+                "processwire/processwire": "<=3.0.246",
                 "propel/propel": ">=2.0.0.0-alpha1,<=2.0.0.0-alpha7",
                 "propel/propel1": ">=1,<=1.7.1",
                 "pterodactyl/panel": "<=1.11.10",
@@ -17835,7 +17843,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-21T18:07:19+00:00"
+            "time": "2025-10-22T17:05:47+00:00"
         }
     ],
     "aliases": [],
