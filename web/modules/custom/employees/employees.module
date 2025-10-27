@@ -424,6 +424,18 @@ function _invalidate_group_page_menu_cache($entity) {
 }
 
 /**
+ * Implements hook_node_presave()
+ */
+function employees_node_presave($node) {
+  // Prevent duplicate reviewers
+  if (isset($node->field_reviewer)) {
+    // SORT_REGULAR flag is needed to compare equality of sub-arrays
+    $unique_reviewers = array_unique($node->field_reviewer->getValue(), SORT_REGULAR);
+    $node->field_reviewer->setValue($unique_reviewers);
+  }
+}
+
+/**
  * Implements hook_media_presave()
  */
 function employees_media_presave($media) {
