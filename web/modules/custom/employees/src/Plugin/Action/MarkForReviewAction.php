@@ -82,14 +82,14 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state):void {
 
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state):void {
     $this->configuration['reviewer'] = $form_state->getValue('reviewer');
   }
 }

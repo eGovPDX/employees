@@ -883,7 +883,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  *      a local development environment, to insure that
  *      the site settings remain consistent.
  */
-include __DIR__ . "/settings.pantheon.php";
+include \Pantheon\Integrations\Assets::dir() . "/settings.pantheon.php";
 
 /**
  * If there is a local settings file, then include it

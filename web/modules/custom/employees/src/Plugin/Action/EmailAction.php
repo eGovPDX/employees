@@ -25,7 +25,7 @@ class EmailAction extends ViewsBulkOperationsActionBase implements PluginFormInt
    * {@inheritdoc}
    */
   public function execute($entity = NULL) {
-    if ($entity->getEntityTypeId() == "group_content") {
+    if ($entity->getEntityTypeId() == "group_relationship") {
       $uid = $entity->get("entity_id")->__get("target_id");
     } else {  // User entity
       $uid = $entity->get("uid")->value;
@@ -54,7 +54,7 @@ class EmailAction extends ViewsBulkOperationsActionBase implements PluginFormInt
     $to = $combined_result;
     $params["subject"] = $this->configuration["subject"];
     $params["message"] = $this->configuration["message"]["value"];
-    if ($entity->getEntityTypeId() == "group_content") {
+    if ($entity->getEntityTypeId() == "group_relationship") {
       $gid = $entity->get("gid")->__get("target_id");
       $group = \Drupal::entityTypeManager()->getStorage("group")->load($gid);
       $params["group"] = $group->label();

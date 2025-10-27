@@ -48,7 +48,7 @@ dependencies:
     - field.storage.user.field_title
     - field.storage.user.field_type
     - field.storage.user.field_workspace
-    - search_api.server.pantheon_solr8
+    - search_api.server.pantheon_search
   module:
     - group
     - media
@@ -889,4 +889,4 @@ options:
   delete_on_fail: true
   index_directly: true
   track_changes_in_references: false
-server: pantheon_solr8
+server: pantheon_search
