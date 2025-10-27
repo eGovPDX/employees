@@ -31,7 +31,10 @@ commands:
       - run:
           name: Get latest Terminus release
           command: |
-            echo 'export TERMINUS_RELEASE=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest" | jq -r .tag_name)'  >> $BASH_ENV && source $BASH_ENV
+            echo 'export CURL_OUTPUT=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest")'  >> $BASH_ENV && source $BASH_ENV
+            echo "Curl Output for debugging when this fails: $CURL_OUTPUT"
+            # echo 'export TERMINUS_RELEASE=$(curl --silent "https://api.github.com/repos/pantheon-systems/terminus/releases/latest" | jq -r .tag_name)'  >> $BASH_ENV && source $BASH_ENV
+            echo 'export TERMINUS_RELEASE=$(echo $CURL_OUTPUT | jq -r .tag_name)'  >> $BASH_ENV && source $BASH_ENV
             echo $TERMINUS_RELEASE > ~/terminus_release.txt
             echo "Latest Terminus release: $TERMINUS_RELEASE"
       - restore_cache:
