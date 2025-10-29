@@ -173,16 +173,22 @@ There are a few extra steps for the assigned build master. This person is the fi
 
 We are using the Dev environment to bundle all the approved code together into a single release which can then be deployed to Test, and Live and make sure things are solid. At least once per week, or more frequently as needed, our combined changes should be pushed to the Test and Live environments. The test deployment is essentially the last check to see if our code will be safe on Production and build correctly as the Pantheon Quicksilver scripts operate in a slightly different environment than CircleCI's Terminus commands.
 
-1. Go to the Pantheon dashboard and navigate to the Test environment.
-2. Under Deploys, you should see that the code you just deployed to Dev is ready for Test. Check the box to clone the Live database to Test and then merge that code and run the build on Test. You should make sure and provide a handy release message that tells us a little about what is included.
-3. If necessary, go to the Test website and synchronize the configuration at /admin/config/development/configuration or run `lando terminus drush portlandor.test cim -y`.
-4. Verify that everything still works on Test.
-
-Once a deployment to Test has been tested and passes, the same set of changes should be promptly deployed to Production by following the same basic procedure above.
+1. [Create a new release](https://github.com/eGovPDX/employees/releases/new) in Github.
+    - Common convention is to use `v[SPRINT_NUMBER].[RELEASE_COUNT]` for the tag and release title. For example: v163.3 means the third release in Sprint 163.
+    - Click the `Generate release notes` button to automatically generate release notes. You can make additional edits to the release notes as well.
+    - Publish the new release.
+1. (Optional) In the [Actions page](https://github.com/eGovPDX/employees/actions), watch the deployment job progress.
+1. When the first job `Deploy to test` is finished, manually smoke test the Test site by visiting a few pages like site search, directory, news, group homepage, etc.
+    - Visit the configuration sync and status report pages in the admin menu. If config is not imported, it may be necessary to synchronize the configuration by running `lando terminus drush employees.test cim -y`. Never use the Drupal configuration synchronization admin UI to run the config import. (There be dragons... and the Drush timeout is significantly longer than the UI timeout. The UI timeout can lead to config coruption and data loss.)
+    - All reviewers will receive an email about the pending job that needs approval.
+1. If everything works on the Test site, approve the Live deployment job in the [Actions page](https://github.com/eGovPDX/employees/actions).
+1. After the approval, the `Deployment to live` starts. Repeat the step above to smoke test the Live site and review the configuration sync and status report pages.
+1. Add a News item in the [City Web Editors group](https://employees.portland.gov/web-support) on the Employees portal.
+    - There is a release notes template that can be cloned for a quick head start.
 
 ## Using Composer
 Composer is built into our Lando implementation for package management. We use it primarily to manage Drupal contrib modules and libraries.
-Here is a good guide to using Composer with Drupal 8: https://www.lullabot.com/articles/drupal-8-composer-best-practices
+Here is a good guide to using Composer with Drupal: https://www.lullabot.com/articles/drupal-8-composer-best-practices
 Composer cheat sheet: https://devhints.io/composer
 ### Installing contrib modules
 Use `lando composer require drupal/[module name]` to download contrib modules and add them to the composer.json file. This ensures they're installed in each environment where the site is built. Drupal modules that are added this way must also be enabled using the `lando drush pm:enable [module name]` command.
