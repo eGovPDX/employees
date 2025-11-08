@@ -9,7 +9,7 @@
         "bower-asset/toc": "^0.3.2",
         "choices/choices": "^11.0",
         "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6.0",
+        "cweagans/composer-patches": "^2.0",
         "drupal/action": "^0.2.2",
         "drupal/add_content_by_bundle": "^1.0@beta",
         "drupal/admin_dialogs": "^1.0",
@@ -214,8 +214,7 @@
             "drupal/core": {
                 "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
                 "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
-                "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2018-04-19/node-revisions-missing-local-tasks-2885278-11.patch",
-                "2769289 - Revision User information not displayed in views when content revision user is selected for View type Content": "https://www.drupal.org/files/issues/2018-09-07/node_revision_author-2769289-11.patch",
+                "2885278 - Node local tasks tabs do not appear on node revisions": "https://www.drupal.org/files/issues/2025-07-23/2885278-97.patch",
                 "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
                 "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2024-07-17/autocomplete-element-3212854-5.patch",
                 "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
@@ -226,7 +225,7 @@
                 "3474018 - [regression] CSS class is not added to MediaLibrary dialog": "https://www.drupal.org/files/issues/2025-10-09/3474018-11.2.5.patch"
             },
             "drupal/bulk_user_registration": {
-                "Drupal 11 Compatibility": "https://www.drupal.org/files/issues/2025-08-01/3519503-drupal-11-compatibility-2.patch",
+                "3519503 - Drupal 11 Compatibility": "https://www.drupal.org/files/issues/2025-11-07/3519503-drupal-11-compatibility-6.patch",
                 "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch"
             },
             "drupal/ckeditor_accordion": {
@@ -256,6 +255,9 @@
             },
             "drupal/media_revisions_ui": {
                 "3428662 - Drupal 10.1: Revisions tab appears twice on media": "https://www.drupal.org/files/issues/2024-03-15/media_duplicate_revision_tabs.patch"
+            },
+            "drupal/mimemail": {
+                "3554648 - Deprecated function: parse_str(): Passing null to parameter #1 ($string) of type string is deprecated": "https://git.drupalcode.org/project/mimemail/-/merge_requests/40.patch"
             },
             "drupal/openid_connect_windows_aad": {
                 "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
