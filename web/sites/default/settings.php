@@ -875,15 +875,20 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # $settings['migrate_file_private_path'] = '';
 
 /**
+ * Load services definition file.
+ */
+$settings['container_yamls'][] = __DIR__ . '/services.yml';
+
+/**
  * Include the Pantheon-specific settings file.
  *
  * n.b. The settings.pantheon.php file makes some changes
- *      that affect all envrionments that this site
+ *      that affect all environments that this site
  *      exists in.  Always include this file, even in
- *      a local development environment, to insure that
+ *      a local development environment, to ensure that
  *      the site settings remain consistent.
  */
-include \Pantheon\Integrations\Assets::dir() . "/settings.pantheon.php";
+include __DIR__ . "/settings.pantheon.php";
 
 /**
  * Skipping permissions hardening will make scaffolding
