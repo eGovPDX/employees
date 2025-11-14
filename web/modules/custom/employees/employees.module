@@ -486,7 +486,6 @@ function employees_mail($key, &$message, $params)
       $message['subject'] = t('@title', array('@title' => $params['title']), $options);
       $message['body'][] = $params['message'];
       $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
-      $message['headers']['Reply-To'] = $params['reply_to'];
       break;
     case 'employees_group_admin_email':
       $user = \Drupal::currentUser()->getAccount();
@@ -584,8 +583,6 @@ function _notify_reviewer($entity, $entity_event_type)
       \Drupal::logger('mail-log')->error(t('The latest revision author\'s email address for Node ID @id is empty.', array('@id' => $node->id())));
       return;
     }
-    // This will be used in employees_mail to set the Reply-To header
-    $params['reply_to'] = $current_user_email;
 
     // Send email to all reviewers EXCEPT the author
     $to_emails = [];
