@@ -1,0 +1,371 @@
+{
+    "_hash": "4cbfa7f20877b4751e8a55ce34e80d31ac9a948a600ac1490da8b75e050fa29d",
+    "patches": {
+        "drupal/core": [
+            {
+                "package": "drupal/core",
+                "description": "2567035 - Database::startLog() cause a notice in Shortcut::sort()",
+                "url": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
+                "sha256": "1653a0ccae0b3630b88b6586d2e969722811239a1bb649ccc83e3897f4a22a2b",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "2797583 - Dynamically provide action plugins for every moderation state change",
+                "url": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
+                "sha256": "d6767ddb98de528310c77943e78b9e8ae95a8143bb77612084162418d5b7c719",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "2885278 - Node local tasks tabs do not appear on node revisions",
+                "url": "https://www.drupal.org/files/issues/2025-07-23/2885278-97.patch",
+                "sha256": "18d1a932b6f2c7478e86a0dc6daa2eb1c8d41d5f705fa295e58ec34454744afa",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)",
+                "url": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
+                "sha256": "159e3cb57ac5648fceb11c6f07182b773a848e7830eea76cc9591af9bedcbdbe",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3212854 - Autocomplete form breaks wrapping container",
+                "url": "https://www.drupal.org/files/issues/2024-07-17/autocomplete-element-3212854-5.patch",
+                "sha256": "584bb904170e6406ce8e02cfc6c833c5466fb28cd24c17f9bde134ddd02c664a",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Retry starting transaction to fix the \"there is already an active transaction\" error",
+                "url": "patches/pe-430-retry-starting-transaction.patch",
+                "sha256": "2b4f041d358cd6f530b4094f675d185101b07c6e370d6e182dbeebfc7de2b279",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3095434 - Access denied when view own unpublished revision, access check is not using revision author",
+                "url": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
+                "sha256": "b73d5f179fe287960c7b6ba6e09f0568b5673cf7deba85aa3ef7ece34aa604f9",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "PE-479 - Update media library so that documents are the default first media type",
+                "url": "patches/pe-479-media-library-default-documents.patch",
+                "sha256": "13c8a376e8de1d01ce41445f11b85296c3ebfb1a2bc3a923758c1f97ad68a281",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified",
+                "url": "https://www.drupal.org/files/issues/2025-06-26/3410100-108-revert-3396628-11-x.patch",
+                "sha256": "3fd15d976630bd5e1ecda694e768e31ea5009f7a7002b344a382212b8e2f5864",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3415961 - [drupalMedia] Using the Insert Media button causes the window to scroll to the bottom of the page",
+                "url": "https://www.drupal.org/files/issues/2024-02-15/3415961.patch",
+                "sha256": "77ecfa9f74b19929670e05857fe603e81e203ee90cc3b2ce0048a7df9458f1e0",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "3474018 - [regression] CSS class is not added to MediaLibrary dialog",
+                "url": "https://www.drupal.org/files/issues/2025-10-09/3474018-11.2.5.patch",
+                "sha256": "51cb0b8c1e240e4af38d033434aea79d13352b9d0bea6abb9a40e1f5ce2acbc8",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/bulk_user_registration": [
+            {
+                "package": "drupal/bulk_user_registration",
+                "description": "3519503 - Drupal 11 Compatibility",
+                "url": "https://www.drupal.org/files/issues/2025-11-07/3519503-drupal-11-compatibility-6.patch",
+                "sha256": "bf5e431715838bc3235decd836acc53d3a6d7b77048b2433d6090b9ed1a6052e",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/bulk_user_registration",
+                "description": "POWR-3262 Bulk update existing users",
+                "url": "patches/powr-3262-bulk-update_existing_users.patch",
+                "sha256": "ef692b140811e73f99237815b40dab35e586499d252b1d4ceb76a6c9931aa51a",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/ckeditor_accordion": [
+            {
+                "package": "drupal/ckeditor_accordion",
+                "description": "3469556 - Set accordion title and content as empty when adding new row",
+                "url": "https://www.drupal.org/files/issues/2025-07-23/3469556-2.patch",
+                "sha256": "bf53d8389b8963e95a1bcc6edebaf02cdb536c8a2f6aaa5a91c2b8cce1af829a",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/ckeditor_accordion",
+                "description": "3124167 - Provide an accessible variant (MR #13 @ df3c1110)",
+                "url": "patches/ckeditor-accordion-mr-13-df3c1110-v3.patch",
+                "sha256": "3b727f81159e12e3e5265c5bfe50de38fcea0b9369b6df3671b2ea8d177a0f5b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/datetime_range": [
+            {
+                "package": "drupal/datetime_range",
+                "description": "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields",
+                "url": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch",
+                "sha256": "86f6b567df412b71d312db9871013edb09b06176136d3159c8791d272d71bde7",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/group": [
+            {
+                "package": "drupal/group",
+                "description": "3441825 - Drupal\\group\\Plugin\\Group\\RelationHandlerDefault::getRelationshipLabel() doesn't account for inexistent entity",
+                "url": "https://www.drupal.org/files/issues/2024-05-15/getRelationshipLabel-fix-for-accounting-inexistent-entities_3441825.patch",
+                "sha256": "cb46989d6b8e7dbc86db8f7d88ba0d9e67f16a7c2ad8281abf27d160ba0beadd",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "3020883 - Use VBO together with group permission",
+                "url": "https://www.drupal.org/files/issues/2024-06-04/group-3020883-51.patch",
+                "sha256": "c3442147c61430e36074a2f09aa04cd34bceaa16313d9e09e2cea479c889da7a",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL",
+                "url": "https://git.drupalcode.org/project/group/-/merge_requests/121.patch",
+                "sha256": "aab5a3a1bd680fde56ca387195b25d21dcc2769396317d8f3a505d4d32d8bddf",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/group_content_menu": [
+            {
+                "package": "drupal/group_content_menu",
+                "description": "3519798 - Add ability to set new menu link defaults to first available group menu",
+                "url": "https://www.drupal.org/files/issues/2025-07-29/3519798-set-default-group-menu-gcm3.0.6.x-4.patch",
+                "sha256": "c7ff371d4b054563d0eed9fda7b50e3332fa6ca3136728751c2448c2cfce93ff",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/group_notifications": [
+            {
+                "package": "drupal/group_notifications",
+                "description": "3287817 - Automated Drupal 10 compatibility fixes",
+                "url": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch",
+                "sha256": "dc4f915431e341899149d61de048be13fa9674233977c9bba4279b3dabde4da1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/field_states_ui": [
+            {
+                "package": "drupal/field_states_ui",
+                "description": "Drupal 11 compatibility",
+                "url": "https://git.drupalcode.org/project/field_states_ui/-/merge_requests/9.patch",
+                "sha256": "56f09b3598b2758ca0fc28fa40245e74eaab39149c95332a683f8d412729c0ef",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/field_states_ui",
+                "description": "3263814 - Error: Call to undefined method Drupal\\commerce_checkout\\Plugin\\Commerce\\CheckoutFlow\\MultistepDefault::getFormDisplay() ",
+                "url": "https://www.drupal.org/files/issues/2024-12-09/3263814-2.patch",
+                "sha256": "10651eaa15f21ddac2dd02357653ada6254fad20b353bf26c7b3388790d237e2",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/media_entity_download": [
+            {
+                "package": "drupal/media_entity_download",
+                "description": "3059830 - Make link title editable / add token support / more options - feature/WCOR-1199",
+                "url": "https://www.drupal.org/files/issues/2024-06-03/3059830-make-link-title-20.patch",
+                "sha256": "b8fbefa39f20eb256a0ed7f996a7fd57b027a1277bd78ace453caee4ae3c5fbf",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/media_revisions_ui": [
+            {
+                "package": "drupal/media_revisions_ui",
+                "description": "3428662 - Drupal 10.1: Revisions tab appears twice on media",
+                "url": "https://www.drupal.org/files/issues/2024-03-15/media_duplicate_revision_tabs.patch",
+                "sha256": "a978bbd2ae214d7fb3df433525d8511f4ce251895e99dc9bee60822a76bccdba",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/mimemail": [
+            {
+                "package": "drupal/mimemail",
+                "description": "3554648 - Deprecated function: parse_str(): Passing null to parameter #1 ($string) of type string is deprecated",
+                "url": "https://git.drupalcode.org/project/mimemail/-/merge_requests/40.patch",
+                "sha256": "b7d3586c5ecc5e9c17eb1b03dfda648b63f83c87d8467593b972bc89582ef0fa",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/openid_connect_windows_aad": [
+            {
+                "package": "drupal/openid_connect_windows_aad",
+                "description": "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name",
+                "url": "patches/powr2529-openid-connect-windows-aad-4.patch",
+                "sha256": "91572ed60edca18a547a1b7d87a700553dcd2125fa60a26d1d53264359d36de8",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/redirect": [
+            {
+                "package": "drupal/redirect",
+                "description": "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)",
+                "url": "https://www.drupal.org/files/issues/2025-09-08/redirect-loop-3401916-20.patch",
+                "sha256": "ef5738ef2c7283d62a8bcd3f0ca6cc268a91ea1c64d7a599ecd21f9d1414d344",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/scheduler_content_moderation_integration": [
+            {
+                "package": "drupal/scheduler_content_moderation_integration",
+                "description": "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)",
+                "url": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch",
+                "sha256": "3a92e56982b7ca9205833fa8946718d22f3bfb47a21dea879f9e8efa16a93f34",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/search_api_group_filtering": [
+            {
+                "package": "drupal/search_api_group_filtering",
+                "description": "3029582 - Fix handling of Views filter groups",
+                "url": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch",
+                "sha256": "30f0d2d6196568748636ff6ea849fd79a93d933658513438e0ea61d2e70646e3",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/show_email": [
+            {
+                "package": "drupal/show_email",
+                "description": "3485932 - D11 compatibility of show email address",
+                "url": "https://www.drupal.org/files/issues/2025-10-21/show_email-d11-compatibility.patch",
+                "sha256": "5468e2a7014ec07838f7896640477dc91cc3feb7cd1623f86485ac037fb84d2f",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/tour": [
+            {
+                "package": "drupal/tour",
+                "description": "PE-543 - Fix tour scrolling",
+                "url": "patches/pe-543-fix-tour-scrolling.patch",
+                "sha256": "163b957ae34c40a9d16b4ebbfe019221610d65a2364de7a0f5605cf892b6024e",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/views_bulk_edit": [
+            {
+                "package": "drupal/views_bulk_edit",
+                "description": "3024419 - Fix Required fields to really not be required (PE-669)",
+                "url": "https://www.drupal.org/files/issues/2024-12-04/3024419_fix-required_fields_mr20_68.patch",
+                "sha256": "50778bc9d45b7609a73305ba25ec10cd95dc02204ea3679d067d3689b571b6f5",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}
