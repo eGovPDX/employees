@@ -513,12 +513,11 @@ class PortlandOpenIdConnectUtil
         $user->set('field_managers', array_unique($manager_user_ids));
       }
     } catch (RequestException $e) {
-      // To many 404 errors. Disable logging for now.
-      // $variables = [
-      //   '@message' => 'No manager info for ' . $user->getAccountName(),
-      //   '@error_message' => $e->getMessage(),
-      // ];
-      // \Drupal::logger('portland OpenID')->debug('@message. Details: @error_message', $variables);
+      if($e->getCode() === 404) {
+        // User has no manager info. Clear the Managers field.
+        $user->set('field_managers', []);
+        return;
+      }
     }
   }
 
