@@ -11,6 +11,9 @@ config:
 proxy:
   solr:
     - solr-employees.lndo.site:8983
+  mailpit:
+    - mailpit.employees.lndo.site
+
 services:
   # The headers for / are too large and cause the URL scanner to return HPE_HEADER_OVERFLOW errors
   appserver_nginx:
@@ -54,6 +57,11 @@ services:
     portforward: true
     config:
       dir: private/solr-conf
+  mailpit:
+    type: mailpit
+    overrides:
+      environment:
+        MP_ALLOW_UNTRUSTED_TLS: TRUE
 tooling:
   drush:
     description: CUSTOM Run drush commands
