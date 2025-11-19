@@ -1,6 +1,8 @@
 services:
   anonymous_login_extranet.redirect:
     class: Drupal\anonymous_login_extranet\EventSubscriber\AnonymousLoginExtranetSubscriber
+    # *** Begin Anonymous Login Extranet change
     arguments: ['@config.factory', '@state', '@current_user', '@path.matcher', '@path_alias.manager', '@module_handler', '@path.validator', '@path.current', '@request_stack']
+    # *** End Anonymous Login Extranet change
     tags:
       - { name: event_subscriber }

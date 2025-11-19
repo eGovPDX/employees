@@ -1,6 +1,13 @@
 _core:
   default_config_hash: ZKVq7lpyGFQf-SCuj_Ng2yLPD24rKHxz-TzGQxBjLl4
-paths: "~/openid-connect/azure\r\n~/openid-connect/windows_aad\r\n~/saml/acs\r\n~/saml/login\r\n~/webform/css/*\r\n~/webform/javascript/*\r\n*"
+paths:
+  - ~/openid-connect/azure
+  - ~/openid-connect/windows_aad
+  - ~/saml/acs
+  - ~/saml/login
+  - '~/webform/css/*'
+  - '~/webform/javascript/*'
+  - '*'
 ip_exceptions: "172.16.0.0 - 172.31.255.255\r\n74.120.152.116 - 74.120.152.145"
 login_path: /user/login
 message: "You must login to view this page because you're not on the city network."
