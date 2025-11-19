@@ -224,16 +224,16 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         if($user_data['accountEnabled'] == 0 && $user->status->value == 1) $users_disabled []= $userName;
       }
 
+      // PTLD users don't have manager data
+      if ($data["domain"] == "portlandoregon.gov") {
+        PortlandOpenIdConnectUtil::GetUserManager($data["access_token"], $user);
+      }
+
       // echo (($user->isNew()) ? "created," : "updated,") . $user_data['userPrincipalName'] . PHP_EOL;
       try {
         $user->save();
       } catch (Exception $e) {
         \Drupal::logger('portland OpenID')->error('Failed to save user ' . $user_data['userPrincipalName']);
-      }
-
-      // PTLD users don't have manager data
-      if ($data["domain"] == "portlandoregon.gov") {
-        PortlandOpenIdConnectUtil::GetUserManager($data["access_token"], $user);
       }
     }
 
