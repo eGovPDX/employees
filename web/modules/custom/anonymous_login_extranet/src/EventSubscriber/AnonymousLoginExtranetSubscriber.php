@@ -14,12 +14,14 @@ use Drupal\Core\State\StateInterface;
 use Drupal\Core\Url;
 use Drupal\path_alias\AliasManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+// *** Begin Anonymous Login Extranet change
 use Symfony\Component\HttpFoundation\RequestStack;    
+// *** End Anonymous Login Extranet change
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Class AnonymousLoginExtranetSubscriber.
+ * Event Subscriber for redirecting to login page for anonymous users.
  *
  * @package Drupal\anonymous_login_extranet
  */
@@ -83,10 +85,12 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
    */
   protected $currentPath;
 
+  // *** Begin Anonymous Login Extranet change
   /**
    * @var \Symfony\Component\HttpFoundation\Request
    */
   protected $request;
+  // *** End Anonymous Login Extranet change
   
   /**
    * The Server API for this build of PHP.
@@ -114,22 +118,16 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
    *   The path validator service.
    * @param \Drupal\Core\Path\CurrentPathStack $current_path
    *   The current path.
+   * *** Begin Anonymous Login Extranet change
    * @param Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack object.
+   * *** End Anonymous Login Extranet change
    * @param string $sapi
    *   (Optional) The Server API for this build of PHP.
    *   We need it to prevent skipping during tests.
    */
-  public function __construct(ConfigFactoryInterface $config_factory,
-                              StateInterface $state,
-                              AccountProxyInterface $current_user,
-                              PathMatcherInterface $path_matcher,
-                              AliasManagerInterface $alias_manager,
-                              ModuleHandlerInterface $module_handler,
-                              PathValidatorInterface $path_validator,
-                              CurrentPathStack $current_path,
-                              RequestStack $request_stack,
-                              $sapi = PHP_SAPI) {
+  // *** Begin Anonymous Login Extranet change
+  public function __construct(ConfigFactoryInterface $config_factory, StateInterface $state, AccountProxyInterface $current_user, PathMatcherInterface $path_matcher, AliasManagerInterface $alias_manager, ModuleHandlerInterface $module_handler, PathValidatorInterface $path_validator, CurrentPathStack $current_path, RequestStack $request_stack, $sapi = PHP_SAPI) {
     $this->configFactory = $config_factory;
     $this->state = $state;
     $this->currentUser = $current_user;
@@ -141,11 +139,12 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     $this->request = $request_stack->getCurrentRequest();
     $this->sapi = $sapi;
   }
+  // *** End Anonymous Login Extranet change
 
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['redirect', 100];
     return $events;
   }
@@ -174,12 +173,13 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     if (!($paths = $this->paths()) || empty($paths['include'])) {
       return;
     }
-    
+
     // Skip if the user is not anonymous.
     if (!$this->currentUser->isAnonymous()) {
       return;
     }
 
+	// *** Begin Anonymous Login Extranet change
     // Skip for internal IP addresses.
     $ip = $this->request->getClientIp();
     // drupal_set_message($ip);
@@ -190,14 +190,19 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
         return;
       }
     }
-    
+    // *** End Anonymous Login Extranet change
+	
     // Get current request.
     $request = $event->getRequest();
+
+    // Base path. This is used if Drupal is installed in a subdirectory.
+    $base_path = $request->getBasePath();
 
     // Determine the current path and alias.
     $current_path = $this
       ->aliasManager
       ->getPathByAlias($this->currentPath->getPath($request));
+    $current_path = $base_path ? $base_path . $current_path : $current_path;
     $current = [
       'path' => $current_path,
       'alias' => $this->aliasManager->getAliasByPath($current_path),
@@ -209,6 +214,7 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     }
 
     $login_page = '/user/login';
+    $login_page = $base_path ? $base_path . $login_page : $login_page;
 
     // Validate path to prevent system error if path doesn't exist
     // or it was deleted for some reason.
@@ -291,13 +297,10 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     ];
 
     // Fetch the stored paths set in the admin settings.
-    if ($setting = $this->configFactory->get('anonymous_login_extranet.settings')->get('paths')) {
-      // Split by each newline.
-      $setting = explode(PHP_EOL, $setting);
-
+    if ($config_paths = $this->configFactory->get('anonymous_login_extranet.settings')->get('paths')) {
       // Iterate each path and determine if the path should be included
       // or excluded.
-      foreach ($setting as $path) {
+      foreach ($config_paths as $path) {
         if (substr($path, 0, 1) == '~') {
           $path = substr($path, 1);
           $path = $this->pathSlashCut($path);
@@ -321,6 +324,7 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
     return $paths;
   }
 
+  // *** Begin Anonymous Login Extranet change
   /**
    * Fetch the IP address ranges.
    *
@@ -363,6 +367,7 @@ class AnonymousLoginExtranetSubscriber implements EventSubscriberInterface {
 
     return $ip_ranges;
   }
+  // *** End  Anonymous Login Extranet change
 
   /**
    * Cut leading and trailer slashes, if needed.

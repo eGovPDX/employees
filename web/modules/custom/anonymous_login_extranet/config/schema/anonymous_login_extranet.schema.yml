@@ -4,11 +4,16 @@ anonymous_login_extranet.settings:
   label: 'Anonymous login for extranets settings.'
   mapping:
     paths:
-      type: string
+      type: sequence
       label: 'Anonymous login for extranets page paths.'
+      sequence:
+        type: string
+        label: 'Path'
+    # *** Begin Anonymous Login Extranet change
     ip_exceptions:
       type: string
       label: 'Anonymous login for extranets IP address ranges.'
+    # *** End Anonymous Login Extranet change
     login_path:
       type: string
       label: 'Site login page path.'

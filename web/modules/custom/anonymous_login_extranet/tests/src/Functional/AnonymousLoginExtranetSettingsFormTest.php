@@ -1,21 +1,21 @@
 <?php
 
-namespace Drupal\Tests\anonymous_login\Functional;
+namespace Drupal\Tests\anonymous_login_extranet\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Anonymous login settings form browser tests.
+ * Anonymous Login for Extranet for Extranet settings form browser tests.
  *
- * @group anonymous_login
+ * @group anonymous_login_extranet
  */
-class AnonymousLoginSettingsFormTest extends BrowserTestBase {
+class AnonymousLoginExtranetSettingsFormTest extends BrowserTestBase {
 
   /**
    * {@inheritdoc}
    */
   protected static $modules = [
-    'anonymous_login',
+    'anonymous_login_extranet',
     'node',
   ];
 
@@ -36,7 +36,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->moduleConfig = $this->config('anonymous_login.settings');
+    $this->moduleConfig = $this->config('anonymous_login_extranet.settings');
   }
 
   /**
@@ -46,7 +46,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
     $this->drupalGet('admin/config/user-interface/anonymous-login');
     $this->assertSession()->statusCodeEquals(403);
 
-    $this->drupalLogin($this->drupalCreateUser(['administer anonymous login settings']));
+    $this->drupalLogin($this->drupalCreateUser(['administer Anonymous Login for Extranet settings']));
 
     $this->drupalGet('admin/config/user-interface/anonymous-login_wrong');
     $this->assertSession()->statusCodeEquals(404);
@@ -60,7 +60,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
       'message' => 'Test login message.',
     ];
     // Test login path validation.
-    $this->submitForm($edit, t('Save configuration'));
+    $this->submitForm($edit, 'Save configuration');
     $this->assertSession()->pageTextContains('Login page path is invalid. Check it please.');
 
     // Prepare node to use it in login path setting.
@@ -74,7 +74,7 @@ class AnonymousLoginSettingsFormTest extends BrowserTestBase {
     $edit['login_path'] = '/node/1';
 
     // Test form saving.
-    $this->submitForm($edit, t('Save configuration'));
+    $this->submitForm($edit, 'Save configuration');
     $this->assertSession()->pageTextContains('The configuration options have been saved.');
 
     $this->drupalGet('admin/config/user-interface/anonymous-login');

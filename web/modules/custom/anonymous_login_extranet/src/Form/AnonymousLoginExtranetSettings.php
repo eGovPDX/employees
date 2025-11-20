@@ -2,14 +2,12 @@
 
 namespace Drupal\anonymous_login_extranet\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Path\PathValidatorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class AnonymousLoginExtranetSettings.
+ * Anonymous Login Extranet Settings Form
  */
 class AnonymousLoginExtranetSettings extends ConfigFormBase {
 
@@ -37,26 +35,13 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
   }
 
   /**
-   * Constructs a AnonymousLoginExtranetSettings object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
-   *   The path validator service.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, PathValidatorInterface $path_validator) {
-    parent::__construct($config_factory);
-    $this->pathValidator = $path_validator;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('path.validator')
-    );
+    $instance = parent::create($container);
+    $instance->pathValidator = $container->get('path.validator');
+
+    return $instance;
   }
 
   /**
@@ -64,18 +49,21 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('anonymous_login_extranet.settings');
+    $paths = $config->get('paths') ?? [];
     $form['paths'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Page paths'),
-      '#default_value' => $config->get('paths'),
+      '#default_value' => $paths ? implode(PHP_EOL, $paths) : '',
       '#description' => $this->t('Enter a list of page paths that will force anonymous users to login before viewing. After logging in, they will be redirected back to the requested page. Enter each path on a different line. Wildcards (*) can be used. Prefix a path with ~ (tilde) to exclude it from being redirected.'),
     ];
-    $form['ip_exceptions'] = [
+    // *** Begin Anonymous Login Extranet change
+	$form['ip_exceptions'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Internal IP Addresses'),
       '#default_value' => $config->get('ip_exceptions'),
       '#description' => $this->t('Enter a list of internal IP addresses. Anonymous users from these IP addresses will not be forced to login. Enter each IP address on a different line. IP address ranges can also be entered using the format \'192.168.0.0 - 192.168.255.255\'.'),
     ];
+	// *** End Anonymous Login Extranet change
     $form['login_path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Login page path'),
@@ -98,6 +86,7 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
 
+	// *** Begin Anonymous Login Extranet change
     // IP address range validation.
     $ip_exceptions = $form_state->getValue('ip_exceptions');
     if (strlen($ip_exceptions)) {
@@ -123,7 +112,11 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
         }
       }
     }
+	// *** End Anonymous Login Extranet change
     
+    $paths = array_filter(array_map('trim', explode(PHP_EOL, $form_state->getValue('paths'))));
+    $form_state->setValue('paths', $paths);
+
     // Login page path validation.
     $path = $this->pathValidator
       ->getUrlIfValidWithoutAccessCheck($form_state->getValue('login_path'));
@@ -134,7 +127,6 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
       // Set path without language prefix.
       $form_state->setValue('login_path', '/' . $path->getInternalPath());
     }
-
   }
 
   /**
@@ -145,7 +137,9 @@ class AnonymousLoginExtranetSettings extends ConfigFormBase {
 
     $this->config('anonymous_login_extranet.settings')
       ->set('paths', $form_state->getValue('paths'))
+	  // *** Begin Anonymous Login Extranet change
       ->set('ip_exceptions', $form_state->getValue('ip_exceptions'))
+	  // *** End Anonymous Login Extranet change
       ->set('login_path', $form_state->getValue('login_path'))
       ->set('message', $form_state->getValue('message'))
       ->save();

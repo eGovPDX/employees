@@ -1,19 +1,20 @@
 <?php
 
-namespace Drupal\Tests\anonymous_login\Unit;
+namespace Drupal\Tests\anonymous_login_extranet\Unit;
 
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Drupal\anonymous_login\EventSubscriber\AnonymousLoginExtranetSubscriber;
+use Drupal\anonymous_login_extranet\EventSubscriber\AnonymousLoginExtranetSubscriber;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * Tests the redirect logic.
  *
- * @group anonymous_login
+ * @group anonymous_login_extranet
  *
- * @coversDefaultClass \Drupal\anonymous_login\EventSubscriber\AnonymousLoginExtranetSubscriber
+ * @coversDefaultClass \Drupal\anonymous_login_extranet\EventSubscriber\AnonymousLoginExtranetSubscriber
  */
 class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
 
@@ -29,7 +30,7 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
     }
     else {
       $alias = empty($alias) ? $request_uri : $alias;
-      $redirect_uri = $redirect_uri . '?destination=' . substr($alias, 1);
+      $redirect_uri = $redirect_uri . '?destination=' . $alias;
     }
     $this->assertTrue($event->getResponse() instanceof RedirectResponse);
     $response = $event->getResponse();
@@ -40,7 +41,7 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
   /**
    * Data provider for test.
    */
-  public function getRedirectData() {
+  public static function getRedirectData(): array {
     return [
       ['/user/login', '/user/login'],
       // For $paths['exclude'][] = 'user/reset/*'.
@@ -77,18 +78,18 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
     $state->expects($this->any())
       ->method('get')
       ->with('system.maintenance_mode')
-      ->will($this->returnValue(FALSE));
+      ->willReturn(FALSE);
 
     $current_user = $this->createMock('Drupal\Core\Session\AccountProxyInterface');
     $current_user->expects($this->any())
       ->method('isAnonymous')
-      ->will($this->returnValue(TRUE));
+      ->willReturn(TRUE);
 
     $alias_manager = $this->createMock('Drupal\path_alias\AliasManagerInterface');
     $alias_manager->expects($this->any())
       ->method('getPathByAlias')
       ->with($this->anything())
-      ->will($this->returnCallback(function ($alias) {
+      ->willReturnCallback(function ($alias) {
         switch ($alias) {
           case '/node-1-alias':
             $path = '/node/1';
@@ -103,11 +104,11 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
         }
 
         return $path;
-      }));
+      });
     $alias_manager->expects($this->any())
       ->method('getAliasByPath')
       ->with($this->anything())
-      ->will($this->returnCallback(function ($path) {
+      ->willReturnCallback(function ($path) {
         switch ($path) {
           case '/node/1':
             $alias = '/node-1-alias';
@@ -122,7 +123,7 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
         }
 
         return $alias;
-      }));
+      });
 
     $paths = [
       'include' => ['*'],
@@ -137,7 +138,7 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
     $path_matcher->expects($this->any())
       ->method('matchPath')
       ->with($this->anything(), $this->anything())
-      ->will($this->returnCallback(function ($path, $patterns) {
+      ->willReturnCallback(function ($path, $patterns) {
           $to_replace = [
             '/(\r\n?|\n)/',
             '/\\\\\*/',
@@ -152,27 +153,30 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
           $search = '/^(' . preg_replace($to_replace, $replacements, $patterns_quoted) . ')$/';
 
           return (bool) preg_match($search, $path);
-      }));
+      });
     $module_handler = $this->createMock('Drupal\Core\Extension\ModuleHandlerInterface');
     $module_handler->expects($this->any())
       ->method('alter')
-      ->will($this->returnValue($paths));
+      ->willReturn($paths);
     $path_validator = $this->createMock('Drupal\Core\Path\PathValidatorInterface');
     $path_validator->expects($this->any())
       ->method('getUrlIfValidWithoutAccessCheck')
-      ->will($this->returnValue(FALSE));
+      ->willReturn(FALSE);
     $current_path = $this->createMock('Drupal\Core\Path\CurrentPathStack');
     $current_path->expects($this->any())
       ->method('getPath')
       ->with($request)
-      ->will($this->returnValue($request->getPathInfo()));
+      ->willReturn($request->getPathInfo());
 
     $subscriber = new AnonymousLoginExtranetSubscriber(
       $this->getConfigFactoryStub(
         [
-          'anonymous_login.settings' =>
+          'anonymous_login_extranet.settings' =>
           [
-            'paths' => '*' . PHP_EOL . '~/node/2',
+            'paths' => [
+              '*',
+              '~/node/2',
+            ],
             'login_path' => '/user/login',
           ],
           'system.site' => ['page.front' => '<front>'],
@@ -207,7 +211,11 @@ class AnonymousLoginExtranetSubscriberTest extends UnitTestCase {
     $request = Request::create($request_uri, 'GET', [], [], [], ['SCRIPT_NAME' => 'index.php']);
 
     $http_kernel = $this->createMock('\Symfony\Component\HttpKernel\HttpKernelInterface');
-    return new RequestEvent($http_kernel, $request, 'test');
+    $request_type = defined('\Symfony\Component\HttpKernel\HttpKernelInterface::MAIN_REQUEST') ?
+    HttpKernelInterface::MAIN_REQUEST :
+    // @phpstan-ignore-next-line as it is deprecated onwards symfony 5.3 version.
+    HttpKernelInterface::MASTER_REQUEST;
+    return new RequestEvent($http_kernel, $request, $request_type);
   }
 
 }
