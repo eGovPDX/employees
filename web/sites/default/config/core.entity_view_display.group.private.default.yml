@@ -18,10 +18,12 @@ dependencies:
     - group_content_menu.group_content_menu_type.page_menu
     - views.view.group_list_views
     - views.view.group_search_index
+    - views.view.notifications
   module:
     - group_content_menu
     - layout_builder
     - layout_builder_restrictions
+    - layout_discovery
     - layout_library
     - options
     - system
@@ -34,6 +36,26 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: Notifications
+          context_mapping: {  }
+        components:
+          cc91efb2-ac72-4f54-a42f-575db73410a5:
+            uuid: cc91efb2-ac72-4f54-a42f-575db73410a5
+            region: content
+            configuration:
+              id: 'views_block:notifications-block_group_notifications'
+              label: ''
+              label_display: '0'
+              provider: views
+              context_mapping: {  }
+              views_label: ''
+              items_per_page: null
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
       -
         layout_id: westy_two_column_page_hero
         layout_settings:
@@ -93,7 +115,7 @@ third_party_settings:
       -
         layout_id: westy_three_column
         layout_settings:
-          label: ''
+          label: 'Main Content'
           context_mapping: {  }
         components:
           6066a5fe-57b8-49ec-9275-538b104f1398:
@@ -124,7 +146,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 4
             additional: {  }
           aa0e213f-74f5-4ea6-8c7e-b698c8a232d4:
@@ -137,7 +159,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: Today
-              items_per_page: none
+              items_per_page: 0
             weight: 10
             additional: {  }
           a1bd2647-53f4-46e1-9d54-784a27b69b0e:
@@ -150,7 +172,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 11
             additional: {  }
           bf2c52f1-eca4-48e0-942b-de4e8669f9e1:
@@ -182,7 +204,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 1
             additional: {  }
           1375b01e-c2ff-4eeb-ab7f-890f84f8b13b:
@@ -195,7 +217,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 9
             additional: {  }
           aa9a1b0d-76a5-4bd5-83e7-d92d82cffee5:
@@ -208,7 +230,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 7
             additional: {  }
           2a562cb8-fba0-4b0e-83ed-b419c275b227:
@@ -221,7 +243,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 5
             additional: {  }
           931d9262-6c85-49f6-be46-896928f197b7:
@@ -234,7 +256,7 @@ third_party_settings:
               provider: views
               context_mapping: {  }
               views_label: ''
-              items_per_page: none
+              items_per_page: 0
             weight: 8
             additional: {  }
           d33b6db2-1d7c-4c27-97ea-9e6f5888e6e7:
