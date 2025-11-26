@@ -7,6 +7,7 @@ dependencies:
     - node.type.alert
     - system.menu.editor-toolbar
     - user.role.administrator
+    - user.role.alert_editor
     - user.role.site_editor
   module:
     - content_moderation
@@ -315,16 +316,34 @@ display:
           show_multipage_selection_box: default
           show_select_all: default
           selected_actions:
-            4:
+            -
               action_id: mark_for_review_action
               preconfiguration:
                 add_confirmation: false
+                confirm_help_text: ''
                 label_override: 'Mark for review'
-            5:
+                message_override: ''
+            -
               action_id: employees_publish_action
               preconfiguration:
                 add_confirmation: false
+                confirm_help_text: ''
                 label_override: Publish
+                message_override: ''
+            -
+              action_id: employees_unpublish_action
+              preconfiguration:
+                add_confirmation: false
+                confirm_help_text: ''
+                label_override: Unpublish
+                message_override: ''
+            -
+              action_id: views_bulk_operations_delete_entity
+              preconfiguration:
+                add_confirmation: false
+                confirm_help_text: ''
+                label_override: Delete
+                message_override: ''
         title:
           id: title
           table: node_field_data
@@ -717,6 +736,7 @@ display:
         type: role
         options:
           role:
+            alert_editor: alert_editor
             site_editor: site_editor
             administrator: administrator
       filters:
@@ -875,7 +895,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: '<p><a href="/node/add/alert" class="button">Add alert</a></p>'
+          content: '<p><a href="/node/add/alert?destination=/alerts/admin" class="button">Add alert</a></p>'
           tokenize: false
         result:
           id: result
