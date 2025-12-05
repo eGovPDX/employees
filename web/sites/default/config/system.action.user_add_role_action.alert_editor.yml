@@ -1,0 +1,14 @@
+uuid: 5772a1b5-cdb9-4ff3-868b-6ac3a92b68ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.alert_editor
+  module:
+    - user
+id: user_add_role_action.alert_editor
+label: 'Add the Alert editor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: alert_editor

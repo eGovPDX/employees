@@ -1,0 +1,14 @@
+uuid: 84675649-6f43-42e2-a768-06f9940d3c79
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.alert_editor
+  module:
+    - user
+id: user_remove_role_action.alert_editor
+label: 'Remove the Alert editor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: alert_editor
