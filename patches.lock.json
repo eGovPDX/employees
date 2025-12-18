@@ -1,5 +1,5 @@
 {
-    "_hash": "c8976901492d2118935830f7e0d08554ee78e7824891a5a8d4617e9d78fdb9d6",
+    "_hash": "62db18b0ea28c72e9dd1f16884111af749be0b7f506d1e3f13f4594d4bc21b6c",
     "patches": {
         "drupal/core": [
             {
@@ -358,6 +358,16 @@
             }
         ],
         "drupal/tour": [
+            {
+                "package": "drupal/tour",
+                "description": "3562939 - Missing library assets/shepherd/css/shepherd.css",
+                "url": "https://www.drupal.org/files/issues/2025-12-22/Missing_library_shepherd_css_file-3562939-3.patch",
+                "sha256": "d392f6be1b3be236f765c271686419982546d0ba7d1e7c270b3be2c633daf565",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:patches.json"
+                }
+            },
             {
                 "package": "drupal/tour",
                 "description": "PE-543 - Fix tour scrolling",
