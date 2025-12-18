@@ -74,31 +74,31 @@ git checkout master
 git pull origin master
 lando latest
 lando refresh
-git checkout -b powr-[ID]
+git checkout -b pe-[ID]
 ```
 
 <details>
 
 1. Verify you are on the master branch with `git checkout master`.
 2. On the master branch, run `git pull origin master`. This will make sure you have the latest changes from the remote master. Optionally, running `git pull -p origin` will prune any local branches not on the remote to help keep your local repo clean.
-3. Use the issue ID from Jira for a new feature branch name to start work: `git checkout -b powr-[ID]` to create and checkout a new branch. (We use lowercase for the branch name to help create Pantheon multidev environments correctly.) If the branch already exists, you may use `git checkout powr-[ID]` to switch to your branch. If you need to create multiple multidevs for your story, name your additional branches `powr-[ID][a-z]` or `powr-[ID]-[a-z or 1-9]` (but continue use just `POWR-[ID]` in the git commits and PR titles for all branches relating to that Jira story).
+3. Use the issue ID from Jira for a new feature branch name to start work: `git checkout -b pe-[ID]` to create and checkout a new branch. (We use lowercase for the branch name to help create Pantheon multidev environments correctly.) If the branch already exists, you may use `git checkout pe-[ID]` to switch to your branch. If you need to create multiple multidevs for your story, name your additional branches `pe-[ID][a-z]` or `pe-[ID]-[a-z or 1-9]` (but continue use just `PE-[ID]` in the git commits and PR titles for all branches relating to that Jira story).
 
    **TLDR:**
     - New feature branch
         ```
-        git checkout -b powr-[ID]
+        git checkout -b pe-[ID]
         ```
     - New branch from current branch
         ```
-        powr-[ID][a-z]` or `powr-[ID]-[a-z or 1-9]
+        pe-[ID][a-z]` or `pe-[ID]-[a-z or 1-9]
         ```
     - Use base branch ID for base/sub-branch commits and PR titles
         ```
-        POWR-[ID]
-        // on base branch powr-123
-        git commit -m "POWR-123 ..."
-        // on powr-123-a branched from powr-123
-        git commit -m "POWR-123 ..."
+        PE-[ID]
+        // on base branch pe-123
+        git commit -m "PE-123 ..."
+        // on pe-123-a branched from pe-123
+        git commit -m "PE-123 ..."
         ```
 
 4. Run `lando latest` at the start of every sprint, or as directed by the build lead, to update your local database with a copy of the database from Test.
@@ -107,22 +107,39 @@ git checkout -b powr-[ID]
 
 </details>
 
+### Workflows for Composer patches
+
+[Official documentation on recommended workflows](https://docs.cweagans.net/composer-patches/usage/recommended-workflows/)
+
+#### Adding a patch
+
+1. Add the patch definition to `patches.json`.
+2. Run `lando composer patches-relock` to regenerate `patches.lock.json` with your new patch.
+3. Run `lando composer patches-repatch` to reapply the defined patches to all dependencies.
+
+#### Removing a patch
+
+1. Delete the patch definition from `patches.json`.
+2. Run `lando composer patches-relock` to regenerate `patches.lock.json`.
+3. Manually delete the dependency that you removed a patch from (the location of the dependency will vary, but a good starting point is to look in the /vendor or /web/modules/contrib directories).
+4. Run `lando composer patches-repatch` to reapply the defined patches to all dependencies.
+
 ### Commit code and push to Github
 
 1. In addition to any custom modules or theming files you may have created, you need to export any configuraiton changes to the repo in order for those changes to be synchronized. Run `lando drush cex` (config-export) in your local envionrment to create/update/delete the necessary config files. You will need to commit these to git.
 2. To commit your work, run `git add -A` to add all of the changes to your local repo. (If you prefer to be a little more precise, you can `git add [filename]` for each file or several files separated by a space.
-3. Then create a commit with a comment, such as `git commit -m "POWR-[ID] description of your change."`
+3. Then create a commit with a comment, such as `git commit -m "PE-[ID] description of your change."`
 4. Just before you push to GitHub, you should rebase your feature branch on the tip of the latest remote master branch. To do this run `git fetch origin master` then `git rebase -i origin/master`. This lets you "interactively" replay your change on the tip of the current release branch. You'll need to pick, squash or drop your changes and resolve any conflicts to get a clean commit that can be pushed to release. You may need to `git rebase --continue` until all of your changes have been replayed and your branch is clean. 
    - You may also choose to mrege in `master` (`git merge origin master`) if your branch has many commits that would make a rebase difficult or if you have already pushed your branch to Github.
 5. Run `lando refresh` to refresh your local environment with any changes from master. (This runs composer install, drush updb, drush cim, and drush cr.)
-6. You can now run `git push -u origin powr-[ID]`. This will push your feature branch and set its remote to a branch of the same name on origin (GitHub).
+6. You can now run `git push -u origin pe-[ID]`. This will push your feature branch and set its remote to a branch of the same name on origin (GitHub).
 
 ### Create a pull request
 
 When your work is ready for code review and merge:
 
 - Create a Pull Request (PR) on GitHub for your feature branch, it will default to branching from `master`.
-- Make sure to include POWR-[ID] and a short description of the feature in your PR title so that Jira can relate that PR to the correct issue. This also helps with writing release notes.
+- Make sure to include PE-[ID] and a short description of the feature in your PR title so that Jira can relate that PR to the correct issue. This also helps with writing release notes.
 
 ### Continuous integration on CircleCI
 
@@ -158,7 +175,7 @@ There are a few extra steps for the assigned build master. This person is the fi
 ### Bundling a release and deploying to Pantheon Dev site
 
 1. After a team member has provided an approval, which may be after responding to feedback and resolving review issues, the build master will be able to push the "Squash and merge" button and commit the work to the `master` branch. 
-    - Make sure the PR has `master` set as the base branch and that the merge message is prepended with the Jira issue ID (e.g. "POWR-42 Adding the super duper feature")
+    - Make sure the PR has `master` set as the base branch and that the merge message is prepended with the Jira issue ID (e.g. "PE-42 Adding the super duper feature")
    - The merge triggers an automated CircleCI build on the Dev environment.
 2. Test that everything still works on the Dev site. This is just a sanity check since a QA has already been performed.
    - Can you confirm the expected code changes were deployed?
