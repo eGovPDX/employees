@@ -215,7 +215,14 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "scripts": {},
+    "scripts": {
+        "post-install-cmd": [
+            "@composer patches-repatch --no-scripts"
+        ],
+        "post-update-cmd": [
+            "@composer patches-repatch --no-scripts"
+        ]
+    },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
     }
