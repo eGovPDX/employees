@@ -151,10 +151,6 @@ build_and_deploy: &build_and_deploy
     - run:
         name: Composer install
         command: |
-          # TODO: [POWR-3429] I'm not sure we need this hotfix on employees - getting error on module but can't update due to lightning dependency, try removing and getting fresh
-          rm -rf ./web/modules/contrib/search_api_solr
-          # Pantheon does not allow these folders but Composer needs them
-          rm -rf ./web/modules/contrib/facets
           # Run composer install
           composer -V
           composer config --global --auth github-oauth.github.com "$COMPOSER_TOKEN"
@@ -386,7 +382,8 @@ clone_live_database: &clone_live_database
 
           # Reindex the Solr server. Indexing will take some time
           # and will continue running after the CircleCI build finishes.
-          echo "Begin indexing the Solr server"
+          echo "Begin reindexing the Solr server"
+          terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- search-api:reset-tracker
           terminus drush $CIRCLE_PROJECT_REPONAME.$PANTHEON_ENV -- search-api:index full_index &
           sleep 20
     - run:

@@ -1,0 +1,71 @@
+{
+    "patches": {
+        "drupal/core": {
+            "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
+            "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
+            "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
+            "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2024-07-17/autocomplete-element-3212854-5.patch",
+            "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
+            "3095434 - Access denied when view own unpublished revision, access check is not using revision author": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
+            "PE-479 - Update media library so that documents are the default first media type": "patches/pe-479-media-library-default-documents.patch",
+            "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified": "https://www.drupal.org/files/issues/2025-06-26/3410100-108-revert-3396628-11-x.patch",
+            "3415961 - [drupalMedia] Using the Insert Media button causes the window to scroll to the bottom of the page": "https://www.drupal.org/files/issues/2024-02-15/3415961.patch"
+        },
+        "drupal/bulk_user_registration": {
+            "3519503 - Drupal 11 Compatibility": "https://www.drupal.org/files/issues/2025-11-07/3519503-drupal-11-compatibility-6.patch",
+            "POWR-3262 Bulk update existing users": "patches/powr-3262-bulk-update_existing_users.patch"
+        },
+        "drupal/ckeditor_accordion": {
+            "3469556 - Set accordion title and content as empty when adding new row": "https://www.drupal.org/files/issues/2025-07-23/3469556-2.patch",
+            "3124167 - Provide an accessible variant (MR #13 @ df3c1110)": "patches/ckeditor-accordion-mr-13-df3c1110-v3.patch"
+        },
+        "drupal/datetime_range": {
+            "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch"
+        },
+        "drupal/group": {
+            "3441825 - Drupal\\group\\Plugin\\Group\\RelationHandlerDefault::getRelationshipLabel() doesn't account for inexistent entity": "https://www.drupal.org/files/issues/2024-05-15/getRelationshipLabel-fix-for-accounting-inexistent-entities_3441825.patch",
+            "3020883 - Use VBO together with group permission": "https://www.drupal.org/files/issues/2024-06-04/group-3020883-51.patch",
+            "3336280 - avoid fatal error when group argument to GroupAccessResult:: allowedIfHasGroupPermissions() is NULL": "https://git.drupalcode.org/project/group/-/merge_requests/121.patch"
+        },
+        "drupal/group_content_menu": {
+            "3519798 - Add ability to set new menu link defaults to first available group menu": "https://www.drupal.org/files/issues/2025-07-29/3519798-set-default-group-menu-gcm3.0.6.x-4.patch"
+        },
+        "drupal/group_notifications": {
+            "3287817 - Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch"
+        },
+        "drupal/field_states_ui": {
+            "Drupal 11 compatibility": "https://git.drupalcode.org/project/field_states_ui/-/merge_requests/9.patch",
+            "3263814 - Error: Call to undefined method Drupal\\commerce_checkout\\Plugin\\Commerce\\CheckoutFlow\\MultistepDefault::getFormDisplay() ": "https://www.drupal.org/files/issues/2024-12-09/3263814-2.patch"
+        },
+        "drupal/media_entity_download": {
+            "3059830 - Make link title editable / add token support / more options - feature/WCOR-1199": "https://www.drupal.org/files/issues/2024-06-03/3059830-make-link-title-20.patch"
+        },
+        "drupal/media_revisions_ui": {
+            "3428662 - Drupal 10.1: Revisions tab appears twice on media": "https://www.drupal.org/files/issues/2024-03-15/media_duplicate_revision_tabs.patch"
+        },
+        "drupal/openid_connect_windows_aad": {
+            "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
+        },
+        "drupal/rabbit_hole": {
+            "3516167 - Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff"
+        },
+        "drupal/redirect": {
+            "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)": "https://www.drupal.org/files/issues/2025-09-08/redirect-loop-3401916-20.patch"
+        },
+        "drupal/scheduler_content_moderation_integration": {
+            "3270462 - Set a default value in the publish / unpublish state dropdowns (PE-477)": "https://www.drupal.org/files/issues/2023-04-19/3270462-25.patch"
+        },
+        "drupal/search_api_group_filtering": {
+            "3029582 - Fix handling of Views filter groups": "https://www.drupal.org/files/issues/2022-07-30/3029582-13--fix_views_filter_groups_handling.patch"
+        },
+        "drupal/show_email": {
+            "3485932 - D11 compatibility of show email address": "https://www.drupal.org/files/issues/2025-10-21/show_email-d11-compatibility.patch"
+        },
+        "drupal/tour": {
+            "PE-543 - Fix tour scrolling": "patches/pe-543-fix-tour-scrolling.patch"
+        },
+        "drupal/views_bulk_edit": {
+            "3024419 - Fix Required fields to really not be required (PE-669)": "https://www.drupal.org/files/issues/2024-12-04/3024419_fix-required_fields_mr20_68.patch"
+        }
+    }
+}
