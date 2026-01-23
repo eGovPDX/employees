@@ -119,7 +119,7 @@ commands:
 ## Job to build and deploy to Pantheon
 build_and_deploy: &build_and_deploy
   docker:
-    - image: cimg/php:8.4-node
+    - image: cimg/php:8.3-node
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
@@ -324,7 +324,7 @@ build_and_deploy: &build_and_deploy
 
 tests: &tests
   docker:
-    - image: cimg/php:8.4-browsers
+    - image: cimg/php:8.3-browsers
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
@@ -354,7 +354,7 @@ tests: &tests
 
 clone_live_database: &clone_live_database
   docker:
-    - image: cimg/php:8.4-browsers
+    - image: cimg/php:8.3-browsers
       auth:
         username: egovpdx
         password: $DOCKERHUB_PASSWORD
