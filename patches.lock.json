@@ -1,5 +1,5 @@
 {
-    "_hash": "2c0f5a3d71d01a3e8ddd5d6518cd6ac45e415a2334d328716c837fab3f17ccc5",
+    "_hash": "d41dd3610db9316e2af2f53eab65c3d3974059a61701ecbe27ec4b436e64220a",
     "patches": {
         "drupal/core": [
             {
@@ -191,16 +191,6 @@
                 "extra": {
                     "provenance": "patches-file:patches.json"
                 }
-            },
-            {
-                "package": "drupal/group_content_menu",
-                "description": "3545902 - PHP 8.4 compatibility issues",
-                "url": "https://git.drupalcode.org/project/group_content_menu/-/merge_requests/58.patch",
-                "sha256": "d7d7f3f5a373f827397065fc962b0e42de25e18fc7b2216eded94a0674a24d2a",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
             }
         ],
         "drupal/group_notifications": [
@@ -209,18 +199,6 @@
                 "description": "3287817 - Automated Drupal 10 compatibility fixes",
                 "url": "https://www.drupal.org/files/issues/2022-06-15/group_notifications.1.x-dev.rector.patch",
                 "sha256": "dc4f915431e341899149d61de048be13fa9674233977c9bba4279b3dabde4da1",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            }
-        ],
-        "drupal/field_permissions": [
-            {
-                "package": "drupal/field_permissions",
-                "description": "3322809 - PHP 8.4 compatibility",
-                "url": "https://git.drupalcode.org/project/field_permissions/-/merge_requests/40.patch",
-                "sha256": "af2bdc25e1bb648d1b5c5c138317ae0fa384e89cae215959686a61138b546eae",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:patches.json"
@@ -273,18 +251,6 @@
                 }
             }
         ],
-        "drupal/mimemail": [
-            {
-                "package": "drupal/mimemail",
-                "description": "3554648 - Deprecated function: parse_str(): Passing null to parameter #1 ($string) of type string is deprecated",
-                "url": "https://git.drupalcode.org/project/mimemail/-/merge_requests/40.patch",
-                "sha256": "b7d3586c5ecc5e9c17eb1b03dfda648b63f83c87d8467593b972bc89582ef0fa",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            }
-        ],
         "drupal/openid_connect_windows_aad": [
             {
                 "package": "drupal/openid_connect_windows_aad",
@@ -301,8 +267,8 @@
             {
                 "package": "drupal/rabbit_hole",
                 "description": "3516167 - Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility",
-                "url": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.patch",
-                "sha256": "8a7d61de079ae37ec70545e9a856065d4b45d05066986ce9b8f5f71464907769",
+                "url": "https://git.drupalcode.org/project/rabbit_hole/-/merge_requests/82.diff",
+                "sha256": "726fe2bfbf29b3fc5d63a7b7019adcd149f49e98f2d72b747cd381469cda6a7a",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:patches.json"
@@ -358,16 +324,6 @@
             }
         ],
         "drupal/tour": [
-            {
-                "package": "drupal/tour",
-                "description": "3562939 - Missing library assets/shepherd/css/shepherd.css",
-                "url": "https://www.drupal.org/files/issues/2025-12-22/Missing_library_shepherd_css_file-3562939-3.patch",
-                "sha256": "d392f6be1b3be236f765c271686419982546d0ba7d1e7c270b3be2c633daf565",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            },
             {
                 "package": "drupal/tour",
                 "description": "PE-543 - Fix tour scrolling",
