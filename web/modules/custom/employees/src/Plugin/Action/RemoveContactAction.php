@@ -80,7 +80,7 @@ class RemoveContactAction extends ViewsBulkOperationsActionBase {
   /**
    * {@inheritdoc}
    */
-  public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
     return $object->access('edit', $account, $return_as_object);
   }
 }

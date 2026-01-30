@@ -30,7 +30,7 @@ final class AddGroupMembershipAction extends ViewsBulkOperationsActionBase imple
   /**
    * {@inheritdoc}
    */
-  public function execute(UserInterface $user = NULL) {
+  public function execute(?UserInterface $user = NULL) {
     if ($user === NULL || $this->configuration['group_id'] === 0) {
       return $this->t('Invalid entity or configuration.');
     }
