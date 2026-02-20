@@ -36,7 +36,7 @@ class UpdateUserPrimaryGroups extends ViewsBulkOperationsActionBase
   /**
    * {@inheritdoc}
    */
-  public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE)
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE)
   {
     /** @var \Drupal\user\UserInterface $object */
     $access = $object->status->access('edit', $account, TRUE)
