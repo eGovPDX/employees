@@ -1174,7 +1174,7 @@ function employees_form_user_login_form_alter(&$form, &$form_state)
     in_array($_ENV['PANTHEON_ENVIRONMENT'], [
       'cddev', 'dev', 'test', 'live', 'sandbox', 'pe-755'])
   ) {
-    $destination = \Drupal::request()->get('destination');
+    $destination = \Drupal::request()->query->get('destination');
     
     // Remove the default Drupal login form elements
     unset($form['name']);
