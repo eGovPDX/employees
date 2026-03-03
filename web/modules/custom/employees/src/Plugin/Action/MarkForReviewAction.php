@@ -47,7 +47,7 @@ class MarkForReviewAction extends ViewsBulkOperationsActionBase {
   /**
    * {@inheritdoc}
    */
-  public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
     if ($object->getEntityTypeId() === 'node') {
       $access = $object->access('update', $account, TRUE);
       return $return_as_object ? $access : $access->isAllowed();

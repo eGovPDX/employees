@@ -19,10 +19,17 @@ $fa-font-path: '/themes/custom/westy/dist';
 // ------------------------------------------------------------------------------------------
 // Preface all Westy styles with .ck-content to restrict them to the content within CKEditor
 .ck-content {
+  // Neutralize CKEditor content variables to allow Westy styles to apply correctly within the editor
+  --ck-content-font-color: initial;
+  --ck-content-font-family: initial;
+  --ck-content-font-size: initial;
+  --ck-content-line-height: initial;
+  --ck-content-word-break: initial;
+
   @import "westy.style";
 
   // Copy all `html, body { }` styles from _typography.scss or elsewhere here
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-weight: 400;
 
   // The CKEditor preview HTML for drupal media includes a duplicate list container when media is inside of a list.
