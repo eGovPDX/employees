@@ -10,8 +10,10 @@ plugin: windows_aad
 settings:
   client_id: 7cec2858-72a2-4a6a-bf26-336fd0c4e67e
   client_secret: open_id_aad_client_secret
+  iss_allowed_domains: ''
   authorization_endpoint_wa: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
   token_endpoint_wa: 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+  end_session_endpoint: ''
   userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me'
   map_ad_groups_to_roles: false
   group_mapping:
@@ -22,10 +24,9 @@ settings:
   userinfo_graph_api_use_other_mails: false
   userinfo_update_email: true
   hide_email_address_warning: false
+  prompt: '<noprompt>'
   subject_key: sub
   redirect_url: ''
   enable_single_sign_out: 0
   override_name: '0'
-  iss_allowed_domains: ''
-  end_session_endpoint: ''
   front_channel_logout_url: ''
