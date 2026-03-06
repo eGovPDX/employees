@@ -6,8 +6,9 @@ override_registration_settings: true
 end_session_enabled: true
 user_login_display: hidden
 redirect_login: user
-redirect_logout: ''
+redirect_logout: /
 userinfo_mappings:
   timezone: zoneinfo
   user_picture: picture
 role_mappings: {  }
+autostart_login: false
