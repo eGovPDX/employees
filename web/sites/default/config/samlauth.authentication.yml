@@ -16,7 +16,6 @@ drupal_login_roles:
   content_lead: '0'
   administrator: '0'
 sp_entity_id: employees.portland.gov
-sp_name_id_format: ''
 sp_x509_certificate: 'file:sites/default/files/private/sp.crt'
 sp_new_certificate: ''
 sp_private_key: 'file:sites/default/files/private/sp.key'
@@ -31,6 +30,7 @@ idp_certs:
   - 'file:sites/default/files/private/idp_test.crt'
   - 'file:sites/default/files/private/idp_live.crt'
   - 'file:sites/default/files/private/idp_sandbox.crt'
+  - 'file:sites/default/files/private/idp_pe-619.crt'
 idp_cert_encryption: ''
 unique_id_attribute: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
 map_users: false

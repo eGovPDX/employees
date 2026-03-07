@@ -30,7 +30,6 @@ dependencies:
   module:
     - datetime
     - responsive_image
-    - show_email
     - simple_gmap
     - telephone
     - user
@@ -58,6 +57,7 @@ content:
       map_type: m
       langcode: en
       apikey: ''
+      alt_text: 'Map location: %address'
     third_party_settings: {  }
     weight: 15
     region: content
@@ -205,6 +205,7 @@ content:
       map_type: m
       langcode: en
       apikey: ''
+      alt_text: 'Map location: %address'
     third_party_settings: {  }
     weight: 21
     region: content
@@ -225,6 +226,7 @@ content:
       map_type: m
       langcode: en
       apikey: ''
+      alt_text: 'Map location: %address'
     third_party_settings: {  }
     weight: 22
     region: content
@@ -261,6 +263,7 @@ content:
       map_type: m
       langcode: en
       apikey: ''
+      alt_text: 'Map location: %address'
     third_party_settings: {  }
     weight: 23
     region: content
@@ -274,14 +277,11 @@ content:
     weight: 13
     region: content
   mail:
-    type: show_email_address
+    type: basic_string
     label: above
-    settings:
-      hide_user_one: 1
-      email_mailto: 0
-      hide_per_role: {  }
+    settings: {  }
     third_party_settings: {  }
-    weight: 14
+    weight: 26
     region: content
   masquerade_as:
     type: masquerade_field_default
