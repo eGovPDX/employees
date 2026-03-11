@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: O5kx4FC8Kso_2JJ7Anle6fqD_i8UDy9uCdtg5W8C1Qo
+requirements:
+  openid_connect_connect_existing_users:
+    action: change_severity
+    severity: ok
+    reason: 'Security risk mitigated because our MS365 is a trusted OpenID provider.'
+  openid_connect_prompt_none:
+    action: change_severity
+    severity: ok
+    reason: 'MS documentation actually recommends using no prompt to let the identity service decide on the best user experience.'
+  webform_spam:
+    action: change_severity
+    severity: ok
+    reason: 'No risk of spam since entire site requires login to access.'
