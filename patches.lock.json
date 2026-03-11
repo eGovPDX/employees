@@ -1,5 +1,5 @@
 {
-    "_hash": "c99ea9f17978e4e913828551577744bac09b61392d31058b614d94deba5d3248",
+    "_hash": "69dc9f71b831101fa4eb85c10a47758fabb8b3fdac73f3c2a5cee795809ad56d",
     "patches": {
         "drupal/core": [
             {
@@ -251,29 +251,7 @@
                 }
             }
         ],
-        "drupal/openid_connect": [
-            {
-                "package": "drupal/openid_connect",
-                "description": "3577049 - Update.php fails with InvalidArgumentException : The configuration property settings.prompt.login doesn't exist",
-                "url": "https://git.drupalcode.org/project/openid_connect/-/merge_requests/193.patch",
-                "sha256": "eb0df85f2ac76e7b30f6299c6f3fe31bc1fdd92b61ff9b01a1cada5becbaf5b6",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            }
-        ],
         "drupal/openid_connect_windows_aad": [
-            {
-                "package": "drupal/openid_connect_windows_aad",
-                "description": "3577142 - prompt schema mismatch with parent plugin",
-                "url": "https://git.drupalcode.org/project/openid_connect_windows_aad/-/merge_requests/46.diff",
-                "sha256": "8d7098df64fa46360a7902c9252cd56d602991ce0734ae7dff43dbc09852ac84",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            },
             {
                 "package": "drupal/openid_connect_windows_aad",
                 "description": "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name",
