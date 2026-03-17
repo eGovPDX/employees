@@ -44,7 +44,31 @@ em.placeholder {
   }
 }
 
-// Fix table styling in ck-content elements by increasing specificity
-.ck-content table.table:not(.bogus):not(.bogus):not(.bogus) {
-  @extend .table;
+// Fix table styling in ck-content elements by resetting some properties with a higher specificity
+.ck-content table {
+  border-width: 0 !important;
+  border-color: var(--#{$prefix}table-border-color) !important;
+  margin: 0 !important;
+  margin-bottom: $spacer !important;
+
+  > :not(caption) > * > * {
+    padding: $table-cell-padding-y $table-cell-padding-x !important;
+    background-color: var(--#{$prefix}table-bg) !important;
+  }
+
+  &.table-bordered {
+    > :not(caption) > * {
+      border-color: inherit !important;
+      border-width: $table-border-width 0;
+
+      > * {
+        border-color: inherit !important;
+        border-width: 0 $table-border-width;
+      }
+    }
+  }
+
+  &.table-sm > :not(caption) > * > * {
+    padding: $table-cell-padding-y-sm $table-cell-padding-x-sm !important;
+  }
 }
