@@ -39,7 +39,7 @@ class CopyCreatedToUpdated extends ViewsBulkOperationsActionBase {
   /**
    * {@inheritdoc}
    */
-  public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
     if ($object->getEntityTypeId() === 'node' || $object->getEntityTypeId() === 'media') {
       $access = $object->access('update', $account, TRUE)->andIf($object->access('edit', $account, TRUE));
       return $return_as_object ? $access : $access->isAllowed();

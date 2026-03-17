@@ -57,7 +57,6 @@ function portland_openid_connect_user_update($account)
  *    drush sqlq "DELETE FROM semaphore WHERE name = 'cron';"
  * Get state values: 
  *    drush state:get epgov.user_sync.stop
- *    drush state:get epgov.user_sync.day_of_week
  *    drush state:get epgov.user_sync.sync_now
  *    drush state:get epgov.user_sync.batch_size
  *    drush state:get epgov.user_sync.last_sync_date.DOMAIN
@@ -80,12 +79,6 @@ function portland_openid_connect_cron()
   // Check if we need to sync now
   $sync_now = (strtolower(\Drupal::state()->get('epgov.user_sync.sync_now') ?? "") === "true");
 
-  // Get the day of the week to sync. Default is Saturday.
-  if( !$sync_now ) {
-    $sync_day = \Drupal::state()->get('epgov.user_sync.day_of_week') ?? "Saturday";
-    if(strtolower(date("l")) !== strtolower($sync_day) ) return;
-  }
-
   // Domains should be defined as constants in PortlandOpenIdConnectUtil
   $domains = [
     PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME => false,
@@ -98,10 +91,10 @@ function portland_openid_connect_cron()
     $last_check_removals_date = \Drupal::state()->get("epgov.user_sync.last_check_removals_date.$domain");
     $last_check_removals_date = empty($last_check_removals_date) ? (new DateTime("2024-10-01")) : new DateTime($last_check_removals_date);
 
-    // Do nothing if the last sync was done within 7 days
+    // Do nothing if the last sync was done within 1 day
     $now = new DateTime();
-    $skip_user_sync = ($now->diff($last_user_sync_date)->days < 7);
-    $skip_user_removal_check = ($now->diff($last_check_removals_date)->days < 7);
+    $skip_user_sync = ($now->diff($last_user_sync_date)->days < 1);
+    $skip_user_removal_check = ($now->diff($last_check_removals_date)->days < 1);
     if($skip_user_sync && $skip_user_removal_check) {
       $domains[$domain] = true;
       continue;

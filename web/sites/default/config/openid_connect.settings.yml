@@ -4,10 +4,11 @@ always_save_userinfo: true
 connect_existing_users: true
 override_registration_settings: true
 end_session_enabled: true
-user_login_display: null
+user_login_display: hidden
 redirect_login: user
-redirect_logout: ''
+redirect_logout: /
 userinfo_mappings:
   timezone: zoneinfo
   user_picture: picture
 role_mappings: {  }
+autostart_login: false
