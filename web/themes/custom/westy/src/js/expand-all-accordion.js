@@ -18,7 +18,7 @@ Drupal.behaviors.westyExpandAllAccordion = {
     if (open) {
       panelEl.removeAttribute("hidden");
     } else {
-      panelEl.setAttribute("hidden", "");
+      panelEl.setAttribute("hidden", "until-found");
     }
   },
 
@@ -35,9 +35,9 @@ Drupal.behaviors.westyExpandAllAccordion = {
   },
 
   attach(context, drupalSettings) {
-    const minRows = drupalSettings?.portland?.westyExpandAllAccordion?.minRows ?? 0;
+    const minRows = drupalSettings?.portland?.cloudyExpandAllAccordion?.minRows ?? 0;
     window.addEventListener("DOMContentLoaded", () => {
-      once("westyExpandAllAccordion", "div.aria-accordion", context).forEach((accordion) => {
+      once("cloudyExpandAllAccordion", "div.aria-accordion", context).forEach((accordion) => {
         const accordionPanelIds = Array.from(
           accordion.querySelectorAll("div.aria-accordion__panel"),
         ).map((el) => el.id);
@@ -46,7 +46,7 @@ Drupal.behaviors.westyExpandAllAccordion = {
           accordion
             .querySelector(".aria-accordion__heading > button")
             .setAttribute("aria-expanded", "false");
-          accordion.querySelector(".aria-accordion__panel").setAttribute("hidden", "");
+          accordion.querySelector(".aria-accordion__panel").setAttribute("hidden", "until-found");
           return;
         }
 
@@ -83,5 +83,12 @@ Drupal.behaviors.westyExpandAllAccordion = {
 
       this.expandPanelContainingId(e.target.hash.slice(1));
     });
+
+    // Maintain the heading's expansion/hidden state when matching text is found inside a hidden panel
+    if('onbeforematch' in document.body) {
+      window.addEventListener("beforematch", (e) => {
+        this.expandPanelContainingId(e.target.id);
+      });
+    }
   },
 };
