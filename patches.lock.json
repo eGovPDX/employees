@@ -1,5 +1,5 @@
 {
-    "_hash": "69dc9f71b831101fa4eb85c10a47758fabb8b3fdac73f3c2a5cee795809ad56d",
+    "_hash": "ad3a5a5bbc7ad57557f25c0e16484d8a18951e0991cf46cb507d0d7b7e6d756b",
     "patches": {
         "drupal/core": [
             {
@@ -341,6 +341,18 @@
                 "description": "3024419 - Fix Required fields to really not be required (PE-669)",
                 "url": "https://www.drupal.org/files/issues/2025-11-28/3024419-72.patch",
                 "sha256": "706e13ffde7a9c82fc4597cfa7f91da0adbd31cba347189eff8b318ddfeb3812",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ],
+        "smillart/wai-aria-patterns-and-widgets": [
+            {
+                "package": "smillart/wai-aria-patterns-and-widgets",
+                "description": "POWR-1879 Set hidden value to until-found",
+                "url": "https://github.com/smillart/WAI-ARIA-Patterns-And-Widgets/pull/22.patch",
+                "sha256": "936e2fcaa44ece382bf6833530783f8f2190a1870cf2fedb025d5a2231568138",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:patches.json"

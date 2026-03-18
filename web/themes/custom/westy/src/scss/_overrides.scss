@@ -1,6 +1,3 @@
-// Google Fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,700,800");
-
 // PE-310: Fix node preview controls being obscured by header
 .node-preview-container {
   position: static;
@@ -44,5 +41,34 @@ em.placeholder {
     border-radius: 1em;
     padding: 10px;
     translate: 2px -2px;
+  }
+}
+
+// Fix table styling in ck-content elements by resetting some properties with a higher specificity
+table {
+  border-width: 0 !important;
+  border-color: var(--#{$prefix}table-border-color) !important;
+  margin: 0 !important;
+  margin-bottom: $spacer !important;
+
+  > :not(caption) > * > * {
+    padding: $table-cell-padding-y $table-cell-padding-x !important;
+    background-color: var(--#{$prefix}table-bg) !important;
+  }
+
+  &.table-bordered {
+    > :not(caption) > * {
+      border-color: inherit !important;
+      border-width: $table-border-width 0;
+
+      > * {
+        border-color: inherit !important;
+        border-width: 0 $table-border-width;
+      }
+    }
+  }
+
+  &.table-sm > :not(caption) > * > * {
+    padding: $table-cell-padding-y-sm $table-cell-padding-x-sm !important;
   }
 }

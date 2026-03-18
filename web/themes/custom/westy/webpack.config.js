@@ -9,7 +9,6 @@ const config = {
   entry: {
     westy: ['./src/scss/westy.style.scss', './src/js/westy.script.js'],
     "westy-ckeditor": ['./src/scss/westy-ckeditor.style.scss'],
-    "ckeditor-content-styles": ['./src/scss/content-styles.scss'],
     'expand-all-accordion': ['./src/js/expand-all-accordion.js'],
   },
   output: {
