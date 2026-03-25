@@ -714,7 +714,12 @@ $settings['update_free_access'] = FALSE;
  * Load services definition file.
  */
 $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
-$settings['container_yamls'][] = $app_root . '/' . $site_path . '/monolog.services.yml';
+if (isset($_ENV['PANTHEON_ENVIRONMENT']) && (
+  $_ENV['PANTHEON_ENVIRONMENT'] === 'live' || $_ENV['PANTHEON_ENVIRONMENT'] === 'pe-772')) {
+  $settings['container_yamls'][] = $app_root . '/' . $site_path . '/monolog.services.production.yml';
+} else {
+  $settings['container_yamls'][] = $app_root . '/' . $site_path . '/monolog.services.yml';
+}
 
 /**
  * Override the default service container class.
