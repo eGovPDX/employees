@@ -202,7 +202,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_when:
-    type: smartdate_default
+    type: smartdate_inline
     weight: 3
     region: content
     settings:
@@ -213,6 +213,8 @@ content:
       hide_date: true
       allday: true
       remove_seconds: false
+      duration_overlay: true
+      separator: to
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
