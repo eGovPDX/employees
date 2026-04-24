@@ -1,7 +1,11 @@
 _core:
   default_config_hash: 6XRelHPjACQVOo9yRQMmbXt-ysCA2Pt6l762bxQQbdw
 exclude:
-  node: {  }
+  node:
+    news:
+      - field_published_on
+      - field_updated_on
   paragraph: {  }
 text_to_prepend_to_title: ''
 clone_status: default
+create_group_relationships: false
