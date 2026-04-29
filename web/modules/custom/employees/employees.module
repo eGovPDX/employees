@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Cache\Cache;
+use Drupal\node\NodeInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * Implements hook_form_alter()
@@ -1505,5 +1507,19 @@ function employees_module_implements_alter(&$implementations, $hook) {
     $employees = $implementations['employees'];
     unset($implementations['employees']);
     $implementations['employees'] = $employees;
+  }
+}
+
+/**
+ * Implements hook_cloned_node_alter().
+ */
+function employees_cloned_node_alter(NodeInterface $cloned_node, NodeInterface $original_node) {
+  // Check if the cloned node has a published or updated field and update its value to the current date and time
+  $now = new DrupalDateTime('now', new \DateTimeZone('UTC'))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
+  if ($cloned_node->hasField('field_published_on')) {
+    $cloned_node->set('field_published_on', $now);
+  }
+  if ($cloned_node->hasField('field_updated_on')) {
+    $cloned_node->set('field_updated_on', $now);
   }
 }
