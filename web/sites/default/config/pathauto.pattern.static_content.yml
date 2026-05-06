@@ -2,17 +2,18 @@ uuid: f7b55ade-02f4-4b4b-91a7-678cb21f8256
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.page
   module:
     - node
 id: static_content
 label: 'Static Content'
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/[node:menu-link:parents:join-path]/[node:menu-link]'
+pattern: '/[node:field_display_in_group:0:entity:field_group_path]/[node:menu-link:parents:join-path]/[node:menu-link]'
 selection_criteria:
   82ca54e4-26f8-406f-a3f3-730834df8915:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 82ca54e4-26f8-406f-a3f3-730834df8915
     context_mapping:
       node: node
     bundles:
