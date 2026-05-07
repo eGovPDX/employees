@@ -2,17 +2,18 @@ uuid: d131c9b9-01d7-4b2b-80ea-caae74e843ef
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.event
   module:
     - node
 id: events
 label: Events
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/events/[node:field_when:start_date:numeric_year]/[node:field_when:start_date:numeric_month]/[node:field_when:start_date:numeric_day]/[node:title]'
+pattern: '/[node:field_display_in_group:0:entity:field_group_path]/events/[node:field_when:start_date:numeric_year]/[node:field_when:start_date:numeric_month]/[node:field_when:start_date:numeric_day]/[node:title]'
 selection_criteria:
   b093d68b-377e-4e54-89fe-6fe54e7f3075:
     id: 'entity_bundle:node'
     negate: false
-    uuid: b093d68b-377e-4e54-89fe-6fe54e7f3075
     context_mapping:
       node: node
     bundles:

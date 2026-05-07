@@ -2,17 +2,18 @@ uuid: 221e3d49-6e56-44e6-86e5-af16aa7e57ef
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.resource
   module:
     - node
 id: resources
 label: Resources
 type: 'canonical_entities:node'
-pattern: '[node:field_display_in_group:0:entity:field_group_path]/resources/[node:title]'
+pattern: '/[node:field_display_in_group:0:entity:field_group_path]/resources/[node:title]'
 selection_criteria:
   ab25ed53-4c32-4f6b-a739-d878eab2e25a:
     id: 'entity_bundle:node'
     negate: false
-    uuid: ab25ed53-4c32-4f6b-a739-d878eab2e25a
     context_mapping:
       node: node
     bundles:
