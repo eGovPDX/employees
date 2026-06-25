@@ -722,6 +722,13 @@ field_settings:
           resource: default
         'entity:user':
           user: compact
+  role_access:
+    label: 'Role-based access information'
+    property_path: search_api_role_access
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
   uid:
     label: uid
     datasource_id: 'entity:node'
@@ -809,11 +816,11 @@ processor_settings:
     title: true
     alt: true
     tags:
-      b: 2
-      h1: 5
-      h2: 3
-      h3: 2
-      strong: 2
+      b: 2.0
+      h1: 5.0
+      h2: 3.0
+      h3: 2.0
+      strong: 2.0
   ignore_character:
     weights:
       preprocess_index: -10
@@ -837,6 +844,9 @@ processor_settings:
       - Ps
   language_with_fallback: {  }
   rendered_item: {  }
+  role_access:
+    weights:
+      preprocess_query: -30
   solr_boost_more_recent:
     weights:
       preprocess_query: 0
