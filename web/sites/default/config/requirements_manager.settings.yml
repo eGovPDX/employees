@@ -1,6 +1,10 @@
 _core:
   default_config_hash: O5kx4FC8Kso_2JJ7Anle6fqD_i8UDy9uCdtg5W8C1Qo
 requirements:
+  enable_html5_validation:
+    action: change_severity
+    severity: ok
+    reason: 'No action necessary prior to Drupal 12'
   openid_connect_connect_existing_users:
     action: change_severity
     severity: ok
