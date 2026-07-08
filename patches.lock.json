@@ -1,5 +1,5 @@
 {
-    "_hash": "a553384e4aba617090617e0f41e2a350fcf735e1aaf7de7b8c78e12aa607e699",
+    "_hash": "5ca7969fbcead68970c1584f854c1957a05a40a64046babb45cb3b39e82af9a5",
     "patches": {
         "drupal/core": [
             {
@@ -46,7 +46,7 @@
                 "package": "drupal/core",
                 "description": "Retry starting transaction to fix the \"there is already an active transaction\" error",
                 "url": "patches/pe-430-retry-starting-transaction.patch",
-                "sha256": "2b4f041d358cd6f530b4094f675d185101b07c6e370d6e182dbeebfc7de2b279",
+                "sha256": "904a5706e141cd23ba9bdba887fc4db7f9194fdb583ef494e35ed9b2ca7304f2",
                 "depth": 2,
                 "extra": {
                     "provenance": "patches-file:patches.json"
@@ -55,8 +55,8 @@
             {
                 "package": "drupal/core",
                 "description": "3095434 - Access denied when view own unpublished revision, access check is not using revision author",
-                "url": "https://www.drupal.org/files/issues/2023-03-16/view-latest-revision.patch",
-                "sha256": "b73d5f179fe287960c7b6ba6e09f0568b5673cf7deba85aa3ef7ece34aa604f9",
+                "url": "https://www.drupal.org/files/issues/2026-07-06/view-latest-revision.patch",
+                "sha256": "a46e2422bdf2203279165e547e60daca10e3c76d8332adf48d7e067471eff4ce",
                 "depth": 2,
                 "extra": {
                     "provenance": "patches-file:patches.json"
@@ -75,8 +75,8 @@
             {
                 "package": "drupal/core",
                 "description": "3410100 - [10.2 regression] CKEditor 5 breaks when Source editing button is added and \"Manually editable HTML tags\" are specified",
-                "url": "https://www.drupal.org/files/issues/2025-06-26/3410100-108-revert-3396628-11-x.patch",
-                "sha256": "3fd15d976630bd5e1ecda694e768e31ea5009f7a7002b344a382212b8e2f5864",
+                "url": "https://www.drupal.org/files/issues/2026-07-06/3410100-112-mr-12509.patch",
+                "sha256": "ffb026483a1e4fb86ff050a5808b9bb377ed7541244ea0d987cbea00611ef97f",
                 "depth": 2,
                 "extra": {
                     "provenance": "patches-file:patches.json"
@@ -143,6 +143,18 @@
                 "description": "2734255 - Support a per-instance 'all-day' option for datetime and datetime range fields",
                 "url": "https://www.drupal.org/files/issues/2019-01-29/add-a-date-range-field-type-2734255-23.patch",
                 "sha256": "86f6b567df412b71d312db9871013edb09b06176136d3159c8791d272d71bde7",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ],
+        "drupal/eva": [
+            {
+                "package": "drupal/eva",
+                "description": "3606104 - Unchecked link_display setting causes error",
+                "url": "patches/eva-unchecked-link-error.patch",
+                "sha256": "f2e376fc91a554d12e932730f8e327eb8a40be45bee29aa09d26b0b46c9951d7",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:patches.json"

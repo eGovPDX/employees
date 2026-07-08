@@ -880,6 +880,12 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # $settings['migrate_file_private_path'] = '';
 
 /**
+ * HTML5 client-side validation
+ * See https://www.drupal.org/node/3537128
+ */
+$settings['enable_html5_validation'] = TRUE;
+
+/**
  * Load services definition file.
  */
 $settings['container_yamls'][] = __DIR__ . '/services.yml';
