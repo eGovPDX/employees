@@ -67,10 +67,10 @@
  * during the same request.
  *
  * One example of the simplest connection array is shown below. To use the
- * sample settings, copy and uncomment the code below between the @code and
- * @endcode lines and paste it after the $databases declaration. You will need
- * to replace the database username and password and possibly the host and port
- * with the appropriate credentials for your database system.
+ * sample settings, copy and uncomment the code below and paste it after the
+ * $databases declaration. You will need to replace the database username and
+ * password and possibly the host and port with the appropriate credentials for
+ * your database system.
  *
  * The next section describes how to customize the $databases array for more
  * specific needs.
@@ -144,7 +144,7 @@ $databases = [];
  * in deadlocks, the other two options are 'READ UNCOMMITTED' and 'SERIALIZABLE'.
  * They are available but not supported; use them at your own risk. For more
  * info:
- * https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html
+ * https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html
  *
  * On your settings.php, change the isolation level:
  * @code
@@ -312,7 +312,7 @@ $settings['hash_salt'] = '';
 $settings['update_free_access'] = FALSE;
 
 /**
- * Fallback to HTTP for Update Manager and for fetching security advisories.
+ * Fallback to HTTP for Update Status and for fetching security advisories.
  *
  * If your site fails to connect to updates.drupal.org over HTTPS (either when
  * fetching data on available updates, or when fetching the feed of critical
@@ -517,6 +517,15 @@ $settings['update_free_access'] = FALSE;
 # $settings['file_assets_path'] = 'sites/default/files';
 
 /**
+ * Asset aggregate garbage collection threshold.
+ *
+ * During cache clears, JavaScript and CSS aggregates older than this threshold
+ * will be deleted. Set this to 0 to immediately delete all files, e.g. during
+ * development.
+ */
+# $settings['aggregate_gc_threshold'] = 86400 * 45;
+
+/**
  * Public file base URL:
  *
  * An alternative base URL to be used for serving public files. This must
@@ -626,6 +635,18 @@ $settings['update_free_access'] = FALSE;
 # $settings['file_temp_path'] = '/tmp';
 
 /**
+ * Automatically create an Apache HTTP .htaccess file in writable directories.
+ *
+ * This setting can be disabled if you are not using Apache HTTP server, or if
+ * you have a web server configuration that protects the various writable file
+ * directories.
+ *
+ * @see \Drupal\Component\FileSecurity\FileSecurity::writeHtaccess()
+ * @see https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-file-permissions-and-ownership
+ */
+# $settings['auto_create_htaccess'] = FALSE;
+
+/**
  * Session write interval:
  *
  * Set the minimum interval between each session write to database.
@@ -647,7 +668,7 @@ $settings['update_free_access'] = FALSE;
  */
 # $settings['locale_custom_strings_en'][''] = [
 #   'Home' => 'Front page',
-#   '@count min' => '@count minutes',
+#   'Last run @time ago' => 'Last run was done @time ago',
 # ];
 
 /**
@@ -709,6 +730,24 @@ $settings['update_free_access'] = FALSE;
  */
 # $config['system.site']['name'] = 'My Drupal site';
 # $config['user.settings']['anonymous'] = 'Visitor';
+
+/**
+ * Enable HTML5 form validation.
+ *
+ * Drupal 12 will disable HTML5 form validation by default due to issues with
+ * usability and accessibility.  Setting this to TRUE will allow user agents to
+ * continue performing client-side HTML5 validation. This prevents Drupal's
+ * Form API (FAPI) validation from executing, so FAPI validation error messages
+ * may not be displayed including those for required elements.
+ *
+ * Setting this to FALSE will cause HTML5 validation to be disabled on all
+ * forms. Only Drupal's server-side validation will be executed.
+ *
+ * This setting will be removed in Drupal 13.
+ *
+ * @see https://www.drupal.org/node/3537128
+ */
+$settings['enable_html5_validation'] = TRUE;
 
 /**
  * Load services definition file.
@@ -880,10 +919,24 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # $settings['migrate_file_private_path'] = '';
 
 /**
- * HTML5 client-side validation
- * See https://www.drupal.org/node/3537128
+ * Media oEmbed discovery trusted host configuration.
+ *
+ * The oEmbed spec allows for provider/resource discovery by fetching a URL. The
+ * patterns here restrict which domains Drupal will make a request to for oEmbed
+ * discovery.
+ *
+ * For example:
+ * @code
+ * $settings['media_oembed_discovery_trusted_host_patterns'] = [
+ *   '^www\.example\.com$',
+ * ];
+ * @endcode
+ * will allow the site to make oEmbed discovery requests to www.example.com.
  */
-$settings['enable_html5_validation'] = TRUE;
+$settings['media_oembed_discovery_trusted_host_patterns'] = [
+  '^www\.youtube\.com$',
+  '^vimeo\.com$',
+];
 
 /**
  * Load services definition file.
