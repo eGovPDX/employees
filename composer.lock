@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31676d3d3dc9866d68a2c0b6d0e2d407",
+    "content-hash": "d2e1c76d1958077ec6aa96559a4b9d04",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1787,26 +1787,26 @@
         },
         {
             "name": "drupal/add_content_by_bundle",
-            "version": "1.2.2",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/add_content_by_bundle.git",
-                "reference": "1.2.2"
+                "reference": "2.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/add_content_by_bundle-1.2.2.zip",
-                "reference": "1.2.2",
-                "shasum": "47dc9c87c28b49e024d397299f08033a362b9a1a"
+                "url": "https://ftp.drupal.org/files/projects/add_content_by_bundle-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "0b09e7967d33987c0635636b706c04782615573d"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.2.2",
-                    "datestamp": "1713171345",
+                    "version": "2.0.1",
+                    "datestamp": "1783076897",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3519,38 +3519,38 @@
         },
         {
             "name": "drupal/diff",
-            "version": "1.10.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/diff.git",
-                "reference": "8.x-1.10"
+                "reference": "2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.10.zip",
-                "reference": "8.x-1.10",
-                "shasum": "21398888a97071bfeb57bdc7128fcf6681da5358"
+                "url": "https://ftp.drupal.org/files/projects/diff-2.1.0.zip",
+                "reference": "2.1.0",
+                "shasum": "6d1924d7c154a5f23cba8fc47d5c72a3d8ad6636"
             },
             "require": {
-                "drupal/core": "^10 || ^11",
+                "drupal/core": "^10.5 || ^11",
                 "mkalkbrenner/php-htmldiff-advanced": "~0.0.8",
                 "php": "^8.1"
             },
             "require-dev": {
-                "jangregor/phpstan-prophecy": "^1.0",
-                "mglaman/phpstan-drupal": "^1.2.10",
+                "jangregor/phpstan-prophecy": "^1.0 || ^2.2.0",
+                "mglaman/phpstan-drupal": "^1.2.10 || ^2.0.7",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan": "^1.11 || ^2.1.17",
                 "phpstan/phpstan-deprecation-rules": "*",
-                "phpstan/phpstan-phpunit": "1.4.x-dev",
-                "phpstan/phpstan-strict-rules": "^1@stable",
-                "previousnext/coding-standard": "1.0.1"
+                "phpstan/phpstan-phpunit": "1.4 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.0 || ^2.0.4",
+                "previousnext/coding-standard": "1.1.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.10",
-                    "datestamp": "1768951091",
+                    "version": "2.1.0",
+                    "datestamp": "1781130225",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4289,26 +4289,29 @@
         },
         {
             "name": "drupal/extlink",
-            "version": "2.0.5",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/extlink.git",
-                "reference": "2.0.5"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/extlink-2.0.5.zip",
-                "reference": "2.0.5",
-                "shasum": "3b2f73f60483ebf6e7f374f7340b19f228386cca"
+                "url": "https://ftp.drupal.org/files/projects/extlink-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "b0e072b24d7517773ae48b9d1ea3abe498b65b69"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^11.3 || ^12"
+            },
+            "require-dev": {
+                "drupal/ui_icons": "1.1.x-dev"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.5",
-                    "datestamp": "1757349140",
+                    "version": "3.0.0",
+                    "datestamp": "1782867655",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5060,41 +5063,40 @@
         },
         {
             "name": "drupal/image_effects",
-            "version": "4.0.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/image_effects.git",
-                "reference": "4.0.0"
+                "reference": "5.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/image_effects-4.0.0.zip",
-                "reference": "4.0.0",
-                "shasum": "61a04f78275e907e8f06f74974660fef91e4a20c"
+                "url": "https://ftp.drupal.org/files/projects/image_effects-5.0.0.zip",
+                "reference": "5.0.0",
+                "shasum": "6f4c50bdb35127053e3625d855428627d4bf0415"
             },
             "require": {
-                "drupal/core": "^10.3.7 | ^11.0.6",
-                "drupal/file_mdm": "^3.1",
+                "drupal/core": "^11.3",
+                "drupal/file_mdm": "^3.2",
                 "drupal/file_mdm_exif": "*",
                 "drupal/file_mdm_font": "*"
             },
             "conflict": {
-                "drupal/color": "<2",
-                "drupal/imagemagick": "<4.0.1"
+                "drupal/imagemagick": "<5"
             },
             "require-dev": {
-                "drupal/color": "^2",
-                "drupal/imagemagick": "^4.0.2",
+                "drupal/imagemagick": "^5",
+                "drupal/textimage": "^5",
                 "drupal/token": "*",
                 "drupal/vendor_stream_wrapper": "^2.0.5",
-                "drush/drush": ">=12",
+                "drush/drush": ">=13",
                 "fileeye/linuxlibertine-fonts": "^5.3"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.0",
-                    "datestamp": "1733831437",
+                    "version": "5.0.0",
+                    "datestamp": "1769890352",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5207,28 +5209,31 @@
         },
         {
             "name": "drupal/imagemagick",
-            "version": "4.0.2",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/imagemagick.git",
-                "reference": "4.0.2"
+                "reference": "5.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imagemagick-4.0.2.zip",
-                "reference": "4.0.2",
-                "shasum": "758bdf632dd8f2eeb97d198b692d20a59cdbdc13"
+                "url": "https://ftp.drupal.org/files/projects/imagemagick-5.0.1.zip",
+                "reference": "5.0.1",
+                "shasum": "3a9e70d80064b3be3f2d0b4b4a4d1beb92d6ead2"
             },
             "require": {
-                "drupal/core": "^10.3 | ^11",
-                "drupal/file_mdm": "^3.1",
-                "drupal/sophron": "^2.1"
+                "drupal/core": "^11.3",
+                "drupal/file_mdm": "^3.2",
+                "drupal/sophron": "^3"
+            },
+            "require-dev": {
+                "drupal/image_effects": "^5"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.2",
-                    "datestamp": "1724827811",
+                    "version": "5.0.1",
+                    "datestamp": "1769759255",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8527,27 +8532,27 @@
         },
         {
             "name": "drupal/sophron",
-            "version": "2.2.2",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/sophron.git",
-                "reference": "2.2.2"
+                "reference": "3.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/sophron-2.2.2.zip",
-                "reference": "2.2.2",
-                "shasum": "158dfc54ff3c16a03e87d8217f170e54ddb330af"
+                "url": "https://ftp.drupal.org/files/projects/sophron-3.1.1.zip",
+                "reference": "3.1.1",
+                "shasum": "6fd86916ab6a620372c474a8a1ba15edeb989f4b"
             },
             "require": {
-                "drupal/core": "^10.2 || ^11",
-                "fileeye/mimemap": "^2.2.1"
+                "drupal/core": "^11.2 | ^12",
+                "fileeye/mimemap": "^2.2.5"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.2.2",
-                    "datestamp": "1781376759",
+                    "version": "3.1.1",
+                    "datestamp": "1774250660",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8577,34 +8582,26 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "3.1.6",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "3.1.6"
+                "reference": "4.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-3.1.6.zip",
-                "reference": "3.1.6",
-                "shasum": "06b7196c0c367dc079ab937e1f6b85fc28c2bcc2"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-4.0.0.zip",
+                "reference": "4.0.0",
+                "shasum": "1f7a51d20c7163ba42e863dded03cc4c3a8fdc51"
             },
             "require": {
-                "drupal/core": "^10.3 || ^11",
-                "php": ">=8.1"
-            },
-            "conflict": {
-                "drush/drush": "<12"
-            },
-            "require-dev": {
-                "drupal/coder": "^8.3",
-                "drush/drush": ">=12"
+                "drupal/core": "^11.3 || ^12.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.1.6",
-                    "datestamp": "1757610587",
+                    "version": "4.0.0",
+                    "datestamp": "1782935083",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8612,17 +8609,6 @@
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
-            "scripts": {
-                "phpcs": [
-                    "vendor/bin/phpcs -p ."
-                ],
-                "phpcbf": [
-                    "vendor/bin/phpcbf -p ."
-                ],
-                "test": [
-                    "@phpcs"
-                ]
-            },
             "license": [
                 "GPL-2.0-or-later"
             ],
@@ -8995,20 +8981,20 @@
         },
         {
             "name": "drupal/tour",
-            "version": "2.0.17",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/tour.git",
-                "reference": "2.0.17"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/tour-2.0.17.zip",
-                "reference": "2.0.17",
-                "shasum": "42c020512ee76d6d0648fc5a3eaf04bb99a06175"
+                "url": "https://ftp.drupal.org/files/projects/tour-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "08a065ae1e217aa30e76233417d944a29b019b44"
             },
             "require": {
-                "drupal/core": "^10.3 || ^11"
+                "drupal/core": "^11.3 || ^12"
             },
             "require-dev": {
                 "drupal/dashboard": "*",
@@ -9021,8 +9007,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.17",
-                    "datestamp": "1769735179",
+                    "version": "3.0.0",
+                    "datestamp": "1782838401",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -18041,7 +18027,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/add_content_by_bundle": 10,
         "drupal/block_exclude_pages": 10,
         "drupal/ckeditor5_fullscreen": 10,
         "drupal/components": 10,
