@@ -234,18 +234,24 @@ display:
         options:
           view_modes:
             'entity:group':
+              ':default': default
               employee: search_result
               private: search_result
             'entity:media':
+              ':default': default
               document: search_result
             'entity:node':
+              ':default': default
+              alert: search_result
               contact: search_result
               contract: search_result
               event: search_result
               news: search_result
+              notification: ':default'
               page: search_result
               resource: search_result
             'entity:user':
+              ':default': default
               user: search_result
       query:
         type: search_api_query
