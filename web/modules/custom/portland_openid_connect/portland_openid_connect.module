@@ -131,9 +131,15 @@ function _invalidate_user_sync_cache_when_done()
   if (!$state->get('epgov.user_sync.invalidate_cache_pending')) return;
   if (\Drupal::queue('user_sync')->numberOfItems() > 0) return;
 
+  // Only clear the cache tag when full sync and removal check finish for both domain
+  foreach ([PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME, PortlandOpenIdConnectUtil::PTLD_DOMAIN_NAME] as $domain) {
+    if (!empty($state->get("epgov.user_sync.resume_url.$domain"))) return;
+    if (!empty($state->get("epgov.user_sync.drupal_user_last_uid.$domain"))) return;
+  }
+
   Cache::invalidateTags([PortlandOpenIdConnectUtil::USER_SYNC_CACHE_TAG]);
   $state->delete('epgov.user_sync.invalidate_cache_pending');
-  \Drupal::logger('portland OpenID')->info('User sync finished. Invalidated the ' . PortlandOpenIdConnectUtil::USER_SYNC_CACHE_TAG . ' cache tag.');
+  \Drupal::logger('portland OpenID')->info('User sync finished for all domains. Invalidated the ' . PortlandOpenIdConnectUtil::USER_SYNC_CACHE_TAG . ' cache tag.');
 }
 
 /**
