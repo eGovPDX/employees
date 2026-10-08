@@ -62,12 +62,14 @@ function portland_openid_connect_user_update($account)
  *    drush state:get epgov.user_sync.last_sync_date.DOMAIN
  *    drush state:get epgov.user_sync.last_check_removals_date.DOMAIN
  *    drush state:get epgov.user_sync.resume_url.DOMAIN
- *    drush state:get epgov.user_sync.drupal_user_offset.DOMAIN
+ *    drush state:get epgov.user_sync.drupal_user_last_uid.DOMAIN
  * To start sync from a fresh state:
  *    drush employees:reset_user_sync
  */
 function portland_openid_connect_cron()
 {
+  _invalidate_user_sync_cache_when_done();
+
   // To stop user sync: drush state:set epgov.user_sync.stop true
   // To restart user sync: drush state:delete epgov.user_sync.stop
   $stop_user_sync = \Drupal::state()->get('epgov.user_sync.stop');
@@ -119,14 +121,33 @@ function portland_openid_connect_cron()
 }
 
 /**
+ * Invalidate caches built from synced user data, after a sync has finished and the user_sync queue is empty.
+ *
+ * hook_cron() runs before cron processes queues, so this fires on the first cron run after the queue is drained.
+ */
+function _invalidate_user_sync_cache_when_done()
+{
+  $state = \Drupal::state();
+  if (!$state->get('epgov.user_sync.invalidate_cache_pending')) return;
+  if (\Drupal::queue('user_sync')->numberOfItems() > 0) return;
+
+  Cache::invalidateTags([PortlandOpenIdConnectUtil::USER_SYNC_CACHE_TAG]);
+  $state->delete('epgov.user_sync.invalidate_cache_pending');
+  \Drupal::logger('portland OpenID')->info('User sync finished. Invalidated the ' . PortlandOpenIdConnectUtil::USER_SYNC_CACHE_TAG . ' cache tag.');
+}
+
+/**
  * Check if Drupal users have been removed from EntraID
  */
 function _update_users_removed_from_ad($access_token, $domain)
 {
-  $drupal_user_offset = \Drupal::state()->get("epgov.user_sync.drupal_user_offset.$domain") ?? 0;
+  // Page through users by user ID rather than by offset: users disabled by
+  // earlier batches drop out of the "enabled" set, which would shift offsets
+  // and make later batches skip users.
+  $last_uid = \Drupal::state()->get("epgov.user_sync.drupal_user_last_uid.$domain") ?? 0;
   $drupal_user_limit = 100;
 
-  if ($drupal_user_offset == 0) {
+  if ($last_uid == 0) {
     \Drupal::logger('portland OpenID')->notice("Started checking for users removed in $domain");
   }
 
@@ -140,8 +161,9 @@ function _update_users_removed_from_ad($access_token, $domain)
   if($domain === PortlandOpenIdConnectUtil::ROSE_DOMAIN_NAME) $email_domain_condition_group->condition('u.mail', "%" . PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX, 'LIKE');
   $uids = $query->condition($email_domain_condition_group)
     ->condition('u.status', 1, '=')
+    ->condition('u.uid', $last_uid, '>')
     ->orderBy('u.uid', 'ASC')
-    ->range($drupal_user_offset, $drupal_user_limit)
+    ->range(0, $drupal_user_limit)
     ->execute()
     ->fetchCol();
 
@@ -160,13 +182,15 @@ function _update_users_removed_from_ad($access_token, $domain)
     ]);
   }
 
-  // Update the user offset
-  \Drupal::state()->set("epgov.user_sync.drupal_user_offset.$domain", $drupal_user_offset + count($uids));
+  // Continue after the last user in this batch next time
+  if (count($uids) > 0) \Drupal::state()->set("epgov.user_sync.drupal_user_last_uid.$domain", (int) end($uids));
   // Done when the returned user count is less than the limit
   if (count($uids) < $drupal_user_limit) {
     \Drupal::logger('portland OpenID')->notice("Finished checking for users removed in $domain");
-    \Drupal::state()->set("epgov.user_sync.drupal_user_offset.$domain", 0);
+    \Drupal::state()->set("epgov.user_sync.drupal_user_last_uid.$domain", 0);
     \Drupal::state()->set("epgov.user_sync.last_check_removals_date.$domain", (new DateTime())->format('Y-m-d'));
+    // The last users are still in the queue. Invalidate caches once it's processed.
+    \Drupal::state()->set('epgov.user_sync.invalidate_cache_pending', TRUE);
     return;
   }
 }
@@ -247,6 +271,8 @@ function _get_all_users($access_token, $domain = PortlandOpenIdConnectUtil::ROSE
     else {
       $system_state->set("epgov.user_sync.last_sync_date.$domain", (new DateTime())->format('Y-m-d'));
       $system_state->set("epgov.user_sync.resume_url.$domain", '');
+      // The last users are still in the queue. Invalidate caches once it's processed.
+      $system_state->set('epgov.user_sync.invalidate_cache_pending', TRUE);
       \Drupal::logger('portland OpenID')->info("Finished user sync for $domain.");
     }
   } catch (RequestException $e) {

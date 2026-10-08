@@ -1,0 +1,237 @@
+uuid: 367a8ce0-6b82-4c07-b0fc-ae74a9ea26c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_group_names
+    - field.storage.user.field_managers
+    - field.storage.user.field_title
+    - field.storage.user.user_picture
+    - user.role.authenticated
+  module:
+    - employees_org_chart
+    - image
+    - user
+id: employees_org_chart
+label: 'Org chart'
+module: views
+description: 'Interactive org chart built from the Manager field.'
+tag: ''
+base_table: users_field_data
+base_field: uid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Org chart'
+      fields:
+        name:
+          id: name
+          table: users_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_label_colon: false
+          click_sort_column: value
+          type: user_name
+          settings:
+            link_to_entity: false
+        field_title:
+          id: field_title
+          table: user__field_title
+          field: field_title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: field_title
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_label_colon: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+        user_picture:
+          id: user_picture
+          table: user__user_picture
+          field: user_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: user_picture
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_label_colon: false
+          click_sort_column: value
+          type: image
+          settings:
+            image_link: ''
+            image_style: ''
+        field_managers:
+          id: field_managers
+          table: user__field_managers
+          field: field_managers
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: field_managers
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_label_colon: false
+          click_sort_column: value
+          type: entity_reference_label
+          settings:
+            link: false
+          group_rows: true
+          delta_limit: 0
+        field_group_names:
+          id: field_group_names
+          table: user__field_group_names
+          field: field_group_names
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: field_group_names
+          plugin_id: field
+          label: ''
+          exclude: false
+          element_label_colon: false
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: basic
+        options: {  }
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      cache:
+        type: employees_org_chart_time_only
+        options:
+          results_lifespan: 14400
+          output_lifespan: 14400
+      empty: {  }
+      sorts: {  }
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: users_field_data
+          field: status
+          relationship: none
+          group_type: group
+          entity_type: user
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+        mail:
+          id: mail
+          table: users_field_data
+          field: mail
+          relationship: none
+          group_type: group
+          admin_label: 'Exclude admin accounts (_adm@)'
+          entity_type: user
+          entity_field: mail
+          plugin_id: string
+          operator: not
+          value: _adm@
+          group: 1
+          exposed: false
+        mail_1:
+          id: mail_1
+          table: users_field_data
+          field: mail
+          relationship: none
+          group_type: group
+          admin_label: 'Exclude Police domain (@police.portlandoregon.gov)'
+          entity_type: user
+          entity_field: mail
+          plugin_id: string
+          operator: not_ends
+          value: '@police.portlandoregon.gov'
+          group: 1
+          exposed: false
+      style:
+        type: employees_org_chart
+        options:
+          name_field: name
+          title_field: field_title
+          image_field: user_picture
+          image_style: thumbnail
+          parent_field: field_managers
+          hide_isolated: true
+          root_label: 'City of Portland'
+          levels: 2
+          compact: true
+          height: 700
+          group_field: field_group_names
+          top_level_titles: |-
+            Councilor|City Council
+            Auditor, City
+      row:
+        type: fields
+        options: {  }
+      query:
+        type: views_query
+        options: {  }
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.roles
+      tags:
+        - 'config:field.storage.user.field_group_names'
+        - 'config:field.storage.user.field_managers'
+        - 'config:field.storage.user.field_title'
+        - 'config:field.storage.user.user_picture'
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: org-chart
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.roles
+      tags:
+        - 'config:field.storage.user.field_group_names'
+        - 'config:field.storage.user.field_managers'
+        - 'config:field.storage.user.field_title'
+        - 'config:field.storage.user.user_picture'

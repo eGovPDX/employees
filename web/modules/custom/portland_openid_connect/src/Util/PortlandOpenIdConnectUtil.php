@@ -9,6 +9,7 @@ use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
 use Drupal\Core\TypedData\ListInterface;
 use Drupal\taxonomy\TermStorageInterface;
 
@@ -21,6 +22,9 @@ class PortlandOpenIdConnectUtil
   public const ROSE_DOMAIN_NAME = "portlandoregon.gov";
   public const PTLD_DOMAIN_NAME = "police.portlandoregon.gov";
   public const PROSPER_PORTLAND_EMAIL_SUFFIX = "@prosperportland.us";
+  // Cache tag invalidated after a user sync (or removal check) has finished and its queue has been processed.
+  // Caches built from synced user data, such as the org chart, can add this tag to refresh after each sync.
+  public const USER_SYNC_CACHE_TAG = "portland_openid_connect:user_sync";
 
   // Keys
   private static $ROSE_SYNC_CLIENT_ID;
@@ -333,6 +337,32 @@ class PortlandOpenIdConnectUtil
   }
 
   /**
+   * Pick the current account when several Drupal accounts share an AD ID.
+   *
+   * Prefers the account whose email matches Entra ID (the one the user sync looks up and updates), then a matching
+   * principal name, then an active account, then the most recently updated one.
+   *
+   * @param \Drupal\user\UserInterface[] $users
+   *   Drupal accounts with the same AD ID.
+   * @param array $entra_user
+   *   The Entra ID user from Microsoft Graph, with "mail" and "userPrincipalName".
+   */
+  public static function PickCurrentAccount(array $users, array $entra_user): UserInterface
+  {
+    $mail = strtolower($entra_user['mail'] ?? '');
+    $principal_name = strtolower($entra_user['userPrincipalName'] ?? '');
+    $rank = fn(UserInterface $user) => [
+      $mail !== '' && strtolower((string) $user->getEmail()) === $mail,
+      $principal_name !== '' && strtolower((string) $user->get('field_principal_name')->value) === $principal_name,
+      $user->isActive(),
+      $user->getChangedTime(),
+    ];
+    $users = array_values($users);
+    usort($users, fn(UserInterface $a, UserInterface $b) => $rank($b) <=> $rank($a));
+    return $users[0];
+  }
+
+  /**
    * Drupal username is limited to 60 characters. Trim the principal name if it's too long.
    */
   public static function TrimUserName($userName)
@@ -488,13 +518,15 @@ class PortlandOpenIdConnectUtil
       ) {
         // Try to load the Drupal user with AD ID
         $manager_ad_id = $response_data['id'];
+        /** @var \Drupal\user\UserInterface[] $manager_users */
         $manager_users = \Drupal::entityTypeManager()->getStorage('user')
           ->loadByProperties(['field_active_directory_id' => $manager_ad_id]);
 
         $manager_user_ids = [];
         if (count($manager_users) > 0) {
-          // manager_users is an associate array with user ID as key, user entity as value
-          $manager_user_ids[] = key($manager_users);
+          // Several Drupal accounts can share an AD ID (old stub accounts, accounts recreated after an email change).
+          // Use the one the user sync keeps up to date, not just the first (oldest) one.
+          $manager_user_ids[] = self::PickCurrentAccount($manager_users, $response_data)->id();
           // \Drupal::logger('portland OpenID')->notice('Found existing manager: ' . $manager_ad_id);
         } else {
           $manager_stub_user = User::create([

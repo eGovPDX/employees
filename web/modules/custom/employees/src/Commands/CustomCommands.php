@@ -155,10 +155,13 @@ final class CustomCommands extends DrushCommands
       'epgov.user_sync.last_sync_date.police.portlandoregon.gov',
       'epgov.user_sync.last_check_removals_date.portlandoregon.gov',
       'epgov.user_sync.last_check_removals_date.police.portlandoregon.gov',
-      'epgov.user_sync.drupal_user_offset.portlandoregon.gov',
-      'epgov.user_sync.drupal_user_offset.police.portlandoregon.gov',
+      'epgov.user_sync.drupal_user_last_uid.portlandoregon.gov',
+      'epgov.user_sync.drupal_user_last_uid.police.portlandoregon.gov',
       'epgov.user_sync.resume_url.portlandoregon.gov',
       'epgov.user_sync.resume_url.police.portlandoregon.gov',
+      // Replaced by drupal_user_last_uid. Safe to delete after PE-798 is deployed.
+      'epgov.user_sync.drupal_user_offset.portlandoregon.gov',
+      'epgov.user_sync.drupal_user_offset.police.portlandoregon.gov',
     ]);
 
     echo "The user sync process will start in the next cron run." . PHP_EOL;

@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Org chart Views style.
+ *
+ * The chart data is in drupalSettings.employeesOrgChart[chart_id] and is drawn
+ * by js/org-chart.js into the canvas element.
+ *
+ * Available variables:
+ * - chart_id: Unique ID linking this markup to its settings.
+ * - view: The view object.
+ * - options: The style plugin options.
+ */
+#}
+<div class="employees-org-chart" data-org-chart-id="{{ chart_id }}">
+  <div class="employees-org-chart__toolbar">
+    <div class="employees-org-chart__search">
+      <label for="{{ chart_id }}-search" class="visually-hidden">{{ 'Find an employee'|t }}</label>
+      <input type="search" id="{{ chart_id }}-search" class="form-control form-control-sm" list="{{ chart_id }}-people" placeholder="{{ 'Start typing a first or last name to find an employee'|t }}" autocomplete="off" data-org-chart-search>
+      <datalist id="{{ chart_id }}-people"></datalist>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-org-chart-action="fit">{{ 'Fit to screen'|t }}</button>
+    <button type="button" class="btn btn-sm btn-outline-primary" data-org-chart-action="collapse">{{ 'Collapse all'|t }}</button>
+  </div>
+  <div class="employees-org-chart__canvas" role="img" aria-label="{{ 'Organization chart. Use the search box to find an employee.'|t }}"></div>
+  <noscript>{{ 'The org chart requires JavaScript.'|t }}</noscript>
+</div>
