@@ -69,6 +69,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
   public function processDrupalUsers($data)
   {
     $users_disabled = [];
+    $users_skipped = [];
     /* @var \GuzzleHttp\ClientInterface $client */
     $client = new Client();
     // Perform the request.
@@ -96,8 +97,16 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       if (!str_ends_with($user_email, $email_domain) && 
       !str_ends_with($user_email, PortlandOpenIdConnectUtil::PROSPER_PORTLAND_EMAIL_SUFFIX)) continue;
 
-      // Must use the principal name as the lookup key
-      $request_url = 'https://graph.microsoft.com/v1.0/users/' . urlencode((string)$user->field_principal_name->value);
+      // Look up by principal name, or by AD ID for accounts without one (e.g. older accounts). Never request
+      // /users/ with an empty key: that lists users (HTTP 200), so a user removed from EntraID would never get
+      // a 404 and never be disabled. Email is not used: Graph only accepts an ID or principal name, so an email
+      // that differs from the principal name would 404 and wrongly disable an active user.
+      $lookup_key = (string) ($user->field_principal_name->value ?: $user->field_active_directory_id->value);
+      if ($lookup_key === '') {
+        $users_skipped[] = $user->getEmail();
+        continue;
+      }
+      $request_url = 'https://graph.microsoft.com/v1.0/users/' . urlencode($lookup_key);
       $result_is_404 = false;
       try {
         $response = $client->get($request_url, $options);
@@ -123,6 +132,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     }
 
     if (count($users_disabled) > 0) \Drupal::logger('portland OpenID')->info("(Removal) Disabled " . count($users_disabled) . " users: " . implode(",", $users_disabled));
+    if (count($users_skipped) > 0) \Drupal::logger('portland OpenID')->warning("(Removal) Skipped " . count($users_skipped) . " users with no principal name or AD ID: " . implode(",", $users_skipped));
   }
 
   /**
@@ -199,6 +209,8 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
         'name' => $userName,
         'pass' => \Drupal::service('password_generator')->generate(), // Create a temp password
       ]) :  array_values($users)[0];
+      // Remember the current status before it's overwritten, to log enabled/disabled users below.
+      $previous_status = (int) $user->status->value;
       $user->field_active_directory_id = $user_data['id'];
       $user->status = $user_data['accountEnabled'];
       $user->field_principal_name = $user_data['userPrincipalName']; // No length limit, can use the value from EntraID
@@ -220,8 +232,8 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
       }
       else {
         $user->setUsername($userName);
-        if($user_data['accountEnabled'] == 1 && $user->status->value == 0) $users_enabled []= $userName;
-        if($user_data['accountEnabled'] == 0 && $user->status->value == 1) $users_disabled []= $userName;
+        if($user_data['accountEnabled'] == 1 && $previous_status == 0) $users_enabled []= $userName;
+        if($user_data['accountEnabled'] == 0 && $previous_status == 1) $users_disabled []= $userName;
       }
 
       // PTLD users don't have manager data
@@ -238,7 +250,7 @@ class UserSyncWorker extends QueueWorkerBase implements ContainerFactoryPluginIn
     }
 
     if(count($users_created) > 0) \Drupal::logger('portland OpenID')->info("Created " . count($users_created) . " users: " . implode(",", $users_created));
-    if(count($users_enabled) > 0) \Drupal::logger('portland OpenID')->info("Enabed " . count($users_enabled) . " users: " . implode(",", $users_enabled));
+    if(count($users_enabled) > 0) \Drupal::logger('portland OpenID')->info("Enabled " . count($users_enabled) . " users: " . implode(",", $users_enabled));
     if(count($users_disabled) > 0) \Drupal::logger('portland OpenID')->info("Disabled " . count($users_disabled) . " users: " . implode(",", $users_disabled));
   }
 }
