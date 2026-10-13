@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Provides an org chart Views style built on d3-org-chart.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function employees_org_chart_theme() {
+  return [
+    'employees_org_chart' => [
+      'variables' => [
+        'view' => NULL,
+        'options' => [],
+        'chart_id' => NULL,
+      ],
+    ],
+  ];
+}
