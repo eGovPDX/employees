@@ -53,7 +53,7 @@ services:
       - npm -C /app/web/themes/custom/westy install
       - npm -C /app/web/themes/custom/westy run build
   solr:
-    type: solr:9
+    type: solr:9.10
     portforward: true
     overrides:
       environment:
