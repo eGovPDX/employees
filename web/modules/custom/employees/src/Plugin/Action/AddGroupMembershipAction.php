@@ -143,11 +143,11 @@ final class AddGroupMembershipAction extends ViewsBulkOperationsActionBase imple
    * {@inheritdoc}
    */
   public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
-    // This checks for edit access on the selected users' accounts. We can't really check if the operator 
+    // This checks for update access on the selected users' accounts. We can't really check if the operator 
     // has the necessary group permissions because the group hasn't been chosen yet, but since this action is
     // only available on the /admin/people view which requires sitewide admin permissions, we can assume the
     // operator has the necessary permissions.
-    return $object->access('edit', $account, $return_as_object);
+    return $object->access('update', $account, $return_as_object);
   }
 
 }
