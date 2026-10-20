@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * Publish content
+ * Change contact
  *
  * @Action(
  *   id = "employees_change_contact_action",
@@ -95,6 +95,6 @@ class ChangeContactAction extends ViewsBulkOperationsActionBase {
    * {@inheritdoc}
    */
   public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
-    return $object->access('edit', $account, $return_as_object);
+    return $object->access('update', $account, $return_as_object);
   }
 }
