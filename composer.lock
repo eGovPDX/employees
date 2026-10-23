@@ -2191,11 +2191,11 @@
                     "homepage": "https://www.drupal.org/user/3250112"
                 },
                 {
-                    "name": "Shamsher_Alam",
+                    "name": "shamsher_alam",
                     "homepage": "https://www.drupal.org/user/2742027"
                 },
                 {
-                    "name": "Sutharsan",
+                    "name": "sutharsan",
                     "homepage": "https://www.drupal.org/user/73854"
                 }
             ],
@@ -4135,7 +4135,8 @@
             },
             "require-dev": {
                 "drupal/gin": "^4.0",
-                "drupal/gin_toolbar": "^2.0"
+                "drupal/gin_toolbar": "^2.0",
+                "drupal/toolbar": "*"
             },
             "type": "drupal-module",
             "extra": {
@@ -6969,17 +6970,17 @@
         },
         {
             "name": "drupal/rabbit_hole",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/rabbit_hole.git",
-                "reference": "8.x-1.2"
+                "reference": "8.x-1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/rabbit_hole-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "9fee0b55182c09fa2e3a14da965dbde323e4eb9a"
+                "url": "https://ftp.drupal.org/files/projects/rabbit_hole-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "bab5f639cb4df4e18e79acfe59872999d48859bd"
             },
             "require": {
                 "drupal/core": "^9.5 || ^10 || ^11"
@@ -6994,8 +6995,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1773704444",
+                    "version": "8.x-1.3",
+                    "datestamp": "1792606163",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7028,11 +7029,7 @@
                     "homepage": "https://www.drupal.org/user/3426249"
                 },
                 {
-                    "name": "mparker17",
-                    "homepage": "https://www.drupal.org/user/536298"
-                },
-                {
-                    "name": "Odd Hill",
+                    "name": "odd hill",
                     "homepage": "https://www.drupal.org/user/789934"
                 },
                 {
@@ -8188,6 +8185,10 @@
                 {
                     "name": "p0deje",
                     "homepage": "https://www.drupal.org/user/529960"
+                },
+                {
+                    "name": "the_g_bomb",
+                    "homepage": "https://www.drupal.org/user/492012"
                 }
             ],
             "description": "SecKit provides Drupal with various security-hardening options.",
@@ -8980,7 +8981,8 @@
                 "shasum": "52cca3162055d6b00f102e7c2e29db713ad76971"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10 || ^11"
+                "drupal/core": "^9.2 || ^10 || ^11",
+                "drupal/toolbar": "*"
             },
             "suggest": {
                 "drupal/admin_toolbar": "Integrate additional Menu Toolbar items within the Admin Toolbar and combine mutliple menus."
@@ -16960,6 +16962,7 @@
         }
     ],
     "packages-dev": [
+        
         {
             "name": "roave/security-advisories",
             "version": "dev-latest",
@@ -18136,8 +18139,7 @@
         "drupal/openid_connect_windows_aad": 10,
         "drupal/rabbit_hole": 10,
         "drupal/webform": 10,
-        "fengyuanchen/cropper": 20,
-        "roave/security-advisories": 20
+        "fengyuanchen/cropper": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
