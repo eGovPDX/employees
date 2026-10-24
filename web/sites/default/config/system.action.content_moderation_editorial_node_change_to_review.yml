@@ -1,0 +1,17 @@
+uuid: bba1e7ec-d776-452c-9c94-caec6239441a
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - node
+id: content_moderation_editorial_node_change_to_review
+label: 'Change moderation state to Review'
+type: node
+plugin: 'moderation_state_change:node'
+configuration:
+  workflow: editorial
+  state: review
+  revision_log_message: 'Change moderation state to Review'

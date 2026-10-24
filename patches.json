@@ -2,7 +2,7 @@
     "patches": {
         "drupal/core": {
             "2567035 - Database::startLog() cause a notice in Shortcut::sort()": "https://www.drupal.org/files/issues/2019-12-05/2567035-51.patch",
-            "2797583 - Dynamically provide action plugins for every moderation state change": "https://www.drupal.org/files/issues/2020-12-19/2797583-181.patch",
+            "2797583 - Dynamically provide action plugins for every moderation state change": "https://git.drupalcode.org/project/drupal/-/merge_requests/16528.patch",
             "3114467 - 'Negate' form value for condition plugins should be cast to boolean in validation (for Google Tag Manager)": "https://www.drupal.org/files/issues/2023-11-06/3114467-30.patch",
             "3212854 - Autocomplete form breaks wrapping container": "https://www.drupal.org/files/issues/2024-07-17/autocomplete-element-3212854-5.patch",
             "Retry starting transaction to fix the \"there is already an active transaction\" error": "patches/pe-430-retry-starting-transaction.patch",
@@ -45,9 +45,6 @@
         },
         "drupal/openid_connect_windows_aad": {
             "Custom patch to use scope, and 3159055 - Option to use concatenation of givenName and surname instead of default name": "patches/powr2529-openid-connect-windows-aad-4.patch"
-        },
-        "drupal/rabbit_hole": {
-            "3516167 - Fix Multiple Implicit Nullable Parameters for PHP 8.4 Compatibility": "https://www.drupal.org/files/issues/2026-03-20/3516167-8-x-1.x-52.patch"
         },
         "drupal/redirect": {
             "3401916 - Redirect loop wrong detection (service unavailable: RedirectLoopException)": "https://www.drupal.org/files/issues/2026-05-06/redirect-loop-3401916-22.patch"

@@ -1,0 +1,17 @@
+uuid: 0ef54828-2c67-49b0-8f87-e8a9fedd2a31
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - node
+id: content_moderation_editorial_node_change_to_unpublished
+label: 'Change moderation state to Unpublished'
+type: node
+plugin: 'moderation_state_change:node'
+configuration:
+  workflow: editorial
+  state: unpublished
+  revision_log_message: 'Change moderation state to Unpublished'
