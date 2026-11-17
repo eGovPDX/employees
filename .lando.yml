@@ -143,8 +143,15 @@ tooling:
       - node: echo "Building theme asset files..."
       - node: npm -C /app/web/themes/custom/westy install
       - node: npm -C /app/web/themes/custom/westy run build
+  index:
+    description: CUSTOM Index the Solr search index (finish just what is left un-indexed)
+    service: appserver
+    cmd:
+      - echo "Indexing the Solr server..."
+      - echo "(This runs in the background and will take several minutes to complete. Use 'lando stillindexing' to check progress.)"
+      - drush --root=/app/web sapi-fast full_index
   reindex:
-    description: CUSTOM Reindex the Solr searcher
+    description: CUSTOM Reindex the Solr search index
     service: appserver
     cmd:
       - echo "Reindexing the Solr server..."
