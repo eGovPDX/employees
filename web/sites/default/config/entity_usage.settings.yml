@@ -24,10 +24,18 @@ track_enabled_plugins:
   - media_embed
 track_enabled_base_fields: false
 site_domains:
-  - dev-employees.pantheonsite.io
-  - employees.lndo.site
-  - employees.portland.gov
-  - test-employees.pantheonsite.io
+  -
+    host: dev-employees.pantheonsite.io
+    path: ''
+  -
+    host: employees.lndo.site
+    path: ''
+  -
+    host: employees.portland.gov
+    path: ''
+  -
+    host: test-employees.pantheonsite.io
+    path: ''
 edit_warning_message_entity_types: {  }
 delete_warning_message_entity_types:
   - group
