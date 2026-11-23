@@ -1,0 +1,28 @@
+# d3, d3-flextree and d3-org-chart are bundled in js/, copied unmodified from
+# their npm packages. d3-org-chart 3.x expects d3 v7 and d3-flextree 2.x on the
+# global d3 object, so they must load in this order. To upgrade, replace the
+# files and update the versions here.
+d3-org-chart:
+  remote: https://github.com/bumbeishvili/org-chart
+  version: 3.1.1
+  license:
+    name: MIT
+    url: https://github.com/bumbeishvili/org-chart/blob/master/LICENSE.md
+    gpl-compatible: true
+  js:
+    js/d3.min.js: { minified: true, weight: -3 }
+    js/d3-flextree.min.js: { minified: true, weight: -2 }
+    js/d3-org-chart.min.js: { minified: true, weight: -1 }
+
+org-chart:
+  version: 1.0
+  js:
+    js/org-chart.js: {}
+  css:
+    component:
+      css/org-chart.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+    - employees_org_chart/d3-org-chart
